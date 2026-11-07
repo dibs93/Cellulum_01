@@ -1,6 +1,7 @@
 /**
  * ============================================================================
- * CELLULUM — Argon Engine v2.4 (Spatial Zoom & Dual Simulator Engine)
+ * CELLULUM — Argon Engine v2.4 (True Circular Concentric Zoom & Inline Expand)
+ * Supports data/module1.json, module2.json, module2b.json, module3..14.json
  * ============================================================================
  */
 
@@ -21,17 +22,20 @@ const MODULE_REGISTRY = [
   { id: "module_08", shortUnit: "MOD 08", title: "Developmental Biology & Morphogenesis", files: ["module8.json", "module_08_developmental_bio_revised.json", "module_08.json"] },
   { id: "module_09", shortUnit: "MOD 09", title: "Plant Physiology & Photosynthesis", files: ["module9.json", "module_09.json"] },
   { id: "module_10", shortUnit: "MOD 10", title: "Animal Physiology & Neurobiology", files: ["module10.json", "module_10.json"] },
-  { id: "module_11", shortUnit: "MOD 11", title: "Immunology & Host Defense", files: ["module11.json", "module_11.json"] },
+  { id: "module_11", shortUnit: "MOD 11", title: "Immunology & Host Defense", files: ["module10.json", "module11.json", "module_11.json"] },
   { id: "module_12", shortUnit: "MOD 12", title: "Inheritance Biology, Operons & Mapping", files: ["module12.json", "module_12_genetics_mapping.json"] },
   { id: "module_13", shortUnit: "MOD 13", title: "Ecological Principles & Biogeography", files: ["module13.json", "module_13_ecology.json", "module_13_ecology_revised.json"] },
   { id: "module_14", shortUnit: "MOD 14", title: "Biophysical Methods & Techniques", files: ["module14.json", "module_14_methods.json", "module_14_wetlab_biophysics.json"] }
 ];
+
+const SCALE_ORDER = ["L1", "L2", "L3", "L4"];
 
 const state = {
   activeRegistryItem: MODULE_REGISTRY[0],
   moduleData: null,
   activeScaleId: "L1",
   activeNodeId: null,
+  activeTabByNode: {},
   activeDrawerTab: "mechanism",
   activeSimAgentId: null,
   quizMode: false,
@@ -39,12 +43,93 @@ const state = {
   cache: {}
 };
 
+// ============================================================================
+// INITIALIZATION & SELF-CONTAINED CIRCULAR ZOOM CSS
+// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
+  injectCircularZoomStyles();
   injectMathJaxSupport();
   renderSidebarNav(MODULE_REGISTRY);
   bindArgonEvents();
   loadModule(MODULE_REGISTRY[0].id);
 });
+
+function injectCircularZoomStyles() {
+  const style = document.createElement("style");
+  style.textContent = `
+    .circular-lens-viewport {
+      position: relative;
+      width: 310px;
+      height: 310px;
+      margin: 0 auto;
+      border-radius: 9999px;
+      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.16) 0%, rgba(15, 23, 42, 0.92) 68%, rgba(2, 6, 23, 1) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.35);
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.18), inset 0 0 35px rgba(16, 185, 129, 0.15);
+      overflow: hidden;
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    @media (min-width: 640px) {
+      .circular-lens-viewport {
+        width: 360px;
+        height: 360px;
+      }
+    }
+    .circular-lens-rotor {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: 50% 50%;
+    }
+    .concentric-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 9999px;
+      border: 1px dashed rgba(148, 163, 184, 0.25);
+      transition: all 0.45s ease;
+      pointer-events: none;
+    }
+    .concentric-ring.active-ring {
+      border: 2px solid var(--theme-color, #10b981);
+      box-shadow: 0 0 22px var(--accent-glow, rgba(16, 185, 129, 0.4));
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+    }
+    .radar-orb-node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 25;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      user-select: none;
+    }
+    .radar-orb-node:hover {
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+    .radar-orb-node.active-orb {
+      transform: translate(-50%, -50%) scale(1.22);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.85);
+      z-index: 35;
+    }
+    .scale-btn.active {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.45);
+    }
+  `;
+  document.head.appendChild(style);
+}
 
 function injectMathJaxSupport() {
   if (!window.MathJax) {
@@ -59,6 +144,9 @@ function injectMathJaxSupport() {
   }
 }
 
+// ============================================================================
+// LOAD MODULE JSON
+// ============================================================================
 async function loadModule(registryId) {
   const regItem = MODULE_REGISTRY.find(m => m.id === registryId) || MODULE_REGISTRY[0];
   state.activeRegistryItem = regItem;
@@ -117,6 +205,9 @@ async function fetchJsonFromPaths(regItem) {
   return getFallbackModuleData(regItem);
 }
 
+// ============================================================================
+// WORKSPACE COORDINATOR
+// ============================================================================
 function renderArgonWorkspace() {
   const mod = state.moduleData;
   const reg = state.activeRegistryItem;
@@ -147,29 +238,32 @@ function renderArgonWorkspace() {
     }
   });
 
-  renderVisualSpatialStage();
+  renderCircularZoomAndExpandableCards();
   renderNodeInspectorAndDrawer();
   renderPathwaySimulator();
   typesetMath();
 }
 
 // ============================================================================
-// SPATIAL ZOOM STAGE & CIRCULAR / FLOATING NODE PINS (#hotspotCanvas)
+// 1. TRUE CIRCULAR CONCENTRIC ZOOM STAGE + 2. INLINE EXPANDABLE ACCORDION CARDS
 // ============================================================================
-function renderVisualSpatialStage() {
+function renderCircularZoomAndExpandableCards() {
   const mod = state.moduleData;
   const levels = mod.scale_levels || [];
   const activeLvl = levels.find(l => l.level_id === state.activeScaleId) || levels[0];
   if (!activeLvl) return;
 
+  const scaleIndex = Math.max(0, SCALE_ORDER.indexOf(state.activeScaleId));
+  const opticalZoomFactor = [1.0, 1.12, 1.25, 1.4][scaleIndex] || 1.0;
+
   const hudLabel = document.getElementById("hudScaleLabel");
   if (hudLabel) {
-    hudLabel.textContent = `${activeLvl.level_id}: ${activeLvl.name} ${activeLvl.scale_metric ? `[${activeLvl.scale_metric}]` : ""}`;
+    hudLabel.textContent = `${activeLvl.level_id} (${opticalZoomFactor.toFixed(2)}x Zoom): ${activeLvl.name}`;
   }
 
   const summaryText = document.getElementById("scaleSummaryText");
   if (summaryText) {
-    summaryText.textContent = activeLvl.description || "Select any spatial hotspot node below to inspect biochemical mechanisms and Part C traps.";
+    summaryText.textContent = activeLvl.description || "Tap any circular node in the lens or expand any topic card below.";
   }
 
   const canvas = document.getElementById("hotspotCanvas");
@@ -179,17 +273,18 @@ function renderVisualSpatialStage() {
   const activeAgent = (mod.inhibitor_simulator?.agents || []).find(a => a.id === state.activeSimAgentId);
   const quizzes = mod.quiz_challenges || [];
 
+  // Optional Quiz Bar
   let quizHtml = "";
   if (quizzes.length > 0) {
     const q = quizzes[state.currentQuizIdx] || quizzes[0];
     quizHtml = `
-      <div class="w-full mb-3 p-3 rounded-xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'} shadow-xl">
+      <div class="w-full mb-4 p-3.5 rounded-2xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/80' : 'border-slate-800'} shadow-lg">
         <div class="flex items-center justify-between gap-2">
           <div class="flex items-center space-x-2">
             <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">
               <i class="fa-solid fa-bolt mr-1"></i>CSIR Quiz (${state.currentQuizIdx + 1}/${quizzes.length})
             </span>
-            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching spatial node below!" : "Test your Part-C recall"}</span>
+            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Tap the matching node orb or card!" : "Test your Part-C recall"}</span>
           </div>
           <div class="flex items-center space-x-1.5">
             ${state.quizMode ? `
@@ -202,9 +297,9 @@ function renderVisualSpatialStage() {
           </div>
         </div>
         ${state.quizMode ? `
-          <div class="mt-2 text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(q.prompt)}</div>
+          <div class="mt-2.5 text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(q.prompt)}</div>
           ${Array.isArray(q.answer_options) && q.answer_options.length ? `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">
               ${q.answer_options.map((opt, i) => `
                 <button data-opt-idx="${i}" class="quiz-mcq-choice p-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-left text-xs text-slate-200 transition">
                   ${formatRichText(opt)}
@@ -212,99 +307,297 @@ function renderVisualSpatialStage() {
               `).join("")}
             </div>
           ` : ""}
-          <div id="stageQuizFeedback" class="hidden mt-2 p-2 rounded-lg text-xs"></div>
+          <div id="stageQuizFeedback" class="hidden mt-2.5 p-2.5 rounded-lg text-xs"></div>
         ` : ""}
       </div>
     `;
   }
 
-  // Render Visual Circular / Floating Spatial Pins & Cards
-  const pinsHtml = nodeIds.map((nid, idx) => {
+  // Build Circular Orbital Nodes along the active ring (Radius = 35% of circular viewport)
+  const totalNodes = nodeIds.length || 1;
+  const orbitRadiusPct = 34;
+
+  const orbPinsHtml = nodeIds.map((nid, idx) => {
     const node = mod.nodes?.[nid];
     if (!node) return "";
     const isSelected = node.id === state.activeNodeId;
     const isPerturbed = activeAgent && activeAgent.target_node === node.id;
-    
-    // Calculate orbital / grid coordinates if UI coordinates aren't explicitly provided
-    const fallbackX = 20 + (idx * 28) % 65;
-    const fallbackY = 30 + Math.floor(idx / 3) * 35;
-    const coords = node.ui_coordinates || node.coordinates || { x: fallbackX, y: fallbackY };
+
+    const angle = (idx / totalNodes) * 2 * Math.PI - Math.PI / 2;
+    const xPct = 50 + orbitRadiusPct * Math.cos(angle);
+    const yPct = 50 + orbitRadiusPct * Math.sin(angle);
 
     return `
-      <div data-node-id="${node.id}" class="spatial-node-pin cursor-pointer absolute p-3.5 rounded-2xl border transition-all duration-300 backdrop-blur-md max-w-[260px] ${
-        isSelected
-          ? "bg-emerald-950/90 border-emerald-400 shadow-2xl shadow-emerald-900/60 scale-105 z-30 ring-2 ring-emerald-400"
-          : "bg-slate-950/85 border-slate-800 hover:border-emerald-500/60 hover:bg-slate-900/90 z-20"
-      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500 bg-rose-950/90" : ""}"
-           style="left: ${coords.x}%; top: ${coords.y}%; transform: translate(-50%, -50%);">
-        <div class="flex items-center justify-between gap-2 mb-1">
-          <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-800">
-            ${node.level} • Pin ${idx + 1}
-          </span>
-          <div class="flex items-center space-x-1">
-            ${isPerturbed ? `<span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700 animate-pulse">Inhibited</span>` : ""}
-            ${node.next_zoom_target ? `
-              <button data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip text-[9px] font-mono px-1.5 py-0.5 rounded bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-700 transition">
-                Zoom ${node.next_zoom_target}
-              </button>
-            ` : ""}
+      <button type="button" data-orb-node="${node.id}"
+              title="${node.title}"
+              class="radar-orb-node ${
+                isSelected
+                  ? "active-orb bg-emerald-500 text-slate-950 border-2 border-white font-extrabold"
+                  : "bg-slate-900/95 text-emerald-300 border border-emerald-500/60 hover:bg-emerald-950"
+              } ${isPerturbed ? "!bg-rose-600 !text-white !border-rose-200 animate-pulse" : ""}"
+              style="left: ${xPct}%; top: ${yPct}%;">
+        <span class="text-[10px] leading-none">${node.level}</span>
+        <span class="text-[9px] leading-none mt-0.5">#${idx + 1}</span>
+      </button>
+    `;
+  }).join("");
+
+  // Active node short title inside the center of the circular lens
+  const activeNodeObj = mod.nodes?.[state.activeNodeId] || mod.nodes?.[nodeIds[0]];
+
+  // Build Expandable Accordion Topic Cards below the circular lens (NO floating overlap, full 4-tab content inline!)
+  const expandableCardsHtml = nodeIds.map((nid, idx) => {
+    const node = mod.nodes?.[nid];
+    if (!node) return "";
+    const isExpanded = node.id === state.activeNodeId;
+    const isPerturbed = activeAgent && activeAgent.target_node === node.id;
+    const activeTabKey = state.activeTabByNode[node.id] || "mechanism";
+
+    const tabsList = [
+      { key: "mechanism", label: "Mechanism", icon: "fa-gears" },
+      { key: "csir_high_yield", label: "CSIR High-Yield", icon: "fa-bullseye" },
+      { key: "pathology", label: "Pathology", icon: "fa-heart-pulse" },
+      { key: "lab_workbench", label: "Lab Assays", icon: "fa-flask" }
+    ];
+
+    const tabParagraphs = node.tabs?.[activeTabKey] || ["No notes available for this section."];
+    const metricsEntries = Object.entries(node.metrics || {});
+
+    return `
+      <div data-card-node="${node.id}" class="rounded-2xl border transition-all duration-200 overflow-hidden ${
+        isExpanded
+          ? "bg-slate-900/95 border-emerald-500 shadow-xl shadow-emerald-950/40"
+          : "bg-slate-950/85 border-slate-800 hover:border-slate-700"
+      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500" : ""}">
+        
+        <!-- Card Header (Click anywhere here to Expand / Collapse) -->
+        <div data-card-header="${node.id}" class="p-4 cursor-pointer flex items-start justify-between gap-3 select-none">
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center font-mono text-xs font-bold mt-0.5 ${
+              isExpanded ? "bg-emerald-500 text-slate-950" : "bg-slate-800 text-emerald-400"
+            }">
+              ${idx + 1}
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-1">
+                <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-slate-950 text-emerald-400 border border-slate-800">
+                  ${node.level} • ${activeLvl.scale_metric || "Scale"}
+                </span>
+                ${isPerturbed ? `<span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700 animate-pulse">Inhibited by ${activeAgent.name}</span>` : ""}
+                ${node.next_zoom_target ? `
+                  <button type="button" data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950 hover:bg-sky-800 text-sky-300 border border-sky-700/70 transition">
+                    <i class="fa-solid fa-magnifying-glass-plus mr-1"></i>Zoom Deeper (${node.next_zoom_target})
+                  </button>
+                ` : ""}
+              </div>
+              <h4 class="text-sm sm:text-base font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
+              <p class="text-xs text-slate-400 mt-0.5">${formatRichText(node.subtitle || "")}</p>
+            </div>
           </div>
+
+          <button type="button" class="p-1.5 rounded-lg bg-slate-800/80 text-slate-300 shrink-0 mt-1">
+            <i class="fa-solid ${isExpanded ? "fa-chevron-up text-emerald-400" : "fa-chevron-down"} text-xs"></i>
+          </button>
         </div>
-        <h4 class="text-xs font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
-        <p class="text-[10px] text-slate-400 mt-1 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
+
+        <!-- Inline Expanded Body (Shows full metrics + all 4 study tabs right inside the card!) -->
+        ${isExpanded ? `
+          <div class="px-4 pb-4 pt-2 border-t border-slate-800/90 space-y-4">
+            
+            <!-- Quantitative Metrics Grid -->
+            ${metricsEntries.length ? `
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                ${metricsEntries.map(([k, v]) => `
+                  <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800/90">
+                    <div class="text-[10px] font-mono uppercase text-emerald-400 font-bold">${k.replace(/_/g, " ")}</div>
+                    <div class="text-xs text-slate-200 mt-0.5 leading-snug">${formatRichText(String(v))}</div>
+                  </div>
+                `).join("")}
+              </div>
+            ` : ""}
+
+            <!-- 4-Tab Switcher Inside Card -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1 rounded-xl bg-slate-950 border border-slate-800">
+              ${tabsList.map(t => `
+                <button type="button" data-inline-node="${node.id}" data-inline-tab="${t.key}"
+                        class="inline-tab-btn py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
+                          activeTabKey === t.key ? "bg-emerald-600 text-white shadow" : "text-slate-400 hover:text-slate-200"
+                        }">
+                  <i class="fa-solid ${t.icon} text-[10px]"></i>
+                  <span>${t.label}</span>
+                </button>
+              `).join("")}
+            </div>
+
+            <!-- Full Tab Content Paragraphs -->
+            <div class="space-y-2.5">
+              ${tabParagraphs.map(p => `
+                <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800/80 text-xs sm:text-sm text-slate-200 leading-relaxed">
+                  ${formatRichText(p)}
+                </div>
+              `).join("")}
+            </div>
+
+            <!-- Action Bar: Open Full Slide-Out Drawer or Jump Scale -->
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/70">
+              <button type="button" data-open-drawer-for="${node.id}" class="px-3 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-xs font-semibold transition">
+                <i class="fa-solid fa-up-right-and-down-left-from-center mr-1.5"></i>Open in Full-Screen Study Drawer
+              </button>
+              ${node.next_zoom_target ? `
+                <button type="button" data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip px-3 py-1.5 rounded-xl bg-sky-600/20 hover:bg-sky-600/30 text-sky-300 border border-sky-500/40 text-xs font-semibold transition">
+                  <i class="fa-solid fa-magnifying-glass-plus mr-1"></i>Zoom In to ${node.next_zoom_target}
+                </button>
+              ` : ""}
+            </div>
+          </div>
+        ` : ""}
       </div>
     `;
   }).join("");
 
   canvas.innerHTML = `
-    <div class="w-full relative min-h-[380px] sm:min-h-[440px]">
+    <div class="w-full flex flex-col items-center">
       ${quizHtml}
-      <div class="absolute inset-0 w-full h-full pointer-events-auto">
-        ${pinsHtml}
+
+      <!-- CIRCULAR CONCENTRIC OPTICAL ZOOM STAGE -->
+      <div class="w-full flex flex-col items-center my-2">
+        <div class="circular-lens-viewport">
+          <div id="circularLensRotor" class="circular-lens-rotor" style="transform: scale(${opticalZoomFactor});">
+            <!-- 4 Concentric Scale Rings (L1 Outer -> L4 Inner) -->
+            <div class="concentric-ring ${state.activeScaleId === 'L1' ? 'active-ring' : ''}" style="width: 90%; height: 90%;"></div>
+            <div class="concentric-ring ${state.activeScaleId === 'L2' ? 'active-ring' : ''}" style="width: 68%; height: 68%;"></div>
+            <div class="concentric-ring ${state.activeScaleId === 'L3' ? 'active-ring' : ''}" style="width: 46%; height: 46%;"></div>
+            <div class="concentric-ring ${state.activeScaleId === 'L4' ? 'active-ring' : ''}" style="width: 26%; height: 26%;"></div>
+
+            <!-- Crosshair Axes -->
+            <div class="absolute inset-x-0 top-1/2 h-px bg-emerald-500/15 pointer-events-none"></div>
+            <div class="absolute inset-y-0 left-1/2 w-px bg-emerald-500/15 pointer-events-none"></div>
+
+            <!-- Orbital Node Pins -->
+            ${orbPinsHtml}
+
+            <!-- Center Microscope Core Readout -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-slate-950/90 border border-emerald-500/40 flex flex-col items-center justify-center p-2 text-center pointer-events-none shadow-inner">
+              <span class="text-[10px] font-mono uppercase text-emerald-400 font-bold tracking-wider">${activeLvl.level_id} • ${activeLvl.scale_metric || ""}</span>
+              <span class="text-[11px] font-bold text-white leading-tight mt-1 line-clamp-2">${activeNodeObj ? activeNodeObj.title.split(":")[0] : activeLvl.name}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optical Zoom In / Out Controls Under Circular Viewport -->
+        <div class="flex items-center space-x-2 mt-3 bg-slate-950/90 px-3 py-1.5 rounded-full border border-slate-800">
+          <button type="button" id="lensZoomOutBtn" class="px-2.5 py-1 rounded-full bg-slate-900 hover:bg-slate-800 text-xs text-slate-300 font-mono transition" ${scaleIndex === 0 ? "disabled style='opacity:0.4'" : ""}>
+            <i class="fa-solid fa-magnifying-glass-minus mr-1"></i>Zoom Out
+          </button>
+          <span class="text-[11px] font-mono text-emerald-400 px-2">Scale ${state.activeScaleId} (${scaleIndex + 1}/4)</span>
+          <button type="button" id="lensZoomInBtn" class="px-2.5 py-1 rounded-full bg-emerald-950/90 hover:bg-emerald-900 text-xs text-emerald-300 border border-emerald-700/60 font-mono transition" ${scaleIndex >= SCALE_ORDER.length - 1 ? "disabled style='opacity:0.4'" : ""}>
+            Zoom In<i class="fa-solid fa-magnifying-glass-plus ml-1"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- INLINE EXPANDABLE HOTSPOT CARDS (Full Content Right Below the Lens!) -->
+      <div class="w-full mt-5 space-y-3">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-bold">
+            <i class="fa-solid fa-layer-group mr-1"></i>${activeLvl.level_id} Hotspot Topics (Tap any card to expand full notes)
+          </span>
+          <span class="text-[11px] font-mono text-slate-400">${nodeIds.length} Nodes</span>
+        </div>
+        ${expandableCardsHtml}
       </div>
     </div>
   `;
 
-  // Bind Pin Clicks
-  canvas.querySelectorAll(".spatial-node-pin").forEach(pin => {
-    pin.addEventListener("click", (e) => {
-      const zoomBtn = e.target.closest(".zoom-jump-chip");
-      if (zoomBtn) {
+  // 1. Bind Circular Radar Node Clicks
+  canvas.querySelectorAll("[data-orb-node]").forEach(orb => {
+    orb.addEventListener("click", () => {
+      const nid = orb.dataset.orbNode;
+      state.activeNodeId = nid;
+      renderCircularZoomAndExpandableCards();
+      renderNodeInspectorAndDrawer();
+      if (state.quizMode) evaluateQuizNodeSelection(nid);
+      typesetMath();
+
+      // Smoothly scroll the expanded card into view
+      const targetCard = canvas.querySelector(`[data-card-node="${nid}"]`);
+      targetCard?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  });
+
+  // 2. Bind Zoom In / Zoom Out Lens Buttons
+  document.getElementById("lensZoomOutBtn")?.addEventListener("click", () => {
+    if (scaleIndex > 0) switchScaleWithZoom(SCALE_ORDER[scaleIndex - 1]);
+  });
+  document.getElementById("lensZoomInBtn")?.addEventListener("click", () => {
+    if (scaleIndex < SCALE_ORDER.length - 1) switchScaleWithZoom(SCALE_ORDER[scaleIndex + 1]);
+  });
+
+  // 3. Bind Accordion Card Header Clicks (Expand / Collapse Inline)
+  canvas.querySelectorAll("[data-card-header]").forEach(hdr => {
+    hdr.addEventListener("click", (e) => {
+      const zoomChip = e.target.closest(".zoom-jump-chip");
+      if (zoomChip) {
         e.stopPropagation();
-        const nextScale = zoomBtn.dataset.zoomTo;
-        state.activeScaleId = nextScale;
-        const targetLvl = (mod.scale_levels || []).find(l => l.level_id === nextScale);
-        const nextNodes = targetLvl?.node_ids || targetLvl?.hotspots || [];
-        if (nextNodes.length) state.activeNodeId = nextNodes[0];
-        renderArgonWorkspace();
+        switchScaleWithZoom(zoomChip.dataset.zoomTo);
         return;
       }
-
-      state.activeNodeId = pin.dataset.nodeId;
-      renderVisualSpatialStage();
-      renderNodeInspectorAndDrawer();
-
-      if (state.quizMode) {
-        evaluateQuizNodeSelection(pin.dataset.nodeId);
+      const nid = hdr.dataset.cardHeader;
+      state.activeNodeId = state.activeNodeId === nid ? null : nid;
+      renderCircularZoomAndExpandableCards();
+      if (state.activeNodeId) {
+        renderNodeInspectorAndDrawer();
+        if (state.quizMode) evaluateQuizNodeSelection(nid);
       }
       typesetMath();
     });
   });
 
-  // Bind Quiz Stage Controls
+  // 4. Bind Inline 4-Tab Switcher Buttons inside Expanded Card
+  canvas.querySelectorAll(".inline-tab-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const nid = btn.dataset.inlineNode;
+      const tabKey = btn.dataset.inlineTab;
+      state.activeTabByNode[nid] = tabKey;
+      state.activeDrawerTab = tabKey;
+      renderCircularZoomAndExpandableCards();
+      renderNodeInspectorAndDrawer();
+      typesetMath();
+    });
+  });
+
+  // 5. Bind "Open in Full-Screen Study Drawer" Button & Deeper Zoom Chips
+  canvas.querySelectorAll("[data-open-drawer-for]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      state.activeNodeId = btn.dataset.openDrawerFor;
+      renderNodeInspectorAndDrawer();
+      toggleStudyDrawer(true);
+    });
+  });
+
+  canvas.querySelectorAll(".zoom-jump-chip").forEach(chip => {
+    chip.addEventListener("click", (e) => {
+      e.stopPropagation();
+      switchScaleWithZoom(chip.dataset.zoomTo);
+    });
+  });
+
+  // 6. Bind Quiz Controls
   document.getElementById("toggleQuizStageBtn")?.addEventListener("click", () => {
     state.quizMode = !state.quizMode;
-    renderVisualSpatialStage();
+    renderCircularZoomAndExpandableCards();
     typesetMath();
   });
   document.getElementById("prevQuizStageBtn")?.addEventListener("click", () => {
     state.currentQuizIdx = (state.currentQuizIdx - 1 + quizzes.length) % quizzes.length;
-    renderVisualSpatialStage();
+    renderCircularZoomAndExpandableCards();
     typesetMath();
   });
   document.getElementById("nextQuizStageBtn")?.addEventListener("click", () => {
     state.currentQuizIdx = (state.currentQuizIdx + 1) % quizzes.length;
-    renderVisualSpatialStage();
+    renderCircularZoomAndExpandableCards();
     typesetMath();
   });
   canvas.querySelectorAll(".quiz-mcq-choice").forEach(btn => {
@@ -315,6 +608,16 @@ function renderVisualSpatialStage() {
       showStageQuizFeedback(ok, ok ? q.explanation : `Correct Answer: ${q.correct_answer}. ${q.explanation}`);
     });
   });
+}
+
+function switchScaleWithZoom(targetScale) {
+  if (!targetScale) return;
+  state.activeScaleId = targetScale;
+  const levels = state.moduleData?.scale_levels || [];
+  const lvlObj = levels.find(l => l.level_id === targetScale);
+  const lvlNodes = lvlObj?.node_ids || lvlObj?.hotspots || [];
+  if (lvlNodes.length) state.activeNodeId = lvlNodes[0];
+  renderArgonWorkspace();
 }
 
 function evaluateQuizNodeSelection(clickedNodeId) {
@@ -333,7 +636,7 @@ function showStageQuizFeedback(isCorrect, text) {
   const box = document.getElementById("stageQuizFeedback");
   if (!box) return;
   box.classList.remove("hidden");
-  box.className = `mt-2 p-2 rounded-lg text-xs border ${
+  box.className = `mt-2.5 p-2.5 rounded-lg text-xs border ${
     isCorrect ? "bg-emerald-950/90 border-emerald-500 text-emerald-200" : "bg-rose-950/90 border-rose-500 text-rose-200"
   }`;
   box.innerHTML = `<strong>${isCorrect ? "✓ Spot On!" : "✗ Try Again:"}</strong> ${formatRichText(text)}`;
@@ -341,11 +644,12 @@ function showStageQuizFeedback(isCorrect, text) {
 }
 
 // ============================================================================
-// INSPECTOR & STUDY DRAWER
+// RIGHT COLUMN INSPECTOR & SLIDE-OUT STUDY DRAWER
 // ============================================================================
 function renderNodeInspectorAndDrawer() {
   const mod = state.moduleData;
-  const node = mod.nodes?.[state.activeNodeId];
+  const fallbackId = Object.keys(mod.nodes || {})[0];
+  const node = mod.nodes?.[state.activeNodeId || fallbackId];
   if (!node) return;
 
   const inspector = document.getElementById("nodeInspectorContent");
@@ -370,7 +674,7 @@ function renderNodeInspectorAndDrawer() {
 
     inspector.innerHTML = `
       <div class="pb-2 border-b border-slate-800">
-        <div class="text-[10px] font-mono uppercase text-emerald-400">${node.level} Active Pin</div>
+        <div class="text-[10px] font-mono uppercase text-emerald-400">${node.level} Active Node</div>
         <h4 class="text-sm font-bold text-white mt-0.5">${formatRichText(node.title)}</h4>
         <p class="text-[11px] text-slate-400 mt-0.5">${formatRichText(node.subtitle || "")}</p>
       </div>
@@ -378,7 +682,7 @@ function renderNodeInspectorAndDrawer() {
       <div class="space-y-2 pt-2 border-t border-slate-800/80">${mechPreview}</div>
       <button id="inspectorOpenDrawerBtn" class="w-full mt-2 py-2 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-xs font-semibold transition flex items-center justify-center space-x-1.5">
         <i class="fa-solid fa-book-open"></i>
-        <span>Read Full Part-C Notes, Pathology & Assays</span>
+        <span>Open Full Study Drawer</span>
       </button>
       ${resourcesHtml ? `<div class="space-y-1.5 pt-2.5 border-t border-slate-800/80">${resourcesHtml}</div>` : ""}
     `;
@@ -452,7 +756,7 @@ function renderSlideOutDrawer(node) {
 }
 
 // ============================================================================
-// SIMULATOR PANEL (PRESERVING KINETICS SANDBOX + INHIBITOR AGENTS)
+// SIMULATOR PANEL (KINETICS SANDBOX + CSIR INHIBITOR AGENTS)
 // ============================================================================
 function renderPathwaySimulator() {
   const simPanel = document.getElementById("simulatorPanel");
@@ -499,35 +803,17 @@ function renderPathwaySimulator() {
     `
     : "";
 
-  // Preserve the Michaelis-Menten kinetics sliders from index.html while appending CSIR Perturbations below
   simPanel.innerHTML = `
     <div class="flex items-center justify-between mb-3">
       <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center space-x-2">
         <i class="fa-solid fa-flask-vial"></i>
-        <span id="simTitle">Interactive Kinetics & Flux Sandbox</span>
+        <span id="simTitle">CSIR Experimental Perturbation & Kinetics Simulator</span>
       </h3>
-      <div class="flex items-center space-x-2">
-        <span class="text-[11px] font-mono text-slate-400" id="simReadout">v0 = (Vmax · [S]) / (Km + [S])</span>
-        ${activeAgent ? `<button id="resetSimAgentBtn" class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">Reset Agent</button>` : ""}
-      </div>
-    </div>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 mb-4">
-      <div>
-        <label class="block text-[11px] text-slate-400 mb-1">Substrate Concentration $[S]$ (<span id="subVal">50</span> $\mu\text{M}$)</label>
-        <input type="range" id="simSubstrate" min="1" max="200" value="50" class="w-full accent-emerald-500">
-      </div>
-      <div>
-        <label class="block text-[11px] text-slate-400 mb-1">Modifier / Inhibitor $[I]$ (<span id="inhVal">0</span> $\mu\text{M}$)</label>
-        <input type="range" id="simInhibitor" min="0" max="100" value="0" class="w-full accent-amber-500">
-      </div>
-    </div>
-    <div id="simCalculatedOutput" class="mb-4 p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-emerald-300">
-      Reaction Velocity ($V_0$): 71.4 µmol/min | Apparent $K_m$: 20.0 µM
+      ${activeAgent ? `<button id="resetSimAgentBtn" class="px-2.5 py-1 rounded bg-slate-800 text-[10px] font-mono text-slate-300">Reset to Baseline</button>` : ""}
     </div>
 
-    <div class="pt-3 border-t border-slate-800">
-      <div class="text-[10px] font-mono uppercase text-emerald-400 font-bold mb-2">CSIR Experimental Perturbation & Inhibitor Simulator</div>
+    <div class="mb-4">
+      <div class="text-[10px] font-mono uppercase text-slate-400 mb-2">Tap an Inhibitor / Perturbation Agent:</div>
       <div class="flex flex-wrap gap-2 mb-3">
         ${agentsButtonsHtml || `<span class="text-xs text-slate-400">No inhibitor agents configured for this module.</span>`}
       </div>
@@ -536,9 +822,25 @@ function renderPathwaySimulator() {
       </div>
       ${mechDetail}
     </div>
+
+    <div class="pt-3 border-t border-slate-800">
+      <div class="text-[10px] font-mono uppercase text-emerald-400 font-bold mb-2">Michaelis-Menten Enzyme Kinetics Sandbox</div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[11px] text-slate-400 mb-1">Substrate $[S]$ (<span id="subVal">50</span> µM)</label>
+          <input type="range" id="simSubstrate" min="1" max="200" value="50" class="w-full accent-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] text-slate-400 mb-1">Competitive Inhibitor $[I]$ (<span id="inhVal">0</span> µM)</label>
+          <input type="range" id="simInhibitor" min="0" max="100" value="0" class="w-full accent-amber-500">
+        </div>
+      </div>
+      <div id="simCalculatedOutput" class="mt-2.5 p-2.5 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-emerald-300">
+        Reaction Velocity (V0): 71.4 µmol/min | Apparent Km: 20.0 µM
+      </div>
+    </div>
   `;
 
-  // Bind Kinetics Sliders
   const subSlider = document.getElementById("simSubstrate");
   const inhSlider = document.getElementById("simInhibitor");
   const subVal = document.getElementById("subVal");
@@ -550,21 +852,15 @@ function renderPathwaySimulator() {
     const I = Number(inhSlider?.value || 0);
     if (subVal) subVal.textContent = S;
     if (inhVal) inhVal.textContent = I;
-
-    const Vmax = 100;
-    const Km = 20;
-    const Ki = 25;
-    const apparentKm = Km * (1 + I / Ki);
-    const v0 = (Vmax * S) / (apparentKm + S);
+    const apparentKm = 20 * (1 + I / 25);
+    const v0 = (100 * S) / (apparentKm + S);
     if (outBox) {
-      outBox.innerHTML = `Reaction Velocity ($V_0$): ${v0.toFixed(1)} µmol/min | Apparent $K_m$: ${apparentKm.toFixed(1)} µM`;
+      outBox.textContent = `Reaction Velocity (V0): ${v0.toFixed(1)} µmol/min | Apparent Km: ${apparentKm.toFixed(1)} µM`;
     }
-    typesetMath();
   };
 
   subSlider?.addEventListener("input", updateKinetics);
   inhSlider?.addEventListener("input", updateKinetics);
-  updateKinetics();
 
   simPanel.querySelectorAll(".sim-agent-pill").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -585,6 +881,9 @@ function renderPathwaySimulator() {
   });
 }
 
+// ============================================================================
+// SIDEBAR & PUBMED
+// ============================================================================
 function renderSidebarNav(list) {
   const nav = document.getElementById("moduleNavContainer");
   const badge = document.getElementById("loadedModulesBadge");
@@ -645,16 +944,13 @@ async function fetchPubMedArticles(queryText) {
   }
 }
 
+// ============================================================================
+// UI EVENT BINDINGS
+// ============================================================================
 function bindArgonEvents() {
   document.querySelectorAll(".scale-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const targetScale = btn.dataset.scale;
-      state.activeScaleId = targetScale;
-      const levels = state.moduleData?.scale_levels || [];
-      const lvlObj = levels.find(l => l.level_id === targetScale);
-      const lvlNodes = lvlObj?.node_ids || lvlObj?.hotspots || [];
-      if (lvlNodes.length) state.activeNodeId = lvlNodes[0];
-      renderArgonWorkspace();
+      switchScaleWithZoom(btn.dataset.scale);
     });
   });
 
@@ -704,7 +1000,7 @@ function formatRichText(str) {
   return String(str)
     .replace(/\*\*\*(.*?)\*\*\*/g, '<strong class="italic text-emerald-300">$1</strong>')
     .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em class="text-slate-300">$1</i>')
+    .replace(/\*(.*?)\*/g, '<em class="text-slate-300">$1</em>')
     .replace(/\n/g, "<br>");
 }
 
