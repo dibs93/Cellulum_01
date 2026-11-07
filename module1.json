@@ -1,0 +1,792 @@
+{
+  "module_id": "module_01_bioenergetics",
+  "title": "Mitochondrial Bioenergetics & Oxidative Phosphorylation",
+  "subtitle": "Bioenergetic Thermodynamics (ΔG'°), TCA Matrix Hub, ETC Complexes I–IV, Q-Cycle, FoF1 Rotary Catalysis & Uncouplers",
+  "csir_net_units": [
+    "Unit 1 (Bioenergetics, Free Energy & Redox Potentials)",
+    "Unit 2 (Mitochondrial Architecture & Protein Import)",
+    "Unit 13 (Clark Oxygen Electrode & Respirometry Assays)"
+  ],
+  "theme_color": "#f97316",
+  "accent_glow": "rgba(249, 115, 22, 0.45)",
+  "scale_levels": [
+    {
+      "level_id": "L1",
+      "level_number": 1,
+      "name": "Mitochondrial Double-Membrane Architecture, Import & Shuttles",
+      "scale_metric": "500 nm",
+      "camera_zoom_factor": 1.0,
+      "description": "Outer membrane porins, cardiolipin-rich inner membrane cristae, TOM/TIM23/TIM22 protein import, Malate-Aspartate vs. Glycerol-3-P shuttles, and TCA matrix hub.",
+      "hotspots": [
+        "node_mito_membranes_import",
+        "node_nadh_shuttles_tca",
+        "node_thermodynamics_redox"
+      ]
+    },
+    {
+      "level_id": "L2",
+      "level_number": 2,
+      "name": "The Electron Transport Chain (Complexes I, II, III & IV)",
+      "scale_metric": "15 nm",
+      "camera_zoom_factor": 2.5,
+      "description": "Proton-pumping respiratory supercomplexes (Respirasome), prosthetic group redox ladders (FMN, Fe-S, CoQ10, Hemes, CuA/CuB), and Mitchell's Q-cycle.",
+      "hotspots": [
+        "node_complex_i_nadh",
+        "node_complex_ii_sdh",
+        "node_complex_iii_q_cycle",
+        "node_complex_iv_cox"
+      ]
+    },
+    {
+      "level_id": "L3",
+      "level_number": 3,
+      "name": "Chemiosmotic Coupling, FoF1 ATP Synthase & Adenine Nucleotide Transport",
+      "scale_metric": "8 nm (80 Å)",
+      "camera_zoom_factor": 4.2,
+      "description": "Proton-motive force (Δp = ΔΨ + ΔpH), Boyer's binding-change rotary catalysis (O-L-T states), c-ring stoichiometry (2.5 vs. 1.5 ATP), and ANT/Phosphate translocase.",
+      "hotspots": [
+        "node_f0f1_atp_synthase",
+        "node_pmf_ant_translocase"
+      ]
+    },
+    {
+      "level_id": "L4",
+      "level_number": 4,
+      "name": "Uncouplers (UCP1 / DNP), ROS Detoxification & Alternative Oxidase",
+      "scale_metric": "20 nm",
+      "camera_zoom_factor": 3.2,
+      "description": "Protonophoric uncoupling vs. Fo blockade in Clark oxygen electrode traces, brown fat thermogenin (UCP1), superoxide SOD2/GPx defense, and cyanide-resistant plant AOX.",
+      "hotspots": [
+        "node_uncouplers_respirometry",
+        "node_ros_defense_sod2",
+        "node_plant_aox_bypass"
+      ]
+    }
+  ],
+  "nodes": {
+    "node_mito_membranes_import": {
+      "id": "node_mito_membranes_import",
+      "level": "L1",
+      "title": "Mitochondrial Membranes (Cardiolipin) & Post-Translational Protein Import (TOM / TIM23 / TIM22)",
+      "subtitle": "Porin-Permeable OMM vs. Impermeable Cristae IMM | Amphipathic N-Terminal Matrix Targeting Presequences",
+      "coordinates": {
+        "x": 20,
+        "y": 40
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "outer_membrane_omm": "40% Lipid : 60% Protein; contains VDAC (Porin) channels permeable to molecules <5,000 Da (IMS pH = Cytosol pH ~7.2!)",
+        "inner_membrane_imm": "20% Lipid : 80% Protein; enriched in Cardiolipin (Diphosphatidylglycerol — 4 acyl chains!); 100% impermeable to H+, K+, Cl-, NADH",
+        "matrix_import_tim23": "N-terminal amphipathic α-helix (positively charged) -> TOM40 -> TIM23/TIM44 + mtHsp70 (Requires BOTH ΔΨ across IMM AND Matrix ATP!)",
+        "carrier_import_tim22": "Internal targeting sequences (no cleavable presequence, e.g., ANT) -> Cytosolic Hsp70/90 -> TOM -> Small Tim9/10 -> TIM22 (Requires ΔΨ ONLY!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. COMPARTMENTALIZATION & THE CARDIOLIPIN SEAL**:",
+          "• The **Outer Mitochondrial Membrane (OMM)** contains abundant **VDAC (Voltage-Dependent Anion Channel / Porin)** beta-barrels, making the **Intermembrane Space (IMS)** chemically equivalent to the cytosol for small ions and metabolites ($<5\\ \\text{kDa}$).",
+          "• The **Inner Mitochondrial Membrane (IMM)**—folded into **Cristae** by **MICOS** and **OPA1** complexes—contains **~20% Cardiolipin (diphosphatidylglycerol)**, a unique dimeric phospholipid with four fatty acyl chains that packs tightly around respiratory complexes and makes the IMM virtually **100% impermeable to protons ($\\text{H}^+$)**, enabling maintenance of a $-180\\ \\text{mV}$ membrane potential.",
+          "**2. POST-TRANSLATIONAL PROTEIN IMPORT (>99% of Mitochondrial Proteins are Nuclear-Encoded!)**:",
+          "• Precursor proteins are synthesized on **free cytosolic polysomes** and kept unfolded by **cytosolic Hsp70** (requiring cytosolic ATP hydrolysis to release!).",
+          "• **Matrix-Targeted Proteins (TOM $\\rightarrow$ TIM23 Pathway)**: Carry a cleavable N-terminal **amphipathic $\\alpha$-helix presequence** (positively charged Arg/Lys on one face, hydrophobic on the other). Recognized by **Tom20/Tom22**, threaded through **Tom40** and **Tim23**, driven across the IMM by **electrophoretic attraction of the positive presequence to the negative Matrix ($\\Delta\\Psi$)** AND pulled in by the **PAM motor (mtHsp70 + Tim44, which hydrolyzes Matrix ATP)**, before cleavage by **MPP (Mitochondrial Processing Peptidase)**!"
+        ],
+        "csir_high_yield": [
+          "Guaranteed CSIR NET Part C Experimental Questions on Mitochondrial Import Energetics:",
+          "• **What happens to Matrix Protein Import if you add Valinomycin/DNP (collapsing $\\Delta\\Psi$) vs. Oligomycin/Atractyloside (depleting Matrix ATP)?**",
+          "  – **Collapsing $\\Delta\\Psi$ across the IMM**: Completely abolishes insertion of the positively charged presequence into **TIM23** AND abolishes carrier insertion into **TIM22**!",
+          "  – **Depleting Matrix ATP (while keeping $\\Delta\\Psi$ intact)**: The N-terminal presequence STILL crosses the IMM via TIM23 (driven by $\\Delta\\Psi$) and gets cleaved by MPP, **BUT the rest of the polypeptide stalls halfway across the membrane** because **mtHsp70** requires Matrix ATP to ratchet the protein inside!",
+          "• **Intermembrane Space (IMS) Routing via the 'Stop-Transfer' vs. 'MIA40 Disulfide Relay'**:",
+          "  – **Cytochrome $b_2$ / Cytochrome $c_1$**: Carry a **bipartite signal** (matrix targeting sequence followed immediately by a hydrophobic stop-transfer sequence that arrests in TIM23 and is cleaved by inner-membrane peptidase **Imp1** to release the mature protein into the IMS!)."
+        ],
+        "pathology": [
+          "**Barth Syndrome**: X-linked mutation in the **TAZ (*Tafazzin*)** gene (a phospholipid transacylase that remodels cardiolipin acyl chains) causes cardiolipin deficiency, destabilizing ETC supercomplexes and leading to dilated cardiomyopathy, neutropenia, and skeletal myopathy."
+        ],
+        "lab_workbench": [
+          "Isolated Mitochondria Proteinase K Protection + MPP Cleavage Assay: Incubating isolated mitochondria with radiolabeled $^{35}\\text{S}$-precursor protein in vitro: successful import into the matrix is proved by (1) shift to a smaller MW band (**MPP cleavage of presequence**) AND (2) **complete resistance to externally added Proteinase K** (unless Triton X-100 detergent is added to lyse the membranes!)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (6G2J — Cryo-EM Structure of the Yeast Mitochondrial TOM Core Complex Translocase)",
+          "url": "https://www.rcsb.org/structure/6G2J",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (TAZ / Tafazzin Mutations in Barth Syndrome Cardiolipin Deficiency)",
+          "url": "https://www.omim.org/entry/302060",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_nadh_shuttles_tca": {
+      "id": "node_nadh_shuttles_tca",
+      "level": "L1",
+      "title": "Cytosolic NADH Shuttles (Malate-Aspartate vs. Glycerol-3-P) & The TCA Cycle Matrix Hub",
+      "subtitle": "Why 1 Glucose Yields 32 vs. 30 ATP | Pyruvate Dehydrogenase (5 Cofactors) & Succinyl-CoA Synthetase",
+      "coordinates": {
+        "x": 52,
+        "y": 35
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "pdh_5_cofactors": "TPP (Vit B1, E1), Lipoamide (E2), Coenzyme A (Vit B5, E2), FAD (Vit B2, E3), NAD+ (Vit B3, E3)",
+        "tca_yield_per_acetyl_coa": "3 NADH (Isocitrate DH, α-KGDH, Malate DH) + 1 FADH2 (Succinate DH) + 1 GTP/ATP (Succinyl-CoA Synthetase) = 10 ATP per Acetyl-CoA!",
+        "malate_aspartate_shuttle": "Liver, Kidney & Heart: Cytosolic NADH -> Matrix NADH (Complex I) -> Yields 2.5 ATP per cytosolic NADH -> Total = 32 ATP / Glucose!",
+        "glycerol_3p_shuttle": "Skeletal Muscle & Brain: Cytosolic NADH -> Mitochondrial FAD-G3PDH -> Ubiquinone (Bypasses Complex I!) -> Yields 1.5 ATP -> Total = 30 ATP / Glucose!"
+      },
+      "tabs": {
+        "mechanism": [
+          "Because the Inner Mitochondrial Membrane is **100% impermeable to cytosolic NADH** (generated during glycolysis by GAPDH), reducing equivalents must be ferried into the electron transport chain via one of two tissue-specific **Substrate Shuttles**:",
+          "1. **MALATE–ASPARTATE SHUTTLE (Reversible; Heart, Liver, Kidney — Zero Energetic Loss!)**: Cytosolic **Malate Dehydrogenase (cMDH)** reduces Oxaloacetate (OAA) + $\\text{NADH} \\rightarrow$ **Malate** + $\\text{NAD}^+$. Malate enters the matrix via the **Malate–$\\alpha$-Ketoglutarate Antiporter** and is re-oxidized by mitochondrial **mMDH** back into OAA + **Matrix NADH** (which enters **Complex I**, yielding **2.5 ATP**!). Matrix OAA is transaminated to **Aspartate**, which exits via the electrogenic **Glutamate–Aspartate Antiporter**.",
+          "2. **GLYCEROL-3-PHOSPHATE SHUTTLE (Irreversible; Skeletal Muscle, Brain, Insect Flight Muscle — Fast but Costs 1 ATP!)**: Cytosolic G3PDH reduces DHAP + $\\text{NADH} \\rightarrow$ **Glycerol-3-Phosphate**, which is oxidized on the outer face of the IMM by **flavoprotein mG3PDH (containing FAD)**, transferring electrons directly to **Ubiquinone (CoQ)**—**bypassing Complex I** and yielding only **1.5 ATP** per cytosolic NADH!"
+        ],
+        "csir_high_yield": [
+          "Complete Modern CSIR NET ATP Accounting per 1 Molecule of Glucose ($2.5\\ \\text{ATP/NADH}$ and $1.5\\ \\text{ATP/FADH}_2$):",
+          "• **1. Glycolysis (in Cytosol)**:",
+          "  – Substrate-level phosphorylation: $+2\\ \\text{ATP}$ net ($4$ made $-$ $2$ spent).",
+          "  – $2\\ \\text{Cytosolic NADH}$: Yields **$5\\ \\text{ATP}$** (via Malate-Aspartate shuttle) OR **$3\\ \\text{ATP}$** (via Glycerol-3-P shuttle).",
+          "• **2. Pyruvate Dehydrogenase Complex (in Matrix, $2\\ \\text{Pyruvate} \\rightarrow 2\\ \\text{Acetyl-CoA}$)**:",
+          "  – $2\\ \\text{Matrix NADH} \\times 2.5 = \\mathbf{5\\ \\text{ATP}}$.",
+          "• **3. TCA Cycle (in Matrix, $2\\ \\text{Turns}$)**:",
+          "  – $6\\ \\text{Matrix NADH} \\times 2.5 = \\mathbf{15\\ \\text{ATP}}$.",
+          "  – $2\\ \\text{FADH}_2 \\times 1.5 = \\mathbf{3\\ \\text{ATP}}$.",
+          "  – $2\\ \\text{GTP (ATP)}$ (substrate-level at Succinyl-CoA synthetase) $= \\mathbf{2\\ \\text{ATP}}$.",
+          "• **GRAND TOTAL**: **$32\\ \\text{ATP}$** (Liver/Heart/Kidney) or **$30\\ \\text{ATP}$** (Skeletal Muscle/Brain)! *(Note: In bacteria, which lack mitochondria and require zero shuttle transport, 1 Glucose also yields 32 ATP!).*",
+          "• **Where is the ONLY Membrane-Bound Enzyme of the TCA Cycle?** **Succinate Dehydrogenase (Complex II)** is embedded directly in the Inner Mitochondrial Membrane; all other 7 TCA enzymes are soluble in the matrix!"
+        ],
+        "pathology": [
+          "**Arsenite ($\\text{AsO}_2^-$) & Mercury Poisoning vs. Arsenate ($\\text{AsO}_4^{3-}$) Uncoupling of Glycolysis**:",
+          "• **Trivalent Arsenite ($\\text{As}^{3+}$)**: Forms a stable covalent ring with the reduced **dihydrolipoamide ($-\\text{SH}$ groups)** cofactor of **Pyruvate Dehydrogenase (E2)** and **$\\alpha$-Ketoglutarate Dehydrogenase**, halting the TCA cycle!",
+          "• **Pentavalent Arsenate ($\\text{AsO}_4^{3-}$)**: Structural mimic of Inorganic Phosphate ($\\text{P}_i$); used by **GAPDH** to form 1-arseno-3-phosphoglycerate, which spontaneously hydrolyzes to 3-PGA without making ATP at PGK (**net Glycolysis ATP drops to ZERO**!)."
+        ],
+        "lab_workbench": [
+          "Fluoroacetate ('Compound 1080') Aconitase Suicide Inhibition Assay: Cells convert Fluoroacetate into **Fluorocitrate**, which irreversibly inhibits **Aconitase** (an $[4\\text{Fe}\\text{-}4\\text{S}]$ cluster enzyme that is NOT a heme protein!), causing massive accumulation of **Citrate**."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1W85 — Crystal Structure of the Mammalian Pyruvate Dehydrogenase Complex Core)",
+          "url": "https://www.rcsb.org/structure/1W85",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Hans Krebs on the Citric Acid Cycle (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/medicine/1953/krebs/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_thermodynamics_redox": {
+      "id": "node_thermodynamics_redox",
+      "level": "L1",
+      "title": "Bioenergetic Thermodynamics: Standard vs. Actual Free Energy ($\\Delta G$) & Redox Potentials ($\\Delta E'^\\circ$)",
+      "subtitle": "$\\Delta G'^\\circ = -nF\\Delta E'^\\circ$, Coupled Endergonic/Exergonic Reactions & Why ATP Hydrolysis Yields $-50\\ \\text{kJ/mol}$ In Vivo",
+      "coordinates": {
+        "x": 82,
+        "y": 40
+      },
+      "next_zoom_target": "L2",
+      "metrics": {
+        "gibbs_free_energy_eq": "ΔG = ΔG'° + RT × ln( [Products] / [Reactants] ) | At Equilibrium (ΔG = 0): ΔG'° = -RT × ln(K'_eq) = -2.303 RT log10(K'_eq)",
+        "rt_constant_25c": "At 25°C (298 K): RT = 2.48 kJ/mol (0.59 kcal/mol) and 2.303 RT = 5.706 kJ/mol (1.36 kcal/mol)!",
+        "redox_free_energy_eq": "ΔG'° = -n × F × ΔE'° [where n = electrons transferred, F = Faraday constant = 96.485 kJ/(V·mol), ΔE'° = E'°(Acceptor) - E'°(Donor)]",
+        "nadh_to_o2_span": "E'°(NAD+/NADH) = -0.320 V | E'°(1/2 O2 / H2O) = +0.816 V -> ΔE'° = +0.816 - (-0.320) = +1.136 V -> ΔG'° = -2(96.5)(1.136) = -219.2 kJ/mol!"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. RELATING BIOCHEMICAL EQUILIBRIUM CONSTANT ($K'_{\\text{eq}}$) TO $\\Delta G'^\\circ$ AT pH 7.0 ($25^\\circ\\text{C}$)**:",
+          "$$\\Delta G'^\\circ = -2.303\\ RT \\log_{10}(K'_{\\text{eq}}) = -5.7\\ \\text{kJ/mol} \\times \\log_{10}(K'_{\\text{eq}})$$",
+          "• Every **10-fold increase in $K'_{\\text{eq}}$** makes $\\Delta G'^\\circ$ more negative by exactly **$-5.7\\ \\text{kJ/mol}$** ($-1.36\\ \\text{kcal/mol}$):",
+          "  – $K'_{\\text{eq}} = 1 \\Longleftrightarrow \\Delta G'^\\circ = 0\\ \\text{kJ/mol}$.",
+          "  – $K'_{\\text{eq}} = 10^1 \\Longleftrightarrow \\Delta G'^\\circ = -5.7\\ \\text{kJ/mol}$ | $K'_{\\text{eq}} = 10^2 \\Longleftrightarrow \\Delta G'^\\circ = -11.4\\ \\text{kJ/mol}$ | $K'_{\\text{eq}} = 10^{-3} \\Longleftrightarrow \\Delta G'^\\circ = +17.1\\ \\text{kJ/mol}$!",
+          "**2. REDOX POTENTIAL LADDER ($E'^\\circ$) & FREE ENERGY ($\\Delta G'^\\circ = -nF\\Delta E'^\\circ$)**:",
+          "• Spontaneous electron flow ALWAYS proceeds from the redox couple with the **MORE NEGATIVE reduction potential ($E'^\\circ$, stronger reducing agent / electron donor)** to the couple with the **MORE POSITIVE reduction potential ($E'^\\circ$, stronger oxidizing agent / electron acceptor)**:",
+          "$$\\Delta E'^\\circ = E'^\\circ_{\\text{electron acceptor}} - E'^\\circ_{\\text{electron donor}} > 0 \\quad \\Longrightarrow \\quad \\Delta G'^\\circ = -nF\\Delta E'^\\circ < 0$$"
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Unit 1 Numerical Problems on Actual $\\Delta G$ vs. Standard $\\Delta G'^\\circ$ & Phosphoryl Group Transfer:",
+          "• **1. Why can a Reaction with a POSITIVE $\\Delta G'^\\circ$ (like Malate $\\rightarrow$ Oxaloacetate in the TCA cycle, $\\Delta G'^\\circ = +29.7\\ \\text{kJ/mol}$, or Aldolase in Glycolysis, $\\Delta G'^\\circ = +23.8\\ \\text{kJ/mol}$) Proceed Forward Spontaneously Inside a Living Cell?**",
+          "  – Because spontaneity in vivo is determined by the **ACTUAL Free Energy Change ($\\Delta G$)**, NOT $\\Delta G'^\\circ$! In the mitochondrial matrix, Citrate Synthase continuously consumes Oxaloacetate, keeping the actual mass-action ratio $[\\text{OAA}]/[\\text{Malate}] < 10^{-6}$ so that $RT\\ln Q$ is strongly negative ($<-34\\ \\text{kJ/mol}$), making actual **$\\Delta G < 0$**!",
+          "• **2. Ranking of Standard Free Energy of Hydrolysis ($\\Delta G'^\\circ$) of Phosphorylated Compounds (Who Can Phosphorylate ADP to ATP?)**:",
+          "  1. **Phosphoenolpyruvate (PEP)**: **$-61.9\\ \\text{kJ/mol}$** (Highest! Driven by enol-to-keto tautomerization of pyruvate).",
+          "  2. **1,3-Bisphosphoglycerate (1,3-BPG)**: **$-49.3\\ \\text{kJ/mol}$** (Resonance stabilization of 3-PGA).",
+          "  3. **Phosphocreatine**: **$-43.0\\ \\text{kJ/mol}$**.",
+          "  4. **ATP ($\\rightarrow$ ADP + $\\text{P}_i$)**: **$-30.5\\ \\text{kJ/mol}$** (Actual cellular $\\Delta G_p \\approx -50\\text{ to }-54\\ \\text{kJ/mol}$!).",
+          "  5. **Glucose-1-Phosphate**: **$-20.9\\ \\text{kJ/mol}$** | **Glucose-6-Phosphate**: **$-13.8\\ \\text{kJ/mol}$** | **Glycerol-3-Phosphate**: **$-9.2\\ \\text{kJ/mol}$**.",
+          "  *Rule*: Only compounds **ABOVE ATP** ($\\text{PEP}$, $1,3\\text{-BPG}$, Phosphocreatine, Succinyl-CoA) have a more negative $\\Delta G'^\\circ$ than $-30.5\\ \\text{kJ/mol}$ and can drive **Substrate-Level Phosphorylation of ADP $\\rightarrow$ ATP**!"
+        ],
+        "pathology": [
+          "**Atkinson's Adenylate Energy Charge ($\\text{AEC} = \\frac{[\\text{ATP}] + 0.5[\\text{ADP}]}{[\\text{ATP}] + [\\text{ADP}] + [\\text{AMP}]}$)**: Healthy metabolizing cells tightly buffer their Energy Charge between **$0.80\\text{ and }0.95$** (via **Adenylate Kinase**: $2\\ \\text{ADP} \\rightleftharpoons \\text{ATP} + \\text{AMP}$, where rising $[\\text{AMP}]$ allosterically activates **AMPK** and **PFK-1**!); if $\\text{AEC}$ drops below $0.5$, the cell undergoes necrotic death."
+        ],
+        "lab_workbench": [
+          "Potentiometric Redox Titration with Mediators & Clark Electrode: Determines the midpoint potential ($E_m$) of individual Iron-Sulfur clusters and cytochromes via Nernst plots ($E_h = E'^\\circ + \\frac{59\\ \\text{mV}}{n}\\log\\frac{[\\text{Ox}]}{[\\text{Red}]}$)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1CRK — Crystal Structure of Mitochondrial Creatine Kinase Octamer Catalyzing Phosphocreatine Phosphoryl Transfer)",
+          "url": "https://www.rcsb.org/structure/1CRK",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_complex_i_nadh": {
+      "id": "node_complex_i_nadh",
+      "level": "L2",
+      "title": "Complex I (NADH : Ubiquinone Oxidoreductase — 45 Subunits, ~1 MDa)",
+      "subtitle": "L-Shaped Proton Pump: NADH -> FMN -> 7–8 Fe-S Clusters (N2) -> Ubiquinone (CoQ10) | Pumps 4 H+ / 2 e-",
+      "coordinates": {
+        "x": 16,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "prosthetic_pathway": "Matrix NADH (2e- hydride) -> FMN (2e- to 1e- transducer!) -> 7–8 Fe-S Clusters (N3 -> N1b -> N4 -> N5 -> N6a -> N6b -> N2) -> Ubiquinone (Q -> QH2)",
+        "proton_stoichiometry": "Pumps 4 H+ from Matrix to IMS per 2 e- (1 NADH) oxidized!",
+        "classic_inhibitors": "Rotenone (Plant isoflavonoid insecticide), Piericidin A, Amytal / Barbiturates, & Demerol (All block electron transfer from Fe-S cluster N2 to Ubiquinone!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**Complex I** is the largest multimeric enzyme of the respiratory chain (**45 subunits in mammals**: 7 hydrophobic core subunits encoded by **mtDNA [*ND1–ND6, ND4L*]** + 38 nuclear-encoded subunits), folded into an **L-shaped architecture**:",
+          "1. **Hydrophilic Matrix Arm (Electron Transfer Wire)**: Matrix **NADH** donates a **2-electron hydride ion ($\\text{H}^-$)** to **FMN (Flavin Mononucleotide)** ($\\rightarrow \\text{FMNH}_2$). Because Iron-Sulfur ($\\text{Fe-S}$) clusters can only carry **1 electron at a time** ($\\text{Fe}^{3+} \\leftrightarrow \\text{Fe}^{2+}$), **FMN acts as an obligate $2e^- \\rightarrow 1e^-$ step-down transducer**, passing electrons singly down a wire of 7 conserved $[2\\text{Fe-2S}]$ and $[4\\text{Fe-4S}]$ clusters culminating in the high-potential cluster **N2**.",
+          "2. **Hydrophobic Membrane Arm (Conformational Proton Pump)**: Electron transfer from cluster **N2** to lipid-soluble **Ubiquinone ($\\text{CoQ}_{10}$)** (plus $2\\text{H}^+$ from the matrix to form **Ubiquinol, $\\text{QH}_2$**) drives long-range Electrostatic conformational waves across three antiporter-like subunits (ND2, ND4, ND5) that **pump $4\\text{H}^+$ from the Matrix into the Intermembrane Space**!"
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Questions on Complex I Inhibitors & Bypass Rescue:",
+          "• **Does Complex I contain any Heme (Cytochrome) prosthetic groups?** **NO!** Complex I contains **ONLY FMN and Iron–Sulfur ($\\text{Fe-S}$) clusters**! (Hemes appear only in Complex II [$b_{560}$], Complex III [$b_L, b_H, c_1$], and Complex IV [$a, a_3$]).",
+          "• **Classic Rotenone + Succinate Rescue Experiment (Guaranteed CSIR Part C Oxygen-Electrode Question!)**:",
+          "  – Mitochondria respiring on **Pyruvate/Malate or Glutamate/Malate** (which generate **NADH** for Complex I) are treated with **Rotenone (or Amytal)**: Oxygen consumption **drops immediately to ZERO**!",
+          "  – Now **Succinate** (or Glycerol-3-Phosphate) is added to the exact same Rotenone-poisoned chamber: **Oxygen consumption and ATP synthesis IMMEDIATELY RESUME!** Why? Because Succinate feeds electrons via **Complex II ($\\text{FADH}_2$)** directly into the **Ubiquinone ($\\text{CoQ}$) pool**, completely **bypassing blocked Complex I**!"
+        ],
+        "pathology": [
+          "**Leber's Hereditary Optic Neuropathy (LHON)** & **MPTP / Rotenone-Induced Parkinsonism**:",
+          "• Maternal mtDNA point mutations in Complex I subunits (*MT-ND1, ND4, ND6*) cause selective degeneration of retinal ganglion cells and adult-onset blindness.",
+          "• **Rotenone** and **MPP+ (metabolite of MPTP)** inhibit Complex I in nigrostriatal dopaminergic neurons, causing superoxide leakage from FMN and clinical **Parkinson's disease**."
+        ],
+        "lab_workbench": [
+          "Spectrophotometric NADH Oxidation Assay at $340\\ \\text{nm}$ (Rotenone-Sensitive Rate): Measures $\\Delta A_{340}/\\Delta t$ in submitochondrial particles incubated with NADH + Decylubiquinone (in the presence of KCN to block Complex IV), subtracting the residual Rotenone-insensitive rate."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (5LDW — Judy Hirst 4.2 Å Cryo-EM Structure of the Complete Mammalian Mitochondrial Complex I — All 45 Subunits)",
+          "url": "https://www.rcsb.org/structure/5LDW",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (MT-ND4 Mutations in Leber Hereditary Optic Neuropathy LHON)",
+          "url": "https://www.omim.org/entry/535000",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_complex_ii_sdh": {
+      "id": "node_complex_ii_sdh",
+      "level": "L2",
+      "title": "Complex II (Succinate Dehydrogenase — SDHA/B/C/D): The Non-Pumping TCA Bridge",
+      "subtitle": "100% Nuclear-Encoded! Succinate -> Covalently Bound FAD -> 3 Fe-S Clusters -> Heme b560 -> Ubiquinone | Pumps 0 H+!",
+      "coordinates": {
+        "x": 40,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "subunit_genetics": "4 Subunits (SDHA, SDHB, SDHC, SDHD): 100% NUCLEAR-ENCODED! (The ONLY respiratory complex with ZERO mtDNA-encoded subunits!)",
+        "prosthetic_pathway": "Succinate -> Covalently bound FAD (His-flavinated on SDHA) -> [2Fe-2S] -> [4Fe-4S] -> [3Fe-4S] (on SDHB) -> Ubiquinone (Heme b560 prevents ROS leak)",
+        "proton_stoichiometry": "Pumps ZERO (0) H+! (Why? ΔE'° from Succinate/Fumarate [+0.031 V] to Ubiquinone [+0.045 V] is too small [ΔG'° ≈ -2.7 kJ/mol] to pump protons!)",
+        "classic_inhibitors": "Malonate (3-carbon dicarboxylate competitive inhibitor of SDHA succinate site) | Carboxin & TTFA (Thenoyltrifluoroacetone — block Q-binding pocket!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**Complex II (Succinate : Ubiquinone Oxidoreductase)** is the physical and catalytic bridge linking the **TCA Cycle** directly to the **Electron Transport Chain**:",
+          "• **SDHA** (matrix-facing flavoprotein) oxidizes **Succinate $\\rightarrow$ Fumarate**, reducing a **covalently attached FAD** prosthetic group to $\\text{FADH}_2$.",
+          "• Electrons pass singly through **three Iron–Sulfur clusters** ($[2\\text{Fe-2S}] \\rightarrow [4\\text{Fe-4S}] \\rightarrow [3\\text{Fe-4S}]$) in **SDHB** to reduce **Ubiquinone ($\\text{CoQ}_{10}$) $\\rightarrow \\text{QH}_2$** bound at the membrane-anchor subunits **SDHC/SDHD** (which also coordinate a single **Heme $b_{560}$** that acts as an electron sink to prevent superoxide radical formation)."
+        ],
+        "csir_high_yield": [
+          "Three Guaranteed CSIR NET Exam Facts About Complex II:",
+          "• **1. Why does $\\text{FADH}_2$ yield only $1.5\\ \\text{ATP}$ whereas $\\text{NADH}$ yields $2.5\\ \\text{ATP}$?** Because **Complex II pumps ZERO ($0$) protons ($\\text{H}^+$)** across the inner mitochondrial membrane! Electrons from $\\text{FADH}_2$ enter the Ubiquinone pool and only pump protons at **Complex III ($4\\text{H}^+$) + Complex IV ($2\\text{H}^+$) = $6\\text{H}^+$ total** ($6/4 = \\mathbf{1.5\\ \\text{ATP}}$), whereas NADH pumps $4\\text{H}^+$ at Complex I + $4\\text{H}^+$ at Complex III + $2\\text{H}^+$ at Complex IV $= \\mathbf{10\\text{H}^+}$ total ($10/4 = \\mathbf{2.5\\ \\text{ATP}}$)!",
+          "• **2. Which is the ONLY ETC Complex Encoded 100% by the Nuclear Genome?** **Complex II (SDHA, B, C, D)**! Therefore, in **$\\rho^0$ cells (cells completely stripped of mitochondrial DNA by ethidium bromide)**, Complexes I, III, IV, and V are completely absent/non-functional, **WHEREAS Complex II (Succinate Dehydrogenase) remains 100% enzymatically ACTIVE**!",
+          "• **3. Malonate vs. Carboxin / TTFA**: **Malonate** ($\\text{HOOC–CH}_2\\text{–COOH}$) is the textbook **competitive inhibitor** of the Succinate active site on SDHA; **Carboxin** (systemic fungicide) and **TTFA** block electron transfer from the $[3\\text{Fe-4S}]$ cluster to Ubiquinone."
+        ],
+        "pathology": [
+          "**Hereditary Paraganglioma & Pheochromocytoma (*SDHB / SDHD* Tumor Suppressor Mutations)**: Loss-of-function mutations in *SDH* subunits cause intracellular **Succinate** accumulation. Excess Succinate competitively inhibits $\\alpha$-ketoglutarate-dependent **Prolyl Hydroxylases (PHDs)**, stabilizing **HIF-1$\\alpha$** under normoxia (**'Pseudohypoxia'**) and inhibiting TET DNA demethylases as an **Oncometabolite**!"
+        ],
+        "lab_workbench": [
+          "Succinate Dehydrogenase Histochemical Assay with **NBT (Nitroblue Tetrazolium) or INT**: Incubating tissue cryosections or mitochondrial fractions with Succinate + Phenazine Methosulfate (PMS) + colorless Tetrazolium reduces the dye into an insoluble dark-blue **Formazan** precipitate (completely abolished by adding **Malonate**!)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1ZOY — Sun & Rao Crystal Structure of Mammalian Mitochondrial Respiratory Complex II Bound to Ubiquinone and TTFA)",
+          "url": "https://www.rcsb.org/structure/1ZOY",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_complex_iii_q_cycle": {
+      "id": "node_complex_iii_q_cycle",
+      "level": "L2",
+      "title": "Complex III (Cytochrome bc1) & Peter Mitchell's Bifurcated Q-Cycle",
+      "subtitle": "Qo vs. Qi Sites: Why 2 QH2 Oxidized Yield 1 QH2 Regenerated, 2 Cyt c Reduced & 4 H+ Released to IMS",
+      "coordinates": {
+        "x": 64,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "prosthetic_groups": "Cytochrome b (mtDNA-encoded; contains Low-Potential Heme bL & High-Potential Heme bH) + Rieske Iron-Sulfur Protein ([2Fe-2S]) + Cytochrome c1 (Heme c1)",
+        "q_cycle_net_equation": "QH2 + 2 Cyt c (Fe3+) + 2 H+_(Matrix) -> Q + 2 Cyt c (Fe2+) + 4 H+_(IMS)!",
+        "mobile_shuttle_out": "Cytochrome c (Water-soluble 12.4 kDa peripheral protein on outer IMS face of IMM; carries 1 e- via covalently thioether-linked Heme c!)",
+        "site_specific_inhibitors": "Myxothiazol & Stigmatellin (Block outer Qo site!) vs. Antimycin A (Blocks inner Qi site!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**Complex III (Ubiquinol : Cytochrome $c$ Oxidoreductase)** solves a fundamental stoichiometry puzzle: **Ubiquinol ($\\text{QH}_2$) is a 2-electron, 2-proton carrier** diffusing inside the lipid bilayer, whereas **Cytochrome $c$ is strictly a 1-electron, 0-proton carrier** in the aqueous Intermembrane Space! It couples this $2e^- \\rightarrow 1e^-$ split to proton translocation via **Mitchell's Two-Half-Turn Q-Cycle**:",
+          "• **HALF-TURN 1 (At the Outer/IMS-facing $Q_o$ Site)**: The first **$\\text{QH}_2$** docks at the **$Q_o$ site** and releases **$2\\text{H}^+$ into the IMS**. Its **2 electrons bifurcate (split)** down two different paths:",
+          "  – **Electron 1 (High-Potential Chain)**: Jumps to the mobile head of the **Rieske $[2\\text{Fe-2S}]$ protein** $\\rightarrow$ **Cytochrome $c_1$** $\\rightarrow$ reduces the **1st molecule of Cytochrome $c$**, while oxidized **Ubiquinone ($Q$)** leaves the $Q_o$ site.",
+          "  – **Electron 2 (Low-Potential Recycling Chain)**: Jumps across the membrane through **Heme $b_L \\rightarrow$ Heme $b_H$** to the inner/Matrix-facing **$Q_i$ site**, where it reduces an oxidized Ubiquinone ($Q$) into a stable **Semiquinone Radical ($Q^{\\bullet -}$)**!",
+          "• **HALF-TURN 2**: A **second $\\text{QH}_2$** docks at the **$Q_o$ site**, releases another **$2\\text{H}^+$ into the IMS** (**Total = $4\\text{H}^+$ into IMS!**), sends its 1st electron via Rieske/$c_1$ to reduce a **2nd molecule of Cytochrome $c$**, and sends its 2nd electron via Heme $b_L \\rightarrow b_H$ to the **$Q_i$ site**, where it reduces the waiting **Semiquinone ($Q^{\\bullet -}$) + $2\\text{H}^+$ taken from the Matrix** to regenerate **1 full molecule of $\\text{QH}_2$**!"
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Part C Questions on the Q-Cycle, Antimycin A & TMPD + Ascorbate Rescue:",
+          "• **Q-Cycle Accounting Trap**: How many molecules of $\\text{QH}_2$ must bind the $Q_o$ site to complete one full Q-cycle, and what is the **NET** number of $\\text{QH}_2$ consumed? **2 molecules of $\\text{QH}_2$ are oxidized at $Q_o$, and 1 molecule of $\\text{QH}_2$ is regenerated at $Q_i$**, for a **NET consumption of 1 $\\text{QH}_2$**, releasing **$4\\text{H}^+$ into the IMS** and consuming **$2\\text{H}^+$ from the Matrix**!",
+          "• **Antimycin A vs. Myxothiazol Site Specificity**:",
+          "  – **Antimycin A** blocks the inner **$Q_i$ site** (preventing Heme $b_H$ from reducing $Q/Q^{\\bullet -}$ at $Q_i$, causing Heme $b_L/b_H$ to stay reduced and leaking superoxide from $Q_o$!).",
+          "  – **Myxothiazol** and **Stigmatellin** block the outer **$Q_o$ site** (preventing $\\text{QH}_2$ from donating electrons to the Rieske Fe-S center).",
+          "• **Classic Antimycin A + TMPD / Ascorbate Bypass Rescue (Guaranteed CSIR Part C Respirometry Question!)**:",
+          "  – If mitochondria are poisoned with **Antimycin A** (blocking Complex III), neither NADH-linked substrates (Pyruvate/Malate) nor Succinate can drive $\\text{O}_2$ consumption!",
+          "  – How do you bypass blocked Complex III in the lab? Add **Ascorbate + TMPD (*N,N,N',N'*-tetramethyl-*p*-phenylenediamine)**! TMPD is an artificial electron carrier reduced by Ascorbate that **donates electrons directly to Cytochrome $c$**, driving **Complex IV ($\\text{O}_2$ consumption and $2\\text{H}^+$ pumping = $0.5\\text{–}1.0\\ \\text{ATP}$)** while bypassing Complexes I, II, and III!"
+        ],
+        "pathology": [
+          "**Atovaquone (Antimalarial Drug)**: Selectively binds the **$Q_o$ site of *Plasmodium falciparum* Cytochrome $bc_1$ (Complex III)** without inhibiting human Complex III; because malaria parasites rely on ubiquinone to run dihydroorotate dehydrogenase (DHODH) for pyrimidine synthesis, Atovaquone starves the parasite of dTTP/CTP!"
+        ],
+        "lab_workbench": [
+          "Dual-Wavelength Cytochrome $c$ Reduction Assay at $550\\ \\text{nm}$: Reduced **Ferrocytochrome $c$ ($\\text{Fe}^{2+}$)** exhibits a sharp diagnostic **$\\alpha$-absorption band at $550\\ \\text{nm}$** (absent in oxidized Ferricytochrome $c$); measuring $\\Delta A_{550}/\\Delta t$ upon adding decylubiquinol quantifies Complex III activity."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1BGY — Iwata Crystal Structure of Bovine Heart Mitochondrial Cytochrome bc1 Complex III Showing Mobile Rieske Head)",
+          "url": "https://www.rcsb.org/structure/1BGY",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_complex_iv_cox": {
+      "id": "node_complex_iv_cox",
+      "level": "L2",
+      "title": "Complex IV (Cytochrome c Oxidase): CuA -> Heme a -> Heme a3–CuB Binuclear Center",
+      "subtitle": "4-Electron Reduction of O2 -> 2 H2O Without Releasing ROS | 4 'Chemical' H+ + 4 'Pumped' H+ per O2!",
+      "coordinates": {
+        "x": 88,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "core_mtDNA_subunits": "13 Subunits total; 3 Catalytic Core Subunits are mtDNA-encoded: COX1 (Heme a + Heme a3 + CuB), COX2 (Binuclear CuA center), COX3",
+        "electron_transfer_path": "4 Cytochrome c (IMS) -> Binuclear CuA center (2 Cu ions sharing 1 e-) -> Heme a -> Heme a3–CuB Binuclear Center -> O2",
+        "proton_accounting_per_o2": "Per 1 O2 (4 e-): 4 'Substrate/Chemical' H+ taken from Matrix to make 2 H2O + 4 'Vectorial' H+ pumped from Matrix to IMS = 8 H+ removed from Matrix!",
+        "classic_inhibitors": "Cyanide (CN- — binds Fe3+ of Heme a3), Carbon Monoxide (CO — binds Fe2+ of Heme a3), Sodium Azide (N3-), & Hydrogen Sulfide (H2S)!"
+      },
+      "tabs": {
+        "mechanism": [
+          "**Complex IV (Cytochrome $c$ Oxidase)** catalyzes the terminal, irreversible step of aerobic respiration—transferring **4 electrons** from 4 molecules of reduced **Cytochrome $c$** (in the IMS) to reduce **1 molecule of $\\text{O}_2$ into $2\\ \\text{H}_2\\text{O}$**:",
+          "1. **Electron Path**: Each Cytochrome $c$ docks on **Subunit II (COX2)** and passes 1 electron to the **Binuclear $\\text{Cu}_A$ center** (two copper atoms bridged by cysteine thiols), then to **Heme $a$** in **Subunit I (COX1)**, and finally to the catalytic **Heme $a_3\\text{–Cu}_B$ Binuclear Center**.",
+          "2. **Trapping $\\text{O}_2$ Without Leaking Peroxide or Superoxide**: $\\text{O}_2$ binds between reduced $\\text{Fe}^{2+}$ of **Heme $a_3$** and $\\text{Cu}^+$ of **$\\text{Cu}_B$**; the O=O bond is cleaved immediately in a single 4-electron step using 2 electrons from $\\text{Fe}^{2+}$ ($\\rightarrow \\text{Fe}^{4+}=\\text{O}$ ferryl), 1 electron from $\\text{Cu}^+$, and 1 electron + $\\text{H}^+$ from a conserved **cross-linked Tyrosine-244 (His-Tyr covalent cofactor!)**, keeping all oxygen intermediates tightly bound until fully reduced to $2\\ \\text{H}_2\\text{O}$!"
+        ],
+        "csir_high_yield": [
+          "Guaranteed CSIR NET Part B & C Questions on Complex IV Proton Stoichiometry & Cyanide vs. CO Poisoning:",
+          "• **Exact Proton Stoichiometry of Complex IV (Per $2e^-$ [$\\frac{1}{2}\\text{O}_2$] vs. Per $4e^-$ [$1\\ \\text{O}_2$])**:",
+          "  – **Per $2e^-$ ($\\frac{1}{2}\\text{O}_2$ reduced to $1\\ \\text{H}_2\\text{O}$)**: Complex IV consumes **$2\\text{H}^+$ from the Matrix as chemical substrate** (to form $\\text{H}_2\\text{O}$) AND **pumps $2\\text{H}^+$ vectorially into the IMS**! *(Therefore, across the whole chain per $2e^-$: Complex I [$4\\text{H}^+$] + Complex III [$4\\text{H}^+$] + Complex IV [$2\\text{H}^+$] = **$10\\text{H}^+$ pumped into the IMS per NADH**, and **$6\\text{H}^+$ per $\\text{FADH}_2$**!).*",
+          "  – **Per $4e^-$ ($1\\text{ full }\\text{O}_2$ reduced to $2\\ \\text{H}_2\\text{O}$)**: Complex IV removes $8\\text{H}^+$ from the Matrix ($4\\text{H}^+$ become $2\\ \\text{H}_2\\text{O}$ + **$4\\text{H}^+$ pumped into the IMS**).",
+          "• **Why do Nitrites (Amyl Nitrite / Sodium Nitrite) Rescue Cyanide ($\\text{CN}^-$) Poisoning? (Classic CSIR Biochemistry Question!)**:",
+          "  – **Cyanide ($\\text{CN}^-$)** has ultra-high affinity specifically for the **ferric ($\\text{Fe}^{3+}$) state** of **Heme $a_3$** in Complex IV (whereas **Carbon Monoxide [CO]** binds the **ferrous [$\\text{Fe}^{2+}$] state**!).",
+          "  – Administering **Sodium Nitrite** oxidizes a fraction of circulating **Hemoglobin ($\\text{Fe}^{2+}$) into Methemoglobin ($\\text{Fe}^{3+}$)**! Because Methemoglobin ($\\text{Fe}^{3+}$) competes with Complex IV ($\\text{Fe}^{3+}$) for binding $\\text{CN}^-$, it pulls Cyanide out of the mitochondria to form non-toxic **Cyanmethemoglobin**, which is then converted by **Sodium Thiosulfate + Rhodanese** into harmless urinary **Thiocyanate ($\\text{SCN}^-$)**!",
+          "• **Redox State of the Entire Chain When Complex IV is Blocked by $\\text{CN}^-$ or $\\text{CO}$**: Because the terminal exit to $\\text{O}_2$ is plugged, electrons back up across the entire chain—**NADH, FMN, $\\text{CoQ}$, Cytochrome $b$, Cytochrome $c_1$, Cytochrome $c$, and Cytochrome $a/a_3$ ALL become 100% REDUCED**!"
+        ],
+        "pathology": [
+          "**Leigh Syndrome (Subacute Necrotizing Encephalomyelopathy)**: Mutations in the nuclear-encoded Complex IV assembly factor **SURF1** (or *SCO2* copper chaperone) prevent Cytochrome $c$ Oxidase assembly, causing severe infantile lactic acidosis and basal ganglia degeneration."
+        ],
+        "lab_workbench": [
+          "TMPD (*N,N,N',N'*-Tetramethyl-*p*-phenylenediamine) Cytochrome $c$ Oxidase Colorimetric Test (Kovacs' Oxidase Test in Bacteriology): Bacteria expressing Cytochrome $c$ and Complex IV (*Pseudomonas, Neisseria, Vibrio*) oxidize colorless TMPD into deep indophenol **Purple** within 10 seconds, whereas *Enterobacteriaceae* (*E. coli, Salmonella*) lack Cytochrome $c$ (using ubiquinol oxidase instead) and test **Oxidase-Negative**!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1OCC — Tsukihara Landmark 2.8 Å Crystal Structure of Bovine Heart Mitochondrial Cytochrome c Oxidase Complex IV)",
+          "url": "https://www.rcsb.org/structure/1OCC",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_f0f1_atp_synthase": {
+      "id": "node_f0f1_atp_synthase",
+      "level": "L3",
+      "title": "Complex V (FoF1 ATP Synthase): Boyer's Binding-Change Mechanism & Rotary Catalysis",
+      "subtitle": "Stator ($a b_2 \\delta \\alpha_3\\beta_3$) vs. Rotor ($c_n \\gamma\\varepsilon$), O–L–T Conformations & Why ATP Release Costs the Energy!",
+      "coordinates": {
+        "x": 30,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "f1_catalytic_head": "α3β3γδε (Matrix-facing knob; 3 β-subunits are catalytic; γ-axle rotation forces β-subunits through Open [O] -> Loose [L] -> Tight [T] states!)",
+        "fo_membrane_motor": "a1 b2 c8–15 (Oligomycin-sensitive proton channel; in mammalian mitochondria, c-ring has 8 c-subunits; in yeast 10; in chloroplasts 14!)",
+        "rotary_yield_per_360": "1 full 360° rotation of γ-subunit (driven by c-ring) synthesizes exactly 3 ATP molecules (120° step per ATP)!",
+        "classic_inhibitors": "Oligomycin & DCCD (Block Fo proton channel!) | Aurovertin, Venturicidin, Tentoxin & IF1 (Inhibit F1 catalytic head!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. PAUL BOYER'S BINDING-CHANGE MECHANISM (1997 Nobel Prize with John Walker)**:",
+          "• **The #1 Conceptual Surprise**: On the surface of the $\\beta$-subunit in the **Tight ($T$) conformation**, the synthesis of $\\text{ATP}$ from $\\text{ADP} + \\text{P}_i$ has an equilibrium constant **$K'_{\\text{eq}} \\approx 1.0$ ($\\Delta G'^\\circ \\approx 0$)**—meaning **forming the phosphoanhydride bond of ATP on the enzyme surface requires ZERO proton-motive force**! Instead, the Proton-Motive Force is required to drive the mechanical rotation of the asymmetric **$\\gamma$-subunit axle**, which forces the Tight ($T$) $\\beta$-subunit into the **Open ($O$) conformation to RELEASE the tightly bound ATP** into the matrix!",
+          "• **The 3 Asymmetric States of theThree $\\beta$-Subunits at Any Instant**:",
+          "  – **L (Loose)**: Binds $\\text{ADP} + \\text{P}_i$ loosely (catalytically inactive).",
+          "  – **T (Tight)**: Binds $\\text{ADP} + \\text{P}_i$ so tightly that they spontaneously condense into **tightly bound $\\text{ATP}$**.",
+          "  – **O (Open)**: Very low affinity; **releases newly synthesized $\\text{ATP}$** and binds fresh $\\text{ADP} + \\text{P}_i$.",
+          "**2. PROTON-DRIVEN ROTATION OF THE $c$-RING & $\\gamma$-AXLE**:",
+          "Protons from the IMS enter the entry half-channel of the stationary **$a$-subunit**, neutralize a conserved negatively charged **Glutamate/Aspartate (Glu-58)** on a **$c$-subunit** so it can rotate nearly $360^\\circ$ through the hydrophobic lipid bilayer, and exit into the Matrix via the second half-channel of the $a$-subunit (guided by the essential **Arginine** stator charge on subunit $a$)."
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Questions on Noji's Actin-Filament Assay, DCCD & $c$-Ring Stoichiometry:",
+          "• **Hiroyuki Noji & Masasuke Yoshida's Direct Visual Proof of $\\gamma$-Subunit Rotation**:",
+          "  – Immobilized the $\\alpha_3\\beta_3$ $F_1$ head upside-down via $\\text{His}_6$-tags onto a glass coverslip, attached a **$1\\ \\mu\\text{m}$ fluorescently labeled Actin filament** to the tip of the **$\\gamma$-subunit**, and added **ATP**: Under fluorescence microscopy, the actin filament rotated continuously **counterclockwise in discrete $120^\\circ$ steps** (each $120^\\circ$ step driven by hydrolysis of 1 ATP!).",
+          "• **Oligomycin vs. DCCD ($N,N'$-Dicyclohexylcarbodiimide)**:",
+          "  – **Oligomycin**: Binds at the interface between the **$a$-subunit and $c$-ring of $F_o$** (whence the 'O' in $F_o$ = *Oligomycin-sensitive factor*!).",
+          "  – **DCCD**: Reacts covalently with the single protonated **Carboxyl side chain (Glutamate/Aspartate)** inside the **$c$-subunit** of $F_o$, locking the $c$-ring rotor!",
+          "• **Why DoIsolated $F_1$ Knobs (Stripped from Inner Membrane Vesicles by Urea/Sonication — Racker's Experiment) Only HYDROLYZE ATP Instead of Synthesizing ATP?**",
+          "  – Without the $F_o$ membrane proton channel and an intact $\\Delta p$, soluble **$F_1$ acts solely as an ATPase** (hydrolyzing $\\text{ATP} \\rightarrow \\text{ADP} + \\text{P}_i$)! Only when purified $F_1$ knobs are added back to $F_1$-stripped submitochondrial vesicles is oxidative phosphorylation restored!"
+        ],
+        "pathology": [
+          "**NARP (Neuropathy, Ataxia, and Retinitis Pigmentosa) & MILS**: Maternal mtDNA point mutations (e.g., T8993G) in the **MT-ATP6** gene (encoding the **$a$-subunit of $F_o$**) block proton flow through the stator half-channels, crippling ATP synthesis in brain and retina."
+        ],
+        "lab_workbench": [
+          "$^{18}\\text{O}$-Water Isotope Exchange Assay (Boyer's Proof): Incubating mitochondria with $\\text{ADP} + \\text{P}_i$ in $\\text{H}_2^{18}\\text{O}$ in the presence of an uncoupler (zero net ATP synthesis) still results in rapid incorporation of multiple $^{18}\\text{O}$ atoms into inorganic phosphate—proving that $\\text{ADP} + \\text{P}_i \\rightleftharpoons \\text{ATP} + \\text{H}_2\\text{O}$ reverses back and forth freely at the $T$ site without needing PMF!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1BMF — John Walker Landmark 2.8 Å Crystal Structure of Bovine Mitochondrial F1-ATPase Showing O, L, and T Beta-Subunits)",
+          "url": "https://www.rcsb.org/structure/1BMF",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Paul Boyer & John Walker on the Rotary Mechanism of ATP Synthase (Nobel Lectures)",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1997/walker/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_pmf_ant_translocase": {
+      "id": "node_pmf_ant_translocase",
+      "level": "L3",
+      "title": "Proton-Motive Force ($\\Delta p$), Adenine Nucleotide Translocase (ANT) & Phosphate Translocase",
+      "subtitle": "$\\Delta p = \\Delta\\Psi - 59\\Delta\\text{pH}$, Why Importing Pi Costs 1 H+ ($3 + 1 = 4\\ \\text{H}^+/\\text{ATP}$) & Atractyloside vs. Bongkrekic Acid",
+      "coordinates": {
+        "x": 75,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "proton_motive_force_eq": "Δp (in mV) = ΔΨ - (2.303 RT / F) × ΔpH = ΔΨ - (59 mV × ΔpH) ≈ 160 mV + (59 × 0.8) ≈ 200–220 mV (In mitochondria, ~80% is ΔΨ!)",
+        "ant_exchanger": "Adenine Nucleotide Translocase (ANT / AAC): Exports Matrix ATP^4- in exchange for importing Cytosolic ADP^3- (Electrogenic! Driven by ΔΨ)",
+        "phosphate_translocase": "Phosphate Carrier (PiC): Imports H2PO4- + H+ Symport (or H2PO4-/OH- Antiport) -> Consumes 1 H+ from the PMF per ATP exported!",
+        "net_h_per_atp_budget": "Approximately 3 H+ (or 2.7 H+ for c8 ring) through FoF1 + 1 H+ for Pi/ATP transport = 4 H+ per cytosolic ATP -> P/O = 10/4 = 2.5 (NADH) & 6/4 = 1.5 (FADH2)!"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. QUANTITATIVE PROTON-MOTIVE FORCE ($\\Delta p$ OR PMF) EQUATION**:",
+          "Across the inner mitochondrial membrane, pumping $\\text{H}^+$ out of the matrix creates BOTH an **Electrical Potential ($\\Delta\\Psi \\approx 150\\text{–}180\\ \\text{mV}$, Matrix negative)** and a **Chemical pH Gradient ($\\Delta\\text{pH} = \\text{pH}_{\\text{IMS}} - \\text{pH}_{\\text{Matrix}} \\approx 7.2 - 8.0 = -0.8\\ \\text{units}$, Matrix alkaline)**:",
+          "$$\\Delta p\\ (\\text{mV}) = \\Delta\\Psi - 59\\ \\Delta\\text{pH} \\qquad \\Longleftrightarrow \\qquad \\Delta G_{\\text{H}^+} = -F\\Delta p \\approx -20\\ \\text{kJ/mol H}^+$$",
+          "**2. WHY EXPORTING 1 ATP TO THE CYTOSOL COSTS 1 EXTRA PROTON ($3 + 1 = 4\\ \\text{H}^+$)**:",
+          "• **Adenine Nucleotide Translocase (ANT, the most abundant protein in the IMM!)** exchanges **Matrix $\\text{ATP}^{4-}$ (4 negative charges) OUT** for **Cytosolic $\\text{ADP}^{3-}$ (3 negative charges) IN**. Because exporting one net negative charge out of the negative matrix is driven by $\\Delta\\Psi$, it is coupled to **Phosphate Translocase**, which imports **$1\\ \\text{H}_2\\text{PO}_4^- + 1\\ \\text{H}^+$** into the matrix (**consuming $1\\text{H}^+$ of the proton-motive force**!).",
+          "• Combining $\\sim 3\\text{H}^+$ (for $120^\\circ$ rotation of $F_oF_1$) $+\\ 1\\text{H}^+$ (for $\\text{P}_i/\\text{ATP}$ transport) $= \\mathbf{4\\text{H}^+\\text{ per cytosolic ATP}}$! Since NADH pumps $10\\text{H}^+$, **$10 / 4 = \\mathbf{2.5\\ \\text{ATP/NADH}}$**; since $\\text{FADH}_2$ pumps $6\\text{H}^+$, **$6 / 4 = \\mathbf{1.5\\ \\text{ATP/FADH}_2}$**!"
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Questions on ANT Conformational Inhibitors & Submitochondrial Particles (SMPs):",
+          "• **Atractyloside (Carboxyatractyloside) vs. Bongkrekic Acid**:",
+          "  – **Atractyloside** (plant glycoside): Binds ANT from the **Intermembrane Space (c-state / cytosolic face)**, locking ANT facing outward.",
+          "  – **Bongkrekic Acid** (*Burkholderia cocovenenans* fermented-coconut toxin): Binds ANT from the **Matrix face (m-state)**, locking ANT facing inward.",
+          "  – *Effect of Both*: Immediately halts $\\text{ADP}/\\text{ATP}$ exchange, starving $F_oF_1$ of matrix $\\text{ADP}$ and halting both ATP synthesis and coupled $\\text{O}_2$ consumption (**mimics Oligomycin on an oxygen electrode trace!**).",
+          "• **Inside-Out Submitochondrial Particles (SMPs — Generated by Sonicating Mitochondria! — Classic CSIR Part C Trap)**:",
+          "  – When mitochondria are disrupted by **sonication**, the cristae pinch off **INSIDE-OUT** ($F_1$ catalytic knobs now face the **OUTSIDE buffer**, while the Cytochrome $c$ binding site faces the **INSIDE lumen**!).",
+          "  – Consequently, in SMPs: (1) **NADH, Succinate, and $\\text{ADP} + \\text{P}_i$ can be added directly to the external buffer** (requiring ZERO shuttles and ZERO ANT transport, so **Atractyloside has NO effect on SMPs**!), and (2) **Protons ($\\text{H}^+$) are pumped INWARD into the SMP vesicle lumen** (making the lumen acidic and positive)!"
+        ],
+        "pathology": [
+          "Mitochondrial Permeability Transition Pore (**mPTP**): Under severe $\\text{Ca}^{2+}$ overload + oxidative stress (ischemia-reperfusion injury), **Cyclophilin D** binds the $F_oF_1$/ANT complex to open a non-selective mega-channel (**mPTP**), collapsing $\\Delta\\Psi$, swelling the matrix, and rupturing the OMM (inhibited by **Cyclosporin A**!)."
+        ],
+        "lab_workbench": [
+          "Tetramethylrhodamine Ethyl Ester (**TMRE / TMRM**) or **Rhodamine 123** Live-Cell Fluorescence Assay: Cationic lipophilic dyes accumulate inside the negatively charged mitochondrial matrix strictly according to the Nernst equation ($\\Delta\\Psi = -180\\ \\text{mV}$); adding the protonophore **FCCP** instantly extinguishes mitochondrial fluorescence."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1OKC — Pebay-Peyroula Crystal Structure of Bovine Mitochondrial ADP/ATP Carrier ANT Bound to Carboxyatractyloside)",
+          "url": "https://www.rcsb.org/structure/1OKC",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_uncouplers_respirometry": {
+      "id": "node_uncouplers_respirometry",
+      "level": "L4",
+      "title": "Chemical & Physiological Uncouplers (DNP, FCCP, UCP1) & Clark Oxygen Electrode Traces",
+      "subtitle": "State 3 vs. State 4 Respiration, Why DNP Relieves Oligomycin Blockade & Brown Fat Non-Shivering Thermogenesis",
+      "coordinates": {
+        "x": 20,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "respiratory_states_chance": "State 4 (Substrate only, ZERO ADP: Slow O2 consumption, High Δp) | State 3 (+ADP added: Fast O2 consumption!) | RCR = Rate(State 3) / Rate(State 4) > 5",
+        "chemical_uncouplers": "2,4-Dinitrophenol (DNP, weak lipophilic acid pKa = 4.1) & FCCP / CCCP -> Shuttle H+ across IMM -> Collapse Δp -> Max O2 consumption + ZERO ATP (Heat)!",
+        "ionophores_contrast": "Valinomycin (Uncharged K+ carrier -> Collapses ΔΨ ONLY!) vs. Nigericin (Electroneutral K+/H+ antiporter -> Collapses ΔpH ONLY!) | Valinomycin + Nigericin = Full Uncoupling!",
+        "brown_fat_ucp1": "Thermogenin (UCP1 in Brown Adipose Tissue): Activated by Norepinephrine -> β3-AR -> cAMP -> PKA -> Lipolysis releases Free Fatty Acids (activate UCP1)!"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. HOW WEAK-ACID PROTONOPHORES (2,4-DNP & FCCP) UNCOUPLE OXIDATION FROM PHOSPHORYLATION**:",
+          "• **2,4-Dinitrophenol (DNP)** and **FCCP** are lipid-soluble weak acids whose both protonated neutral form ($\\text{HA}$) and deprotonated anionic base ($\\text{A}^-$, delocalized over the aromatic ring) can diffuse directly across the hydrophobic Inner Mitochondrial Membrane!",
+          "• In the acidic **Intermembrane Space (pH 7.2)**, $\\text{A}^-$ picks up a proton ($\\rightarrow \\text{HA}$), diffuses across the IMM into the alkaline **Matrix (pH 8.0)**, and releases $\\text{H}^+$! By short-circuiting the proton gradient ($\\Delta p \\rightarrow 0$), **ATP synthesis drops to ZERO**, while the thermodynamic back-pressure on Complexes I, III, and IV is completely removed—causing **electron transport, NADH oxidation, and $\\text{O}_2$ consumption to race at MAXIMAL speed**, dissipating 100% of the $-219\\ \\text{kJ/mol}$ redox energy as **HEAT**!",
+          "**2. PHYSIOLOGICAL UNCOUPLING IN BROWN ADIPOSE TISSUE (Thermogenin / UCP1)**:",
+          "Hibernating mammals and human neonates possess **Brown Adipose Tissue** (brown due to dense iron-heme cytochrome mitochondria!) expressing **Uncoupling Protein 1 (UCP1 / Thermogenin)**. In resting warm conditions, UCP1 is tonically **inhibited by cytosolic purine nucleotides (GDP/ATP)**. Cold exposure triggers sympathetic **Norepinephrine $\\rightarrow \\beta_3\\text{-Adrenergic Receptor} \\rightarrow \\text{cAMP} \\rightarrow \\text{PKA} \\rightarrow$ Hormone-Sensitive Lipase**, releasing **Free Long-Chain Fatty Acids**, which bind UCP1, overcome purine inhibition, and conduct $\\text{H}^+$ back into the matrix to generate **Non-Shivering Heat**!"
+        ],
+        "csir_high_yield": [
+          "The Classic CSIR NET Part C Clark Oxygen Electrode Sequence (Oligomycin Followed by DNP!):",
+          "Memorize the exact slope of the $\\text{O}_2$-versus-Time curve at each addition:",
+          "• **Step 1 (Add Mitochondria + $\\text{P}_i$ + Succinate/Malate, NO ADP = State 4)**: $\\text{O}_2$ decreases **very slowly** (flat slope) because $\\Delta p$ builds up to maximum and resists further proton pumping (**Respiratory Control**).",
+          "• **Step 2 (Add ADP = State 3)**: $F_oF_1$ consumes $\\text{H}^+$ to make ATP $\\rightarrow$ $\\text{O}_2$ consumption **accelerates 5- to 10-fold** (steep downward slope) until all added ADP is converted to ATP (returning to State 4; the $\\text{ADP} : \\text{O}$ ratio measures the exact P/O ratio!).",
+          "• **Step 3 (Add OLIGOMYCIN during State 3)**: Oligomycin blocks the $F_o$ proton channel $\\rightarrow \\Delta p$ builds to maximum and **$\\text{O}_2$ consumption STOPS / drops back to the flat State 4 baseline**!",
+          "• **Step 4 (Now Add 2,4-DNP [or FCCP] to the Oligomycin-Blocked Mitochondria!)**:",
+          "  – **What happens to $\\text{O}_2$ consumption?** **$\\text{O}_2$ consumption IMMEDIATELY RESUMES at MAXIMAL (or even faster than State 3) speed**, while ATP synthesis remains ZERO! Why? Because Oligomycin only blocked the $F_oF_1$ channel; DNP provides an alternative lipid route for $\\text{H}^+$ to re-enter the matrix, relieving the $\\Delta p$ back-pressure on Complexes I–IV!",
+          "  – **Contrast**: What if you added **Cyanide ($\\text{CN}^-$) or Rotenone** instead of Oligomycin at Step 3, and then added **2,4-DNP** at Step 4? **DNP has ZERO effect** (cannot restore $\\text{O}_2$ consumption when the electron transport chain itself is directly blocked!)."
+        ],
+        "pathology": [
+          "Fatal Hyperthermia from **2,4-DNP Weight-Loss Pills** & **Salicylate (Aspirin) Overdose**: High-dose DNP or toxic Aspirin overdose uncouples skeletal muscle mitochondria nationwide, causing uncontrollable lactic acidosis, ATP depletion, rigor, and fatal $>42^\\circ\\text{C}$ hyperthermia."
+        ],
+        "lab_workbench": [
+          "Seahorse XF Extracellular Flux Analyzer ('Mito Stress Test' Profile): Sequentially injects (1) **Oligomycin** (drops OCR by the amount coupled to ATP synthesis, leaving **Proton Leak**), (2) **FCCP** (shoots OCR up to **Maximal Respiration**; $\\text{Maximal} - \\text{Basal} = \\mathbf{\\text{Spare Respiratory Capacity}}$), and (3) **Rotenone + Antimycin A** (drops OCR to **Non-Mitochondrial Respiration**)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (8HBV — Cryo-EM Structure of Human Mitochondrial Uncoupling Protein 1 UCP1 Bound to Purine Nucleotide vs. DNP)",
+          "url": "https://www.rcsb.org/structure/8HBV",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_ros_defense_sod2": {
+      "id": "node_ros_defense_sod2",
+      "level": "L4",
+      "title": "Mitochondrial Reactive Oxygen Species (ROS) Generation & Antioxidant Defense",
+      "subtitle": "Superoxide ($\\text{O}_2^{\\bullet -}$) Leakage at Complex I/III, Mn-SOD (SOD2), Glutathione Peroxidase (Selenium) & NNT",
+      "coordinates": {
+        "x": 54,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "ros_reduction_steps": "O2 --(1e-)--> Superoxide (O2•-) --(1e- + 2H+)--> Hydrogen Peroxide (H2O2, NOT a free radical!) --(1e- + Fe2+ Fenton)--> Hydroxyl Radical (•OH, most destructive!)",
+        "sod_isoforms": "SOD1 (Cytosolic & IMS: Cu/Zn-SOD) | SOD2 (Mitochondrial Matrix: Mn-SOD — Tetramer!) | SOD3 (Extracellular: Cu/Zn-SOD)",
+        "h2o2_detoxification": "1. Glutathione Peroxidase (GPx, contains Selenocysteine [Sec, 21st AA] + 2 GSH -> GSSG + 2 H2O) | 2. Peroxiredoxin-3/Thioredoxin-2 | 3. Catalase (Peroxisomes)",
+        "nadph_regeneration": "Glutathione Reductase (FAD) uses NADPH (generated in matrix by IDH2 & Nicotinamide Nucleotide Transhydrogenase [NNT] driven by Δp!) to reduce GSSG -> 2 GSH"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. WHERE AND WHY MITOCHONDRIA LEAK SUPEROXIDE ($\\text{O}_2^{\\bullet -}$)**:",
+          "• Approximately $0.2\\text{–}2\\%$ of electrons passing through the respiratory chain leak prematurely by **1-electron reduction of $\\text{O}_2$** into **Superoxide Radical ($\\text{O}_2^{\\bullet -}$)**, primarily from two sites: (1) reduced **FMN** in **Complex I** (especially during **Reverse Electron Transport [RET]** when high Succinate + high $\\Delta p$ push electrons backward into Complex I!) and (2) the unstable **Ubiquosemiquinone radical ($Q^{\\bullet -}$)** at the **$Q_o$ site of Complex III**.",
+          "**2. TWO-STEP ENZYMATIC DETOXIFICATION CASCADE**:",
+          "• **Step 1 — Superoxide Dismutase (SOD)**: Matrix **Mn-SOD (SOD2)** catalyzes the dismutation of two superoxide radicals:",
+          "$$2\\ \\text{O}_2^{\\bullet -} + 2\\text{H}^+ \\xrightarrow{\\text{Mn-SOD (SOD2)}} \\text{H}_2\\text{O}_2 + \\text{O}_2$$",
+          "• **Step 2 — Hydrogen Peroxide Removal (Preventing the Fenton Reaction!)**: Although $\\text{H}_2\\text{O}_2$ has no unpaired electrons, if it encounters free $\\text{Fe}^{2+}$ or $\\text{Cu}^+$ (**Fenton Reaction**: $\\text{Fe}^{2+} + \\text{H}_2\\text{O}_2 \\rightarrow \\text{Fe}^{3+} + \\text{OH}^- + \\mathbf{^{\\bullet}\\text{OH}}$), it generates the indiscriminately reactive **Hydroxyl Radical ($^{\\bullet}\\text{OH}$, against which NO enzyme exists!)**. Matrix **Glutathione Peroxidase (GPx1/GPx4)** uses **2 reduced Glutathione (GSH)** to reduce $\\text{H}_2\\text{O}_2 \\rightarrow 2\\ \\text{H}_2\\text{O} + \\text{GSSG}$."
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Questions on SOD Isoforms, Selenocysteine & Fenton Chemistry:",
+          "• **Metal Cofactor & Subcellular Localization of Superoxide Dismutases**:",
+          "  – **Mitochondrial Matrix (and Bacteria)**: **Manganese-SOD (Mn-SOD / SOD2)** (insensitive to Cyanide!).",
+          "  – **Eukaryotic Cytosol & Mitochondrial IMS**: **Copper/Zinc-SOD (Cu,Zn-SOD / SOD1)** ($\text{Cu}^{2+}$ is catalytic; $\\text{Zn}^{2+}$ is structural; **inhibited by Cyanide [$\\text{CN}^-$]**!).",
+          "  – **Chloroplast Stroma & Certain Bacteria**: **Iron-SOD (Fe-SOD)** and Cu,Zn-SOD.",
+          "• **Which Antioxidant Enzyme Requires Selenium (as the 21st Amino Acid Selenocysteine, encoded by `UGA` via SECIS)?** **Glutathione Peroxidase (GPx)** (and **Thioredoxin Reductase**)!",
+          "• **Why Does State 4 (Resting, High $\\Delta p$, No ADP) Produce MUCH MORE Mitochondrial ROS Than State 3 (Active ATP Synthesis)?** Because in State 4, high $\\Delta p$ slows electron flow through Complexes I and III, keeping FMN, $\\text{CoQ}$, and $Q^{\\bullet -}$ in a **hyper-reduced state** with a long half-life to react with $\\text{O}_2$! (Adding a mild uncoupler or ADP lowers $\\Delta p$, oxidizes the chain, and **decreases ROS production**!)."
+        ],
+        "pathology": [
+          "**Familial Amyotrophic Lateral Sclerosis (ALS / Lou Gehrig's Disease)**: Dominant toxic gain-of-function mutations in **SOD1 (Cu/Zn-SOD)** cause protein misfolding and motor neuron death.",
+          "**Ferroptosis**: Iron-dependent non-apoptotic cell death caused by inactivation of **GPx4** (or cystine/glutamate antiporter System $x_c^-$ inhibition by **Erastin**), leading to lethal accumulation of membrane **lipid hydroperoxides**."
+        ],
+        "lab_workbench": [
+          "**MitoSOX Red** & **Amplex Red** Fluorometric Assays: **MitoSOX** (triphenylphosphonium-linked dihydroethidium) concentrates 1,000-fold inside the mitochondrial matrix driven by $\\Delta\\Psi$ and fluoresces red at $580\\ \\text{nm}$ specifically upon oxidation by **Superoxide ($\\text{O}_2^{\\bullet -}$)**."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1N0J — Borgstahl Crystal Structure of Human Mitochondrial Manganese Superoxide Dismutase Mn-SOD2 Tetramer)",
+          "url": "https://www.rcsb.org/structure/1N0J",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_plant_aox_bypass": {
+      "id": "node_plant_aox_bypass",
+      "level": "L4",
+      "title": "Plant Mitochondrial Alternative Oxidase (AOX) & Type II Rotenone-Insensitive NADH Dehydrogenases",
+      "subtitle": "Cyanide-Resistant Ubiquinol Oxidation (QH2 -> O2), SHAM Inhibition & Thermogenic Skunk Cabbage Arum Spadix",
+      "coordinates": {
+        "x": 84,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "aox_reaction": "Ubiquinol (QH2) + 1/2 O2 -> Ubiquinone (Q) + H2O (Directly on matrix face of IMM; Non-heme Di-iron [Fe-Fe] catalytic center!)",
+        "bypassed_complexes": "AOX bypasses BOTH Complex III AND Complex IV! -> Pumps ZERO H+ (NADH via Complex I + AOX pumps only 4 H+ = ~1.0 ATP!)",
+        "rotenone_insensitive_nd": "Internal & External Type II NAD(P)H Dehydrogenases (NDin / NDex): Oxidize NADH/NADPH -> Q while bypassing Complex I (0 H+ pumped)!",
+        "specific_aox_inhibitor": "SHAM (Salicylhydroxamic Acid) & n-Propyl Gallate (Specifically block Alternative Oxidase without inhibiting Complex IV!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "Unlike mammalian mitochondria, **Plant, Fungal, and Trypanosome Mitochondria** possess a branched respiratory chain containing two energy-dissipating bypasses:",
+          "1. **ALTERNATIVE OXIDASE (AOX — Cyanide-Resistant Respiration)**: A homodimeric interfacial membrane protein containing a **non-heme di-iron ($\\text{Fe–Fe}$) center** (activated via pyruvate binding and thioredoxin disulfide reduction). **AOX takes electrons directly from Ubiquinol ($\\text{QH}_2$) and reduces $\\text{O}_2 \\rightarrow \\text{H}_2\\text{O}$ in a single step—completely bypassing Complex III, Cytochrome $c$, and Complex IV**!",
+          "2. **TYPE II ROTENONE-INSENSITIVE NAD(P)H DEHYDROGENASES ($\\text{ND}_{\\text{ex}}$ and $\\text{ND}_{\\text{in}}$)**: Single-subunit flavoproteins on both the IMS and Matrix surfaces of the plant IMM that transfer electrons from cytosolic or matrix $\\text{NADH/NADPH}$ to Ubiquinone without pumping protons (**bypassing Complex I**!).",
+          "**COMBINED ENERGETIC CONSEQUENCE**: If electrons enter via $\\text{ND}_{\\text{in/ex}}$ ($0\\ \\text{H}^+$) and exit via **AOX** ($0\\ \\text{H}^+$), **ZERO protons are pumped and ZERO ATP is made**, allowing the TCA cycle to keep producing carbon skeletons ($\\alpha$-ketoglutarate) and preventing over-reduction/ROS damage when cellular ATP is already full!"
+        ],
+        "csir_high_yield": [
+          "Classic CSIR NET Unit 1 & Unit 6 Questions on Cyanide + SHAM Titration in Plant Mitochondria:",
+          "• **Why Do Isolated Plant Mitochondria Continue Consuming $\\text{O}_2$ After Adding Potassium Cyanide ($\\text{KCN}$) or Azide ($\\text{NaN}_3$)?**",
+          "  – Because **AOX is 100% INSENSITIVE to Cyanide, Azide, Antimycin A, and Carbon Monoxide**! When Complex IV is blocked by KCN, electrons in the Ubiquinol ($\\text{QH}_2$) pool divert through **AOX** to $\\text{O}_2$!",
+          "• **How Do You Completely Stop Plant Mitochondrial $\\text{O}_2$ Consumption?**",
+          "  – You must add **BOTH KCN** (to block the Cytochrome Complex IV pathway) **AND SHAM (Salicylhydroxamic Acid** or *n*-propyl gallate, to block the **Alternative Oxidase [AOX]** pathway)!",
+          "• **Thermogenic Pollination in Araceae (*Symplocarpus foetidus* [Skunk Cabbage] & *Sauromatum guttatum* [Voodoo Lily])**:",
+          "  – Just before flowering, **Salicylic Acid** triggers a massive surge in **AOX** and **$\\text{ND}_{\\text{in}}$** expression in the floral **spadix**; uncoupled oxidation of starch via AOX heats the spadix **$15\\text{–}25^\\circ\\text{C}$ above ambient freezing air temperature** to volatilize foul-smelling amines/indoles and attract carrion-beetle pollinators!"
+        ],
+        "pathology": [
+          "**African Sleeping Sickness (*Trypanosoma brucei*) Trypanosome Alternative Oxidase (TAO)**: Bloodstream-form *Trypanosoma brucei* lacks cytochromes (Complexes III and IV) and relies **100% on a Glycerol-3-Phosphate Shuttle coupled to Trypanosome Alternative Oxidase (TAO)** to re-oxidize glycolytic NADH—making TAO inhibitors (**Ascofuranone** and **SHAM + Glycerol**) selectively lethal to the parasite!"
+        ],
+        "lab_workbench": [
+          "$^{18}\\text{O}_2 / ^{16}\\text{O}_2$ Isotope Fractionation Mass Spectrometry for In Vivo AOX Flux Partitioning: Even without adding inhibitors, **AOX discriminates much more strongly against heavy $^{18}\\text{O}_2$ ($\\sim 24\\text{–}30\\text{‰}$) than Cytochrome $c$ Oxidase ($\\sim 18\\text{‰}$)**, allowing exact non-invasive quantification of in vivo electron partitioning between Complex IV and AOX in intact leaves!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (3VV9 — Shiba & Harada Crystal Structure of the Trypanosome Alternative Oxidase TAO Di-Iron Catalytic Center Bound to Inhibitor)",
+          "url": "https://www.rcsb.org/structure/3VV9",
+          "type": "3D Atomic Model"
+        }
+      ]
+    }
+  },
+  "inhibitor_simulator": {
+    "baseline_metrics": {
+      "o2_consumption_rate_percent": 100,
+      "atp_synthesis_rate_percent": 100,
+      "proton_motive_force_mv": "200 mV (State 3 Active Respiration: Pyruvate/Malate + ADP + Pi)",
+      "nadh_to_nad_redox_state": "Balanced (30% Reduced)",
+      "cytochrome_c_redox_state": "Balanced (25% Reduced)"
+    },
+    "agents": [
+      {
+        "id": "sim_rotenone_plus_succinate",
+        "name": "Rotenone (Blocks Complex I) -> Followed by Succinate Addition",
+        "category": "Complex I Blockade & Complex II Bypass Test",
+        "target_node": "node_complex_i_nadh",
+        "binding_site": "Rotenone blocks electron transfer from Fe-S cluster N2 to Ubiquinone in Complex I",
+        "resulting_metrics": {
+          "o2_consumption_rate_percent": "0% (on Pyruvate/Malate) -> Rescued to 100% upon adding Succinate!",
+          "atp_synthesis_rate_percent": "0% -> Rescued to 60% (P/O drops from 2.5 to 1.5 with Succinate!)",
+          "proton_motive_force_mv": "0 mV -> Restored to 185 mV with Succinate",
+          "nadh_to_nad_redox_state": "100% REDUCED (Matrix NADH stays trapped behind Rotenone block!)",
+          "cytochrome_c_redox_state": "100% OXIDIZED (until Succinate restores electron flow via CoQ!)"
+        },
+        "rescue_experiment": "Classic CSIR NET Diagnostic Test: When Rotenone or Amytal blocks Complex I, NADH accumulates (100% reduced) while downstream CoQ, Cyt b, Cyt c, and Cyt a/a3 drain into O2 and become 100% oxidized! Adding Succinate feeds electrons via Complex II (FADH2) directly into CoQ, bypassing Complex I and restoring both O2 consumption and ATP synthesis (at 1.5 ATP per Succinate)!",
+        "visual_effect": "block_complex_i_reduce_nadh_rescue_via_complex_ii_succinate"
+      },
+      {
+        "id": "sim_antimycin_a_plus_tmpd",
+        "name": "Antimycin A (Blocks Complex III) -> Followed by Ascorbate + TMPD",
+        "category": "Complex III Qi Blockade & Cytochrome c Bypass Test",
+        "target_node": "node_complex_iii_q_cycle",
+        "binding_site": "Antimycin A blocks the inner Qi site of Cytochrome bc1 (Complex III)",
+        "resulting_metrics": {
+          "o2_consumption_rate_percent": "0% (on Both NADH & Succinate!) -> Rescued to 95% upon adding Ascorbate + TMPD!",
+          "atp_synthesis_rate_percent": "0% -> Rescued to 30% (Only Complex IV pumps 2 H+ / 2 e-!)",
+          "proton_motive_force_mv": "0 mV -> Restored to 140 mV with TMPD/Ascorbate",
+          "nadh_to_nad_redox_state": "100% REDUCED (alongside CoQ and Cytochrome b!)",
+          "cytochrome_c_redox_state": "100% OXIDIZED (after Antimycin A) -> Reduced directly by TMPD!"
+        },
+        "rescue_experiment": "Cross-Over Theorem (Chance & Williams): Antimycin A creates a redox 'crossover point' between Cytochrome b (100% reduced upstream) and Cytochrome c1 / Cytochrome c (100% oxidized downstream)! Neither NADH nor Succinate can bypass Complex III, but artificial electron donor Ascorbate + TMPD reduces Cytochrome c directly, driving Complex IV!",
+        "visual_effect": "block_complex_iii_crossover_cyt_b_and_c_rescue_with_tmpd"
+      },
+      {
+        "id": "sim_cyanide_azide_co",
+        "name": "Potassium Cyanide (KCN) / Carbon Monoxide (CO) / Sodium Azide",
+        "category": "Terminal Complex IV Binuclear Center Blocker",
+        "target_node": "node_complex_iv_cox",
+        "binding_site": "CN- binds Fe3+ (and CO binds Fe2+) of Heme a3 in the Heme a3–CuB center of Complex IV",
+        "resulting_metrics": {
+          "o2_consumption_rate_percent": 0,
+          "atp_synthesis_rate_percent": 0,
+          "proton_motive_force_mv": "0 mV (Collapsed)",
+          "nadh_to_nad_redox_state": "100% REDUCED",
+          "cytochrome_c_redox_state": "100% REDUCED (Every single carrier from NADH to Heme a3 backs up with electrons!)"
+        },
+        "rescue_experiment": "Because Complex IV is the terminal exit to O2 in mammalian mitochondria, blocking it causes the ENTIRE chain (NADH, FMN, CoQ, Cyt b, Cyt c1, Cyt c, Cyt a) to become 100% REDUCED, and neither Succinate, TMPD/Ascorbate, nor 2,4-DNP can restore O2 consumption! (Only plant/fungal mitochondria expressing SHAM-sensitive Alternative Oxidase [AOX] can continue consuming O2 in the presence of Cyanide!).",
+        "visual_effect": "plug_complex_iv_heme_a3_back_up_electrons_across_entire_chain"
+      },
+      {
+        "id": "sim_oligomycin_alone",
+        "name": "Oligomycin (or DCCD / Atractyloside)",
+        "category": "Fo Proton Channel / Phosphorylation System Blocker",
+        "target_node": "node_f0f1_atp_synthase",
+        "binding_site": "Blocks H+ translocation through the a-subunit / c-ring interface of Fo ATP Synthase",
+        "resulting_metrics": {
+          "o2_consumption_rate_percent": "10% (Drops to flat State 4 proton-leak baseline due to extreme Δp back-pressure!)",
+          "atp_synthesis_rate_percent": 0,
+          "proton_motive_force_mv": "235 mV (HYPER-POLARIZED! Protons cannot re-enter matrix through Fo!)",
+          "nadh_to_nad_redox_state": "85% Reduced",
+          "cytochrome_c_redox_state": "75% Reduced"
+        },
+        "rescue_experiment": "Why does blocking ATP Synthase with Oligomycin ALSO stop O2 consumption at Complex IV? Because in tightly coupled mitochondria, when protons cannot flow back through FoF1, Δp hyperpolarizes to ~235 mV until the free energy required to pump another proton (+22 kJ/mol) equals the redox energy of the ETC! Adding 2,4-DNP immediately collapses Δp and unleashes maximal O2 consumption!",
+        "visual_effect": "plug_fo_channel_hyperpolarize_membrane_halt_coupled_respiration"
+      },
+      {
+        "id": "sim_dnp_fccp_uncoupler",
+        "name": "2,4-Dinitrophenol (DNP) / FCCP (Protonophoric Uncoupler)",
+        "category": "Inner Membrane Proton Gradient Short-Circuit",
+        "target_node": "node_uncouplers_respirometry",
+        "binding_site": "Lipophilic weak acid shuttles H+ freely across the inner membrane lipid bilayer (bypasses FoF1)",
+        "resulting_metrics": {
+          "o2_consumption_rate_percent": "250% (MAXIMAL Uninhibited Speed — even in the presence of Oligomycin or absence of ADP!)",
+          "atp_synthesis_rate_percent": "0% (All redox energy dissipated as Heat!)",
+          "proton_motive_force_mv": "0 mV (ΔΨ and ΔpH completely collapsed!)",
+          "nadh_to_nad_redox_state": "5% Reduced (95% OXIDIZED — rapid drainage to O2)",
+          "cytochrome_c_redox_state": "5% Reduced (95% OXIDIZED)"
+        },
+        "rescue_experiment": "Collapses Δp to zero, completely uncoupling electron transport from ATP synthesis: ATP production drops to zero (and F1 actually runs in reverse as an ATPase unless inhibited by IF1 or Oligomycin!), while O2 consumption and NADH oxidation race at maximal speed regardless of ADP or Oligomycin!",
+        "visual_effect": "short_circuit_protons_across_bilayer_race_etc_dissipate_heat"
+      }
+    ]
+  },
+  "quiz_challenges": [
+    {
+      "question_id": "q1_shuttles_32_vs_30_atp",
+      "prompt": "Click the L1 metabolic hub explaining why aerobic oxidation of 1 Glucose yields 32 ATP in liver/heart (Malate-Aspartate shuttle -> Complex I) versus 30 ATP in skeletal muscle/brain (Glycerol-3-P shuttle -> CoQ).",
+      "correct_node_id": "node_nadh_shuttles_tca",
+      "explanation": "Correct! The Malate-Aspartate shuttle regenerates matrix NADH (2.5 ATP each = 32 ATP total), whereas the Glycerol-3-Phosphate shuttle transfers electrons via FAD directly to Ubiquinone, bypassing Complex I (1.5 ATP each = 30 ATP total)."
+    },
+    {
+      "question_id": "q2_complex_ii_zero_protons",
+      "prompt": "Click the respiratory complex that is 100% nuclear-encoded, serves directly as a TCA cycle enzyme, is competitively inhibited by Malonate, and pumps ZERO protons across the inner membrane.",
+      "correct_node_id": "node_complex_ii_sdh",
+      "explanation": "Spot on! Complex II (Succinate Dehydrogenase: SDHA/B/C/D) is the only ETC complex with zero mtDNA-encoded subunits and pumps 0 H+ because the ΔE'° between Succinate and Ubiquinone is too small."
+    },
+    {
+      "question_id": "q3_boyer_atp_release",
+      "prompt": "Click the rotary motor node where Paul Boyer's Binding-Change mechanism proved that proton-motive force is used NOT to form the ATP bond on the Tight (T) site (K'eq ≈ 1), but to mechanically force the Open (O) conformation to RELEASE ATP.",
+      "correct_node_id": "node_f0f1_atp_synthase",
+      "explanation": "Exact match! In FoF1 ATP Synthase, condensation of ADP + Pi -> ATP on the Tight (T) β-subunit is isoenergetic (ΔG'° ≈ 0); PMF-driven rotation of the γ-axle forces the T -> O transition to release bound ATP."
+    },
+    {
+      "question_id": "q4_oligomycin_dnp_trace",
+      "prompt": "Click the L4 respirometry node explaining why adding 2,4-DNP (or FCCP) to Oligomycin-inhibited mitochondria immediately restores maximal O2 consumption without restoring ATP synthesis.",
+      "correct_node_id": "node_uncouplers_respirometry",
+      "explanation": "Correct! Oligomycin halts O2 consumption indirectly by blocking the Fo proton channel (causing Δp back-pressure); adding the protonophore 2,4-DNP collapses Δp across the lipid bilayer, unleashing maximal ETC O2 consumption as heat."
+    }
+  ]
+}
