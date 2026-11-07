@@ -4,19 +4,6 @@
  * ============================================================================
  */
 
-// Add this inside your DOMContentLoaded or at the top of app.js to inject smooth optical zoom keyframes
-const zoomStyle = document.createElement("style");
-zoomStyle.innerHTML = `
-  @keyframes opticalZoomIn {
-    0% { transform: scale(0.94); opacity: 0.4; filter: blur(6px); }
-    50% { filter: blur(2px); }
-    100% { transform: scale(1); opacity: 1; filter: blur(0); }
-  .stage-optical-zoom {
-    animation: opticalZoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-`;
-document.head.appendChild(zoomStyle);
-
 const APP_CONFIG = {
   name: "Cellulum",
   searchPaths: ["./data/", "./", "./modules/"]
@@ -166,8 +153,8 @@ function renderArgonWorkspace() {
   typesetMath();
 }
 
-// ========================================== ============================================================================
-// SPATIAL ZOOM STAGE & CIRCULAR / ORBITAL NODE PINS (#hotspotCanvas)
+// ============================================================================
+// SPATIAL ZOOM STAGE & CIRCULAR / FLOATING NODE PINS (#hotspotCanvas)
 // ============================================================================
 function renderVisualSpatialStage() {
   const mod = state.moduleData;
@@ -196,20 +183,20 @@ function renderVisualSpatialStage() {
   if (quizzes.length > 0) {
     const q = quizzes[state.currentQuizIdx] || quizzes[0];
     quizHtml = `
-      <div class="w-full mb-3 p-3 rounded-xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'} shadow-xl relative z-40">
+      <div class="w-full mb-3 p-3 rounded-xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'} shadow-xl">
         <div class="flex items-center justify-between gap-2">
           <div class="flex items-center space-x-2">
             <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">
               <i class="fa-solid fa-bolt mr-1"></i>CSIR Quiz (${state.currentQuizIdx + 1}/${quizzes.length})
             </span>
-            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching circular zoom node below!" : "Test your Part-C recall"}</span>
+            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching spatial node below!" : "Test your Part-C recall"}</span>
           </div>
           <div class="flex items-center space-x-1.5">
             ${state.quizMode ? `
               <button id="prevQuizStageBtn" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-300"><i class="fa-solid fa-chevron-left"></i></button>
               <button id="nextQuizStageBtn" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-300"><i class="fa-solid fa-chevron-right"></i></button>
             ` : ""}
-            <button id="toggleQuizStageBtn" class="px-2.5 py-1 rounded-lg text-xs font-semibold ${state.quizMode ? 'bg-rose-950/80 text-rose-300 border border-rose-700/60' : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/60'}">
+            <button id="toggleQuizStageBtn" class="px-2.5 py-1 rounded-lg text-xs font-semibold ${state.quizMode ? 'bg-rose-950/80 text-rose-300 border border-rose-700/60' : 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/60'}">
               ${state.quizMode ? "Exit Quiz" : "Start Quiz"}
             </button>
           </div>
@@ -231,29 +218,24 @@ function renderVisualSpatialStage() {
     `;
   }
 
-  // Render Circular / Orbital Floating Node Pins positioned around the stage
-  const totalNodes = nodeIds.length || 1;
-  const radiusX = 36; // horizontal orbital radius %
-  const radiusY = 32; // vertical orbital radius %
-
+  // Render Visual Circular / Floating Spatial Pins & Cards
   const pinsHtml = nodeIds.map((nid, idx) => {
     const node = mod.nodes?.[nid];
     if (!node) return "";
     const isSelected = node.id === state.activeNodeId;
     const isPerturbed = activeAgent && activeAgent.target_node === node.id;
     
-    // Compute circular orbital coordinates if explicit coordinates aren't set
-    const angle = (idx / totalNodes) * 2 * Math.PI - Math.PI / 2;
-    const posX = 50 + radiusX * Math.cos(angle);
-    const posY = 52 + radiusY * Math.sin(angle);
-    const coords = node.ui_coordinates || node.coordinates || { x: posX, y: posY };
+    // Calculate orbital / grid coordinates if UI coordinates aren't explicitly provided
+    const fallbackX = 20 + (idx * 28) % 65;
+    const fallbackY = 30 + Math.floor(idx / 3) * 35;
+    const coords = node.ui_coordinates || node.coordinates || { x: fallbackX, y: fallbackY };
 
     return `
-      <div data-node-id="${node.id}" class="spatial-node-pin cursor-pointer absolute p-3.5 rounded-2xl border transition-all duration-300 backdrop-blur-md max-w-[240px] ${
+      <div data-node-id="${node.id}" class="spatial-node-pin cursor-pointer absolute p-3.5 rounded-2xl border transition-all duration-300 backdrop-blur-md max-w-[260px] ${
         isSelected
-          ? "bg-emerald-950/95 border-emerald-400 shadow-2xl shadow-emerald-900/70 scale-110 z-30 ring-2 ring-emerald-400"
-          : "bg-slate-950/90 border-slate-800 hover:border-emerald-500/60 hover:bg-slate-900/95 z-20"
-      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500 bg-rose-950/95" : ""}"
+          ? "bg-emerald-950/90 border-emerald-400 shadow-2xl shadow-emerald-900/60 scale-105 z-30 ring-2 ring-emerald-400"
+          : "bg-slate-950/85 border-slate-800 hover:border-emerald-500/60 hover:bg-slate-900/90 z-20"
+      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500 bg-rose-950/90" : ""}"
            style="left: ${coords.x}%; top: ${coords.y}%; transform: translate(-50%, -50%);">
         <div class="flex items-center justify-between gap-2 mb-1">
           <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-800">
@@ -269,19 +251,13 @@ function renderVisualSpatialStage() {
           </div>
         </div>
         <h4 class="text-xs font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
-        <p class="text-[10px] text-slate-400 mt-0.5 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
+        <p class="text-[10px] text-slate-400 mt-1 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
       </div>
     `;
   }).join("");
 
   canvas.innerHTML = `
-    <div class="w-full relative min-h-[420px] sm:min-h-[480px] flex items-center justify-center">
-      <!-- Central Scale Optical Core Ring -->
-      <div class="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-emerald-500/20 bg-emerald-950/10 pointer-events-none flex items-center justify-center animate-pulse">
-        <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-dashed border-emerald-500/30 flex items-center justify-center">
-          <span class="text-[10px] font-mono uppercase text-emerald-400/80 tracking-widest">${activeLvl.level_id} CORE</span>
-        </div>
-      </div>
+    <div class="w-full relative min-h-[380px] sm:min-h-[440px]">
       ${quizHtml}
       <div class="absolute inset-0 w-full h-full pointer-events-auto">
         ${pinsHtml}
@@ -289,7 +265,7 @@ function renderVisualSpatialStage() {
     </div>
   `;
 
-  // Bind Circular Pin Clicks
+  // Bind Pin Clicks
   canvas.querySelectorAll(".spatial-node-pin").forEach(pin => {
     pin.addEventListener("click", (e) => {
       const zoomBtn = e.target.closest(".zoom-jump-chip");
@@ -300,14 +276,6 @@ function renderVisualSpatialStage() {
         const targetLvl = (mod.scale_levels || []).find(l => l.level_id === nextScale);
         const nextNodes = targetLvl?.node_ids || targetLvl?.hotspots || [];
         if (nextNodes.length) state.activeNodeId = nextNodes[0];
-        
-        const stage = document.getElementById("interactiveStage");
-        if (stage) {
-          stage.classList.remove("stage-optical-zoom");
-          void stage.offsetWidth;
-          stage.classList.add("stage-optical-zoom");
-        }
-
         renderArgonWorkspace();
         return;
       }
@@ -315,7 +283,6 @@ function renderVisualSpatialStage() {
       state.activeNodeId = pin.dataset.nodeId;
       renderVisualSpatialStage();
       renderNodeInspectorAndDrawer();
-      toggleStudyDrawer(true);
 
       if (state.quizMode) {
         evaluateQuizNodeSelection(pin.dataset.nodeId);
@@ -349,203 +316,7 @@ function renderVisualSpatialStage() {
     });
   });
 }
- ============================================================================
-// ============================================================================
-// STRUCTURED LEVEL & GRID STAGE RENDERER (#hotspotCanvas)
-// ============================================================================
-function renderVisualSpatialStage() {
-    // Bind Card Clicks with Instant Drawer Expansion
-  canvas.querySelectorAll(".hotspot-node-card").forEach(card => {
-    card.addEventListener("click", (e) => {
-      const zoomBtn = e.target.closest(".zoom-jump-chip");
-      if (zoomBtn) {
-        e.stopPropagation();
-        const nextScale = zoomBtn.dataset.zoomTo;
-        state.activeScaleId = nextScale;
-        const targetLvl = (mod.scale_levels || []).find(l => l.level_id === nextScale);
-        const nextNodes = targetLvl?.node_ids || targetLvl?.hotspots || [];
-        if (nextNodes.length) state.activeNodeId = nextNodes[0];
-        
-        // Trigger optical zoom animation
-        const stage = document.getElementById("interactiveStage");
-        if (stage) {
-          stage.classList.remove("stage-optical-zoom");
-          void stage.offsetWidth;
-          stage.classList.add("stage-optical-zoom");
-        }
 
-        renderArgonWorkspace();
-        return;
-      }
-
-      state.activeNodeId = card.dataset.nodeId;
-      renderVisualSpatialStage();
-      renderNodeInspectorAndDrawer();
-
-      // Automatically open the slide-out study drawer for instant mobile expansion
-      toggleStudyDrawer(true);
-
-      if (state.quizMode) {
-        evaluateQuizNodeSelection(card.dataset.nodeId);
-      }
-      typesetMath();
-    });
-  });
-
-  const summaryText = document.getElementById("scaleSummaryText");
-  if (summaryText) {
-    summaryText.textContent = activeLvl.description || "Select any hotspot node below to inspect biochemical mechanisms and Part C traps.";
-  }
-
-  const canvas = document.getElementById("hotspotCanvas");
-  if (!canvas) return;
-
-  const nodeIds = activeLvl.node_ids || activeLvl.hotspots || [];
-  const activeAgent = (mod.inhibitor_simulator?.agents || []).find(a => a.id === state.activeSimAgentId);
-  const quizzes = mod.quiz_challenges || [];
-
-  let quizHtml = "";
-  if (quizzes.length > 0) {
-    const q = quizzes[state.currentQuizIdx] || quizzes[0];
-    quizHtml = `
-      <div class="w-full mb-4 p-3.5 rounded-xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'} shadow-xl">
-        <div class="flex items-center justify-between gap-2">
-          <div class="flex items-center space-x-2">
-            <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">
-              <i class="fa-solid fa-bolt mr-1"></i>CSIR Quiz (${state.currentQuizIdx + 1}/${quizzes.length})
-            </span>
-            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching node card below!" : "Test your Part-C recall"}</span>
-          </div>
-          <div class="flex items-center space-x-1.5">
-            ${state.quizMode ? `
-              <button id="prevQuizStageBtn" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-300"><i class="fa-solid fa-chevron-left"></i></button>
-              <button id="nextQuizStageBtn" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs text-slate-300"><i class="fa-solid fa-chevron-right"></i></button>
-            ` : ""}
-            <button id="toggleQuizStageBtn" class="px-2.5 py-1 rounded-lg text-xs font-semibold ${state.quizMode ? 'bg-rose-950/80 text-rose-300 border border-rose-700/60' : 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/60'}">
-              ${state.quizMode ? "Exit Quiz" : "Start Quiz"}
-            </button>
-          </div>
-        </div>
-        ${state.quizMode ? `
-          <div class="mt-2.5 text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(q.prompt)}</div>
-          ${Array.isArray(q.answer_options) && q.answer_options.length ? `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">
-              ${q.answer_options.map((opt, i) => `
-                <button data-opt-idx="${i}" class="quiz-mcq-choice p-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-left text-xs text-slate-200 transition">
-                  ${formatRichText(opt)}
-                </button>
-              `).join("")}
-            </div>
-          ` : ""}
-          <div id="stageQuizFeedback" class="hidden mt-2.5 p-2.5 rounded-lg text-xs"></div>
-        ` : ""}
-      </div>
-    `;
-  }
-
-  // Render Clean Structured Grid Cards for the Active Zoom Level
-  const cardsHtml = nodeIds.map((nid, idx) => {
-    const node = mod.nodes?.[nid];
-    if (!node) return "";
-    const isSelected = node.id === state.activeNodeId;
-    const isPerturbed = activeAgent && activeAgent.target_node === node.id;
-    const metricKeys = Object.keys(node.metrics || {});
-    const previewMetric = metricKeys.length ? `${metricKeys[0].replace(/_/g, " ")}: ${node.metrics[metricKeys[0]]}` : "";
-
-    return `
-      <div data-node-id="${node.id}" class="hotspot-node-card cursor-pointer p-4 rounded-2xl border transition-all duration-200 flex flex-col justify-between ${
-        isSelected
-          ? "bg-emerald-950/50 border-emerald-400 shadow-xl shadow-emerald-950/50 scale-[1.01] ring-1 ring-emerald-400"
-          : "bg-slate-950/85 border-slate-800/90 hover:border-slate-600 hover:bg-slate-900/90"
-      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500 bg-rose-950/40" : ""}">
-        <div>
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-800">
-              ${node.level} • Hotspot ${idx + 1}
-            </span>
-            <div class="flex items-center space-x-1.5">
-              ${isPerturbed ? `<span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700 animate-pulse">Inhibited</span>` : ""}
-              ${node.next_zoom_target ? `
-                <button data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-700/60 transition">
-                  Zoom ${node.next_zoom_target} <i class="fa-solid fa-arrow-up-right-from-square ml-0.5"></i>
-                </button>
-              ` : ""}
-            </div>
-          </div>
-          <h4 class="text-sm font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
-          <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
-        </div>
-
-        ${previewMetric ? `
-          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-slate-300 font-mono line-clamp-2">
-            ${formatRichText(previewMetric)}
-          </div>
-        ` : ""}
-      </div>
-    `;
-  }).join("");
-
-  const gridCols = nodeIds.length >= 4 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3";
-  canvas.innerHTML = `
-    <div class="w-full">
-      ${quizHtml}
-      <div class="grid ${gridCols} gap-4 w-full">
-        ${cardsHtml}
-      </div>
-    </div>
-  `;
-
-  // Bind Card Clicks
-  canvas.querySelectorAll(".hotspot-node-card").forEach(card => {
-    card.addEventListener("click", (e) => {
-      const zoomBtn = e.target.closest(".zoom-jump-chip");
-      if (zoomBtn) {
-        e.stopPropagation();
-        const nextScale = zoomBtn.dataset.zoomTo;
-        state.activeScaleId = nextScale;
-        const targetLvl = (mod.scale_levels || []).find(l => l.level_id === nextScale);
-        const nextNodes = targetLvl?.node_ids || targetLvl?.hotspots || [];
-        if (nextNodes.length) state.activeNodeId = nextNodes[0];
-        renderArgonWorkspace();
-        return;
-      }
-
-      state.activeNodeId = card.dataset.nodeId;
-      renderVisualSpatialStage();
-      renderNodeInspectorAndDrawer();
-
-      if (state.quizMode) {
-        evaluateQuizNodeSelection(card.dataset.nodeId);
-      }
-      typesetMath();
-    });
-  });
-
-  // Bind Quiz Stage Controls
-  document.getElementById("toggleQuizStageBtn")?.addEventListener("click", () => {
-    state.quizMode = !state.quizMode;
-    renderVisualSpatialStage();
-    typesetMath();
-  });
-  document.getElementById("prevQuizStageBtn")?.addEventListener("click", () => {
-    state.currentQuizIdx = (state.currentQuizIdx - 1 + quizzes.length) % quizzes.length;
-    renderVisualSpatialStage();
-    typesetMath();
-  });
-  document.getElementById("nextQuizStageBtn")?.addEventListener("click", () => {
-    state.currentQuizIdx = (state.currentQuizIdx + 1) % quizzes.length;
-    renderVisualSpatialStage();
-    typesetMath();
-  });
-  canvas.querySelectorAll(".quiz-mcq-choice").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const q = quizzes[state.currentQuizIdx];
-      const chosen = q.answer_options[Number(btn.dataset.optIdx)];
-      const ok = chosen === q.correct_answer;
-      showStageQuizFeedback(ok, ok ? q.explanation : `Correct Answer: ${q.correct_answer}. ${q.explanation}`);
-    });
-  });
-}
 function evaluateQuizNodeSelection(clickedNodeId) {
   const quizzes = state.moduleData.quiz_challenges || [];
   const q = quizzes[state.currentQuizIdx];
@@ -875,28 +646,14 @@ async function fetchPubMedArticles(queryText) {
 }
 
 function bindArgonEvents() {
-
-  // L1 - L4 Scale Buttons with Optical Zoom Transition
   document.querySelectorAll(".scale-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const targetScale = btn.dataset.scale;
-      if (state.activeScaleId === targetScale) return; // already active
-
       state.activeScaleId = targetScale;
-
-      // Trigger cinematic zoom-lens animation on the interactive stage
-      const stage = document.getElementById("interactiveStage");
-      if (stage) {
-        stage.classList.remove("stage-optical-zoom");
-        void stage.offsetWidth; // force reflow
-        stage.classList.add("stage-optical-zoom");
-      }
-
       const levels = state.moduleData?.scale_levels || [];
       const lvlObj = levels.find(l => l.level_id === targetScale);
       const lvlNodes = lvlObj?.node_ids || lvlObj?.hotspots || [];
       if (lvlNodes.length) state.activeNodeId = lvlNodes[0];
-      
       renderArgonWorkspace();
     });
   });
