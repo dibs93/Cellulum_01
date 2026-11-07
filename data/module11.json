@@ -1,0 +1,728 @@
+{
+  "module_id": "module_11_animal_physiology",
+  "title": "Animal System Physiology & Organ Biophysics",
+  "subtitle": "Action Potentials, Synaptic SNAREs, Sarcomere Excitation-Contraction, Cardiac ECG, Bohr/Haldane & Nephron Countercurrent",
+  "csir_net_units": [
+    "Unit 7 (System Physiology - Animal)",
+    "Unit 13 (Patch-Clamp Electrophysiology, ECG & Renal Clearance Assays)"
+  ],
+  "theme_color": "#f43f5e",
+  "accent_glow": "rgba(244, 63, 94, 0.45)",
+  "scale_levels": [
+    {
+      "level_id": "L1",
+      "level_number": 1,
+      "name": "Cardiopulmonary Dynamics: Cardiac Cycle, ECG & Hemoglobin Gas Transport",
+      "scale_metric": "Organ / Systemic Scale",
+      "camera_zoom_factor": 1.0,
+      "description": "SA/AV nodal conduction, Wiggers cardiac cycle & Einthoven ECG waves, Oxyhemoglobin sigmoidal cooperativity (Bohr/2,3-BPG), and Chloride Shift.",
+      "hotspots": [
+        "node_cardiac_pacemaker_ecg",
+        "node_hemoglobin_bohr_haldane"
+      ]
+    },
+    {
+      "level_id": "L2",
+      "level_number": 2,
+      "name": "Renal Countercurrent Multiplier & Hypothalamic-Pituitary Endocrine Axes",
+      "scale_metric": "Nephron / Endocrine Axis",
+      "camera_zoom_factor": 2.4,
+      "description": "Glomerular Starling filtration, Loop of Henle countercurrent multiplication, RAAS & ADH Aquaporin-2 insertion, and HPG/HPT/HPA hormonal feedback.",
+      "hotspots": [
+        "node_glomerular_clearance",
+        "node_countercurrent_nephron",
+        "node_endocrine_feedback_axes"
+      ]
+    },
+    {
+      "level_id": "L3",
+      "level_number": 3,
+      "name": "Neurophysiology: Action Potentials, Nernst/Goldman & Synaptic SNARE Release",
+      "scale_metric": "20 nm (Axon & Synapse)",
+      "camera_zoom_factor": 3.8,
+      "description": "Hodgkin-Huxley voltage-gated Na+/K+ channel kinetics, refractory periods, Ca2+-Synaptotagmin SNARE exocytosis, and EPSP/IPSP integration.",
+      "hotspots": [
+        "node_action_potential_hodgkin",
+        "node_synaptic_snare_transmission",
+        "node_sensory_phototransduction"
+      ]
+    },
+    {
+      "level_id": "L4",
+      "level_number": 4,
+      "name": "Skeletal vs. Smooth Muscle Excitation-Contraction Coupling",
+      "scale_metric": "10 nm (Sarcomere / Triad)",
+      "camera_zoom_factor": 4.2,
+      "description": "Sarcomere A/I/H/Z-band geometry, T-tubule DHPR–RyR1 mechanical coupling, Troponin-Tropomyosin Ca2+ switch, and Smooth Muscle MLCK/MLCP.",
+      "hotspots": [
+        "node_sarcomere_dhpr_ryr",
+        "node_smooth_muscle_mlck"
+      ]
+    }
+  ],
+  "nodes": {
+    "node_cardiac_pacemaker_ecg": {
+      "id": "node_cardiac_pacemaker_ecg",
+      "level": "L1",
+      "title": "Cardiac Conduction, Pacemaker 'Funny' Current (If) & Electrocardiogram (ECG)",
+      "subtitle": "SA Node Phase 4 Prepotential (HCN4) vs. Ventricular Phase 2 Ca2+ Plateau & Wiggers Cycle",
+      "coordinates": {
+        "x": 28,
+        "y": 44
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "conduction_pathway": "SA Node (70–80 bpm) -> Internodal Tracts -> AV Node (0.1 s delay!) -> Bundle of His -> Left/Right Bundle Branches -> Purkinje Fibers (4 m/s)",
+        "sa_node_phases": "Phase 4 (Slow Na+ 'funny' current If via HCN + T-type Ca2+) -> Phase 0 (L-type Ca2+ influx, NO fast Na+!) -> Phase 3 (K+ efflux)",
+        "ventricular_phases": "Phase 0 (Fast Na+ influx) -> Phase 1 (Ito K+ notch) -> Phase 2 (250 ms Plateau: L-type Ca2+ in = K+ out!) -> Phase 3 (K+ out) -> Phase 4 (-90 mV)",
+        "cardiac_equations": "Cardiac Output (CO) = Heart Rate (HR) × Stroke Volume (SV) | SV = EDV (120 mL) - ESV (50 mL) = 70 mL | Ejection Fraction = SV / EDV (~58%)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. SA NODAL PACEMAKER POTENTIAL vs. VENTRICULAR MYOCYTE ACTION POTENTIAL**:",
+          "• **SA Node (Autorhythmic)**: Lacks a stable resting potential! Starts at $-60\\ \\text{mV}$ and spontaneously depolarizes during **Phase 4 (Pacemaker Prepotential)** via hyperpolarization-activated cyclic-nucleotide-gated **'Funny' $\\text{Na}^+$ channels ($I_f$ / HCN4)** and **T-type $\\text{Ca}^{2+}$ channels**. Once threshold ($-40\\ \\text{mV}$) is reached, **Phase 0 Upstroke is driven entirely by slow L-type $\\text{Ca}^{2+}$ channels** (not fast $\\text{Na}^+$!), followed by **Phase 3 $\\text{K}^+$ repolarization**.",
+          "• **Ventricular Contractile Myocyte**: Stable resting potential at $-90\\ \\text{mV}$ (**Phase 4**). **Phase 0** = explosive fast voltage-gated $\\text{Na}^+$ influx ($+20\\ \\text{mV}$); **Phase 1** = transient outward $\\text{K}^+$ ($I_{to}$); **Phase 2 (200–300 ms Plateau)** = inward **L-type $\\text{Ca}^{2+}$ influx** exactly balances outward delayed-rectifier **$\\text{K}^+$ efflux** (this long refractory plateau **prevents cardiac tetany** so the ventricle has time to refill with blood before contracting again!).",
+          "**2. THE ELECTROCARDIOGRAM (ECG) & WIGGERS CARDIAC CYCLE**:",
+          "• **P Wave**: Atrial depolarization (precedes atrial systole; PR interval = $0.12\\text{–}0.20\\ \\text{s}$ reflects AV nodal delay).",
+          "• **QRS Complex**: Ventricular depolarization (masks atrial repolarization; immediately precedes Isovolumetric Ventricular Contraction where AV valves [Mitral/Tricuspid] snap shut = **First Heart Sound S1 'Lub'**).",
+          "• **ST Segment**: Isoelectric plateau when the entire ventricular myocardium is depolarized (Phase 2).",
+          "• **T Wave**: Ventricular repolarization (followed by Isovolumetric Ventricular Relaxation where Semilunar valves [Aortic/Pulmonary] snap shut at the **Dicrotic Notch** = **Second Heart Sound S2 'Dub'**)."
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Part B & C Questions on Cardiac Physiology & Autonomic Control:",
+          "• **How do Sympathetic (Norepinephrine) vs. Parasympathetic (Vagus Nerve / Acetylcholine) inputs alter the SA Node Pacemaker Slope?**",
+          "  – **Sympathetic ($\\beta_1$-Adrenergic Receptor $\\rightarrow G_s \\rightarrow \\uparrow \\text{cAMP}$)**: cAMP binds directly to **HCN4 ($I_f$) channels** and PKA phosphorylates L-type $\\text{Ca}^{2+}$ channels, **steepening the Phase 4 pacemaker slope** so threshold is reached faster (**Positive Chronotropic Effect** = $\\uparrow$ HR) and increasing $\\text{Ca}^{2+}$ contractility (**Positive Inotropic Effect**).",
+          "  – **Parasympathetic ($\\text{M}_2$ Muscarinic Receptor $\\rightarrow G_i$)** : The **$G_{\\beta\\gamma}$ subunit** directly opens **GIRK ($I_{\\text{KACh}}$) $\\text{K}^+$ channels** (hyperpolarizing the SA node to $-75\\ \\text{mV}$) while $G_{i\\alpha}$ lowers cAMP (**flattening the Phase 4 slope** = **Negative Chronotropic Effect**).",
+          "• **Frank–Starling Law of the Heart**: Within physiological limits, increasing venous return (**End-Diastolic Volume / Preload**) stretches ventricular sarcomeres closer to their optimal overlap length ($\\sim 2.2\\ \\mu\\text{m}$) and increases Troponin C $\\text{Ca}^{2+}$ sensitivity, automatically increasing **Stroke Volume** to match venous return!",
+          "• **Valvular Closure Landmarks**:",
+          "  – **Isovolumetric Contraction**: Occurs between **AV valve closure (S1)** and **Semilunar valve opening** (ALL 4 valves are closed; volume is constant while pressure skyrockets!).",
+          "  – **Isovolumetric Relaxation**: Occurs between **Semilunar valve closure (S2)** and **AV valve opening** (ALL 4 valves are closed!)."
+        ],
+        "pathology": [
+          "**Long QT Syndrome (Romano-Ward / Jervell & Lange-Nielsen)** & **AV Heart Blocks**:",
+          "• Loss-of-function mutations in cardiac delayed-rectifier $\\text{K}^+$ channels (*KCNQ1* or *KCNH2* / hERG) prolong Phase 2/3 repolarization, lengthening the **QT interval** on the ECG and predisposing patients to lethal *Torsades de Pointes* ventricular fibrillation.",
+          "• **Myocardial Infarction (STEMI)**: Acute coronary occlusion causes **ST-Segment Elevation** and pathological Q waves on the ECG alongside serum elevation of **Cardiac Troponin I / T (cTnI/cTnT)** and **CK-MB**."
+        ],
+        "lab_workbench": [
+          "Einthoven's Triangle Bipolar Limb Lead Recording (Leads I, II, III): **Einthoven's Law** states that at any given instant in the cardiac cycle, the electrical potential of **Lead II equals the sum of Lead I plus Lead III** ($\\text{II} = \\text{I} + \\text{III}$, where Lead I = LA – RA, Lead II = LL – RA, and Lead III = LL – LA)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (5U6O — Lee & MacKinnon Cryo-EM Structure of the Human HCN1 Pacemaker 'Funny' Channel)",
+          "url": "https://www.rcsb.org/structure/5U6O",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Willem Einthoven's Discovery of the Mechanism of the Electrocardiogram (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/medicine/1924/einthoven/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_hemoglobin_bohr_haldane": {
+      "id": "node_hemoglobin_bohr_haldane",
+      "level": "L1",
+      "title": "Respiratory Gas Transport: Hemoglobin Allostery (T <-> R), Bohr/Haldane Effects & Chloride Shift",
+      "subtitle": "Sigmoidal O2 Cooperativity (Hill nH = 2.8), 2,3-BPG Stabilization of T-State, Fetal HbF (α2γ2) & AE1 Band-3",
+      "coordinates": {
+        "x": 74,
+        "y": 44
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "hb_vs_mb_kinetics": "Myoglobin (Monomer, Hyperbolic curve, P50 ≈ 2.8 mmHg, nH = 1.0) vs. Hemoglobin A (α2β2 Tetramer, Sigmoidal curve, P50 ≈ 26 mmHg, nH ≈ 2.8)",
+        "right_shift_unloading": "Caused by ↑ PCO2, ↓ pH (↑ H+ = Bohr Effect), ↑ Temperature, and ↑ 2,3-BPG (Increases P50 -> Decreases O2 affinity -> Unloads O2 to tissues!)",
+        "co2_transport_forms": "70% as Plasma Bicarbonate (HCO3- via RBC Carbonic Anhydrase II) + 23% as Carbaminohemoglobin (Hb-NH-COO-) + 7% Dissolved CO2",
+        "chloride_shift_hamburger": "In tissues: HCO3- exits RBC in strict 1:1 electroneutral exchange for Cl- entering via Band-3 (AE1 / SLC4A1) anion exchanger!"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. PERUTZ'S T-TO-R ALLOSTERIC SWITCH IN HEMOGLOBIN ($\\alpha_2\\beta_2$)**:",
+          "• **Deoxyhemoglobin (T-State = 'Tense', Low $\\text{O}_2$ Affinity)**: Stabilized by a network of inter-subunit **salt bridges** (including **His-146** on the $\\beta$-chains) and by one molecule of negatively charged **2,3-Bisphosphoglycerate (2,3-BPG)** sitting inside the central positively charged cavity (lined by His-143, Lys-82, and N-termini of the two $\\beta$-chains). In the T-state, the high-spin $\\text{Fe}^{2+}$ ion is pulled **0.4–0.6 Å out of the porphyrin plane** toward the proximal **Histidine F8 (His-92)**.",
+          "• **Oxyhemoglobin (R-State = 'Relaxed', 150x Higher $\\text{O}_2$ Affinity)**: Binding of $\\text{O}_2$ to the first heme converts $\\text{Fe}^{2+}$ to a smaller low-spin state that **snaps flat into the porphyrin plane**, pulling the proximal **His-F8** and the F-helix with it! This ruptures the inter-subunit salt bridges, expels 2,3-BPG, and rotates the $\\alpha_1\\beta_1$ dimer $15^\\circ$ relative to $\\alpha_2\\beta_2$ into the high-affinity **R-state** (**Positive Cooperativity**, Hill coefficient $n_H \\approx 2.8$).",
+          "**2. THE BOHR EFFECT (In Metabolically Active Tissues) vs. HALDANE EFFECT (In Lungs)**:",
+          "• **Bohr Effect**: Metabolizing tissues produce $\\text{CO}_2$ and Lactic acid ($\\downarrow \\text{pH}$). Protons ($\\text{H}^+$) protonate **His-146** on $\\beta$-globin (enabling it to form a stabilizing salt bridge with Asp-94 in the **T-state**), while $\\text{CO}_2$ reacts with N-terminal amino groups to form negatively charged **Carbaminohemoglobin ($\\text{Hb-NH-COO}^-$)**—shifting the dissociation curve to the **RIGHT ($\\uparrow P_{50}$)** to dump extra $\\text{O}_2$ precisely where tissues need it most!",
+          "• **Haldane Effect**: In the lungs, binding of high $\\text{O}_2$ converts Hb into the **R-state**, which is a stronger acid (releases $\\text{H}^+$ from His-146 to drive $\\text{H}^+ + \\text{HCO}_3^- \\rightarrow \\text{H}_2\\text{O} + \\text{CO}_2$) and has lower affinity for carbamino-$\\text{CO}_2$—**promoting $\\text{CO}_2$ unloading in the alveoli**!"
+        ],
+        "csir_high_yield": [
+          "Guaranteed CSIR NET Part B & C Questions on Fetal Hemoglobin, High Altitude & CO Poisoning:",
+          "• **Why does Fetal Hemoglobin ($\\text{HbF}, \\alpha_2\\gamma_2$) have a HIGHER affinity for $\\text{O}_2$ ($P_{50} \\approx 19\\ \\text{mmHg}$, Left-Shifted curve) than Maternal Adult Hemoglobin ($\\text{HbA}, \\alpha_2\\beta_2, P_{50} \\approx 26\\ \\text{mmHg}$)?** Because in the fetal **$\\gamma$-globin chain**, the positively charged **Histidine-143** of the adult $\\beta$-chain is replaced by an uncharged **Serine (Ser-143)**! With two fewer positive charges in the central cavity, **HbF binds 2,3-BPG much more weakly**, spending more time in the high-affinity R-state so it can extract $\\text{O}_2$ across the placenta from maternal HbA!",
+          "• **High-Altitude Acclimatization**: Hypoxia increases RBC glycolysis and activates **BPG Mutase**, elevating RBC **[2,3-BPG]** within 24–48 hours $\\rightarrow$ shifts the curve to the **RIGHT ($\\uparrow P_{50}$)** to maintain tissue $\\text{O}_2$ unloading despite lower arterial $P_{\\text{O}_2}$! *(Long-term: renal peritubular interstitial cells stabilize **HIF-1$\\alpha$** to secrete **Erythropoietin [EPO]**).",
+          "• **Carbon Monoxide (CO) Poisoning Double Whammy**: CO binds $\\text{Fe}^{2+}$ with ~220x higher affinity than $\\text{O}_2$ (reducing total $\\text{O}_2$-carrying capacity by 50% at 50% HbCO), **AND locking 1 or 2 CO molecules onto an Hb tetramer traps the remaining subunits in the high-affinity R-state**—shifting the curve to the **LEFT** (converting it from sigmoidal to hyperbolic!) so the remaining bound $\\text{O}_2$ **cannot be unloaded** to starving brain/heart tissues!"
+        ],
+        "pathology": [
+          "**Sickle Cell Anemia ($\\text{HbS}$)**: Point mutation (**Glu6Val**) on the $\\beta$-globin surface creates a sticky hydrophobic patch specifically in the **Deoxy (T-state)** that polymerizes into rigid fibers (treated clinically with **Hydroxyurea**, which reactivates fetal **$\\text{HbF } (\\alpha_2\\gamma_2)$** expression to block HbS polymerization!).",
+          "**Methemoglobinemia ($\\text{Fe}^{3+}$)**: Nitrites or oxidative drugs oxidize heme $\\text{Fe}^{2+} \\rightarrow \\text{Fe}^{3+}$ (**Methemoglobin**, which **cannot bind $\\text{O}_2$** and turns blood chocolate-brown); normally reduced back to $\\text{Fe}^{2+}$ by RBC **NADH-Cytochrome $b_5$ Reductase** (or treated clinically with **Methylene Blue**)."
+        ],
+        "lab_workbench": [
+          "Hill Plot Linearization ($\\log[Y / (1 - Y)] \\text{ vs. } \\log P_{\\text{O}_2}$): Myoglobin yields a straight line with slope **$n_H = 1.0$** across all $P_{\\text{O}_2}$; Hemoglobin yields an asymptote of slope $1.0$ at extreme low/high $P_{\\text{O}_2}$ (when all 4 subunits are in T or R) and a maximum central slope of **$n_H \\approx 2.8\\text{–}3.0$** around $P_{50}$."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (2HHB & 1HHO — Max Perutz Crystal Structures of Human Deoxyhemoglobin T-State vs. Oxyhemoglobin R-State)",
+          "url": "https://www.rcsb.org/structure/2HHB",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Max Perutz on X-Ray Analysis & Allosteric Mechanism of Hemoglobin (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1962/perutz/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_glomerular_clearance": {
+      "id": "node_glomerular_clearance",
+      "level": "L2",
+      "title": "Glomerular Filtration (GFR), Starling Forces & Renal Clearance Math",
+      "subtitle": "Fenestrated Endothelium + GBM + Podocyte Slit Diaphragm | Inulin vs. PAH Clearance Equations",
+      "coordinates": {
+        "x": 20,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "net_filtration_pressure": "NFP = P_GC (55 mmHg) - P_BS (15 mmHg) - π_GC (30 mmHg) = +10 mmHg | GFR = Kf × NFP ≈ 125 mL/min (180 L/day!)",
+        "clearance_equation": "C_x = (U_x × V) / P_x [mL/min] | Filtered Load = GFR × P_x | Excretion Rate = U_x × V",
+        "gold_standard_markers": "Inulin (or Creatinine) Clearance = GFR (125 mL/min) | PAH Clearance = Effective Renal Plasma Flow (ERPF ≈ 625 mL/min)",
+        "filtration_fraction": "FF = GFR / RPF = 125 / 625 = 0.20 (20% of renal plasma is filtered at the glomerulus)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. THE THREE-LAYER GLOMERULAR FILTRATION BARRIER (Size- AND Charge-Selective!)**:",
+          "• **Layer 1**: Fenestrated glomerular capillary endothelium (70–100 nm pores; excludes blood cells).",
+          "• **Layer 2**: **Glomerular Basement Membrane (GBM)**—meshwork of **Type IV Collagen** and negatively charged **Heparan Sulfate proteoglycans**.",
+          "• **Layer 3**: Visceral epithelial **Podocyte foot processes** bridged by a 40 nm **Slit Diaphragm** (**Nephrin + Podocin**).",
+          "*Charge Selectivity Rule*: Because the GBM and podocyte sialoproteins are rich in **negative charges**, negatively charged plasma **Albumin** (~66 kDa, radius 3.6 nm) is electrostatically **repelled** and excluded from the filtrate (<0.02% filtered), whereas neutral dextrans of the exact same 3.6 nm size pass through easily!",
+          "**2. OPPOSITE EFFECTS OF AFFERENT vs. EFFERENT ARTERIOLAR CONSTRICTION**:",
+          "• **Afferent Arteriole Constriction** (e.g., high sympathetic tone / NSAIDs blocking prostaglandins): Drops glomerular capillary hydrostatic pressure ($P_{\\text{GC}}$) $\\rightarrow$ **Decreases BOTH RPF and GFR**.",
+          "• **Mild-to-Moderate Efferent Arteriole Constriction** (mediated specifically by **Angiotensin II**!): Backs up blood inside the glomerulus, **increasing $P_{\\text{GC}}$** while decreasing RPF $\\rightarrow$ **Increases GFR (or maintains GFR during renal hypoperfusion) and INCREASES Filtration Fraction ($\text{FF} = \\text{GFR}/\\text{RPF}$)**!"
+        ],
+        "csir_high_yield": [
+          "Renal Clearance Numerical Rules (Guaranteed CSIR NET Part C Calculation Problem!):",
+          "Always start with two formulas: **$\\text{Clearance } (C_x) = \\frac{U_x \\times V}{P_x}$** and **$\\text{Filtered Load} = \\text{GFR} \\times P_x$**:",
+          "• **If $C_x = C_{\\text{Inulin}}$ ($125\\ \\text{mL/min}$)**: Substance $X$ is freely filtered and experiences **zero net reabsorption or secretion** (e.g., **Inulin**).",
+          "• **If $C_x < C_{\\text{Inulin}}$ (or $\\text{Excreted } U_x V < \\text{Filtered Load } \\text{GFR} \\times P_x$)**: Substance $X$ undergoes **NET TUBULAR REABSORPTION**! (e.g., **Glucose** at normal plasma levels $<180\\ \\text{mg/dL}$ is 100% reabsorbed in the PCT via **SGLT2/SGLT1**, so **$C_{\\text{Glucose}} = 0\\ \\text{mL/min}$**; **Urea** has $C_{\\text{Urea}} \\approx 65\\ \\text{mL/min}$).",
+          "• **If $C_x > C_{\\text{Inulin}}$ (or $\\text{Excreted } U_x V > \\text{Filtered Load } \\text{GFR} \\times P_x$)**: Substance $X$ undergoes **NET TUBULAR SECRETION**! (e.g., **PAH [Para-aminohippuric acid]** is filtered AND 100% secreted by peritubular OAT transporters in a single pass, so **$C_{\\text{PAH}} = \\text{ERPF} \\approx 625\\ \\text{mL/min}$**; Penicillin and $\\text{H}^+$ also have $C_x > \\text{GFR}$)."
+        ],
+        "pathology": [
+          "**Minimal Change Disease / Nephrotic Syndrome**: Loss of negative heparan sulfate charges on the GBM (or mutations in *NPHS1* [**Nephrin**] in congenital nephrotic syndrome) allows massive filtration of negatively charged **Albumin** into the urine (**Proteinuria $>3.5\\ \\text{g/day}$**), dropping plasma oncotic pressure ($\\pi_{\\text{GC}}$) and causing generalized **pitting edema**!",
+          "**SGLT2 Inhibitors (Dapagliflozin / Empagliflozin)**: Block proximal tubule $\\text{Na}^+$/Glucose cotransporter 2 to lower the renal threshold for glucose and excrete excess blood glucose in Type 2 Diabetes."
+        ],
+        "lab_workbench": [
+          "Glucose Titration Curve (Renal Transport Maximum $T_m$ & 'Splay'): Below plasma $[\\text{Glucose}] = 180\\ \\text{mg/dL}$ (Renal Threshold), 100% of filtered glucose is reabsorbed; above $300\\ \\text{mg/dL}$, all SGLT2/SGLT1 carriers saturate at **$T_m = 375\\ \\text{mg/min}$**, and the excretion curve parallels the filtered load curve."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (7VSI — Cryo-EM Structure of Human Renal Na+/Glucose Cotransporter SGLT2 Bound to Empagliflozin)",
+          "url": "https://www.rcsb.org/structure/7VSI",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_countercurrent_nephron": {
+      "id": "node_countercurrent_nephron",
+      "level": "L2",
+      "title": "The Nephron Countercurrent Multiplier (Loop of Henle), RAAS & ADH Aquaporin-2",
+      "subtitle": "300 to 1,200 mOsm/L Medullary Gradient | Thin Descending (H2O) vs. Thick Ascending NKCC2 (Diluting Segment)",
+      "coordinates": {
+        "x": 54,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "pct_reabsorption": "Iso-osmotic (300 mOsm/L)! Reabsorbs 67% of filtered Na+ & H2O + 100% of Glucose & Amino Acids + 85% of HCO3-",
+        "thin_descending_limb": "Freely permeable to H2O (via Aquaporin-1); impermeable to NaCl -> Tubular fluid concentrates to 1,200 mOsm/L at hairpin turn!",
+        "thick_ascending_limb": "'Diluting Segment'! 100% IMPERMEABLE to H2O; actively pumps out Na+-K+-2Cl- via NKCC2 -> Fluid becomes HYPO-OSMOTIC (~100 mOsm/L)!",
+        "collecting_duct_adh": "Principal Cells: ADH (V2 Receptor -> cAMP/PKA) inserts Aquaporin-2 (AQP2) into apical membrane + Urea recycling builds 1,200 mOsm/L papilla!"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. HOW JUXTAMEDULLARY NEPHRONS BUILD THE 300 $\\rightarrow$ 1,200 mOsm/L MEDULLARY GRADIENT**:",
+          "• **The 'Single Effect' (Thick Ascending Limb / TAL)**: Epithelial cells of the Thick Ascending Limb are **completely impermeable to water** (lack aquaporins) and use the apical **NKCC2 ($\\text{Na}^+\\text{-K}^+\\text{-2Cl}^-$) cotransporter** to pump $\\text{NaCl}$ out of the lumen into the medullary interstitium—generating a $200\\ \\text{mOsm/L}$ horizontal gradient while leaving the tubular fluid exiting the Loop of Henle **hypo-osmotic ($\\sim 100\\ \\text{mOsm/L}$, the 'Diluting Segment')**!",
+          "• **Countercurrent Multiplication**: Because the **Thin Descending Limb** is freely permeable to water (**AQP1**), water is osmotically drawn out into the hypertonic interstitium, concentrating descending tubular fluid to $1,200\\ \\text{mOsm/L}$ at the hairpin tip. Meanwhile, **Inner Medullary Urea Recycling** ( accounts for **~50% [$600\\ \\text{mOsm/L}$] of deep medullary osmolarity** via ADH-activated **UT-A1/A3** urea transporters) and hairpin **Vasa Recta Countercurrent Exchangers** (which prevent blood flow from washing away the medullary salt/urea gradient!) lock the $1,200\\ \\text{mOsm/L}$ gradient in place.",
+          "**2. THE RENIN–ANGIOTENSIN–ALDOSTERONE SYSTEM (RAAS) & ADH**:",
+          "• Low blood pressure / low macula densa $\\text{NaCl}$ delivery $\\rightarrow$ Juxtaglomerular (JG) cells secrete **Renin** (aspartyl protease) $\\rightarrow$ cleaves liver **Angiotensinogen** into decapeptide **Angiotensin I (10 aa)** $\\rightarrow$ pulmonary endothelial **ACE (Angiotensin-Converting Enzyme)** cleaves it into octapeptide **Angiotensin II (8 aa)**.",
+          "• **Angiotensin II**: Constricts arterioles (efferent > afferent), stimulates PCT $\\text{Na}^+/\\text{H}^+$ exchange, stimulates hypothalamic **ADH** release & thirst, and stimulates the **Zona Glomerulosa** of the adrenal cortex to secrete **Aldosterone** (which upregulates **ENaC** $\\text{Na}^+$ channels and $\\text{ROMK}$ $\\text{K}^+$ channels in **Principal Cells** of the Late DCT/Collecting Duct!)."
+        ],
+        "csir_high_yield": [
+          "Guaranteed CSIR NET Tubular Segment Osmolarity & Diuretic Matching Questions:",
+          "• **In which segment of the nephron is tubular fluid ALWAYS HYPO-OSMOTIC (~100 mOsm/L) relative to plasma, regardless of whether ADH is maximal or zero?** Entering the **Early Distal Convoluted Tubule (just exiting the Thick Ascending Limb)**! Why? Because the Thick Ascending Limb actively pumps out $\\text{NaCl}$ via NKCC2 while being 100% impermeable to water!",
+          "• **Where is the highest percentage of filtered water reabsorbed when ADH is ABSENT vs. PRESENT?** In **BOTH cases**, the **Proximal Convoluted Tubule (PCT)** reabsorbs the largest absolute volume and percentage (~67%) of filtered water obligatorily! **ADH (Vasopressin)** only controls the facultative final 10–15% of water reabsorption in the **Collecting Duct** (by triggering exocytic insertion of **Aquaporin-2 [AQP2]** vesicles into the apical membrane via **$V_2 \\text{ GPCR} \\rightarrow G_s \\rightarrow \\text{cAMP} \\rightarrow \\text{PKA}$**).",
+          "• **Site-Specific Diuretic Pharmacology**:",
+          "  – **Acetazolamide**: Inhibits **Carbonic Anhydrase** in the **PCT**.",
+          "  – **Furosemide (Loop Diuretic)**: Inhibits **NKCC2 ($\\text{Na}^+\\text{-K}^+\\text{-2Cl}^-$)** in the **Thick Ascending Limb** (washout of medullary gradient + causes $\\text{Ca}^{2+}$ excretion because it abolishes the lumen-positive potential generated by ROMK!).",
+          "  – **Thiazide Diuretics**: Inhibit **NCC ($\\text{Na}^+\\text{-Cl}^-$ cotransporter)** in the **Early DCT** (uniquely *increases* $\\text{Ca}^{2+}$ reabsorption!).",
+          "  – **Spironolactone (Aldosterone antagonist) & Amiloride (ENaC blocker)**: Act on **Principal Cells of Collecting Duct** (**$\\text{K}^+$-Sparing Diuretics**!)."
+        ],
+        "pathology": [
+          "**Central vs. Nephrogenic Diabetes Insipidus (DI)**:",
+          "• **Central DI**: Failure of posterior pituitary to secrete ADH $\\rightarrow$ massive excretion ($>10\\ \\text{L/day}$) of ultra-dilute urine ($50\\ \\text{mOsm/L}$); **100% rescued by intranasal Desmopressin (dDAVP)**.",
+          "• **Nephrogenic DI**: Mutations in the renal **$V_2$ Receptor (*AVPR2*, X-linked)** or **Aquaporin-2 (*AQP2*)** (or **Lithium** therapy inhibiting cAMP) $\\rightarrow$ collecting duct fails to respond to ADH (**NOT rescued by Desmopressin**!).",
+          "**Bartter Syndrome** (loss of NKCC2 in TAL; mimics Furosemide) vs. **Gitelman Syndrome** (loss of NCC in DCT; mimics Thiazides) vs. **Liddle Syndrome** (gain-of-function mutation deleting the PY Nedd4-2 ubiquitin-ligase degron on **ENaC**, causing severe hypertension + hypokalemia with *low* renin/aldosterone!)."
+        ],
+        "lab_workbench": [
+          "Free-Water Clearance ($C_{\\text{H}_2\\text{O}} = V - C_{\\text{osm}} = V - \\frac{U_{\\text{osm}} V}{P_{\\text{osm}}}$): When urine is dilute ($U_{\\text{osm}} < P_{\\text{osm}}$, low ADH), **$C_{\\text{H}_2\\text{O}}$ is POSITIVE** (solute-free water is being excreted); when urine is concentrated ($U_{\\text{osm}} > P_{\\text{osm}}$, high ADH), **$C_{\\text{H}_2\\text{O}}$ is NEGATIVE** (designated **$T^c_{\\text{H}_2\\text{O}}$**, solute-free water is being reabsorbed into blood)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (4OJ2 — Frick & Törnroth-Horsefield Crystal Structure of Human Aquaporin-2 Water Channel)",
+          "url": "https://www.rcsb.org/structure/4OJ2",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Peter Agre's Discovery of Aquaporin Water Channels (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/chemistry/2003/agre/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_endocrine_feedback_axes": {
+      "id": "node_endocrine_feedback_axes",
+      "level": "L2",
+      "title": "Hypothalamic–Pituitary Axes, Thyroid Peroxidase, Adrenal Cortex Zones & Ca2+ Homeostasis",
+      "subtitle": "Portal Tropic Cascades (HPA, HPT, HPG), Dopamine Prolactin Tonic Brake & PTH vs. Calcitonin/Calcitriol",
+      "coordinates": {
+        "x": 84,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "anterior_vs_posterior_pituitary": "Adenohypophysis (Rathke's pouch ectoderm; hypothalamo-hypophyseal portal blood: FLAT PEG hormones) vs. Neurohypophysis (Neural: ADH & Oxytocin)",
+        "adrenal_cortex_zones": "GFR Mnemonic! Zona Glomerulosa (Aldosterone) | Zona Fasciculata (Cortisol; lacks 18-hydroxylase) | Zona Reticularis (DHEA/Androgens)",
+        "thyroid_synthesis": "NIS (Na+/I- Symporter) -> Pendrin -> Thyroid Peroxidase (TPO: Oxidation, Organification of MIT/DIT on Thyroglobulin, & Coupling -> T4 [90%] / T3 [10%, 4x more active!])",
+        "calcium_phosphate_hormones": "PTH (↑ Serum Ca2+, ↓ Serum PO4 3- via inhibiting PCT NaPi-IIa!) vs. Calcitriol / 1,25-(OH)2-D3 (↑ BOTH Serum Ca2+ & PO4 3- via gut Calbindin!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. HYPOTHALAMIC–PITUITARY PORTAL vs. NEUROSECRETORY AXES**:",
+          "• **Posterior Pituitary (Neurohypophysis)**: Magnocellular neurons in the **Supraoptic Nucleus (SON, mainly ADH)** and **Paraventricular Nucleus (PVN, mainly Oxytocin)** synthesize preprohormones packaged with **Neurophysin I (Oxytocin) or Neurophysin II (ADH)** and transport them down axons through the infundibular stalk to release directly into systemic capillaries.",
+          "• **Anterior Pituitary (Adenohypophysis)**: Regulated via the **Hypothalamo-Hypophyseal Portal System**:",
+          "  – **TRH (Tripeptide: pGlu-His-Pro-NH2)** $\\rightarrow$ Thyrotrophs $\\rightarrow$ **TSH** (and Prolactin!).",
+          "  – **CRH** $\\rightarrow$ Corticotrophs (**POMC** precursor cleaved into **ACTH** + **$\\alpha$-MSH** + **$\\beta$-Endorphin**) $\\rightarrow$ **Cortisol**.",
+          "  – **GnRH (Pulsatile!)** $\\rightarrow$ Gonadotrophs $\\rightarrow$ **FSH & LH** (*Note*: **Continuous non-pulsatile GnRH agonist infusion [Leuprolide] downregulates pituitary GnRH receptors and SHUTS DOWN FSH/LH!**).",
+          "  – **GHRH (+) vs. Somatostatin (–)** $\\rightarrow$ Somatotrophs $\\rightarrow$ **Growth Hormone (GH)** $\\rightarrow$ Liver **IGF-1**.",
+          "  – **Dopamine (PIF)**: **Tonically INHIBITS Lactotrophs** from secreting **Prolactin**!",
+          "**2. THE OVULATORY POSITIVE-FEEDBACK SWITCH (Menstrual Cycle Day 12–14)**: Throughout most of the cycle, Estradiol exerts *negative* feedback on LH/FSH. However, when sustained high **17$\\beta$-Estradiol** from the dominant Graafian follicle exceeds a threshold for $>36\\text{–}48\\ \\text{hours}$, it switches to **POSITIVE FEEDBACK** on GnRH/kisspeptin neurons and gonadotrophs, triggering the mid-cycle **LH Surge** that induces meiosis I resumption, **Ovulation**, and Corpus Luteum formation (which secretes **Progesterone**; rescued in pregnancy by placental **hCG**, which shares the identical $\\alpha$-subunit with FSH, LH, and TSH!)."
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Endocrine Traps:",
+          "• **What happens to all 6 Anterior Pituitary Hormones if the Pituitary Stalk is surgically transected?** **FSH, LH, TSH, ACTH, and GH all DROP to near zero** (because they lose their hypothalamic releasing hormones), **WHEREAS PROLACTIN SURGES UPWARD**! Why? Because Prolactin is under **tonic inhibitory control by hypothalamic Dopamine**!",
+          "• **Why does Primary Adrenal Insufficiency (Addison's Disease — low Cortisol) cause Bronze Hyperpigmentation of the skin, whereas Secondary Pituitary ACTH deficiency does NOT?** In primary adrenal failure, loss of Cortisol negative feedback drives sky-high hypothalamic CRH and pituitary **POMC (Pro-opiomelanocortin)** transcription; cleaving POMC into massive amounts of **ACTH** simultaneously releases massive amounts of **$\\alpha$-MSH (Melanocyte-Stimulating Hormone)** (and ACTH itself contains the $\\alpha$-MSH sequence in its first 13 amino acids!), stimulating MC1R on skin melanocytes!",
+          "• **Graves' Disease vs. Hashimoto's Goiter Feedback Profiles**:",
+          "  – **Graves' Disease**: Autoantibodies (**TSI**) agonize the TSH Receptor $\\rightarrow$ **High Free $\\text{T}_3/\\text{T}_4$** suppresses pituitary **TSH to near ZERO**, yet the thyroid enlarges into a goiter because TSI keeps stimulating it!",
+          "  – **Iodine-Deficiency / Hashimoto's Goiter**: **Low $\\text{T}_3/\\text{T}_4$** removes negative feedback $\\rightarrow$ **Sky-High Pituitary TSH** stimulates thyroid follicular hypertrophy (Goiter).",
+          "• **21-Hydroxylase Deficiency (Congenital Adrenal Hyperplasia — CAH)**: Blocks synthesis of both Cortisol and Aldosterone $\\rightarrow$ high ACTH shunts all steroid precursors into **Adrenal Androgens (DHEA)**, causing virilization/ambiguous genitalia in XX newborns + salt-wasting hypotension."
+        ],
+        "pathology": [
+          "**Propylthiouracil (PTU) vs. Methimazole in Hyperthyroidism**: Both drugs inhibit **Thyroid Peroxidase (TPO)** (blocking iodide oxidation, organification, and coupling), while **PTU additionally blocks peripheral Type-1 5'-Deiodinase** (preventing conversion of prohormone $\\text{T}_4$ into active $\\text{T}_3$ in peripheral tissues!)."
+        ],
+        "lab_workbench": [
+          "Radioactive Iodine ($^{123}\\text{I} / ^{131}\\text{I}$) Thyroid Uptake Scan & Perchlorate ($\\text{ClO}_4^-$) Discharge Test: Administering Potassium Perchlorate competitively blocks the basolateral **NIS ($\\text{Na}^+/\\text{I}^-$ symporter)**; in patients with a genetic **TPO organification defect (Pendred Syndrome)**, unincorporated free radioiodide immediately washes out of the thyroid gland upon $\\text{ClO}_4^-$ challenge!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1XWD — Crystal Structure of Human Chorionic Gonadotropin hCG / Glycoprotein Hormone Alpha-Beta Heterodimer)",
+          "url": "https://www.rcsb.org/structure/1XWD",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "RCSB PDB (1A28 — Crystal Structure of the Human Progesterone Nuclear Receptor Ligand-Binding Domain)",
+          "url": "https://www.rcsb.org/structure/1A28",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_action_potential_hodgkin": {
+      "id": "node_action_potential_hodgkin",
+      "level": "L3",
+      "title": "Neuronal Action Potentials: Nernst/GHK Equations, Voltage-Gated Na+/K+ Gates & Saltatory Conduction",
+      "subtitle": "Fast m-Gate Activation vs. Slow h-Gate Ball-and-Chain Inactivation (Absolute Refractory Period)",
+      "coordinates": {
+        "x": 20,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "equilibrium_potentials": "E_K ≈ -90 mV | E_Cl ≈ -70 mV | E_Na ≈ +60 mV | E_Ca ≈ +125 mV | Neuronal Resting V_m ≈ -70 mV (set by K+ leak channels + Na+/K+ ATPase)",
+        "nernst_equation_37c": "E_ion = (61.5 / z) × log10( [Ion]_out / [Ion]_in ) [in mV at 37°C; 58 mV at 20°C]",
+        "na_channel_gates": "2 Gates: Fast Activation Gate (m-gate) + Slow Inactivation 'Ball-and-Chain' Gate (h-gate)! K+ channel has ONLY 1 Slow Gate (n-gate)",
+        "refractory_periods": "Absolute Refractory Period = Na+ h-gates are INACTIVATED (0% excitability) | Relative Refractory Period = High K+ conductance g_K (hyperpolarized)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. NERNST vs. GOLDMAN–HODGKIN–KATZ (GHK) VOLTAGE EQUATION**:",
+          "At rest ($V_m = -70\\ \\text{mV}$), membrane permeability is dominated by two-pore **$\\text{K}^+$ leak channels** ($P_{\\text{K}} : P_{\\text{Na}} : P_{\\text{Cl}} = 1.0 : 0.04 : 0.45$). Because $P_{\\text{K}}$ is 25x higher than $P_{\\text{Na}}$, resting $V_m$ sits close to $E_{\\text{K}}$ ($-90\\ \\text{mV}$), while the electrogenic **$\\text{Na}^+/\\text{K}^+$-ATPase ($3\\text{Na}^+ \\text{ out} : 2\\text{K}^+ \\text{ in}$)** maintains the concentration gradients (contributing ~$-4\\ \\text{mV}$ directly).",
+          "**2. HODGKIN & HUXLEY GATING MECHANICS OF THE ACTION POTENTIAL**:",
+          "• **Resting State ($-70\\ \\text{mV}$)**: Voltage-gated $\\text{Na}^+$ channel **Activation gate ($m$) is CLOSED**, while its cytoplasmic **Inactivation gate ($h$) is OPEN**. Voltage-gated $\\text{K}^+$ channel gate ($n$) is **CLOSED**.",
+          "• **Threshold ($-55\\ \\text{mV}$) & Rising Phase Depolarization (Overshoot to $+35\\ \\text{mV}$)**: S4 voltage-sensor helices (rich in positively charged **Arginine/Lysine** every 3rd residue) slide outward, snapping the **fast $\\text{Na}^+$ Activation gate ($m$) OPEN** ($P_{\\text{Na}}/P_{\\text{K}}$ flips to $20 : 1$, driving $V_m$ toward $E_{\\text{Na}} = +60\\ \\text{mV}$ in a Hodgkin cycle).",
+          "• **Peak & Falling Phase Repolarization**: Within $0.5\\text{–}1.0\\ \\text{ms}$, two events terminate the spike: (1) the delayed **$\\text{Na}^+$ Inactivation gate ($h$, cytoplasmic III–IV linker loop) plugs the inner pore**, halting $\\text{Na}^+$ influx, and (2) the slow **delayed-rectifier $\\text{K}^+$ gate ($n$) opens**, driving massive $\\text{K}^+$ efflux and an **After-Hyperpolarization (Undershoot)** toward $E_{\\text{K}}$ ($-90\\ \\text{mV}$)!"
+        ],
+        "csir_high_yield": [
+          "Guaranteed CSIR NET Part B & C Questions on Refractory Periods, Extracellular $\\text{K}^+$ & Myelination:",
+          "• **What is the exact molecular basis of the ABSOLUTE Refractory Period (and why do action potentials propagate strictly unidirectionally from axon hillock to terminal)?** Because voltage-gated $\\text{Na}^+$ channels enter the **INACTIVATED state ($h$-gate closed)** at the peak of the action potential! **An inactivated $\\text{Na}^+$ channel CANNOT be reopened by any depolarizing stimulus, no matter how strong, until the membrane first REPOLARIZES back toward $-70\\ \\text{mV}$ to reset the $h$-gate!**",
+          "• **What happens to Resting Membrane Potential and Action Potential Peak if Extracellular $[\\text{K}^+]_{\\text{out}}$ is increased from $4\\ \\text{mM}$ to $20\\ \\text{mM}$ (Hyperkalemia)?** By the Nernst equation ($E_{\\text{K}} = 61.5 \\log([\\text{K}^+]_{\\text{out}}/[\\text{K}^+]_{\\text{in}})$), raising $[\\text{K}^+]_{\\text{out}}$ makes $E_{\\text{K}}$ **LESS NEGATIVE (depolarizes the resting membrane potential!)**, whereas changing $[\\text{Na}^+]_{\\text{out}}$ alters the **peak overshoot height** of the action potential with minimal effect on resting $V_m$! *(Note: Severe chronic depolarization by hyperkalemia locks $\\text{Na}^+$ $h$-gates in the inactivated state, causing **accommodation / flaccid paralysis and cardiac arrest in diastole**!).*",
+          "• **Cable Theory & Saltatory Conduction**: Conduction velocity increases with: (1) **Larger axon diameter ($a$)** (decreases internal axial resistance $r_i \\propto 1/a^2$, hence the $1\\ \\text{mm}$ **Squid Giant Axon**!), and (2) **Myelination** (Oligodendrocytes in CNS; Schwann cells in PNS), which vastly **increases membrane resistance ($r_m$) and DECREASES membrane capacitance ($C_m$)**, increasing the **Length Constant ($\\lambda = \\sqrt{r_m / r_i}$)** so current leaps passively between **Nodes of Ranvier** (where $\\text{Na}_v1.6$ channels are packed at $10,000/\\mu\\text{m}^2$)!"
+        ],
+        "pathology": [
+          "**Multiple Sclerosis (MS)** (CNS autoimmune demyelination) & **Guillain-Barré Syndrome** (PNS demyelination): Loss of myelin drops membrane resistance ($r_m$) and increases capacitance ($C_m$); current leaks out across the bare internodal membrane (which has almost zero voltage-gated $\\text{Na}^+$ channels!), causing **conduction block** before reaching the next Node of Ranvier."
+        ],
+        "lab_workbench": [
+          "Neher & Sakmann Patch-Clamp Configurations (1991 Nobel Prize) & Pronase Treatment: Applying **Pronase** (protease) to the **INSIDE (cytoplasmic face)** of a squid giant axon digests the III–IV linker loop (**$h$-gate**), completely **abolishing $\\text{Na}^+$ channel inactivation** so $\\text{Na}^+$ current stays open indefinitely during a voltage-clamp step!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1BL8 — Roderick MacKinnon Landmark Crystal Structure of the KcsA Potassium Channel Selectivity Filter TVGYG)",
+          "url": "https://www.rcsb.org/structure/1BL8",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Alan Hodgkin & Andrew Huxley on Ionic Movements and Electrical Activity in Giant Nerve Fibers (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/medicine/1963/hodgkin/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_synaptic_snare_transmission": {
+      "id": "node_synaptic_snare_transmission",
+      "level": "L3",
+      "title": "Synaptic Transmission: Ca2+–Synaptotagmin SNARE Exocytosis, EPSP/IPSP & LTP",
+      "subtitle": "v-SNARE (Synaptobrevin) + t-SNARE (Syntaxin-1/SNAP-25), Botulinum/Tetanus Cleavage & NMDA Coincidence Detection",
+      "coordinates": {
+        "x": 54,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "snare_core_complex": "4-Helix Bundle: v-SNARE Synaptobrevin (VAMP, 1 helix) + t-SNAREs Syntaxin-1 (1 helix) & SNAP-25 (2 helices) + Ca2+ sensor Synaptotagmin-1",
+        "excitatory_neurotransmitters": "Glutamate (AMPA, Kainate, NMDA Na+/Ca2+ channels) & Acetylcholine (Nicotinic nAChR pentamer at NMJ) -> Depolarizing EPSP!",
+        "inhibitory_neurotransmitters": "GABA (GABA_A Cl- channel; GABA_B Gi GPCR -> K+ out) & Glycine (Spinal cord Cl- channel blocked by Strychnine!) -> Hyperpolarizing IPSP!",
+        "nmj_termination": "Acetylcholinesterase (AChE) in synaptic cleft hydrolyzes ACh -> Choline + Acetate (Choline recycled via hemicholinium-sensitive CHT1)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. PRESYNAPTIC VESICLE DOCKING & $\\text{Ca}^{2+}$-TRIGGERED EXOCYTOSIS (Südhof / Rothman / Schekman)**:",
+          "• Neurotransmitters are pumped into synaptic vesicles by vesicular antiporters driven by a **V-type $\\text{H}^+$-ATPase**. At the active zone, the vesicle **v-SNARE Synaptobrevin (VAMP)** partially zippers into a tight 4-helix bundle with the plasma-membrane **t-SNAREs Syntaxin-1 and SNAP-25** (clamped by Complexin and chaperoned by Munc18).",
+          "• Arrival of an action potential opens presynaptic **Voltage-Gated P/Q- and N-type $\\text{Ca}^{2+}$ Channels ($\\text{Ca}_v2.1/2.2$)**. Local $\\text{Ca}^{2+}$ ($>10\\ \\mu\\text{M}$) binds the C2A/C2B domains of the vesicular $\\text{Ca}^{2+}$ sensor **Synaptotagmin-1**, driving sub-millisecond membrane fusion and quantal neurotransmitter release (followed by **NSF + $\\alpha$-SNAP** ATPase disassembly of cis-SNARE complexes for clathrin/dynamin recycling).",
+          "**2. HIPPOCAMPAL LONG-TERM POTENTIATION (LTP — Synaptic Plasticity & Memory)**:",
+          "• At resting membrane potential ($-70\\ \\text{mV}$), postsynaptic **NMDA Glutamate Receptors** are physically plugged inside their pore by an extracellular **$\\text{Mg}^{2+}$ ion**—even when Glutamate is bound! Only **AMPA Receptors** pass $\\text{Na}^+$.",
+          "• High-frequency tetanic stimulation causes strong postsynaptic depolarization via AMPA receptors, which **electrostatically expels the $\\text{Mg}^{2+}$ plug from the NMDA receptor** (**Coincidence Detector**: requires *both* presynaptic Glutamate AND postsynaptic depolarization!). Resulting **$\\text{Ca}^{2+}$ influx through NMDA receptors** activates **CaMKII**, which phosphorylates AMPA receptors and inserts extra AMPA receptors into the postsynaptic density!"
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Questions on Clostridial Neurotoxins, NMJ Diseases & KCC2 Chloride Switch:",
+          "• **Botulinum Toxin (BoNT A–G) vs. Tetanus Toxin (TeNT) — Same Molecular Target, Opposite Clinical Paralysis!**:",
+          "  – Both are $\\text{Zn}^{2+}$-endopeptidases that cleave **SNARE proteins** (**BoNT-B and Tetanus toxin both cleave Synaptobrevin/VAMP at the exact same peptide bond**; BoNT-A/E cleave **SNAP-25**; BoNT-C cleaves **Syntaxin-1**).",
+          "  – **Botulinum Toxin**: Acts peripherally at the **Cholinergic Neuromuscular Junction (NMJ)**, blocking **Acetylcholine** release $\\rightarrow$ **FLACCID PARALYSIS**!",
+          "  – **Tetanus Toxin (Tetanospasmin)**: Undergoes retrograde axonal transport (via cytoplasmic dynein!) up motor axons to **Renshaw Inhibitory Interneurons in the Spinal Cord**, blocking **Glycine and GABA** release $\\rightarrow$ unchecked motor neuron firing $\\rightarrow$ **SPASTIC PARALYSIS ('Lockjaw')**! (*Strychnine* causes identical spastic convulsions by competitively blocking postsynaptic **Glycine receptors**!).",
+          "• **Myasthenia Gravis vs. Lambert-Eaton Myasthenic Syndrome (LEMS)**:",
+          "  – **Myasthenia Gravis**: Autoantibodies against **Postsynaptic Nicotinic ACh Receptors (nAChR)**; weakness **worsens** with repetitive muscle use; treated with **AChE inhibitors (Pyridostigmine / Neostigmine / Edrophonium)**.",
+          "  – **Lambert-Eaton Syndrome**: Autoantibodies against **Presynaptic Voltage-Gated $\\text{Ca}^{2+}$ Channels ($\\text{Ca}_v2.1$)**; muscle strength paradoxically **improves** after brief repetitive high-frequency exercise as presynaptic $\\text{Ca}^{2+}$ builds up!",
+          "• **Why is GABA Excitatory (Depolarizing) in Embryonic/Neonatal Neurons, but Inhibitory (Hyperpolarizing) in Mature Adult Neurons?** Embryonic neurons express high **NKCC1** (pumps $\\text{Cl}^-$ *into* the cell, so intracellular $[\\text{Cl}^-]$ is high and $E_{\\text{Cl}} \\approx -40\\ \\text{mV}$ $\\rightarrow$ opening $\\text{GABA}_A$ causes $\\text{Cl}^-$ *efflux* and depolarization!). During postnatal maturation, neurons upregulate **KCC2** (extrudes $\\text{Cl}^-$ *out* of the cell, dropping $E_{\\text{Cl}}$ to $-75\\ \\text{mV}$ $\\rightarrow$ opening $\\text{GABA}_A$ causes $\\text{Cl}^-$ *influx* and hyperpolarizing inhibition!)."
+        ],
+        "pathology": [
+          "**Organophosphate Nerve Agents (Sarin, Parathion, Malathion)**: Irreversibly phosphorylate the catalytic Serine of **Acetylcholinesterase (AChE)**, causing cholinergic crisis and respiratory muscle paralysis (treated with **Atropine** [muscarinic antagonist] + **Pralidoxime [2-PAM]**, which regenerates phosphorylated AChE before 'aging' occurs)."
+        ],
+        "lab_workbench": [
+          "Bernard Katz Miniature End-Plate Potential (mEPP) Recording at the Frog Sartorius NMJ: In the absence of presynaptic action potentials, spontaneous ~$0.4\\ \\text{mV}$ postsynaptic depolarizations (**mEPPs**) occur at random intervals—each representing the spontaneous exocytosis of **a single synaptic vesicle ('Quantum' $\\approx 7,000\\text{–}10,000$ ACh molecules)**!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1SFC — Sutton & Brunger Crystal Structure of the Neuronal SNARE Four-Helix Bundle Complex)",
+          "url": "https://www.rcsb.org/structure/1SFC",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Thomas Südhof on the Molecular Machinery of Neurotransmitter Release (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/medicine/2013/sudhof/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_sensory_phototransduction": {
+      "id": "node_sensory_phototransduction",
+      "level": "L3",
+      "title": "Vertebrate Retinal Phototransduction: The Dark Current, Transducin ($G_t$) & cGMP PDE",
+      "subtitle": "11-cis-Retinal Photoisomerization -> Rhodopsin -> Transducin -> PDE6 Hydrolyzes cGMP -> CNG Na+/Ca2+ Channels CLOSE!",
+      "coordinates": {
+        "x": 84,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "dark_state_rod": "High [cGMP] keeps Cyclic-Nucleotide-Gated (CNG) Na+/Ca2+ channels OPEN ('Dark Current') -> Rod is DEPOLARIZED (-40 mV) & Continuously Releases Glutamate!",
+        "light_cascade": "Photon -> 11-cis to All-trans-Retinal -> Metarhodopsin II -> Transducin (Gtα-GTP) -> Activates cGMP Phosphodiesterase (PDE6) -> [cGMP] drops!",
+        "light_response_sign": "CNG Na+/Ca2+ channels CLOSE -> Rod HYPERPOLARIZES (to -70 mV) -> Stops releasing Glutamate!",
+        "signal_amplification": "1 Photon -> 1 Rhodopsin* -> ~500 Transducins -> ~500 PDE6 -> Hydrolyzes >10^5 cGMP molecules/sec!"
+      },
+      "tabs": {
+        "mechanism": [
+          "Vertebrate Rod and Cone photoreceptors are famous because **Light HYPERPOLARIZES the cell** (the exact opposite of almost all other sensory receptors!):",
+          "1. **IN COMPLETE DARKNESS (The 'Dark Current')**: Rod outer-segment **Guanylyl Cyclase** continuously synthesizes **cGMP**. High cytosolic $[\\text{cGMP}]$ binds and holds **Cyclic-Nucleotide-Gated (CNG) $\\text{Na}^+/\\text{Ca}^{2+}$ channels OPEN**, allowing an inward 'Dark Current' of $\\text{Na}^+$ and $\\text{Ca}^{2+}$ that keeps the photoreceptor **DEPOLARIZED at $-40\\ \\text{mV}$**, continuously releasing **Glutamate** onto bipolar cells!",
+          "2. **IN LIGHT (Hyperpolarization Cascade)**:",
+          "• A single photon isomerizes **11-*cis*-retinal** (covalently bound via a protonated Schiff base to **Lys-296** of **Opsin**) into **All-*trans*-retinal**, converting Rhodopsin into active **Metarhodopsin II ($R^*$)**.",
+          "• $R^*$ activates the heterotrimeric G-protein **Transducin ($G_t$)** ($G_{t\\alpha}\\text{-GDP} \\rightarrow G_{t\\alpha}\\text{-GTP}$).",
+          "• $G_{t\\alpha}\\text{-GTP}$ binds the inhibitory $\\gamma$-subunits of **cGMP Phosphodiesterase (PDE6)**, unleashing PDE6 catalytic $\\alpha\\beta$ subunits to rapidly **hydrolyze cGMP into linear 5'-GMP**.",
+          "• Dropping $[\\text{cGMP}]$ causes **CNG $\\text{Na}^+/\\text{Ca}^{2+}$ channels to SNAP SHUT**, **HYPERPOLARIZING** the rod membrane to $-70\\ \\text{mV}$ and **halting Glutamate release**!",
+          "3. **LIGHT ADAPTATION & RECOVERY**: Because CNG channels close while the $\\text{Na}^+/\\text{Ca}^{2+},\\text{K}^+$ exchanger (NCKX) keeps pumping $\\text{Ca}^{2+}$ out, intracellular $[\\text{Ca}^{2+}]$ drops from $500\\ \\text{nM}$ to $50\\ \\text{nM}$. Low $\\text{Ca}^{2+}$ causes **GCAP (Guanylyl Cyclase-Activating Protein)** to stimulate **Guanylyl Cyclase** to resynthesize cGMP, while **Rhodopsin Kinase (GRK1) + Arrestin** turn off $R^*$ and **RGS9** accelerates $G_{t\\alpha}$ GTP hydrolysis!"
+        ],
+        "csir_high_yield": [
+          "Guaranteed CSIR NET Part B & C Questions on Vision & Sensory Transduction:",
+          "• **Summary Flow of Light in a Vertebrate Rod Cell (Memorize Every Arrow!)**:",
+          "  **Light ($h\\nu$) $\\rightarrow$ 11-*cis* to All-*trans*-Retinal $\\rightarrow$ Metarhodopsin II $\\rightarrow$ Active Transducin ($G_{t\\alpha}$-GTP) $\\rightarrow$ Active cGMP-PDE6 $\\rightarrow \\downarrow [\\text{cGMP}] \\rightarrow$ Closure of CNG $\\text{Na}^+/\\text{Ca}^{2+}$ Channels $\\rightarrow$ Membrane HYPERPOLARIZATION ($-40\\ \\text{mV} \\rightarrow -70\\ \\text{mV}$) $\\rightarrow \\downarrow$ Presynaptic Glutamate Release!**",
+          "• **How do ON-Center vs. OFF-Center Bipolar Cells respond when Light stops Glutamate release?**",
+          "  – **OFF-Bipolar Cells** express ionotropic **AMPA/Kainate** glutamate receptors (excited by dark glutamate; **hyperpolarized/turned OFF in light**).",
+          "  – **ON-Bipolar Cells** express the metabotropic receptor **mGluR6** (which in the dark *closes* TRPM1 cation channels; therefore, when light **stops** glutamate release, mGluR6 turns off, TRPM1 opens, and the **ON-Bipolar cell DEPOLARIZES in light**!).",
+          "• **Olfactory Sensory Neuron Contrast**: Unlike photoreceptors, Odorant GPCRs ($G_{\\text{olf}}$) activate **Adenylyl Cyclase III $\\rightarrow \\uparrow [\\text{cAMP}] \\rightarrow$ OPENS CNG $\\text{Na}^+/\\text{Ca}^{2+}$ channels** (followed by $\\text{Ca}^{2+}$-activated $\\text{Cl}^-$ efflux!), **DEPOLARIZING** the olfactory neuron!"
+        ],
+        "pathology": [
+          "**Retinitis Pigmentosa** (mutations in Rhodopsin or PDE6$\\beta$) & **Leber Congenital Amaurosis (*RPE65* Deficiency)**: *RPE65* is the isomerohydrolase in the Retinal Pigment Epithelium (RPE) that regenerates 11-*cis*-retinal from all-*trans*-retinyl esters; treated with **Luxturna (Voretigene neparvovec)**, the first FDA-approved *in vivo* AAV2 gene therapy!"
+        ],
+        "lab_workbench": [
+          "Suction Electrode Single-Rod Outer Segment Recording (Baylor, Lamb & Yau): Drawing the outer segment of a single toad rod into a glass micropipette in the dark measures a steady $-25\\ \\text{pA}$ inward Dark Current that transiently drops by $1\\ \\text{pA}$ upon absorption of a **single photon of 500 nm light**!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (3SN6 & 1F88 — Palczewski Crystal Structure of Bovine Rhodopsin and Active Opsins)",
+          "url": "https://www.rcsb.org/structure/1F88",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: George Wald on the Molecular Basis of Visual Excitation (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/medicine/1967/wald/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_sarcomere_dhpr_ryr": {
+      "id": "node_sarcomere_dhpr_ryr",
+      "level": "L4",
+      "title": "Skeletal vs. Cardiac Sarcomere Mechanics & Excitation–Contraction Coupling",
+      "subtitle": "A/I/H/Z-Band Sliding Filaments, Mechanical DHPR–RyR1 vs. Ca2+-Induced RyR2 & Troponin C/I/T Regulation",
+      "coordinates": {
+        "x": 30,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "sarcomere_bands_contraction": "A-Band (Myosin II thick filament length) = CONSTANT! | I-Band (Actin only) & H-Zone (Myosin only) = SHORTEN! | Z-Discs = Move closer!",
+        "giant_rulers": "Titin (3.5 MDa elastic spring anchoring Myosin from M-line to Z-disc) & Nebulin (Inelastic ruler specifying exact F-actin thin filament length)",
+        "skeletal_ec_coupling": "T-Tubule Cav1.1 (DHPR) physically/mechanically pulls open SR RyR1 (Requires ZERO extracellular Ca2+ influx!)",
+        "cardiac_ec_coupling": "T-Tubule Cav1.2 (DHPR) lets in extracellular Ca2+ -> Triggers SR RyR2 opening (Calcium-Induced Calcium Release / CICR!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. HUXLEY SLIDING FILAMENT GEOMETRY (Z-Disc to Z-Disc $\\approx 2.2\\ \\mu\\text{m}$)**:",
+          "• **A-Band (Anisotropic / Dark Band)**: Contains the full length of bipolar **Myosin II thick filaments** (plus overlapping thin filaments). **Because neither thick nor thin filaments change their intrinsic length during contraction, the width of the A-Band remains 100% CONSTANT!**",
+          "• **I-Band (Isotropic / Light Band)**: Contains **ONLY Actin thin filaments** (plus Titin) flanking the **Z-Disc** (crosslinked by **$\\alpha$-Actinin** and capped at the barbed $[+]$ end by **CapZ**, while **Tropomodulin** caps the pointed $[-]$ end). **I-Band SHORTENS** during contraction.",
+          "• **H-Zone (Hensen's Zone)**: Central region of the A-band containing **ONLY Myosin thick filaments** bisected by the **M-Line** (Myomesin). **H-Zone SHORTENS** as actin slides inward.",
+          "**2. TROPOMYOSIN & THE TROPONIN COMPLEX (TnC, TnI, TnT)**:",
+          "In resting muscle (cytosolic $[\\text{Ca}^{2+}] < 10^{-7}\\ \\text{M}$), **Troponin I (TnI, Inhibitory)** holds **Tropomyosin** over the myosin-binding sites on F-actin. When SR $\\text{Ca}^{2+}$ release raises cytosolic $[\\text{Ca}^{2+}]$ to $10^{-5}\\ \\text{M}$, binding of **4 $\\text{Ca}^{2+}$ ions to Troponin C (TnC)** causes **Troponin T (TnT)** to roll Tropomyosin deeper into the actin groove—**unmasking the myosin-binding sites** for cross-bridge cycling! Relaxation occurs when the **SERCA pump** pumps $\\text{Ca}^{2+}$ back into the Sarcoplasmic Reticulum using ATP."
+        ],
+        "csir_high_yield": [
+          "Skeletal vs. Cardiac Excitation–Contraction Coupling (Top CSIR NET Part C Experimental Question!):",
+          "• **What happens if a Skeletal Muscle fiber vs. a Cardiac Myocyte is placed in a $\\text{Ca}^{2+}$-FREE extracellular Ringer's solution (plus EGTA) and electrically stimulated?**",
+          "  – **Skeletal Muscle CONTRACTS NORMALLY!** Why? Because at the skeletal muscle **Triad** (1 T-tubule + 2 SR terminal cisternae), the T-tubule voltage sensor **DHPR ($\\text{Ca}_v1.1$)** is **physically/mechanically linked** via its II–III cytoplasmic loop directly to the SR **Ryanodine Receptor 1 (RyR1)**! Voltage change alone mechanically pulls RyR1 open without needing any extracellular $\\text{Ca}^{2+}$ entry!",
+          "  – **Cardiac Muscle IMMEDIATELY FAILS TO CONTRACT ('Ringer's Experiment')!** Why? Because at the cardiac **Dyad**, T-tubule **DHPR ($\\text{Ca}_v1.2$)** is NOT mechanically connected to **RyR2**! Instead, extracellular $\\text{Ca}^{2+}$ MUST enter through $\\text{Ca}_v1.2$ during the Phase 2 plateau to bind and open SR **RyR2** (**Calcium-Induced Calcium Release / CICR**)! Furthermore, blocking $\\text{Ca}_v1.2$ with **Nifedipine / Verapamil / Diltiazem** inhibits cardiac & smooth muscle contraction while sparing skeletal muscle!"
+        ],
+        "pathology": [
+          "**Malignant Hyperthermia**: Autosomal dominant mutation in **RYR1** causes volatile anesthetics (Halothane) or succinylcholine to lock SR RyR1 channels open; massive uncontrolled $\\text{Ca}^{2+}$ flooding drives relentless ATP consumption, muscle rigidity, and lethal $43^\\circ\\text{C}$ hyperthermia (treated with the direct RyR1 antagonist **Dantrolene**!).",
+          "**Duchenne Muscular Dystrophy (DMD)**: X-linked frameshift deletions in the giant **Dystrophin** gene (which links cortical F-actin to the sarcolemmal dystroglycan-laminin ECM complex) cause myofiber membrane tearing during contraction."
+        ],
+        "lab_workbench": [
+          "Gordon, Huxley & Julian Single-Fiber Length-Tension Curve: Active isometric tension is maximal at a sarcomere length of **$2.0\\text{–}2.2\\ \\mu\\text{m}$** (optimal overlap between all myosin cross-bridges and actin); drops linearly to zero at **$3.65\\ \\mu\\text{m}$** (zero overlap between thick and thin filaments!) and drops below $1.65\\ \\mu\\text{m}$ as thin filaments collide across the M-line and thick filaments crumple against the Z-discs."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (5T15 — Zalk & Marks Cryo-EM Structure of the Mammalian Skeletal Muscle Ryanodine Receptor RyR1)",
+          "url": "https://www.rcsb.org/structure/5T15",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "RCSB PDB (1J1E — Takeda Crystal Structure of the Core Domain of Human Cardiac Troponin C-I-T Complex)",
+          "url": "https://www.rcsb.org/structure/1J1E",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_smooth_muscle_mlck": {
+      "id": "node_smooth_muscle_mlck",
+      "level": "L4",
+      "title": "Smooth Muscle Contraction: Calmodulin–MLCK vs. MLCP & The NO–cGMP Vasodilation Pathway",
+      "subtitle": "Thick-Filament Regulated Phosphorylation (Zero Troponin!), Dense Bodies & Sildenafil PDE5 Pharmacology",
+      "coordinates": {
+        "x": 76,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "structural_hallmarks": "NO sarcomeres / striations, NO T-tubules, and NO Troponin! Actin attaches to α-Actinin Dense Bodies & Intermediate Filaments",
+        "on_switch_kinase": "Ca2+ (from L-type channels & IP3-SR) binds Calmodulin (4 Ca2+-CaM) -> Activates Myosin Light Chain Kinase (MLCK) -> Phosphorylates Myosin RLC (Ser-19)!",
+        "off_switch_phosphatase": "Myosin Light Chain Phosphatase (MLCP) dephosphorylates Myosin RLC -> Relaxation (Inhibited by RhoA-ROCK for Ca2+ Sensitization!)",
+        "no_vasodilation_axis": "Endothelial ACh/Shear -> eNOS (L-Arg -> NO gas) -> Smooth Muscle Soluble Guanylyl Cyclase (sGC) -> cGMP -> PKG activates MLCP -> Vasodilation!"
+      },
+      "tabs": {
+        "mechanism": [
+          "**1. THICK-FILAMENT (MYOSIN-LINKED) REGULATION IN SMOOTH MUSCLE (vs. Thin-Filament Troponin in Striated Muscle!)**:",
+          "• Smooth muscle completely **LACKS Troponin**! Instead, in resting smooth muscle, **Myosin II** is folded into an autoinhibited 10S conformation that cannot interact with actin even though tropomyosin is present.",
+          "• **CONTRACTION**: Hormones/neurotransmitters ($G_q \\rightarrow \\text{IP}_3$) or depolarization (L-type $\\text{Ca}^{2+}$ channels) raise cytosolic $\\text{Ca}^{2+}$. Four $\\text{Ca}^{2+}$ ions bind **Calmodulin (CaM)**. The **$\\text{Ca}^{2+}\\text{–Calmodulin}$ complex** binds and activates **Myosin Light Chain Kinase (MLCK)**, which uses ATP to **phosphorylate Serine-19 on the Myosin Regulatory Light Chain (RLC)**! Only phosphorylated Smooth Muscle Myosin II can unfold, assemble into side-polar filaments, and cycle on actin!",
+          "• **RELAXATION & THE LATCH STATE**: **Myosin Light Chain Phosphatase (MLCP)** removes the phosphate from the RLC. *(Note: If RLC is dephosphorylated *while* the myosin head is still attached to actin, detachment slows down dramatically—creating the energy-efficient **'Latch State'** that maintains tonic vascular/sphincter tension for hours while consuming only 1/300th the ATP of skeletal muscle!).*",
+          "**2. ENDOTHELIUM-DERIVED NITRIC OXIDE (NO / EDRF) VASODILATION CASCADE (Furchgott, Ignarro & Murad 1998 Nobel Prize)**:",
+          "• **Acetylcholine**, Bradykinin, or blood-flow **Shear Stress** on vascular **Endothelial Cells** increases endothelial $\\text{Ca}^{2+}$, activating **Endothelial Nitric Oxide Synthase (eNOS)** to convert **L-Arginine + $\\text{O}_2 \\rightarrow$ L-Citrulline + Nitric Oxide ($\\text{NO}$ gas)**.",
+          "• Uncharged **$\\text{NO}$ gas** diffuses paracrinally into the underlying **Vascular Smooth Muscle Cell** and binds the **Heme moiety of Soluble Guanylyl Cyclase (sGC)**, converting GTP into **cGMP**.",
+          "• **cGMP activates Protein Kinase G (PKG)**, which phosphorylates and **activates MLCP** while lowering cytosolic $\\text{Ca}^{2+}$ (phosphorylating IRAG/BK channels/PLN) $\\rightarrow$ **Smooth Muscle Relaxation & Vasodilation**!"
+        ],
+        "csir_high_yield": [
+          "High-Yield CSIR NET Questions on Acetylcholine's Intact-Endothelium Paradox & $\\text{Ca}^{2+}$ Sensitization:",
+          "• **Robert Furchgott's Classic Endothelium-Rubbing Experiment**:",
+          "  – Adding **Acetylcholine (ACh)** to an arterial ring with an **INTACT Endothelium** causes **VASODILATION** (because ACh binds endothelial $\\text{M}_3$ receptors $\\rightarrow \\text{Ca}^{2+} \\rightarrow \\text{eNOS} \\rightarrow \\text{NO}$ gas diffuses to relax smooth muscle!).",
+          "  – Adding **Acetylcholine (ACh)** to an arterial ring whose **Endothelium has been gently rubbed off** causes **VASOCONSTRICTION** (because without endothelial NO, ACh acts directly on smooth muscle $\\text{M}_3 \\rightarrow G_q \\rightarrow \\text{IP}_3/\\text{Ca}^{2+} \\rightarrow$ MLCK contraction!).",
+          "• **RhoA–ROCK Calcium Sensitization**: Agonists acting through $G_{12/13}$ activate **RhoA $\\rightarrow$ Rho-Kinase (ROCK)**, which phosphorylates and **INHIBITS Myosin Light Chain Phosphatase (MLCP)** (via MYPT1/CPI-17)—sustaining strong smooth muscle contraction even when cytosolic $[\\text{Ca}^{2+}]$ is low!",
+          "• **Nitroglycerin & Sildenafil (Viagra) Synergy**: **Nitroglycerin** is a direct $\\text{NO}$ donor (increases cGMP synthesis via sGC); **Sildenafil** inhibits **cGMP-specific Phosphodiesterase-5 (PDE5)** (blocks cGMP degradation into 5'-GMP). Combining them causes life-threatening hypotensive vasodilation!"
+        ],
+        "pathology": [
+          "**Asthma Bronchoconstriction vs. $\\beta_2$-Agonist Rescue (Salbutamol / Albuterol)**: In bronchial smooth muscle, $\\beta_2$-adrenergic agonists activate $G_s \\rightarrow \\text{Adenylyl Cyclase} \\rightarrow \\uparrow \\text{cAMP} \\rightarrow \\text{PKA}$. **PKA phosphorylates MLCK**, reducing MLCK's affinity for $\\text{Ca}^{2+}\\text{–Calmodulin}$ and rapidly relaxing constricted airways!"
+        ],
+        "lab_workbench": [
+          "Organ-Bath Isometric Aortic Ring Myography with L-NAME: Pre-treating an intact aortic ring with **L-NAME ($N^\\omega$-nitro-L-arginine methyl ester**, a competitive inhibitor of NOS) or **ODQ** (oxidizes the sGC heme iron) completely abolishes Acetylcholine-induced relaxation while leaving Sodium Nitroprusside (direct NO donor) relaxation intact (for L-NAME)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (6JT1 — Cryo-EM Structure of Human Soluble Guanylyl Cyclase sGC in Inactive vs. NO-Bound Active States)",
+          "url": "https://www.rcsb.org/structure/6JT1",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Robert Furchgott, Louis Ignarro & Ferid Murad on Nitric Oxide as a Signaling Molecule in the Cardiovascular System (Nobel Lectures)",
+          "url": "https://www.nobelprize.org/prizes/medicine/1998/furchgott/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    }
+  },
+  "inhibitor_simulator": {
+    "baseline_metrics": {
+      "action_potential_upstroke_mv": "+35 mV (Normal Spike)",
+      "repolarization_duration_ms": "1.5 ms",
+      "hb_p50_mmhg": "26.5 mmHg (Normal Tissue O2 Unloading)",
+      "urine_osmolarity_mosm": "600 mOsm/L (Moderate Hydration)",
+      "skeletal_twitch_tension": "100% (Normal)"
+    },
+    "agents": [
+      {
+        "id": "sim_ttx_saxitoxin",
+        "name": "Tetrodotoxin (TTX — Pufferfish) / Saxitoxin / Lidocaine",
+        "category": "Voltage-Gated Na+ Channel Pore Blocker",
+        "target_node": "node_action_potential_hodgkin",
+        "binding_site": "TTX/STX guanidinium group plugs the EXTRACELLULAR selectivity filter mouth of Nav channels (Lidocaine blocks from the INSIDE!)",
+        "resulting_metrics": {
+          "action_potential_upstroke_mv": "-70 mV (0% Action Potential — Complete Conduction Block!)",
+          "repolarization_duration_ms": "N/A (No Spike)",
+          "hb_p50_mmhg": "26.5 mmHg",
+          "urine_osmolarity_mosm": "600 mOsm/L",
+          "skeletal_twitch_tension": "0% (Flaccid Paralysis)"
+        },
+        "rescue_experiment": "Classic Hodgkin-Huxley Voltage-Clamp Tool: Adding nanomolar TTX to the outside of a squid giant axon completely abolishes the early inward Na+ current while leaving the resting membrane potential (-70 mV) and the delayed outward K+ current 100% intact!",
+        "visual_effect": "plug_outer_nav_channel_mouth_flatten_action_potential_trace"
+      },
+      {
+        "id": "sim_tea_4ap",
+        "name": "Tetraethylammonium (TEA) / 4-Aminopyridine (4-AP)",
+        "category": "Voltage-Gated K+ Channel Blocker",
+        "target_node": "node_action_potential_hodgkin",
+        "binding_site": "Plugs the delayed-rectifier Kv channel pore, preventing outward K+ repolarization",
+        "resulting_metrics": {
+          "action_potential_upstroke_mv": "+35 mV (Normal Rising Phase!)",
+          "repolarization_duration_ms": "35.0 ms (Massively Prolonged Plateau & Loss of After-Hyperpolarization!)",
+          "hb_p50_mmhg": "26.5 mmHg",
+          "urine_osmolarity_mosm": "600 mOsm/L",
+          "skeletal_twitch_tension": "140% (Prolonged presynaptic Ca2+ entry increases ACh release)"
+        },
+        "rescue_experiment": "With Kv channels blocked by TEA, the rising phase (Na+ influx) is normal, but repolarization now depends solely on slow Na+ h-gate inactivation and leak channels—broadening the action potential 20-fold and abolishing the undershoot!",
+        "visual_effect": "block_kv_pore_stretch_action_potential_falling_phase_eliminate_undershoot"
+      },
+      {
+        "id": "sim_furosemide_loop",
+        "name": "Furosemide (Loop Diuretic)",
+        "category": "Thick Ascending Limb NKCC2 Cotransporter Blocker",
+        "target_node": "node_countercurrent_nephron",
+        "binding_site": "Binds the Cl--binding pocket of apical NKCC2 (Na+-K+-2Cl-) in the Thick Ascending Limb of Henle",
+        "resulting_metrics": {
+          "action_potential_upstroke_mv": "+35 mV",
+          "repolarization_duration_ms": "1.5 ms",
+          "hb_p50_mmhg": "26.5 mmHg",
+          "urine_osmolarity_mosm": "300 mOsm/L (Iso-osmotic! Medullary 1,200 mOsm/L Gradient Washed Out!)",
+          "skeletal_twitch_tension": "100%"
+        },
+        "rescue_experiment": "CSIR Renal Physiology Classic: By shutting down the 'Single Effect' (NKCC2) in the Thick Ascending Limb, Furosemide washes out the entire hypertonic medullary interstitium (dropping it from 1,200 down to 300 mOsm/L). Consequently, the kidney can neither concentrate urine (even if given maximal ADH!) nor dilute urine below 300 mOsm/L!",
+        "visual_effect": "halt_nkcc2_pump_collapse_medullary_gradient_to_300_mosm"
+      },
+      {
+        "id": "sim_curare_bungarotoxin",
+        "name": "d-Tubocurarine (Curare) / α-Bungarotoxin (Krait Snake Venom)",
+        "category": "Postsynaptic Nicotinic AChR (nAChR) Antagonists",
+        "target_node": "node_synaptic_snare_transmission",
+        "binding_site": "Binds the α-subunit ACh-binding sites on the motor end-plate pentameric Nicotinic Receptor (Curare = reversible competitive; α-Bungarotoxin = quasi-irreversible)",
+        "resulting_metrics": {
+          "action_potential_upstroke_mv": "+35 mV (Motor Axon Fires Normally)",
+          "repolarization_duration_ms": "1.5 ms",
+          "hb_p50_mmhg": "26.5 mmHg",
+          "urine_osmolarity_mosm": "600 mOsm/L",
+          "skeletal_twitch_tension": "0% (End-Plate Potential Drops Below Muscle Threshold)"
+        },
+        "rescue_experiment": "Distinguishing Curare from α-Bungarotoxin or Botulinum Toxin: Adding an Acetylcholinesterase inhibitor (Neostigmine / Physostigmine) floods the synaptic cleft with endogenous ACh, competitively displacing reversible Curare and restoring muscle twitch tension to 100% (whereas Neostigmine cannot rescue irreversible α-Bungarotoxin!).",
+        "visual_effect": "block_nachr_on_motor_endplate_rescue_with_neostigmine"
+      },
+      {
+        "id": "sim_23bpg_bohr_exercise",
+        "name": "Strenuous Exercise + High Altitude (↑ 2,3-BPG, ↑ PCO2, ↓ pH to 7.2, ↑ Temp to 39°C)",
+        "category": "Allosteric T-State Stabilizers (Bohr Shift)",
+        "target_node": "node_hemoglobin_bohr_haldane",
+        "binding_site": "2,3-BPG binds central β-chain cavity; H+ protonates His-146; CO2 forms N-terminal carbamino groups",
+        "resulting_metrics": {
+          "action_potential_upstroke_mv": "+35 mV",
+          "repolarization_duration_ms": "1.5 ms",
+          "hb_p50_mmhg": "38.0 mmHg (Strong RIGHT Shift -> Massive O2 Unloading to Working Muscle!)",
+          "urine_osmolarity_mosm": "950 mOsm/L",
+          "skeletal_twitch_tension": "100%"
+        },
+        "rescue_experiment": "Stabilizes Deoxyhemoglobin (T-state), shifting the sigmoidal O2 dissociation curve to the RIGHT (raising P50 from 26.5 to 38 mmHg) so working skeletal muscle extracts up to 75–80% of arterial O2 while pulmonary loading at PO2 = 100 mmHg remains ~95% saturated!",
+        "visual_effect": "shift_sigmoidal_hb_curve_right_insert_23bpg_into_t_state_cavity"
+      }
+    ]
+  },
+  "quiz_challenges": [
+    {
+      "question_id": "q1_fetal_hbf_ser143",
+      "prompt": "Click the respiratory node explaining why Fetal Hemoglobin (HbF, α2γ2) has a left-shifted curve (higher O2 affinity) because γ-globin replaces positively charged His-143 with uncharged Serine-143, reducing 2,3-BPG binding.",
+      "correct_node_id": "node_hemoglobin_bohr_haldane",
+      "explanation": "Correct! In HbF (α2γ2), the γ-chains carry Ser-143 instead of His-143, weakening binding of the T-state stabilizer 2,3-BPG so HbF has higher O2 affinity than maternal HbA."
+    },
+    {
+      "question_id": "q2_tal_diluting_segment",
+      "prompt": "Click the renal nephron node where the Thick Ascending Limb ('Diluting Segment') actively pumps out Na+-K+-2Cl- via NKCC2 while remaining 100% impermeable to water, delivering ~100 mOsm/L hypo-osmotic fluid to the DCT.",
+      "correct_node_id": "node_countercurrent_nephron",
+      "explanation": "Spot on! The Thick Ascending Limb lacks aquaporins and uses NKCC2 (targeted by Furosemide) to establish the medullary osmotic gradient while diluting the tubular fluid."
+    },
+    {
+      "question_id": "q3_rod_dark_current_pde",
+      "prompt": "Click the sensory node where light activates Transducin (Gt) and cGMP-Phosphodiesterase (PDE6) to hydrolyze cGMP, CLOSING CNG Na+/Ca2+ channels and HYPERPOLARIZING the cell.",
+      "correct_node_id": "node_sensory_phototransduction",
+      "explanation": "Exact match! Vertebrate rods are depolarized in the dark ('Dark Current' via cGMP-gated channels) and hyperpolarize in the light when PDE6 degrades cGMP."
+    },
+    {
+      "question_id": "q4_skeletal_vs_cardiac_ec",
+      "prompt": "Click the sarcomere node explaining why skeletal muscle contracts normally in Ca2+-free extracellular solution (mechanical DHPR–RyR1 coupling), whereas cardiac muscle fails immediately (requires Ca2+-induced Ca2+ release via RyR2).",
+      "correct_node_id": "node_sarcomere_dhpr_ryr",
+      "explanation": "Correct! Skeletal muscle Cav1.1 (DHPR) mechanically pulls open SR RyR1 without needing extracellular Ca2+ entry, whereas cardiac Cav1.2 requires extracellular Ca2+ influx to trigger RyR2."
+    }
+  ]
+}

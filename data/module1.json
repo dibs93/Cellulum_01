@@ -2,7 +2,11 @@
   "module_id": "module_01_bioenergetics",
   "title": "Mitochondrial Bioenergetics & Oxidative Phosphorylation",
   "subtitle": "Bioenergetic Thermodynamics (ΔG'°), TCA Matrix Hub, ETC Complexes I–IV, Q-Cycle, FoF1 Rotary Catalysis & Uncouplers",
-  "csir_net_units": ["Unit 1 (Bioenergetics, Free Energy & Redox Potentials)", "Unit 2 (Mitochondrial Architecture & Protein Import)", "Unit 13 (Clark Oxygen Electrode & Respirometry Assays)"],
+  "csir_net_units": [
+    "Unit 1 (Bioenergetics, Free Energy & Redox Potentials)",
+    "Unit 2 (Mitochondrial Architecture & Protein Import)",
+    "Unit 13 (Clark Oxygen Electrode & Respirometry Assays)"
+  ],
   "theme_color": "#f97316",
   "accent_glow": "rgba(249, 115, 22, 0.45)",
   "scale_levels": [
@@ -13,7 +17,11 @@
       "scale_metric": "500 nm",
       "camera_zoom_factor": 1.0,
       "description": "Outer membrane porins, cardiolipin-rich inner membrane cristae, TOM/TIM23/TIM22 protein import, Malate-Aspartate vs. Glycerol-3-P shuttles, and TCA matrix hub.",
-      "hotspots": ["node_mito_membranes_import", "node_nadh_shuttles_tca", "node_thermodynamics_redox"]
+      "hotspots": [
+        "node_mito_membranes_import",
+        "node_nadh_shuttles_tca",
+        "node_thermodynamics_redox"
+      ]
     },
     {
       "level_id": "L2",
@@ -22,7 +30,12 @@
       "scale_metric": "15 nm",
       "camera_zoom_factor": 2.5,
       "description": "Proton-pumping respiratory supercomplexes (Respirasome), prosthetic group redox ladders (FMN, Fe-S, CoQ10, Hemes, CuA/CuB), and Mitchell's Q-cycle.",
-      "hotspots": ["node_complex_i_nadh", "node_complex_ii_sdh", "node_complex_iii_q_cycle", "node_complex_iv_cox"]
+      "hotspots": [
+        "node_complex_i_nadh",
+        "node_complex_ii_sdh",
+        "node_complex_iii_q_cycle",
+        "node_complex_iv_cox"
+      ]
     },
     {
       "level_id": "L3",
@@ -31,7 +44,10 @@
       "scale_metric": "8 nm (80 Å)",
       "camera_zoom_factor": 4.2,
       "description": "Proton-motive force (Δp = ΔΨ + ΔpH), Boyer's binding-change rotary catalysis (O-L-T states), c-ring stoichiometry (2.5 vs. 1.5 ATP), and ANT/Phosphate translocase.",
-      "hotspots": ["node_f0f1_atp_synthase", "node_pmf_ant_translocase"]
+      "hotspots": [
+        "node_f0f1_atp_synthase",
+        "node_pmf_ant_translocase"
+      ]
     },
     {
       "level_id": "L4",
@@ -40,7 +56,11 @@
       "scale_metric": "20 nm",
       "camera_zoom_factor": 3.2,
       "description": "Protonophoric uncoupling vs. Fo blockade in Clark oxygen electrode traces, brown fat thermogenin (UCP1), superoxide SOD2/GPx defense, and cyanide-resistant plant AOX.",
-      "hotspots": ["node_uncouplers_respirometry", "node_ros_defense_sod2", "node_plant_aox_bypass"]
+      "hotspots": [
+        "node_uncouplers_respirometry",
+        "node_ros_defense_sod2",
+        "node_plant_aox_bypass"
+      ]
     }
   ],
   "nodes": {
@@ -49,7 +69,10 @@
       "level": "L1",
       "title": "Mitochondrial Membranes (Cardiolipin) & Post-Translational Protein Import (TOM / TIM23 / TIM22)",
       "subtitle": "Porin-Permeable OMM vs. Impermeable Cristae IMM | Amphipathic N-Terminal Matrix Targeting Presequences",
-      "coordinates": { "x": 20, "y": 40 },
+      "coordinates": {
+        "x": 20,
+        "y": 40
+      },
       "next_zoom_target": null,
       "metrics": {
         "outer_membrane_omm": "40% Lipid : 60% Protein; contains VDAC (Porin) channels permeable to molecules <5,000 Da (IMS pH = Cytosol pH ~7.2!)",
@@ -99,7 +122,10 @@
       "level": "L1",
       "title": "Cytosolic NADH Shuttles (Malate-Aspartate vs. Glycerol-3-P) & The TCA Cycle Matrix Hub",
       "subtitle": "Why 1 Glucose Yields 32 vs. 30 ATP | Pyruvate Dehydrogenase (5 Cofactors) & Succinyl-CoA Synthetase",
-      "coordinates": { "x": 52, "y": 35 },
+      "coordinates": {
+        "x": 52,
+        "y": 35
+      },
       "next_zoom_target": null,
       "metrics": {
         "pdh_5_cofactors": "TPP (Vit B1, E1), Lipoamide (E2), Coenzyme A (Vit B5, E2), FAD (Vit B2, E3), NAD+ (Vit B3, E3)",
@@ -154,7 +180,10 @@
       "level": "L1",
       "title": "Bioenergetic Thermodynamics: Standard vs. Actual Free Energy ($\\Delta G$) & Redox Potentials ($\\Delta E'^\\circ$)",
       "subtitle": "$\\Delta G'^\\circ = -nF\\Delta E'^\\circ$, Coupled Endergonic/Exergonic Reactions & Why ATP Hydrolysis Yields $-50\\ \\text{kJ/mol}$ In Vivo",
-      "coordinates": { "x": 82, "y": 40 },
+      "coordinates": {
+        "x": 82,
+        "y": 40
+      },
       "next_zoom_target": "L2",
       "metrics": {
         "gibbs_free_energy_eq": "ΔG = ΔG'° + RT × ln( [Products] / [Reactants] ) | At Equilibrium (ΔG = 0): ΔG'° = -RT × ln(K'_eq) = -2.303 RT log10(K'_eq)",
@@ -205,7 +234,10 @@
       "level": "L2",
       "title": "Complex I (NADH : Ubiquinone Oxidoreductase — 45 Subunits, ~1 MDa)",
       "subtitle": "L-Shaped Proton Pump: NADH -> FMN -> 7–8 Fe-S Clusters (N2) -> Ubiquinone (CoQ10) | Pumps 4 H+ / 2 e-",
-      "coordinates": { "x": 16, "y": 50 },
+      "coordinates": {
+        "x": 16,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "prosthetic_pathway": "Matrix NADH (2e- hydride) -> FMN (2e- to 1e- transducer!) -> 7–8 Fe-S Clusters (N3 -> N1b -> N4 -> N5 -> N6a -> N6b -> N2) -> Ubiquinone (Q -> QH2)",
@@ -252,7 +284,10 @@
       "level": "L2",
       "title": "Complex II (Succinate Dehydrogenase — SDHA/B/C/D): The Non-Pumping TCA Bridge",
       "subtitle": "100% Nuclear-Encoded! Succinate -> Covalently Bound FAD -> 3 Fe-S Clusters -> Heme b560 -> Ubiquinone | Pumps 0 H+!",
-      "coordinates": { "x": 40, "y": 50 },
+      "coordinates": {
+        "x": 40,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "subunit_genetics": "4 Subunits (SDHA, SDHB, SDHC, SDHD): 100% NUCLEAR-ENCODED! (The ONLY respiratory complex with ZERO mtDNA-encoded subunits!)",
@@ -292,7 +327,10 @@
       "level": "L2",
       "title": "Complex III (Cytochrome bc1) & Peter Mitchell's Bifurcated Q-Cycle",
       "subtitle": "Qo vs. Qi Sites: Why 2 QH2 Oxidized Yield 1 QH2 Regenerated, 2 Cyt c Reduced & 4 H+ Released to IMS",
-      "coordinates": { "x": 64, "y": 50 },
+      "coordinates": {
+        "x": 64,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "prosthetic_groups": "Cytochrome b (mtDNA-encoded; contains Low-Potential Heme bL & High-Potential Heme bH) + Rieske Iron-Sulfur Protein ([2Fe-2S]) + Cytochrome c1 (Heme c1)",
@@ -338,7 +376,10 @@
       "level": "L2",
       "title": "Complex IV (Cytochrome c Oxidase): CuA -> Heme a -> Heme a3–CuB Binuclear Center",
       "subtitle": "4-Electron Reduction of O2 -> 2 H2O Without Releasing ROS | 4 'Chemical' H+ + 4 'Pumped' H+ per O2!",
-      "coordinates": { "x": 88, "y": 50 },
+      "coordinates": {
+        "x": 88,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "core_mtDNA_subunits": "13 Subunits total; 3 Catalytic Core Subunits are mtDNA-encoded: COX1 (Heme a + Heme a3 + CuB), COX2 (Binuclear CuA center), COX3",
@@ -382,7 +423,10 @@
       "level": "L3",
       "title": "Complex V (FoF1 ATP Synthase): Boyer's Binding-Change Mechanism & Rotary Catalysis",
       "subtitle": "Stator ($a b_2 \\delta \\alpha_3\\beta_3$) vs. Rotor ($c_n \\gamma\\varepsilon$), O–L–T Conformations & Why ATP Release Costs the Energy!",
-      "coordinates": { "x": 30, "y": 50 },
+      "coordinates": {
+        "x": 30,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "f1_catalytic_head": "α3β3γδε (Matrix-facing knob; 3 β-subunits are catalytic; γ-axle rotation forces β-subunits through Open [O] -> Loose [L] -> Tight [T] states!)",
@@ -436,7 +480,10 @@
       "level": "L3",
       "title": "Proton-Motive Force ($\\Delta p$), Adenine Nucleotide Translocase (ANT) & Phosphate Translocase",
       "subtitle": "$\\Delta p = \\Delta\\Psi - 59\\Delta\\text{pH}$, Why Importing Pi Costs 1 H+ ($3 + 1 = 4\\ \\text{H}^+/\\text{ATP}$) & Atractyloside vs. Bongkrekic Acid",
-      "coordinates": { "x": 75, "y": 50 },
+      "coordinates": {
+        "x": 75,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "proton_motive_force_eq": "Δp (in mV) = ΔΨ - (2.303 RT / F) × ΔpH = ΔΨ - (59 mV × ΔpH) ≈ 160 mV + (59 × 0.8) ≈ 200–220 mV (In mitochondria, ~80% is ΔΨ!)",
@@ -483,7 +530,10 @@
       "level": "L4",
       "title": "Chemical & Physiological Uncouplers (DNP, FCCP, UCP1) & Clark Oxygen Electrode Traces",
       "subtitle": "State 3 vs. State 4 Respiration, Why DNP Relieves Oligomycin Blockade & Brown Fat Non-Shivering Thermogenesis",
-      "coordinates": { "x": 20, "y": 50 },
+      "coordinates": {
+        "x": 20,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "respiratory_states_chance": "State 4 (Substrate only, ZERO ADP: Slow O2 consumption, High Δp) | State 3 (+ADP added: Fast O2 consumption!) | RCR = Rate(State 3) / Rate(State 4) > 5",
@@ -529,7 +579,10 @@
       "level": "L4",
       "title": "Mitochondrial Reactive Oxygen Species (ROS) Generation & Antioxidant Defense",
       "subtitle": "Superoxide ($\\text{O}_2^{\\bullet -}$) Leakage at Complex I/III, Mn-SOD (SOD2), Glutathione Peroxidase (Selenium) & NNT",
-      "coordinates": { "x": 54, "y": 50 },
+      "coordinates": {
+        "x": 54,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "ros_reduction_steps": "O2 --(1e-)--> Superoxide (O2•-) --(1e- + 2H+)--> Hydrogen Peroxide (H2O2, NOT a free radical!) --(1e- + Fe2+ Fenton)--> Hydroxyl Radical (•OH, most destructive!)",
@@ -576,7 +629,10 @@
       "level": "L4",
       "title": "Plant Mitochondrial Alternative Oxidase (AOX) & Type II Rotenone-Insensitive NADH Dehydrogenases",
       "subtitle": "Cyanide-Resistant Ubiquinol Oxidation (QH2 -> O2), SHAM Inhibition & Thermogenic Skunk Cabbage Arum Spadix",
-      "coordinates": { "x": 84, "y": 50 },
+      "coordinates": {
+        "x": 84,
+        "y": 50
+      },
       "next_zoom_target": null,
       "metrics": {
         "aox_reaction": "Ubiquinol (QH2) + 1/2 O2 -> Ubiquinone (Q) + H2O (Directly on matrix face of IMM; Non-heme Di-iron [Fe-Fe] catalytic center!)",

@@ -1,0 +1,853 @@
+{
+  "module_id": "module_06_cell_cycle_apoptosis",
+  "title": "Cell Cycle Engine, Mitosis & Programmed Cell Death",
+  "subtitle": "Cyclin-CDK Oscillators, Rb/p53 Checkpoints, APC/C Cohesin Cleavage & Caspase Cascades",
+  "csir_net_units": [
+    "Unit 2 (Cell Division & Cell Cycle Control)",
+    "Unit 4 (Cancer Biology, Oncogenes & Apoptosis)",
+    "Unit 13 (FACS Cell Cycle Profiling, Annexin-V & TUNEL Assays)"
+  ],
+  "theme_color": "#ef4444",
+  "accent_glow": "rgba(239, 68, 68, 0.45)",
+  "scale_levels": [
+    {
+      "level_id": "L1",
+      "level_number": 1,
+      "name": "The 4-Phase Cell Cycle Clock & Cyclin-CDK Oscillators",
+      "scale_metric": "10 µm (Whole Cell)",
+      "camera_zoom_factor": 1.0,
+      "description": "Temporal progression through G1, S, G2, and M phases driven by periodic synthesis and ubiquitin-mediated destruction of Cyclins.",
+      "hotspots": [
+        "node_g1_restriction_point",
+        "node_s_phase_trigger",
+        "node_g2_m_mpf_switch",
+        "node_cki_brakes"
+      ]
+    },
+    {
+      "level_id": "L2",
+      "level_number": 2,
+      "name": "Mitotic Spindle Mechanics, SAC & Anaphase Cohesin Cleavage",
+      "scale_metric": "1.0 µm",
+      "camera_zoom_factor": 2.4,
+      "description": "Kinetochore-microtubule amphitelic attachment, the Mad2/BubR1 Spindle Assembly Checkpoint, and APC/C-Securin-Separase activation.",
+      "hotspots": [
+        "node_kinetochore_sac",
+        "node_apcc_separase",
+        "node_anaphase_a_b_cytokinesis"
+      ]
+    },
+    {
+      "level_id": "L3",
+      "level_number": 3,
+      "name": "Genome Guardians & Tumor Suppressor Networks (p53 & Rb)",
+      "scale_metric": "15 nm",
+      "camera_zoom_factor": 3.8,
+      "description": "ATM/ATR DNA damage sensing, Mdm2-p53 ubiquitin feedback, p21-mediated G1 arrest, and viral oncoprotein hijacking.",
+      "hotspots": [
+        "node_atm_atr_sensors",
+        "node_p53_mdm2_axis",
+        "node_rb_e2f_pocket"
+      ]
+    },
+    {
+      "level_id": "L4",
+      "level_number": 4,
+      "name": "Apoptosis (Intrinsic vs. Extrinsic), Autophagy & Necroptosis",
+      "scale_metric": "10 nm (100 Å)",
+      "camera_zoom_factor": 4.2,
+      "description": "Bcl-2/Bax mitochondrial outer membrane permeabilization (MOMP), the heptameric Apoptosome, Death Receptor DISC, and Caspase execution.",
+      "hotspots": [
+        "node_intrinsic_momp",
+        "node_apoptosome_casp9",
+        "node_extrinsic_disc",
+        "node_caspase_execution_casp3"
+      ]
+    }
+  ],
+  "nodes": {
+    "node_g1_restriction_point": {
+      "id": "node_g1_restriction_point",
+      "level": "L1",
+      "title": "G1 Phase & The Restriction Point ('Start' in Yeast)",
+      "subtitle": "Mitogen-Driven Cyclin D–CDK4/6 & Cyclin E–CDK2 Commit the Cell to Division",
+      "coordinates": {
+        "x": 22,
+        "y": 30
+      },
+      "next_zoom_target": "L3",
+      "metrics": {
+        "mid_g1_complex": "Cyclin D (D1, D2, D3) + CDK4 or CDK6 (Mitogen sensor)",
+        "late_g1_complex": "Cyclin E + CDK2 (Fires the irreversible Restriction Point / 'Start')",
+        "yeast_homolog": "Cdc28 (S. cerevisiae) / Cdc2 (S. pombe) paired with G1 cyclins Cln1, Cln2, Cln3"
+      },
+      "tabs": {
+        "mechanism": [
+          "In the absence of extracellular growth factors, cells exit G1 into a quiescent **G0 state**. When mitogens (e.g., EGF, PDGF) stimulate RTK-Ras-MAPK signaling, immediate-early genes (*c-Fos, c-Jun, c-Myc*) drive transcription of **Cyclin D**.",
+          "**Mid-G1**: **Cyclin D–CDK4/6** partially (hypo-) phosphorylates the Retinoblastoma protein (**Rb**).",
+          "**Late-G1 Restriction Point**: Partially relieved E2F drives transcription of **Cyclin E**. **Cyclin E–CDK2** hyper-phosphorylates and completely inactivates Rb, creating a positive feedback loop that commits the cell irreversibly to S-phase entry—even if growth factors are subsequently washed away!"
+        ],
+        "csir_high_yield": [
+          "Master Mammalian Cyclin–CDK Pairing Table (Guaranteed CSIR Part B/C Question):",
+          "• **Mid-G1 (Mitogen Entry)**: **Cyclin D + CDK4 / CDK6**.",
+          "• **G1/S Transition (Restriction Point)**: **Cyclin E + CDK2**.",
+          "• **S-Phase Progression**: **Cyclin A + CDK2** (and CDK1).",
+          "• **G2/M Transition & Mitosis (MPF)**: **Cyclin B + CDK1**.",
+          "Why is Cyclin D unique among all cyclins? Unlike Cyclins E, A, and B (whose levels oscillate strictly with cell cycle phase), **Cyclin D synthesis depends continuously on extracellular growth factor signaling** and drops rapidly via GSK3β-mediated phosphorylation and proteasomal degradation if mitogens are removed."
+        ],
+        "pathology": [
+          "Hormone-Receptor-Positive (ER+) Breast Cancer: Amplification of *CCND1* (Cyclin D1) drives unchecked G1/S progression; clinically treated with selective **CDK4/6 Inhibitors** (**Palbociclib, Ribociclib, Abemaciclib**)."
+        ],
+        "lab_workbench": [
+          "Serum Starvation Synchronization: Culturing mammalian fibroblasts in 0.1% fetal bovine serum (FBS) for 24–48 hours arrests 95% of cells in **G0 / Early G1** prior to the Restriction Point."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (2W96 — Crystal Structure of Human Cyclin D1-CDK4 Complex)",
+          "url": "https://www.rcsb.org/structure/2W96",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Leland Hartwell's Discovery of 'Start' & CDC Genes (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/medicine/2001/hartwell/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_s_phase_trigger": {
+      "id": "node_s_phase_trigger",
+      "level": "L1",
+      "title": "S-Phase Entry: SCF Ubiquitin Ligase & Cyclin A–CDK2",
+      "subtitle": "Phospho-Degron Destruction of p27/Sic1 & Prevention of Origin Re-Replication",
+      "coordinates": {
+        "x": 76,
+        "y": 30
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "e3_ubiquitin_ligase": "SCF Complex (Skp1 – Cullin1 – F-box protein [Skp2 / Cdc4] – Rbx1)",
+        "scf_recognition_rule": "Strictly recognizes PHOSPHORYLATED substrates ('Phospho-degrons')",
+        "key_targets": "Destroys CKI inhibitors (p27Kip1, p21Cip1, yeast Sic1) and Cyclin E"
+      },
+      "tabs": {
+        "mechanism": [
+          "During G1, S-phase CDKs (Cyclin A–CDK2) are held inactive by stoichiometric CDK inhibitor proteins (**p27Kip1** in mammals; **Sic1** in budding yeast).",
+          "At the G1/S boundary, rising **Cyclin E–CDK2** phosphorylates p27Kip1 (on Thr-187) or Sic1. The **SCF E3 Ubiquitin Ligase** (always constitutively active, unlike APC/C!) uses its variable **F-box subunit** (Skp2 in mammals; Cdc4 in yeast) to recognize only the **phosphorylated** inhibitor, polyubiquitinating it for 26S proteasomal destruction.",
+          "Liberated **Cyclin A–CDK2** immediately fires licensed replication origins (phosphorylating Cdc45/Treslin) while phosphorylating Cdc6/ORC to block new MCM2-7 loading."
+        ],
+        "csir_high_yield": [
+          "SCF vs. APC/C E3 Ligase Contrast (Classic CSIR NET Part C Comparison):",
+          "• **SCF Complex**: Enzyme is **constitutively active** throughout the cell cycle; substrate destruction is controlled by **phosphorylating the target substrate** (e.g., CDK phosphorylates p27/Sic1/Cyclin E so the F-box subunit binds it). Controls **G1/S transition**.",
+          "• **APC/C (Anaphase-Promoting Complex / Cyclosome)**: Substrate is unmodified; the E3 ligase itself is **turned ON via phosphorylation and activator binding** (**Cdc20** in Metaphase->Anaphase; **Cdh1** in Late M->G1). Recognizes **D-box (Destruction box)** and **KEN-box** motifs on Securin and Cyclin B!"
+        ],
+        "pathology": [
+          "Overexpression of the F-box oncoprotein **Skp2** in human carcinomas accelerates p27Kip1 degradation, abolishing the G1/S brake and correlating with poor clinical prognosis."
+        ],
+        "lab_workbench": [
+          "FUCCI (Fluorescent Ubiquitination-based Cell Cycle Indicator) Live Imaging: Fuses red mKO2 to **Cdt1** (destroyed in S/G2 by SCF-Skp2 -> G1 nuclei glow RED) and green mAG to **Geminin** (destroyed in G1 by APC/C-Cdh1 -> S/G2/M nuclei glow GREEN)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1LDK — Structure of the Cul1-Rbx1-Skp1-F boxSkp2 SCF Ubiquitin Ligase Complex)",
+          "url": "https://www.rcsb.org/structure/1LDK",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_g2_m_mpf_switch": {
+      "id": "node_g2_m_mpf_switch",
+      "level": "L1",
+      "title": "G2/M Checkpoint & Maturation-Promoting Factor (MPF: Cyclin B–CDK1)",
+      "subtitle": "CAK Activating Thr-161 vs. Wee1 Inhibitory Tyr-15 & Cdc25 Phosphatase Bistable Switch",
+      "coordinates": {
+        "x": 76,
+        "y": 68
+      },
+      "next_zoom_target": "L2",
+      "metrics": {
+        "mpf_composition": "CDK1 (Cdc2 / p34) + Mitotic Cyclin B",
+        "activating_kinase": "CAK (CDK-Activating Kinase: CDK7-Cyclin H) phosphorylates Thr-161 (T-loop)",
+        "inhibitory_kinases": "Wee1 (phosphorylates Tyr-15) & Myt1 (phosphorylates Thr-14 & Tyr-15)",
+        "activating_phosphatase": "Cdc25C Phosphatase (Removes inhibitory Tyr-15 & Thr-14 phosphates!)"
+      },
+      "tabs": {
+        "mechanism": [
+          "As Cyclin B levels rise steadily through S and G2 phases, Cyclin B binds CDK1. However, the complex is held completely **INACTIVE** throughout G2 until DNA replication is 100% finished:",
+          "1. **CAK** phosphorylates **Thr-161** on the CDK1 activation loop (required for activity).",
+          "2. Simultaneously, **Wee1 kinase** phosphorylates **Tyr-15** (and Myt1 phosphorylates **Thr-14**) right inside the ATP-binding roof of CDK1, dominantly keeping MPF **OFF** during G2.",
+          "3. **THE BISTABLE TRIGGER**: At the end of G2, **Polo-like Kinase 1 (Plk1)** activates **Cdc25C phosphatase**, which strips off the inhibitory Tyr-15/Thr-14 phosphates. Newly active Cyclin B–CDK1 then phosphorylates and **activates more Cdc25C** while phosphorylating and **inhibiting Wee1**—creating an explosive, all-or-nothing positive feedback switch into Mitosis!"
+        ],
+        "csir_high_yield": [
+          "Schizosaccharomyces pombe (Fission Yeast) *wee1* vs. *cdc25* Mutant Phenotypes (Paul Nurse's Nobel Experiment — Top CSIR NET Question):",
+          "• **Wild-Type S. pombe**: Divides at a uniform cell length (~14 µm).",
+          "• ***wee1-* Loss-of-Function Mutant**: Lacks the Tyr-15 brake! Cells enter mitosis **prematurely** at half their normal size, producing tiny **'wee' (small) cells** (~7 µm).",
+          "• ***wee1* Overexpression** OR ***cdc25-* Loss-of-Function Mutant**: Cannot remove the Tyr-15 brake! Cells arrest at G2/M while continuing to grow longitudinally, forming **giant elongated cells** (>30 µm).",
+          "• **Non-Phosphorylatable CDK1-Y15F Mutant**: Mimics *wee1-* loss of function (causes premature mitotic entry / mitotic catastrophe!)."
+        ],
+        "pathology": [
+          "Wee1 Kinase Inhibitors (**Adavosertib / AZD1775**): Used in clinical oncology to force p53-deficient tumor cells (which lack the G1 checkpoint and rely entirely on the Wee1 G2 checkpoint to repair DNA damage) into premature, lethal **Mitotic Catastrophe**."
+        ],
+        "lab_workbench": [
+          "Xenopus Oocyte Maturation Assay (Masui & Markert / Tim Hunt): Microinjecting cytoplasm from an M-phase frog egg into a G2-arrested immature oocyte induces germinal vesicle (nuclear envelope) breakdown even in the presence of cycloheximide; led to the discovery of MPF and oscillating Cyclin B!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (4YC3 — Human CDK1-Cyclin B1-CKS2 Complex Crystal Structure)",
+          "url": "https://www.rcsb.org/structure/4YC3",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: Paul Nurse & Tim Hunt on CDK1/Cdc2 & Cyclins (Nobel Lectures)",
+          "url": "https://www.nobelprize.org/prizes/medicine/2001/nurse/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_cki_brakes": {
+      "id": "node_cki_brakes",
+      "level": "L1",
+      "title": "CDK Inhibitor Proteins (CKIs): INK4 vs. Cip/Kip Families",
+      "subtitle": "Structural Specificity of p16INK4a (CDK4/6 Only) vs. p21Cip1/p27Kip1 (Pan-CDK)",
+      "coordinates": {
+        "x": 22,
+        "y": 68
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "ink4_family": "p16INK4a, p15INK4b, p18INK4c, p19INK4d (Ankyrin-repeat proteins; inhibit ONLY CDK4 & CDK6!)",
+        "cip_kip_family": "p21Cip1/Waf1, p27Kip1, p57Kip2 (Bind and inhibit intact Cyclin–CDK complexes across G1/S/G2)",
+        "upstream_inducers": "TGF-β induces p15INK4b & p27Kip1; p53 induces p21Cip1"
+      },
+      "tabs": {
+        "mechanism": [
+          "Mammalian cells deploy two structurally and mechanistically distinct families of Cyclin-Dependent Kinase Inhibitors (CKIs):",
+          "1. **INK4 Family ('INhibitors of CDK4': p15, p16, p18, p19)**: Composed of tandem ankyrin repeats. They bind directly to monomeric **CDK4 and CDK6**, allosterically distorting the kinase so that **Cyclin D cannot bind** and ATP affinity drops.",
+          "2. **Cip/Kip Family (p21, p27, p57)**: Intrinsically disordered proteins that bind to **pre-assembled Cyclin–CDK heterodimers** (especially Cyclin E–CDK2 and Cyclin A–CDK2), draping across the Cyclin groove and inserting a 310-helix plug directly into the CDK catalytic ATP-binding cleft."
+        ],
+        "csir_high_yield": [
+          "INK4 vs. Cip/Kip Distinction (CSIR Part B/C Staple):",
+          "• **p16INK4a & p15INK4b**: Specific exclusively for **G1 CDK4/CDK6**; compete directly with Cyclin D.",
+          "• **p21Cip1 (CDKN1A)**: Induced transcriptionally by **p53** following DNA damage; inhibits **Cyclin E–CDK2** and **Cyclin A–CDK2** AND binds **PCNA** to pause S-phase DNA replication while sparing nucleotide excision repair!",
+          "• **The *CDKN2A* Locus Marvel**: A single human gene locus on chromosome 9p21 uses **alternative reading frames** to encode two completely unrelated tumor suppressors: **p16INK4a** (keeps Rb active) and **p14ARF** (inhibits Mdm2 to keep p53 active)!"
+        ],
+        "pathology": [
+          "Familial Melanoma & Pancreatic Adenocarcinoma: Germline or somatic deletion of *CDKN2A* (losing both p16INK4a and p14ARF) simultaneously disables BOTH the Rb and p53 tumor suppressor pathways in a single genetic hit!"
+        ],
+        "lab_workbench": [
+          "Co-Immunoprecipitation & Histone H1 In Vitro Kinase Assay: Immunoprecipitating CDK2 from UV-irradiated cells shows strong co-precipitation of p21 and complete loss of32P-phosphate transfer onto Histone H1 substrate."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1JSU — Crystal Structure of p27Kip1 Bound to the Cyclin A-CDK2 Complex)",
+          "url": "https://www.rcsb.org/structure/1JSU",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (CDKN2A / p16INK4a & p14ARF Locus in Human Cancer)",
+          "url": "https://www.omim.org/entry/600160",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_kinetochore_sac": {
+      "id": "node_kinetochore_sac",
+      "level": "L2",
+      "title": "Kinetochore Attachment & The Spindle Assembly Checkpoint (SAC)",
+      "subtitle": "Aurora B Tension Sensing & The Single Unattached Kinetochore 'Wait Anaphase' Signal",
+      "coordinates": {
+        "x": 22,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "kinetochore_interface": "Inner Kinetochore (CENP-A nucleosome) + Outer Kinetochore (Ndc80/Hec1 complex binds + end MTs)",
+        "attachment_states": "Amphitelic (Correct bi-orientation) vs. Syntelic, Merotelic, or Monotelic (Error states)",
+        "mcc_inhibitor": "Mitotic Checkpoint Complex (Mad2 + BubR1 + Bub3 + Cdc20) sequesters APC/C activator Cdc20"
+      },
+      "tabs": {
+        "mechanism": [
+          "**TENSION SENSING (Aurora B Kinase)**: Proper chromosome segregation requires **Amphitelic (Bi-oriented) attachment**, where sister kinetochores attach to microtubules from opposite spindle poles. If both sisters attach to the SAME pole (**Syntelic attachment**), there is **zero mechanical tension** across the centromere. Centromeric **Aurora B Kinase** senses this lack of tension and phosphorylates **Ndc80**, destabilizing and detaching the incorrect microtubules so they can try again!",
+          "**ATTACHMENT SENSING (The SAC)**: Even a **SINGLE unattached kinetochore** recruits the **Mad1–Mad2** complex, which catalyzes a conformational conversion of Open-Mad2 into Closed-Mad2 (**C-Mad2**). C-Mad2 combines with **BubR1** and **Bub3** to form the diffusible **Mitotic Checkpoint Complex (MCC)**, which binds and inhibits **Cdc20**, preventing APC/C activation until every single chromosome is aligned at the metaphase plate."
+        ],
+        "csir_high_yield": [
+          "Bruce Nicklas Micromanipulation Experiment (Classic CSIR Part C Analytical Question):",
+          "• In praying mantis spermatocytes, an improperly attached chromosome with no tension delays anaphase indefinitely.",
+          "• When Nicklas used a glass microneedle to **physically pull on the lone chromosome**, applying artificial mechanical tension across the kinetochore, the Spindle Assembly Checkpoint was satisfied and the cell immediately entered Anaphase! This proved that mechanical **tension** stabilizes kinetochore attachment (by pulling outer kinetochore Ndc80 physically away from inner centromere Aurora B kinase)."
+        ],
+        "pathology": [
+          "Mosaic Variegated Aneuploidy (MVA) Syndrome: Biallelic mutations in *BUB1B* (encoding **BubR1**) weaken the Spindle Assembly Checkpoint, causing premature sister chromatid separation, severe whole-chromosome aneuploidy, microcephaly, and childhood rhabdomyosarcoma."
+        ],
+        "lab_workbench": [
+          "Laser Microbeam Kinetochore Ablation (Conly Rieder's Experiment): Destroying the final unattached kinetochore in a PtK1 cell with a focused laser pulse immediately triggers Anaphase onset within ~20 minutes, proving that unattached kinetochores emit a catalytic 'Wait' signal."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (5K3B — Cryo-EM Structure of Human APC/C Bound to the Mitotic Checkpoint Complex MCC)",
+          "url": "https://www.rcsb.org/structure/5K3B",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (BUB1B Mutations in Mosaic Variegated Aneuploidy)",
+          "url": "https://www.omim.org/entry/257300",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_apcc_separase": {
+      "id": "node_apcc_separase",
+      "level": "L2",
+      "title": "APC/C–Cdc20, Securin Destruction & Separase Cleavage of Cohesin",
+      "subtitle": "Proteolytic Unlinking of Sister Chromatids (Scc1/Rad21) & Cyclin B Destruction",
+      "coordinates": {
+        "x": 54,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "cohesin_ring": "SMC1 + SMC3 + Scc3 (SA1/2) + Kleisin clasp Scc1 (Rad21 in mitosis; Rec8 in meiosis)",
+        "protease_cascade": "APC/C-Cdc20 polyubiquitinates Securin -> Liberates Separase -> Cleaves Scc1 (Rad21)",
+        "mitotic_exit": "APC/C-Cdc20 also destroys Cyclin B -> CDK1 drops -> Cdc14/PP1 phosphatases drive Telophase"
+      },
+      "tabs": {
+        "mechanism": [
+          "From S-phase until Metaphase, replicated sister chromatids are topologically encircled by proteinaceous **Cohesin** rings (SMC1, SMC3, Scc3, and the kleisin subunit **Scc1/Rad21**).",
+          "Once every kinetochore achieves amphitelic attachment and silences Mad2, **Cdc20** activates the **Anaphase-Promoting Complex (APC/C)** E3 ubiquitin ligase. **APC/C–Cdc20** targets two key D-box proteins for proteasomal destruction:",
+          "1. **Securin**: Acts as an inhibitory chaperone holding the cysteine protease **Separase** inactive. Destroying Securin unleashes active **Separase**, which cleaves the **Scc1 (Rad21)** subunit of Cohesin, snapping the rings open so sister chromatids segregate synchronously in **Anaphase**!",
+          "2. **Cyclin B**: Destroying Cyclin B inactivates CDK1, allowing **Cdh1** to replace Cdc20 on APC/C and enabling phosphatases (PP1/PP2A/Cdc14) to dephosphorylate nuclear lamins and reform the nuclear envelope at Telophase."
+        ],
+        "csir_high_yield": [
+          "Non-Degradable Mutant Experiments (Guaranteed CSIR Part C Experimental Question):",
+          "• **What happens if a cell expresses a non-degradable Securin mutant (lacking its D-box)?** APC/C-Cdc20 cannot destroy Securin -> Separase stays inactive -> Cohesin is NEVER cleaved -> **Sister chromatids CANNOT separate**, BUT **Cyclin B is still destroyed**, so the cell exits mitosis with an unseparated 4N nucleus!",
+          "• **What happens if a cell expresses a non-degradable Cyclin B mutant (lacking its D-box)?** APC/C-Cdc20 destroys Securin normally -> Separase cleaves Cohesin and **sister chromatids separate into Anaphase**, BUT because CDK1 activity remains high, the spindle never disassembles, chromosomes stay condensed, nuclear envelope cannot reform, and the cell **arrests permanently in late Anaphase / mitotic exit**!",
+          "Meiosis I Centromeric Protection: During Anaphase I of meiosis, **Shugoshin (Sgo1) + PP2A** protect centromeric **Rec8** cohesin from Separase cleavage so sister chromatids stay together until Anaphase II!"
+        ],
+        "pathology": [
+          "Cornelia de Lange Syndrome (Cohesinopathy): Mutations in the Cohesin loader *NIPBL* or subunits *SMC1A/SMC3* impair both sister chromatid cohesion and cohesin-mediated enhancer-promoter looping, causing severe limb and craniofacial developmental defects."
+        ],
+        "lab_workbench": [
+          "Chromosome Spread Giemsa Assay for Premature Chromatid Separation (PCS): Depleting Shugoshin or expressing hyperactive Separase converts normal X-shaped metaphase chromosomes into separated 'railroad-track' single chromatids."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (5U0T — Cryo-EM Structure of Human Separase-Securin Complex)",
+          "url": "https://www.rcsb.org/structure/5U0T",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_anaphase_a_b_cytokinesis": {
+      "id": "node_anaphase_a_b_cytokinesis",
+      "level": "L2",
+      "title": "Anaphase A vs. Anaphase B Mechanics & Actomyosin Cytokinesis",
+      "subtitle": "Pac-Man Kinetochore Depolymerization, Spindle Pole Separation & RhoA Contractile Ring",
+      "coordinates": {
+        "x": 84,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "anaphase_a": "Chromosomes move to poles (Kinetochore MTs shorten via Kinesin-13 depolymerization at + and - ends)",
+        "anaphase_b": "Spindle poles move apart (Kinesin-5 pushes interpolar MTs; Cortical Dynein pulls astral MTs)",
+        "cytokinesis_ring": "Centralspindlin -> Ect2 (RhoGEF) -> Active RhoA-GTP -> Formin (F-actin) + ROCK (Myosin II)"
+      },
+      "tabs": {
+        "mechanism": [
+          "**ANAPHASE A (Chromosome-to-Pole Movement)**: Driven by shortening of Kinetochore Microtubules. Kinesin-13 (MCAK) depolymerizes tubulin mainly at the kinetochore (+) end ('Pac-Man' mechanism) coupled with poleward microtubule flux at the (-) end. Notably, Anaphase A chromosome movement is driven directly by **microtubule depolymerization energy** and can occur in vitro without ATP!",
+          "**ANAPHASE B (Spindle Pole Separation)**: Driven by two ATP-dependent motors: (1) Bipolar **Kinesin-5** slides overlapping antiparallel interpolar microtubules apart from the midzone (**pushing force**); (2) Plasma-membrane-anchored **Cortical Dynein** walks toward the (-) end of astral microtubules (**pulling force**).",
+          "**CYTOKINESIS**: The spindle midzone (Centralspindlin complex) recruits **Ect2 (a Rho-GEF)** to the equatorial cortex. Active **RhoA-GTP** simultaneously activates **Formins** (polymerizing unbranched F-actin) and **ROCK / MLCK** (phosphorylating **Myosin II** regulatory light chains) to constrict the **Contractile Ring** like a purse string."
+        ],
+        "csir_high_yield": [
+          "Animal vs. Plant Cytokinesis Contrast (CSIR Unit 2 & Unit 6 Integration):",
+          "• **Animal & Fungal Cells (Centripetal / Outside-In Cleavage)**: Constriction of an equatorial **Actin + Myosin II Contractile Ring** (inhibited by Cytochalasin D or Blebbistatin) pinches the plasma membrane inward, finished by ESCRT-III abscission at the midbody.",
+          "• **Higher Plant Cells (Centrifugal / Inside-Out Phragmoplast)**: Rigid cell walls prevent pinching! Instead, Golgi-derived vesicles carrying pectin and hemicellulose are transported along equatorial remnant spindle microtubules (**the Phragmoplast**) to fuse from the **center outward**, forming the **Cell Plate** (stabilized by the preprophase band memory site; disrupted by **Caffeine**, which blocks callose/vesicle fusion and creates binucleate plant cells!)."
+        ],
+        "pathology": [
+          "Tetraploidy & Centrosome Amplification in Tumorigenesis: Failure of cytokinesis produces a single tetraploid (4N) cell with 2 centrosomes; in the next mitosis, multipolar spindles cause massive chromosomal instability (CIN)."
+        ],
+        "lab_workbench": [
+          "Fluorescent Speckle Microscopy (FSM) & Photobleaching on the Mitotic Spindle: Bleaching a laser stripe across fluorescently labeled kinetochore microtubules demonstrates that chromosomes chew their way toward the bleached mark ('Pac-Man' at the kinetochore + end) while the mark also inches poleward ('Poleward Flux' at the - end)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (3EDL — Structure of the RhoA-ROCK Kinase Signaling Complex in Cytokinesis)",
+          "url": "https://www.rcsb.org/structure/3EDL",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_atm_atr_sensors": {
+      "id": "node_atm_atr_sensors",
+      "level": "L3",
+      "title": "DNA Damage Checkpoint Kinases: ATM–Chk2 vs. ATR–Chk1",
+      "subtitle": "DSB vs. ssDNA Lesion Sensing, Cdc25 Degradation & Acute Cell Cycle Arrest",
+      "coordinates": {
+        "x": 20,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "dsb_pathway": "Double-Strand Break -> MRN Complex -> ATM Kinase -> Chk2 Kinase + γ-H2AX (Ser-139)",
+        "ssdna_pathway": "Stalled Replication Fork (RPA-coated ssDNA) -> ATRIP -> ATR Kinase -> Chk1 Kinase",
+        "acute_target": "Chk1/Chk2 phosphorylate Cdc25A/C (inducing SCF degradation or 14-3-3 cytoplasmic sequestration)"
+      },
+      "tabs": {
+        "mechanism": [
+          "Cells respond to DNA damage through two parallel PIKK-family sensor-transducer kinase axes:",
+          "1. **ATM – Chk2 Axis**: Activated within seconds by **Double-Strand Breaks (DSBs)** sensed by the MRN (Mre11-Rad50-Nbs1) complex.",
+          "2. **ATR – Chk1 Axis**: Activated by **RPA-coated single-stranded DNA (ssDNA)** at stalled replication forks or UV-induced NER gaps.",
+          "**TWO-WAVE ARREST MECHANISM**:",
+          "• **Fast/Acute Wave (Minutes — Transcription-Independent)**: Chk1/Chk2 phosphorylate **Cdc25A/C** phosphatases, triggering 14-3-3 cytoplasmic sequestration and rapid SCF-mediated proteasomal destruction. Without Cdc25, CDK2 and CDK1 stay locked in their inactive Tyr-15-phosphorylated state!",
+          "• **Slow/Sustained Wave (Hours — Transcription-Dependent)**: ATM/ATR and Chk1/Chk2 phosphorylate **p53** (at Ser-15 and Ser-20), stabilizing p53 to transcribe the CDK inhibitor **p21Cip1**."
+        ],
+        "csir_high_yield": [
+          "ATM vs. ATR Lesion Specificity (CSIR Part B/C Staple):",
+          "• **Ionizing Radiation (γ-rays / X-rays / Radiomimetic Bleomycin)** creates **DSBs** $\rightarrow$ activates **ATM $\rightarrow$ Chk2**.",
+          "• **UV Light, Hydroxyurea, or Aphidicolin** creates **stalled forks / ssDNA** $\rightarrow$ activates **ATR $\rightarrow$ Chk1**.",
+          "• Why does **Caffeine** sensitize cancer cells to radiation ('Radioresistant DNA Synthesis')? Because high-dose Caffeine inhibits ATM and ATR kinase activity, overriding the G2/M checkpoint so damaged cells crash into mitosis before repairing their DNA!"
+        ],
+        "pathology": [
+          "Ataxia-Telangiectasia (A-T): Autosomal recessive biallelic loss of *ATM* causes cerebellar Purkinje neuron degeneration (ataxia), ocular telangiectasias, immunodeficiency (defective V(D)J class-switch recombination), lymphoid malignancies, and extreme radiosensitivity."
+        ],
+        "lab_workbench": [
+          "γ-H2AX Immunofluorescence Foci Assay: ATM phosphorylates the histone variant H2AX at Serine-139 (forming **γ-H2AX**) across megabase domains flanking a DSB; each discrete fluorescent nuclear focus corresponds 1:1 to a single Double-Strand Break!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (5NP0 — Cryo-EM Structure of Human ATM Kinase Dimer)",
+          "url": "https://www.rcsb.org/structure/5NP0",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (ATM Mutations in Ataxia-Telangiectasia)",
+          "url": "https://www.omim.org/entry/208900",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_p53_mdm2_axis": {
+      "id": "node_p53_mdm2_axis",
+      "level": "L3",
+      "title": "p53 ('Guardian of the Genome') & The Mdm2 Autoregulatory Loop",
+      "subtitle": "Tetrameric Transcription Factor Governing Cell Cycle Arrest (p21) vs. Apoptosis (PUMA/Bax)",
+      "coordinates": {
+        "x": 52,
+        "y": 50
+      },
+      "next_zoom_target": "L4",
+      "metrics": {
+        "quaternary_structure": "Homotetramer (Explains why missense mutations in 1 allele act Dominant-Negatively!)",
+        "basal_half_life": "~5–20 minutes in unstressed cells (Constantly polyubiquitinated by E3 ligase Mdm2)",
+        "stress_switches": "ATM/Chk2 phosphorylate p53 N-terminus (Ser15/Ser20); Oncogenic Myc/Ras induce p14ARF to inhibit Mdm2"
+      },
+      "tabs": {
+        "mechanism": [
+          "In healthy, unstressed cells, **p53** protein is synthesized continuously but has a half-life of only minutes because the RING-finger E3 ubiquitin ligase **Mdm2 (HDM2)** binds its N-terminal transactivation domain, blocks transcription, exports p53 to the cytoplasm, and polyubiquitinates it for 26S proteasomal destruction.",
+          "**ACTIVATION BY DNA DAMAGE**: ATM/ATR and Chk2/Chk1 phosphorylate the N-terminus of p53 (at **Ser-15 and Ser-20**), sterically blocking Mdm2 from binding! p53 levels surge 10- to 50-fold, and p300/CBP acetylates its C-terminus to activate DNA binding.",
+          "**ACTIVATION BY ONCOGENIC STRESS**: Hyperactive Ras or Myc induces transcription of **p14ARF** (p19ARF in mice), which sequesters Mdm2 in the nucleolus and inhibits its ubiquitin ligase activity, stabilizing p53.",
+          "**CELL FATE DECISION**: Mild/repairable damage $\rightarrow$ p53 transcribes **p21Cip1** (arrests G1/S via CDK2 inhibition) and **GADD45** (DNA repair). Severe/irreparable damage $\rightarrow$ p53 transcribes pro-apoptotic **Bax, PUMA, and Noxa** (triggers Mitochondrial Apoptosis!)."
+        ],
+        "csir_high_yield": [
+          "Why do *TP53* missense mutations often exhibit a **Dominant-Negative** effect even before the second allele is lost? (Classic CSIR Part C Genetics/Cancer Question): Active p53 binds DNA strictly as a **HOMOTETRAMER** (4 subunits). In a heterozygote carrying 1 wild-type allele and 1 DNA-binding-domain missense allele (e.g., R175H, R248Q, R273H), random assembly of tetramers yields $(1/2)^4 = 1/16$ (**only 6.25%!**) fully wild-type tetramers, while **93.75% (15/16)** of tetramers are poisoned by at least one mutant subunit!",
+          "Viral Oncoprotein Hijacking: Human Papillomavirus (**HPV-16/18**) protein **E6** recruits host E6AP ubiquitin ligase to degrade **p53**; Adenovirus **E1B-55K** and **SV40 Large T-Antigen** directly bind and sequester **p53**."
+        ],
+        "pathology": [
+          "Li-Fraumeni Syndrome: Autosomal dominant germline inheritance of one mutant *TP53* allele causes a >90% lifetime risk of early-onset sarcomas, breast cancer, brain tumors, and adrenocortical carcinoma.",
+          "**Nutlin-3 / Idasanutlin**: Small-molecule cis-imidazoline drugs that fit into the p53-binding pocket of **Mdm2**, freeing wild-type p53 to kill Mdm2-amplified sarcoma cells."
+        ],
+        "lab_workbench": [
+          "Cycloheximide Chase Western Blot for p53 Half-Life: In unstressed cells, adding cycloheximide causes the p53 band to vanish within 20 minutes; in UV-irradiated or Nutlin-3-treated cells, the p53 band remains rock-stable for >4 hours."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1TUP — Cho & Pavletich Crystal Structure of p53 Core Domain Bound to DNA)",
+          "url": "https://www.rcsb.org/structure/1TUP",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "RCSB PDB (1YCR — Crystal Structure of the MDM2 Oncoprotein Bound to the p53 Transactivation Peptide)",
+          "url": "https://www.rcsb.org/structure/1YCR",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (TP53 Mutations & Li-Fraumeni Syndrome)",
+          "url": "https://www.omim.org/entry/191170",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_rb_e2f_pocket": {
+      "id": "node_rb_e2f_pocket",
+      "level": "L3",
+      "title": "The Retinoblastoma (Rb) Pocket Protein & E2F Transcriptional Gate",
+      "subtitle": "Hypophosphorylated Active Brake vs. Hyperphosphorylated Inactive State & Knudson's Two-Hit Model",
+      "coordinates": {
+        "x": 82,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "active_repressor_state": "Un-/Hypo-phosphorylated Rb (Binds E2F activation domain & recruits HDAC1 to silence S-phase genes)",
+        "inactivated_state": "Hyper-phosphorylated Rb (Phosphorylated by Cyclin D-CDK4/6 & Cyclin E-CDK2 -> Releases E2F!)",
+        "e2f_target_genes": "Cyclin E, Cyclin A, DNA Polymerase α/δ, Thymidine Kinase, DHFR, MCM2-7, PCNA, ORC1"
+      },
+      "tabs": {
+        "mechanism": [
+          "In G0 and early G1, the **Retinoblastoma protein (pRb)** is in its **unphosphorylated / hypophosphorylated (ACTIVE)** state. Its A/B 'pocket' domain clamps tightly onto the transactivation domain of **E2F–DP** heterodimeric transcription factors at S-phase gene promoters and recruits **Histone Deacetylases (HDACs)** to keep chromatin closed.",
+          "When mitogens activate **Cyclin D–CDK4/6** and **Cyclin E–CDK2**, they phosphorylate Rb on >15 Serine/Threonine residues (**Hyperphosphorylated Rb = INACTIVE**). This conformational shift releases E2F, which immediately transcribes the entire suite of S-phase machinery (DNA polymerases, Thymidine kinase, Ribonucleotide reductase, PCNA, Cyclin E/A)."
+        ],
+        "csir_high_yield": [
+          "High-Yield Rb Conceptual Traps for CSIR NET:",
+          "• **Which form of Rb is the ACTIVE tumor suppressor brake?** The **UNPHOSPHORYLATED / HYPOPHOSPHORYLATED** form! Phosphorylation by CDKs **INACTIVATES** Rb (and PP1 phosphatase reactivates Rb at the end of mitosis).",
+          "• **SDS-PAGE Mobility Shift of Rb**: Hypophosphorylated Rb (G0/early G1) migrates **faster** (lower apparent MW ~105 kDa) on an SDS-PAGE Western blot, whereas Hyperphosphorylated Rb (S/G2/M) migrates **slower** (shifted upward ~110–115 kDa)!",
+          "• **Viral Oncoproteins Binding the Rb Pocket (LxCxE Motif)**: **HPV E7**, **Adenovirus E1A**, and **SV40 Large T-Antigen** use a conserved **Leu-X-Cys-X-Glu (LxCxE)** motif to bind the pocket of hypophosphorylated Rb, forcibly displacing E2F and driving host cells into S-phase for viral DNA replication!"
+        ],
+        "pathology": [
+          "Knudson's Two-Hit Hypothesis (Familial vs. Sporadic Retinoblastoma):",
+          "• **Familial/Hereditary Retinoblastoma**: Child inherits 1 germline mutant *RB1* allele ('1st Hit' in every retinal cell); only a single somatic mutation/LOH in the remaining wild-type allele ('2nd Hit') is required $\rightarrow$ **bilateral, multifocal** retinal tumors in infancy (follows autosomal dominant pedigree inheritance despite being recessive at the cellular level!).",
+          "• **Sporadic Retinoblastoma**: Requires **two independent somatic hits** in the same retinal retinoblast $\rightarrow$ rare, **unilateral**, later-onset tumor."
+        ],
+        "lab_workbench": [
+          "E2F Luciferase Reporter & Phospho-Rb (Ser780/Ser807) Western Blot: Demonstrates that adding Palbociclib (CDK4/6 inhibitor) collapses the upper hyperphosphorylated Rb band into the lower hypophosphorylated band and silences E2F reporter expression—unless the tumor cell is *RB1*-null (in which case Palbociclib has zero effect!)."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1GUX — Crystal Structure of the Rb Pocket Domain Bound to HPV E7 LxCxE Peptide)",
+          "url": "https://www.rcsb.org/structure/1GUX",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (RB1 Gene & Knudson's Two-Hit Retinoblastoma Model)",
+          "url": "https://www.omim.org/entry/180200",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_intrinsic_momp": {
+      "id": "node_intrinsic_momp",
+      "level": "L4",
+      "title": "Intrinsic (Mitochondrial) Apoptosis: Bcl-2 Family & MOMP",
+      "subtitle": "Three-Tiered Bcl-2 Homology (BH) Rheostat Controlling Bax/Bak Oligomeric Pore Formation",
+      "coordinates": {
+        "x": 18,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "anti_apoptotic_bh1_4": "Bcl-2, Bcl-xL, Mcl-1 (Contain BH1, BH2, BH3, BH4 domains; preserve OMM integrity)",
+        "pro_apoptotic_effectors": "Bax & Bak (Contain BH1–BH3; oligomerize into toroidal pores in the Outer Mitochondrial Membrane)",
+        "pro_apoptotic_bh3_only": "Bid (tBid), Bim, Bad, PUMA, Noxa (Sensors that inhibit Bcl-2/Bcl-xL and/or directly activate Bax/Bak)"
+      },
+      "tabs": {
+        "mechanism": [
+          "Triggered by intracellular stress (irreparable DNA damage via p53, growth factor withdrawal, ER stress, or ROS). Governed by the balance of three classes of **Bcl-2 family proteins**:",
+          "1. **Anti-Apoptotic Guardians (Bcl-2, Bcl-xL, Mcl-1)**: Reside on the Outer Mitochondrial Membrane (OMM) and sequester pro-apoptotic proteins.",
+          "2. **BH3-Only Sensors (Bim, Bid, Bad, PUMA, Noxa)**: Activated by stress signals (e.g., p53 transcribes **PUMA/Noxa**; lack of PI3K/Akt dephosphorylates **Bad**, freeing it from 14-3-3; Caspase-8 cleaves **Bid** into **tBid**). They insert their amphipathic **BH3 α-helix** into the hydrophobic groove of Bcl-2/Bcl-xL, neutralizing the guardians.",
+          "3. **Multi-Domain Pore Effectors (Bax & Bak)**: Released from inhibition, cytosolic **Bax** translocates to the OMM and oligomerizes with **Bak** to punch giant lipidic/proteinaceous pores (**MOMP — Mitochondrial Outer Membrane Permeabilization**), releasing **Cytochrome c** and **SMAC/DIABLO** into the cytosol!"
+        ],
+        "csir_high_yield": [
+          "C. elegans Genetic Pathway to Mammalian Homologs (Sydney Brenner, H. Robert Horvitz & John Sulston Nobel Discovery — Guaranteed CSIR NET Part B/C Matchup):",
+          "• **EGL-1** (C. elegans) = **BH3-only proteins** (Bim/Bid/PUMA) in Mammals [Pro-apoptotic trigger; inhibits CED-9].",
+          "• **CED-9** (C. elegans) = **Bcl-2 / Bcl-xL** in Mammals [Anti-apoptotic guardian; inhibits CED-4].",
+          "• **CED-4** (C. elegans) = **Apaf-1** in Mammals [Apoptosome adaptor].",
+          "• **CED-3** (C. elegans) = **Caspase-9 / Caspase-3** in Mammals [Executioner protease].",
+          "*Genetic Epistasis Rule*: A loss-of-function mutation in *ced-3* or *ced-4* (or a gain-of-function mutation in *ced-9*) causes the 131 cells normally fated to die during *C. elegans* hermaphrodite development to **survive**!"
+        ],
+        "pathology": [
+          "Follicular B-Cell Lymphoma & **t(14;18) Translocation**: Places the *BCL2* gene on chromosome 18 under control of the hyperactive Immunoglobulin Heavy Chain (*IGH*) enhancer on chromosome 14. Overexpressed Bcl-2 blocks MOMP, immortalizing B cells.",
+          "**Venetoclax (ABT-199)**: FDA-approved small-molecule **BH3-mimetic drug** that fits into the hydrophobic groove of Bcl-2, displacing Bax/Bak to immediately trigger MOMP and apoptosis in Chronic Lymphocytic Leukemia (CLL)!"
+        ],
+        "lab_workbench": [
+          "JC-1 or TMRE Mitochondrial Membrane Potential Flow Cytometry + Cytosolic Cytochrome c Western Blot: Detects MOMP as a rapid shift of JC-1 fluorescence from red J-aggregates (high ΔΨm) to green monomers (depolarized mitochondria) alongside Cytochrome c appearance in the S-100 cytosolic supernatant."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (6O0K — Structure of Anti-Apoptotic Bcl-2 Bound to the BH3-Mimetic Drug Venetoclax)",
+          "url": "https://www.rcsb.org/structure/6O0K",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "Landmark Lecture: H. Robert Horvitz's Genetic Control of Programmed Cell Death in C. elegans (Nobel Lecture)",
+          "url": "https://www.nobelprize.org/prizes/medicine/2002/horvitz/lecture/",
+          "type": "Primary Research Paper"
+        }
+      ]
+    },
+    "node_apoptosome_casp9": {
+      "id": "node_apoptosome_casp9",
+      "level": "L4",
+      "title": "The Heptameric Apoptosome (Cytochrome c + Apaf-1 + dATP) & Caspase-9",
+      "subtitle": "WD40 Autoinhibition Relief, CARD-CARD Recruitment & SMAC/DIABLO Relief of IAPs",
+      "coordinates": {
+        "x": 44,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "wheel_symmetry": "Heptameric (7-spoked wheel, ~1.4 MDa) assembled from 7 Apaf-1 + 7 Cytochrome c + dATP/ATP",
+        "recruitment_domain": "CARD (Caspase Activation and Recruitment Domain) on Apaf-1 binds CARD on Procaspase-9",
+        "iap_antagonist": "SMAC/DIABLO & Omi/HtrA2 (Released from IMS to inhibit XIAP / c-IAP1/2)"
+      },
+      "tabs": {
+        "mechanism": [
+          "In healthy cytosol, monomeric **Apaf-1** (Apoptotic Protease-Activating Factor 1) is locked in an autoinhibited conformation by its C-terminal WD40 repeats.",
+          "Upon MOMP, **Cytochrome c** enters the cytosol and binds the WD40 domain of Apaf-1, triggering nucleotide exchange of bound dADP/ADP for **dATP (or ATP)** in its NB-ARC domain. Seven Apaf-1–Cytochrome c monomers assemble radially into the wheel-shaped **Apoptosome**.",
+          "The central hub of the Apoptosome exposes seven **CARD domains**, which recruit **Procaspase-9** via homotypic CARD–CARD interactions. Proximity-induced dimerization on the Apoptosome hub activates **Initiator Caspase-9** (even before proteolysis!).",
+          "Simultaneously, mitochondrial **SMAC/DIABLO** neutralizes cytosolic **XIAP** (X-linked Inhibitor of Apoptosis Protein), freeing active Caspase-9 to cleave and activate **Executioner Caspases-3 and -7**."
+        ],
+        "csir_high_yield": [
+          "Initiator vs. Executioner Caspase Activation Mechanism (CSIR Part C Conceptual Distinction):",
+          "• **Initiator Caspases (Caspase-8, -9, -10)**: Exist as inactive **monomers** in the cytosol; possess long N-terminal prodomains (**CARD** in Casp-9; **DED** in Casp-8/10); activated by **proximity-induced dimerization** on multiprotein scaffolds (Apoptosome or DISC).",
+          "• **Executioner / Effector Caspases (Caspase-3, -6, -7)**: Exist as pre-formed inactive **dimers**; possess short prodomains; activated strictly by **internal proteolytic cleavage** (at Aspartate residues) catalyzed by Initiator Caspases!"
+        ],
+        "pathology": [
+          "Overexpression of **XIAP** or **Survivin** (BIRC5) in human carcinomas directly blocks the active sites of Caspase-9, -3, and -7, conferring resistance to chemotherapy-induced MOMP (targeted clinically by **SMAC-mimetic** drugs like Birinapant)."
+        ],
+        "lab_workbench": [
+          "Cell-Free Cytosolic S-100 Extract Reconstitution Assay (Xiaodong Wang's Classic Experiment): Adding purified **Cytochrome c + dATP** to a healthy HeLa S-100 cytosolic extract triggers spontaneous Apoptosome assembly and robust Caspase-3 cleavage within 30 minutes!"
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (5JUY — Atomic Cryo-EM Structure of the Active Human Heptameric Apoptosome with Caspase-9)",
+          "url": "https://www.rcsb.org/structure/5JUY",
+          "type": "3D Atomic Model"
+        }
+      ]
+    },
+    "node_extrinsic_disc": {
+      "id": "node_extrinsic_disc",
+      "level": "L4",
+      "title": "Extrinsic (Death Receptor) Pathway: Fas/TNF, DISC & Caspase-8",
+      "subtitle": "Homotrimeric Death Receptors (Fas/CD95, TRAIL-R, TNFR1), FADD/TRADD & c-FLIP Regulation",
+      "coordinates": {
+        "x": 68,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "receptors_ligands": "Fas (CD95/Apo-1) + FasL | TNFR1 + TNF-α | DR4/DR5 + TRAIL",
+        "disc_assembly": "Fas Death Domain (DD) -> binds FADD (DD + DED) -> binds Procaspase-8/10 (DED)",
+        "crosstalk_bridge": "Caspase-8 cleaves cytosolic Bid -> truncated tBid translocates to mitochondria to trigger MOMP!"
+      },
+      "tabs": {
+        "mechanism": [
+          "Triggered by extracellular immune killer ligands—such as **Fas Ligand (FasL / CD95L)** expressed on Cytotoxic T Lymphocytes (CTLs) and NK cells—binding to homotrimeric **Fas (CD95)** receptors on target cells.",
+          "**DISC ASSEMBLY (Death-Inducing Signaling Complex)**:",
+          "1. Clustering of intracellular **Death Domains (DD)** on Fas recruits the bipartite adaptor protein **FADD** (Fas-Associated Death Domain) via homotypic **DD–DD** interaction.",
+          "2. FADD exposes its N-terminal **Death Effector Domain (DED)**, which recruits **Procaspase-8** (or -10) via homotypic **DED–DED** interaction.",
+          "3. High local concentration inside the DISC drives Procaspase-8 dimerization and autoproteolytic cleavage into active **Initiator Caspase-8**.",
+          "**TYPE I vs. TYPE II CELLS**: In Type I cells (thymocytes), massive Caspase-8 activation directly cleaves **Caspase-3**. In Type II cells (hepatocytes), Caspase-8 must cleave the BH3-only protein **Bid** into **tBid**, which triggers mitochondrial MOMP to amplify the death signal!"
+        ],
+        "csir_high_yield": [
+          "Domain Matching at the DISC (CSIR Part B/C Favorite):",
+          "• **Fas Receptor meets FADD** via **DD – DD** (Death Domain) interaction.",
+          "• **FADD meets Procaspase-8** via **DED – DED** (Death Effector Domain) interaction.",
+          "• **TNFR1 Exception**: TNFR1 first recruits **TRADD** (TNF-Receptor Associated Death Domain), which can either recruit RIPK1/TRAF2 to activate pro-survival **NF-κB** OR recruit FADD/Caspase-8 to trigger apoptosis!",
+          "• **c-FLIP**: A catalytically dead Caspase-8 homolog (contains DEDs but lacks the active-site Cysteine) that competes for FADD binding to inhibit extrinsic apoptosis.",
+          "• **Necroptosis Switch**: If Caspase-8 is inhibited (e.g., by viral inhibitors or z-VAD-fmk) when TNF-α binds TNFR1, **RIPK1 and RIPK3** phosphorylate **MLKL**, which oligomerizes to rupture the plasma membrane in programmed inflammatory **Necroptosis** (inhibited by **Necrostatin-1**)!"
+        ],
+        "pathology": [
+          "Autoimmune Lymphoproliferative Syndrome (ALPS) & *lpr / gld* Mice:",
+          "• Mutations in **Fas (*APT1*; *lpr* mouse)** or **Fas Ligand (*gld* mouse)** prevent activation-induced cell death (AICD) of self-reactive peripheral T and B lymphocytes, causing massive lymphadenopathy, splenomegaly, and lupus-like autoimmunity."
+        ],
+        "lab_workbench": [
+          "Cr-51 Release & Anti-Fas (CH11 IgM) Crosslinking Assay: Pentameric anti-Fas IgM antibodies physically cluster Fas receptors on Jurkat T-cells, inducing 90% DISC-mediated apoptosis within 4 hours."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (3EZQ — Crystal Structure of the Fas-FADD Death Domain Complex)",
+          "url": "https://www.rcsb.org/structure/3EZQ",
+          "type": "3D Atomic Model"
+        },
+        {
+          "title": "OMIM Database (FAS Mutations in Autoimmune Lymphoproliferative Syndrome ALPS)",
+          "url": "https://www.omim.org/entry/601859",
+          "type": "Clinical Genetics"
+        }
+      ]
+    },
+    "node_caspase_execution_casp3": {
+      "id": "node_caspase_execution_casp3",
+      "level": "L4",
+      "title": "Executioner Caspases (-3, -6, -7), CAD Endonuclease & Phagocytic 'Eat-Me' Signals",
+      "subtitle": "Cysteine-Aspartate Proteolysis of ICAD, PARP1 & Lamins, 180 bp DNA Ladder & PS Flipping",
+      "coordinates": {
+        "x": 90,
+        "y": 50
+      },
+      "next_zoom_target": null,
+      "metrics": {
+        "protease_chemistry": "Cysteine-dependent Aspartate-directed proteases (Active-site Cys nucleophile; cleaves strictly after Asp!)",
+        "key_substrates": "ICAD (liberates CAD nuclease), PARP1 (89 kDa fragment), Nuclear Lamins (A/B/C), Gelsolin (actin blebbing)",
+        "eat_me_signal": "Phosphatidylserine (PS) flips from inner (cytosolic) leaflet to outer leaflet via Xkr8 scramblase"
+      },
+      "tabs": {
+        "mechanism": [
+          "**Caspases** (**C**ysteine-dependent **asp**artate-directed prote**ases**) use an active-site **Cysteine** side chain (-SH) to cleave target proteins specifically on the C-terminal side of **Aspartate (Asp)** residues (e.g., DEVD↓ motif for Caspase-3/7).",
+          "Once activated by either Caspase-9 (Intrinsic) or Caspase-8 (Extrinsic), **Executioner Caspases-3, -6, and -7** dismantle the cell cleanly from within without rupturing the plasma membrane:",
+          "1. **Internucleosomal DNA Fragmentation**: Caspase-3 cleaves **ICAD** (Inhibitor of Caspase-Activated DNase), liberating **CAD endonuclease**, which enters the nucleus and cuts linker DNA between nucleosomes into a **180–200 bp DNA ladder**.",
+          "2. **Nuclear & Cytoskeletal Collapse**: Caspase-6 cleaves **Nuclear Lamins** (causing chromatin condensation / pyknosis and karyorrhexis); Caspase-3 cleaves **PARP1** (preventing ATP depletion), **p21-activated kinase / Gelsolin / ROCK1** (driving plasma membrane **blebbing** into apoptotic bodies).",
+          "3. **Silent Efferocytosis ('Eat-Me' Signal)**: Caspase-3 simultaneously cleaves and **inactivates ATP11C flippase** while cleaving and **activating Xkr8 phospholipid scramblase**, flipping negatively charged **Phosphatidylserine (PS)** from the inner cytosolic leaflet to the outer extracellular surface so macrophages engulf the apoptotic bodies with **ZERO inflammation**!"
+        ],
+        "csir_high_yield": [
+          "Apoptosis vs. Necrosis / Pyroptosis Hallmarks (Classic CSIR Part B/C Comparison):",
+          "• **Apoptosis**: Cell **shrinks**, plasma membrane remains **intact**, PS flips to outer leaflet (**Annexin-V positive, PI negative** in early apoptosis), DNA cleaved at linker regions into a **discrete 180 bp ladder** on agarose gel, **ATP-dependent**, **non-inflammatory**.",
+          "• **Necrosis**: Cell and organelles **swell** (oncosis), plasma membrane **ruptures** early (**PI positive**), DNA degraded randomly into a **continuous smear** on agarose gel, **ATP-depleted**, releases DAMPs (HMGB1, ATP, uric acid) causing **severe inflammation**.",
+          "• **Pyroptosis (Inflammatory Caspase-1 / -4 / -5 / -11)**: Triggered by the **NLRP3 Inflammasome**; Caspase-1 processes pro-IL-1β/IL-18 AND cleaves **Gasdermin D (GSDMD)** to form plasma membrane pores that lyse the cell!"
+        ],
+        "pathology": [
+          "Ischemic Stroke & Myocardial Infarction: The necrotic core undergoes ATP-depleted necrosis, while the surrounding ischemic penumbra undergoes Caspase-3-mediated apoptosis over 24–72 hours."
+        ],
+        "lab_workbench": [
+          "Annexin-V FITC / Propidium Iodide (PI) Dual-Parameter Flow Cytometry & TUNEL Assay:",
+          "• **Live Healthy Cells**: Annexin-V (–) / PI (–) [Bottom-Left quadrant].",
+          "• **Early Apoptotic Cells**: **Annexin-V (+) / PI (–)** [Bottom-Right quadrant — PS has flipped outside, but plasma membrane is still impermeable to PI!].",
+          "• **Late Apoptotic / Necrotic Cells**: Annexin-V (+) / PI (+) [Top-Right quadrant].",
+          "• **TUNEL Assay**: Uses **Terminal Deoxynucleotidyl Transferase (TdT)** to enzymatically attach fluorescent dUTP onto the free **3'-OH ends** of CAD-cleaved DNA breaks."
+        ]
+      },
+      "external_resources": [
+        {
+          "title": "RCSB PDB (1PAU — Crystal Structure of Active Human Caspase-3 Bound to Tetrapeptide Inhibitor)",
+          "url": "https://www.rcsb.org/structure/1PAU",
+          "type": "3D Atomic Model"
+        }
+      ]
+    }
+  },
+  "inhibitor_simulator": {
+    "baseline_metrics": {
+      "g1_2n_fraction_percent": 60,
+      "s_phase_fraction_percent": 25,
+      "g2_m_4n_fraction_percent": 15,
+      "sub_g1_apoptotic_percent": 1,
+      "rb_phosphorylation_state": "Cycling (Hypo -> Hyper)",
+      "caspase_3_activity": "Basal (0%)"
+    },
+    "agents": [
+      {
+        "id": "sim_palbociclib",
+        "name": "Palbociclib / Ribociclib (CDK4/6 Inhibitor)",
+        "category": "G1 Restriction Point Blocker",
+        "target_node": "node_g1_restriction_point",
+        "binding_site": "ATP-binding catalytic cleft of CDK4 and CDK6 (Mimics p16INK4a)",
+        "resulting_metrics": {
+          "g1_2n_fraction_percent": 94,
+          "s_phase_fraction_percent": 2,
+          "g2_m_4n_fraction_percent": 3,
+          "sub_g1_apoptotic_percent": 1,
+          "rb_phosphorylation_state": "100% Hypophosphorylated (Active Brake Locked on E2F!)",
+          "caspase_3_activity": "Basal (Cytostatic G1 Arrest)"
+        },
+        "rescue_experiment": "CSIR High-Yield Clinical Test: Arrests wild-type Rb+ cells cleanly in G1 (2N DNA content on FACS). However, if the tumor cell is RB1-null (or expresses HPV E7), Palbociclib has ZERO effect because the downstream brake (Rb) is already missing!",
+        "visual_effect": "lock_cells_in_g1_2n_peak_clamp_rb_on_e2f"
+      },
+      {
+        "id": "sim_nutlin3",
+        "name": "Nutlin-3a (Mdm2 Antagonist)",
+        "category": "p53 Stabilizer & Activator",
+        "target_node": "node_p53_mdm2_axis",
+        "binding_site": "Hydrophobic p53-binding pocket of Mdm2 E3 ubiquitin ligase",
+        "resulting_metrics": {
+          "g1_2n_fraction_percent": 75,
+          "s_phase_fraction_percent": 2,
+          "g2_m_4n_fraction_percent": 8,
+          "sub_g1_apoptotic_percent": 15,
+          "rb_phosphorylation_state": "Hypophosphorylated (via p53 -> p21Cip1 induction)",
+          "caspase_3_activity": "Elevated (via PUMA/Bax transcription)"
+        },
+        "rescue_experiment": "Stabilizes wild-type p53 without causing DNA damage! Induces massive p21 transcription (arresting G1 and G2) and PUMA/Bax transcription (apoptosis). Completely ineffective in TP53-mutant or TP53-null cells.",
+        "visual_effect": "displace_mdm2_glow_p53_tetramer_induce_p21"
+      },
+      {
+        "id": "sim_ro3306",
+        "name": "RO-3306 (Selective CDK1 Inhibitor)",
+        "category": "G2/M Boundary Blocker",
+        "target_node": "node_g2_m_mpf_switch",
+        "binding_site": "ATP-binding pocket of CDK1 (Spares CDK2/4/6 at 9 µM)",
+        "resulting_metrics": {
+          "g1_2n_fraction_percent": 5,
+          "s_phase_fraction_percent": 5,
+          "g2_m_4n_fraction_percent": 88,
+          "sub_g1_apoptotic_percent": 2,
+          "rb_phosphorylation_state": "Hyperphosphorylated",
+          "caspase_3_activity": "Basal"
+        },
+        "rescue_experiment": "Synchronizes cells reversibly right at the late G2 border (4N DNA content with intact nuclear envelope and duplicated centrosomes). Washing out RO-3306 releases 90% of cells synchronously into Prophase within 10 minutes!",
+        "visual_effect": "accumulate_4n_g2_peak_halt_nuclear_envelope_breakdown"
+      },
+      {
+        "id": "sim_venetoclax",
+        "name": "Venetoclax / ABT-199 (BH3-Mimetic)",
+        "category": "Direct Intrinsic MOMP Inducer",
+        "target_node": "node_intrinsic_momp",
+        "binding_site": "Hydrophobic BH3-binding groove of anti-apoptotic Bcl-2",
+        "resulting_metrics": {
+          "g1_2n_fraction_percent": 20,
+          "s_phase_fraction_percent": 5,
+          "g2_m_4n_fraction_percent": 5,
+          "sub_g1_apoptotic_percent": 70,
+          "rb_phosphorylation_state": "Cleaved by Caspases",
+          "caspase_3_activity": "95% Maximal (Rapid MOMP -> Apoptosome -> Caspase-3)"
+        },
+        "rescue_experiment": "Directly displaces Bax/Bak from Bcl-2 on the outer mitochondrial membrane, triggering immediate Cytochrome c release and Caspase-3 activation within 2 hours—even in p53-null leukemia cells (bypasses the need for upstream p53!).",
+        "visual_effect": "trigger_bax_pores_release_cytc_assemble_apoptosome"
+      },
+      {
+        "id": "sim_zvad_fmk",
+        "name": "z-VAD-fmk (Pan-Caspase Inhibitor) + Staurosporine",
+        "category": "Irreversible Caspase Active-Site Blocker",
+        "target_node": "node_caspase_execution_casp3",
+        "binding_site": "Fluoromethylketone covalently alkylates the catalytic Cysteine of all Caspases",
+        "resulting_metrics": {
+          "g1_2n_fraction_percent": 55,
+          "s_phase_fraction_percent": 25,
+          "g2_m_4n_fraction_percent": 18,
+          "sub_g1_apoptotic_percent": 2,
+          "rb_phosphorylation_state": "Intact",
+          "caspase_3_activity": "0% (Completely Abolished)"
+        },
+        "rescue_experiment": "Classic CSIR Experimental Trap: When cells are treated with Staurosporine (an intrinsic apoptotic trigger) + z-VAD-fmk, Bax still oligomerizes and Cytochrome c STILL leaks out of mitochondria into the cytosol (because MOMP is upstream of caspases!), but Apoptosome Caspase-9 and Caspase-3 are completely blocked, so no 180 bp DNA ladder or PARP cleavage occurs!",
+        "visual_effect": "allow_cytc_release_but_freeze_caspase_cleavage"
+      }
+    ]
+  },
+  "quiz_challenges": [
+    {
+      "question_id": "q1_wee1_pombe",
+      "prompt": "In fission yeast (S. pombe), loss-of-function mutations in a Tyr-15 inhibitory kinase cause cells to divide prematurely at half their normal length ('wee' phenotype). Click this G2/M switch node.",
+      "correct_node_id": "node_g2_m_mpf_switch",
+      "explanation": "Correct! Wee1 kinase phosphorylates CDK1 on Tyr-15 to hold MPF inactive during G2; losing Wee1 causes premature mitotic entry and tiny 'wee' daughter cells."
+    },
+    {
+      "question_id": "q2_securin_separase",
+      "prompt": "Click the mitotic node where APC/C-Cdc20 polyubiquitinates an inhibitory chaperone to unleash a cysteine protease that cleaves the Scc1 (Rad21) subunit of Cohesin.",
+      "correct_node_id": "node_apcc_separase",
+      "explanation": "Spot on! APC/C-Cdc20 degrades Securin, freeing Separase to cleave Scc1/Rad21 cohesin rings and trigger synchronous Anaphase sister chromatid separation."
+    },
+    {
+      "question_id": "q3_rb_active_form",
+      "prompt": "Click the tumor suppressor hub whose UNPHOSPHORYLATED / HYPOPHOSPHORYLATED form acts as the active G1 brake by binding E2F and recruiting HDACs, and is hijacked by HPV E7 via an LxCxE motif.",
+      "correct_node_id": "node_rb_e2f_pocket",
+      "explanation": "Exact match! Hypophosphorylated Rb binds and represses E2F; phosphorylation by Cyclin D-CDK4/6 and Cyclin E-CDK2 inactivates Rb to release E2F for S-phase transcription."
+    },
+    {
+      "question_id": "q4_ced9_bcl2",
+      "prompt": "Click the L4 mitochondrial node containing the mammalian homolog of C. elegans CED-9 (which prevents Bax/Bak pore formation) and is targeted clinically by the BH3-mimetic drug Venetoclax.",
+      "correct_node_id": "node_intrinsic_momp",
+      "explanation": "Correct! Bcl-2 (homolog of C. elegans CED-9) resides on the outer mitochondrial membrane and inhibits Bax/Bak-mediated MOMP."
+    }
+  ]
+}
