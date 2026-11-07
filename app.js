@@ -173,15 +173,43 @@ function renderArgonWorkspace() {
 // STRUCTURED LEVEL & GRID STAGE RENDERER (#hotspotCanvas)
 // ============================================================================
 function renderVisualSpatialStage() {
-  const mod = state.moduleData;
-  const levels = mod.scale_levels || [];
-  const activeLvl = levels.find(l => l.level_id === state.activeScaleId) || levels[0];
-  if (!activeLvl) return;
+    // Bind Card Clicks with Instant Drawer Expansion
+  canvas.querySelectorAll(".hotspot-node-card").forEach(card => {
+    card.addEventListener("click", (e) => {
+      const zoomBtn = e.target.closest(".zoom-jump-chip");
+      if (zoomBtn) {
+        e.stopPropagation();
+        const nextScale = zoomBtn.dataset.zoomTo;
+        state.activeScaleId = nextScale;
+        const targetLvl = (mod.scale_levels || []).find(l => l.level_id === nextScale);
+        const nextNodes = targetLvl?.node_ids || targetLvl?.hotspots || [];
+        if (nextNodes.length) state.activeNodeId = nextNodes[0];
+        
+        // Trigger optical zoom animation
+        const stage = document.getElementById("interactiveStage");
+        if (stage) {
+          stage.classList.remove("stage-optical-zoom");
+          void stage.offsetWidth;
+          stage.classList.add("stage-optical-zoom");
+        }
 
-  const hudLabel = document.getElementById("hudScaleLabel");
-  if (hudLabel) {
-    hudLabel.textContent = `${activeLvl.level_id}: ${activeLvl.name} ${activeLvl.scale_metric ? `[${activeLvl.scale_metric}]` : ""}`;
-  }
+        renderArgonWorkspace();
+        return;
+      }
+
+      state.activeNodeId = card.dataset.nodeId;
+      renderVisualSpatialStage();
+      renderNodeInspectorAndDrawer();
+
+      // Automatically open the slide-out study drawer for instant mobile expansion
+      toggleStudyDrawer(true);
+
+      if (state.quizMode) {
+        evaluateQuizNodeSelection(card.dataset.nodeId);
+      }
+      typesetMath();
+    });
+  });
 
   const summaryText = document.getElementById("scaleSummaryText");
   if (summaryText) {
