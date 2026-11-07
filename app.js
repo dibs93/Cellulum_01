@@ -156,6 +156,9 @@ function renderArgonWorkspace() {
 // ============================================================================
 // SPATIAL ZOOM STAGE & CIRCULAR / FLOATING NODE PINS (#hotspotCanvas)
 // ============================================================================
+// ============================================================================
+// STRUCTURED LEVEL & GRID STAGE RENDERER (#hotspotCanvas)
+// ============================================================================
 function renderVisualSpatialStage() {
   const mod = state.moduleData;
   const levels = mod.scale_levels || [];
@@ -169,7 +172,7 @@ function renderVisualSpatialStage() {
 
   const summaryText = document.getElementById("scaleSummaryText");
   if (summaryText) {
-    summaryText.textContent = activeLvl.description || "Select any spatial hotspot node below to inspect biochemical mechanisms and Part C traps.";
+    summaryText.textContent = activeLvl.description || "Select any hotspot node below to inspect biochemical mechanisms and Part C traps.";
   }
 
   const canvas = document.getElementById("hotspotCanvas");
@@ -183,13 +186,13 @@ function renderVisualSpatialStage() {
   if (quizzes.length > 0) {
     const q = quizzes[state.currentQuizIdx] || quizzes[0];
     quizHtml = `
-      <div class="w-full mb-3 p-3 rounded-xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'} shadow-xl">
+      <div class="w-full mb-4 p-3.5 rounded-xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'} shadow-xl">
         <div class="flex items-center justify-between gap-2">
           <div class="flex items-center space-x-2">
             <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">
               <i class="fa-solid fa-bolt mr-1"></i>CSIR Quiz (${state.currentQuizIdx + 1}/${quizzes.length})
             </span>
-            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching spatial node below!" : "Test your Part-C recall"}</span>
+            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching node card below!" : "Test your Part-C recall"}</span>
           </div>
           <div class="flex items-center space-x-1.5">
             ${state.quizMode ? `
@@ -202,9 +205,9 @@ function renderVisualSpatialStage() {
           </div>
         </div>
         ${state.quizMode ? `
-          <div class="mt-2 text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(q.prompt)}</div>
+          <div class="mt-2.5 text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(q.prompt)}</div>
           ${Array.isArray(q.answer_options) && q.answer_options.length ? `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">
               ${q.answer_options.map((opt, i) => `
                 <button data-opt-idx="${i}" class="quiz-mcq-choice p-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-left text-xs text-slate-200 transition">
                   ${formatRichText(opt)}
@@ -212,62 +215,67 @@ function renderVisualSpatialStage() {
               `).join("")}
             </div>
           ` : ""}
-          <div id="stageQuizFeedback" class="hidden mt-2 p-2 rounded-lg text-xs"></div>
+          <div id="stageQuizFeedback" class="hidden mt-2.5 p-2.5 rounded-lg text-xs"></div>
         ` : ""}
       </div>
     `;
   }
 
-  // Render Visual Circular / Floating Spatial Pins & Cards
-  const pinsHtml = nodeIds.map((nid, idx) => {
+  // Render Clean Structured Grid Cards for the Active Zoom Level
+  const cardsHtml = nodeIds.map((nid, idx) => {
     const node = mod.nodes?.[nid];
     if (!node) return "";
     const isSelected = node.id === state.activeNodeId;
     const isPerturbed = activeAgent && activeAgent.target_node === node.id;
-    
-    // Calculate orbital / grid coordinates if UI coordinates aren't explicitly provided
-    const fallbackX = 20 + (idx * 28) % 65;
-    const fallbackY = 30 + Math.floor(idx / 3) * 35;
-    const coords = node.ui_coordinates || node.coordinates || { x: fallbackX, y: fallbackY };
+    const metricKeys = Object.keys(node.metrics || {});
+    const previewMetric = metricKeys.length ? `${metricKeys[0].replace(/_/g, " ")}: ${node.metrics[metricKeys[0]]}` : "";
 
     return `
-      <div data-node-id="${node.id}" class="spatial-node-pin cursor-pointer absolute p-3.5 rounded-2xl border transition-all duration-300 backdrop-blur-md max-w-[260px] ${
+      <div data-node-id="${node.id}" class="hotspot-node-card cursor-pointer p-4 rounded-2xl border transition-all duration-200 flex flex-col justify-between ${
         isSelected
-          ? "bg-emerald-950/90 border-emerald-400 shadow-2xl shadow-emerald-900/60 scale-105 z-30 ring-2 ring-emerald-400"
-          : "bg-slate-950/85 border-slate-800 hover:border-emerald-500/60 hover:bg-slate-900/90 z-20"
-      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500 bg-rose-950/90" : ""}"
-           style="left: ${coords.x}%; top: ${coords.y}%; transform: translate(-50%, -50%);">
-        <div class="flex items-center justify-between gap-2 mb-1">
-          <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-800">
-            ${node.level} • Pin ${idx + 1}
-          </span>
-          <div class="flex items-center space-x-1">
-            ${isPerturbed ? `<span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700 animate-pulse">Inhibited</span>` : ""}
-            ${node.next_zoom_target ? `
-              <button data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip text-[9px] font-mono px-1.5 py-0.5 rounded bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-700 transition">
-                Zoom ${node.next_zoom_target}
-              </button>
-            ` : ""}
+          ? "bg-emerald-950/50 border-emerald-400 shadow-xl shadow-emerald-950/50 scale-[1.01] ring-1 ring-emerald-400"
+          : "bg-slate-950/85 border-slate-800/90 hover:border-slate-600 hover:bg-slate-900/90"
+      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500 bg-rose-950/40" : ""}">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-800">
+              ${node.level} • Hotspot ${idx + 1}
+            </span>
+            <div class="flex items-center space-x-1.5">
+              ${isPerturbed ? `<span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700 animate-pulse">Inhibited</span>` : ""}
+              ${node.next_zoom_target ? `
+                <button data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-700/60 transition">
+                  Zoom ${node.next_zoom_target} <i class="fa-solid fa-arrow-up-right-from-square ml-0.5"></i>
+                </button>
+              ` : ""}
+            </div>
           </div>
+          <h4 class="text-sm font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
+          <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
         </div>
-        <h4 class="text-xs font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
-        <p class="text-[10px] text-slate-400 mt-1 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
+
+        ${previewMetric ? `
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-slate-300 font-mono line-clamp-2">
+            ${formatRichText(previewMetric)}
+          </div>
+        ` : ""}
       </div>
     `;
   }).join("");
 
+  const gridCols = nodeIds.length >= 4 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3";
   canvas.innerHTML = `
-    <div class="w-full relative min-h-[380px] sm:min-h-[440px]">
+    <div class="w-full">
       ${quizHtml}
-      <div class="absolute inset-0 w-full h-full pointer-events-auto">
-        ${pinsHtml}
+      <div class="grid ${gridCols} gap-4 w-full">
+        ${cardsHtml}
       </div>
     </div>
   `;
 
-  // Bind Pin Clicks
-  canvas.querySelectorAll(".spatial-node-pin").forEach(pin => {
-    pin.addEventListener("click", (e) => {
+  // Bind Card Clicks
+  canvas.querySelectorAll(".hotspot-node-card").forEach(card => {
+    card.addEventListener("click", (e) => {
       const zoomBtn = e.target.closest(".zoom-jump-chip");
       if (zoomBtn) {
         e.stopPropagation();
@@ -280,12 +288,12 @@ function renderVisualSpatialStage() {
         return;
       }
 
-      state.activeNodeId = pin.dataset.nodeId;
+      state.activeNodeId = card.dataset.nodeId;
       renderVisualSpatialStage();
       renderNodeInspectorAndDrawer();
 
       if (state.quizMode) {
-        evaluateQuizNodeSelection(pin.dataset.nodeId);
+        evaluateQuizNodeSelection(card.dataset.nodeId);
       }
       typesetMath();
     });
@@ -316,7 +324,6 @@ function renderVisualSpatialStage() {
     });
   });
 }
-
 function evaluateQuizNodeSelection(clickedNodeId) {
   const quizzes = state.moduleData.quiz_challenges || [];
   const q = quizzes[state.currentQuizIdx];
