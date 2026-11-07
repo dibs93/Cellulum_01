@@ -1,7 +1,6 @@
 /**
  * ============================================================================
- * CELLULUM — Argon Engine v2.4 (Universal Schema v1.0 & v1.1)
- * Fully synchronized with index.html DOM IDs & module1.json - module14.json
+ * CELLULUM — Argon Engine v2.4 (Spatial Zoom & Dual Simulator Engine)
  * ============================================================================
  */
 
@@ -11,96 +10,21 @@ const APP_CONFIG = {
 };
 
 const MODULE_REGISTRY = [
-  {
-    id: "module_01",
-    shortUnit: "MOD 01",
-    title: "Mitochondrial Bioenergetics & OxPhos",
-    files: ["module1.json", "module_01_bioenergetics.json", "module_01.json"]
-  },
-  {
-    id: "module_02",
-    shortUnit: "MOD 02",
-    title: "The Nucleus, Chromatin & Transcription",
-    files: ["module2.json", "module_02_nucleus.json", "module_02.json"]
-  },
-  {
-    id: "module_02b",
-    shortUnit: "MOD 02B",
-    title: "Core Module 2B (DNA / Metabolic / Specialized)",
-    files: ["module2b.json", "module2B.json", "module_02b.json", "module_2b.json"]
-  },
-  {
-    id: "module_03",
-    shortUnit: "MOD 03",
-    title: "Protein Synthesis, Translocation & ER",
-    files: ["module3.json", "module_03_ribosome_er.json", "module_03.json"]
-  },
-  {
-    id: "module_04",
-    shortUnit: "MOD 04",
-    title: "Cell Signaling & Membrane Receptors",
-    files: ["module4.json", "module_04_signaling.json", "module_04.json"]
-  },
-  {
-    id: "module_05",
-    shortUnit: "MOD 05",
-    title: "Cytoskeleton, Motors & Cell Adhesion",
-    files: ["module5.json", "module_05_cytoskeleton_ecm.json", "module_05.json"]
-  },
-  {
-    id: "module_06",
-    shortUnit: "MOD 06",
-    title: "Cell Cycle, Mitosis & Apoptosis",
-    files: ["module6.json", "module_06.json"]
-  },
-  {
-    id: "module_07",
-    shortUnit: "MOD 07",
-    title: "DNA Replication, Repair & Recombination",
-    files: ["module7.json", "module_07.json"]
-  },
-  {
-    id: "module_08",
-    shortUnit: "MOD 08",
-    title: "Developmental Biology & Morphogenesis",
-    files: ["module8.json", "module_08_developmental_bio_revised.json", "module_08.json"]
-  },
-  {
-    id: "module_09",
-    shortUnit: "MOD 09",
-    title: "Plant Physiology & Photosynthesis",
-    files: ["module9.json", "module_09.json"]
-  },
-  {
-    id: "module_10",
-    shortUnit: "MOD 10",
-    title: "Animal Physiology & Neurobiology",
-    files: ["module10.json", "module_10.json"]
-  },
-  {
-    id: "module_11",
-    shortUnit: "MOD 11",
-    title: "Immunology & Host Defense",
-    files: ["module11.json", "module_11.json"]
-  },
-  {
-    id: "module_12",
-    shortUnit: "MOD 12",
-    title: "Inheritance Biology, Operons & Mapping",
-    files: ["module12.json", "module_12_genetics_mapping.json"]
-  },
-  {
-    id: "module_13",
-    shortUnit: "MOD 13",
-    title: "Ecological Principles & Biogeography",
-    files: ["module13.json", "module_13_ecology.json", "module_13_ecology_revised.json"]
-  },
-  {
-    id: "module_14",
-    shortUnit: "MOD 14",
-    title: "Biophysical Methods & Techniques",
-    files: ["module14.json", "module_14_methods.json", "module_14_wetlab_biophysics.json"]
-  }
+  { id: "module_01", shortUnit: "MOD 01", title: "Mitochondrial Bioenergetics & OxPhos", files: ["module1.json", "module_01_bioenergetics.json", "module_01.json"] },
+  { id: "module_02", shortUnit: "MOD 02", title: "The Nucleus, Chromatin & Transcription", files: ["module2.json", "module_02_nucleus.json", "module_02.json"] },
+  { id: "module_02b", shortUnit: "MOD 02B", title: "Core Module 2B (DNA / Metabolic)", files: ["module2b.json", "module2B.json", "module_02b.json", "module_2b.json"] },
+  { id: "module_03", shortUnit: "MOD 03", title: "Protein Synthesis, Translocation & ER", files: ["module3.json", "module_03_ribosome_er.json", "module_03.json"] },
+  { id: "module_04", shortUnit: "MOD 04", title: "Cell Signaling & Membrane Receptors", files: ["module4.json", "module_04_signaling.json", "module_04.json"] },
+  { id: "module_05", shortUnit: "MOD 05", title: "Cytoskeleton, Motors & Cell Adhesion", files: ["module5.json", "module_05_cytoskeleton_ecm.json", "module_05.json"] },
+  { id: "module_06", shortUnit: "MOD 06", title: "Cell Cycle, Mitosis & Apoptosis", files: ["module6.json", "module_06.json"] },
+  { id: "module_07", shortUnit: "MOD 07", title: "DNA Replication, Repair & Recombination", files: ["module7.json", "module_07.json"] },
+  { id: "module_08", shortUnit: "MOD 08", title: "Developmental Biology & Morphogenesis", files: ["module8.json", "module_08_developmental_bio_revised.json", "module_08.json"] },
+  { id: "module_09", shortUnit: "MOD 09", title: "Plant Physiology & Photosynthesis", files: ["module9.json", "module_09.json"] },
+  { id: "module_10", shortUnit: "MOD 10", title: "Animal Physiology & Neurobiology", files: ["module10.json", "module_10.json"] },
+  { id: "module_11", shortUnit: "MOD 11", title: "Immunology & Host Defense", files: ["module11.json", "module_11.json"] },
+  { id: "module_12", shortUnit: "MOD 12", title: "Inheritance Biology, Operons & Mapping", files: ["module12.json", "module_12_genetics_mapping.json"] },
+  { id: "module_13", shortUnit: "MOD 13", title: "Ecological Principles & Biogeography", files: ["module13.json", "module_13_ecology.json", "module_13_ecology_revised.json"] },
+  { id: "module_14", shortUnit: "MOD 14", title: "Biophysical Methods & Techniques", files: ["module14.json", "module_14_methods.json", "module_14_wetlab_biophysics.json"] }
 ];
 
 const state = {
@@ -115,9 +39,6 @@ const state = {
   cache: {}
 };
 
-// ============================================================================
-// INITIALIZATION
-// ============================================================================
 document.addEventListener("DOMContentLoaded", () => {
   injectMathJaxSupport();
   renderSidebarNav(MODULE_REGISTRY);
@@ -138,16 +59,12 @@ function injectMathJaxSupport() {
   }
 }
 
-// ============================================================================
-// MODULE JSON FETCHER (WITH FALLBACK & DOCX BINARY PROTECTION)
-// ============================================================================
 async function loadModule(registryId) {
   const regItem = MODULE_REGISTRY.find(m => m.id === registryId) || MODULE_REGISTRY[0];
   state.activeRegistryItem = regItem;
   state.activeSimAgentId = null;
   state.currentQuizIdx = 0;
 
-  // Highlight active module in sidebar
   document.querySelectorAll(".mod-nav-card").forEach(el => {
     const isActive = el.dataset.id === regItem.id;
     el.classList.toggle("border-emerald-500", isActive);
@@ -164,19 +81,16 @@ async function loadModule(registryId) {
     state.cache[regItem.id] = state.moduleData;
   }
 
-  // Auto-update sidebar title from loaded JSON title if present
   if (state.moduleData && state.moduleData.title) {
     regItem.title = state.moduleData.title;
     const activeCardTitle = document.querySelector(`.mod-nav-card[data-id="${regItem.id}"] .text-slate-200`);
     if (activeCardTitle) activeCardTitle.textContent = state.moduleData.title;
   }
 
-  // Apply module theme color if defined
   const root = document.documentElement;
   root.style.setProperty("--theme-color", state.moduleData.theme_color || "#10b981");
   root.style.setProperty("--accent-glow", state.moduleData.accent_glow || "rgba(16, 185, 129, 0.45)");
 
-  // Default to L1 (or first available scale level) and its first node
   const levels = state.moduleData.scale_levels || [];
   const firstLevel = levels[0] || { level_id: "L1", hotspots: [] };
   state.activeScaleId = firstLevel.level_id || "L1";
@@ -197,22 +111,16 @@ async function fetchJsonFromPaths(regItem) {
             return JSON.parse(raw);
           }
         }
-      } catch (err) {
-        // Continue checking next path
-      }
+      } catch (err) {}
     }
   }
   return getFallbackModuleData(regItem);
 }
 
-// ============================================================================
-// ARGON WORKSPACE RENDERER (MATCHED TO YOUR INDEX.HTML IDs)
-// ============================================================================
 function renderArgonWorkspace() {
   const mod = state.moduleData;
   const reg = state.activeRegistryItem;
 
-  // 1. Top Unit & Title Bar
   const unitTagEl = document.getElementById("activeUnitTag");
   const titleEl = document.getElementById("activeModuleTitle");
   if (unitTagEl) {
@@ -225,7 +133,6 @@ function renderArgonWorkspace() {
     titleEl.textContent = mod.title || reg.title;
   }
 
-  // 2. Update L1 - L4 Scale Switcher Buttons
   const levels = mod.scale_levels || [];
   document.querySelectorAll(".scale-btn").forEach(btn => {
     const scaleId = btn.dataset.scale;
@@ -240,22 +147,21 @@ function renderArgonWorkspace() {
     }
   });
 
-  renderHotspotStage();
+  renderVisualSpatialStage();
   renderNodeInspectorAndDrawer();
   renderPathwaySimulator();
   typesetMath();
 }
 
 // ============================================================================
-// CENTER STAGE: HOTSPOT NODES, 2D PINS & QUIZ BAR (#hotspotCanvas)
+// SPATIAL ZOOM STAGE & CIRCULAR / FLOATING NODE PINS (#hotspotCanvas)
 // ============================================================================
-function renderHotspotStage() {
+function renderVisualSpatialStage() {
   const mod = state.moduleData;
   const levels = mod.scale_levels || [];
   const activeLvl = levels.find(l => l.level_id === state.activeScaleId) || levels[0];
   if (!activeLvl) return;
 
-  // Update HUD Scale Label & Bottom Summary
   const hudLabel = document.getElementById("hudScaleLabel");
   if (hudLabel) {
     hudLabel.textContent = `${activeLvl.level_id}: ${activeLvl.name} ${activeLvl.scale_metric ? `[${activeLvl.scale_metric}]` : ""}`;
@@ -263,7 +169,7 @@ function renderHotspotStage() {
 
   const summaryText = document.getElementById("scaleSummaryText");
   if (summaryText) {
-    summaryText.textContent = activeLvl.description || "Select a hotspot node above to inspect biochemical mechanisms and Part C analytical traps.";
+    summaryText.textContent = activeLvl.description || "Select any spatial hotspot node below to inspect biochemical mechanisms and Part C traps.";
   }
 
   const canvas = document.getElementById("hotspotCanvas");
@@ -273,18 +179,17 @@ function renderHotspotStage() {
   const activeAgent = (mod.inhibitor_simulator?.agents || []).find(a => a.id === state.activeSimAgentId);
   const quizzes = mod.quiz_challenges || [];
 
-  // Optional Quiz Bar inside the stage
   let quizHtml = "";
   if (quizzes.length > 0) {
     const q = quizzes[state.currentQuizIdx] || quizzes[0];
     quizHtml = `
-      <div class="w-full mb-4 p-3.5 rounded-xl bg-slate-950/90 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'}">
+      <div class="w-full mb-3 p-3 rounded-xl bg-slate-950/95 border ${state.quizMode ? 'border-amber-500/70' : 'border-slate-800'} shadow-xl">
         <div class="flex items-center justify-between gap-2">
           <div class="flex items-center space-x-2">
             <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">
               <i class="fa-solid fa-bolt mr-1"></i>CSIR Quiz (${state.currentQuizIdx + 1}/${quizzes.length})
             </span>
-            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching hotspot node below!" : "Test your Part-C recall on this module"}</span>
+            <span class="text-xs font-semibold text-slate-200">${state.quizMode ? "Click the matching spatial node below!" : "Test your Part-C recall"}</span>
           </div>
           <div class="flex items-center space-x-1.5">
             ${state.quizMode ? `
@@ -297,9 +202,9 @@ function renderHotspotStage() {
           </div>
         </div>
         ${state.quizMode ? `
-          <div class="mt-2.5 text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(q.prompt)}</div>
+          <div class="mt-2 text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(q.prompt)}</div>
           ${Array.isArray(q.answer_options) && q.answer_options.length ? `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
               ${q.answer_options.map((opt, i) => `
                 <button data-opt-idx="${i}" class="quiz-mcq-choice p-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-left text-xs text-slate-200 transition">
                   ${formatRichText(opt)}
@@ -307,67 +212,62 @@ function renderHotspotStage() {
               `).join("")}
             </div>
           ` : ""}
-          <div id="stageQuizFeedback" class="hidden mt-2.5 p-2.5 rounded-lg text-xs"></div>
+          <div id="stageQuizFeedback" class="hidden mt-2 p-2 rounded-lg text-xs"></div>
         ` : ""}
       </div>
     `;
   }
 
-  // Render Interactive Hotspot Cards Grid
-  const cardsHtml = nodeIds.map((nid, idx) => {
+  // Render Visual Circular / Floating Spatial Pins & Cards
+  const pinsHtml = nodeIds.map((nid, idx) => {
     const node = mod.nodes?.[nid];
     if (!node) return "";
     const isSelected = node.id === state.activeNodeId;
     const isPerturbed = activeAgent && activeAgent.target_node === node.id;
-    const metricKeys = Object.keys(node.metrics || {});
-    const previewMetric = metricKeys.length ? `${metricKeys[0].replace(/_/g, " ")}: ${node.metrics[metricKeys[0]]}` : "";
+    
+    // Calculate orbital / grid coordinates if UI coordinates aren't explicitly provided
+    const fallbackX = 20 + (idx * 28) % 65;
+    const fallbackY = 30 + Math.floor(idx / 3) * 35;
+    const coords = node.ui_coordinates || node.coordinates || { x: fallbackX, y: fallbackY };
 
     return `
-      <div data-node-id="${node.id}" class="hotspot-node-card cursor-pointer p-4 rounded-xl border transition-all duration-200 flex flex-col justify-between ${
+      <div data-node-id="${node.id}" class="spatial-node-pin cursor-pointer absolute p-3.5 rounded-2xl border transition-all duration-300 backdrop-blur-md max-w-[260px] ${
         isSelected
-          ? "bg-emerald-950/40 border-emerald-400 shadow-lg shadow-emerald-950/50 scale-[1.01]"
-          : "bg-slate-950/80 border-slate-800/90 hover:border-slate-600 hover:bg-slate-900/80"
-      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500" : ""}">
-        <div>
-          <div class="flex items-center justify-between gap-2 mb-1.5">
-            <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-800">
-              ${node.level} • Hotspot ${idx + 1}
-            </span>
-            <div class="flex items-center space-x-1.5">
-              ${isPerturbed ? `<span class="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700 animate-pulse">Inhibited</span>` : ""}
-              ${node.next_zoom_target ? `
-                <button data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip text-[10px] font-mono px-2 py-0.5 rounded bg-sky-950/90 hover:bg-sky-900 text-sky-300 border border-sky-700/60 transition">
-                  Zoom ${node.next_zoom_target} <i class="fa-solid fa-arrow-up-right-from-square ml-0.5"></i>
-                </button>
-              ` : ""}
-            </div>
+          ? "bg-emerald-950/90 border-emerald-400 shadow-2xl shadow-emerald-900/60 scale-105 z-30 ring-2 ring-emerald-400"
+          : "bg-slate-950/85 border-slate-800 hover:border-emerald-500/60 hover:bg-slate-900/90 z-20"
+      } ${isPerturbed ? "ring-2 ring-rose-500 border-rose-500 bg-rose-950/90" : ""}"
+           style="left: ${coords.x}%; top: ${coords.y}%; transform: translate(-50%, -50%);">
+        <div class="flex items-center justify-between gap-2 mb-1">
+          <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-800">
+            ${node.level} • Pin ${idx + 1}
+          </span>
+          <div class="flex items-center space-x-1">
+            ${isPerturbed ? `<span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700 animate-pulse">Inhibited</span>` : ""}
+            ${node.next_zoom_target ? `
+              <button data-zoom-to="${node.next_zoom_target}" class="zoom-jump-chip text-[9px] font-mono px-1.5 py-0.5 rounded bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-700 transition">
+                Zoom ${node.next_zoom_target}
+              </button>
+            ` : ""}
           </div>
-          <h4 class="text-sm font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
-          <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
         </div>
-
-        ${previewMetric ? `
-          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-slate-300 font-mono line-clamp-2">
-            ${formatRichText(previewMetric)}
-          </div>
-        ` : ""}
+        <h4 class="text-xs font-bold text-white leading-snug">${formatRichText(node.title)}</h4>
+        <p class="text-[10px] text-slate-400 mt-1 line-clamp-2">${formatRichText(node.subtitle || "")}</p>
       </div>
     `;
   }).join("");
 
-  const gridCols = nodeIds.length >= 4 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3";
   canvas.innerHTML = `
-    <div class="w-full">
+    <div class="w-full relative min-h-[380px] sm:min-h-[440px]">
       ${quizHtml}
-      <div class="grid ${gridCols} gap-3.5 w-full">
-        ${cardsHtml}
+      <div class="absolute inset-0 w-full h-full pointer-events-auto">
+        ${pinsHtml}
       </div>
     </div>
   `;
 
-  // Bind Hotspot Card Clicks
-  canvas.querySelectorAll(".hotspot-node-card").forEach(card => {
-    card.addEventListener("click", (e) => {
+  // Bind Pin Clicks
+  canvas.querySelectorAll(".spatial-node-pin").forEach(pin => {
+    pin.addEventListener("click", (e) => {
       const zoomBtn = e.target.closest(".zoom-jump-chip");
       if (zoomBtn) {
         e.stopPropagation();
@@ -380,32 +280,31 @@ function renderHotspotStage() {
         return;
       }
 
-      const clickedId = card.dataset.nodeId;
-      state.activeNodeId = clickedId;
-      renderHotspotStage();
+      state.activeNodeId = pin.dataset.nodeId;
+      renderVisualSpatialStage();
       renderNodeInspectorAndDrawer();
 
       if (state.quizMode) {
-        evaluateQuizNodeSelection(clickedId);
+        evaluateQuizNodeSelection(pin.dataset.nodeId);
       }
       typesetMath();
     });
   });
 
-  // Bind Quiz Controls if present
+  // Bind Quiz Stage Controls
   document.getElementById("toggleQuizStageBtn")?.addEventListener("click", () => {
     state.quizMode = !state.quizMode;
-    renderHotspotStage();
+    renderVisualSpatialStage();
     typesetMath();
   });
   document.getElementById("prevQuizStageBtn")?.addEventListener("click", () => {
     state.currentQuizIdx = (state.currentQuizIdx - 1 + quizzes.length) % quizzes.length;
-    renderHotspotStage();
+    renderVisualSpatialStage();
     typesetMath();
   });
   document.getElementById("nextQuizStageBtn")?.addEventListener("click", () => {
     state.currentQuizIdx = (state.currentQuizIdx + 1) % quizzes.length;
-    renderHotspotStage();
+    renderVisualSpatialStage();
     typesetMath();
   });
   canvas.querySelectorAll(".quiz-mcq-choice").forEach(btn => {
@@ -426,7 +325,7 @@ function evaluateQuizNodeSelection(clickedNodeId) {
   const isCorrect = clickedNodeId === q.correct_node_id;
   const msg = isCorrect
     ? (q.feedback?.correct || q.explanation)
-    : (q.feedback?.incorrect || `Not quite! Hint: Check the scale levels for ${q.correct_node_id.replace(/_/g, " ")}.`);
+    : (q.feedback?.incorrect || `Not quite! Hint: Check scale levels for ${q.correct_node_id.replace(/_/g, " ")}.`);
   showStageQuizFeedback(isCorrect, msg);
 }
 
@@ -434,17 +333,15 @@ function showStageQuizFeedback(isCorrect, text) {
   const box = document.getElementById("stageQuizFeedback");
   if (!box) return;
   box.classList.remove("hidden");
-  box.className = `mt-2.5 p-2.5 rounded-lg text-xs border ${
-    isCorrect
-      ? "bg-emerald-950/90 border-emerald-500 text-emerald-200"
-      : "bg-rose-950/90 border-rose-500 text-rose-200"
+  box.className = `mt-2 p-2 rounded-lg text-xs border ${
+    isCorrect ? "bg-emerald-950/90 border-emerald-500 text-emerald-200" : "bg-rose-950/90 border-rose-500 text-rose-200"
   }`;
   box.innerHTML = `<strong>${isCorrect ? "✓ Spot On!" : "✗ Try Again:"}</strong> ${formatRichText(text)}`;
   typesetMath();
 }
 
 // ============================================================================
-// RIGHT COLUMN INSPECTOR (#nodeInspectorContent) & SLIDE-OUT DRAWER (#drawerBody)
+// INSPECTOR & STUDY DRAWER
 // ============================================================================
 function renderNodeInspectorAndDrawer() {
   const mod = state.moduleData;
@@ -473,7 +370,7 @@ function renderNodeInspectorAndDrawer() {
 
     inspector.innerHTML = `
       <div class="pb-2 border-b border-slate-800">
-        <div class="text-[10px] font-mono uppercase text-emerald-400">${node.level} Active Hotspot</div>
+        <div class="text-[10px] font-mono uppercase text-emerald-400">${node.level} Active Pin</div>
         <h4 class="text-sm font-bold text-white mt-0.5">${formatRichText(node.title)}</h4>
         <p class="text-[11px] text-slate-400 mt-0.5">${formatRichText(node.subtitle || "")}</p>
       </div>
@@ -489,10 +386,7 @@ function renderNodeInspectorAndDrawer() {
     document.getElementById("inspectorOpenDrawerBtn")?.addEventListener("click", () => toggleStudyDrawer(true));
   }
 
-  // Populate Slide-Out Study Drawer (#drawerTitle & #drawerBody)
   renderSlideOutDrawer(node);
-
-  // Trigger Live NCBI PubMed Lookup for the selected node
   fetchPubMedArticles(node.title);
 }
 
@@ -513,9 +407,7 @@ function renderSlideOutDrawer(node) {
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1 rounded-xl bg-slate-950 border border-slate-800 mb-4">
       ${tabsConfig.map(t => `
         <button data-drawer-tab="${t.key}" class="drawer-tab-pill py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
-          state.activeDrawerTab === t.key
-            ? "bg-emerald-600 text-white shadow"
-            : "text-slate-400 hover:text-slate-200"
+          state.activeDrawerTab === t.key ? "bg-emerald-600 text-white shadow" : "text-slate-400 hover:text-slate-200"
         }">
           <i class="fa-solid ${t.icon} text-[10px]"></i>
           <span>${t.label}</span>
@@ -560,7 +452,7 @@ function renderSlideOutDrawer(node) {
 }
 
 // ============================================================================
-// PATHWAY & INHIBITOR SIMULATOR PANEL (#simulatorPanel)
+// SIMULATOR PANEL (PRESERVING KINETICS SANDBOX + INHIBITOR AGENTS)
 // ============================================================================
 function renderPathwaySimulator() {
   const simPanel = document.getElementById("simulatorPanel");
@@ -589,9 +481,7 @@ function renderPathwaySimulator() {
     const isSelected = ag.id === state.activeSimAgentId;
     return `
       <button data-sim-agent="${ag.id}" class="sim-agent-pill px-3 py-1.5 rounded-xl text-xs font-semibold border transition flex items-center space-x-1.5 ${
-        isSelected
-          ? "bg-rose-950/90 border-rose-500 text-rose-200 shadow"
-          : "bg-slate-950 border-slate-800 text-slate-300 hover:border-emerald-500/50"
+        isSelected ? "bg-rose-950/90 border-rose-500 text-rose-200 shadow" : "bg-slate-950 border-slate-800 text-slate-300 hover:border-emerald-500/50"
       }">
         <i class="fa-solid fa-vial-circle-check text-[10px] ${isSelected ? 'text-rose-400' : 'text-emerald-400'}"></i>
         <span>${ag.name}</span>
@@ -609,28 +499,72 @@ function renderPathwaySimulator() {
     `
     : "";
 
+  // Preserve the Michaelis-Menten kinetics sliders from index.html while appending CSIR Perturbations below
   simPanel.innerHTML = `
-    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+    <div class="flex items-center justify-between mb-3">
       <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center space-x-2">
         <i class="fa-solid fa-flask-vial"></i>
-        <span>CSIR Experimental Perturbation & Inhibitor Simulator</span>
+        <span id="simTitle">Interactive Kinetics & Flux Sandbox</span>
       </h3>
-      ${activeAgent ? `
-        <button id="resetSimAgentBtn" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300">
-          <i class="fa-solid fa-rotate-left mr-1"></i>Reset to Wild-Type Baseline
-        </button>
-      ` : `<span class="text-[11px] font-mono text-slate-400">Select an inhibitor/agent to perturb pathway</span>`}
+      <div class="flex items-center space-x-2">
+        <span class="text-[11px] font-mono text-slate-400" id="simReadout">v0 = (Vmax · [S]) / (Km + [S])</span>
+        ${activeAgent ? `<button id="resetSimAgentBtn" class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300">Reset Agent</button>` : ""}
+      </div>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 mb-4">
+      <div>
+        <label class="block text-[11px] text-slate-400 mb-1">Substrate Concentration $[S]$ (<span id="subVal">50</span> $\mu\text{M}$)</label>
+        <input type="range" id="simSubstrate" min="1" max="200" value="50" class="w-full accent-emerald-500">
+      </div>
+      <div>
+        <label class="block text-[11px] text-slate-400 mb-1">Modifier / Inhibitor $[I]$ (<span id="inhVal">0</span> $\mu\text{M}$)</label>
+        <input type="range" id="simInhibitor" min="0" max="100" value="0" class="w-full accent-amber-500">
+      </div>
+    </div>
+    <div id="simCalculatedOutput" class="mb-4 p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-emerald-300">
+      Reaction Velocity ($V_0$): 71.4 µmol/min | Apparent $K_m$: 20.0 µM
     </div>
 
-    <div class="flex flex-wrap gap-2 mb-3.5">
-      ${agentsButtonsHtml || `<span class="text-xs text-slate-400">No inhibitor agents configured for this module.</span>`}
+    <div class="pt-3 border-t border-slate-800">
+      <div class="text-[10px] font-mono uppercase text-emerald-400 font-bold mb-2">CSIR Experimental Perturbation & Inhibitor Simulator</div>
+      <div class="flex flex-wrap gap-2 mb-3">
+        ${agentsButtonsHtml || `<span class="text-xs text-slate-400">No inhibitor agents configured for this module.</span>`}
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+        ${metricsHtml}
+      </div>
+      ${mechDetail}
     </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-      ${metricsHtml}
-    </div>
-    ${mechDetail}
   `;
+
+  // Bind Kinetics Sliders
+  const subSlider = document.getElementById("simSubstrate");
+  const inhSlider = document.getElementById("simInhibitor");
+  const subVal = document.getElementById("subVal");
+  const inhVal = document.getElementById("inhVal");
+  const outBox = document.getElementById("simCalculatedOutput");
+
+  const updateKinetics = () => {
+    const S = Number(subSlider?.value || 50);
+    const I = Number(inhSlider?.value || 0);
+    if (subVal) subVal.textContent = S;
+    if (inhVal) inhVal.textContent = I;
+
+    const Vmax = 100;
+    const Km = 20;
+    const Ki = 25;
+    const apparentKm = Km * (1 + I / Ki);
+    const v0 = (Vmax * S) / (apparentKm + S);
+    if (outBox) {
+      outBox.innerHTML = `Reaction Velocity ($V_0$): ${v0.toFixed(1)} µmol/min | Apparent $K_m$: ${apparentKm.toFixed(1)} µM`;
+    }
+    typesetMath();
+  };
+
+  subSlider?.addEventListener("input", updateKinetics);
+  inhSlider?.addEventListener("input", updateKinetics);
+  updateKinetics();
 
   simPanel.querySelectorAll(".sim-agent-pill").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -651,9 +585,6 @@ function renderPathwaySimulator() {
   });
 }
 
-// ============================================================================
-// LEFT SIDEBAR NAVIGATION (#moduleNavContainer) & PUBMED FEED (#pubmedContainer)
-// ============================================================================
 function renderSidebarNav(list) {
   const nav = document.getElementById("moduleNavContainer");
   const badge = document.getElementById("loadedModulesBadge");
@@ -714,11 +645,7 @@ async function fetchPubMedArticles(queryText) {
   }
 }
 
-// ============================================================================
-// UI EVENT BINDINGS (SCALE BUTTONS, DRAWER, BUNDLE MODAL, SEARCH)
-// ============================================================================
 function bindArgonEvents() {
-  // L1 - L4 Scale Buttons
   document.querySelectorAll(".scale-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const targetScale = btn.dataset.scale;
@@ -731,7 +658,6 @@ function bindArgonEvents() {
     });
   });
 
-  // Toggle Pathway Simulator Panel (#toggleSimBtn -> #simulatorPanel)
   const simPanel = document.getElementById("simulatorPanel");
   document.getElementById("toggleSimBtn")?.addEventListener("click", () => {
     if (!simPanel) return;
@@ -741,12 +667,10 @@ function bindArgonEvents() {
     }
   });
 
-  // Slide-Out Study Drawer (#openDrawerBtn, #closeDrawerBtn, #studyDrawerBackdrop)
   document.getElementById("openDrawerBtn")?.addEventListener("click", () => toggleStudyDrawer(true));
   document.getElementById("closeDrawerBtn")?.addEventListener("click", () => toggleStudyDrawer(false));
   document.getElementById("studyDrawerBackdrop")?.addEventListener("click", () => toggleStudyDrawer(false));
 
-  // High-Yield Study Bundle Modal (#openBundleModalBtn, #closeBundleModalBtn, #bundleModal)
   const bundleModal = document.getElementById("bundleModal");
   document.getElementById("openBundleModalBtn")?.addEventListener("click", () => {
     bundleModal?.classList.remove("hidden");
@@ -757,7 +681,6 @@ function bindArgonEvents() {
     bundleModal?.classList.remove("flex");
   });
 
-  // Global Search Input (#globalModuleSearch)
   document.getElementById("globalModuleSearch")?.addEventListener("input", (e) => {
     const q = e.target.value.toLowerCase().trim();
     const filtered = MODULE_REGISTRY.filter(m =>
@@ -781,7 +704,7 @@ function formatRichText(str) {
   return String(str)
     .replace(/\*\*\*(.*?)\*\*\*/g, '<strong class="italic text-emerald-300">$1</strong>')
     .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em class="text-slate-300">$1</em>')
+    .replace(/\*(.*?)\*/g, '<em class="text-slate-300">$1</i>')
     .replace(/\n/g, "<br>");
 }
 
@@ -801,7 +724,7 @@ function getFallbackModuleData(regItem) {
         level_id: "L1",
         name: "Overview & Architecture",
         scale_metric: "100 nm",
-        description: `Upload ${regItem.files[0]} into the /data folder on your main branch to populate this module.`,
+        description: `Upload ${regItem.files[0]} into the /data folder on your main branch.`,
         hotspots: ["node_fallback"]
       }
     ],
@@ -813,11 +736,11 @@ function getFallbackModuleData(regItem) {
         subtitle: `Expected ./data/${regItem.files[0]} on the 'main' GitHub branch.`,
         metrics: {
           expected_path: `./data/${regItem.files[0]}`,
-          fix: "Ensure your JSON files are inside the 'data/' folder on the 'main' branch (not on the separate 'data' branch)."
+          fix: "Ensure your JSON files are inside the 'data/' folder on the 'main' branch."
         },
         tabs: {
-          mechanism: [`Make sure \`data/${regItem.files[0]}\` is committed to the \`main\` branch of your GitHub repository.`],
-          csir_high_yield: ["Once uploaded to `main/data/`, refresh the page and your full CSIR NET module will render automatically."],
+          mechanism: [`Make sure \`data/${regItem.files[0]}\` is committed to the \`main\` branch.`],
+          csir_high_yield: ["Once uploaded to `main/data/`, refresh the page."],
           pathology: ["No data loaded yet."],
           lab_workbench: ["No data loaded yet."]
         },
