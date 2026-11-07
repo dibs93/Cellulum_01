@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cellulum — Interactive Multi-Scale Life Sciences Observatory</title>
+  <!-- Tailwind CSS for layout utility + Custom Argon Styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="argon-theme bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- Top Observatory Header -->
+  <header class="argon-header sticky top-0 z-40 bg-slate-900/85 backdrop-blur-md border-b border-slate-800 px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="brand-orb w-10 h-10 rounded-xl flex items-center justify-center shadow-lg">
+        <i class="fa-solid fa-dna text-white text-lg"></i>
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span id="appBrandTitle" class="brand-title text-xl font-extrabold tracking-tight">Cellulum</span>
+          <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">Argon Engine v2.4</span>
+        </div>
+        <span id="appBrandTagline" class="block text-[11px] text-slate-400">Multi-Scale Life Sciences Observatory</span>
+      </div>
+    </div>
+
+    <!-- Global Search & Monetization/Bundle Triggers -->
+    <div class="flex items-center space-x-3">
+      <div class="relative hidden md:block">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
+        <input type="text" id="globalModuleSearch" placeholder="Search pathways, enzymes, units..." 
+               class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-64 transition">
+      </div>
+
+      <button id="openBundleModalBtn" class="argon-btn-primary px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-2">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>High-Yield Study Bundle</span>
+      </button>
+
+      <a id="supportBtn" href="#support" class="px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-amber-400 flex items-center space-x-1.5 transition">
+        <i class="fa-solid fa-mug-hot"></i>
+        <span class="hidden sm:inline">Support</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Argon Workspace Grid -->
+  <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 max-w-[1600px] w-full mx-auto p-4 sm:p-6 gap-6 relative">
+
+    <!-- Left Column: CSIR NET 15-Module JSON Navigator -->
+    <aside class="lg:col-span-3 flex flex-col space-y-4">
+      <div class="argon-panel p-4 rounded-2xl flex-1 flex flex-col">
+        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800/80">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">CSIR NET Curriculum</h2>
+          <span id="loadedModulesBadge" class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/40">15 JSON Units</span>
+        </div>
+        <div id="moduleNavContainer" class="space-y-1.5 overflow-y-auto max-h-[calc(100vh-220px)] pr-1 custom-scroll">
+          <!-- Populated dynamically by Argon JSON Loader -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center Column: Multi-Scale Interactive Viewport & Simulator -->
+    <main class="lg:col-span-6 flex flex-col space-y-5">
+      
+      <!-- Scale Transition Bar (L1 to L4) -->
+      <div class="argon-panel p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span id="activeUnitTag" class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">UNIT 01</span>
+          <h1 id="activeModuleTitle" class="text-lg font-bold text-white leading-tight">Loading Module...</h1>
+        </div>
+
+        <div class="scale-switcher flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800" role="group">
+          <button data-scale="L1" class="scale-btn" title="Organismal / Physiological Scale">L1 · Macro</button>
+          <button data-scale="L2" class="scale-btn" title="Tissue & Organ Architecture">L2 · Tissue</button>
+          <button data-scale="L3" class="scale-btn active" title="Cellular & Organelle Ultrastructure">L3 · Cellular</button>
+          <button data-scale="L4" class="scale-btn" title="Molecular, Atomic & Kinetic Scale">L4 · Molecular</button>
+        </div>
+      </div>
+
+      <!-- Interactive Visual Hotspot Canvas -->
+      <div id="interactiveStage" class="argon-stage rounded-2xl relative overflow-hidden flex-1 min-h-[420px] flex flex-col justify-between p-6">
+        <!-- Top Overlay HUD -->
+        <div class="flex items-center justify-between z-10 pointer-events-none">
+          <div class="bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800/80 text-xs flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span id="hudScaleLabel" class="font-mono text-slate-300">L3: Cellular Ultrastructure</span>
+          </div>
+          <button id="openDrawerBtn" class="pointer-events-auto bg-slate-900/90 hover:bg-emerald-950/90 text-emerald-400 border border-emerald-700/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-lg">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Open Part-C Study Drawer</span>
+          </button>
+        </div>
+
+        <!-- Dynamic SVG / Hotspot Nodes Container -->
+        <div id="hotspotCanvas" class="my-auto py-6 flex flex-col items-center justify-center relative z-10">
+          <!-- Interactive Nodes & Pathway Simulators injected via app.js -->
+        </div>
+
+        <!-- Bottom Scale Crumb & Kinetics Bar -->
+        <div class="z-10 bg-slate-950/85 backdrop-blur-md p-3.5 rounded-xl border border-slate-800/90 flex flex-wrap items-center justify-between gap-3">
+          <p id="scaleSummaryText" class="text-xs text-slate-300 flex-1">Select a hotspot node above to inspect biochemical mechanisms and Part C analytical traps.</p>
+          <button id="toggleSimBtn" class="px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-xs font-mono transition">
+            <i class="fa-solid fa-wave-square mr-1"></i> Pathway Simulator
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Kinetics / Pathway Simulator Panel (Collapsible) -->
+      <div id="simulatorPanel" class="argon-panel p-5 rounded-2xl hidden">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center space-x-2">
+            <i class="fa-solid fa-flask-vial"></i>
+            <span id="simTitle">Interactive Kinetics & Flux Sandbox</span>
+          </h3>
+          <span class="text-[11px] font-mono text-slate-400" id="simReadout">v0 = (Vmax · [S]) / (Km + [S])</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Substrate Concentration $[S]$ (<span id="subVal">50</span> $\mu\text{M}$)</label>
+            <input type="range" id="simSubstrate" min="1" max="200" value="50" class="w-full accent-emerald-500">
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Modifier / Inhibitor $[I]$ (<span id="inhVal">0</span> $\mu\text{M}$)</label>
+            <input type="range" id="simInhibitor" min="0" max="100" value="0" class="w-full accent-amber-500">
+          </div>
+        </div>
+        <div id="simCalculatedOutput" class="mt-3 p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-emerald-300">
+          Reaction Velocity ($V_0$): 71.4 µmol/min | Apparent $K_m$: 20.0 µM
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Right Column: Node Inspector & Live NCBI PubMed Feed -->
+    <aside class="lg:col-span-3 flex flex-col space-y-5">
+      
+      <!-- Active Hotspot Node Inspector -->
+      <div class="argon-panel p-4 rounded-2xl">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2 flex items-center space-x-2">
+          <i class="fa-solid fa-crosshairs"></i>
+          <span>Mechanism & Part-C Focus</span>
+        </h3>
+        <div id="nodeInspectorContent" class="text-xs text-slate-300 space-y-2 leading-relaxed">
+          <!-- Populated on Hotspot Click -->
+        </div>
+      </div>
+
+      <!-- Live NCBI E-Utilities PubMed Integration -->
+      <div class="argon-panel p-4 rounded-2xl flex-1 flex flex-col">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-sky-400 flex items-center space-x-2">
+            <i class="fa-solid fa-book-journal-whills"></i>
+            <span>Live PubMed Feed</span>
+          </h3>
+          <span class="text-[10px] font-mono text-slate-500">NCBI E-utils</span>
+        </div>
+        <div id="pubmedContainer" class="space-y-2.5 overflow-y-auto max-h-[340px] pr-1 custom-scroll flex-1">
+          <!-- Populated dynamically via PubMed API -->
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Slide-Out Deep Study Drawer (Argon Drawer Component) -->
+  <div id="studyDrawerBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity"></div>
+  <aside id="studyDrawer" class="fixed top-0 right-0 h-full w-full max-w-lg bg-slate-900 border-l border-slate-800 z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+    <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-mono uppercase text-emerald-400">Deep-Dive Reference Drawer</span>
+        <h3 id="drawerTitle" class="text-base font-bold text-white">Analytical Notes & Experimental Assays</h3>
+      </div>
+      <button id="closeDrawerBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div id="drawerBody" class="p-6 overflow-y-auto flex-1 space-y-4 text-xs text-slate-300 leading-relaxed custom-scroll">
+      <!-- Dynamic Part-C Analytical Tables & Notes -->
+    </div>
+  </aside>
+
+  <!-- Monetization Modal: High-Yield Study Bundle -->
+  <div id="bundleModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="argon-panel max-w-md w-full rounded-2xl p-6 border border-emerald-500/40 relative shadow-2xl">
+      <button id="closeBundleModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md bg-emerald-950 text-emerald-400 text-[10px] font-mono uppercase mb-3 border border-emerald-800">
+        <i class="fa-solid fa-star"></i>
+        <span>CSIR NET Master Revision</span>
+      </div>
+      <h3 class="text-lg font-bold text-white mb-2">Cellulum High-Yield Study Bundle</h3>
+      <p class="text-xs text-slate-300 leading-relaxed mb-4">
+        Get the complete offline companion to Cellulum: 13 Unit Rapid-Revision Cheat Sheets, Part-C Experimental Trap Flowcharts, and 500+ Anki Flashcards.
+      </p>
+      <ul class="text-xs text-slate-300 space-y-2 mb-6">
+        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-400"></i><span>All 15 Module Biochemical & Genetic Maps (PDF)</span></li>
+        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-400"></i><span>Enzyme Kinetics & Genetics Calculation Workbook</span></li>
+        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-400"></i><span>Spaced-Repetition Anki Deck (.apkg)</span></li>
+      </ul>
+      <div class="flex items-center space-x-3">
+        <a id="bundlePurchaseLink" href="#" target="_blank" class="argon-btn-primary flex-1 py-2.5 rounded-xl text-xs font-bold text-center">
+          Download Master Bundle
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
