@@ -4,6 +4,19 @@
  * ============================================================================
  */
 
+// Add this inside your DOMContentLoaded or at the top of app.js to inject smooth optical zoom keyframes
+const zoomStyle = document.createElement("style");
+zoomStyle.innerHTML = `
+  @keyframes opticalZoomIn {
+    0% { transform: scale(0.94); opacity: 0.4; filter: blur(6px); }
+    50% { filter: blur(2px); }
+    100% { transform: scale(1); opacity: 1; filter: blur(0); }
+  .stage-optical-zoom {
+    animation: opticalZoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+`;
+document.head.appendChild(zoomStyle);
+
 const APP_CONFIG = {
   name: "Cellulum",
   searchPaths: ["./data/", "./", "./modules/"]
@@ -45,18 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
   bindArgonEvents();
   loadModule(MODULE_REGISTRY[0].id);
 });
-// Add this inside your DOMContentLoaded or at the top of app.js to inject smooth optical zoom keyframes
-const zoomStyle = document.createElement("style");
-zoomStyle.innerHTML = `
-  @keyframes opticalZoomIn {
-    0% { transform: scale(0.94); opacity: 0.4; filter: blur(6px); }
-    50% { filter: blur(2px); }
-    100% { transform: scale(1); opacity: 1; filter: blur(0); }
-  .stage-optical-zoom {
-    animation: opticalZoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-`;
-document.head.appendChild(zoomStyle);
 
 function injectMathJaxSupport() {
   if (!window.MathJax) {
