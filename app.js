@@ -45,6 +45,18 @@ document.addEventListener("DOMContentLoaded", () => {
   bindArgonEvents();
   loadModule(MODULE_REGISTRY[0].id);
 });
+// Add this inside your DOMContentLoaded or at the top of app.js to inject smooth optical zoom keyframes
+const zoomStyle = document.createElement("style");
+zoomStyle.innerHTML = `
+  @keyframes opticalZoomIn {
+    0% { transform: scale(0.94); opacity: 0.4; filter: blur(6px); }
+    50% { filter: blur(2px); }
+    100% { transform: scale(1); opacity: 1; filter: blur(0); }
+  .stage-optical-zoom {
+    animation: opticalZoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+`;
+document.head.appendChild(zoomStyle);
 
 function injectMathJaxSupport() {
   if (!window.MathJax) {
@@ -653,14 +665,28 @@ async function fetchPubMedArticles(queryText) {
 }
 
 function bindArgonEvents() {
+
+  // L1 - L4 Scale Buttons with Optical Zoom Transition
   document.querySelectorAll(".scale-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const targetScale = btn.dataset.scale;
+      if (state.activeScaleId === targetScale) return; // already active
+
       state.activeScaleId = targetScale;
+
+      // Trigger cinematic zoom-lens animation on the interactive stage
+      const stage = document.getElementById("interactiveStage");
+      if (stage) {
+        stage.classList.remove("stage-optical-zoom");
+        void stage.offsetWidth; // force reflow
+        stage.classList.add("stage-optical-zoom");
+      }
+
       const levels = state.moduleData?.scale_levels || [];
       const lvlObj = levels.find(l => l.level_id === targetScale);
       const lvlNodes = lvlObj?.node_ids || lvlObj?.hotspots || [];
       if (lvlNodes.length) state.activeNodeId = lvlNodes[0];
+      
       renderArgonWorkspace();
     });
   });
