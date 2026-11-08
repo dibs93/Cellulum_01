@@ -1354,24 +1354,38 @@ function getFallbackModuleData(regItem) {
     return slice.replace(regex, `<strong class="text-emerald-300 underline">$1</strong>`);
   }
 })();
-// ============================================================================
-// UI REFINEMENT PACK:
+
+ // ============================================================================
+// UI REFINEMENT PACK (V2):
 // 1. Phone-Lock Module Carousel Controls
-// 2. Pure Physical Metric Slider (Hides L1-L4 Labels, Shows Only Size + Unit)
-// 3. Interactive SVG Pathway Flux & Enzyme Kinetics Curve Simulator
+// 2. Pure Physical Metric Slider
+// 3. Self-Contained Expandable Pathway Simulator Tab with:
+//    - SVG Pathway Diagram at the TOP
+//    - Floating Quick-Info Inspector Popover at the TOP on Node/Factor Click
 // ============================================================================
 (function initCellulumRefinements() {
   const FALLBACK_METRICS = ["500 μm", "50 μm", "1.5 μm", "8 nm"];
+  let simExpanded = false; // Starts neatly collapsed as a clickable button/tab; expands on click
+  let selectedSimNodeId = null; // Tracks which SVG node/complex is clicked for the top floating info tab
 
   document.addEventListener("DOMContentLoaded", () => {
     setupLockScreenModuleCarousel();
+    hideOldDuplicateSimButton();
     overrideWorkspaceForMetricSliderAndSvgSim();
   });
+
+  // Hide the old duplicate "Pathway Simulator" button in the upper stage crumb bar
+  function hideOldDuplicateSimButton() {
+    const oldBtn = document.getElementById("toggleSimBtn");
+    if (oldBtn) oldBtn.style.display = "none";
+    const simPanel = document.getElementById("simulatorPanel");
+    if (simPanel) simPanel.classList.remove("hidden"); // Always visible as a clickable expandable tab
+  }
 
   // 1. PHONE-LOCK STYLE MODULE CAROUSEL HEADER & ARROWS
   function setupLockScreenModuleCarousel() {
     const nav = document.getElementById("moduleNavContainer");
-    if (!nav || !nav.parentElement) return;
+    if (!nav || !nav.parentElement || document.getElementById("modCarouselPrev")) return;
 
     const controlsBar = document.createElement("div");
     controlsBar.className = "flex items-center justify-between mb-2 px-1 text-[11px] font-mono text-emerald-300";
@@ -1393,6 +1407,7 @@ function getFallbackModuleData(regItem) {
       const nextIdx = (idx + dir + MODULE_REGISTRY.length) % MODULE_REGISTRY.length;
       const targetMod = MODULE_REGISTRY[nextIdx];
       if (targetMod) {
+        selectedSimNodeId = null;
         loadModule(targetMod.id);
         setTimeout(() => {
           const card = nav.querySelector(`.mod-nav-card[data-id="${targetMod.id}"]`);
@@ -1405,14 +1420,13 @@ function getFallbackModuleData(regItem) {
     document.getElementById("modCarouselNext")?.addEventListener("click", () => stepModule(1));
   }
 
-  // Extract Pure Size + Unit (e.g. "1.5 μm (Organelle)" -> "1.5 μm")
   function extractPureMetric(lvlObj, idx) {
     const raw = (lvlObj?.scale_metric || FALLBACK_METRICS[idx] || "10 nm").trim();
     const cleaned = raw.split("(")[0].split("–")[0].split("-")[0].trim();
     return cleaned || FALLBACK_METRICS[idx] || "10 nm";
   }
 
-  // 2. REPLACE L1-L4 BUTTONS WITH PURE METRIC SLIDER & STRIP L1-L4 FROM UI
+  // 2. PURE METRIC SLIDER
   function renderPureMetricSlider() {
     const mod = state.moduleData;
     if (!mod) return;
@@ -1421,7 +1435,6 @@ function getFallbackModuleData(regItem) {
     const activeLvl = levels[activeIdx] || levels[0];
     const currentMetric = extractPureMetric(activeLvl, activeIdx);
 
-    // Replace the old .scale-switcher button group with a sleek Aero Metric Slider
     const switcher = document.querySelector(".scale-switcher");
     if (switcher) {
       switcher.className = "scale-switcher metric-scale-slider-wrap flex flex-col";
@@ -1444,8 +1457,7 @@ function getFallbackModuleData(regItem) {
         </div>
       `;
 
-      const sliderEl = document.getElementById("pureMetricScaleSlider");
-      sliderEl?.addEventListener("input", (e) => {
+      document.getElementById("pureMetricScaleSlider")?.addEventListener("input", (e) => {
         const chosenLvl = levels[Number(e.target.value)];
         if (chosenLvl && chosenLvl.level_id !== state.activeScaleId) {
           switchScaleWithZoom(chosenLvl.level_id);
@@ -1460,21 +1472,17 @@ function getFallbackModuleData(regItem) {
       });
     }
 
-    // Update HUD, Center Lens, and Cards so ONLY the physical metric is shown (No L1-L4!)
     const hudLabel = document.getElementById("hudScaleLabel");
     if (hudLabel && activeLvl) {
       hudLabel.textContent = `${currentMetric} • ${activeLvl.name}`;
     }
 
-    // Replace L1-L4 inside circular radar orbs and cards with pure metric units
     const canvas = document.getElementById("hotspotCanvas");
     if (canvas) {
-      canvas.querySelectorAll("[data-orb-node]").forEach((orb, i) => {
+      canvas.querySelectorAll("[data-orb-node]").forEach(orb => {
         const firstSpan = orb.querySelector("span:first-child");
         if (firstSpan) firstSpan.textContent = currentMetric;
       });
-
-      // Replace center core readout & zoom bar text
       canvas.querySelectorAll("span").forEach(sp => {
         if (/^L[1-4]\b/.test(sp.textContent.trim())) {
           sp.textContent = sp.textContent.replace(/L[1-4]\s*•?\s*/g, `${currentMetric} • `).replace(/•\s*•/g, "•");
@@ -1483,8 +1491,6 @@ function getFallbackModuleData(regItem) {
           sp.textContent = `Resolution: ${currentMetric}`;
         }
       });
-
-      // Update "Zoom Deeper (L2)" buttons to show target size instead of L2/L3/L4
       canvas.querySelectorAll(".zoom-jump-chip").forEach(chip => {
         const targetId = chip.dataset.zoomTo;
         const targetIdx = levels.findIndex(l => l.level_id === targetId);
@@ -1496,10 +1502,11 @@ function getFallbackModuleData(regItem) {
     }
   }
 
-  // 3. INTERACTIVE SVG PATHWAY FLUX & KINETICS CURVE SIMULATOR
+  // 3. SELF-CONTAINED EXPANDABLE PATHWAY SIMULATOR WITH TOP SVG & FLOATING QUICK-INFO TAB
   function renderInteractiveSvgSimulator() {
     const simPanel = document.getElementById("simulatorPanel");
     if (!simPanel || !state.moduleData) return;
+    simPanel.classList.remove("hidden");
 
     const mod = state.moduleData;
     const sim = mod.inhibitor_simulator || {};
@@ -1508,28 +1515,34 @@ function getFallbackModuleData(regItem) {
     const baseline = sim.baseline_metrics || {};
     const predicted = activeAgent?.predicted_phenotype || activeAgent?.resulting_metrics || {};
 
-    // Pick 4 representative pathway nodes across the module for the interactive SVG circuit
+    // Gather up to 4 pathway nodes for the interactive SVG diagram
     const allNodes = Object.values(mod.nodes || {}).slice(0, 4);
+    if (!selectedSimNodeId && allNodes.length) {
+      selectedSimNodeId = activeAgent?.target_node || allNodes[0].id;
+    }
+    const inspectedNode = mod.nodes?.[selectedSimNodeId] || allNodes[0];
+
     const targetNodeId = activeAgent?.target_node;
     const blockedIdx = allNodes.findIndex(n => n.id === targetNodeId);
 
+    // Build Interactive SVG Nodes (Clickable to open/update the top floating info tab)
     const svgNodesHtml = allNodes.map((n, i) => {
       const cx = 75 + i * 145;
       const cy = 92;
+      const isSelectedNode = inspectedNode && n.id === inspectedNode.id;
       const isTarget = n.id === targetNodeId || (activeAgent && blockedIdx === -1 && i === 1);
       const isDownstreamBlocked = activeAgent && ((blockedIdx !== -1 && i > blockedIdx) || (blockedIdx === -1 && i > 1));
-      const shortName = (n.title || `Step ${i + 1}`).split(":")[0].split("(")[0].trim().slice(0, 16);
+      const shortName = (n.title || `Complex ${i + 1}`).split(":")[0].split("(")[0].trim().slice(0, 15);
 
-      // Edge connecting to next node
       let edgeSvg = "";
       if (i < allNodes.length - 1) {
         const nextCx = 75 + (i + 1) * 145;
         const edgeBlocked = isTarget || isDownstreamBlocked;
         edgeSvg = `
-          <line x1="${cx + 36}" y1="${cy}" x2="${nextCx - 36}" y2="${cy}"
+          <line x1="${cx + 38}" y1="${cy}" x2="${nextCx - 38}" y2="${cy}"
                 stroke="${edgeBlocked ? '#f43f5e' : '#34d399'}" stroke-width="3"
                 class="${edgeBlocked ? 'svg-flux-blocked' : 'svg-flux-active'}" />
-          <polygon points="${nextCx - 36},${cy} ${nextCx - 44},${cy - 5} ${nextCx - 44},${cy + 5}"
+          <polygon points="${nextCx - 38},${cy} ${nextCx - 46},${cy - 5} ${nextCx - 46},${cy + 5}"
                    fill="${edgeBlocked ? '#f43f5e' : '#34d399'}" />
         `;
       }
@@ -1537,18 +1550,21 @@ function getFallbackModuleData(regItem) {
       return `
         ${edgeSvg}
         <g class="svg-pathway-node cursor-pointer" data-svg-node="${n.id}">
+          <!-- Outer Selection Halo if clicked -->
+          ${isSelectedNode ? `
+            <circle cx="${cx}" cy="${cy}" r="41" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 3" />
+          ` : ""}
           <circle cx="${cx}" cy="${cy}" r="34"
-                  fill="${isTarget ? 'rgba(159, 18, 57, 0.85)' : isDownstreamBlocked ? 'rgba(30, 41, 59, 0.7)' : 'rgba(6, 78, 59, 0.85)'}"
-                  stroke="${isTarget ? '#fb7185' : isDownstreamBlocked ? '#64748b' : '#34d399'}"
-                  stroke-width="${isTarget ? '3' : '2'}" />
+                  fill="${isTarget ? 'rgba(159, 18, 57, 0.9)' : isSelectedNode ? 'rgba(3, 105, 161, 0.85)' : isDownstreamBlocked ? 'rgba(30, 41, 59, 0.75)' : 'rgba(6, 78, 59, 0.88)'}"
+                  stroke="${isTarget ? '#fb7185' : isSelectedNode ? '#38bdf8' : isDownstreamBlocked ? '#64748b' : '#34d399'}"
+                  stroke-width="${isSelectedNode || isTarget ? '3' : '2'}" />
           <text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace" font-weight="bold">
             STEP ${i + 1}
           </text>
-          <text x="${cx}" y="${cy + 11}" text-anchor="middle" fill="${isTarget ? '#fecdd3' : '#a7f3d0'}" font-size="9" font-family="sans-serif">
+          <text x="${cx}" y="${cy + 11}" text-anchor="middle" fill="${isTarget ? '#fecdd3' : '#e2e8f0'}" font-size="9" font-family="sans-serif">
             ${shortName}
           </text>
           ${isTarget ? `
-            <!-- Red T-Bar Inhibitor Clamp -->
             <line x1="${cx}" y1="${cy - 54}" x2="${cx}" y2="${cy - 37}" stroke="#f43f5e" stroke-width="3.5" />
             <line x1="${cx - 14}" y1="${cy - 37}" x2="${cx + 14}" y2="${cy - 37}" stroke="#f43f5e" stroke-width="4" />
             <rect x="${cx - 48}" y="${cy - 74}" width="96" height="18" rx="6" fill="#881337" stroke="#fb7185" stroke-width="1" />
@@ -1560,13 +1576,66 @@ function getFallbackModuleData(regItem) {
       `;
     }).join("");
 
+    // Build Limited Floating Quick-Info Tab for the Selected Node / Complex / Inhibitor (Sits at TOP of Simulator!)
+    let floatingQuickTabHtml = "";
+    if (inspectedNode) {
+      const metricEntries = Object.entries(inspectedNode.metrics || {}).slice(0, 2);
+      const conciseSummary = (inspectedNode.tabs?.mechanism?.[0] || inspectedNode.subtitle || "").slice(0, 210) + "...";
+
+      floatingQuickTabHtml = `
+        <div id="simFloatingQuickCard" class="mb-3.5 p-3.5 rounded-2xl bg-slate-950/95 border border-sky-400/50 shadow-2xl relative backdrop-blur-xl">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-1">
+                <span class="px-2 py-0.5 rounded text-[9px] font-mono uppercase bg-sky-950 text-sky-300 border border-sky-700/60">
+                  <i class="fa-solid fa-circle-info mr-1"></i>Selected Complex / Node
+                </span>
+                ${activeAgent ? `
+                  <span class="px-2 py-0.5 rounded text-[9px] font-mono uppercase bg-rose-950 text-rose-300 border border-rose-700/60">
+                    Perturbed by ${activeAgent.name.split("(")[0].trim()}
+                  </span>
+                ` : ""}
+              </div>
+              <h4 class="text-xs sm:text-sm font-bold text-white leading-snug">${formatRichText(inspectedNode.title)}</h4>
+              <p class="text-[11px] text-slate-400 mt-0.5">${formatRichText(inspectedNode.subtitle || "")}</p>
+            </div>
+            <button type="button" id="closeSimQuickCardBtn" class="p-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <p class="text-[11px] text-slate-200 leading-relaxed mt-2 pt-2 border-t border-white/10">
+            ${formatRichText(conciseSummary)}
+          </p>
+
+          ${metricEntries.length ? `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">
+              ${metricEntries.map(([k, v]) => `
+                <div class="px-2.5 py-1.5 rounded-xl bg-slate-900/90 border border-white/10">
+                  <span class="text-[9px] font-mono uppercase text-emerald-400 block">${k.replace(/_/g, " ")}</span>
+                  <span class="text-[11px] text-slate-200 font-medium">${formatRichText(String(v))}</span>
+                </div>
+              `).join("")}
+            </div>
+          ` : ""}
+
+          ${activeAgent ? `
+            <div class="mt-2.5 p-2.5 rounded-xl bg-rose-950/40 border border-rose-500/40 text-[11px] text-rose-100">
+              <strong class="text-rose-300">Inhibitor Action:</strong> ${formatRichText(activeAgent.binding_site || activeAgent.mechanism_of_action || "")}
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
+
+    // Compact horizontal scrollable / wrap pills for Inhibitors (Below the SVG so they never push the SVG down!)
     const agentsButtonsHtml = agents.map(ag => {
       const isSelected = ag.id === state.activeSimAgentId;
       return `
-        <button type="button" data-sim-agent="${ag.id}" class="sim-agent-pill px-3 py-1.5 rounded-xl text-xs font-semibold border transition flex items-center space-x-1.5 ${
-          isSelected ? "bg-rose-950/90 border-rose-400 text-rose-100 shadow-lg" : "bg-slate-950/80 border-white/15 text-slate-200 hover:border-emerald-400"
+        <button type="button" data-sim-agent="${ag.id}" class="sim-agent-pill px-3 py-1.5 rounded-xl text-[11px] font-semibold border transition flex items-center space-x-1.5 text-left ${
+          isSelected ? "bg-rose-950/90 border-rose-400 text-rose-100 shadow-lg" : "bg-slate-950/85 border-white/15 text-slate-200 hover:border-emerald-400"
         }">
-          <i class="fa-solid ${isSelected ? 'fa-ban text-rose-400' : 'fa-vial text-emerald-400'} text-[10px]"></i>
+          <i class="fa-solid ${isSelected ? 'fa-ban text-rose-400' : 'fa-vial text-emerald-400'} text-[10px] shrink-0"></i>
           <span>${ag.name}</span>
         </button>
       `;
@@ -1585,175 +1654,204 @@ function getFallbackModuleData(regItem) {
     }).join("");
 
     simPanel.innerHTML = `
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center space-x-2">
-          <i class="fa-solid fa-diagram-project"></i>
-          <span>Interactive SVG Pathway Flux & Kinetics Simulator</span>
-        </h3>
-        ${activeAgent ? `
-          <button type="button" id="resetSimAgentBtn" class="px-2.5 py-1 rounded-lg bg-rose-950/80 hover:bg-rose-900 border border-rose-500/50 text-[10px] font-mono text-rose-200">
-            <i class="fa-solid fa-rotate-left mr-1"></i>Remove Inhibitor (${activeAgent.name})
-          </button>
-        ` : `<span class="text-[10px] font-mono text-emerald-400">● Wild-Type Pathway Flux Active</span>`}
+      <!-- SELF-CONTAINED CLICKABLE PATHWAY SIMULATOR HEADER BUTTON -->
+      <div id="simAccumulatorToggleBar" class="cursor-pointer select-none flex items-center justify-between gap-3 p-1">
+        <div class="flex items-center space-x-2.5">
+          <span class="px-3 py-1.5 rounded-xl bg-emerald-600/25 border border-emerald-400/50 text-emerald-300 text-xs font-mono font-bold flex items-center space-x-2 shadow">
+            <i class="fa-solid fa-wave-square"></i>
+            <span>Pathway Simulator</span>
+          </span>
+          <span class="text-[11px] font-mono ${activeAgent ? 'text-rose-300' : 'text-slate-300'} hidden sm:inline">
+            ${activeAgent ? `● Perturbed: ${activeAgent.name.split("(")[0]}` : "● Interactive Flux & Kinetics"}
+          </span>
+        </div>
+
+        <button type="button" class="px-3 py-1 rounded-xl bg-slate-900/90 border border-white/20 text-xs font-mono text-emerald-300 flex items-center space-x-1.5">
+          <span>${simExpanded ? "Collapse" : "Expand Simulator"}</span>
+          <i class="fa-solid ${simExpanded ? "fa-chevron-up" : "fa-chevron-down"} text-[10px]"></i>
+        </button>
       </div>
 
-      <!-- Inhibitor Perturbation Buttons -->
-      <div class="flex flex-wrap gap-2 mb-3">
-        ${agentsButtonsHtml || `<span class="text-xs text-slate-400">Select any node above or adjust the SVG kinetics curves below.</span>`}
-      </div>
+      <!-- EXPANDABLE SIMULATOR BODY (SVG & FLOATING INFO TAB AT THE VERY TOP!) -->
+      ${simExpanded ? `
+        <div class="mt-4 pt-3.5 border-t border-white/15">
+          
+          <!-- 1. FLOATING QUICK-INFO CARD FOR SELECTED NODE / FACTOR (TOP POSITION) -->
+          ${floatingQuickTabHtml}
 
-      <!-- INTERACTIVE SVG PATHWAY FLUX DIAGRAM -->
-      <div class="w-full rounded-2xl bg-slate-950/95 border border-white/15 p-2 mb-4 overflow-x-auto shadow-inner">
-        <svg viewBox="0 0 590 165" class="w-full h-auto min-w-[460px]">
-          <defs>
-            <radialGradient id="simStageGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="rgba(16, 185, 129, 0.18)" />
-              <stop offset="100%" stop-color="rgba(2, 6, 23, 0)" />
-            </radialGradient>
-          </defs>
-          <rect width="590" height="165" fill="url(#simStageGlow)" rx="12" />
-          <text x="16" y="20" fill="#94a3b8" font-size="10" font-family="monospace">
-            ${activeAgent ? `PERTURBED STATE: ${activeAgent.name.toUpperCase()} BLOCKADE` : "WILD-TYPE STEADY-STATE BIOLOGICAL FLUX (Click any node or inhibitor)"}
-          </text>
-          ${svgNodesHtml}
-        </svg>
-      </div>
+          <!-- 2. INTERACTIVE SVG PATHWAY FLUX DIAGRAM (RIGHT AT THE TOP!) -->
+          <div class="w-full rounded-2xl bg-slate-950/95 border border-white/20 p-2.5 mb-3.5 overflow-x-auto shadow-inner">
+            <div class="flex items-center justify-between px-1 mb-1">
+              <span class="text-[10px] font-mono uppercase text-emerald-400">
+                <i class="fa-solid fa-hand-pointer mr-1"></i>Tap any circular Step/Complex below to inspect its role above
+              </span>
+              ${activeAgent ? `
+                <button type="button" id="resetSimAgentBtn" class="px-2 py-0.5 rounded bg-rose-950 hover:bg-rose-900 border border-rose-500/50 text-[10px] font-mono text-rose-200">
+                  <i class="fa-solid fa-rotate-left mr-1"></i>Reset Wild-Type
+                </button>
+              ` : ""}
+            </div>
+            <svg viewBox="0 0 590 155" class="w-full h-auto min-w-[460px]">
+              <defs>
+                <radialGradient id="simStageGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="rgba(16, 185, 129, 0.20)" />
+                  <stop offset="100%" stop-color="rgba(2, 6, 23, 0)" />
+                </radialGradient>
+              </defs>
+              <rect width="590" height="155" fill="url(#simStageGlow)" rx="12" />
+              ${svgNodesHtml}
+            </svg>
+          </div>
 
-      <!-- Quantitative Readout Cards -->
-      ${metricsHtml ? `<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">${metricsHtml}</div>` : ""}
+          <!-- 3. INHIBITOR / PERTURBATION FACTOR PILLS -->
+          <div class="mb-4">
+            <div class="text-[10px] font-mono uppercase text-slate-300 mb-2">
+              <i class="fa-solid fa-vial-circle-check mr-1 text-emerald-400"></i>Apply Experimental Inhibitor / Perturbation Factor:
+            </div>
+            <div class="flex flex-wrap gap-2">
+              ${agentsButtonsHtml || `<span class="text-xs text-slate-400">No inhibitor agents configured for this module.</span>`}
+            </div>
+          </div>
 
-      ${activeAgent ? `
-        <div class="mb-4 p-3 rounded-xl bg-rose-950/35 border border-rose-500/50 text-xs text-slate-200 space-y-1">
-          <div><strong class="text-rose-300">Mechanism of Blockade:</strong> ${formatRichText(activeAgent.binding_site || activeAgent.mechanism_of_action || "")}</div>
-          ${activeAgent.rescue_experiment ? `<div class="text-emerald-300"><strong>CSIR Part-C Rescue Assay:</strong> ${formatRichText(activeAgent.rescue_experiment)}</div>` : ""}
+          <!-- 4. QUANTITATIVE FLUX READOUTS -->
+          ${metricsHtml ? `<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">${metricsHtml}</div>` : ""}
+
+          <!-- 5. LIVE SVG MICHAELIS-MENTEN KINETICS PLOTTER -->
+          <div class="pt-3 border-t border-white/15 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+            <div class="md:col-span-5 space-y-3">
+              <div class="text-[11px] font-mono uppercase text-emerald-300 font-bold">Live SVG Enzyme Kinetics Curve</div>
+              <div>
+                <label class="block text-[11px] text-slate-300 mb-1">Substrate $[S]$: <span id="subVal" class="text-emerald-400 font-mono font-bold">60</span> µM</label>
+                <input type="range" id="simSubstrate" min="5" max="200" value="60" class="aero-range-slider">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-300 mb-1">Inhibitor $[I]$: <span id="inhVal" class="text-amber-400 font-mono font-bold">0</span> µM</label>
+                <input type="range" id="simInhibitor" min="0" max="100" value="0" class="aero-range-slider">
+              </div>
+              <div id="simCalculatedOutput" class="p-2.5 rounded-xl bg-slate-950 border border-white/15 font-mono text-[11px] text-emerald-300"></div>
+            </div>
+
+            <div class="md:col-span-7 rounded-2xl bg-slate-950/95 border border-white/15 p-2">
+              <svg id="kineticsCurveSvg" viewBox="0 0 320 150" class="w-full h-auto"></svg>
+            </div>
+          </div>
         </div>
       ` : ""}
-
-      <!-- INTERACTIVE SVG MICHAELIS-MENTEN CURVE PLOTTER -->
-      <div class="pt-3 border-t border-white/15 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-        <div class="md:col-span-5 space-y-3">
-          <div class="text-[11px] font-mono uppercase text-emerald-300 font-bold">Live SVG Enzyme Kinetics Curve</div>
-          <div>
-            <label class="block text-[11px] text-slate-300 mb-1">Substrate $[S]$: <span id="subVal" class="text-emerald-400 font-mono font-bold">60</span> µM</label>
-            <input type="range" id="simSubstrate" min="5" max="200" value="60" class="aero-range-slider">
-          </div>
-          <div>
-            <label class="block text-[11px] text-slate-300 mb-1">Inhibitor $[I]$: <span id="inhVal" class="text-amber-400 font-mono font-bold">0</span> µM</label>
-            <input type="range" id="simInhibitor" min="0" max="100" value="0" class="aero-range-slider">
-          </div>
-          <div id="simCalculatedOutput" class="p-2.5 rounded-xl bg-slate-950 border border-white/15 font-mono text-[11px] text-emerald-300"></div>
-        </div>
-
-        <div class="md:col-span-7 rounded-2xl bg-slate-950/95 border border-white/15 p-2">
-          <svg id="kineticsCurveSvg" viewBox="0 0 320 150" class="w-full h-auto"></svg>
-        </div>
-      </div>
     `;
 
-    // Bind Inhibitor Buttons
+    // Toggle Expand / Collapse when clicking the Pathway Simulator Header Button
+    document.getElementById("simAccumulatorToggleBar")?.addEventListener("click", () => {
+      simExpanded = !simExpanded;
+      renderInteractiveSvgSimulator();
+      typesetMath();
+    });
+
+    // Close Floating Quick-Info Tab
+    document.getElementById("closeSimQuickCardBtn")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const card = document.getElementById("simFloatingQuickCard");
+      if (card) card.style.display = "none";
+    });
+
+    // Clicking any SVG Circle Node opens/updates the Floating Quick-Info Tab at the TOP of Simulator
+    simPanel.querySelectorAll(".svg-pathway-node").forEach(g => {
+      g.addEventListener("click", () => {
+        selectedSimNodeId = g.dataset.svgNode;
+        renderInteractiveSvgSimulator();
+        typesetMath();
+      });
+    });
+
+    // Clicking an Inhibitor Pill applies the perturbation AND shows the target node in the top floating tab
     simPanel.querySelectorAll(".sim-agent-pill").forEach(btn => {
       btn.addEventListener("click", () => {
         state.activeSimAgentId = btn.dataset.simAgent;
         const chosen = agents.find(a => a.id === state.activeSimAgentId);
         if (chosen?.target_node && mod.nodes?.[chosen.target_node]) {
-          state.activeScaleId = mod.nodes[chosen.target_node].level;
-          state.activeNodeId = chosen.target_node;
+          selectedSimNodeId = chosen.target_node;
         }
-        renderArgonWorkspace();
+        renderInteractiveSvgSimulator();
+        typesetMath();
       });
     });
 
     document.getElementById("resetSimAgentBtn")?.addEventListener("click", () => {
       state.activeSimAgentId = null;
-      renderArgonWorkspace();
+      renderInteractiveSvgSimulator();
+      typesetMath();
     });
 
-    // Bind Clicking SVG Pathway Nodes
-    simPanel.querySelectorAll(".svg-pathway-node").forEach(g => {
-      g.addEventListener("click", () => {
-        const nid = g.dataset.svgNode;
-        if (nid && mod.nodes?.[nid]) {
-          state.activeScaleId = mod.nodes[nid].level;
-          state.activeNodeId = nid;
-          renderArgonWorkspace();
+    // Bind Live SVG Kinetics Curve Plotter if expanded
+    if (simExpanded) {
+      const subSlider = document.getElementById("simSubstrate");
+      const inhSlider = document.getElementById("simInhibitor");
+      const subVal = document.getElementById("subVal");
+      const inhVal = document.getElementById("inhVal");
+      const outBox = document.getElementById("simCalculatedOutput");
+      const curveSvg = document.getElementById("kineticsCurveSvg");
+
+      const drawSvgKinetics = () => {
+        const S = Number(subSlider?.value || 60);
+        const I = Number(inhSlider?.value || 0);
+        if (subVal) subVal.textContent = S;
+        if (inhVal) inhVal.textContent = I;
+
+        const Vmax = 100;
+        const Km = 25;
+        const Ki = 20;
+        const appKm = Km * (1 + I / Ki);
+        const v0 = (Vmax * S) / (appKm + S);
+
+        if (outBox) {
+          outBox.innerHTML = `V₀ = <strong>${v0.toFixed(1)}</strong> µmol/min | Km(app) = <strong>${appKm.toFixed(1)}</strong> µM`;
         }
-      });
-    });
 
-    // Bind Live SVG Kinetics Curve Plotter
-    const subSlider = document.getElementById("simSubstrate");
-    const inhSlider = document.getElementById("simInhibitor");
-    const subVal = document.getElementById("subVal");
-    const inhVal = document.getElementById("inhVal");
-    const outBox = document.getElementById("simCalculatedOutput");
-    const curveSvg = document.getElementById("kineticsCurveSvg");
+        if (!curveSvg) return;
+        const plotX = s => 35 + (s / 200) * 265;
+        const plotY = v => 128 - (v / 100) * 105;
 
-    const drawSvgKinetics = () => {
-      const S = Number(subSlider?.value || 60);
-      const I = Number(inhSlider?.value || 0);
-      if (subVal) subVal.textContent = S;
-      if (inhVal) inhVal.textContent = I;
+        let uninhibitedPts = [];
+        let currentPts = [];
+        for (let s = 0; s <= 200; s += 8) {
+          uninhibitedPts.push(`${plotX(s).toFixed(1)},${plotY((Vmax * s) / (Km + s)).toFixed(1)}`);
+          currentPts.push(`${plotX(s).toFixed(1)},${plotY((Vmax * s) / (appKm + s)).toFixed(1)}`);
+        }
 
-      const Vmax = 100;
-      const Km = 25;
-      const Ki = 20;
-      const appKm = Km * (1 + I / Ki);
-      const v0 = (Vmax * S) / (appKm + S);
+        const curX = plotX(S);
+        const curY = plotY(v0);
 
-      if (outBox) {
-        outBox.innerHTML = `V₀ = <strong>${v0.toFixed(1)}</strong> µmol/min | Km(app) = <strong>${appKm.toFixed(1)}</strong> µM`;
-      }
+        curveSvg.innerHTML = `
+          <line x1="35" y1="18" x2="35" y2="128" stroke="#475569" stroke-width="1.5" />
+          <line x1="35" y1="128" x2="305" y2="128" stroke="#475569" stroke-width="1.5" />
+          <line x1="35" y1="${plotY(100)}" x2="305" y2="${plotY(100)}" stroke="#334155" stroke-dasharray="3 3" />
+          <text x="40" y="${plotY(100) + 10}" fill="#64748b" font-size="8" font-family="monospace">Vmax (100)</text>
+          <polyline fill="none" stroke="rgba(16, 185, 129, 0.35)" stroke-width="2" stroke-dasharray="4 3" points="${uninhibitedPts.join(" ")}" />
+          <polyline fill="none" stroke="${I > 0 ? '#f59e0b' : '#10b981'}" stroke-width="2.5" points="${currentPts.join(" ")}" />
+          <line x1="${curX}" y1="128" x2="${curX}" y2="${curY}" stroke="#38bdf8" stroke-dasharray="2 2" />
+          <line x1="35" y1="${curY}" x2="${curX}" y2="${curY}" stroke="#38bdf8" stroke-dasharray="2 2" />
+          <circle cx="${curX}" cy="${curY}" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" />
+          <text x="170" y="144" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">Substrate [S] (µM)</text>
+          <text x="12" y="75" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace" transform="rotate(-90 12 75)">Velocity V₀</text>
+        `;
+      };
 
-      if (!curveSvg) return;
-      const plotX = s => 35 + (s / 200) * 265;
-      const plotY = v => 128 - (v / 100) * 105;
-
-      let uninhibitedPts = [];
-      let currentPts = [];
-      for (let s = 0; s <= 200; s += 8) {
-        uninhibitedPts.push(`${plotX(s).toFixed(1)},${plotY((Vmax * s) / (Km + s)).toFixed(1)}`);
-        currentPts.push(`${plotX(s).toFixed(1)},${plotY((Vmax * s) / (appKm + s)).toFixed(1)}`);
-      }
-
-      const curX = plotX(S);
-      const curY = plotY(v0);
-
-      curveSvg.innerHTML = `
-        <!-- Axes -->
-        <line x1="35" y1="18" x2="35" y2="128" stroke="#475569" stroke-width="1.5" />
-        <line x1="35" y1="128" x2="305" y2="128" stroke="#475569" stroke-width="1.5" />
-        <!-- Vmax Asymptote -->
-        <line x1="35" y1="${plotY(100)}" x2="305" y2="${plotY(100)}" stroke="#334155" stroke-dasharray="3 3" />
-        <text x="40" y="${plotY(100) + 10}" fill="#64748b" font-size="8" font-family="monospace">Vmax (100)</text>
-        <!-- Baseline Uninhibited Curve (Dashed Emerald) -->
-        <polyline fill="none" stroke="rgba(16, 185, 129, 0.35)" stroke-width="2" stroke-dasharray="4 3" points="${uninhibitedPts.join(" ")}" />
-        <!-- Active Curve -->
-        <polyline fill="none" stroke="${I > 0 ? '#f59e0b' : '#10b981'}" stroke-width="2.5" points="${currentPts.join(" ")}" />
-        <!-- Operating Point Crosshair -->
-        <line x1="${curX}" y1="128" x2="${curX}" y2="${curY}" stroke="#38bdf8" stroke-dasharray="2 2" />
-        <line x1="35" y1="${curY}" x2="${curX}" y2="${curY}" stroke="#38bdf8" stroke-dasharray="2 2" />
-        <circle cx="${curX}" cy="${curY}" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" />
-        <text x="170" y="144" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">Substrate [S] (µM)</text>
-        <text x="12" y="75" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace" transform="rotate(-90 12 75)">Velocity V₀</text>
-      `;
-    };
-
-    subSlider?.addEventListener("input", drawSvgKinetics);
-    inhSlider?.addEventListener("input", drawSvgKinetics);
-    drawSvgKinetics();
+      subSlider?.addEventListener("input", drawSvgKinetics);
+      inhSlider?.addEventListener("input", drawSvgKinetics);
+      drawSvgKinetics();
+    }
   }
 
-  // Hook into renderArgonWorkspace so every module/scale change applies these upgrades
   function overrideWorkspaceForMetricSliderAndSvgSim() {
     const origRender = window.renderArgonWorkspace;
     if (typeof origRender === "function") {
       window.renderArgonWorkspace = function () {
+        hideOldDuplicateSimButton();
         origRender();
         renderPureMetricSlider();
         renderInteractiveSvgSimulator();
         typesetMath();
       };
-      // Trigger immediately for initial load
+      hideOldDuplicateSimButton();
       renderPureMetricSlider();
       renderInteractiveSvgSimulator();
     }
