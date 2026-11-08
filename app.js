@@ -1354,26 +1354,27 @@ function getFallbackModuleData(regItem) {
     return slice.replace(regex, `<strong class="text-emerald-300 underline">$1</strong>`);
   }
 })();
-
- // ============================================================================
-// UI REFINEMENT PACK (V3):
+// ============================================================================
+// UI REFINEMENT PACK (V4):
 // 1. Phone-Lock Module Carousel Controls
 // 2. Pure Physical Metric Slider (Size + Unit Only)
-// 3. Dynamic Biological Region SVG Viewport (Replaces Circular Radar Wheel!)
-//    Renders Organelle Cross-Sections, Lipid Bilayers, Multi-Subunit Complexes
-//    & Atomic Catalytic Pockets with Interactive Pins Mapped to the Structure
-// 4. Self-Contained Expandable Pathway Simulator with Top SVG & Quick-Info Card
+// 3. Universal Science Main Stage (Ultrastructure SVG + 3-Tab General Cards:
+//    Mechanism, Pathology, Lab Assays — No CSIR Clutter in Main Viewport!)
+// 4. Consolidated "CSIR NET Part-C Exam Hub" in the Side/Bottom Panel
+//    (Combines High-Yield Traps, Interactive Analytical Quiz & Reference Drawer)
+// 5. Self-Contained Expandable Pathway Simulator with Top SVG & Quick-Info Card
 // ============================================================================
 (function initCellulumRefinements() {
   const FALLBACK_METRICS = ["500 μm", "50 μm", "1.5 μm", "8 nm"];
   let simExpanded = false;
   let selectedSimNodeId = null;
+  let activeCsirHubTab = "traps"; // 'traps' | 'quiz' | 'drawer'
 
   document.addEventListener("DOMContentLoaded", () => {
     injectBioSchematicStyles();
     setupLockScreenModuleCarousel();
-    hideOldDuplicateSimButton();
-    overrideWorkspaceForBioSchematicAndSim();
+    cleanUpStageHudAndButtons();
+    overrideWorkspaceForUniversalStageAndCsirHub();
   });
 
   function injectBioSchematicStyles() {
@@ -1381,9 +1382,11 @@ function getFallbackModuleData(regItem) {
     const style = document.createElement("style");
     style.id = "bioSchematicCss";
     style.textContent = `
-      /* Hide the old circular radar wheel and its zoom buttons */
+      /* Hide old circular radar wheel, stage drawer button, and inline stage quiz */
       .circular-lens-viewport,
-      .circular-lens-viewport + div {
+      .circular-lens-viewport + div,
+      #openDrawerBtn,
+      #toggleSimBtn {
         display: none !important;
       }
       #interactiveStage {
@@ -1408,9 +1411,19 @@ function getFallbackModuleData(regItem) {
     document.head.appendChild(style);
   }
 
-  function hideOldDuplicateSimButton() {
-    const oldBtn = document.getElementById("toggleSimBtn");
-    if (oldBtn) oldBtn.style.display = "none";
+  function cleanUpStageHudAndButtons() {
+    const oldSimBtn = document.getElementById("toggleSimBtn");
+    if (oldSimBtn) oldSimBtn.style.display = "none";
+
+    const openDrawerBtn = document.getElementById("openDrawerBtn");
+    if (openDrawerBtn) openDrawerBtn.style.display = "none";
+
+    // Make the top HUD scale title banner span full-width cleanly
+    const hudLabel = document.getElementById("hudScaleLabel");
+    if (hudLabel && hudLabel.parentElement) {
+      hudLabel.parentElement.className = "w-full bg-slate-950/85 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 text-xs flex items-center space-x-2.5 shadow";
+    }
+
     const simPanel = document.getElementById("simulatorPanel");
     if (simPanel) simPanel.classList.remove("hidden");
   }
@@ -1427,7 +1440,7 @@ function getFallbackModuleData(regItem) {
         <i class="fa-solid fa-chevron-left mr-1"></i>Prev
       </button>
       <span id="modCarouselIndicator" class="text-[10px] text-slate-300 tracking-wider uppercase">
-        <i class="fa-solid fa-hand-pointer mr-1 text-emerald-400"></i>Swipe Lock-Slider
+        <i class="fa-solid fa-hand-pointer mr-1 text-emerald-400"></i>Swipe Topics
       </span>
       <button type="button" id="modCarouselNext" class="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/20 text-slate-200 shadow">
         Next<i class="fa-solid fa-chevron-right ml-1"></i>
@@ -1459,8 +1472,8 @@ function getFallbackModuleData(regItem) {
     return cleaned || FALLBACK_METRICS[idx] || "10 nm";
   }
 
-  // 2. PURE METRIC SLIDER
-  function renderPureMetricSlider() {
+  // 2. PURE METRIC SLIDER & CLEAN UNIVERSAL STUDY CARDS
+  function renderPureMetricSliderAndCleanStage() {
     const mod = state.moduleData;
     if (!mod) return;
     const levels = mod.scale_levels || [];
@@ -1512,11 +1525,30 @@ function getFallbackModuleData(regItem) {
 
     const canvas = document.getElementById("hotspotCanvas");
     if (canvas) {
+      // Remove the inline CSIR Quiz box from the main stage so it never sits between the SVG and Topic Cards
+      const stageQuizBtn = document.getElementById("toggleQuizStageBtn");
+      if (stageQuizBtn) {
+        const quizBanner = stageQuizBtn.closest("div.w-full.mb-4");
+        if (quizBanner) quizBanner.style.display = "none";
+      }
+
+      // Hide the "CSIR High-Yield" tab button inside the general topic cards (since it now lives in the CSIR Hub Card)
+      canvas.querySelectorAll('.inline-tab-btn[data-inline-tab="csir_high_yield"]').forEach(btn => {
+        const tabGrid = btn.parentElement;
+        btn.remove();
+        if (tabGrid) {
+          tabGrid.classList.remove("sm:grid-cols-4");
+          tabGrid.classList.add("sm:grid-cols-3");
+        }
+      });
+
+      // Clean L1-L4 labels into physical metric units
       canvas.querySelectorAll("span").forEach(sp => {
         if (/^L[1-4]\b/.test(sp.textContent.trim())) {
           sp.textContent = sp.textContent.replace(/L[1-4]\s*•?\s*/g, `${currentMetric} • `).replace(/•\s*•/g, "•");
         }
       });
+
       canvas.querySelectorAll(".zoom-jump-chip").forEach(chip => {
         const targetId = chip.dataset.zoomTo;
         const targetIdx = levels.findIndex(l => l.level_id === targetId);
@@ -1528,7 +1560,7 @@ function getFallbackModuleData(regItem) {
     }
   }
 
-  // 3. DYNAMIC BIOLOGICAL REGION SVG VIEWPORT (REPLACES CIRCULAR RADAR WHEEL)
+  // 3. DYNAMIC BIOLOGICAL REGION SVG VIEWPORT
   function renderBiologicalRegionSvgViewport() {
     const canvas = document.getElementById("hotspotCanvas");
     const mod = state.moduleData;
@@ -1543,10 +1575,8 @@ function getFallbackModuleData(regItem) {
     const nodeIds = activeLvl.node_ids || activeLvl.hotspots || [];
     const activeAgent = (mod.inhibitor_simulator?.agents || []).find(a => a.id === state.activeSimAgentId);
 
-    // Generate the anatomical / ultrastructural SVG artwork based on zoom level (0=Organelle/Macro, 1=Membrane/Tissue, 2=Complex, 3=Atomic Pocket)
-    const regionBackdropSvg = buildScaleBiologicalArtwork(activeIdx, mod.title || "", activeLvl.name || "");
+    const regionBackdropSvg = buildScaleBiologicalArtwork(activeIdx);
 
-    // Compute anatomical pin coordinates across the SVG structure
     const pinPositions = [
       { x: 145, y: 78 },
       { x: 310, y: 118 },
@@ -1568,11 +1598,9 @@ function getFallbackModuleData(regItem) {
 
       return `
         <g class="bio-svg-pin cursor-pointer" data-bio-pin="${node.id}">
-          <!-- Leader Line to Structure -->
           <line x1="${pt.x}" y1="${pt.y}" x2="${pt.x}" y2="${pt.y + 24}" stroke="${strokeCol}" stroke-width="1.5" stroke-dasharray="2 2" />
           <circle cx="${pt.x}" cy="${pt.y + 24}" r="3.5" fill="${strokeCol}" />
           ${isSelected ? `<circle cx="${pt.x}" cy="${pt.y}" r="22" fill="rgba(16, 185, 129, 0.25)" class="bio-pin-pulse" />` : ""}
-          <!-- Pin Pill Badge on SVG -->
           <rect x="${pt.x - 68}" y="${pt.y - 15}" width="136" height="28" rx="14"
                 fill="${fillCol}" stroke="${strokeCol}" stroke-width="${isSelected ? '2.2' : '1.3'}" />
           <text x="${pt.x}" y="${pt.y + 3}" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif" font-weight="bold">
@@ -1582,7 +1610,6 @@ function getFallbackModuleData(regItem) {
       `;
     }).join("");
 
-    // Quick-jump pill strip under the biological SVG
     const quickPillsHtml = nodeIds.map((nid, idx) => {
       const node = mod.nodes?.[nid];
       if (!node) return "";
@@ -1599,12 +1626,11 @@ function getFallbackModuleData(regItem) {
       `;
     }).join("");
 
-    // Inject or update the Biological Region SVG Banner at the top of #hotspotCanvas
     let existingBanner = document.getElementById("bioRegionSvgContainer");
     if (!existingBanner) {
       existingBanner = document.createElement("div");
       existingBanner.id = "bioRegionSvgContainer";
-      existingBanner.className = "w-full mb-3";
+      existingBanner.className = "w-full mb-2";
       const firstChild = canvas.firstElementChild;
       if (firstChild) {
         firstChild.insertBefore(existingBanner, firstChild.firstChild);
@@ -1617,7 +1643,7 @@ function getFallbackModuleData(regItem) {
       <div class="bio-region-stage rounded-2xl p-3 overflow-hidden">
         <div class="flex items-center justify-between mb-1.5 px-1">
           <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 font-bold">
-            <i class="fa-solid fa-microscope mr-1.5"></i> Ultrastructure Cross-Section (${currentMetric})
+            <i class="fa-solid fa-microscope mr-1.5"></i>Ultrastructure Cross-Section (${currentMetric})
           </span>
           <span class="text-[10px] font-mono text-slate-400">Tap any region pin to inspect</span>
         </div>
@@ -1629,14 +1655,12 @@ function getFallbackModuleData(regItem) {
           </svg>
         </div>
 
-        <!-- Horizontal Quick-Select Pills for Current Scale Region -->
         <div class="flex items-center gap-2 overflow-x-auto pt-2.5 pb-0.5 no-scrollbar">
           ${quickPillsHtml}
         </div>
       </div>
     `;
 
-    // Bind clicking any SVG structural pin or quick-pill to expand & scroll to that card
     const selectNodeFromRegion = (nid) => {
       state.activeNodeId = nid;
       renderArgonWorkspace();
@@ -1654,9 +1678,7 @@ function getFallbackModuleData(regItem) {
     });
   }
 
-  // Draws authentic biological SVG schematics tailored to the active magnification scale
-  function buildScaleBiologicalArtwork(scaleIdx, modTitle, levelName) {
-    // SCALE 0 (Macro / Organelle & Compartmental Architecture)
+  function buildScaleBiologicalArtwork(scaleIdx) {
     if (scaleIdx === 0) {
       return `
         <defs>
@@ -1665,11 +1687,8 @@ function getFallbackModuleData(regItem) {
             <stop offset="100%" stop-color="rgba(2, 132, 199, 0.18)" />
           </linearGradient>
         </defs>
-        <!-- Cytosolic Background Grid -->
         <text x="16" y="20" fill="#64748b" font-size="9" font-family="monospace">CYTOSOL / EXTRACELLULAR COMPARTMENT</text>
-        <!-- Outer Organelle / Cellular Envelope -->
         <ellipse cx="300" cy="100" rx="255" ry="68" fill="url(#orgOuter)" stroke="#10b981" stroke-width="2.5" />
-        <!-- Inner Folded Membrane / Cristae / Chromatin Compartments -->
         <path d="M 75,100 Q 115,45 145,100 T 215,100 T 285,100 T 355,100 T 425,100 T 495,100"
               fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7" />
         <path d="M 90,115 Q 135,155 180,110 T 270,115 T 360,110 T 450,115 T 515,100"
@@ -1679,11 +1698,8 @@ function getFallbackModuleData(regItem) {
         </text>
       `;
     }
-
-    // SCALE 1 (Phospholipid Bilayer & Transmembrane Apparatus)
     if (scaleIdx === 1) {
-      let headsTop = "";
-      let headsBot = "";
+      let headsTop = "", headsBot = "";
       for (let x = 25; x <= 575; x += 18) {
         headsTop += `
           <circle cx="${x}" cy="66" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" />
@@ -1698,38 +1714,27 @@ function getFallbackModuleData(regItem) {
       }
       return `
         <text x="16" y="20" fill="#7dd3fc" font-size="9" font-family="monospace">P-SIDE (IMS / EXTRACELLULAR / HIGH [H+])</text>
-        ${headsTop}
-        ${headsBot}
-        <!-- Embedded Transmembrane Multi-Pass Helices -->
+        ${headsTop}${headsBot}
         <rect x="120" y="50" width="52" height="88" rx="12" fill="rgba(16, 185, 129, 0.35)" stroke="#34d399" stroke-width="2" />
         <rect x="280" y="46" width="64" height="96" rx="14" fill="rgba(14, 165, 233, 0.35)" stroke="#38bdf8" stroke-width="2" />
         <rect x="440" y="52" width="54" height="84" rx="12" fill="rgba(168, 85, 247, 0.35)" stroke="#c084fc" stroke-width="2" />
         <text x="16" y="172" fill="#6ee7b7" font-size="9" font-family="monospace">N-SIDE (MATRIX / CYTOSOL / ΔΨm SIGNALING)</text>
       `;
     }
-
-    // SCALE 2 (Macromolecular Multi-Subunit Complex & Translocation Channel)
     if (scaleIdx === 2) {
       return `
         <text x="16" y="20" fill="#a7f3d0" font-size="9" font-family="monospace">MACROMOLECULAR QUATERNARY ASSEMBLY & TRANSLOCATION CHANNEL</text>
-        <!-- Membrane Anchor Plane -->
         <line x1="20" y1="130" x2="580" y2="130" stroke="#334155" stroke-width="8" stroke-linecap="round" />
-        <!-- Multi-Subunit α3β3 / Stator / Polymerase Core -->
         <ellipse cx="200" cy="85" rx="68" ry="42" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="2" />
         <ellipse cx="300" cy="78" rx="52" ry="48" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2" />
         <ellipse cx="400" cy="85" rx="68" ry="42" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="2" />
-        <!-- Central Stalk / Channel Pore -->
         <rect x="282" y="95" width="36" height="65" rx="8" fill="rgba(245, 158, 11, 0.3)" stroke="#fbbf24" stroke-width="2" />
         <path d="M 100,90 C 200,30 400,30 500,90" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="6 4" class="svg-flux-active" />
       `;
     }
-
-    // SCALE 3 (Atomic Catalytic Pocket, Transition State & Cofactor Coordination)
     return `
       <text x="16" y="20" fill="#fde68a" font-size="9" font-family="monospace">ATOMIC CATALYTIC POCKET • COFACTOR & H-BOND COORDINATION</text>
-      <!-- Catalytic Pocket Cavity -->
       <path d="M 90,35 Q 300,175 510,35" fill="rgba(15, 23, 42, 0.65)" stroke="#38bdf8" stroke-width="2.5" />
-      <!-- Coordinate Bonds to Central Cofactor / Mg2+ / Heme / Fe-S -->
       <line x1="160" y1="75" x2="300" y2="105" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 3" />
       <line x1="440" y1="75" x2="300" y2="105" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 3" />
       <line x1="300" y1="45" x2="300" y2="105" stroke="#34d399" stroke-width="2" stroke-dasharray="4 3" />
@@ -1738,7 +1743,197 @@ function getFallbackModuleData(regItem) {
     `;
   }
 
-  // 4. SELF-CONTAINED EXPANDABLE PATHWAY SIMULATOR WITH TOP SVG & FLOATING QUICK-INFO TAB
+  // 4. CONSOLIDATED "CSIR NET PART-C EXAM HUB" IN THE SIDE/BOTTOM CARD (#nodeInspectorContent)
+  function renderConsolidatedCsirHubCard() {
+    const inspector = document.getElementById("nodeInspectorContent");
+    const mod = state.moduleData;
+    if (!inspector || !mod) return;
+
+    // Update the card's header title so users clearly see all CSIR features live here
+    const headerH3 = inspector.previousElementSibling;
+    if (headerH3 && headerH3.tagName === "H3") {
+      headerH3.innerHTML = `
+        <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+        <span>CSIR NET Part-C Exam Hub & Quiz</span>
+      `;
+    }
+
+    const fallbackId = Object.keys(mod.nodes || {})[0];
+    const node = mod.nodes?.[state.activeNodeId || fallbackId];
+    const quizzes = mod.quiz_challenges || [];
+    const currentQuiz = quizzes[state.currentQuizIdx] || quizzes[0];
+
+    const hubTabsHtml = `
+      <div class="grid grid-cols-3 gap-1 p-1 rounded-xl bg-slate-950 border border-white/15 mb-3">
+        <button type="button" data-csir-hub-tab="traps" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
+          activeCsirHubTab === "traps" ? "bg-emerald-600 text-white shadow" : "text-slate-400 hover:text-white"
+        }">
+          <i class="fa-solid fa-bullseye text-[10px]"></i>
+          <span>Part-C Traps</span>
+        </button>
+        <button type="button" data-csir-hub-tab="quiz" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
+          activeCsirHubTab === "quiz" ? "bg-amber-600 text-slate-950 font-bold shadow" : "text-amber-300/80 hover:text-amber-200"
+        }">
+          <i class="fa-solid fa-bolt text-[10px]"></i>
+          <span>Quiz (${quizzes.length ? `${state.currentQuizIdx + 1}/${quizzes.length}` : "0"})</span>
+        </button>
+        <button type="button" data-csir-hub-tab="drawer" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
+          activeCsirHubTab === "drawer" ? "bg-sky-600 text-white shadow" : "text-slate-400 hover:text-white"
+        }">
+          <i class="fa-solid fa-book-open text-[10px]"></i>
+          <span>Ref & 3D</span>
+        </button>
+      </div>
+    `;
+
+    let bodyHtml = "";
+
+    if (activeCsirHubTab === "traps" && node) {
+      const highYieldNotes = node.tabs?.csir_high_yield || ["Select any topic card above to view its CSIR NET Part-C analytical traps."];
+      bodyHtml = `
+        <div class="pb-2 mb-2 border-b border-white/10">
+          <span class="text-[10px] font-mono uppercase text-emerald-400">Active Topic High-Yield Focus</span>
+          <h4 class="text-xs sm:text-sm font-bold text-white mt-0.5">${formatRichText(node.title)}</h4>
+        </div>
+        <div class="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">
+          ${highYieldNotes.map(p => `
+            <div class="p-3 rounded-xl bg-slate-950/90 border border-emerald-500/30 text-xs text-slate-200 leading-relaxed">
+              ${formatRichText(p)}
+            </div>
+          `).join("")}
+        </div>
+      `;
+    } else if (activeCsirHubTab === "quiz") {
+      if (!currentQuiz) {
+        bodyHtml = `<p class="text-xs text-slate-400 italic py-4 text-center">No quiz questions configured for this module yet.</p>`;
+      } else {
+        bodyHtml = `
+          <div class="p-3.5 rounded-2xl bg-slate-950/95 border border-amber-500/40 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">
+                Question ${state.currentQuizIdx + 1} of ${quizzes.length}
+              </span>
+              <div class="flex items-center space-x-1.5">
+                <button type="button" id="hubPrevQuizBtn" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-white/15 text-xs text-slate-200">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button type="button" id="hubNextQuizBtn" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-white/15 text-xs text-slate-200">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="text-xs text-amber-100 leading-relaxed font-medium">
+              ${formatRichText(currentQuiz.prompt)}
+            </div>
+
+            ${Array.isArray(currentQuiz.answer_options) && currentQuiz.answer_options.length ? `
+              <div class="space-y-2 pt-1">
+                ${currentQuiz.answer_options.map((opt, i) => `
+                  <button type="button" data-hub-opt="${i}" class="hub-quiz-opt w-full p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-400 text-left text-xs text-slate-200 transition">
+                    ${formatRichText(opt)}
+                  </button>
+                `).join("")}
+              </div>
+            ` : `
+              <div class="space-y-1.5 pt-1">
+                <div class="text-[10px] font-mono uppercase text-slate-400">Select the matching complex/node:</div>
+                ${Object.values(mod.nodes || {}).slice(0, 6).map(n => `
+                  <button type="button" data-hub-node-ans="${n.id}" class="hub-quiz-node-btn w-full p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-400 text-left text-xs text-slate-200 transition">
+                    ${formatRichText(n.title.split(":")[0])}
+                  </button>
+                `).join("")}
+              </div>
+            `}
+
+            <div id="hubQuizFeedbackBox" class="hidden p-2.5 rounded-xl text-xs leading-relaxed"></div>
+          </div>
+        `;
+      }
+    } else if (activeCsirHubTab === "drawer" && node) {
+      const resourcesHtml = (node.external_resources || []).map(r => `
+        <a href="${r.url}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 border border-white/15 hover:border-emerald-400 transition">
+          <span class="text-xs text-emerald-300 truncate pr-2">${r.title}</span>
+          <span class="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300 shrink-0">${r.type || "3D / Ref"}</span>
+        </a>
+      `).join("");
+
+      bodyHtml = `
+        <div class="space-y-3">
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Prefer reading all 4 tabs (Mechanism, CSIR High-Yield, Pathology & Lab Workbench) in a single full-height side sheet?
+          </p>
+          <button type="button" id="hubOpenDrawerBtn" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600/25 hover:bg-emerald-600/35 text-emerald-300 border border-emerald-400/50 text-xs font-bold transition flex items-center justify-center space-x-2 shadow">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Open Full-Screen Reference Drawer</span>
+          </button>
+          ${resourcesHtml ? `
+            <div class="pt-2 border-t border-white/10 space-y-2">
+              <div class="text-[10px] font-mono uppercase text-slate-400">External 3D Structures & Databases</div>
+              ${resourcesHtml}
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
+
+    inspector.innerHTML = `${hubTabsHtml}${bodyHtml}`;
+
+    // Bind Hub Tab Switcher
+    inspector.querySelectorAll("[data-csir-hub-tab]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeCsirHubTab = btn.dataset.csirHubTab;
+        renderConsolidatedCsirHubCard();
+        typesetMath();
+      });
+    });
+
+    // Bind Quiz Controls inside Hub
+    document.getElementById("hubPrevQuizBtn")?.addEventListener("click", () => {
+      state.currentQuizIdx = (state.currentQuizIdx - 1 + quizzes.length) % quizzes.length;
+      renderConsolidatedCsirHubCard();
+      typesetMath();
+    });
+    document.getElementById("hubNextQuizBtn")?.addEventListener("click", () => {
+      state.currentQuizIdx = (state.currentQuizIdx + 1) % quizzes.length;
+      renderConsolidatedCsirHubCard();
+      typesetMath();
+    });
+
+    const showHubQuizResult = (ok, text) => {
+      const fb = document.getElementById("hubQuizFeedbackBox");
+      if (!fb) return;
+      fb.classList.remove("hidden");
+      fb.className = `p-3 rounded-xl text-xs border ${
+        ok ? "bg-emerald-950/90 border-emerald-400 text-emerald-100" : "bg-rose-950/90 border-rose-400 text-rose-100"
+      }`;
+      fb.innerHTML = `<strong>${ok ? "✓ Correct!" : "✗ Not quite:"}</strong> ${formatRichText(text)}`;
+      typesetMath();
+    };
+
+    inspector.querySelectorAll(".hub-quiz-opt").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const chosen = currentQuiz.answer_options[Number(btn.dataset.hubOpt)];
+        const ok = chosen === currentQuiz.correct_answer;
+        showHubQuizResult(ok, ok ? currentQuiz.explanation : `Correct Answer: ${currentQuiz.correct_answer}. ${currentQuiz.explanation || ""}`);
+      });
+    });
+
+    inspector.querySelectorAll(".hub-quiz-node-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const clickedId = btn.dataset.hubNodeAns;
+        const ok = clickedId === currentQuiz.correct_node_id;
+        const msg = ok
+          ? (currentQuiz.feedback?.correct || currentQuiz.explanation || "Spot on!")
+          : (currentQuiz.feedback?.incorrect || currentQuiz.explanation || "Try another complex/node.");
+        showHubQuizResult(ok, msg);
+      });
+    });
+
+    document.getElementById("hubOpenDrawerBtn")?.addEventListener("click", () => toggleStudyDrawer(true));
+  }
+
+  // 5. SELF-CONTAINED EXPANDABLE PATHWAY SIMULATOR
   function renderInteractiveSvgSimulator() {
     const simPanel = document.getElementById("simulatorPanel");
     if (!simPanel || !state.moduleData) return;
@@ -2029,20 +2224,22 @@ function getFallbackModuleData(regItem) {
     }
   }
 
-  function overrideWorkspaceForBioSchematicAndSim() {
+  function overrideWorkspaceForUniversalStageAndCsirHub() {
     const origRender = window.renderArgonWorkspace;
     if (typeof origRender === "function") {
       window.renderArgonWorkspace = function () {
-        hideOldDuplicateSimButton();
+        cleanUpStageHudAndButtons();
         origRender();
-        renderPureMetricSlider();
+        renderPureMetricSliderAndCleanStage();
         renderBiologicalRegionSvgViewport();
+        renderConsolidatedCsirHubCard();
         renderInteractiveSvgSimulator();
         typesetMath();
       };
-      hideOldDuplicateSimButton();
-      renderPureMetricSlider();
+      cleanUpStageHudAndButtons();
+      renderPureMetricSliderAndCleanStage();
       renderBiologicalRegionSvgViewport();
+      renderConsolidatedCsirHubCard();
       renderInteractiveSvgSimulator();
     }
   }
