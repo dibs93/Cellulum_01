@@ -1047,3 +1047,310 @@ function getFallbackModuleData(regItem) {
     quiz_challenges: []
   };
 }
+// ============================================================================
+// DEEP CROSS-MODULE SEARCH ENGINE (DESKTOP + MOBILE SEARCH BUTTON & MODAL)
+// ============================================================================
+(function initCellulumDeepSearch() {
+  let fullSearchIndex = [];
+  let isIndexing = false;
+  let isIndexed = false;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    injectMobileSearchButtonAndModal();
+    setTimeout(buildGlobalSearchIndex, 1200); // Index all 15 JSONs quietly in background
+  });
+
+  function injectMobileSearchButtonAndModal() {
+    // 1. Add visible Search Button in Top Header (especially for Mobile where input is hidden)
+    const bundleBtn = document.getElementById("openBundleModalBtn");
+    if (bundleBtn && bundleBtn.parentElement) {
+      const mobileSearchBtn = document.createElement("button");
+      mobileSearchBtn.id = "openSearchModalBtn";
+      mobileSearchBtn.type = "button";
+      mobileSearchBtn.className = "px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-emerald-400 flex items-center space-x-1.5 transition shadow";
+      mobileSearchBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i><span>Search</span>`;
+      bundleBtn.parentElement.insertBefore(mobileSearchBtn, bundleBtn);
+
+      mobileSearchBtn.addEventListener("click", () => toggleSearchModal(true));
+    }
+
+    // 2. Also open the deep search modal if user clicks or types in the desktop search bar
+    const desktopInput = document.getElementById("globalModuleSearch");
+    if (desktopInput) {
+      desktopInput.addEventListener("focus", () => {
+        toggleSearchModal(true);
+        const modalInput = document.getElementById("deepSearchInput");
+        if (modalInput && desktopInput.value) {
+          modalInput.value = desktopInput.value;
+          runDeepSearchQuery(desktopInput.value);
+        }
+      });
+    }
+
+    // 3. Create Full-Screen / Overlay Deep Search Modal
+    const modal = document.createElement("div");
+    modal.id = "deepSearchModal";
+    modal.className = "fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-start justify-center p-3 sm:p-6 pt-14 sm:pt-20";
+    modal.innerHTML = `
+      <div class="w-full max-w-2xl rounded-2xl bg-slate-900 border border-emerald-500/40 shadow-2xl overflow-hidden flex flex-col max-h-[82vh]">
+        <!-- Search Input Bar -->
+        <div class="p-3.5 sm:p-4 bg-slate-950 border-b border-slate-800 flex items-center space-x-2.5">
+          <i class="fa-solid fa-magnifying-glass text-emerald-400 text-sm ml-1"></i>
+          <input type="text" id="deepSearchInput" placeholder="Search any enzyme, inhibitor, equation, pathway, or CSIR topic..."
+                 class="w-full bg-transparent text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none font-medium" autocomplete="off">
+          <button type="button" id="clearDeepSearchBtn" class="hidden px-2 py-1 rounded text-[10px] font-mono text-slate-400 hover:text-white bg-slate-800">Clear</button>
+          <button type="button" id="closeDeepSearchBtn" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+
+        <!-- Quick Filter Chips -->
+        <div class="px-4 py-2 bg-slate-900/90 border-b border-slate-800/80 flex items-center gap-1.5 overflow-x-auto text-[10px] font-mono">
+          <span class="text-slate-500 shrink-0">Try:</span>
+          <button type="button" data-quick-term="Rotenone" class="quick-search-chip px-2 py-0.5 rounded bg-slate-950 hover:bg-emerald-950 text-emerald-300 border border-slate-800 shrink-0">Rotenone</button>
+          <button type="button" data-quick-term="TaqMan" class="quick-search-chip px-2 py-0.5 rounded bg-slate-950 hover:bg-emerald-950 text-emerald-300 border border-slate-800 shrink-0">TaqMan</button>
+          <button type="button" data-quick-term="Lotka-Volterra" class="quick-search-chip px-2 py-0.5 rounded bg-slate-950 hover:bg-emerald-950 text-emerald-300 border border-slate-800 shrink-0">Lotka-Volterra</button>
+          <button type="button" data-quick-term="Ramachandran" class="quick-search-chip px-2 py-0.5 rounded bg-slate-950 hover:bg-emerald-950 text-emerald-300 border border-slate-800 shrink-0">Ramachandran</button>
+          <button type="button" data-quick-term="Hardy-Weinberg" class="quick-search-chip px-2 py-0.5 rounded bg-slate-950 hover:bg-emerald-950 text-emerald-300 border border-slate-800 shrink-0">Hardy-Weinberg</button>
+        </div>
+
+        <!-- Results Container -->
+        <div id="deepSearchResults" class="p-3.5 sm:p-4 overflow-y-auto space-y-2.5 flex-1">
+          <div class="text-center py-8 text-xs text-slate-400">
+            Type above to search across all <strong>15 CSIR NET Modules</strong> (nodes, mechanisms, Part-C traps & inhibitors).
+          </div>
+        </div>
+
+        <!-- Footer Status -->
+        <div class="px-4 py-2 bg-slate-950 border-t border-slate-800/90 flex items-center justify-between text-[10px] font-mono text-slate-500">
+          <span id="searchIndexStatus">Indexing 15 modules...</span>
+          <span>Tap any result to jump straight to that scale & node</span>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    const inputEl = document.getElementById("deepSearchInput");
+    const clearBtn = document.getElementById("clearDeepSearchBtn");
+
+    inputEl?.addEventListener("input", (e) => {
+      const val = e.target.value;
+      clearBtn?.classList.toggle("hidden", !val.length);
+      runDeepSearchQuery(val);
+    });
+
+    clearBtn?.addEventListener("click", () => {
+      if (inputEl) {
+        inputEl.value = "";
+        clearBtn.classList.add("hidden");
+        runDeepSearchQuery("");
+        inputEl.focus();
+      }
+    });
+
+    document.getElementById("closeDeepSearchBtn")?.addEventListener("click", () => toggleSearchModal(false));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) toggleSearchModal(false);
+    });
+
+    modal.querySelectorAll(".quick-search-chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        if (inputEl) {
+          inputEl.value = chip.dataset.quickTerm;
+          clearBtn?.classList.remove("hidden");
+          runDeepSearchQuery(chip.dataset.quickTerm);
+        }
+      });
+    });
+
+    // Keyboard shortcut: Ctrl+K or / to open search
+    document.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        toggleSearchModal(true);
+      } else if (e.key === "Escape") {
+        toggleSearchModal(false);
+      }
+    });
+  }
+
+  function toggleSearchModal(open) {
+    const modal = document.getElementById("deepSearchModal");
+    if (!modal) return;
+    modal.classList.toggle("hidden", !open);
+    modal.classList.toggle("flex", open);
+    if (open) {
+      if (!isIndexed && !isIndexing) buildGlobalSearchIndex();
+      setTimeout(() => document.getElementById("deepSearchInput")?.focus(), 50);
+    }
+  }
+
+  async function buildGlobalSearchIndex() {
+    if (isIndexed || isIndexing) return;
+    isIndexing = true;
+    const statusEl = document.getElementById("searchIndexStatus");
+    if (statusEl) statusEl.textContent = "Scanning all 15 JSON modules...";
+
+    const entries = [];
+    for (const regItem of MODULE_REGISTRY) {
+      try {
+        let modData = state.cache[regItem.id];
+        if (!modData) {
+          modData = await fetchJsonFromPaths(regItem);
+          state.cache[regItem.id] = modData;
+        }
+        if (!modData || !modData.nodes) continue;
+
+        // Update sidebar title while we have it loaded!
+        if (modData.title) {
+          regItem.title = modData.title;
+          const cardTitle = document.querySelector(`.mod-nav-card[data-id="${regItem.id}"] .text-slate-200`);
+          if (cardTitle) cardTitle.textContent = modData.title;
+        }
+
+        // Index every Hotspot Node
+        Object.values(modData.nodes).forEach(node => {
+          if (node.id === "node_fallback") return;
+          const metricsText = Object.entries(node.metrics || {}).map(([k, v]) => `${k}: ${v}`).join(" | ");
+          const mechText = (node.tabs?.mechanism || []).join(" ");
+          const csirText = (node.tabs?.csir_high_yield || []).join(" ");
+          const pathText = (node.tabs?.pathology || []).join(" ");
+          const labText = (node.tabs?.lab_workbench || []).join(" ");
+
+          entries.push({
+            type: "NODE",
+            moduleId: regItem.id,
+            shortUnit: regItem.shortUnit,
+            moduleTitle: modData.title || regItem.title,
+            scaleId: node.level || "L1",
+            nodeId: node.id,
+            title: node.title || "",
+            subtitle: node.subtitle || "",
+            searchableBlob: `${regItem.shortUnit} ${modData.title} ${node.title} ${node.subtitle} ${metricsText} ${mechText} ${csirText} ${pathText} ${labText}`.toLowerCase(),
+            rawSnippets: [node.subtitle, metricsText, csirText, mechText].filter(Boolean).join(" • ")
+          });
+        });
+
+        // Index every Inhibitor / Simulator Agent
+        (modData.inhibitor_simulator?.agents || []).forEach(ag => {
+          entries.push({
+            type: "SIMULATOR",
+            moduleId: regItem.id,
+            shortUnit: regItem.shortUnit,
+            moduleTitle: modData.title || regItem.title,
+            scaleId: modData.nodes?.[ag.target_node]?.level || "L1",
+            nodeId: ag.target_node || null,
+            simAgentId: ag.id,
+            title: `${ag.name} (${ag.category || "Inhibitor / Perturbation"})`,
+            subtitle: ag.mechanism_of_action || ag.binding_site || "",
+            searchableBlob: `${ag.name} ${ag.category} ${ag.mechanism_of_action} ${ag.binding_site} ${ag.rescue_experiment}`.toLowerCase(),
+            rawSnippets: `${ag.mechanism_of_action || ""} • ${ag.rescue_experiment || ""}`
+          });
+        });
+      } catch (e) {}
+    }
+
+    fullSearchIndex = entries;
+    isIndexed = true;
+    isIndexing = false;
+    if (statusEl) statusEl.textContent = `Indexed ${entries.length} nodes & simulators across 15 modules`;
+  }
+
+  function runDeepSearchQuery(rawQuery) {
+    const box = document.getElementById("deepSearchResults");
+    if (!box) return;
+
+    const q = (rawQuery || "").toLowerCase().trim();
+    if (!q) {
+      box.innerHTML = `
+        <div class="text-center py-8 text-xs text-slate-400">
+          Type any keyword above to search across all <strong>${fullSearchIndex.length || "150+"}</strong> CSIR NET nodes, equations, and inhibitor experiments.
+        </div>
+      `;
+      return;
+    }
+
+    const terms = q.split(/\s+/).filter(Boolean);
+    const matches = fullSearchIndex
+      .map(item => {
+        let score = 0;
+        const titleLower = item.title.toLowerCase();
+        const subLower = item.subtitle.toLowerCase();
+
+        for (const t of terms) {
+          if (!item.searchableBlob.includes(t)) return null; // All terms must match
+          if (titleLower.includes(t)) score += 10;
+          else if (subLower.includes(t)) score += 5;
+          else score += 2;
+        }
+        return { item, score };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 20);
+
+    if (!matches.length) {
+      box.innerHTML = `<div class="text-center py-8 text-xs text-rose-300">No matches found for "<strong>${rawQuery}</strong>". Try a broader enzyme or pathway name.</div>`;
+      return;
+    }
+
+    box.innerHTML = matches.map(({ item }, idx) => {
+      const snippet = buildHighlightedSnippet(item.rawSnippets, terms[0]);
+      const badgeColor = item.type === "SIMULATOR"
+        ? "bg-rose-950 text-rose-300 border-rose-700/60"
+        : "bg-emerald-950 text-emerald-300 border-emerald-700/60";
+
+      return `
+        <div data-res-idx="${idx}" class="deep-search-hit p-3 rounded-xl bg-slate-950/90 hover:bg-slate-800/80 border border-slate-800 hover:border-emerald-500/60 cursor-pointer transition">
+          <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1">
+            <div class="flex items-center space-x-1.5">
+              <span class="px-2 py-0.5 rounded text-[9px] font-mono uppercase border ${badgeColor}">
+                ${item.type === "SIMULATOR" ? "Inhibitor Sim" : `${item.shortUnit} • ${item.scaleId}`}
+              </span>
+              <span class="text-[10px] text-slate-400 truncate max-w-[200px] sm:max-w-xs">${item.moduleTitle}</span>
+            </div>
+            <span class="text-[10px] font-mono text-emerald-400">Jump <i class="fa-solid fa-arrow-right ml-0.5"></i></span>
+          </div>
+          <div class="text-xs sm:text-sm font-bold text-white leading-snug">${formatRichText(item.title)}</div>
+          <div class="text-[11px] text-slate-400 mt-1 line-clamp-2">${snippet}</div>
+        </div>
+      `;
+    }).join("");
+
+    box.querySelectorAll(".deep-search-hit").forEach(el => {
+      el.addEventListener("click", async () => {
+        const hit = matches[Number(el.dataset.resIdx)]?.item;
+        if (!hit) return;
+        toggleSearchModal(false);
+
+        await loadModule(hit.moduleId);
+        state.activeScaleId = hit.scaleId || "L1";
+        if (hit.nodeId) state.activeNodeId = hit.nodeId;
+        if (hit.simAgentId) {
+          state.activeSimAgentId = hit.simAgentId;
+          document.getElementById("simulatorPanel")?.classList.remove("hidden");
+        }
+        renderArgonWorkspace();
+
+        setTimeout(() => {
+          const targetEl = hit.simAgentId
+            ? document.getElementById("simulatorPanel")
+            : document.querySelector(`[data-card-node="${hit.nodeId}"]`);
+          targetEl?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 120);
+      });
+    });
+  }
+
+  function buildHighlightedSnippet(text, term) {
+    if (!text) return "";
+    const clean = text.replace(/\*\*/g, "");
+    const idx = clean.toLowerCase().indexOf(term.toLowerCase());
+    if (idx === -1) return clean.slice(0, 140) + "...";
+    const start = Math.max(0, idx - 45);
+    const end = Math.min(clean.length, idx + 95);
+    const slice = (start > 0 ? "..." : "") + clean.slice(start, end) + (end < clean.length ? "..." : "");
+    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "ig");
+    return slice.replace(regex, `<strong class="text-emerald-300 underline">$1</strong>`);
+  }
+})();
