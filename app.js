@@ -1356,33 +1356,66 @@ function getFallbackModuleData(regItem) {
 })();
 
  // ============================================================================
-// UI REFINEMENT PACK (V2):
+// UI REFINEMENT PACK (V3):
 // 1. Phone-Lock Module Carousel Controls
-// 2. Pure Physical Metric Slider
-// 3. Self-Contained Expandable Pathway Simulator Tab with:
-//    - SVG Pathway Diagram at the TOP
-//    - Floating Quick-Info Inspector Popover at the TOP on Node/Factor Click
+// 2. Pure Physical Metric Slider (Size + Unit Only)
+// 3. Dynamic Biological Region SVG Viewport (Replaces Circular Radar Wheel!)
+//    Renders Organelle Cross-Sections, Lipid Bilayers, Multi-Subunit Complexes
+//    & Atomic Catalytic Pockets with Interactive Pins Mapped to the Structure
+// 4. Self-Contained Expandable Pathway Simulator with Top SVG & Quick-Info Card
 // ============================================================================
 (function initCellulumRefinements() {
   const FALLBACK_METRICS = ["500 μm", "50 μm", "1.5 μm", "8 nm"];
-  let simExpanded = false; // Starts neatly collapsed as a clickable button/tab; expands on click
-  let selectedSimNodeId = null; // Tracks which SVG node/complex is clicked for the top floating info tab
+  let simExpanded = false;
+  let selectedSimNodeId = null;
 
   document.addEventListener("DOMContentLoaded", () => {
+    injectBioSchematicStyles();
     setupLockScreenModuleCarousel();
     hideOldDuplicateSimButton();
-    overrideWorkspaceForMetricSliderAndSvgSim();
+    overrideWorkspaceForBioSchematicAndSim();
   });
 
-  // Hide the old duplicate "Pathway Simulator" button in the upper stage crumb bar
+  function injectBioSchematicStyles() {
+    if (document.getElementById("bioSchematicCss")) return;
+    const style = document.createElement("style");
+    style.id = "bioSchematicCss";
+    style.textContent = `
+      /* Hide the old circular radar wheel and its zoom buttons */
+      .circular-lens-viewport,
+      .circular-lens-viewport + div {
+        display: none !important;
+      }
+      #interactiveStage {
+        min-height: auto !important;
+        padding: 1rem !important;
+      }
+      .bio-region-stage {
+        background: radial-gradient(circle at 50% 45%, rgba(16, 185, 129, 0.14) 0%, rgba(15, 23, 42, 0.92) 70%, rgba(2, 6, 23, 0.98) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 10px 28px rgba(0, 0, 0, 0.65);
+      }
+      @keyframes bioPulseGlow {
+        0%, 100% { opacity: 0.55; transform: scale(1); }
+        50% { opacity: 0.95; transform: scale(1.06); }
+      }
+      .bio-pin-pulse {
+        animation: bioPulseGlow 2.2s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   function hideOldDuplicateSimButton() {
     const oldBtn = document.getElementById("toggleSimBtn");
     if (oldBtn) oldBtn.style.display = "none";
     const simPanel = document.getElementById("simulatorPanel");
-    if (simPanel) simPanel.classList.remove("hidden"); // Always visible as a clickable expandable tab
+    if (simPanel) simPanel.classList.remove("hidden");
   }
 
-  // 1. PHONE-LOCK STYLE MODULE CAROUSEL HEADER & ARROWS
+  // 1. PHONE-LOCK STYLE MODULE CAROUSEL
   function setupLockScreenModuleCarousel() {
     const nav = document.getElementById("moduleNavContainer");
     if (!nav || !nav.parentElement || document.getElementById("modCarouselPrev")) return;
@@ -1479,16 +1512,9 @@ function getFallbackModuleData(regItem) {
 
     const canvas = document.getElementById("hotspotCanvas");
     if (canvas) {
-      canvas.querySelectorAll("[data-orb-node]").forEach(orb => {
-        const firstSpan = orb.querySelector("span:first-child");
-        if (firstSpan) firstSpan.textContent = currentMetric;
-      });
       canvas.querySelectorAll("span").forEach(sp => {
         if (/^L[1-4]\b/.test(sp.textContent.trim())) {
           sp.textContent = sp.textContent.replace(/L[1-4]\s*•?\s*/g, `${currentMetric} • `).replace(/•\s*•/g, "•");
-        }
-        if (/Scale\s+L[1-4]/i.test(sp.textContent)) {
-          sp.textContent = `Resolution: ${currentMetric}`;
         }
       });
       canvas.querySelectorAll(".zoom-jump-chip").forEach(chip => {
@@ -1502,7 +1528,217 @@ function getFallbackModuleData(regItem) {
     }
   }
 
-  // 3. SELF-CONTAINED EXPANDABLE PATHWAY SIMULATOR WITH TOP SVG & FLOATING QUICK-INFO TAB
+  // 3. DYNAMIC BIOLOGICAL REGION SVG VIEWPORT (REPLACES CIRCULAR RADAR WHEEL)
+  function renderBiologicalRegionSvgViewport() {
+    const canvas = document.getElementById("hotspotCanvas");
+    const mod = state.moduleData;
+    if (!canvas || !mod) return;
+
+    const levels = mod.scale_levels || [];
+    const activeIdx = Math.max(0, levels.findIndex(l => l.level_id === state.activeScaleId));
+    const activeLvl = levels[activeIdx] || levels[0];
+    if (!activeLvl) return;
+
+    const currentMetric = extractPureMetric(activeLvl, activeIdx);
+    const nodeIds = activeLvl.node_ids || activeLvl.hotspots || [];
+    const activeAgent = (mod.inhibitor_simulator?.agents || []).find(a => a.id === state.activeSimAgentId);
+
+    // Generate the anatomical / ultrastructural SVG artwork based on zoom level (0=Organelle/Macro, 1=Membrane/Tissue, 2=Complex, 3=Atomic Pocket)
+    const regionBackdropSvg = buildScaleBiologicalArtwork(activeIdx, mod.title || "", activeLvl.name || "");
+
+    // Compute anatomical pin coordinates across the SVG structure
+    const pinPositions = [
+      { x: 145, y: 78 },
+      { x: 310, y: 118 },
+      { x: 465, y: 82 },
+      { x: 230, y: 142 },
+      { x: 390, y: 68 }
+    ];
+
+    const svgPinsHtml = nodeIds.map((nid, idx) => {
+      const node = mod.nodes?.[nid];
+      if (!node) return "";
+      const pt = pinPositions[idx % pinPositions.length];
+      const isSelected = node.id === state.activeNodeId;
+      const isPerturbed = activeAgent && activeAgent.target_node === node.id;
+      const shortLabel = (node.title || `Site ${idx + 1}`).split(":")[0].split("(")[0].trim().slice(0, 18);
+
+      const fillCol = isPerturbed ? "#e11d48" : isSelected ? "#10b981" : "#0f172a";
+      const strokeCol = isPerturbed ? "#fda4af" : isSelected ? "#ffffff" : "#34d399";
+
+      return `
+        <g class="bio-svg-pin cursor-pointer" data-bio-pin="${node.id}">
+          <!-- Leader Line to Structure -->
+          <line x1="${pt.x}" y1="${pt.y}" x2="${pt.x}" y2="${pt.y + 24}" stroke="${strokeCol}" stroke-width="1.5" stroke-dasharray="2 2" />
+          <circle cx="${pt.x}" cy="${pt.y + 24}" r="3.5" fill="${strokeCol}" />
+          ${isSelected ? `<circle cx="${pt.x}" cy="${pt.y}" r="22" fill="rgba(16, 185, 129, 0.25)" class="bio-pin-pulse" />` : ""}
+          <!-- Pin Pill Badge on SVG -->
+          <rect x="${pt.x - 68}" y="${pt.y - 15}" width="136" height="28" rx="14"
+                fill="${fillCol}" stroke="${strokeCol}" stroke-width="${isSelected ? '2.2' : '1.3'}" />
+          <text x="${pt.x}" y="${pt.y + 3}" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif" font-weight="bold">
+            ${idx + 1}. ${shortLabel}
+          </text>
+        </g>
+      `;
+    }).join("");
+
+    // Quick-jump pill strip under the biological SVG
+    const quickPillsHtml = nodeIds.map((nid, idx) => {
+      const node = mod.nodes?.[nid];
+      if (!node) return "";
+      const isSelected = node.id === state.activeNodeId;
+      const shortTitle = (node.title || "").split(":")[0].trim();
+      return `
+        <button type="button" data-bio-pill="${node.id}" class="px-3 py-1 rounded-full text-[11px] font-semibold border transition shrink-0 ${
+          isSelected
+            ? "bg-emerald-600 text-white border-white shadow-md"
+            : "bg-slate-950/85 text-slate-300 border-white/15 hover:border-emerald-400"
+        }">
+          <span class="font-mono text-[10px] mr-1 opacity-80">#${idx + 1}</span>${shortTitle}
+        </button>
+      `;
+    }).join("");
+
+    // Inject or update the Biological Region SVG Banner at the top of #hotspotCanvas
+    let existingBanner = document.getElementById("bioRegionSvgContainer");
+    if (!existingBanner) {
+      existingBanner = document.createElement("div");
+      existingBanner.id = "bioRegionSvgContainer";
+      existingBanner.className = "w-full mb-3";
+      const firstChild = canvas.firstElementChild;
+      if (firstChild) {
+        firstChild.insertBefore(existingBanner, firstChild.firstChild);
+      } else {
+        canvas.prepend(existingBanner);
+      }
+    }
+
+    existingBanner.innerHTML = `
+      <div class="bio-region-stage rounded-2xl p-3 overflow-hidden">
+        <div class="flex items-center justify-between mb-1.5 px-1">
+          <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 font-bold">
+            <i class="fa-solid fa-microscope mr-1.5"></i> Ultrastructure Cross-Section (${currentMetric})
+          </span>
+          <span class="text-[10px] font-mono text-slate-400">Tap any region pin to inspect</span>
+        </div>
+
+        <div class="w-full overflow-x-auto rounded-xl bg-slate-950/75 border border-white/10">
+          <svg viewBox="0 0 600 185" class="w-full h-auto min-w-[440px]">
+            ${regionBackdropSvg}
+            ${svgPinsHtml}
+          </svg>
+        </div>
+
+        <!-- Horizontal Quick-Select Pills for Current Scale Region -->
+        <div class="flex items-center gap-2 overflow-x-auto pt-2.5 pb-0.5 no-scrollbar">
+          ${quickPillsHtml}
+        </div>
+      </div>
+    `;
+
+    // Bind clicking any SVG structural pin or quick-pill to expand & scroll to that card
+    const selectNodeFromRegion = (nid) => {
+      state.activeNodeId = nid;
+      renderArgonWorkspace();
+      setTimeout(() => {
+        const card = canvas.querySelector(`[data-card-node="${nid}"]`);
+        card?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 60);
+    };
+
+    existingBanner.querySelectorAll("[data-bio-pin]").forEach(el => {
+      el.addEventListener("click", () => selectNodeFromRegion(el.dataset.bioPin));
+    });
+    existingBanner.querySelectorAll("[data-bio-pill]").forEach(el => {
+      el.addEventListener("click", () => selectNodeFromRegion(el.dataset.bioPill));
+    });
+  }
+
+  // Draws authentic biological SVG schematics tailored to the active magnification scale
+  function buildScaleBiologicalArtwork(scaleIdx, modTitle, levelName) {
+    // SCALE 0 (Macro / Organelle & Compartmental Architecture)
+    if (scaleIdx === 0) {
+      return `
+        <defs>
+          <linearGradient id="orgOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(16, 185, 129, 0.22)" />
+            <stop offset="100%" stop-color="rgba(2, 132, 199, 0.18)" />
+          </linearGradient>
+        </defs>
+        <!-- Cytosolic Background Grid -->
+        <text x="16" y="20" fill="#64748b" font-size="9" font-family="monospace">CYTOSOL / EXTRACELLULAR COMPARTMENT</text>
+        <!-- Outer Organelle / Cellular Envelope -->
+        <ellipse cx="300" cy="100" rx="255" ry="68" fill="url(#orgOuter)" stroke="#10b981" stroke-width="2.5" />
+        <!-- Inner Folded Membrane / Cristae / Chromatin Compartments -->
+        <path d="M 75,100 Q 115,45 145,100 T 215,100 T 285,100 T 355,100 T 425,100 T 495,100"
+              fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7" />
+        <path d="M 90,115 Q 135,155 180,110 T 270,115 T 360,110 T 450,115 T 515,100"
+              fill="none" stroke="#34d399" stroke-width="1.8" stroke-dasharray="5 3" stroke-opacity="0.65" />
+        <text x="300" y="162" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">
+          LUMEN / MATRIX / INTERIOR COMPARTMENT
+        </text>
+      `;
+    }
+
+    // SCALE 1 (Phospholipid Bilayer & Transmembrane Apparatus)
+    if (scaleIdx === 1) {
+      let headsTop = "";
+      let headsBot = "";
+      for (let x = 25; x <= 575; x += 18) {
+        headsTop += `
+          <circle cx="${x}" cy="66" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" />
+          <line x1="${x - 2}" y1="72" x2="${x - 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
+          <line x1="${x + 2}" y1="72" x2="${x + 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
+        `;
+        headsBot += `
+          <circle cx="${x}" cy="122" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" />
+          <line x1="${x - 2}" y1="116" x2="${x - 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
+          <line x1="${x + 2}" y1="116" x2="${x + 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
+        `;
+      }
+      return `
+        <text x="16" y="20" fill="#7dd3fc" font-size="9" font-family="monospace">P-SIDE (IMS / EXTRACELLULAR / HIGH [H+])</text>
+        ${headsTop}
+        ${headsBot}
+        <!-- Embedded Transmembrane Multi-Pass Helices -->
+        <rect x="120" y="50" width="52" height="88" rx="12" fill="rgba(16, 185, 129, 0.35)" stroke="#34d399" stroke-width="2" />
+        <rect x="280" y="46" width="64" height="96" rx="14" fill="rgba(14, 165, 233, 0.35)" stroke="#38bdf8" stroke-width="2" />
+        <rect x="440" y="52" width="54" height="84" rx="12" fill="rgba(168, 85, 247, 0.35)" stroke="#c084fc" stroke-width="2" />
+        <text x="16" y="172" fill="#6ee7b7" font-size="9" font-family="monospace">N-SIDE (MATRIX / CYTOSOL / ΔΨm SIGNALING)</text>
+      `;
+    }
+
+    // SCALE 2 (Macromolecular Multi-Subunit Complex & Translocation Channel)
+    if (scaleIdx === 2) {
+      return `
+        <text x="16" y="20" fill="#a7f3d0" font-size="9" font-family="monospace">MACROMOLECULAR QUATERNARY ASSEMBLY & TRANSLOCATION CHANNEL</text>
+        <!-- Membrane Anchor Plane -->
+        <line x1="20" y1="130" x2="580" y2="130" stroke="#334155" stroke-width="8" stroke-linecap="round" />
+        <!-- Multi-Subunit α3β3 / Stator / Polymerase Core -->
+        <ellipse cx="200" cy="85" rx="68" ry="42" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="2" />
+        <ellipse cx="300" cy="78" rx="52" ry="48" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2" />
+        <ellipse cx="400" cy="85" rx="68" ry="42" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="2" />
+        <!-- Central Stalk / Channel Pore -->
+        <rect x="282" y="95" width="36" height="65" rx="8" fill="rgba(245, 158, 11, 0.3)" stroke="#fbbf24" stroke-width="2" />
+        <path d="M 100,90 C 200,30 400,30 500,90" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="6 4" class="svg-flux-active" />
+      `;
+    }
+
+    // SCALE 3 (Atomic Catalytic Pocket, Transition State & Cofactor Coordination)
+    return `
+      <text x="16" y="20" fill="#fde68a" font-size="9" font-family="monospace">ATOMIC CATALYTIC POCKET • COFACTOR & H-BOND COORDINATION</text>
+      <!-- Catalytic Pocket Cavity -->
+      <path d="M 90,35 Q 300,175 510,35" fill="rgba(15, 23, 42, 0.65)" stroke="#38bdf8" stroke-width="2.5" />
+      <!-- Coordinate Bonds to Central Cofactor / Mg2+ / Heme / Fe-S -->
+      <line x1="160" y1="75" x2="300" y2="105" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 3" />
+      <line x1="440" y1="75" x2="300" y2="105" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 3" />
+      <line x1="300" y1="45" x2="300" y2="105" stroke="#34d399" stroke-width="2" stroke-dasharray="4 3" />
+      <circle cx="300" cy="105" r="22" fill="rgba(245, 158, 11, 0.28)" stroke="#fbbf24" stroke-width="2" />
+      <text x="300" y="109" text-anchor="middle" fill="#fef3c7" font-size="10" font-family="monospace" font-weight="bold">Mg²⁺/Fe</text>
+    `;
+  }
+
+  // 4. SELF-CONTAINED EXPANDABLE PATHWAY SIMULATOR WITH TOP SVG & FLOATING QUICK-INFO TAB
   function renderInteractiveSvgSimulator() {
     const simPanel = document.getElementById("simulatorPanel");
     if (!simPanel || !state.moduleData) return;
@@ -1515,7 +1751,6 @@ function getFallbackModuleData(regItem) {
     const baseline = sim.baseline_metrics || {};
     const predicted = activeAgent?.predicted_phenotype || activeAgent?.resulting_metrics || {};
 
-    // Gather up to 4 pathway nodes for the interactive SVG diagram
     const allNodes = Object.values(mod.nodes || {}).slice(0, 4);
     if (!selectedSimNodeId && allNodes.length) {
       selectedSimNodeId = activeAgent?.target_node || allNodes[0].id;
@@ -1525,7 +1760,6 @@ function getFallbackModuleData(regItem) {
     const targetNodeId = activeAgent?.target_node;
     const blockedIdx = allNodes.findIndex(n => n.id === targetNodeId);
 
-    // Build Interactive SVG Nodes (Clickable to open/update the top floating info tab)
     const svgNodesHtml = allNodes.map((n, i) => {
       const cx = 75 + i * 145;
       const cy = 92;
@@ -1550,10 +1784,7 @@ function getFallbackModuleData(regItem) {
       return `
         ${edgeSvg}
         <g class="svg-pathway-node cursor-pointer" data-svg-node="${n.id}">
-          <!-- Outer Selection Halo if clicked -->
-          ${isSelectedNode ? `
-            <circle cx="${cx}" cy="${cy}" r="41" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 3" />
-          ` : ""}
+          ${isSelectedNode ? `<circle cx="${cx}" cy="${cy}" r="41" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 3" />` : ""}
           <circle cx="${cx}" cy="${cy}" r="34"
                   fill="${isTarget ? 'rgba(159, 18, 57, 0.9)' : isSelectedNode ? 'rgba(3, 105, 161, 0.85)' : isDownstreamBlocked ? 'rgba(30, 41, 59, 0.75)' : 'rgba(6, 78, 59, 0.88)'}"
                   stroke="${isTarget ? '#fb7185' : isSelectedNode ? '#38bdf8' : isDownstreamBlocked ? '#64748b' : '#34d399'}"
@@ -1576,7 +1807,6 @@ function getFallbackModuleData(regItem) {
       `;
     }).join("");
 
-    // Build Limited Floating Quick-Info Tab for the Selected Node / Complex / Inhibitor (Sits at TOP of Simulator!)
     let floatingQuickTabHtml = "";
     if (inspectedNode) {
       const metricEntries = Object.entries(inspectedNode.metrics || {}).slice(0, 2);
@@ -1603,11 +1833,9 @@ function getFallbackModuleData(regItem) {
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
-
           <p class="text-[11px] text-slate-200 leading-relaxed mt-2 pt-2 border-t border-white/10">
             ${formatRichText(conciseSummary)}
           </p>
-
           ${metricEntries.length ? `
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">
               ${metricEntries.map(([k, v]) => `
@@ -1618,7 +1846,6 @@ function getFallbackModuleData(regItem) {
               `).join("")}
             </div>
           ` : ""}
-
           ${activeAgent ? `
             <div class="mt-2.5 p-2.5 rounded-xl bg-rose-950/40 border border-rose-500/40 text-[11px] text-rose-100">
               <strong class="text-rose-300">Inhibitor Action:</strong> ${formatRichText(activeAgent.binding_site || activeAgent.mechanism_of_action || "")}
@@ -1628,7 +1855,6 @@ function getFallbackModuleData(regItem) {
       `;
     }
 
-    // Compact horizontal scrollable / wrap pills for Inhibitors (Below the SVG so they never push the SVG down!)
     const agentsButtonsHtml = agents.map(ag => {
       const isSelected = ag.id === state.activeSimAgentId;
       return `
@@ -1654,7 +1880,6 @@ function getFallbackModuleData(regItem) {
     }).join("");
 
     simPanel.innerHTML = `
-      <!-- SELF-CONTAINED CLICKABLE PATHWAY SIMULATOR HEADER BUTTON -->
       <div id="simAccumulatorToggleBar" class="cursor-pointer select-none flex items-center justify-between gap-3 p-1">
         <div class="flex items-center space-x-2.5">
           <span class="px-3 py-1.5 rounded-xl bg-emerald-600/25 border border-emerald-400/50 text-emerald-300 text-xs font-mono font-bold flex items-center space-x-2 shadow">
@@ -1665,21 +1890,15 @@ function getFallbackModuleData(regItem) {
             ${activeAgent ? `● Perturbed: ${activeAgent.name.split("(")[0]}` : "● Interactive Flux & Kinetics"}
           </span>
         </div>
-
         <button type="button" class="px-3 py-1 rounded-xl bg-slate-900/90 border border-white/20 text-xs font-mono text-emerald-300 flex items-center space-x-1.5">
           <span>${simExpanded ? "Collapse" : "Expand Simulator"}</span>
           <i class="fa-solid ${simExpanded ? "fa-chevron-up" : "fa-chevron-down"} text-[10px]"></i>
         </button>
       </div>
 
-      <!-- EXPANDABLE SIMULATOR BODY (SVG & FLOATING INFO TAB AT THE VERY TOP!) -->
       ${simExpanded ? `
         <div class="mt-4 pt-3.5 border-t border-white/15">
-          
-          <!-- 1. FLOATING QUICK-INFO CARD FOR SELECTED NODE / FACTOR (TOP POSITION) -->
           ${floatingQuickTabHtml}
-
-          <!-- 2. INTERACTIVE SVG PATHWAY FLUX DIAGRAM (RIGHT AT THE TOP!) -->
           <div class="w-full rounded-2xl bg-slate-950/95 border border-white/20 p-2.5 mb-3.5 overflow-x-auto shadow-inner">
             <div class="flex items-center justify-between px-1 mb-1">
               <span class="text-[10px] font-mono uppercase text-emerald-400">
@@ -1702,21 +1921,13 @@ function getFallbackModuleData(regItem) {
               ${svgNodesHtml}
             </svg>
           </div>
-
-          <!-- 3. INHIBITOR / PERTURBATION FACTOR PILLS -->
           <div class="mb-4">
             <div class="text-[10px] font-mono uppercase text-slate-300 mb-2">
               <i class="fa-solid fa-vial-circle-check mr-1 text-emerald-400"></i>Apply Experimental Inhibitor / Perturbation Factor:
             </div>
-            <div class="flex flex-wrap gap-2">
-              ${agentsButtonsHtml || `<span class="text-xs text-slate-400">No inhibitor agents configured for this module.</span>`}
-            </div>
+            <div class="flex flex-wrap gap-2">${agentsButtonsHtml}</div>
           </div>
-
-          <!-- 4. QUANTITATIVE FLUX READOUTS -->
           ${metricsHtml ? `<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">${metricsHtml}</div>` : ""}
-
-          <!-- 5. LIVE SVG MICHAELIS-MENTEN KINETICS PLOTTER -->
           <div class="pt-3 border-t border-white/15 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
             <div class="md:col-span-5 space-y-3">
               <div class="text-[11px] font-mono uppercase text-emerald-300 font-bold">Live SVG Enzyme Kinetics Curve</div>
@@ -1730,7 +1941,6 @@ function getFallbackModuleData(regItem) {
               </div>
               <div id="simCalculatedOutput" class="p-2.5 rounded-xl bg-slate-950 border border-white/15 font-mono text-[11px] text-emerald-300"></div>
             </div>
-
             <div class="md:col-span-7 rounded-2xl bg-slate-950/95 border border-white/15 p-2">
               <svg id="kineticsCurveSvg" viewBox="0 0 320 150" class="w-full h-auto"></svg>
             </div>
@@ -1739,21 +1949,16 @@ function getFallbackModuleData(regItem) {
       ` : ""}
     `;
 
-    // Toggle Expand / Collapse when clicking the Pathway Simulator Header Button
     document.getElementById("simAccumulatorToggleBar")?.addEventListener("click", () => {
       simExpanded = !simExpanded;
       renderInteractiveSvgSimulator();
       typesetMath();
     });
-
-    // Close Floating Quick-Info Tab
     document.getElementById("closeSimQuickCardBtn")?.addEventListener("click", (e) => {
       e.stopPropagation();
       const card = document.getElementById("simFloatingQuickCard");
       if (card) card.style.display = "none";
     });
-
-    // Clicking any SVG Circle Node opens/updates the Floating Quick-Info Tab at the TOP of Simulator
     simPanel.querySelectorAll(".svg-pathway-node").forEach(g => {
       g.addEventListener("click", () => {
         selectedSimNodeId = g.dataset.svgNode;
@@ -1761,8 +1966,6 @@ function getFallbackModuleData(regItem) {
         typesetMath();
       });
     });
-
-    // Clicking an Inhibitor Pill applies the perturbation AND shows the target node in the top floating tab
     simPanel.querySelectorAll(".sim-agent-pill").forEach(btn => {
       btn.addEventListener("click", () => {
         state.activeSimAgentId = btn.dataset.simAgent;
@@ -1774,14 +1977,12 @@ function getFallbackModuleData(regItem) {
         typesetMath();
       });
     });
-
     document.getElementById("resetSimAgentBtn")?.addEventListener("click", () => {
       state.activeSimAgentId = null;
       renderInteractiveSvgSimulator();
       typesetMath();
     });
 
-    // Bind Live SVG Kinetics Curve Plotter if expanded
     if (simExpanded) {
       const subSlider = document.getElementById("simSubstrate");
       const inhSlider = document.getElementById("simInhibitor");
@@ -1795,31 +1996,19 @@ function getFallbackModuleData(regItem) {
         const I = Number(inhSlider?.value || 0);
         if (subVal) subVal.textContent = S;
         if (inhVal) inhVal.textContent = I;
-
-        const Vmax = 100;
-        const Km = 25;
-        const Ki = 20;
+        const Vmax = 100, Km = 25, Ki = 20;
         const appKm = Km * (1 + I / Ki);
         const v0 = (Vmax * S) / (appKm + S);
-
-        if (outBox) {
-          outBox.innerHTML = `V₀ = <strong>${v0.toFixed(1)}</strong> µmol/min | Km(app) = <strong>${appKm.toFixed(1)}</strong> µM`;
-        }
-
+        if (outBox) outBox.innerHTML = `V₀ = <strong>${v0.toFixed(1)}</strong> µmol/min | Km(app) = <strong>${appKm.toFixed(1)}</strong> µM`;
         if (!curveSvg) return;
         const plotX = s => 35 + (s / 200) * 265;
         const plotY = v => 128 - (v / 100) * 105;
-
-        let uninhibitedPts = [];
-        let currentPts = [];
+        let uninhibitedPts = [], currentPts = [];
         for (let s = 0; s <= 200; s += 8) {
           uninhibitedPts.push(`${plotX(s).toFixed(1)},${plotY((Vmax * s) / (Km + s)).toFixed(1)}`);
           currentPts.push(`${plotX(s).toFixed(1)},${plotY((Vmax * s) / (appKm + s)).toFixed(1)}`);
         }
-
-        const curX = plotX(S);
-        const curY = plotY(v0);
-
+        const curX = plotX(S), curY = plotY(v0);
         curveSvg.innerHTML = `
           <line x1="35" y1="18" x2="35" y2="128" stroke="#475569" stroke-width="1.5" />
           <line x1="35" y1="128" x2="305" y2="128" stroke="#475569" stroke-width="1.5" />
@@ -1834,25 +2023,26 @@ function getFallbackModuleData(regItem) {
           <text x="12" y="75" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace" transform="rotate(-90 12 75)">Velocity V₀</text>
         `;
       };
-
       subSlider?.addEventListener("input", drawSvgKinetics);
       inhSlider?.addEventListener("input", drawSvgKinetics);
       drawSvgKinetics();
     }
   }
 
-  function overrideWorkspaceForMetricSliderAndSvgSim() {
+  function overrideWorkspaceForBioSchematicAndSim() {
     const origRender = window.renderArgonWorkspace;
     if (typeof origRender === "function") {
       window.renderArgonWorkspace = function () {
         hideOldDuplicateSimButton();
         origRender();
         renderPureMetricSlider();
+        renderBiologicalRegionSvgViewport();
         renderInteractiveSvgSimulator();
         typesetMath();
       };
       hideOldDuplicateSimButton();
       renderPureMetricSlider();
+      renderBiologicalRegionSvgViewport();
       renderInteractiveSvgSimulator();
     }
   }
