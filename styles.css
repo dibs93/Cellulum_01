@@ -189,15 +189,76 @@ mjx-container {
   stroke-dasharray: 4 6;
   opacity: 0.4;
 }
-
+/* ==========================================================================
+   6. COMPACT MOBILE HEADER (< 640px)
+   - Keeps "🔍 Search" pill with full text as-is
+   - Uses compact "📖" icon for Textbook
+   - Keeps green "High-Yield Study Bundle" layers pill as previously
+   ========================================================================== */
 @media (max-width: 640px) {
   .argon-header {
     padding: 0.5rem 0.75rem !important;
     height: auto !important;
+    min-height: 3.5rem !important;
   }
+
+  /* Keep Brand Orb & Title clean on the left so the subtitle only takes 1-2 lines max */
+  .brand-orb {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    border-radius: 0.7rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  #appBrandTitle {
+    font-size: 1.15rem !important;
+    line-height: 1.2 !important;
+    display: block !important;
+  }
+
+  .argon-header p {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    max-width: 135px !important;
+  }
+
+  /* 1. Keep "🔍 Search" pill button as it is (icon + "Search" text) */
+  #openSearchModalBtn {
+    padding: 0.4rem 0.75rem !important;
+    border-radius: 9999px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* 2. Make "📖 Textbook" a compact icon button */
+  #openTextbookReaderBtn span {
+    display: none !important;
+  }
+
+  #openTextbookReaderBtn {
+    padding: 0.45rem 0.65rem !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  #openTextbookReaderBtn i {
+    margin: 0 !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 3. Restore High-Yield Study Bundle green layers pill icon as previously */
   #openBundleModalBtn span {
-    display: none;
+    display: none !important;
   }
+
+  #openBundleModalBtn {
+    padding: 0.45rem 0.65rem !important;
+    border-radius: 9999px !important;
+    flex-shrink: 0 !important;
+  }
+
   .metric-scale-slider-wrap {
     max-width: 100%;
     width: 100%;
