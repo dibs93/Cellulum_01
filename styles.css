@@ -4,78 +4,98 @@
 
 :root {
   --theme-color: #10b981;
-  --accent-glow: rgba(16, 185, 129, 0.45);
+  --accent-glow: rgba(16, 185, 129, 0.38);
 }
 
 /* ==========================================================================
-   1. DEEP SPACE BIOLUMINESCENT BACKGROUND
+   1. LIGHTER, AIRY BIOLUMINESCENT TEAL-SLATE BACKGROUND
    ========================================================================== */
 body.argon-theme {
-  background-color: #020617;
+  background-color: #0b162c !important;
   background-image: 
-    radial-gradient(circle at 18% 12%, var(--accent-glow), transparent 34%),
-    radial-gradient(circle at 85% 82%, rgba(56, 189, 248, 0.16), transparent 38%),
-    radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 24px 24px;
-  background-attachment: fixed;
+    radial-gradient(circle at 15% 12%, var(--accent-glow), transparent 42%),
+    radial-gradient(circle at 85% 25%, rgba(56, 189, 248, 0.22), transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.15), transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px !important;
+  background-attachment: fixed !important;
+  color: #f1f5f9 !important;
 }
 
 /* ==========================================================================
-   2. WINDOWS AERO GLASS EFFECT (SPECULAR BEVEL, DIAGONAL SHEEN & FROST)
+   2. HIDE DUPLICATE DESKTOP SEARCH BAR (KEEP ONLY 1 UNIFIED SEARCH BUTTON)
+   ========================================================================== */
+#globalModuleSearch,
+#globalModuleSearchResultBox,
+div:has(> #globalModuleSearch) {
+  display: none !important;
+}
+
+/* ==========================================================================
+   3. TRANSLUCENT WINDOWS AERO GLASS PANELS (LIGHTWEIGHT & SEE-THROUGH)
    ========================================================================== */
 .argon-header {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(15, 23, 42, 0.72) 48%,
-    rgba(7, 12, 26, 0.88) 52%,
-    rgba(15, 23, 42, 0.82) 100%
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(15, 23, 42, 0.52) 50%,
+    rgba(15, 23, 42, 0.65) 100%
   ) !important;
-  backdrop-filter: blur(20px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(200%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.24) !important;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.65),
-    inset 0 1px 1px rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(22px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
 }
 
 .argon-panel,
-.argon-stage {
+.argon-stage,
+.bio-region-stage {
   position: relative;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.13) 0%,
-    rgba(255, 255, 255, 0.04) 38%,
-    rgba(15, 23, 42, 0.76) 42%,
-    rgba(6, 11, 25, 0.90) 100%
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.06) 40%,
+    rgba(30, 41, 59, 0.42) 45%,
+    rgba(15, 23, 42, 0.55) 100%
   ) !important;
-  backdrop-filter: blur(22px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(190%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  border-top-color: rgba(255, 255, 255, 0.42) !important;
-  border-left-color: rgba(255, 255, 255, 0.30) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.26) !important;
+  border-top-color: rgba(255, 255, 255, 0.48) !important;
+  border-left-color: rgba(255, 255, 255, 0.36) !important;
   box-shadow: 
-    0 14px 38px -6px rgba(0, 0, 0, 0.75),
-    0 0 18px rgba(16, 185, 129, 0.08),
-    inset 0 1px 1px rgba(255, 255, 255, 0.45),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.55) !important;
+    0 10px 30px -6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45) !important;
 }
 
-/* Classic Windows Aero Top Gloss Reflection Strip */
-.argon-panel::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 36px;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.0) 100%);
-  pointer-events: none;
+/* Lighten all inner dark cards (bg-slate-950 / bg-slate-900) so they are airy & transparent */
+.argon-panel .bg-slate-950,
+.argon-panel .bg-slate-950\/90,
+.argon-panel .bg-slate-950\/95,
+.argon-panel .bg-slate-950\/85,
+.argon-panel .bg-slate-950\/75,
+.argon-panel .bg-slate-900,
+.argon-panel .bg-slate-900\/90,
+.argon-stage .bg-slate-950,
+.argon-stage .bg-slate-950\/90,
+.argon-stage .bg-slate-950\/85,
+.argon-stage .bg-slate-950\/75,
+.argon-stage .bg-slate-900 {
+  background: rgba(30, 41, 59, 0.36) !important;
+  backdrop-filter: blur(12px) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Fix inline LaTeX math symbols so they never break onto a new line */
+mjx-container {
+  display: inline-block !important;
+  margin: 0 2px !important;
+  vertical-align: middle !important;
 }
 
 /* ==========================================================================
-   3. PHONE-LOCK STYLE HORIZONTAL SWIPE SLIDER FOR MODULES (MOBILE & DESKTOP)
+   4. HORIZONTAL SWIPEABLE CAROUSEL FOR MODULES (BOTH MOBILE & DESKTOP)
    ========================================================================== */
 #moduleNavContainer {
   display: flex !important;
@@ -87,7 +107,6 @@ body.argon-theme {
   padding: 0.35rem 0.25rem 0.65rem 0.25rem !important;
   max-height: none !important;
   scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
 #moduleNavContainer::-webkit-scrollbar {
@@ -99,54 +118,40 @@ body.argon-theme {
 }
 
 .mod-nav-card {
-  flex: 0 0 82% !important;
-  max-width: 270px;
-  scroll-snap-align: center;
+  flex: 0 0 260px !important;
+  max-width: 280px;
+  scroll-snap-align: start;
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(15, 23, 42, 0.80) 50%,
-    rgba(2, 6, 23, 0.92) 100%
+    160deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(30, 41, 59, 0.45) 55%,
+    rgba(15, 23, 42, 0.58) 100%
   ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+  transition: all 0.22s ease !important;
 }
 
 .mod-nav-card.border-emerald-500 {
   border-color: var(--theme-color) !important;
-  box-shadow: 
-    0 0 22px var(--accent-glow),
-    inset 0 1px 2px rgba(255, 255, 255, 0.65) !important;
-  transform: scale(1.02);
-}
-
-@media (min-width: 1024px) {
-  /* On large desktop screens, allow smooth vertical wheel-lock snapping too */
-  #moduleNavContainer {
-    flex-direction: column !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    scroll-snap-type: y mandatory;
-    max-height: 520px !important;
-  }
-  .mod-nav-card {
-    flex: 0 0 auto !important;
-    max-width: 100%;
-    scroll-snap-align: start;
-  }
+  background: linear-gradient(
+    160deg,
+    rgba(16, 185, 129, 0.28) 0%,
+    rgba(30, 41, 59, 0.55) 100%
+  ) !important;
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 1px 2px rgba(255, 255, 255, 0.65) !important;
 }
 
 /* ==========================================================================
-   4. METRIC-ONLY MAGNIFICATION SLIDER (REPLACES L1-L4 BUTTONS)
+   5. METRIC SLIDER & ANIMATED SVG FLUX
    ========================================================================== */
 .metric-scale-slider-wrap {
   min-width: 240px;
   flex: 1;
   max-width: 360px;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.85), rgba(15, 23, 42, 0.92));
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.25) !important;
   border-radius: 9999px;
   padding: 0.5rem 1rem;
 }
@@ -157,9 +162,8 @@ body.argon-theme {
   width: 100%;
   height: 6px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, #0284c7 0%, var(--theme-color) 100%);
+  background: linear-gradient(90deg, #38bdf8 0%, var(--theme-color) 100%);
   outline: none;
-  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .aero-range-slider::-webkit-slider-thumb {
@@ -168,39 +172,27 @@ body.argon-theme {
   width: 20px;
   height: 20px;
   border-radius: 9999px;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--theme-color) 65%, #064e3b 100%);
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--theme-color) 70%);
   border: 2px solid #ffffff;
-  box-shadow: 0 0 14px var(--theme-color), 0 2px 6px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 12px var(--theme-color);
   cursor: pointer;
-  transition: transform 0.15s ease;
 }
 
-.aero-range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.18);
-}
-
-/* ==========================================================================
-   5. SVG PATHWAY FLOW ANIMATION
-   ========================================================================== */
 @keyframes svgFluxFlow {
-  to {
-    stroke-dashoffset: -28;
-  }
+  to { stroke-dashoffset: -28; }
 }
-
 .svg-flux-active {
   stroke-dasharray: 8 6;
   animation: svgFluxFlow 0.9s linear infinite;
 }
-
 .svg-flux-blocked {
   stroke-dasharray: 4 6;
-  opacity: 0.35;
+  opacity: 0.4;
 }
 
 @media (max-width: 640px) {
   .argon-header {
-    padding: 0.5rem 0.85rem !important;
+    padding: 0.5rem 0.75rem !important;
     height: auto !important;
   }
   #openBundleModalBtn span {
