@@ -1354,11 +1354,9 @@ function getFallbackModuleData(regItem) {
     return slice.replace(regex, `<strong class="text-emerald-300 underline">$1</strong>`);
   }
 })();
-
 // ============================================================================
-// UI REFINEMENT PACK (V4.2 - AUDITED & FIXED):
-// Hooks directly into card expansion & tab switching so the Ultrastructure SVG
-// never disappears and the inline CSIR Quiz / L1-L4 labels never reappear!
+// UI REFINEMENT PACK (V5 - COMPLETE 15-MODULE CUSTOM SVG SCHEMATIC ENGINE):
+// Covers MOD 01 through MOD 14 (including MOD 02B) across all 4 Optical Scales
 // ============================================================================
 (function initCellulumRefinements() {
   const FALLBACK_METRICS = ["500 μm", "50 μm", "1.5 μm", "8 nm"];
@@ -1392,7 +1390,7 @@ function getFallbackModuleData(regItem) {
         padding: 1rem !important;
       }
       .bio-region-stage {
-        background: radial-gradient(circle at 50% 45%, rgba(16, 185, 129, 0.14) 0%, rgba(15, 23, 42, 0.92) 70%, rgba(2, 6, 23, 0.98) 100%);
+        background: radial-gradient(circle at 50% 45%, var(--accent-glow, rgba(16, 185, 129, 0.16)) 0%, rgba(15, 23, 42, 0.94) 70%, rgba(2, 6, 23, 0.99) 100%);
         border: 1px solid rgba(255, 255, 255, 0.22);
         box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 10px 28px rgba(0, 0, 0, 0.65);
       }
@@ -1405,6 +1403,15 @@ function getFallbackModuleData(regItem) {
         transform-box: fill-box;
         transform-origin: center;
       }
+      @keyframes svgRotorSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .svg-spin-slow {
+        animation: svgRotorSpin 14s linear infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -1412,15 +1419,12 @@ function getFallbackModuleData(regItem) {
   function cleanUpStageHudAndButtons() {
     const oldSimBtn = document.getElementById("toggleSimBtn");
     if (oldSimBtn) oldSimBtn.style.display = "none";
-
     const openDrawerBtn = document.getElementById("openDrawerBtn");
     if (openDrawerBtn) openDrawerBtn.style.display = "none";
-
     const hudLabel = document.getElementById("hudScaleLabel");
     if (hudLabel && hudLabel.parentElement) {
       hudLabel.parentElement.className = "w-full bg-slate-950/85 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 text-xs flex items-center space-x-2.5 shadow";
     }
-
     const simPanel = document.getElementById("simulatorPanel");
     if (simPanel) simPanel.classList.remove("hidden");
   }
@@ -1513,7 +1517,6 @@ function getFallbackModuleData(regItem) {
       });
     }
 
-    // Always keep the top HUD label showing Pure Metric + Level Name (never "L2 (1.12x Zoom)")
     const hudLabel = document.getElementById("hudScaleLabel");
     if (hudLabel && activeLvl) {
       hudLabel.textContent = `${currentMetric} • ${activeLvl.name}`;
@@ -1521,14 +1524,12 @@ function getFallbackModuleData(regItem) {
 
     const canvas = document.getElementById("hotspotCanvas");
     if (canvas) {
-      // Permanently strip any inline CSIR Quiz box from the main canvas
       canvas.querySelectorAll(".w-full.mb-4").forEach(el => {
         if (el.textContent.includes("CSIR Quiz") || el.textContent.includes("Test your Part-C")) {
           el.remove();
         }
       });
 
-      // Remove the CSIR High-Yield tab from general topic cards so cards show 3 universal science tabs
       canvas.querySelectorAll('.inline-tab-btn[data-inline-tab="csir_high_yield"]').forEach(btn => {
         const tabGrid = btn.parentElement;
         btn.remove();
@@ -1538,7 +1539,6 @@ function getFallbackModuleData(regItem) {
         }
       });
 
-      // Strip L1-L4 text from badges and headers inside the topic cards
       canvas.querySelectorAll("span").forEach(sp => {
         if (/L[1-4]\b/.test(sp.textContent)) {
           sp.textContent = sp.textContent
@@ -1571,8 +1571,15 @@ function getFallbackModuleData(regItem) {
     const currentMetric = extractPureMetric(activeLvl, activeIdx);
     const nodeIds = activeLvl.node_ids || activeLvl.hotspots || [];
     const activeAgent = (mod.inhibitor_simulator?.agents || []).find(a => a.id === state.activeSimAgentId);
+    const activeModId = state.activeRegistryItem?.id || "module_01";
 
-    const pinPositions = [{ x: 145, y: 78 }, { x: 310, y: 118 }, { x: 465, y: 82 }, { x: 230, y: 142 }, { x: 390, y: 68 }];
+    const pinPositions = [
+      { x: 135, y: 58 },
+      { x: 305, y: 122 },
+      { x: 465, y: 66 },
+      { x: 215, y: 138 },
+      { x: 395, y: 54 }
+    ];
 
     const svgPinsHtml = nodeIds.map((nid, idx) => {
       const node = mod.nodes?.[nid];
@@ -1582,18 +1589,18 @@ function getFallbackModuleData(regItem) {
       const isPerturbed = activeAgent && activeAgent.target_node === node.id;
       const shortLabel = (node.title || `Site ${idx + 1}`).split(":")[0].split("(")[0].trim().slice(0, 18);
 
-      const fillCol = isPerturbed ? "#e11d48" : isSelected ? "#10b981" : "#0f172a";
+      const fillCol = isPerturbed ? "#e11d48" : isSelected ? "#059669" : "rgba(15, 23, 42, 0.92)";
       const strokeCol = isPerturbed ? "#fda4af" : isSelected ? "#ffffff" : "#34d399";
 
       return `
         <g class="bio-svg-pin cursor-pointer" data-bio-pin="${node.id}">
-          <line x1="${pt.x}" y1="${pt.y}" x2="${pt.x}" y2="${pt.y + 24}" stroke="${strokeCol}" stroke-width="1.5" stroke-dasharray="2 2" />
-          <circle cx="${pt.x}" cy="${pt.y + 24}" r="3.5" fill="${strokeCol}" />
-          ${isSelected ? `<circle cx="${pt.x}" cy="${pt.y}" r="22" fill="rgba(16, 185, 129, 0.25)" class="bio-pin-pulse" />` : ""}
-          <rect x="${pt.x - 68}" y="${pt.y - 15}" width="136" height="28" rx="14"
+          <line x1="${pt.x}" y1="${pt.y}" x2="${pt.x}" y2="${pt.y + 22}" stroke="${strokeCol}" stroke-width="1.5" stroke-dasharray="2 2" />
+          <circle cx="${pt.x}" cy="${pt.y + 22}" r="3.5" fill="${strokeCol}" />
+          ${isSelected ? `<circle cx="${pt.x}" cy="${pt.y}" r="24" fill="rgba(16, 185, 129, 0.25)" class="bio-pin-pulse" />` : ""}
+          <rect x="${pt.x - 68}" y="${pt.y - 14}" width="136" height="26" rx="13"
                 fill="${fillCol}" stroke="${strokeCol}" stroke-width="${isSelected ? '2.2' : '1.3'}" />
-          <text x="${pt.x}" y="${pt.y + 3}" text-anchor="middle" fill="#ffffff" font-size="10" font-family="sans-serif" font-weight="bold">
-            ${idx + 1}. ${shortLabel}
+          <text x="${pt.x}" y="${pt.y + 3}" text-anchor="middle" fill="#ffffff" font-size="9.5" font-family="sans-serif" font-weight="bold">
+            #${idx + 1} ${shortLabel}
           </text>
         </g>
       `;
@@ -1632,13 +1639,13 @@ function getFallbackModuleData(regItem) {
       <div class="bio-region-stage rounded-2xl p-3 overflow-hidden">
         <div class="flex items-center justify-between mb-1.5 px-1">
           <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 font-bold">
-            <i class="fa-solid fa-microscope mr-1.5"></i>Ultrastructure Cross-Section (${currentMetric})
+            <i class="fa-solid fa-microscope mr-1.5"></i>${state.activeRegistryItem?.shortUnit || "MOD"} Ultrastructure Schematic (${currentMetric})
           </span>
-          <span class="text-[10px] font-mono text-slate-400">Tap any region pin to inspect</span>
+          <span class="text-[10px] font-mono text-slate-400">Tap any pin on the structure</span>
         </div>
-        <div class="w-full overflow-x-auto rounded-xl bg-slate-950/75 border border-white/10">
-          <svg viewBox="0 0 600 185" class="w-full h-auto min-w-[440px]">
-            ${buildScaleBiologicalArtwork(activeIdx)}
+        <div class="w-full overflow-x-auto rounded-xl bg-slate-950/85 border border-white/15">
+          <svg viewBox="0 0 600 188" class="w-full h-auto min-w-[450px]">
+            ${buildScaleBiologicalArtwork(activeIdx, activeModId)}
             ${svgPinsHtml}
           </svg>
         </div>
@@ -1663,52 +1670,436 @@ function getFallbackModuleData(regItem) {
     });
   }
 
-  function buildScaleBiologicalArtwork(scaleIdx) {
-    if (scaleIdx === 0) {
-      return `
-        <defs><linearGradient id="orgOuter" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="rgba(16, 185, 129, 0.22)" /><stop offset="100%" stop-color="rgba(2, 132, 199, 0.18)" /></linearGradient></defs>
-        <text x="16" y="20" fill="#64748b" font-size="9" font-family="monospace">CYTOSOL / EXTRACELLULAR COMPARTMENT</text>
-        <ellipse cx="300" cy="100" rx="255" ry="68" fill="url(#orgOuter)" stroke="#10b981" stroke-width="2.5" />
-        <path d="M 75,100 Q 115,45 145,100 T 215,100 T 285,100 T 355,100 T 425,100 T 495,100" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7" />
-        <path d="M 90,115 Q 135,155 180,110 T 270,115 T 360,110 T 450,115 T 515,100" fill="none" stroke="#34d399" stroke-width="1.8" stroke-dasharray="5 3" stroke-opacity="0.65" />
-        <text x="300" y="162" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">LUMEN / MATRIX / INTERIOR COMPARTMENT</text>
-      `;
-    }
-    if (scaleIdx === 1) {
-      let headsTop = "", headsBot = "";
-      for (let x = 25; x <= 575; x += 18) {
-        headsTop += `<circle cx="${x}" cy="66" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" /><line x1="${x - 2}" y1="72" x2="${x - 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" /><line x1="${x + 2}" y1="72" x2="${x + 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />`;
-        headsBot += `<circle cx="${x}" cy="122" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" /><line x1="${x - 2}" y1="116" x2="${x - 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" /><line x1="${x + 2}" y1="116" x2="${x + 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />`;
+  // ==========================================================================
+  // 15-MODULE CUSTOM BIOLOGICAL SCHEMATIC GENERATOR (60 MULTI-SCALE SVGS)
+  // ==========================================================================
+  function buildScaleBiologicalArtwork(scaleIdx, modId) {
+    // Helper for phospholipid bilayer backdrop used in membrane-level views
+    const drawBilayer = (yTop, yBot, color = "#38bdf8") => {
+      let s = "";
+      for (let x = 28; x <= 572; x += 20) {
+        s += `<circle cx="${x}" cy="${yTop}" r="5" fill="${color}" fill-opacity="0.45" stroke="${color}" stroke-width="1"/>`;
+        s += `<line x1="${x - 2}" y1="${yTop + 5}" x2="${x - 2}" y2="${(yTop + yBot) / 2 - 2}" stroke="#fbbf24" stroke-opacity="0.45"/>`;
+        s += `<circle cx="${x}" cy="${yBot}" r="5" fill="${color}" fill-opacity="0.45" stroke="${color}" stroke-width="1"/>`;
+        s += `<line x1="${x + 2}" y1="${yBot - 5}" x2="${x + 2}" y2="${(yTop + yBot) / 2 + 2}" stroke="#fbbf24" stroke-opacity="0.45"/>`;
       }
-      return `
-        <text x="16" y="20" fill="#7dd3fc" font-size="9" font-family="monospace">P-SIDE (IMS / EXTRACELLULAR / HIGH [H+])</text>
-        ${headsTop}${headsBot}
-        <rect x="120" y="50" width="52" height="88" rx="12" fill="rgba(16, 185, 129, 0.35)" stroke="#34d399" stroke-width="2" />
-        <rect x="280" y="46" width="64" height="96" rx="14" fill="rgba(14, 165, 233, 0.35)" stroke="#38bdf8" stroke-width="2" />
-        <rect x="440" y="52" width="54" height="84" rx="12" fill="rgba(168, 85, 247, 0.35)" stroke="#c084fc" stroke-width="2" />
-        <text x="16" y="172" fill="#6ee7b7" font-size="9" font-family="monospace">N-SIDE (MATRIX / CYTOSOL / ΔΨm SIGNALING)</text>
-      `;
+      return s;
+    };
+
+    switch (modId) {
+      // ----------------------------------------------------------------------
+      // MOD 01: MITOCHONDRIAL BIOENERGETICS & OXPHOS
+      // ----------------------------------------------------------------------
+      case "module_01":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#6ee7b7" font-size="9" font-family="monospace">MITOCHONDRION • OUTER MEMBRANE, CRISTAE & MATRIX (Δp = -220 mV)</text>
+          <ellipse cx="300" cy="100" rx="255" ry="66" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="2.5"/>
+          <path d="M 75,100 C 95,40 125,40 140,100 C 155,155 185,155 205,100 C 225,38 260,38 280,100 C 300,158 335,158 355,100 C 375,40 410,40 430,100 C 450,155 485,155 515,100" fill="none" stroke="#34d399" stroke-width="2.5"/>
+          <text x="300" y="176" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">CRISTAE LUMEN ([H+] HIGH) vs MATRIX (TCA & mtDNA)</text>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#7dd3fc" font-size="9" font-family="monospace">INNER MITOCHONDRIAL MEMBRANE • RESPIRATORY CHAIN COMPLEXES I–IV</text>
+          ${drawBilayer(64, 124, "#34d399")}
+          <rect x="95" y="44" width="54" height="94" rx="10" fill="rgba(16,185,129,0.45)" stroke="#6ee7b7" stroke-width="2"/><text x="122" y="95" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">CI</text>
+          <circle cx="205" cy="94" r="14" fill="rgba(245,158,11,0.5)" stroke="#fbbf24" stroke-width="2"/><text x="205" y="98" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Q</text>
+          <rect x="265" y="48" width="58" height="88" rx="12" fill="rgba(14,165,233,0.45)" stroke="#7dd3fc" stroke-width="2"/><text x="294" y="95" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">CIII</text>
+          <circle cx="370" cy="56" r="12" fill="rgba(244,63,94,0.55)" stroke="#fda4af" stroke-width="1.8"/><text x="370" y="60" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">Cyt c</text>
+          <rect x="425" y="46" width="60" height="92" rx="12" fill="rgba(168,85,247,0.45)" stroke="#d8b4fe" stroke-width="2"/><text x="455" y="95" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">CIV</text>
+          <path d="M 149,94 L 191,94 M 219,94 L 265,94 M 323,70 L 358,58 M 382,58 L 425,75" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 3" class="svg-flux-active"/>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">F0F1-ATP SYNTHASE ROTARY MOTOR • c-RING & γ-ε CENTRAL STALK</text>
+          <line x1="30" y1="138" x2="570" y2="138" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+          <rect x="255" y="114" width="90" height="46" rx="10" fill="rgba(14,165,233,0.35)" stroke="#38bdf8" stroke-width="2"/>
+          <rect x="286" y="76" width="28" height="44" rx="6" fill="rgba(245,158,11,0.45)" stroke="#fbbf24" stroke-width="2"/>
+          <ellipse cx="255" cy="58" rx="42" ry="28" fill="rgba(16,185,129,0.38)" stroke="#34d399" stroke-width="2"/>
+          <ellipse cx="345" cy="58" rx="42" ry="28" fill="rgba(16,185,129,0.38)" stroke="#34d399" stroke-width="2"/>
+          <ellipse cx="300" cy="54" rx="34" ry="30" fill="rgba(52,211,153,0.5)" stroke="#a7f3d0" stroke-width="2"/>
+          <text x="300" y="58" text-anchor="middle" fill="#022c22" font-size="10" font-family="monospace" font-weight="bold">α₃β₃</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">CYTOCHROME c OXIDASE BINUCLEAR CENTER • HEME a₃ & CuB O₂ REDUCTION</text>
+          <polygon points="220,60 260,45 280,85 240,115 200,95" fill="rgba(244,63,94,0.28)" stroke="#fb7185" stroke-width="2"/>
+          <circle cx="242" cy="80" r="14" fill="#e11d48" stroke="#fff" stroke-width="1.5"/><text x="242" y="84" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">Fe²⁺</text>
+          <circle cx="365" cy="80" r="14" fill="#0284c7" stroke="#7dd3fc" stroke-width="1.5"/><text x="365" y="84" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">CuB</text>
+          <ellipse cx="303" cy="80" rx="26" ry="12" fill="rgba(251,191,36,0.3)" stroke="#fbbf24" stroke-width="2" stroke-dasharray="3 2"/>
+          <text x="303" y="83" text-anchor="middle" fill="#fef3c7" font-size="9" font-family="monospace">O=O</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 02: THE NUCLEUS, CHROMATIN & TRANSCRIPTION
+      // ----------------------------------------------------------------------
+      case "module_02":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#c4b5fd" font-size="9" font-family="monospace">NUCLEAR ENVELOPE • NUCLEAR PORE COMPLEXES (NPC) & NUCLEOLUS</text>
+          <ellipse cx="300" cy="100" rx="240" ry="66" fill="rgba(139,92,246,0.14)" stroke="#a78bfa" stroke-width="3" stroke-dasharray="28 10"/>
+          <circle cx="300" cy="100" r="34" fill="rgba(192,132,252,0.3)" stroke="#e9d5ff" stroke-width="2"/>
+          <text x="300" y="104" text-anchor="middle" fill="#f3e8ff" font-size="9" font-family="monospace">NUCLEOLUS</text>
+          <path d="M 110,95 Q 160,55 220,110 T 410,90 T 490,115" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#d8b4fe" font-size="9" font-family="monospace">CHROMATIN FIBER • 11 nm NUCLEOSOME CORE PARTICLES & H1 LINKER</text>
+          <path d="M 40,95 C 110,45 150,145 220,95 C 290,45 330,145 400,95 C 470,45 510,145 565,95" fill="none" stroke="#38bdf8" stroke-width="3"/>
+          ${[110, 220, 330, 440, 525].map(x => `<circle cx="${x}" cy="95" r="22" fill="rgba(168,85,247,0.5)" stroke="#f3e8ff" stroke-width="2"/><text x="${x}" y="99" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">H2A/B</text>`).join("")}`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#93c5fd" font-size="9" font-family="monospace">RNA POLYMERASE II TRANSCRIPTION BUBBLE & CTD HEPTAD TAIL</text>
+          <path d="M 50,82 L 210,82 Q 300,38 390,82 L 550,82" fill="none" stroke="#38bdf8" stroke-width="3"/>
+          <path d="M 50,104 L 210,104 Q 300,148 390,104 L 550,104" fill="none" stroke="#38bdf8" stroke-width="3"/>
+          <ellipse cx="300" cy="93" rx="78" ry="44" fill="rgba(139,92,246,0.35)" stroke="#c4b5fd" stroke-width="2"/>
+          <path d="M 300,104 Q 260,130 190,158" fill="none" stroke="#f43f5e" stroke-width="3.5" class="svg-flux-active"/>
+          <path d="M 378,95 Q 455,65 535,115" fill="none" stroke="#34d399" stroke-width="3" stroke-dasharray="5 3"/>
+          <text x="485" y="75" fill="#6ee7b7" font-size="9" font-family="monospace">CTD (Ser2/Ser5-P)</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">HISTONE H3K9/K27 TAIL • HAT ACETYLATION vs HMT METHYLATION</text>
+          <path d="M 70,120 Q 200,60 340,110 T 540,75" fill="none" stroke="#c084fc" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="210" cy="88" r="16" fill="#10b981" stroke="#fff" stroke-width="2"/><text x="210" y="92" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">K9-Ac</text>
+          <circle cx="380" cy="102" r="16" fill="#e11d48" stroke="#fff" stroke-width="2"/><text x="380" y="106" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">K27me3</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 02B: CORE METABOLIC & ENZYME REGULATION
+      // ----------------------------------------------------------------------
+      case "module_02b":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#6ee7b7" font-size="9" font-family="monospace">CENTRAL METABOLIC FLUX • GLYCOLYSIS, GLUCONEOGENESIS & TCA</text>
+          <rect x="60" y="38" width="200" height="110" rx="16" fill="rgba(14,165,233,0.15)" stroke="#38bdf8" stroke-width="2"/>
+          <ellipse cx="420" cy="93" rx="115" ry="55" fill="rgba(16,185,129,0.18)" stroke="#34d399" stroke-width="2"/>
+          <path d="M 260,80 L 305,80 M 305,108 L 260,108" stroke="#fbbf24" stroke-width="2.5" class="svg-flux-active"/>
+          <text x="160" y="96" text-anchor="middle" fill="#bae6fd" font-size="10" font-family="monospace">CYTOSOL (PFK-1)</text>
+          <text x="420" y="96" text-anchor="middle" fill="#a7f3d0" font-size="10" font-family="monospace">MATRIX (PDH / TCA)</text>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">ALLOSTERIC REGULATION • RELAXED (R) vs TENSE (T) QUATERNARY STATE</text>
+          <rect x="115" y="52" width="130" height="84" rx="12" fill="rgba(244,63,94,0.28)" stroke="#fb7185" stroke-width="2"/>
+          <ellipse cx="430" cy="94" rx="75" ry="44" fill="rgba(16,185,129,0.32)" stroke="#34d399" stroke-width="2"/>
+          <path d="M 265,85 L 335,85" stroke="#38bdf8" stroke-width="3" class="svg-flux-active"/>
+          <text x="180" y="98" text-anchor="middle" fill="#fecdd3" font-size="10" font-family="monospace">T-STATE (Low Affinity)</text>
+          <text x="430" y="98" text-anchor="middle" fill="#d1fae5" font-size="10" font-family="monospace">R-STATE (+F2,6BP)</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#a7f3d0" font-size="9" font-family="monospace">PYRUVATE DEHYDROGENASE COMPLEX • E1 (TPP) → E2 (Lipoamide) → E3 (FAD)</text>
+          <circle cx="150" cy="95" r="40" fill="rgba(14,165,233,0.32)" stroke="#38bdf8" stroke-width="2"/><text x="150" y="99" text-anchor="middle" fill="#fff" font-size="11" font-family="monospace">E1</text>
+          <circle cx="300" cy="95" r="46" fill="rgba(16,185,129,0.35)" stroke="#34d399" stroke-width="2"/><text x="300" y="99" text-anchor="middle" fill="#fff" font-size="11" font-family="monospace">E2 Core</text>
+          <circle cx="450" cy="95" r="40" fill="rgba(245,158,11,0.35)" stroke="#fbbf24" stroke-width="2"/><text x="450" y="99" text-anchor="middle" fill="#fff" font-size="11" font-family="monospace">E3</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">COENZYME CATALYTIC POCKET • SCHIFF BASE / CARBANION TRANSITION STATE</text>
+          <polygon points="240,55 360,55 390,115 210,115" fill="rgba(245,158,11,0.22)" stroke="#fbbf24" stroke-width="2"/>
+          <circle cx="300" cy="88" r="20" fill="#059669" stroke="#a7f3d0" stroke-width="2"/>
+          <text x="300" y="92" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">TPP/PLP</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 03: PROTEIN SYNTHESIS, TRANSLOCATION & ER
+      // ----------------------------------------------------------------------
+      case "module_03":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#67e8f9" font-size="9" font-family="monospace">ROUGH ENDOPLASMIC RETICULUM • CISTERNAE LUMEN & COPII BUDDING</text>
+          <path d="M 60,52 L 500,52 C 535,52 535,88 500,88 L 110,88 C 75,88 75,128 110,128 L 530,128" fill="none" stroke="#06b6d4" stroke-width="18" stroke-linecap="round" stroke-opacity="0.35"/>
+          <path d="M 60,52 L 500,52 C 535,52 535,88 500,88 L 110,88 C 75,88 75,128 110,128 L 530,128" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          ${[110, 175, 240, 305, 370, 435].map(x => `<circle cx="${x}" cy="40" r="6" fill="#fbbf24"/>`).join("")}`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#67e8f9" font-size="9" font-family="monospace">CO-TRANSLATIONAL TRANSLOCATION • SRP, SRP RECEPTOR & SEC61 TRANSLOCON</text>
+          ${drawBilayer(84, 134, "#22d3ee")}
+          <rect x="268" y="68" width="64" height="80" rx="12" fill="rgba(6,182,212,0.45)" stroke="#67e8f9" stroke-width="2"/><text x="300" y="112" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Sec61</text>
+          <ellipse cx="300" cy="44" rx="46" ry="22" fill="rgba(245,158,11,0.45)" stroke="#fbbf24" stroke-width="2"/><text x="300" y="48" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">60S/40S</text>
+          <path d="M 300,66 L 300,155 Q 320,175 355,162" fill="none" stroke="#34d399" stroke-width="3" class="svg-flux-active"/>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">80S RIBOSOME COMPLEX • A, P & E tRNA SITES & eEF2 TRANSLOCATION</text>
+          <ellipse cx="300" cy="74" rx="125" ry="44" fill="rgba(6,182,212,0.28)" stroke="#22d3ee" stroke-width="2"/>
+          <ellipse cx="300" cy="128" rx="105" ry="24" fill="rgba(14,165,233,0.32)" stroke="#38bdf8" stroke-width="2"/>
+          <line x1="90" y1="120" x2="510" y2="120" stroke="#f43f5e" stroke-width="3"/>
+          <rect x="225" y="62" width="32" height="52" rx="6" fill="rgba(168,85,247,0.5)" stroke="#d8b4fe"/><text x="241" y="92" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">E</text>
+          <rect x="284" y="58" width="32" height="56" rx="6" fill="rgba(16,185,129,0.55)" stroke="#6ee7b7"/><text x="300" y="90" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">P</text>
+          <rect x="343" y="62" width="32" height="52" rx="6" fill="rgba(245,158,11,0.55)" stroke="#fde68a"/><text x="359" y="92" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">A</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">PEPTIDYL TRANSFERASE CENTER (28S rRNA RIBOZYME) • α-NH₂ NUCLEOPHILIC ATTACK</text>
+          <circle cx="235" cy="95" r="32" fill="rgba(16,185,129,0.3)" stroke="#34d399" stroke-width="2"/><text x="235" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">P-tRNA</text>
+          <circle cx="365" cy="95" r="32" fill="rgba(245,158,11,0.3)" stroke="#fbbf24" stroke-width="2"/><text x="365" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">A-tRNA</text>
+          <path d="M 333,88 Q 300,55 267,88" fill="none" stroke="#38bdf8" stroke-width="2.5" class="svg-flux-active"/>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 04: CELL SIGNALING & MEMBRANE RECEPTORS
+      // ----------------------------------------------------------------------
+      case "module_04":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#f9a8d4" font-size="9" font-family="monospace">PLASMA MEMBRANE SIGNALING • 7-TM GPCR & RTK DIMERIZATION</text>
+          ${drawBilayer(65, 118, "#f472b6")}
+          ${[0,1,2,3,4,5,6].map(i => `<rect x="${110 + i * 14}" y="52" width="10" height="78" rx="4" fill="rgba(236,72,153,0.55)" stroke="#fbcfe8" stroke-width="1"/>`).join("")}
+          <rect x="390" y="42" width="18" height="104" rx="8" fill="rgba(56,189,248,0.5)" stroke="#bae6fd" stroke-width="2"/>
+          <rect x="422" y="42" width="18" height="104" rx="8" fill="rgba(56,189,248,0.5)" stroke="#bae6fd" stroke-width="2"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#f9a8d4" font-size="9" font-family="monospace">G-PROTEIN CYCLE & ADENYLYL CYCLASE • ATP → cAMP → PKA</text>
+          <line x1="25" y1="55" x2="575" y2="55" stroke="#f472b6" stroke-width="6"/>
+          <circle cx="160" cy="88" r="26" fill="rgba(236,72,153,0.45)" stroke="#fbcfe8" stroke-width="2"/><text x="160" y="92" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Gαs·GTP</text>
+          <rect x="275" y="48" width="70" height="62" rx="10" fill="rgba(16,185,129,0.4)" stroke="#6ee7b7" stroke-width="2"/><text x="310" y="84" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">AC</text>
+          <circle cx="450" cy="110" r="30" fill="rgba(245,158,11,0.45)" stroke="#fde68a" stroke-width="2"/><text x="450" y="114" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">PKA</text>
+          <path d="M 186,88 L 275,82 M 345,92 L 420,108" stroke="#38bdf8" stroke-width="2.5" class="svg-flux-active"/>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#67e8f9" font-size="9" font-family="monospace">MAPK PHOSPHORYLATION CASCADE • Ras·GTP → Raf → MEK1/2 → ERK1/2</text>
+          ${["Ras·GTP", "Raf (MAP3K)", "MEK (MAP2K)", "ERK (MAPK)"].map((lbl, i) => `
+            <rect x="${55 + i * 130}" y="68" width="98" height="48" rx="12" fill="rgba(14,165,233,0.32)" stroke="#38bdf8" stroke-width="2"/>
+            <text x="${104 + i * 130}" y="96" text-anchor="middle" fill="#fff" font-size="9.5" font-family="monospace">${lbl}</text>
+            ${i < 3 ? `<line x1="${153 + i * 130}" y1="92" x2="${185 + i * 130}" y2="92" stroke="#fbbf24" stroke-width="2.5" class="svg-flux-active"/>` : ""}
+          `).join("")}`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">SH2 DOMAIN POCKET • CONSERVED ARG BIDENTATE COORDINATION OF pTYR</text>
+          <path d="M 150,45 Q 300,175 450,45" fill="rgba(236,72,153,0.22)" stroke="#f472b6" stroke-width="2.5"/>
+          <circle cx="300" cy="95" r="24" fill="rgba(245,158,11,0.45)" stroke="#fbbf24" stroke-width="2"/>
+          <text x="300" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">-PO₃²⁻</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 05: CYTOSKELETON, MOTORS & CELL ADHESION
+      // ----------------------------------------------------------------------
+      case "module_05":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#fdba74" font-size="9" font-family="monospace">CYTOSKELETAL NETWORK • MICROTUBULE TRACKS, ACTIN CORTEX & INTEGRINS</text>
+          <line x1="40" y1="145" x2="560" y2="145" stroke="#10b981" stroke-width="5"/>
+          <line x1="70" y1="55" x2="530" y2="125" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"/>
+          <line x1="80" y1="120" x2="520" y2="60" stroke="#fb923c" stroke-width="3.5" stroke-dasharray="10 4"/>
+          <rect x="275" y="125" width="50" height="32" rx="6" fill="#f43f5e" stroke="#fff"/><text x="300" y="145" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">Integrin</text>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#7dd3fc" font-size="9" font-family="monospace">13-PROTOFILAMENT MICROTUBULE • α/β-TUBULIN DIMERS & (+)-END GTP CAP</text>
+          ${[0,1,2].map(row => [0,1,2,3,4,5,6,7].map(col => `
+            <circle cx="${115 + col * 48}" cy="${65 + row * 28}" r="12" fill="${col >= 6 ? '#f59e0b' : row % 2 === 0 ? '#0284c7' : '#0f766e'}" stroke="#e2e8f0" stroke-width="1"/>
+          `).join("")).join("")}
+          <text x="495" y="42" fill="#fde68a" font-size="9" font-family="monospace">(+) GTP Cap</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">KINESIN-1 WALKING MOTOR • 8 nm HAND-OVER-HAND STEP ALONG MICROTUBULE</text>
+          <rect x="40" y="128" width="520" height="24" rx="6" fill="rgba(14,165,233,0.35)" stroke="#38bdf8" stroke-width="2"/>
+          <ellipse cx="255" cy="118" rx="24" ry="12" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/>
+          <ellipse cx="345" cy="118" rx="24" ry="12" fill="#10b981" stroke="#fff" stroke-width="1.5"/>
+          <path d="M 255,106 L 300,65 L 345,106" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+          <circle cx="300" cy="48" r="22" fill="rgba(168,85,247,0.45)" stroke="#d8b4fe" stroke-width="2"/><text x="300" y="52" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">Cargo</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">MOTOR ATPase POCKET • P-LOOP, SWITCH I/II & γ-PHOSPHATE SENSING</text>
+          <circle cx="300" cy="95" r="46" fill="rgba(245,158,11,0.22)" stroke="#fbbf24" stroke-width="2.5"/>
+          <text x="300" y="99" text-anchor="middle" fill="#fef3c7" font-size="10" font-family="monospace">ATP·Mg²⁺</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 06: CELL CYCLE, MITOSIS & APOPTOSIS
+      // ----------------------------------------------------------------------
+      case "module_06":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#fda4af" font-size="9" font-family="monospace">MITOTIC METAPHASE SPINDLE • CENTROSOMES, K-FIBERS & COHESIN RING</text>
+          <circle cx="85" cy="95" r="16" fill="#38bdf8" stroke="#fff" stroke-width="2"/>
+          <circle cx="515" cy="95" r="16" fill="#38bdf8" stroke="#fff" stroke-width="2"/>
+          ${[55, 78, 95, 112, 135].map(y => `<line x1="101" y1="95" x2="300" y2="${y}" stroke="#34d399" stroke-width="1.8"/><line x1="499" y1="95" x2="300" y2="${y}" stroke="#34d399" stroke-width="1.8"/>`).join("")}
+          <rect x="288" y="45" width="24" height="100" rx="8" fill="rgba(244,63,94,0.6)" stroke="#fda4af" stroke-width="2"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">MPF (CYCLIN B–CDK1) REGULATION • WEE1 (Tyr15-P) vs CDC25 PHOSPHATASE</text>
+          <ellipse cx="265" cy="95" rx="52" ry="38" fill="rgba(244,63,94,0.4)" stroke="#fda4af" stroke-width="2"/><text x="265" y="99" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">CDK1</text>
+          <ellipse cx="345" cy="95" rx="48" ry="38" fill="rgba(16,185,129,0.4)" stroke="#6ee7b7" stroke-width="2"/><text x="345" y="99" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">Cyclin B</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fda4af" font-size="9" font-family="monospace">INTRINSIC APOPTOSIS • BAX/BAK PORE, CYT c RELEASE & APOPTOSOME WHEEL</text>
+          <circle cx="300" cy="96" r="52" fill="rgba(225,29,72,0.22)" stroke="#fb7185" stroke-width="2.5" stroke-dasharray="10 5"/>
+          <circle cx="300" cy="96" r="20" fill="#881337" stroke="#fda4af" stroke-width="2"/>
+          <text x="300" y="100" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">Apaf-1/Casp9</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">CDK1 ACTIVATION LOOP • CAK (Thr161-P) & PSTAIRE HELIX ROTATION</text>
+          <path d="M 140,110 Q 300,30 460,110" fill="none" stroke="#34d399" stroke-width="5"/>
+          <circle cx="300" cy="72" r="20" fill="#10b981" stroke="#fff" stroke-width="2"/><text x="300" y="76" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Thr161-P</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 07: DNA REPLICATION, REPAIR & RECOMBINATION
+      // ----------------------------------------------------------------------
+      case "module_07":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#93c5fd" font-size="9" font-family="monospace">BIDIRECTIONAL REPLICATION FORK • LEADING vs OKAZAKI LAGGING STRAND</text>
+          <path d="M 55,84 L 250,84 L 520,42" fill="none" stroke="#38bdf8" stroke-width="3.5"/>
+          <path d="M 55,104 L 250,104 L 520,148" fill="none" stroke="#38bdf8" stroke-width="3.5"/>
+          <polygon points="255,94 295,68 295,120" fill="rgba(245,158,11,0.55)" stroke="#fbbf24" stroke-width="2"/>
+          <line x1="310" y1="68" x2="500" y2="50" stroke="#10b981" stroke-width="3" class="svg-flux-active"/>
+          <line x1="480" y1="136" x2="340" y2="115" stroke="#f43f5e" stroke-width="3" stroke-dasharray="18 8"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#6ee7b7" font-size="9" font-family="monospace">EUKARYOTIC REPLISOME • CMG HELICASE, POL ε/δ, RFC & PCNA CLAMP</text>
+          <circle cx="220" cy="95" r="36" fill="rgba(245,158,11,0.4)" stroke="#fbbf24" stroke-width="2"/><text x="220" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">MCM2-7</text>
+          <circle cx="345" cy="72" r="30" fill="rgba(16,185,129,0.45)" stroke="#34d399" stroke-width="2"/><text x="345" y="76" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Pol ε</text>
+          <circle cx="430" cy="115" r="26" fill="rgba(56,189,248,0.45)" stroke="#7dd3fc" stroke-width="2"/><text x="430" y="119" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">PCNA</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">MISMATCH REPAIR (MutS/MutL) & HOMOLOGOUS RECOMBINATION D-LOOP</text>
+          <line x1="60" y1="85" x2="540" y2="85" stroke="#38bdf8" stroke-width="3"/>
+          <line x1="60" y1="108" x2="540" y2="108" stroke="#38bdf8" stroke-width="3"/>
+          <ellipse cx="300" cy="96" rx="58" ry="34" fill="rgba(244,63,94,0.42)" stroke="#fda4af" stroke-width="2"/>
+          <text x="300" y="100" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">MutS / Rad51</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">DNA POLYMERASE TWO-METAL-ION CATALYSIS • 3'-OH & MgA²⁺ / MgB²⁺</text>
+          <circle cx="255" cy="95" r="20" fill="#059669" stroke="#fff" stroke-width="2"/><text x="255" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">MgA²⁺</text>
+          <circle cx="345" cy="95" r="20" fill="#0284c7" stroke="#fff" stroke-width="2"/><text x="345" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">MgB²⁺</text>
+          <line x1="275" y1="95" x2="325" y2="95" stroke="#fbbf24" stroke-width="3" stroke-dasharray="4 3"/>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 08: DEVELOPMENTAL BIOLOGY & MORPHOGENESIS
+      // ----------------------------------------------------------------------
+      case "module_08":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#f9a8d4" font-size="9" font-family="monospace">FRENCH FLAG MORPHOGEN GRADIENT • BICOID / SHH THRESHOLD CELL FATES</text>
+          <rect x="75" y="55" width="145" height="80" fill="rgba(59,130,246,0.45)" stroke="#93c5fd"/>
+          <rect x="220" y="55" width="145" height="80" fill="rgba(255,255,255,0.22)" stroke="#e2e8f0"/>
+          <rect x="365" y="55" width="145" height="80" fill="rgba(239,68,68,0.45)" stroke="#fca5a5"/>
+          <path d="M 75,45 Q 240,120 510,132" fill="none" stroke="#fbbf24" stroke-width="3.5"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#67e8f9" font-size="9" font-family="monospace">CANONICAL WNT (FRIZZLED/LRP6) & HEDGEHOG (PTCH/SMO) RECEPTOR SWITCH</text>
+          ${drawBilayer(68, 122, "#38bdf8")}
+          <rect x="175" y="48" width="54" height="90" rx="10" fill="rgba(16,185,129,0.45)" stroke="#6ee7b7" stroke-width="2"/><text x="202" y="96" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Frizzled</text>
+          <rect x="365" y="48" width="54" height="90" rx="10" fill="rgba(168,85,247,0.45)" stroke="#d8b4fe" stroke-width="2"/><text x="392" y="96" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Smo</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">β-CATENIN DESTRUCTION COMPLEX • APC, AXIN, GSK3β & CK1α</text>
+          <ellipse cx="300" cy="95" rx="115" ry="46" fill="rgba(245,158,11,0.28)" stroke="#fbbf24" stroke-width="2"/>
+          <circle cx="300" cy="95" r="24" fill="#10b981" stroke="#fff" stroke-width="2"/><text x="300" y="99" text-anchor="middle" fill="#fff" font-size="8.5" font-family="monospace">β-Cat</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">HOX HOMEODOMAIN HELIX-TURN-HELIX • MAJOR GROOVE 5'-TAAT-3' RECOGNITION</text>
+          <path d="M 80,105 Q 190,45 300,105 T 520,105" fill="none" stroke="#38bdf8" stroke-width="4"/>
+          <rect x="245" y="62" width="110" height="32" rx="14" fill="rgba(16,185,129,0.55)" stroke="#fff" stroke-width="2"/>
+          <text x="300" y="82" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Recognition Helix α3</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 09: PLANT PHYSIOLOGY & PHOTOSYNTHESIS
+      // ----------------------------------------------------------------------
+      case "module_09":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#86efac" font-size="9" font-family="monospace">CHLOROPLAST ULTRASTRUCTURE • GRANA THYLAKOID STACKS & STROMA</text>
+          <ellipse cx="300" cy="100" rx="255" ry="66" fill="rgba(34,197,94,0.14)" stroke="#22c55e" stroke-width="2.5"/>
+          ${[160, 300, 440].map(x => [68, 86, 104, 122].map(y => `<rect x="${x - 36}" y="${y}" width="72" height="12" rx="5" fill="rgba(16,185,129,0.55)" stroke="#86efac" stroke-width="1.2"/>`).join("")).join("")}
+          <line x1="196" y1="92" x2="264" y2="92" stroke="#4ade80" stroke-width="4"/><line x1="336" y1="110" x2="404" y2="110" stroke="#4ade80" stroke-width="4"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#86efac" font-size="9" font-family="monospace">THYLAKOID Z-SCHEME • PSII (P680) → PQ → Cyt b₆f → PC → PSI (P700)</text>
+          ${drawBilayer(66, 124, "#4ade80")}
+          <rect x="95" y="46" width="62" height="92" rx="10" fill="rgba(34,197,94,0.5)" stroke="#bbf7d0" stroke-width="2"/><text x="126" y="96" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">PSII</text>
+          <rect x="268" y="50" width="62" height="86" rx="10" fill="rgba(14,165,233,0.5)" stroke="#bae6fd" stroke-width="2"/><text x="299" y="96" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">Cyt b₆f</text>
+          <rect x="435" y="46" width="62" height="92" rx="10" fill="rgba(245,158,11,0.5)" stroke="#fde68a" stroke-width="2"/><text x="466" y="96" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">PSI</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">RuBisCO HEXADECAMER (L₈S₈) • CARBOXYLATION vs PHOTOrespiration</text>
+          <circle cx="300" cy="95" r="54" fill="rgba(34,197,94,0.32)" stroke="#4ade80" stroke-width="2.5"/>
+          <circle cx="300" cy="95" r="24" fill="rgba(245,158,11,0.45)" stroke="#fde68a" stroke-width="2"/>
+          <text x="300" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">L₈S₈ Core</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">OXYGEN-EVOLVING COMPLEX (Mn₄CaO₅ CUBANE) • KOK S₀–S₄ WATER SPLITTING</text>
+          <polygon points="240,65 340,55 370,115 260,125" fill="rgba(34,197,94,0.25)" stroke="#4ade80" stroke-width="2"/>
+          <circle cx="265" cy="75" r="13" fill="#a855f7" stroke="#fff"/><text x="265" y="79" text-anchor="middle" fill="#fff" font-size="8">Mn</text>
+          <circle cx="335" cy="75" r="13" fill="#a855f7" stroke="#fff"/><text x="335" y="79" text-anchor="middle" fill="#fff" font-size="8">Mn</text>
+          <circle cx="300" cy="112" r="14" fill="#38bdf8" stroke="#fff"/><text x="300" y="116" text-anchor="middle" fill="#fff" font-size="8">Ca²⁺</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 10: ANIMAL PHYSIOLOGY & NEUROBIOLOGY
+      // ----------------------------------------------------------------------
+      case "module_10":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#7dd3fc" font-size="9" font-family="monospace">MYELINATED AXON • NODES OF RANVIER & SALTATORY ACTION POTENTIAL</text>
+          <rect x="40" y="82" width="520" height="28" fill="rgba(56,189,248,0.22)" stroke="#38bdf8" stroke-width="1.5"/>
+          ${[75, 235, 395].map(x => `<rect x="${x}" y="66" width="110" height="60" rx="10" fill="rgba(245,158,11,0.35)" stroke="#fbbf24" stroke-width="2"/>`).join("")}
+          <path d="M 195,62 Q 290,18 385,62" fill="none" stroke="#34d399" stroke-width="2.5" stroke-dasharray="6 4" class="svg-flux-active"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#7dd3fc" font-size="9" font-family="monospace">EXCITABLE AXOLEMMA • Nav1.6, Kv CHANNELS & Na⁺/K⁺-ATPase PUMP</text>
+          ${drawBilayer(66, 124, "#38bdf8")}
+          <rect x="115" y="48" width="56" height="92" rx="10" fill="rgba(244,63,94,0.48)" stroke="#fda4af" stroke-width="2"/><text x="143" y="98" text-anchor="middle" fill="#fff" font-size="9.5" font-family="monospace">Nav</text>
+          <rect x="275" y="48" width="56" height="92" rx="10" fill="rgba(14,165,233,0.48)" stroke="#bae6fd" stroke-width="2"/><text x="303" y="98" text-anchor="middle" fill="#fff" font-size="9.5" font-family="monospace">Kv</text>
+          <rect x="435" y="48" width="64" height="92" rx="10" fill="rgba(16,185,129,0.48)" stroke="#6ee7b7" stroke-width="2"/><text x="467" y="98" text-anchor="middle" fill="#fff" font-size="9.5" font-family="monospace">3Na⁺/2K⁺</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">SYNAPTIC VESICLE EXOCYTOSIS • v-SNARE / t-SNARE 4-HELIX & SYNAPTOTAGMIN</text>
+          <circle cx="300" cy="64" r="38" fill="rgba(14,165,233,0.28)" stroke="#38bdf8" stroke-width="2.5"/>
+          <line x1="80" y1="136" x2="520" y2="136" stroke="#334155" stroke-width="8"/>
+          <path d="M 255,95 L 345,132 M 345,95 L 255,132" stroke="#fbbf24" stroke-width="3.5"/>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">K⁺ CHANNEL TVGYG SELECTIVITY FILTER • DEHYDRATED K⁺ CARBONYL CAGE</text>
+          <rect x="215" y="42" width="32" height="106" rx="6" fill="rgba(14,165,233,0.35)" stroke="#38bdf8" stroke-width="2"/>
+          <rect x="353" y="42" width="32" height="106" rx="6" fill="rgba(14,165,233,0.35)" stroke="#38bdf8" stroke-width="2"/>
+          <circle cx="300" cy="72" r="11" fill="#10b981" stroke="#fff"/><circle cx="300" cy="112" r="11" fill="#10b981" stroke="#fff"/>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 11: IMMUNOLOGY & HOST DEFENSE
+      // ----------------------------------------------------------------------
+      case "module_11":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#c4b5fd" font-size="9" font-family="monospace">IMMUNOLOGICAL SYNAPSE • APC MHC-PEPTIDE PRESENTATION TO T-CELL</text>
+          <circle cx="195" cy="96" r="56" fill="rgba(14,165,233,0.25)" stroke="#38bdf8" stroke-width="2.5"/><text x="195" y="100" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">APC (MHC)</text>
+          <circle cx="405" cy="96" r="56" fill="rgba(16,185,129,0.25)" stroke="#34d399" stroke-width="2.5"/><text x="405" y="100" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">T-Cell (TCR)</text>
+          <rect x="251" y="84" width="98" height="24" rx="8" fill="rgba(245,158,11,0.5)" stroke="#fde68a"/>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#6ee7b7" font-size="9" font-family="monospace">IGG ANTIBODY (Fab / Fc) & TCR–CD3 ITAM SIGNALING COMPLEX</text>
+          <path d="M 260,50 L 300,92 L 340,50 M 300,92 L 300,148" fill="none" stroke="#38bdf8" stroke-width="10" stroke-linecap="round"/>
+          <text x="300" y="168" text-anchor="middle" fill="#93c5fd" font-size="9" font-family="monospace">VH/VL Fab Arms & Heavy Chain Fc Stem</text>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">V(D)J RECOMBINATION • RAG1/2 RECOGNITION OF 12/23 RSS HEPTAMER-NONAMER</text>
+          <line x1="65" y1="95" x2="535" y2="95" stroke="#38bdf8" stroke-width="3"/>
+          <polygon points="210,75 250,95 210,115" fill="#10b981" stroke="#fff"/><text x="200" y="68" fill="#6ee7b7" font-size="8" font-family="monospace">12-bp RSS</text>
+          <polygon points="390,75 350,95 390,115" fill="#f59e0b" stroke="#fff"/><text x="365" y="68" fill="#fde68a" font-size="8" font-family="monospace">23-bp RSS</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">MHC GROOVE & CDR3 HYPERVARIABLE LOOP • EPITOPE ANCHOR RESIDUES</text>
+          <path d="M 140,120 Q 300,155 460,120" fill="none" stroke="#38bdf8" stroke-width="6"/>
+          <rect x="235" y="88" width="130" height="22" rx="10" fill="#f43f5e" stroke="#fff"/><text x="300" y="103" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Antigen Peptide</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 12: INHERITANCE BIOLOGY, OPERONS & MAPPING
+      // ----------------------------------------------------------------------
+      case "module_12":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#6ee7b7" font-size="9" font-family="monospace">GENETIC LINKAGE MAP & THREE-POINT TESTCROSS RECOMBINATION (cM)</text>
+          <line x1="60" y1="95" x2="540" y2="95" stroke="#34d399" stroke-width="5" stroke-linecap="round"/>
+          ${[{x:130,l:"Locus A"},{x:290,l:"Locus B"},{x:460,l:"Locus C"}].map(p => `<circle cx="${p.x}" cy="95" r="14" fill="#059669" stroke="#fff" stroke-width="2"/><text x="${p.x}" y="128" text-anchor="middle" fill="#a7f3d0" font-size="9" font-family="monospace">${p.l}</text>`).join("")}`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#7dd3fc" font-size="9" font-family="monospace">LAC OPERON DUAL CONTROL • cAMP-CRP ACTIVATION & LacI REPRESSOR LOOP</text>
+          <line x1="45" y1="105" x2="555" y2="105" stroke="#38bdf8" stroke-width="4"/>
+          ${[{x:95,c:"#a855f7",t:"CAP"},{x:175,c:"#f59e0b",t:"Prom"},{x:255,c:"#ef4444",t:"lacO"},{x:345,c:"#10b981",t:"lacZ"},{x:425,c:"#06b6d4",t:"lacY"},{x:500,c:"#3b82f6",t:"lacA"}].map(b => `<rect x="${b.x-32}" y="86" width="64" height="36" rx="8" fill="${b.c}" stroke="#fff" stroke-width="1.5"/><text x="${b.x}" y="108" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">${b.t}</text>`).join("")}`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">TRP OPERON ATTENUATION • 1:2 ANTI-TERMINATOR vs 3:4 TERMINATOR HAIRPIN</text>
+          <path d="M 165,140 L 165,65 A 22,22 0 1,1 205,65 L 205,140" fill="none" stroke="#10b981" stroke-width="3.5"/>
+          <path d="M 385,140 L 385,55 A 24,24 0 1,1 430,55 L 430,140" fill="none" stroke="#f43f5e" stroke-width="3.5"/>
+          <text x="185" y="162" text-anchor="middle" fill="#6ee7b7" font-size="9" font-family="monospace">2:3 Anti-Terminator</text>
+          <text x="408" y="162" text-anchor="middle" fill="#fda4af" font-size="9" font-family="monospace">3:4 Terminator + Poly-U</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">ALLOLACTOSE INDUCER POCKET • ALLOSTERIC LOSS OF LacI OPERATOR AFFINITY</text>
+          <ellipse cx="300" cy="95" rx="75" ry="44" fill="rgba(16,185,129,0.28)" stroke="#34d399" stroke-width="2"/>
+          <circle cx="300" cy="95" r="20" fill="#f59e0b" stroke="#fff" stroke-width="2"/><text x="300" y="99" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">Inducer</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 13: ECOLOGICAL PRINCIPLES & BIOGEOGRAPHY
+      // ----------------------------------------------------------------------
+      case "module_13":
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#86efac" font-size="9" font-family="monospace">MACARTHUR-WILSON ISLAND BIOGEOGRAPHY & LINDEMAN TROPHIC PYRAMID</text>
+          <polygon points="300,34 460,152 140,152" fill="rgba(16,185,129,0.22)" stroke="#34d399" stroke-width="2"/>
+          <line x1="220" y1="93" x2="380" y2="93" stroke="#34d399" stroke-width="1.5"/>
+          <line x1="180" y1="122" x2="420" y2="122" stroke="#34d399" stroke-width="1.5"/>
+          <text x="300" y="142" text-anchor="middle" fill="#a7f3d0" font-size="9" font-family="monospace">Primary Producers (10% Rule)</text>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#7dd3fc" font-size="9" font-family="monospace">LOTKA-VOLTERRA COMPETITION PHASE PLANE • ZERO-GROWTH ISOCLINES (N₁, N₂)</text>
+          <line x1="90" y1="30" x2="90" y2="155" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="90" y1="155" x2="510" y2="155" stroke="#94a3b8" stroke-width="2"/>
+          <line x1="90" y1="50" x2="460" y2="155" stroke="#10b981" stroke-width="2.5"/>
+          <line x1="90" y1="120" x2="340" y2="155" stroke="#38bdf8" stroke-width="2.5"/>
+          <circle cx="235" cy="92" r="7" fill="#fbbf24" stroke="#fff" stroke-width="2"/>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">BIOLOGICAL NITROGEN FIXATION • Fe-PROTEIN (dinitrogenase reductase) & MoFe</text>
+          <ellipse cx="220" cy="95" rx="54" ry="36" fill="rgba(245,158,11,0.38)" stroke="#fbbf24" stroke-width="2"/><text x="220" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Fe-Protein</text>
+          <ellipse cx="380" cy="95" rx="68" ry="44" fill="rgba(16,185,129,0.38)" stroke="#34d399" stroke-width="2"/><text x="380" y="99" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">MoFe-Protein</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">FeMo-COFACTOR ACTIVE SITE • N≡N + 8H⁺ + 8e⁻ + 16 MgATP → 2NH₃ + H₂</text>
+          <circle cx="300" cy="95" r="38" fill="rgba(16,185,129,0.28)" stroke="#34d399" stroke-width="2.5"/>
+          <text x="300" y="99" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">MoFe₇S₉C</text>`;
+
+      // ----------------------------------------------------------------------
+      // MOD 14: BIOPHYSICAL METHODS & DIAGNOSTIC ASSAYS
+      // ----------------------------------------------------------------------
+      default:
+        if (scaleIdx === 0) return `
+          <text x="14" y="18" fill="#67e8f9" font-size="9" font-family="monospace">LATERAL FLOW IMMUNOCHROMATOGRAPHIC STRIP & SEC CHROMATOGRAPHY</text>
+          <rect x="65" y="65" width="470" height="56" rx="10" fill="rgba(15,23,42,0.9)" stroke="#38bdf8" stroke-width="2"/>
+          <rect x="80" y="73" width="70" height="40" rx="6" fill="rgba(14,165,233,0.35)"/><text x="115" y="97" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">Sample</text>
+          <rect x="160" y="73" width="75" height="40" rx="6" fill="rgba(244,63,94,0.45)"/><text x="197" y="97" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">AuNP-Conj</text>
+          <line x1="330" y1="70" x2="330" y2="116" stroke="#e11d48" stroke-width="5"/><text x="330" y="136" text-anchor="middle" fill="#fda4af" font-size="8" font-family="monospace">Test (T)</text>
+          <line x1="400" y1="70" x2="400" y2="116" stroke="#10b981" stroke-width="5"/><text x="400" y="136" text-anchor="middle" fill="#6ee7b7" font-size="8" font-family="monospace">Control (C)</text>`;
+        if (scaleIdx === 1) return `
+          <text x="14" y="18" fill="#6ee7b7" font-size="9" font-family="monospace">REAL-TIME RT-qPCR AMPLIFICATION CURVE & THRESHOLD CYCLE (Ct / Cq)</text>
+          <line x1="80" y1="32" x2="80" y2="152" stroke="#64748b" stroke-width="2"/><line x1="80" y1="152" x2="520" y2="152" stroke="#64748b" stroke-width="2"/>
+          <line x1="80" y1="115" x2="520" y2="115" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5 4"/><text x="455" y="110" fill="#fde68a" font-size="8" font-family="monospace">Threshold</text>
+          <path d="M 85,148 L 210,148 Q 260,145 290,95 T 390,42 L 505,40" fill="none" stroke="#10b981" stroke-width="3"/>
+          <path d="M 85,148 L 270,148 Q 320,145 350,95 T 450,42 L 505,40" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="4 3"/>`;
+        if (scaleIdx === 2) return `
+          <text x="14" y="18" fill="#fcd34d" font-size="9" font-family="monospace">TAQMAN 5'→3' EXONUCLEASE HYDROLYSIS PROBE • FRET FLUOROPHORE–QUENCHER</text>
+          <line x1="75" y1="112" x2="525" y2="112" stroke="#38bdf8" stroke-width="3.5"/>
+          <line x1="250" y1="92" x2="410" y2="92" stroke="#fbbf24" stroke-width="4"/>
+          <circle cx="250" cy="84" r="12" fill="#10b981" stroke="#fff" stroke-width="2"/><text x="250" y="88" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">FAM</text>
+          <circle cx="410" cy="84" r="12" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/><text x="410" y="88" text-anchor="middle" fill="#fda4af" font-size="8" font-family="monospace">BHQ</text>
+          <ellipse cx="185" cy="98" rx="42" ry="26" fill="rgba(244,63,94,0.45)" stroke="#fda4af" stroke-width="2"/><text x="185" y="102" text-anchor="middle" fill="#fff" font-size="9" font-family="monospace">Taq Pol</text>`;
+        return `
+          <text x="14" y="18" fill="#fde68a" font-size="9" font-family="monospace">RAMACHANDRAN STEREOCHEMICAL PLOT (φ vs ψ) & CIRCULAR DICHROISM</text>
+          <rect x="190" y="32" width="220" height="126" fill="rgba(15,23,42,0.85)" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="300" y1="32" x2="300" y2="158" stroke="#475569" stroke-dasharray="3 3"/><line x1="190" y1="95" x2="410" y2="95" stroke="#475569" stroke-dasharray="3 3"/>
+          <ellipse cx="245" cy="62" rx="34" ry="20" fill="rgba(56,189,248,0.4)" stroke="#38bdf8"/><text x="245" y="65" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">β-Sheet</text>
+          <ellipse cx="250" cy="118" rx="30" ry="16" fill="rgba(16,185,129,0.45)" stroke="#34d399"/><text x="250" y="121" text-anchor="middle" fill="#fff" font-size="8" font-family="monospace">α-Helix</text>
+          <ellipse cx="350" cy="78" rx="18" ry="12" fill="rgba(245,158,11,0.4)" stroke="#fbbf24"/><text x="350" y="81" text-anchor="middle" fill="#fff" font-size="7" font-family="monospace">L-α</text>`;
     }
-    if (scaleIdx === 2) {
-      return `
-        <text x="16" y="20" fill="#a7f3d0" font-size="9" font-family="monospace">MACROMOLECULAR QUATERNARY ASSEMBLY & TRANSLOCATION CHANNEL</text>
-        <line x1="20" y1="130" x2="580" y2="130" stroke="#334155" stroke-width="8" stroke-linecap="round" />
-        <ellipse cx="200" cy="85" rx="68" ry="42" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="2" />
-        <ellipse cx="300" cy="78" rx="52" ry="48" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2" />
-        <ellipse cx="400" cy="85" rx="68" ry="42" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="2" />
-        <rect x="282" y="95" width="36" height="65" rx="8" fill="rgba(245, 158, 11, 0.3)" stroke="#fbbf24" stroke-width="2" />
-        <path d="M 100,90 C 200,30 400,30 500,90" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="6 4" class="svg-flux-active" />
-      `;
-    }
-    return `
-      <text x="16" y="20" fill="#fde68a" font-size="9" font-family="monospace">ATOMIC CATALYTIC POCKET • COFACTOR & H-BOND COORDINATION</text>
-      <path d="M 90,35 Q 300,175 510,35" fill="rgba(15, 23, 42, 0.65)" stroke="#38bdf8" stroke-width="2.5" />
-      <line x1="160" y1="75" x2="300" y2="105" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 3" />
-      <line x1="440" y1="75" x2="300" y2="105" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4 3" />
-      <line x1="300" y1="45" x2="300" y2="105" stroke="#34d399" stroke-width="2" stroke-dasharray="4 3" />
-      <circle cx="300" cy="105" r="22" fill="rgba(245, 158, 11, 0.28)" stroke="#fbbf24" stroke-width="2" />
-      <text x="300" y="109" text-anchor="middle" fill="#fef3c7" font-size="10" font-family="monospace" font-weight="bold">Mg²⁺/Fe</text>
-    `;
   }
 
   function renderConsolidatedCsirHubCard() {
@@ -2043,7 +2434,6 @@ function getFallbackModuleData(regItem) {
     }
   }
 
-  // CORE HOOKS: Intercept BOTH renderCircularZoomAndExpandableCards AND renderNodeInspectorAndDrawer
   function installCoreRenderHooks() {
     const origStageRender = window.renderCircularZoomAndExpandableCards;
     if (typeof origStageRender === "function") {
@@ -2070,11 +2460,10 @@ function getFallbackModuleData(regItem) {
       };
     }
 
-    // Run once immediately for initial state
     if (state.moduleData) {
       window.renderCircularZoomAndExpandableCards();
       window.renderNodeInspectorAndDrawer();
       window.renderPathwaySimulator();
     }
   }
-})(); 
+})();
