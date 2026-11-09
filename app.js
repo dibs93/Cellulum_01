@@ -2467,3 +2467,302 @@ function getFallbackModuleData(regItem) {
     }
   }
 })();
+// ============================================================================
+// FULL-SCREEN TRANSLUCENT TEXTBOOK READER + SINGLE SEARCH BAR FIX
+// ============================================================================
+(function initCellulumTextbookReader() {
+  let readerOpen = false;
+  let outlineOpenOnMobile = false;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    removeDuplicateDesktopSearchInput();
+    injectTextbookHeaderButtonAndOverlay();
+  });
+
+  // 1. Remove the old desktop search input so there is only ONE Search button
+  function removeDuplicateDesktopSearchInput() {
+    const oldDesktopSearch = document.getElementById("globalModuleSearch");
+    if (oldDesktopSearch) {
+      const wrapper = oldDesktopSearch.closest(".relative") || oldDesktopSearch.parentElement;
+      if (wrapper) wrapper.remove();
+      else oldDesktopSearch.remove();
+    }
+  }
+
+  // 2. Inject "📖 Textbook" Button in Top Header & Create Translucent Full-Screen Reader
+  function injectTextbookHeaderButtonAndOverlay() {
+    const searchBtn = document.getElementById("openSearchModalBtn");
+    const bundleBtn = document.getElementById("openBundleModalBtn");
+    const targetParent = searchBtn?.parentElement || bundleBtn?.parentElement;
+
+    if (targetParent && !document.getElementById("openTextbookReaderBtn")) {
+      const textbookBtn = document.createElement("button");
+      textbookBtn.id = "openTextbookReaderBtn";
+      textbookBtn.type = "button";
+      textbookBtn.className = "px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/35 border border-white/30 text-xs font-semibold text-emerald-200 flex items-center space-x-1.5 transition shadow backdrop-blur-md";
+      textbookBtn.innerHTML = `<i class="fa-solid fa-book-open"></i><span>Textbook</span>`;
+      targetParent.insertBefore(textbookBtn, bundleBtn || null);
+
+      textbookBtn.addEventListener("click", () => toggleTextbookReader(true));
+    }
+
+    if (document.getElementById("textbookReaderOverlay")) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "textbookReaderOverlay";
+    overlay.className = "fixed inset-0 z-50 hidden flex-col bg-slate-900/65 backdrop-blur-2xl text-slate-100";
+    overlay.innerHTML = `
+      <!-- Top Translucent Aero Bar -->
+      <header class="px-4 sm:px-6 py-3 bg-white/10 border-b border-white/25 flex flex-wrap items-center justify-between gap-2 shadow-lg">
+        <div class="flex items-center space-x-2.5">
+          <button type="button" id="readerToggleOutlineBtn" class="px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/30 text-xs font-semibold text-emerald-200 flex items-center space-x-1.5 transition">
+            <i class="fa-solid fa-list-ul"></i>
+            <span>Topic Outline</span>
+          </button>
+          <div class="hidden sm:block h-4 w-[1px] bg-white/25"></div>
+          <h2 id="readerChapterTitle" class="text-xs sm:text-sm font-bold text-white truncate max-w-[200px] sm:max-w-md">
+            Textbook Reading Mode
+          </h2>
+        </div>
+
+        <!-- In-Chapter Search + Exit Button -->
+        <div class="flex items-center space-x-2 flex-1 sm:flex-initial justify-end">
+          <div class="relative flex-1 sm:w-64 max-w-xs">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-emerald-300 text-xs"></i>
+            <input type="text" id="readerSearchInput" placeholder="Search in this chapter..."
+                   class="w-full pl-8 pr-7 py-1.5 rounded-xl bg-slate-900/50 border border-white/30 text-xs text-white placeholder-slate-300 focus:outline-none focus:border-emerald-400">
+            <button type="button" id="readerClearSearchBtn" class="hidden absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-slate-300 hover:text-white">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <button type="button" id="closeTextbookReaderBtn" class="px-3.5 py-1.5 rounded-xl bg-rose-500/30 hover:bg-rose-500/50 border border-rose-300/50 text-xs font-bold text-white flex items-center space-x-1.5 transition shadow">
+            <i class="fa-solid fa-xmark"></i>
+            <span>Main Page</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Reader Body: Left Topic Outline + Right Lightweight Reading Sheet -->
+      <div class="flex-1 flex overflow-hidden relative">
+        <!-- Collapsible Topic Outline Sidebar -->
+        <aside id="readerOutlineDrawer" class="w-72 bg-slate-900/60 backdrop-blur-xl border-r border-white/20 p-4 overflow-y-auto hidden md:block shrink-0 space-y-4">
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 font-bold mb-2">
+              Switch Module Chapter
+            </div>
+            <select id="readerModuleSelect" class="w-full p-2 rounded-xl bg-slate-900/80 border border-white/25 text-xs text-white focus:outline-none"></select>
+          </div>
+
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 font-bold mb-2">
+              Chapter Topic Outline
+            </div>
+            <nav id="readerOutlineNav" class="space-y-1.5 text-xs"></nav>
+          </div>
+        </aside>
+
+        <!-- Lightweight Translucent Textbook Sheet -->
+        <main id="readerScrollContainer" class="flex-1 overflow-y-auto p-4 sm:p-8">
+          <article id="readerArticleBody" class="max-w-3xl mx-auto space-y-6 pb-16"></article>
+        </main>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    // Event Listeners
+    document.getElementById("closeTextbookReaderBtn")?.addEventListener("click", () => toggleTextbookReader(false));
+
+    document.getElementById("readerToggleOutlineBtn")?.addEventListener("click", () => {
+      const drawer = document.getElementById("readerOutlineDrawer");
+      if (!drawer) return;
+      outlineOpenOnMobile = !outlineOpenOnMobile;
+      drawer.classList.toggle("hidden", !outlineOpenOnMobile);
+      drawer.classList.toggle("absolute", outlineOpenOnMobile);
+      drawer.classList.toggle("inset-y-0", outlineOpenOnMobile);
+      drawer.classList.toggle("left-0", outlineOpenOnMobile);
+      drawer.classList.toggle("z-20", outlineOpenOnMobile);
+    });
+
+    const searchInput = document.getElementById("readerSearchInput");
+    const clearBtn = document.getElementById("readerClearSearchBtn");
+    searchInput?.addEventListener("input", (e) => {
+      const q = e.target.value;
+      clearBtn?.classList.toggle("hidden", !q.length);
+      renderTextbookChapterContent(q);
+    });
+    clearBtn?.addEventListener("click", () => {
+      if (searchInput) {
+        searchInput.value = "";
+        clearBtn.classList.add("hidden");
+        renderTextbookChapterContent("");
+      }
+    });
+  }
+
+  function toggleTextbookReader(open) {
+    const overlay = document.getElementById("textbookReaderOverlay");
+    if (!overlay) return;
+    readerOpen = open;
+    overlay.classList.toggle("hidden", !open);
+    overlay.classList.toggle("flex", open);
+    if (open) {
+      populateReaderModuleDropdown();
+      renderTextbookChapterContent(document.getElementById("readerSearchInput")?.value || "");
+    }
+  }
+
+  function populateReaderModuleDropdown() {
+    const select = document.getElementById("readerModuleSelect");
+    if (!select) return;
+    select.innerHTML = MODULE_REGISTRY.map(m => `
+      <option value="${m.id}" ${m.id === state.activeRegistryItem?.id ? "selected" : ""}>
+        ${m.shortUnit}: ${m.title}
+      </option>
+    `).join("");
+
+    select.onchange = async (e) => {
+      await loadModule(e.target.value);
+      renderTextbookChapterContent("");
+    };
+  }
+
+  function renderTextbookChapterContent(searchQuery = "") {
+    const mod = state.moduleData;
+    const titleEl = document.getElementById("readerChapterTitle");
+    const outlineNav = document.getElementById("readerOutlineNav");
+    const article = document.getElementById("readerArticleBody");
+    if (!mod || !article) return;
+
+    const q = searchQuery.trim().toLowerCase();
+    if (titleEl) titleEl.textContent = `${state.activeRegistryItem?.shortUnit || "Chapter"} • ${mod.title}`;
+
+    const levels = mod.scale_levels || [];
+    const customChapters = mod.textbook_chapter || [];
+    const outlineItems = [];
+    const sectionsHtml = [];
+
+    // 1. Optional Custom Textbook Overview Sections (if present in JSON)
+    customChapters.forEach((sec, idx) => {
+      const secId = `tb-custom-${idx}`;
+      outlineItems.push({ id: secId, label: sec.heading || `Overview ${idx + 1}` });
+      sectionsHtml.push(`
+        <section id="${secId}" class="p-5 sm:p-6 rounded-2xl bg-white/10 border border-white/25 shadow-lg space-y-3">
+          <h3 class="text-base sm:text-lg font-bold text-emerald-300">${highlightReaderText(sec.heading || "", q)}</h3>
+          ${(sec.paragraphs || []).map(p => `<p class="text-xs sm:text-sm text-slate-100 leading-relaxed">${highlightReaderText(formatRichText(p), q)}</p>`).join("")}
+        </section>
+      `);
+    });
+
+    // 2. Comprehensive Textbook Sections Compiled from All Scale Levels & Nodes
+    levels.forEach((lvl, sIdx) => {
+      const metric = (lvl.scale_metric || "").split("(")[0].trim();
+      const nodeIds = lvl.node_ids || lvl.hotspots || [];
+
+      nodeIds.forEach((nid, nIdx) => {
+        const node = mod.nodes?.[nid];
+        if (!node) return;
+
+        constmech = node.tabs?.mechanism || [];
+        const path = node.tabs?.pathology || [];
+        const lab = node.tabs?.lab_workbench || [];
+        const csir = node.tabs?.csir_high_yield || [];
+        const metricsEntries = Object.entries(node.metrics || {});
+
+        const combinedBlob = `${node.title} ${node.subtitle} ${constmech.join(" ")} ${path.join(" ")} ${lab.join(" ")} ${csir.join(" ")}`.toLowerCase();
+        if (q && !combinedBlob.includes(q)) return;
+
+        const secId = `tb-sec-${sIdx}-${nIdx}`;
+        outlineItems.push({
+          id: secId,
+          label: `${sIdx + 1}.${nIdx + 1} ${node.title.split(":")[0]}`
+        });
+
+        sectionsHtml.push(`
+          <section id="${secId}" class="p-5 sm:p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/25 shadow-lg space-y-4">
+            <div class="border-b border-white/20 pb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/25 text-emerald-200 border border-emerald-400/40">
+                Scale Region: ${metric} • ${lvl.name}
+              </span>
+              <h3 class="text-base sm:text-lg font-extrabold text-white mt-2 leading-snug">
+                ${sIdx + 1}.${nIdx + 1} — ${highlightReaderText(formatRichText(node.title), q)}
+              </h3>
+              <p class="text-xs text-emerald-200/90 mt-1">${highlightReaderText(formatRichText(node.subtitle || ""), q)}</p>
+            </div>
+
+            ${metricsEntries.length ? `
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                ${metricsEntries.map(([k, v]) => `
+                  <div class="p-2.5 rounded-xl bg-white/10 border border-white/20">
+                    <span class="text-[10px] font-mono uppercase text-emerald-300 block">${k.replace(/_/g, " ")}</span>
+                    <span class="text-xs font-semibold text-white">${highlightReaderText(formatRichText(String(v)), q)}</span>
+                  </div>
+                `).join("")}
+              </div>
+            ` : ""}
+
+            <div class="space-y-2.5">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-sky-300 font-bold">
+                <i class="fa-solid fa-atom mr-1"></i>Core Biochemical & Molecular Mechanism
+              </h4>
+              ${constmech.map(p => `
+                <p class="text-xs sm:text-sm text-slate-100 leading-relaxed">${highlightReaderText(formatRichText(p), q)}</p>
+              `).join("")}
+            </div>
+
+            ${path.length ? `
+              <div class="p-3.5 rounded-xl bg-rose-500/15 border border-rose-300/30 space-y-1.5">
+                <h4 class="text-xs font-mono uppercase tracking-wider text-rose-200 font-bold">
+                  <i class="fa-solid fa-heart-pulse mr-1"></i>Clinical & Pathological Relevance
+                </h4>
+                ${path.map(p => `<p class="text-xs text-rose-100 leading-relaxed">${highlightReaderText(formatRichText(p), q)}</p>`).join("")}
+              </div>
+            ` : ""}
+
+            ${lab.length ? `
+              <div class="p-3.5 rounded-xl bg-sky-500/15 border border-sky-300/30 space-y-1.5">
+                <h4 class="text-xs font-mono uppercase tracking-wider text-sky-200 font-bold">
+                  <i class="fa-solid fa-flask mr-1"></i>Experimental & Diagnostic Assays
+                </h4>
+                ${lab.map(p => `<p class="text-xs text-sky-100 leading-relaxed">${highlightReaderText(formatRichText(p), q)}</p>`).join("")}
+              </div>
+            ` : ""}
+          </section>
+        `);
+      });
+    });
+
+    if (outlineNav) {
+      outlineNav.innerHTML = outlineItems.map(item => `
+        <button type="button" data-outline-target="${item.id}"
+                class="w-full text-left px-3 py-2 rounded-xl hover:bg-white/15 text-slate-200 hover:text-emerald-200 transition truncate">
+          ${item.label}
+        </button>
+      `).join("");
+
+      outlineNav.querySelectorAll("[data-outline-target]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = document.getElementById(btn.dataset.outlineTarget);
+          target?.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (window.innerWidth < 768) {
+            document.getElementById("readerOutlineDrawer")?.classList.add("hidden");
+            outlineOpenOnMobile = false;
+          }
+        });
+      });
+    }
+
+    article.innerHTML = sectionsHtml.length
+      ? sectionsHtml.join("")
+      : `<div class="p-8 text-center text-sm text-slate-300 bg-white/10 rounded-2xl border border-white/20">No chapter sections match "<strong>${searchQuery}</strong>".</div>`;
+
+    typesetMath();
+  }
+
+  function highlightReaderText(html, query) {
+    if (!query || query.length < 2) return html;
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(`(?![^<]*>)(${escaped})`, "gi");
+    return html.replace(regex, `<mark class="bg-amber-400/80 text-slate-950 px-1 rounded font-bold">$1</mark>`);
+  }
+})();
