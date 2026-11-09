@@ -1354,27 +1354,23 @@ function getFallbackModuleData(regItem) {
     return slice.replace(regex, `<strong class="text-emerald-300 underline">$1</strong>`);
   }
 })();
+
 // ============================================================================
-// UI REFINEMENT PACK (V4):
-// 1. Phone-Lock Module Carousel Controls
-// 2. Pure Physical Metric Slider (Size + Unit Only)
-// 3. Universal Science Main Stage (Ultrastructure SVG + 3-Tab General Cards:
-//    Mechanism, Pathology, Lab Assays — No CSIR Clutter in Main Viewport!)
-// 4. Consolidated "CSIR NET Part-C Exam Hub" in the Side/Bottom Panel
-//    (Combines High-Yield Traps, Interactive Analytical Quiz & Reference Drawer)
-// 5. Self-Contained Expandable Pathway Simulator with Top SVG & Quick-Info Card
+// UI REFINEMENT PACK (V4.2 - AUDITED & FIXED):
+// Hooks directly into card expansion & tab switching so the Ultrastructure SVG
+// never disappears and the inline CSIR Quiz / L1-L4 labels never reappear!
 // ============================================================================
 (function initCellulumRefinements() {
   const FALLBACK_METRICS = ["500 μm", "50 μm", "1.5 μm", "8 nm"];
   let simExpanded = false;
   let selectedSimNodeId = null;
-  let activeCsirHubTab = "traps"; // 'traps' | 'quiz' | 'drawer'
+  let activeCsirHubTab = "traps";
 
   document.addEventListener("DOMContentLoaded", () => {
     injectBioSchematicStyles();
     setupLockScreenModuleCarousel();
     cleanUpStageHudAndButtons();
-    overrideWorkspaceForUniversalStageAndCsirHub();
+    installCoreRenderHooks();
   });
 
   function injectBioSchematicStyles() {
@@ -1382,11 +1378,13 @@ function getFallbackModuleData(regItem) {
     const style = document.createElement("style");
     style.id = "bioSchematicCss";
     style.textContent = `
-      /* Hide old circular radar wheel, stage drawer button, and inline stage quiz */
       .circular-lens-viewport,
       .circular-lens-viewport + div,
       #openDrawerBtn,
-      #toggleSimBtn {
+      #toggleSimBtn,
+      #toggleQuizStageBtn,
+      #prevQuizStageBtn,
+      #nextQuizStageBtn {
         display: none !important;
       }
       #interactiveStage {
@@ -1418,7 +1416,6 @@ function getFallbackModuleData(regItem) {
     const openDrawerBtn = document.getElementById("openDrawerBtn");
     if (openDrawerBtn) openDrawerBtn.style.display = "none";
 
-    // Make the top HUD scale title banner span full-width cleanly
     const hudLabel = document.getElementById("hudScaleLabel");
     if (hudLabel && hudLabel.parentElement) {
       hudLabel.parentElement.className = "w-full bg-slate-950/85 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 text-xs flex items-center space-x-2.5 shadow";
@@ -1428,7 +1425,6 @@ function getFallbackModuleData(regItem) {
     if (simPanel) simPanel.classList.remove("hidden");
   }
 
-  // 1. PHONE-LOCK STYLE MODULE CAROUSEL
   function setupLockScreenModuleCarousel() {
     const nav = document.getElementById("moduleNavContainer");
     if (!nav || !nav.parentElement || document.getElementById("modCarouselPrev")) return;
@@ -1472,7 +1468,6 @@ function getFallbackModuleData(regItem) {
     return cleaned || FALLBACK_METRICS[idx] || "10 nm";
   }
 
-  // 2. PURE METRIC SLIDER & CLEAN UNIVERSAL STUDY CARDS
   function renderPureMetricSliderAndCleanStage() {
     const mod = state.moduleData;
     if (!mod) return;
@@ -1518,6 +1513,7 @@ function getFallbackModuleData(regItem) {
       });
     }
 
+    // Always keep the top HUD label showing Pure Metric + Level Name (never "L2 (1.12x Zoom)")
     const hudLabel = document.getElementById("hudScaleLabel");
     if (hudLabel && activeLvl) {
       hudLabel.textContent = `${currentMetric} • ${activeLvl.name}`;
@@ -1525,14 +1521,14 @@ function getFallbackModuleData(regItem) {
 
     const canvas = document.getElementById("hotspotCanvas");
     if (canvas) {
-      // Remove the inline CSIR Quiz box from the main stage so it never sits between the SVG and Topic Cards
-      const stageQuizBtn = document.getElementById("toggleQuizStageBtn");
-      if (stageQuizBtn) {
-        const quizBanner = stageQuizBtn.closest("div.w-full.mb-4");
-        if (quizBanner) quizBanner.style.display = "none";
-      }
+      // Permanently strip any inline CSIR Quiz box from the main canvas
+      canvas.querySelectorAll(".w-full.mb-4").forEach(el => {
+        if (el.textContent.includes("CSIR Quiz") || el.textContent.includes("Test your Part-C")) {
+          el.remove();
+        }
+      });
 
-      // Hide the "CSIR High-Yield" tab button inside the general topic cards (since it now lives in the CSIR Hub Card)
+      // Remove the CSIR High-Yield tab from general topic cards so cards show 3 universal science tabs
       canvas.querySelectorAll('.inline-tab-btn[data-inline-tab="csir_high_yield"]').forEach(btn => {
         const tabGrid = btn.parentElement;
         btn.remove();
@@ -1542,10 +1538,12 @@ function getFallbackModuleData(regItem) {
         }
       });
 
-      // Clean L1-L4 labels into physical metric units
+      // Strip L1-L4 text from badges and headers inside the topic cards
       canvas.querySelectorAll("span").forEach(sp => {
-        if (/^L[1-4]\b/.test(sp.textContent.trim())) {
-          sp.textContent = sp.textContent.replace(/L[1-4]\s*•?\s*/g, `${currentMetric} • `).replace(/•\s*•/g, "•");
+        if (/L[1-4]\b/.test(sp.textContent)) {
+          sp.textContent = sp.textContent
+            .replace(/L[1-4]\s*•\s*/g, "")
+            .replace(/L[1-4]\s+Hotspot/gi, `${currentMetric} • Hotspot`);
         }
       });
 
@@ -1560,7 +1558,6 @@ function getFallbackModuleData(regItem) {
     }
   }
 
-  // 3. DYNAMIC BIOLOGICAL REGION SVG VIEWPORT
   function renderBiologicalRegionSvgViewport() {
     const canvas = document.getElementById("hotspotCanvas");
     const mod = state.moduleData;
@@ -1575,15 +1572,7 @@ function getFallbackModuleData(regItem) {
     const nodeIds = activeLvl.node_ids || activeLvl.hotspots || [];
     const activeAgent = (mod.inhibitor_simulator?.agents || []).find(a => a.id === state.activeSimAgentId);
 
-    const regionBackdropSvg = buildScaleBiologicalArtwork(activeIdx);
-
-    const pinPositions = [
-      { x: 145, y: 78 },
-      { x: 310, y: 118 },
-      { x: 465, y: 82 },
-      { x: 230, y: 142 },
-      { x: 390, y: 68 }
-    ];
+    const pinPositions = [{ x: 145, y: 78 }, { x: 310, y: 118 }, { x: 465, y: 82 }, { x: 230, y: 142 }, { x: 390, y: 68 }];
 
     const svgPinsHtml = nodeIds.map((nid, idx) => {
       const node = mod.nodes?.[nid];
@@ -1626,20 +1615,20 @@ function getFallbackModuleData(regItem) {
       `;
     }).join("");
 
-    let existingBanner = document.getElementById("bioRegionSvgContainer");
-    if (!existingBanner) {
-      existingBanner = document.createElement("div");
-      existingBanner.id = "bioRegionSvgContainer";
-      existingBanner.className = "w-full mb-2";
+    let banner = document.getElementById("bioRegionSvgContainer");
+    if (!banner) {
+      banner = document.createElement("div");
+      banner.id = "bioRegionSvgContainer";
+      banner.className = "w-full mb-3";
       const firstChild = canvas.firstElementChild;
       if (firstChild) {
-        firstChild.insertBefore(existingBanner, firstChild.firstChild);
+        firstChild.insertBefore(banner, firstChild.firstChild);
       } else {
-        canvas.prepend(existingBanner);
+        canvas.prepend(banner);
       }
     }
 
-    existingBanner.innerHTML = `
+    banner.innerHTML = `
       <div class="bio-region-stage rounded-2xl p-3 overflow-hidden">
         <div class="flex items-center justify-between mb-1.5 px-1">
           <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-300 font-bold">
@@ -1647,14 +1636,12 @@ function getFallbackModuleData(regItem) {
           </span>
           <span class="text-[10px] font-mono text-slate-400">Tap any region pin to inspect</span>
         </div>
-
         <div class="w-full overflow-x-auto rounded-xl bg-slate-950/75 border border-white/10">
           <svg viewBox="0 0 600 185" class="w-full h-auto min-w-[440px]">
-            ${regionBackdropSvg}
+            ${buildScaleBiologicalArtwork(activeIdx)}
             ${svgPinsHtml}
           </svg>
         </div>
-
         <div class="flex items-center gap-2 overflow-x-auto pt-2.5 pb-0.5 no-scrollbar">
           ${quickPillsHtml}
         </div>
@@ -1663,17 +1650,15 @@ function getFallbackModuleData(regItem) {
 
     const selectNodeFromRegion = (nid) => {
       state.activeNodeId = nid;
-      renderArgonWorkspace();
-      setTimeout(() => {
-        const card = canvas.querySelector(`[data-card-node="${nid}"]`);
-        card?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, 60);
+      window.renderCircularZoomAndExpandableCards();
+      window.renderNodeInspectorAndDrawer();
+      setTimeout(() => canvas.querySelector(`[data-card-node="${nid}"]`)?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 60);
     };
 
-    existingBanner.querySelectorAll("[data-bio-pin]").forEach(el => {
+    banner.querySelectorAll("[data-bio-pin]").forEach(el => {
       el.addEventListener("click", () => selectNodeFromRegion(el.dataset.bioPin));
     });
-    existingBanner.querySelectorAll("[data-bio-pill]").forEach(el => {
+    banner.querySelectorAll("[data-bio-pill]").forEach(el => {
       el.addEventListener("click", () => selectNodeFromRegion(el.dataset.bioPill));
     });
   }
@@ -1681,36 +1666,19 @@ function getFallbackModuleData(regItem) {
   function buildScaleBiologicalArtwork(scaleIdx) {
     if (scaleIdx === 0) {
       return `
-        <defs>
-          <linearGradient id="orgOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(16, 185, 129, 0.22)" />
-            <stop offset="100%" stop-color="rgba(2, 132, 199, 0.18)" />
-          </linearGradient>
-        </defs>
+        <defs><linearGradient id="orgOuter" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="rgba(16, 185, 129, 0.22)" /><stop offset="100%" stop-color="rgba(2, 132, 199, 0.18)" /></linearGradient></defs>
         <text x="16" y="20" fill="#64748b" font-size="9" font-family="monospace">CYTOSOL / EXTRACELLULAR COMPARTMENT</text>
         <ellipse cx="300" cy="100" rx="255" ry="68" fill="url(#orgOuter)" stroke="#10b981" stroke-width="2.5" />
-        <path d="M 75,100 Q 115,45 145,100 T 215,100 T 285,100 T 355,100 T 425,100 T 495,100"
-              fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7" />
-        <path d="M 90,115 Q 135,155 180,110 T 270,115 T 360,110 T 450,115 T 515,100"
-              fill="none" stroke="#34d399" stroke-width="1.8" stroke-dasharray="5 3" stroke-opacity="0.65" />
-        <text x="300" y="162" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">
-          LUMEN / MATRIX / INTERIOR COMPARTMENT
-        </text>
+        <path d="M 75,100 Q 115,45 145,100 T 215,100 T 285,100 T 355,100 T 425,100 T 495,100" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7" />
+        <path d="M 90,115 Q 135,155 180,110 T 270,115 T 360,110 T 450,115 T 515,100" fill="none" stroke="#34d399" stroke-width="1.8" stroke-dasharray="5 3" stroke-opacity="0.65" />
+        <text x="300" y="162" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="monospace">LUMEN / MATRIX / INTERIOR COMPARTMENT</text>
       `;
     }
     if (scaleIdx === 1) {
       let headsTop = "", headsBot = "";
       for (let x = 25; x <= 575; x += 18) {
-        headsTop += `
-          <circle cx="${x}" cy="66" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" />
-          <line x1="${x - 2}" y1="72" x2="${x - 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
-          <line x1="${x + 2}" y1="72" x2="${x + 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
-        `;
-        headsBot += `
-          <circle cx="${x}" cy="122" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" />
-          <line x1="${x - 2}" y1="116" x2="${x - 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
-          <line x1="${x + 2}" y1="116" x2="${x + 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />
-        `;
+        headsTop += `<circle cx="${x}" cy="66" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" /><line x1="${x - 2}" y1="72" x2="${x - 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" /><line x1="${x + 2}" y1="72" x2="${x + 3}" y2="92" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />`;
+        headsBot += `<circle cx="${x}" cy="122" r="5.5" fill="#38bdf8" fill-opacity="0.55" stroke="#7dd3fc" stroke-width="1" /><line x1="${x - 2}" y1="116" x2="${x - 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" /><line x1="${x + 2}" y1="116" x2="${x + 3}" y2="96" stroke="#fbbf24" stroke-width="1.2" stroke-opacity="0.55" />`;
       }
       return `
         <text x="16" y="20" fill="#7dd3fc" font-size="9" font-family="monospace">P-SIDE (IMS / EXTRACELLULAR / HIGH [H+])</text>
@@ -1743,19 +1711,14 @@ function getFallbackModuleData(regItem) {
     `;
   }
 
-  // 4. CONSOLIDATED "CSIR NET PART-C EXAM HUB" IN THE SIDE/BOTTOM CARD (#nodeInspectorContent)
   function renderConsolidatedCsirHubCard() {
     const inspector = document.getElementById("nodeInspectorContent");
     const mod = state.moduleData;
     if (!inspector || !mod) return;
 
-    // Update the card's header title so users clearly see all CSIR features live here
     const headerH3 = inspector.previousElementSibling;
     if (headerH3 && headerH3.tagName === "H3") {
-      headerH3.innerHTML = `
-        <i class="fa-solid fa-graduation-cap text-amber-400"></i>
-        <span>CSIR NET Part-C Exam Hub & Quiz</span>
-      `;
+      headerH3.innerHTML = `<i class="fa-solid fa-graduation-cap text-amber-400"></i><span>CSIR NET Part-C Exam Hub & Quiz</span>`;
     }
 
     const fallbackId = Object.keys(mod.nodes || {})[0];
@@ -1765,29 +1728,19 @@ function getFallbackModuleData(regItem) {
 
     const hubTabsHtml = `
       <div class="grid grid-cols-3 gap-1 p-1 rounded-xl bg-slate-950 border border-white/15 mb-3">
-        <button type="button" data-csir-hub-tab="traps" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
-          activeCsirHubTab === "traps" ? "bg-emerald-600 text-white shadow" : "text-slate-400 hover:text-white"
-        }">
-          <i class="fa-solid fa-bullseye text-[10px]"></i>
-          <span>Part-C Traps</span>
+        <button type="button" data-csir-hub-tab="traps" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${activeCsirHubTab === "traps" ? "bg-emerald-600 text-white shadow" : "text-slate-400 hover:text-white"}">
+          <i class="fa-solid fa-bullseye text-[10px]"></i><span>Part-C Traps</span>
         </button>
-        <button type="button" data-csir-hub-tab="quiz" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
-          activeCsirHubTab === "quiz" ? "bg-amber-600 text-slate-950 font-bold shadow" : "text-amber-300/80 hover:text-amber-200"
-        }">
-          <i class="fa-solid fa-bolt text-[10px]"></i>
-          <span>Quiz (${quizzes.length ? `${state.currentQuizIdx + 1}/${quizzes.length}` : "0"})</span>
+        <button type="button" data-csir-hub-tab="quiz" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${activeCsirHubTab === "quiz" ? "bg-amber-600 text-slate-950 font-bold shadow" : "text-amber-300/80 hover:text-amber-200"}">
+          <i class="fa-solid fa-bolt text-[10px]"></i><span>Quiz (${quizzes.length ? `${state.currentQuizIdx + 1}/${quizzes.length}` : "0"})</span>
         </button>
-        <button type="button" data-csir-hub-tab="drawer" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${
-          activeCsirHubTab === "drawer" ? "bg-sky-600 text-white shadow" : "text-slate-400 hover:text-white"
-        }">
-          <i class="fa-solid fa-book-open text-[10px]"></i>
-          <span>Ref & 3D</span>
+        <button type="button" data-csir-hub-tab="drawer" class="py-1.5 px-2 rounded-lg text-[11px] font-semibold transition flex items-center justify-center space-x-1 ${activeCsirHubTab === "drawer" ? "bg-sky-600 text-white shadow" : "text-slate-400 hover:text-white"}">
+          <i class="fa-solid fa-book-open text-[10px]"></i><span>Ref & 3D</span>
         </button>
       </div>
     `;
 
     let bodyHtml = "";
-
     if (activeCsirHubTab === "traps" && node) {
       const highYieldNotes = node.tabs?.csir_high_yield || ["Select any topic card above to view its CSIR NET Part-C analytical traps."];
       bodyHtml = `
@@ -1796,11 +1749,7 @@ function getFallbackModuleData(regItem) {
           <h4 class="text-xs sm:text-sm font-bold text-white mt-0.5">${formatRichText(node.title)}</h4>
         </div>
         <div class="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">
-          ${highYieldNotes.map(p => `
-            <div class="p-3 rounded-xl bg-slate-950/90 border border-emerald-500/30 text-xs text-slate-200 leading-relaxed">
-              ${formatRichText(p)}
-            </div>
-          `).join("")}
+          ${highYieldNotes.map(p => `<div class="p-3 rounded-xl bg-slate-950/90 border border-emerald-500/30 text-xs text-slate-200 leading-relaxed">${formatRichText(p)}</div>`).join("")}
         </div>
       `;
     } else if (activeCsirHubTab === "quiz") {
@@ -1810,76 +1759,40 @@ function getFallbackModuleData(regItem) {
         bodyHtml = `
           <div class="p-3.5 rounded-2xl bg-slate-950/95 border border-amber-500/40 space-y-3">
             <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">
-                Question ${state.currentQuizIdx + 1} of ${quizzes.length}
-              </span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-700/60">Question ${state.currentQuizIdx + 1} of ${quizzes.length}</span>
               <div class="flex items-center space-x-1.5">
-                <button type="button" id="hubPrevQuizBtn" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-white/15 text-xs text-slate-200">
-                  <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button type="button" id="hubNextQuizBtn" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-white/15 text-xs text-slate-200">
-                  <i class="fa-solid fa-chevron-right"></i>
-                </button>
+                <button type="button" id="hubPrevQuizBtn" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-white/15 text-xs text-slate-200"><i class="fa-solid fa-chevron-left"></i></button>
+                <button type="button" id="hubNextQuizBtn" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-white/15 text-xs text-slate-200"><i class="fa-solid fa-chevron-right"></i></button>
               </div>
             </div>
-
-            <div class="text-xs text-amber-100 leading-relaxed font-medium">
-              ${formatRichText(currentQuiz.prompt)}
-            </div>
-
+            <div class="text-xs text-amber-100 leading-relaxed font-medium">${formatRichText(currentQuiz.prompt)}</div>
             ${Array.isArray(currentQuiz.answer_options) && currentQuiz.answer_options.length ? `
               <div class="space-y-2 pt-1">
-                ${currentQuiz.answer_options.map((opt, i) => `
-                  <button type="button" data-hub-opt="${i}" class="hub-quiz-opt w-full p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-400 text-left text-xs text-slate-200 transition">
-                    ${formatRichText(opt)}
-                  </button>
-                `).join("")}
+                ${currentQuiz.answer_options.map((opt, i) => `<button type="button" data-hub-opt="${i}" class="hub-quiz-opt w-full p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-400 text-left text-xs text-slate-200 transition">${formatRichText(opt)}</button>`).join("")}
               </div>
             ` : `
               <div class="space-y-1.5 pt-1">
                 <div class="text-[10px] font-mono uppercase text-slate-400">Select the matching complex/node:</div>
-                ${Object.values(mod.nodes || {}).slice(0, 6).map(n => `
-                  <button type="button" data-hub-node-ans="${n.id}" class="hub-quiz-node-btn w-full p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-400 text-left text-xs text-slate-200 transition">
-                    ${formatRichText(n.title.split(":")[0])}
-                  </button>
-                `).join("")}
+                ${Object.values(mod.nodes || {}).slice(0, 6).map(n => `<button type="button" data-hub-node-ans="${n.id}" class="hub-quiz-node-btn w-full p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-400 text-left text-xs text-slate-200 transition">${formatRichText(n.title.split(":")[0])}</button>`).join("")}
               </div>
             `}
-
             <div id="hubQuizFeedbackBox" class="hidden p-2.5 rounded-xl text-xs leading-relaxed"></div>
           </div>
         `;
       }
     } else if (activeCsirHubTab === "drawer" && node) {
-      const resourcesHtml = (node.external_resources || []).map(r => `
-        <a href="${r.url}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 border border-white/15 hover:border-emerald-400 transition">
-          <span class="text-xs text-emerald-300 truncate pr-2">${r.title}</span>
-          <span class="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300 shrink-0">${r.type || "3D / Ref"}</span>
-        </a>
-      `).join("");
-
+      const resourcesHtml = (node.external_resources || []).map(r => `<a href="${r.url}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 border border-white/15 hover:border-emerald-400 transition"><span class="text-xs text-emerald-300 truncate pr-2">${r.title}</span><span class="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300 shrink-0">${r.type || "3D / Ref"}</span></a>`).join("");
       bodyHtml = `
         <div class="space-y-3">
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Prefer reading all 4 tabs (Mechanism, CSIR High-Yield, Pathology & Lab Workbench) in a single full-height side sheet?
-          </p>
-          <button type="button" id="hubOpenDrawerBtn" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600/25 hover:bg-emerald-600/35 text-emerald-300 border border-emerald-400/50 text-xs font-bold transition flex items-center justify-center space-x-2 shadow">
-            <i class="fa-solid fa-sliders"></i>
-            <span>Open Full-Screen Reference Drawer</span>
-          </button>
-          ${resourcesHtml ? `
-            <div class="pt-2 border-t border-white/10 space-y-2">
-              <div class="text-[10px] font-mono uppercase text-slate-400">External 3D Structures & Databases</div>
-              ${resourcesHtml}
-            </div>
-          ` : ""}
+          <p class="text-xs text-slate-300 leading-relaxed">Prefer reading all 4 tabs in a single full-height side sheet?</p>
+          <button type="button" id="hubOpenDrawerBtn" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600/25 hover:bg-emerald-600/35 text-emerald-300 border border-emerald-400/50 text-xs font-bold transition flex items-center justify-center space-x-2 shadow"><i class="fa-solid fa-sliders"></i><span>Open Full-Screen Reference Drawer</span></button>
+          ${resourcesHtml ? `<div class="pt-2 border-t border-white/10 space-y-2"><div class="text-[10px] font-mono uppercase text-slate-400">External 3D Structures</div>${resourcesHtml}</div>` : ""}
         </div>
       `;
     }
 
     inspector.innerHTML = `${hubTabsHtml}${bodyHtml}`;
 
-    // Bind Hub Tab Switcher
     inspector.querySelectorAll("[data-csir-hub-tab]").forEach(btn => {
       btn.addEventListener("click", () => {
         activeCsirHubTab = btn.dataset.csirHubTab;
@@ -1888,7 +1801,6 @@ function getFallbackModuleData(regItem) {
       });
     });
 
-    // Bind Quiz Controls inside Hub
     document.getElementById("hubPrevQuizBtn")?.addEventListener("click", () => {
       state.currentQuizIdx = (state.currentQuizIdx - 1 + quizzes.length) % quizzes.length;
       renderConsolidatedCsirHubCard();
@@ -1904,9 +1816,7 @@ function getFallbackModuleData(regItem) {
       const fb = document.getElementById("hubQuizFeedbackBox");
       if (!fb) return;
       fb.classList.remove("hidden");
-      fb.className = `p-3 rounded-xl text-xs border ${
-        ok ? "bg-emerald-950/90 border-emerald-400 text-emerald-100" : "bg-rose-950/90 border-rose-400 text-rose-100"
-      }`;
+      fb.className = `p-3 rounded-xl text-xs border ${ok ? "bg-emerald-950/90 border-emerald-400 text-emerald-100" : "bg-rose-950/90 border-rose-400 text-rose-100"}`;
       fb.innerHTML = `<strong>${ok ? "✓ Correct!" : "✗ Not quite:"}</strong> ${formatRichText(text)}`;
       typesetMath();
     };
@@ -1918,22 +1828,16 @@ function getFallbackModuleData(regItem) {
         showHubQuizResult(ok, ok ? currentQuiz.explanation : `Correct Answer: ${currentQuiz.correct_answer}. ${currentQuiz.explanation || ""}`);
       });
     });
-
     inspector.querySelectorAll(".hub-quiz-node-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const clickedId = btn.dataset.hubNodeAns;
         const ok = clickedId === currentQuiz.correct_node_id;
-        const msg = ok
-          ? (currentQuiz.feedback?.correct || currentQuiz.explanation || "Spot on!")
-          : (currentQuiz.feedback?.incorrect || currentQuiz.explanation || "Try another complex/node.");
-        showHubQuizResult(ok, msg);
+        showHubQuizResult(ok, ok ? (currentQuiz.feedback?.correct || currentQuiz.explanation || "Spot on!") : (currentQuiz.feedback?.incorrect || currentQuiz.explanation || "Try another complex."));
       });
     });
-
     document.getElementById("hubOpenDrawerBtn")?.addEventListener("click", () => toggleStudyDrawer(true));
   }
 
-  // 5. SELF-CONTAINED EXPANDABLE PATHWAY SIMULATOR
   function renderInteractiveSvgSimulator() {
     const simPanel = document.getElementById("simulatorPanel");
     if (!simPanel || !state.moduleData) return;
@@ -1951,7 +1855,6 @@ function getFallbackModuleData(regItem) {
       selectedSimNodeId = activeAgent?.target_node || allNodes[0].id;
     }
     const inspectedNode = mod.nodes?.[selectedSimNodeId] || allNodes[0];
-
     const targetNodeId = activeAgent?.target_node;
     const blockedIdx = allNodes.findIndex(n => n.id === targetNodeId);
 
@@ -1968,11 +1871,8 @@ function getFallbackModuleData(regItem) {
         const nextCx = 75 + (i + 1) * 145;
         const edgeBlocked = isTarget || isDownstreamBlocked;
         edgeSvg = `
-          <line x1="${cx + 38}" y1="${cy}" x2="${nextCx - 38}" y2="${cy}"
-                stroke="${edgeBlocked ? '#f43f5e' : '#34d399'}" stroke-width="3"
-                class="${edgeBlocked ? 'svg-flux-blocked' : 'svg-flux-active'}" />
-          <polygon points="${nextCx - 38},${cy} ${nextCx - 46},${cy - 5} ${nextCx - 46},${cy + 5}"
-                   fill="${edgeBlocked ? '#f43f5e' : '#34d399'}" />
+          <line x1="${cx + 38}" y1="${cy}" x2="${nextCx - 38}" y2="${cy}" stroke="${edgeBlocked ? '#f43f5e' : '#34d399'}" stroke-width="3" class="${edgeBlocked ? 'svg-flux-blocked' : 'svg-flux-active'}" />
+          <polygon points="${nextCx - 38},${cy} ${nextCx - 46},${cy - 5} ${nextCx - 46},${cy + 5}" fill="${edgeBlocked ? '#f43f5e' : '#34d399'}" />
         `;
       }
 
@@ -1980,24 +1880,10 @@ function getFallbackModuleData(regItem) {
         ${edgeSvg}
         <g class="svg-pathway-node cursor-pointer" data-svg-node="${n.id}">
           ${isSelectedNode ? `<circle cx="${cx}" cy="${cy}" r="41" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 3" />` : ""}
-          <circle cx="${cx}" cy="${cy}" r="34"
-                  fill="${isTarget ? 'rgba(159, 18, 57, 0.9)' : isSelectedNode ? 'rgba(3, 105, 161, 0.85)' : isDownstreamBlocked ? 'rgba(30, 41, 59, 0.75)' : 'rgba(6, 78, 59, 0.88)'}"
-                  stroke="${isTarget ? '#fb7185' : isSelectedNode ? '#38bdf8' : isDownstreamBlocked ? '#64748b' : '#34d399'}"
-                  stroke-width="${isSelectedNode || isTarget ? '3' : '2'}" />
-          <text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace" font-weight="bold">
-            STEP ${i + 1}
-          </text>
-          <text x="${cx}" y="${cy + 11}" text-anchor="middle" fill="${isTarget ? '#fecdd3' : '#e2e8f0'}" font-size="9" font-family="sans-serif">
-            ${shortName}
-          </text>
-          ${isTarget ? `
-            <line x1="${cx}" y1="${cy - 54}" x2="${cx}" y2="${cy - 37}" stroke="#f43f5e" stroke-width="3.5" />
-            <line x1="${cx - 14}" y1="${cy - 37}" x2="${cx + 14}" y2="${cy - 37}" stroke="#f43f5e" stroke-width="4" />
-            <rect x="${cx - 48}" y="${cy - 74}" width="96" height="18" rx="6" fill="#881337" stroke="#fb7185" stroke-width="1" />
-            <text x="${cx}" y="${cy - 62}" text-anchor="middle" fill="#ffe4e6" font-size="9" font-family="monospace" font-weight="bold">
-              ⊣ ${activeAgent.name.slice(0, 12)}
-            </text>
-          ` : ""}
+          <circle cx="${cx}" cy="${cy}" r="34" fill="${isTarget ? 'rgba(159, 18, 57, 0.9)' : isSelectedNode ? 'rgba(3, 105, 161, 0.85)' : isDownstreamBlocked ? 'rgba(30, 41, 59, 0.75)' : 'rgba(6, 78, 59, 0.88)'}" stroke="${isTarget ? '#fb7185' : isSelectedNode ? '#38bdf8' : isDownstreamBlocked ? '#64748b' : '#34d399'}" stroke-width="${isSelectedNode || isTarget ? '3' : '2'}" />
+          <text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="#ffffff" font-size="10" font-family="monospace" font-weight="bold">STEP ${i + 1}</text>
+          <text x="${cx}" y="${cy + 11}" text-anchor="middle" fill="${isTarget ? '#fecdd3' : '#e2e8f0'}" font-size="9" font-family="sans-serif">${shortName}</text>
+          ${isTarget ? `<line x1="${cx}" y1="${cy - 54}" x2="${cx}" y2="${cy - 37}" stroke="#f43f5e" stroke-width="3.5" /><line x1="${cx - 14}" y1="${cy - 37}" x2="${cx + 14}" y2="${cy - 37}" stroke="#f43f5e" stroke-width="4" /><rect x="${cx - 48}" y="${cy - 74}" width="96" height="18" rx="6" fill="#881337" stroke="#fb7185" stroke-width="1" /><text x="${cx}" y="${cy - 62}" text-anchor="middle" fill="#ffe4e6" font-size="9" font-family="monospace" font-weight="bold">⊣ ${activeAgent.name.slice(0, 12)}</text>` : ""}
         </g>
       `;
     }).join("");
@@ -2006,139 +1892,72 @@ function getFallbackModuleData(regItem) {
     if (inspectedNode) {
       const metricEntries = Object.entries(inspectedNode.metrics || {}).slice(0, 2);
       const conciseSummary = (inspectedNode.tabs?.mechanism?.[0] || inspectedNode.subtitle || "").slice(0, 210) + "...";
-
       floatingQuickTabHtml = `
         <div id="simFloatingQuickCard" class="mb-3.5 p-3.5 rounded-2xl bg-slate-950/95 border border-sky-400/50 shadow-2xl relative backdrop-blur-xl">
           <div class="flex items-start justify-between gap-2">
             <div>
               <div class="flex flex-wrap items-center gap-1.5 mb-1">
-                <span class="px-2 py-0.5 rounded text-[9px] font-mono uppercase bg-sky-950 text-sky-300 border border-sky-700/60">
-                  <i class="fa-solid fa-circle-info mr-1"></i>Selected Complex / Node
-                </span>
-                ${activeAgent ? `
-                  <span class="px-2 py-0.5 rounded text-[9px] font-mono uppercase bg-rose-950 text-rose-300 border border-rose-700/60">
-                    Perturbed by ${activeAgent.name.split("(")[0].trim()}
-                  </span>
-                ` : ""}
+                <span class="px-2 py-0.5 rounded text-[9px] font-mono uppercase bg-sky-950 text-sky-300 border border-sky-700/60"><i class="fa-solid fa-circle-info mr-1"></i>Selected Complex / Node</span>
+                ${activeAgent ? `<span class="px-2 py-0.5 rounded text-[9px] font-mono uppercase bg-rose-950 text-rose-300 border border-rose-700/60">Perturbed by ${activeAgent.name.split("(")[0].trim()}</span>` : ""}
               </div>
               <h4 class="text-xs sm:text-sm font-bold text-white leading-snug">${formatRichText(inspectedNode.title)}</h4>
               <p class="text-[11px] text-slate-400 mt-0.5">${formatRichText(inspectedNode.subtitle || "")}</p>
             </div>
-            <button type="button" id="closeSimQuickCardBtn" class="p-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
+            <button type="button" id="closeSimQuickCardBtn" class="p-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
           </div>
-          <p class="text-[11px] text-slate-200 leading-relaxed mt-2 pt-2 border-t border-white/10">
-            ${formatRichText(conciseSummary)}
-          </p>
-          ${metricEntries.length ? `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">
-              ${metricEntries.map(([k, v]) => `
-                <div class="px-2.5 py-1.5 rounded-xl bg-slate-900/90 border border-white/10">
-                  <span class="text-[9px] font-mono uppercase text-emerald-400 block">${k.replace(/_/g, " ")}</span>
-                  <span class="text-[11px] text-slate-200 font-medium">${formatRichText(String(v))}</span>
-                </div>
-              `).join("")}
-            </div>
-          ` : ""}
-          ${activeAgent ? `
-            <div class="mt-2.5 p-2.5 rounded-xl bg-rose-950/40 border border-rose-500/40 text-[11px] text-rose-100">
-              <strong class="text-rose-300">Inhibitor Action:</strong> ${formatRichText(activeAgent.binding_site || activeAgent.mechanism_of_action || "")}
-            </div>
-          ` : ""}
+          <p class="text-[11px] text-slate-200 leading-relaxed mt-2 pt-2 border-t border-white/10">${formatRichText(conciseSummary)}</p>
+          ${metricEntries.length ? `<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2.5">${metricEntries.map(([k, v]) => `<div class="px-2.5 py-1.5 rounded-xl bg-slate-900/90 border border-white/10"><span class="text-[9px] font-mono uppercase text-emerald-400 block">${k.replace(/_/g, " ")}</span><span class="text-[11px] text-slate-200 font-medium">${formatRichText(String(v))}</span></div>`).join("")}</div>` : ""}
         </div>
       `;
     }
 
     const agentsButtonsHtml = agents.map(ag => {
       const isSelected = ag.id === state.activeSimAgentId;
-      return `
-        <button type="button" data-sim-agent="${ag.id}" class="sim-agent-pill px-3 py-1.5 rounded-xl text-[11px] font-semibold border transition flex items-center space-x-1.5 text-left ${
-          isSelected ? "bg-rose-950/90 border-rose-400 text-rose-100 shadow-lg" : "bg-slate-950/85 border-white/15 text-slate-200 hover:border-emerald-400"
-        }">
-          <i class="fa-solid ${isSelected ? 'fa-ban text-rose-400' : 'fa-vial text-emerald-400'} text-[10px] shrink-0"></i>
-          <span>${ag.name}</span>
-        </button>
-      `;
+      return `<button type="button" data-sim-agent="${ag.id}" class="sim-agent-pill px-3 py-1.5 rounded-xl text-[11px] font-semibold border transition flex items-center space-x-1.5 text-left ${isSelected ? "bg-rose-950/90 border-rose-400 text-rose-100 shadow-lg" : "bg-slate-950/85 border-white/15 text-slate-200 hover:border-emerald-400"}"><i class="fa-solid ${isSelected ? 'fa-ban text-rose-400' : 'fa-vial text-emerald-400'} text-[10px] shrink-0"></i><span>${ag.name}</span></button>`;
     }).join("");
 
     const metricsHtml = Object.keys(baseline).map(k => {
       const baseVal = baseline[k];
       const newVal = activeAgent && predicted[k] !== undefined ? predicted[k] : baseVal;
       const changed = activeAgent && String(newVal) !== String(baseVal);
-      return `
-        <div class="p-2.5 rounded-xl bg-slate-950/90 border ${changed ? 'border-rose-500/80 bg-rose-950/30' : 'border-white/15'}">
-          <div class="text-[10px] font-mono uppercase ${changed ? 'text-rose-300 font-bold' : 'text-slate-400'}">${k.replace(/_/g, " ")}</div>
-          <div class="text-xs font-semibold ${changed ? 'text-rose-100' : 'text-emerald-300'} mt-0.5">${formatRichText(String(newVal))}</div>
-        </div>
-      `;
+      return `<div class="p-2.5 rounded-xl bg-slate-950/90 border ${changed ? 'border-rose-500/80 bg-rose-950/30' : 'border-white/15'}"><div class="text-[10px] font-mono uppercase ${changed ? 'text-rose-300 font-bold' : 'text-slate-400'}">${k.replace(/_/g, " ")}</div><div class="text-xs font-semibold ${changed ? 'text-rose-100' : 'text-emerald-300'} mt-0.5">${formatRichText(String(newVal))}</div></div>`;
     }).join("");
 
     simPanel.innerHTML = `
       <div id="simAccumulatorToggleBar" class="cursor-pointer select-none flex items-center justify-between gap-3 p-1">
         <div class="flex items-center space-x-2.5">
-          <span class="px-3 py-1.5 rounded-xl bg-emerald-600/25 border border-emerald-400/50 text-emerald-300 text-xs font-mono font-bold flex items-center space-x-2 shadow">
-            <i class="fa-solid fa-wave-square"></i>
-            <span>Pathway Simulator</span>
-          </span>
-          <span class="text-[11px] font-mono ${activeAgent ? 'text-rose-300' : 'text-slate-300'} hidden sm:inline">
-            ${activeAgent ? `● Perturbed: ${activeAgent.name.split("(")[0]}` : "● Interactive Flux & Kinetics"}
-          </span>
+          <span class="px-3 py-1.5 rounded-xl bg-emerald-600/25 border border-emerald-400/50 text-emerald-300 text-xs font-mono font-bold flex items-center space-x-2 shadow"><i class="fa-solid fa-wave-square"></i><span>Pathway Simulator</span></span>
+          <span class="text-[11px] font-mono ${activeAgent ? 'text-rose-300' : 'text-slate-300'} hidden sm:inline">${activeAgent ? `● Perturbed: ${activeAgent.name.split("(")[0]}` : "● Interactive Flux & Kinetics"}</span>
         </div>
-        <button type="button" class="px-3 py-1 rounded-xl bg-slate-900/90 border border-white/20 text-xs font-mono text-emerald-300 flex items-center space-x-1.5">
-          <span>${simExpanded ? "Collapse" : "Expand Simulator"}</span>
-          <i class="fa-solid ${simExpanded ? "fa-chevron-up" : "fa-chevron-down"} text-[10px]"></i>
-        </button>
+        <button type="button" class="px-3 py-1 rounded-xl bg-slate-900/90 border border-white/20 text-xs font-mono text-emerald-300 flex items-center space-x-1.5"><span>${simExpanded ? "Collapse" : "Expand Simulator"}</span><i class="fa-solid ${simExpanded ? "fa-chevron-up" : "fa-chevron-down"} text-[10px]"></i></button>
       </div>
-
       ${simExpanded ? `
         <div class="mt-4 pt-3.5 border-t border-white/15">
           ${floatingQuickTabHtml}
           <div class="w-full rounded-2xl bg-slate-950/95 border border-white/20 p-2.5 mb-3.5 overflow-x-auto shadow-inner">
             <div class="flex items-center justify-between px-1 mb-1">
-              <span class="text-[10px] font-mono uppercase text-emerald-400">
-                <i class="fa-solid fa-hand-pointer mr-1"></i>Tap any circular Step/Complex below to inspect its role above
-              </span>
-              ${activeAgent ? `
-                <button type="button" id="resetSimAgentBtn" class="px-2 py-0.5 rounded bg-rose-950 hover:bg-rose-900 border border-rose-500/50 text-[10px] font-mono text-rose-200">
-                  <i class="fa-solid fa-rotate-left mr-1"></i>Reset Wild-Type
-                </button>
-              ` : ""}
+              <span class="text-[10px] font-mono uppercase text-emerald-400"><i class="fa-solid fa-hand-pointer mr-1"></i>Tap any circular Step/Complex below to inspect its role above</span>
+              ${activeAgent ? `<button type="button" id="resetSimAgentBtn" class="px-2 py-0.5 rounded bg-rose-950 hover:bg-rose-900 border border-rose-500/50 text-[10px] font-mono text-rose-200"><i class="fa-solid fa-rotate-left mr-1"></i>Reset Wild-Type</button>` : ""}
             </div>
             <svg viewBox="0 0 590 155" class="w-full h-auto min-w-[460px]">
-              <defs>
-                <radialGradient id="simStageGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(16, 185, 129, 0.20)" />
-                  <stop offset="100%" stop-color="rgba(2, 6, 23, 0)" />
-                </radialGradient>
-              </defs>
+              <defs><radialGradient id="simStageGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(16, 185, 129, 0.20)" /><stop offset="100%" stop-color="rgba(2, 6, 23, 0)" /></radialGradient></defs>
               <rect width="590" height="155" fill="url(#simStageGlow)" rx="12" />
               ${svgNodesHtml}
             </svg>
           </div>
           <div class="mb-4">
-            <div class="text-[10px] font-mono uppercase text-slate-300 mb-2">
-              <i class="fa-solid fa-vial-circle-check mr-1 text-emerald-400"></i>Apply Experimental Inhibitor / Perturbation Factor:
-            </div>
+            <div class="text-[10px] font-mono uppercase text-slate-300 mb-2"><i class="fa-solid fa-vial-circle-check mr-1 text-emerald-400"></i>Apply Experimental Inhibitor / Perturbation Factor:</div>
             <div class="flex flex-wrap gap-2">${agentsButtonsHtml}</div>
           </div>
           ${metricsHtml ? `<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">${metricsHtml}</div>` : ""}
           <div class="pt-3 border-t border-white/15 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
             <div class="md:col-span-5 space-y-3">
               <div class="text-[11px] font-mono uppercase text-emerald-300 font-bold">Live SVG Enzyme Kinetics Curve</div>
-              <div>
-                <label class="block text-[11px] text-slate-300 mb-1">Substrate $[S]$: <span id="subVal" class="text-emerald-400 font-mono font-bold">60</span> µM</label>
-                <input type="range" id="simSubstrate" min="5" max="200" value="60" class="aero-range-slider">
-              </div>
-              <div>
-                <label class="block text-[11px] text-slate-300 mb-1">Inhibitor $[I]$: <span id="inhVal" class="text-amber-400 font-mono font-bold">0</span> µM</label>
-                <input type="range" id="simInhibitor" min="0" max="100" value="0" class="aero-range-slider">
-              </div>
+              <div><label class="block text-[11px] text-slate-300 mb-1">Substrate $[S]$: <span id="subVal" class="text-emerald-400 font-mono font-bold">60</span> µM</label><input type="range" id="simSubstrate" min="5" max="200" value="60" class="aero-range-slider"></div>
+              <div><label class="block text-[11px] text-slate-300 mb-1">Inhibitor $[I]$: <span id="inhVal" class="text-amber-400 font-mono font-bold">0</span> µM</label><input type="range" id="simInhibitor" min="0" max="100" value="0" class="aero-range-slider"></div>
               <div id="simCalculatedOutput" class="p-2.5 rounded-xl bg-slate-950 border border-white/15 font-mono text-[11px] text-emerald-300"></div>
             </div>
-            <div class="md:col-span-7 rounded-2xl bg-slate-950/95 border border-white/15 p-2">
-              <svg id="kineticsCurveSvg" viewBox="0 0 320 150" class="w-full h-auto"></svg>
-            </div>
+            <div class="md:col-span-7 rounded-2xl bg-slate-950/95 border border-white/15 p-2"><svg id="kineticsCurveSvg" viewBox="0 0 320 150" class="w-full h-auto"></svg></div>
           </div>
         </div>
       ` : ""}
@@ -2224,23 +2043,38 @@ function getFallbackModuleData(regItem) {
     }
   }
 
-  function overrideWorkspaceForUniversalStageAndCsirHub() {
-    const origRender = window.renderArgonWorkspace;
-    if (typeof origRender === "function") {
-      window.renderArgonWorkspace = function () {
+  // CORE HOOKS: Intercept BOTH renderCircularZoomAndExpandableCards AND renderNodeInspectorAndDrawer
+  function installCoreRenderHooks() {
+    const origStageRender = window.renderCircularZoomAndExpandableCards;
+    if (typeof origStageRender === "function") {
+      window.renderCircularZoomAndExpandableCards = function () {
+        origStageRender();
         cleanUpStageHudAndButtons();
-        origRender();
         renderPureMetricSliderAndCleanStage();
         renderBiologicalRegionSvgViewport();
-        renderConsolidatedCsirHubCard();
-        renderInteractiveSvgSimulator();
-        typesetMath();
       };
-      cleanUpStageHudAndButtons();
-      renderPureMetricSliderAndCleanStage();
-      renderBiologicalRegionSvgViewport();
-      renderConsolidatedCsirHubCard();
-      renderInteractiveSvgSimulator();
+    }
+
+    const origInspectorRender = window.renderNodeInspectorAndDrawer;
+    if (typeof origInspectorRender === "function") {
+      window.renderNodeInspectorAndDrawer = function () {
+        origInspectorRender();
+        renderConsolidatedCsirHubCard();
+      };
+    }
+
+    const origSimRender = window.renderPathwaySimulator;
+    if (typeof origSimRender === "function") {
+      window.renderPathwaySimulator = function () {
+        renderInteractiveSvgSimulator();
+      };
+    }
+
+    // Run once immediately for initial state
+    if (state.moduleData) {
+      window.renderCircularZoomAndExpandableCards();
+      window.renderNodeInspectorAndDrawer();
+      window.renderPathwaySimulator();
     }
   }
-})();
+})(); 
