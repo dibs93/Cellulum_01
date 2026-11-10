@@ -196,30 +196,20 @@ mjx-container {
    - Keeps green "High-Yield Study Bundle" layers pill as previously
    ========================================================================== */
 @media (max-width: 640px) {
-  .argon-header {
-    padding: 0.5rem 0.75rem !important;
-    height: auto !important;
-    min-height: 3.5rem !important;
+    /* Clean sizing for Custom Cellulum SVG Logo & Single-Line Subtitle on Mobile */
+  .cellulum-logo-svg {
+    height: 1.75rem !important;
+    width: auto !important;
   }
 
-  /* Keep Brand Orb & Title clean on the left so the subtitle only takes 1-2 lines max */
-  .brand-orb {
-    width: 2.25rem !important;
-    height: 2.25rem !important;
-    border-radius: 0.7rem !important;
-    flex-shrink: 0 !important;
-  }
-
-  #appBrandTitle {
-    font-size: 1.15rem !important;
-    line-height: 1.2 !important;
-    display: block !important;
-  }
-
-  .argon-header p {
-    font-size: 10px !important;
-    line-height: 1.2 !important;
-    max-width: 135px !important;
+  .brand-subtitle {
+    font-size: 8.5px !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.02em !important;
+    white-space: nowrap !important;
+    max-width: 175px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   /* 1. Keep "🔍 Search" pill button as it is (icon + "Search" text) */
