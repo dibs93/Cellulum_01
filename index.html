@@ -15,13 +15,43 @@
   <!-- Top Observatory Header -->
   <header class="argon-header sticky top-0 z-40 bg-slate-900/85 backdrop-blur-md border-b border-slate-800 px-6 h-16 flex items-center justify-between">
     <div class="flex items-center space-x-3">
-      <div class="brand-orb w-10 h-10 rounded-xl flex items-center justify-center shadow-lg bg-emerald-600">
-        <i class="fa-solid fa-dna text-white text-lg"></i>
-      </div>
-      <div>
-        <div class="flex items-center space-x-2">
-          <span id="appBrandTitle" class="brand-title text-xl font-extrabold tracking-tight">Cellulum</span>
-        </div>
+      <!-- Custom Cellulum SVG Brand Lockup + Single-Line Subtitle -->
+<div class="flex flex-col justify-center shrink-0">
+  <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
+    <svg class="cellulum-logo-svg h-7 sm:h-9 w-auto overflow-visible" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Bioluminescent Emerald-Teal to Deep Azure Gradient -->
+        <linearGradient id="cellCGrad" x1="12" y1="8" x2="72" y2="80" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#10b981" />
+          <stop offset="48%" stop-color="#06b6d4" />
+          <stop offset="100%" stop-color="#1d4ed8" />
+        </linearGradient>
+        <linearGradient id="nucleusGrad" x1="30" y1="30" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#2dd4bf" />
+          <stop offset="100%" stop-color="#0284c7" />
+        </linearGradient>
+      </defs>
+
+      <!-- Stylized Cellular 'C' Outer Membrane Arc -->
+      <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
+
+      <!-- Central Glowing Nucleus -->
+      <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
+
+      <!-- 4 Curved Organelle Capsules Inside Cytoplasm -->
+      <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
+
+      <!-- Rounded Geometric 'ellulum' Typography (Crisp White for Dark Aero Glass) -->
+      <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
+    </svg>
+  </a>
+  <p class="brand-subtitle text-[9px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
+    Multi-Scale Life Sciences Observatory
+  </p>
+</div>
         <span id="appBrandTagline" class="block text-[11px] text-slate-400">Multi-Scale Life Sciences Observatory</span>
       </div>
     </div>
