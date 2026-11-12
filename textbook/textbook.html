@@ -14,19 +14,20 @@
 
   <style>
     :root {
-      --bg-deep: #0b111a;
-      --bg-drawer: rgba(13, 21, 33, 0.96);
-      --bg-panel: #131d2b;
-      --bg-card: #1a2636;
-      --border-subtle: rgba(255, 255, 255, 0.12);
-      --accent-teal: #2dd4bf;
-      --accent-cyan: #00f2fe;
-      --accent-emerald: #00ff87;
-      --accent-amber: #ffca28;
-      --accent-maroon-bg: rgba(127, 29, 49, 0.45);
-      --accent-maroon-border: rgba(225, 29, 72, 0.55);
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
+      /* Windows Aero Frosted Glass Light Theme Palette */
+      --bg-deep: #f1f5f9;
+      --bg-drawer: rgba(255, 255, 255, 0.92);
+      --bg-panel: rgba(255, 255, 255, 0.78);
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --border-subtle: rgba(203, 213, 225, 0.7);
+      --accent-teal: #0d9488;
+      --accent-cyan: #0284c7;
+      --accent-emerald: #059669;
+      --accent-amber: #d97706;
+      --accent-maroon-bg: rgba(254, 226, 226, 0.85);
+      --accent-maroon-border: rgba(239, 68, 68, 0.45);
+      --text-main: #0f172a;
+      --text-muted: #475569;
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
     }
@@ -40,6 +41,9 @@
 
     body {
       background-color: var(--bg-deep);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(52, 211, 153, 0.12) 0px, transparent 50%);
       color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.6;
@@ -47,15 +51,17 @@
       overflow-x: hidden;
     }
 
-    /* Sticky Two-Tier Cellulum Header */
+    /* Sticky Frosted Glass Header */
     header.cellulum-header {
       position: sticky;
       top: 0;
       z-index: 120;
-      background: rgba(11, 17, 26, 0.94);
-      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 0.55rem 0.9rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      padding: 0.5rem 0.5rem 0.55rem 0.6rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -66,7 +72,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 0.4rem;
       width: 100%;
     }
 
@@ -79,7 +85,7 @@
     }
 
     .brand-logo-svg {
-      height: 28px;
+      height: 26px;
       width: auto;
       overflow: visible;
       display: block;
@@ -87,24 +93,25 @@
 
     @media (min-width: 640px) {
       .brand-logo-svg {
-        height: 33px;
+        height: 31px;
       }
     }
 
     .brand-subtext {
       font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.06em;
-      color: #6ee7b7;
-      padding-left: 2px;
-      margin-top: -1px;
+      font-size: 8.5px;
+      letter-spacing: 0.05em;
+      color: var(--accent-teal);
+      padding-left: 1px;
+      margin-top: -2px;
       white-space: nowrap;
+      font-weight: 600;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.35rem;
     }
 
     /* Desktop Search Pill */
@@ -126,26 +133,28 @@
     .desktop-search-wrap i {
       position: absolute;
       left: 0.75rem;
-      color: var(--accent-teal);
+      color: var(--text-muted);
       font-size: 0.78rem;
       pointer-events: none;
     }
 
     input.desktop-search-input {
-      background: #141e2d;
+      background: rgba(241, 245, 249, 0.9);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
       padding: 0.38rem 0.8rem 0.38rem 2.1rem;
       border-radius: 999px;
       font-size: 0.8rem;
-      width: 210px;
+      width: 190px;
       outline: none;
-      transition: width 0.2s, border-color 0.2s;
+      transition: width 0.2s, border-color 0.2s, background 0.2s;
     }
 
     input.desktop-search-input:focus {
+      background: #ffffff;
       border-color: var(--accent-teal);
-      width: 250px;
+      width: 230px;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
     }
 
     /* Mobile Search Icon Button */
@@ -153,13 +162,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
-      background: #141e2d;
+      background: rgba(241, 245, 249, 0.9);
       border: 1px solid var(--border-subtle);
-      color: var(--accent-teal);
-      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
       cursor: pointer;
       flex-shrink: 0;
     }
@@ -168,23 +177,24 @@
     .btn-coffee {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      background: rgba(255, 202, 40, 0.14);
-      border: 1px solid rgba(255, 202, 40, 0.45);
-      color: var(--accent-amber);
-      padding: 0.4rem 0.7rem;
+      gap: 0.3rem;
+      background: rgba(254, 243, 199, 0.9);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #b45309;
+      padding: 0.38rem 0.65rem;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
       transition: all 0.15s ease;
+      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.1);
     }
 
     .btn-coffee:hover {
-      background: rgba(255, 202, 40, 0.25);
+      background: rgba(253, 230, 138, 1);
       transform: translateY(-1px);
     }
 
@@ -192,7 +202,7 @@
       display: none;
     }
 
-    @media (min-width: 520px) {
+    @media (min-width: 540px) {
       .coffee-text {
         display: inline;
       }
@@ -202,18 +212,22 @@
     .btn-main-page {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.3rem;
       background: var(--accent-maroon-bg);
       border: 1px solid var(--accent-maroon-border);
-      color: #fda4af;
-      padding: 0.4rem 0.8rem;
+      color: #9f1239;
+      padding: 0.38rem 0.75rem;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .btn-main-page:hover {
+      background: rgba(254, 202, 202, 0.9);
     }
 
     /* Collapsible Mobile Search Drawer Row */
@@ -238,20 +252,21 @@
     .mobile-search-wrap i {
       position: absolute;
       left: 0.85rem;
-      color: var(--accent-teal);
+      color: var(--text-muted);
       font-size: 0.82rem;
       pointer-events: none;
     }
 
     input.mobile-search-input {
       width: 100%;
-      background: #141e2d;
+      background: #ffffff;
       border: 1px solid var(--accent-teal);
       color: var(--text-main);
-      padding: 0.45rem 0.85rem 0.45rem 2.25rem;
+      padding: 0.42rem 0.85rem 0.42rem 2.25rem;
       border-radius: 999px;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       outline: none;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
     }
 
     /* Tier 2: Topic Outline Trigger + Active Chapter Title */
@@ -261,15 +276,15 @@
       gap: 0.65rem;
       width: 100%;
       padding-top: 0.35rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 1px solid rgba(203, 213, 225, 0.6);
     }
 
     .btn-topic-outline {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(45, 212, 191, 0.14);
-      border: 1px solid rgba(45, 212, 191, 0.4);
+      background: rgba(13, 148, 136, 0.12);
+      border: 1px solid rgba(13, 148, 136, 0.35);
       color: var(--accent-teal);
       padding: 0.36rem 0.8rem;
       border-radius: 999px;
@@ -278,6 +293,10 @@
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .btn-topic-outline:hover {
+      background: rgba(13, 148, 136, 0.2);
     }
 
     .header-active-title {
@@ -295,7 +314,9 @@
       position: fixed;
       inset: 0;
       z-index: 130;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       display: none;
     }
 
@@ -311,8 +332,10 @@
       width: min(78vw, 330px);
       z-index: 140;
       background: var(--bg-drawer);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-right: 1px solid var(--border-subtle);
+      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.08);
       padding: 1.1rem 1rem 2rem;
       overflow-y: auto;
       transform: translateX(-102%);
@@ -334,9 +357,9 @@
 
     select.drawer-module-select {
       width: 100%;
-      background: #141e2d;
+      background: #ffffff;
       color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid var(--border-subtle);
       padding: 0.65rem 0.85rem;
       border-radius: 12px;
       font-size: 0.86rem;
@@ -344,6 +367,7 @@
       margin-bottom: 1.35rem;
       outline: none;
       cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
     }
 
     .outline-list {
@@ -356,7 +380,7 @@
     .outline-item {
       padding: 0.55rem 0.4rem;
       font-size: 0.88rem;
-      color: #cbd5e1;
+      color: #334155;
       cursor: pointer;
       border-radius: 8px;
       white-space: nowrap;
@@ -367,8 +391,9 @@
 
     .outline-item:hover,
     .outline-item.active {
-      background: rgba(45, 212, 191, 0.12);
+      background: rgba(13, 148, 136, 0.1);
       color: var(--accent-teal);
+      font-weight: 600;
     }
 
     .outline-group-spacer {
@@ -383,15 +408,19 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: #111827;
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
       color: var(--text-main);
       font-size: 1.15rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      transition: transform 0.15s;
+    }
+    button.floating-outline-fab:hover {
+      transform: scale(1.05);
     }
 
     main.reader-container {
@@ -400,35 +429,12 @@
       padding: 1.1rem 0.95rem 4rem;
     }
 
-    .offline-picker-bar {
-      background: rgba(255, 202, 40, 0.1);
-      border: 1px solid rgba(255, 202, 40, 0.35);
-      color: var(--accent-amber);
-      padding: 0.65rem 0.9rem;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-    }
-
-    .btn-small {
-      background: rgba(45, 212, 191, 0.18);
-      border: 1px solid var(--accent-teal);
-      color: var(--accent-teal);
-      padding: 0.35rem 0.75rem;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
     .chapter-hero-card {
       background: var(--bg-panel);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border-subtle);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
       border-radius: 14px;
       padding: 1.25rem;
       margin-bottom: 1.25rem;
@@ -439,17 +445,18 @@
       font-family: var(--font-mono);
       font-size: 0.72rem;
       color: var(--accent-teal);
-      background: rgba(45, 212, 191, 0.12);
-      border: 1px solid rgba(45, 212, 191, 0.3);
+      background: rgba(13, 148, 136, 0.1);
+      border: 1px solid rgba(13, 148, 136, 0.25);
       padding: 0.18rem 0.55rem;
       border-radius: 6px;
       margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .chapter-h1 {
       font-size: 1.35rem;
       font-weight: 800;
-      color: #fff;
+      color: var(--text-main);
       margin-bottom: 0.35rem;
     }
 
@@ -464,12 +471,15 @@
       color: var(--accent-teal);
       margin: 1.5rem 0 0.75rem;
       padding-bottom: 0.35rem;
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 2px solid rgba(203, 213, 225, 0.7);
     }
 
     .concept-card {
       background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border-subtle);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
       border-radius: 12px;
       padding: 1.1rem;
       margin-bottom: 0.9rem;
@@ -477,8 +487,9 @@
 
     .concept-card h3 {
       font-size: 1rem;
-      color: #fff;
+      color: var(--text-main);
       margin-bottom: 0.45rem;
+      font-weight: 700;
     }
 
     .concept-meta-tag {
@@ -487,11 +498,12 @@
       color: var(--accent-teal);
       margin-bottom: 0.5rem;
       display: block;
+      font-weight: 600;
     }
 
     .concept-card p {
       font-size: 0.88rem;
-      color: #dbeafe;
+      color: #334155;
       margin-bottom: 0.7rem;
     }
 
@@ -528,25 +540,26 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 0.82rem;
-      background: var(--bg-panel);
+      background: #ffffff;
     }
 
     table.cellulum-table th {
-      background: rgba(45, 212, 191, 0.1);
+      background: rgba(13, 148, 136, 0.1);
       color: var(--accent-teal);
       text-align: left;
       padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-subtle);
+      font-weight: 700;
     }
 
     table.cellulum-table td {
       padding: 0.55rem 0.75rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--text-main);
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
     }
 
     .svg-box {
-      background: #07131e;
+      background: #0f172a; /* Keep diagrams in dark contrast for legibility */
       border: 1px solid var(--border-subtle);
       border-radius: 10px;
       overflow: hidden;
@@ -560,7 +573,7 @@
     }
 
     .sim-control-row {
-      background: var(--bg-panel);
+      background: rgba(241, 245, 249, 0.7);
       padding: 0.65rem 0.85rem;
       border-radius: 8px;
       border: 1px solid var(--border-subtle);
@@ -568,7 +581,7 @@
     }
 
     .sim-output-pill {
-      background: rgba(0, 255, 135, 0.1);
+      background: rgba(5, 150, 105, 0.08);
       border-left: 3px solid var(--accent-emerald);
       padding: 0.65rem 0.85rem;
       border-radius: 6px;
@@ -576,20 +589,21 @@
     }
 
     .math-display {
-      background: #090f17;
+      background: #ffffff;
       padding: 0.85rem;
       border-radius: 8px;
       border: 1px solid var(--border-subtle);
       overflow-x: auto;
       text-align: center;
       margin: 0.55rem 0;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
     }
 
     .quiz-btn {
       display: block;
       width: 100%;
       text-align: left;
-      background: var(--bg-panel);
+      background: #ffffff;
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
       padding: 0.65rem 0.85rem;
@@ -597,28 +611,34 @@
       margin-bottom: 0.45rem;
       font-size: 0.85rem;
       cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: all 0.15s;
+    }
+    .quiz-btn:hover {
+      border-color: var(--accent-teal);
+      background: #f8fafc;
     }
 
     .quiz-btn.correct {
-      background: rgba(0, 255, 135, 0.18);
+      background: rgba(5, 150, 105, 0.12);
       border-color: var(--accent-emerald);
-      color: var(--accent-emerald);
+      color: #047857;
       font-weight: 700;
     }
 
     .quiz-btn.wrong {
-      background: rgba(244, 63, 94, 0.2);
-      border-color: #f43f5e;
-      color: #fda4af;
+      background: rgba(239, 68, 68, 0.1);
+      border-color: #ef4444;
+      color: #b91c1c;
     }
   </style>
 </head>
 <body>
 
-  <!-- Upgraded Two-Tier Cellulum Header with Cellular Logo, Search & Buy Me a Coffee -->
+  <!-- Upgraded Frosted Glass Cellulum Header -->
   <header class="cellulum-header">
     
-    <!-- Row 1: Cellular 'C' Logo + Search + Buy Me a Coffee + Main Page -->
+    <!-- Row 1: Left-Aligned Cellular 'C' Logo + Search + Buy Me a Coffee + Main Page -->
     <div class="header-brand-row">
       <a href="../index.html" class="brand-lockup" aria-label="Cellulum Home">
         <svg class="brand-logo-svg" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -633,21 +653,21 @@
               <stop offset="100%" stop-color="#0284c7" />
             </linearGradient>
           </defs>
-          <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
-          <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#ffffff" stroke-width="3.0" stroke-linecap="round" fill="none" />
-          <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
+          <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(%23g)" stroke-width="13.5" stroke-linecap="round" />
+          <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#0f172a" stroke-width="3.0" stroke-linecap="round" fill="none" />
+          <circle cx="44" cy="43" r="11.5" fill="url(%23nucleusGrad)" />
           <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
           <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
           <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
           <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
-          <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
+          <text x="77" y="62" fill="#0f172a" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
         </svg>
         <span class="brand-subtext">Interactive Textbook &amp; Outlines</span>
       </a>
 
-      <!-- Right Action Buttons -->
+      <!-- Right Action Controls -->
       <div class="header-actions">
-        <!-- Desktop Search Input -->
+        <!-- Desktop Search Pill -->
         <div class="desktop-search-wrap">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input
@@ -677,7 +697,7 @@
       </div>
     </div>
 
-    <!-- Collapsible Mobile Search Bar (Opens when tapping the magnifying glass on phone) -->
+    <!-- Collapsible Mobile Search Bar -->
     <div class="mobile-search-row" id="mobileSearchRow">
       <div class="mobile-search-wrap">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -685,7 +705,7 @@
           type="text"
           class="mobile-search-input"
           id="mobileSearchInput"
-          placeholder="Search pathways, equations, problems in this chapter..."
+          placeholder="Search pathways, equations, problems..."
           oninput="filterChapterContent(this.value)"
         />
       </div>
@@ -728,13 +748,6 @@
 
     <div class="drawer-label">CHAPTER TOPIC OUTLINE</div>
     <ul class="outline-list" id="drawerOutlineList"></ul>
-
-    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-      <label class="btn-small" for="localJsonFiles" style="display:block;text-align:center;">
-        📂 Load Local TextBook JSONs
-      </label>
-      <input type="file" id="localJsonFiles" accept=".json" multiple style="display:none;" onchange="loadManualFiles(this.files)" />
-    </div>
   </aside>
 
   <!-- Floating Bottom-Right Outline Button -->
@@ -744,11 +757,6 @@
 
   <!-- Main Reader Content -->
   <main class="reader-container">
-    <div class="offline-picker-bar" id="offlineNotice">
-      <span id="offlineNoticeText">Could not auto-fetch JSON file. Ensure TextBook1.json–TextBook15.json are inside the textbook/ folder:</span>
-      <label class="btn-small" for="localJsonFiles">Load JSONs</label>
-    </div>
-
     <div id="chapterContentRoot"></div>
   </main>
 
@@ -801,30 +809,6 @@
       }
     }
 
-    function loadManualFiles(files) {
-      if (!files || !files.length) return;
-      let loadedCount = 0;
-      let firstId = null;
-      Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          try {
-            const json = JSON.parse(e.target.result);
-            if (json && json.textbook_id) {
-              moduleCache[json.textbook_id] = json;
-              if (!firstId) firstId = json.textbook_id;
-            }
-          } catch (err) {}
-          loadedCount++;
-          if (loadedCount === files.length) {
-            document.getElementById("offlineNotice").style.display = "none";
-            switchTextbookModule(moduleCache[activeModId] ? activeModId : (firstId || activeModId));
-          }
-        };
-        reader.readAsText(file);
-      });
-    }
-
     async function switchTextbookModule(modId) {
       activeModId = modId;
       document.getElementById("drawerModuleSelect").value = modId;
@@ -847,16 +831,18 @@
           if (res.ok) {
             const data = await res.json();
             moduleCache[modId] = data;
-            document.getElementById("offlineNotice").style.display = "none";
             renderModuleAndOutline(data);
             return;
           }
         } catch (e) {}
       }
 
-      document.getElementById("offlineNotice").style.display = "flex";
-      document.getElementById("offlineNoticeText").innerHTML =
-        `Place <strong>${modId}.json</strong> inside the <code>textbook/</code> folder on GitHub (or tap <strong>Load JSONs</strong>).`;
+      document.getElementById("chapterContentRoot").innerHTML = `
+        <div class="chapter-hero-card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.05);">
+          <h2 class="text-base font-bold text-rose-600 mb-2">Module File Not Found</h2>
+          <p class="text-xs text-slate-600">Could not fetch <code>${modId}.json</code> from the <code>textbook/</code> folder. Please ensure all 15 JSON files are uploaded to your GitHub repository.</p>
+        </div>
+      `;
     }
 
     function renderModuleAndOutline(data) {
@@ -998,7 +984,7 @@
               <h3>${sp.title}</h3>
               <p style="white-space:pre-line;">${sp.statement}</p>
               ${(sp.derivation_steps || []).map(st => `
-                <div style="background:var(--bg-panel);padding:0.65rem;border-radius:8px;margin-bottom:0.5rem;">
+                <div style="background:rgba(241, 245, 249, 0.8);padding:0.65rem;border-radius:8px;margin-bottom:0.5rem;border:1px solid rgba(203, 213, 225, 0.5);">
                   <div style="font-size:0.82rem;color:var(--text-muted);"><strong>Step ${st.step}:</strong> ${st.explanation}</div>
                   <div class="math-display" data-latex="${encodeURIComponent(st.equation_latex)}">${st.equation_latex}</div>
                 </div>
