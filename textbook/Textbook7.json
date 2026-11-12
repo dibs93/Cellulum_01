@@ -1,0 +1,999 @@
+{
+  "textbook_id": "TextBook7",
+  "branch_number": 7,
+  "branch_title": "Plant Sciences: Anatomy, Water Potential Physiology, Photosynthesis, Development, Biotechnology & Genotyping",
+  "subtitle": "Meristematic Architecture, Cohesion-Tension & Pressure-Flow Biophysics, Z-Scheme & C3/C4/CAM Bioenergetics, Photomorphogenesis, Agrobacterium Transformation & High-Throughput Plant Genotyping",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Plant Sciences",
+    "upstream_nodes": [
+      "TextBook1",
+      "TextBook2",
+      "TextBook4",
+      "TextBook5",
+      "TextBook6"
+    ],
+    "downstream_nodes": [
+      "TextBook11",
+      "TextBook12",
+      "TextBook14"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Chlorophyll P680 / P700 Special Pair",
+        "scale_m": 1.5e-9,
+        "display_scale": "1.5 nm",
+        "example": "Mg2+-porphyrin ring exciton trap in Photosystem II and I"
+      },
+      {
+        "level": "Rubisco Hexadecamer (L8S8)",
+        "scale_m": 1.2e-8,
+        "display_scale": "12 nm (~550 kDa)",
+        "example": "Ribulose-1,5-bisphosphate carboxylase/oxygenase in stroma"
+      },
+      {
+        "level": "Thylakoid Grana Stack & Plasmodesmata",
+        "scale_m": 4e-7,
+        "display_scale": "40–500 nm",
+        "example": "Appressed thylakoid membranes; symplastic desmotubule channels"
+      },
+      {
+        "level": "Chloroplast & Guard Cell Stomatal Pore",
+        "scale_m": 8e-6,
+        "display_scale": "5–30 μm",
+        "example": "Plastid bioenergetic organelle; K+/Malate2- turgor-driven stomatal aperture"
+      },
+      {
+        "level": "Kranz Mesophyll-Bundle Sheath & Xylem Vessel",
+        "scale_m": 0.0001,
+        "display_scale": "50–200 μm",
+        "example": "C4 concentric leaf anatomy; lignified tracheary elements"
+      },
+      {
+        "level": "Whole Vascular Sporophyte (Root-to-Canopy)",
+        "scale_m": 10.0,
+        "display_scale": "0.1–100 m",
+        "example": "Soil-Plant-Atmosphere Continuum (SPAC) water potential gradient"
+      }
+    ],
+    "explorer_pathways": [
+      "Plant Scientist",
+      "Geneticist",
+      "Biotechnologist",
+      "Future Molecular Biologist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "7.1",
+      "title": "Plant Anatomy: Meristems, Tissue Systems & Vascular Architecture",
+      "overview": "Vascular plants (tracheophytes) construct indeterminate root and shoot body plans from perpetually embryonic meristems, organizing cells into Dermal, Ground, and Vascular tissue systems.",
+      "core_concepts": [
+        {
+          "concept_id": "7.1.1",
+          "heading": "Apical vs. Lateral Meristems & The Three Tissue Systems",
+          "theory": "Unlike animals, plants exhibit indeterminate post-embryonic organogenesis driven by Shoot Apical Meristems (SAM, maintained by the CLAVATA–WUSCHEL negative feedback loop) and Root Apical Meristems (RAM, organized around the mitotically inactive Quiescent Center). Primary growth elongates the plant body via three primary meristems: Protoderm (dermal), Ground Meristem (ground), and Procambium (vascular).",
+          "key_principles": [
+            "Ground Tissue Cell Types: (1) Parenchyma: Living thin-walled cells (primary cell wall only) performing photosynthesis (chlorenchyma/mesophyll), starch storage, and wound totipotency; (2) Collenchyma: Living cells with unevenly thickened primary walls (pectin/cellulose) providing flexible support to growing shoots; (3) Sclerenchyma (Fibers & Sclereids): Dead at functional maturity with thick, lignified secondary walls resisting mechanical buckling.",
+            "Vascular Tissue System (Xylem vs. Phloem): Xylem conducts water and dissolved minerals unidirectionally from roots to shoots via dead, hollow, lignified Tracheids and Vessel Elements (connected by perforation plates). Phloem translocates photoassimilates (sucrose, amino acids, systemic RNA/hormones) bidirectionally from source to sink via living, enucleate Sieve-Tube Elements (connected by callose-lined sieve plates) metabolically supported by adjacent Companion Cells via branched plasmodesmata.",
+            "Root Endodermis & The Casparian Strip: A hydrophobic belt of Suberin (and lignin) deposited in the radial and transverse anticlinal cell walls of the root endodermis blocks passive apoplastic diffusion into the vascular stele, forcing all water and ions to cross a selectively permeable plasma membrane (symplastic checkpoint)."
+          ]
+        },
+        {
+          "concept_id": "7.1.2",
+          "heading": "C3 Dorsiventral vs. C4 Kranz Leaf Anatomy & Secondary Growth",
+          "theory": "Leaf internal architecture is optimized for light harvesting and CO2 diffusion while minimizing evaporative water loss. In woody dicots and gymnosperms, Lateral Meristems—the Vascular Cambium (producing secondary xylem [wood] inward and secondary phloem outward) and Cork Cambium (producing suberized phellem/periderm)—drive radial thickening.",
+          "key_principles": [
+            "C3 vs. C4 Kranz ('Wreath') Leaf Anatomy: C3 leaves segregate into upper Palisade Mesophyll (columnar cells packed with chloroplasts) and lower Spongy Mesophyll (air spaces for gas diffusion), with Rubisco present in all mesophyll cells. C4 leaves (e.g., maize, sugarcane, sorghum) exhibit concentric rings of Mesophyll cells surrounding large, thick-walled Bundle Sheath cells (containing agranal chloroplasts with Rubisco) with narrow vein spacing (2–4 mesophyll cells between veins vs. >10 in C3)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Structural & Functional Comparison of Plant Cell & Vascular Tissue Types",
+        "headers": [
+          "Cell / Tissue Type",
+          "Protoplast at Maturity",
+          "Cell Wall Composition",
+          "Primary Physiological Function"
+        ],
+        "rows": [
+          [
+            "Parenchyma (Mesophyll / Cortex)",
+            "Living (Nucleate, Totipotent)",
+            "Thin primary wall (Cellulose, Pectin, Hemicellulose)",
+            "Photosynthesis, storage, phloem loading, wound callus regeneration"
+          ],
+          [
+            "Collenchyma",
+            "Living (Nucleate)",
+            "Unevenly thickened non-lignified primary wall",
+            "Plastic mechanical support in elongating stems and petioles"
+          ],
+          [
+            "Sclerenchyma (Fibers / Sclereids)",
+            "Dead (Programmed Cell Death)",
+            "Thick secondary wall heavily impregnated with Lignin",
+            "Rigid structural reinforcement and seed coat protection"
+          ],
+          [
+            "Xylem Tracheids & Vessel Elements",
+            "Dead (Hollow lumen)",
+            "Lignified annular, helical, or pitted secondary walls",
+            "Negative-pressure (tension) bulk water & mineral conduction"
+          ],
+          [
+            "Phloem Sieve-Tube Elements",
+            "Living (Enucleate; lacks vacuole/ribosomes)",
+            "Primary cell wall with Sieve Plates & P-protein",
+            "Positive-pressure (turgor) source-to-sink sucrose translocation"
+          ],
+          [
+            "Companion Cells",
+            "Living (Dense cytoplasm, nucleus, mitochondria)",
+            "Primary wall rich in branched Plasmodesmata",
+            "ATP synthesis, protein supply & H+-ATPase sucrose loading for sieve tubes"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "7.2",
+      "title": "Plant Physiology: Water Potential Thermodynamics, Transpiration & Hormonal Signaling",
+      "overview": "Plants move ratusan of liters of water against gravity without mechanical pumps by harnessing the steep water potential gradient of the Soil–Plant–Atmosphere Continuum (SPAC), while coordinating growth and stress responses via phytohormone ubiquitin-proteasome switches.",
+      "core_concepts": [
+        {
+          "concept_id": "7.2.1",
+          "heading": "Water Potential (Ψw), Cohesion-Tension Transpiration & Münch Phloem Flow",
+          "theory": "Water always moves passively from regions of higher (less negative) total Water Potential (Ψw) to regions of lower (more negative) Ψw, measured in megapascals (MPa, where pure water at STP is defined as Ψw = 0 MPa). Total water potential is the sum of Solute/Osmotic Potential (Ψs ≤ 0), Pressure/Turgor Potential (Ψp), Gravity Potential (Ψg), and Matric Potential (Ψm).",
+          "key_principles": [
+            "Plasmolysis vs. Full Turgor: In a hypotonic solution, water enters the cell until inward osmotic pull (Ψs < 0) is balanced by outward cell wall turgor pressure (Ψp = -Ψs, so Ψw = 0). In a hypertonic solution, water exits, the plasma membrane pulls away from the cell wall (incipient plasmolysis at Ψp = 0), and turgor is lost (wilting).",
+            "Dixon-Joly Cohesion-Tension Theory (Xylem): Solar-driven evaporation from cell wall menisci in leaf air spaces generates immense negative hydrostatic tension (Ψp = -0.8 to -3.0 MPa). Hydrogen-bonded water columns are pulled continuously from soil (Ψw ≈ -0.05 MPa) -> root -> stem xylem -> leaf (Ψw ≈ -1.5 MPa) -> atmosphere (Ψw ≈ -30 to -100 MPa), resisted by water-to-water Cohesion and water-to-xylem wall Adhesion.",
+            "Münch Pressure-Flow Hypothesis (Phloem): At the Source (mature leaf), companion cells use plasma-membrane H+-ATPases and SUT1 H+/Sucrose symporters to actively load sucrose into sieve tubes, dropping Ψs very negative. Water flows in osmotically from adjacent xylem, building high positive turgor pressure (Ψp ≈ +1.0 MPa). At the Sink (roots, fruits, meristems), sucrose is unloaded and consumed/stored as starch, raising Ψs; water exits back to xylem, lowering Ψp and driving bulk mass flow from source to sink."
+          ]
+        },
+        {
+          "concept_id": "7.2.2",
+          "heading": "Mineral Nutrition & Phytohormone Ubiquitin-Ligase Signaling",
+          "theory": "Plants require 17 essential elements (9 Macronutrients: C, H, O, N, P, K, Ca, Mg, S; 8 Micronutrients: Fe, Mn, Zn, Cu, B, Mo, Cl, Ni). Developmental plasticity and abiotic/biotic stress responses are coordinated by small-molecule phytohormones that frequently act as 'molecular glues' triggering SCF E3 ubiquitin ligase degradation of transcriptional repressors.",
+          "key_principles": [
+            "Auxin (IAA), Gibberellin (GA), Jasmonate (JA) & Strigolactone SCF-Proteasome Paradigm: Auxin binds the nuclear receptor TIR1/AFB (an F-box subunit of SCF^TIR1), promoting ubiquitylation and 26S proteasomal degradation of Aux/IAA transcriptional repressors to liberate ARF transcription factors (activating cell wall acid-growth H+-ATPases and expansins). Similarly, Gibberellin binds GID1 to trigger SCF^SLY1 degradation of DELLA repressors.",
+            "Abscisic Acid (ABA) Stomatal Closure Signaling: Under drought stress, root/leaf ABA binds intracellular PYR/PYL/RCAR receptors, which inhibit PP2C phosphatases. This releases SnRK2 (OST1) kinases to phosphorylate SLAC1 anion channels. Efflux of Cl- and Malate2- depolarizes the guard cell plasma membrane, opening voltage-gated outward K+ channels; water exits osmotically, guard cell turgor drops, and the stomatal pore closes.",
+            "Cytokinin, Ethylene & Salicylic Acid: Cytokinins (zeatin) signal via a bacterial-like two-component histidine-aspartate phosphorelay (AHK -> AHP -> ARR) to promote shoot organogenesis and delay senescence. Ethylene (C2H4) inactivates the ER-localized negative regulator CTR1, stabilizing EIN2/EIN3 to drive the seedling 'triple response' and climacteric fruit ripening."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Phytohormone Receptors, Signaling Cascades & Physiological Functions",
+        "headers": [
+          "Phytohormone",
+          "Biosynthetic Precursor",
+          "Primary Receptor & Core Signaling Module",
+          "Canonical Physiological Roles"
+        ],
+        "rows": [
+          [
+            "Auxin (Indole-3-acetic acid, IAA)",
+            "L-Tryptophan (TAA1 / YUCCA)",
+            "TIR1/AFB F-box -> degrades Aux/IAA -> frees ARF TFs",
+            "Apical dominance, phototropism, polar PIN transport, lateral roots (high auxin/cytokinin ratio)"
+          ],
+          [
+            "Cytokinin (Zeatin, Kinetin)",
+            "Adenosine monophosphate + IPP (IPT)",
+            "AHK Histidine Kinase -> AHP -> Type-B ARR TFs",
+            "Shoot meristem division (high CK/auxin ratio), lateral bud outgrowth, delays leaf senescence"
+          ],
+          [
+            "Gibberellin (GA3, GA1)",
+            "Geranylgeranyl diphosphate (Diterpene)",
+            "GID1 receptor -> SCF^SLY1 degrades DELLA repressors",
+            "Stem internode elongation (bolting), seed germination (induces α-amylase in cereal aleurone)"
+          ],
+          [
+            "Abscisic Acid (ABA)",
+            "Zeaxanthin / Violaxanthin (C40 Carotenoid)",
+            "PYR/PYL/RCAR -> inhibits PP2C -> activates SnRK2",
+            "Stomatal closure during drought, maintains seed dormancy (antagonizes GA)"
+          ],
+          [
+            "Ethylene (C2H4 gas)",
+            "L-Methionine -> SAM -> ACC (ACS / ACO)",
+            "ETR1/ERS1 (ER Cu+ receptor) -> inactivates CTR1 -> EIN2/EIN3",
+            "Seedling triple response, leaf abscission, aerenchyma (Sub1A), climacteric fruit ripening"
+          ],
+          [
+            "Brassinosteroids (Brassinolide)",
+            "Campesterol (Phytosterol)",
+            "BRI1/BAK1 LRR-Receptor Kinase -> inhibits BIN2 -> BZR1/BES1",
+            "Cell elongation, vascular xylem differentiation, skotomorphogenesis suppression"
+          ],
+          [
+            "Jasmonic Acid (JA-Ile) vs. Salicylic Acid (SA)",
+            "α-Linolenic acid (JA) / Chorismate (SA)",
+            "COI1 degrades JAZ (JA) / NPR1 monomerization (SA)",
+            "JA: Defense against necrotrophs & insect herbivores; SA: Systemic Acquired Resistance (SAR) to biotrophs"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "7.3",
+      "title": "Photosynthesis: The Thylakoid Z-Scheme, Calvin-Benson Cycle & C3/C4/CAM Bioenergetics",
+      "overview": "Photosynthesis converts solar photon energy into chemical bond energy across two linked stages: the thylakoid Light-Dependent Reactions (oxidizing H2O to O2 while generating ATP and NADPH) and the stromal Carbon-Assimilation Reactions (reducing CO2 to triose phosphates).",
+      "core_concepts": [
+        {
+          "concept_id": "7.3.1",
+          "heading": "Linear vs. Cyclic Photophosphorylation & The Z-Scheme",
+          "theory": "Chloroplasts possess three membranes: Outer Envelope, Inner Envelope, and the internal Thylakoid Membrane network (stacked Grana enriched in Photosystem II [PSII] and unstacked Stroma Lamellae enriched in Photosystem I [PSI] and CF0CF1-ATP Synthase) enclosing the acidic Thylakoid Lumen (pH ~5.0–5.5 in light) vs. alkaline Stroma (pH ~8.0).",
+          "key_principles": [
+            "Photosystem II (P680) & The Oxygen-Evolving Complex (OEC): Photons (≤680 nm) excite the P680 chlorophyll a special pair, transferring an electron to Pheophytin -> plastoquinone QA -> mobile Plastoquinone QB (reduced to QH2 by taking up 2 H+ from the stroma). Oxidized P680+ (the strongest biological oxidant, E°' ≈ +1.2 V) extracts electrons from water via the lumenal Mn4CaO5 cluster (Kok's S0–S4 clock): 2 H2O -> O2 + 4 H+ (lumen) + 4 e-.",
+            "Cytochrome b6f Complex & Plastocyanin: Oxidizes plastoquinol (QH2) via a Q-cycle mechanism, pumping 8 H+ into the thylakoid lumen per 4 e- (for 2 H2O oxidized) and reducing the lumenal copper protein Plastocyanin (PC).",
+            "Photosystem I (P700), Ferredoxin & Cyclic Electron Flow: Photons (≤700 nm) excite P700 -> A0 -> A1 (phylloquinone) -> Fe-S clusters (FX, FA, FB) -> stromal Ferredoxin (Fd). In Linear Electron Flow (LEF), Ferredoxin-NADP+ Reductase (FNR) reduces NADP+ + H+ -> NADPH, yielding 12 H+ in the lumen (4 from OEC + 8 from Cyt b6f) per O2 evolved (~2.57 ATP via the c14 CF0CF1-ATP synthase). To meet the Calvin cycle's higher 3 ATP : 2 NADPH demand, Cyclic Electron Flow shunts electrons from Ferredoxin back to Cytochrome b6f / Plastoquinone, pumping additional H+ to synthesize ATP without producing NADPH or O2."
+          ]
+        },
+        {
+          "concept_id": "7.3.2",
+          "heading": "The Calvin-Benson-Bassham (CBB) Cycle, Photorespiration & C4/CAM Concentrating Mechanisms",
+          "theory": "The Calvin cycle fixes CO2 in the chloroplast stroma across three stages activated by light-driven stromal alkalinization (pH 8.0), Mg2+ efflux, and Ferredoxin-Thioredoxin reduction of regulatory disulfide bonds.",
+          "key_principles": [
+            "Three Stages of the Calvin Cycle: (1) Carboxylation: Rubisco condenses 3 CO2 with 3 Ribulose-1,5-bisphosphate (RuBP, 5C) to yield six 3-Phosphoglycerate (3-PGA, 3C); (2) Reduction: 3-PGA kinase (consumes 6 ATP) and GAPDH (consumes 6 NADPH) produce six Glyceraldehyde-3-phosphate (G3P/triose-P), of which 1 net G3P (3C) is exported; (3) Regeneration: Transketolase and aldolase rearrange five G3P (15C) back into three RuBP (15C), consuming 3 ATP via Phosphoribulokinase. Total cost per G3P (3C): 9 ATP + 6 NADPH (or 18 ATP + 12 NADPH per hexose).",
+            "Rubisco Oxygenase & The C2 Photorespiratory Salvage Pathway: Because Rubisco evolved in an anoxic atmosphere, O2 competitively inhibits CO2 fixation at the active site. Oxygenation of RuBP produces one 3-PGA (3C) and one 2-Phosphoglycolate (2-PG, 2C). Salvaging two molecules of 2-PG back into one 3-PGA across the Chloroplast -> Peroxisome -> Mitochondrion pathway releases 1 fixed CO2 and 1 NH3 while consuming 1 ATP and 1 NADH equivalent, reducing C3 photosynthetic efficiency by 25–40% at high temperatures.",
+            "C4 (Spatial) vs. CAM (Temporal) Carbon-Concentrating Mechanisms: Both use cytosolic PEP Carboxylase (PEPC, which binds HCO3- with high affinity and has zero oxygenase activity) to fix carbon into Oxaloacetate (4C) -> Malate (4C). In C4 plants (maize, sugarcane), malate is shuttled spatially from Mesophyll cells into Bundle Sheath cells, where decarboxylation concentrates CO2 10- to 20-fold around Rubisco (costing 2 extra ATP per CO2 to regenerate PEP via Pyruvate-Phosphate Dikinase, PPDK). In CAM plants (pineapple, agave, Portulacaria afra under drought), stomata open only at night to store malic acid in the vacuole, and close during the day while malate is decarboxylated for the Calvin cycle."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Bioenergetic & Ecophysiological Comparison of C3, C4, and CAM Photosynthetic Pathways",
+        "headers": [
+          "Parameter",
+          "C3 Plants (Rice, Wheat, Soybean)",
+          "C4 Plants (Maize, Sugarcane, Sorghum)",
+          "CAM Plants (Pineapple, Agave, Crassulaceae)"
+        ],
+        "rows": [
+          [
+            "Initial CO2-Fixing Enzyme",
+            "Rubisco (in Mesophyll stroma)",
+            "PEP Carboxylase (in Mesophyll cytosol)",
+            "PEP Carboxylase (at Night in cytosol); Rubisco (Day)"
+          ],
+          [
+            "First Stable Fixation Product",
+            "3-Phosphoglycerate (3-PGA, 3 carbons)",
+            "Oxaloacetate -> Malate / Aspartate (4 carbons)",
+            "Oxaloacetate -> Malic acid (stored in vacuole at night)"
+          ],
+          [
+            "Leaf Kranz Anatomy",
+            "Absent (One chloroplast-containing mesophyll type)",
+            "Present (Spatial separation: Mesophyll -> Bundle Sheath)",
+            "Absent (Succulent mesophyll with large central vacuoles)"
+          ],
+          [
+            "Photorespiration Rate",
+            "High (20–40% loss in hot, dry conditions)",
+            "Negligible (CO2 concentrated around Bundle Sheath Rubisco)",
+            "Very low during day (Stomata closed, high internal [CO2])"
+          ],
+          [
+            "Theoretical Energetic Cost per CO2 Fixed",
+            "3 ATP + 2 NADPH (in absence of photorespiration)",
+            "5 ATP + 2 NADPH (due to 2 ATP cost of PPDK)",
+            "4.5 – 5.5 ATP + 2 NADPH"
+          ],
+          [
+            "Transpiration Ratio (g H2O lost / g CO2 fixed)",
+            "400 – 500 (Low water-use efficiency)",
+            "250 – 300 (High water-use efficiency)",
+            "50 – 100 (Ultra-high water-use efficiency)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "7.4",
+      "title": "Plant Development: Photomorphogenesis, Vernalization & The ABC Floral Model",
+      "overview": "Because plants are sessile, they continuously tune seed germination, shade avoidance, circadian rhythms, and the transition from vegetative to reproductive development by integrating red/far-red and blue light photoreceptors with temperature cues.",
+      "core_concepts": [
+        {
+          "concept_id": "7.4.1",
+          "heading": "Photoreceptor Physics (Phytochromes & Cryptochromes) & Photomorphogenesis",
+          "theory": "Seedlings germinating in darkness undergo Skotomorphogenesis (etiolation: elongated hypocotyl, apical hook, unexpanded yellow cotyledons with etioplasts). Exposure to light triggers Photomorphogenesis (de-etiolation: hypocotyl inhibition, cotyledon expansion, chlorophyll/chloroplast synthesis).",
+          "key_principles": [
+            "Phytochrome Photoreversibility (Pr <-> Pfr): Phytochromes (PhyA–PhyE) are dimeric chromoproteins covalently bound to a linear tetrapyrrole chromophore (phytochromobilin). Synthesized in the inactive Red-absorbing form (Pr, λ_max = 660 nm), absorption of Red light isomerizes the C15=C16 double bond to convert Pr into the biologically active Far-Red-absorbing form (Pfr, λ_max = 730 nm). Pfr translocates into the nucleus to trigger degradation of PIFs (Phytochrome-Interacting Factors). Far-Red light (730 nm, enriched under canopy shade) or dark thermal reversion converts Pfr back to Pr.",
+            "Blue-Light Photoreceptors (Cryptochromes & Phototropins): Cryptochromes (CRY1/CRY2, flavoproteins containing FAD and pterin) regulate circadian clock entrainment and anthocyanin synthesis. Phototropins (PHOT1/PHOT2, FMN-binding LOV-domain kinases) mediate phototropic bending toward blue light, chloroplast accumulation/avoidance movements, and blue-light-induced stomatal opening."
+          ]
+        },
+        {
+          "concept_id": "7.4.2",
+          "heading": "Photoperiodism, Florigen (FT) & The Coen-Meyerowitz ABC(E) Model of Floral Organ Identity",
+          "theory": "The transition of the Shoot Apical Meristem into a Floral Meristem integrates daylength (measured in leaves by CONSTANS [CO] coincidence with circadian light), vernalization (prolonged winter cold epigenetically silencing the floral repressor FLC via PRC2 H3K27me3), and the mobile phloem protein signal Florigen (FLOWERING LOCUS T, FT).",
+          "key_principles": [
+            "The ABC(E) Combinatorial Model of Flower Development (Arabidopsis thaliana): Four concentric whorls of floral organs are specified by combinatorial quartets of MADS-box homeotic transcription factors, where Class A (AP1, AP2) and Class C (AGAMOUS, AG) mutually antagonize each other, and Class E (SEPALLATA 1–4) is required in all four whorls: Whorl 1 (Outer): Class A (+ E) alone -> Sepals; Whorl 2: Class A + Class B (AP3, PI) (+ E) -> Petals; Whorl 3: Class B + Class C (+ E) -> Stamens; Whorl 4 (Center): Class C (+ E) alone -> Carpels (and floral meristem determinacy)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "ABC Homeotic Mutant Phenotypes Across the Four Floral Whorls in Arabidopsis thaliana",
+        "headers": [
+          "Genotype / Mutant Class",
+          "Whorl 1 (Outer)",
+          "Whorl 2",
+          "Whorl 3",
+          "Whorl 4 (Inner Center)",
+          "Mechanistic Explanation (A <-> C Antagonism)"
+        ],
+        "rows": [
+          [
+            "Wild-Type (A+ B+ C+)",
+            "Sepals (A)",
+            "Petals (A + B)",
+            "Stamens (B + C)",
+            "Carpels (C)",
+            "Normal combinatorial MADS-box quartet specification"
+          ],
+          [
+            "Class A Mutant (ap2 / a-)",
+            "Carpels (C)",
+            "Stamens (B + C)",
+            "Stamens (B + C)",
+            "Carpels (C)",
+            "Loss of A allows Class C (AG) to expand into Whorls 1 & 2"
+          ],
+          [
+            "Class B Mutant (ap3 or pi / b-)",
+            "Sepals (A)",
+            "Sepals (A)",
+            "Carpels (C)",
+            "Carpels (C)",
+            "Loss of B leaves A alone in Whorls 1–2 and C alone in Whorls 3–4"
+          ],
+          [
+            "Class C Mutant (agamous / c-)",
+            "Sepals (A)",
+            "Petals (A + B)",
+            "Petals (A + B)",
+            "Sepals (Indeterminate repeat)",
+            "Loss of C allows Class A to expand into Whorls 3–4 & abolishes determinacy"
+          ],
+          [
+            "Triple Mutant (a- b- c-)",
+            "Leaf-like",
+            "Leaf-like",
+            "Leaf-like",
+            "Leaf-like",
+            "Goethe's foliar theory: without A/B/C MADS factors, all floral organs revert to vegetative leaves"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "7.5",
+      "title": "Plant Biotechnology & Signature Plant Genotyping Workflows",
+      "overview": "Exploiting cellular totipotency, Agrobacterium tumefaciens T-DNA delivery, CTAB nucleic acid extraction, and co-dominant SSR/SNP marker platforms powers modern transgenic crop engineering and high-throughput molecular genotyping.",
+      "core_concepts": [
+        {
+          "concept_id": "7.5.1",
+          "heading": "In Vitro Tissue Culture (Skoog-Miller Auxin:Cytokinin Ratio) & Agrobacterium Transformation",
+          "theory": "Because differentiated plant parenchyma cells retain full genomic Totipotency, they can be dedifferentiated into proliferating Callus on Murashige and Skoog (MS) medium and regenerated into whole fertile plants (somatic embryogenesis or organogenesis).",
+          "key_principles": [
+            "Skoog & Miller (1957) Hormonal Morphogenesis Rule: The ratio of Auxin (e.g., IAA, NAA, 2,4-D) to Cytokinin (e.g., BAP, Kinetin) in tissue culture medium dictates organ fate: Intermediate Auxin : Cytokinin ratio -> undifferentiated Callus proliferation; High Auxin : Low Cytokinin ratio -> Root differentiation (rhizogenesis); Low Auxin : High Cytokinin ratio -> Shoot bud differentiation (caulogenesis).",
+            "Agrobacterium tumefaciens Ti-Plasmid & Binary Vectors: Wound phenolic compounds (Acetosyringone) released by plant cells activate the VirA histidine kinase receptor on the bacterial Tumor-Inducing (Ti) plasmid, which phosphorylates VirG to transcribe the vir operon. The VirD1/VirD2 endonuclease nicks the 25-bp direct repeat Left Border (LB) and Right Border (RB) of the T-DNA region, covalently attaching VirD2 to the 5' end of the single-stranded T-strand. Exported through a Type IV Secretion System (VirB/D4) and coated with VirE2 (carrying nuclear localization signals), the T-strand integrates into the plant nuclear genome. In biotechnology, oncogenic auxin/cytokinin/opine genes inside the T-DNA are replaced ('disarmed') with a transgene cassette (e.g., CaMV 35S promoter + Bt cry1Ac or CRISPR-Cas9 + nptII KanR / bar BastaR marker) on a mini Binary Vector alongside a helper vir plasmid."
+          ]
+        },
+        {
+          "concept_id": "7.5.2",
+          "heading": "Signature Cellulum Section: Plant Genotyping (CTAB Extraction, SSRs & KASP/TaqMan SNPs)",
+          "theory": "Plant leaf tissues pose unique biochemical challenges for DNA extraction due to rigid cellulosic walls, abundant neutral/acidic polysaccharides (which inhibit polymerases and restriction enzymes by mimicking nucleic acid phosphate backbones), and polyphenols (which oxidize into quinones that covalently cross-link DNA).",
+          "key_principles": [
+            "CTAB (Cetyltrimethylammonium Bromide) Plant DNA Extraction Chemistry: (1) Mechanical liquid-nitrogen grinding disrupts cell walls; (2) High-salt extraction buffer (>1.4 M NaCl, Tris-HCl pH 8.0, EDTA to chelate Mg2+ and block DNases) + cationic surfactant CTAB (2% w/v): at >0.7 M NaCl, CTAB forms insoluble micelles selectively with acidic polysaccharides while keeping DNA soluble in the aqueous phase; (3) PVP (Polyvinylpyrrolidone) binds polyphenols via hydrogen bonding, and β-Mercaptoethanol acts as a strong reducing agent to prevent polyphenol oxidation into quinones; (4) Chloroform:Isoamyl Alcohol (24:1) partitioning removes proteins/lipids, followed by isopropanol precipitation of pure genomic DNA.",
+            "SSR vs. KASP/TaqMan Bi-Allelic SNP Genotyping: For SSR (Microsatellite) genotyping, PCR products amplified with locus-specific flanking primers are resolved on high-percentage agarose/PAGE or capillary electrophoresis, scoring Homozygous P1 (single upper band), Homozygous P2 (single lower band), and Heterozygous F1 (codominant doublet plus slower heteroduplex band). For high-throughput SNP genotyping (e.g., KASP — Competitive Allele-Specific PCR), two allele-specific forward primers carrying distinct 5' tail sequences (binding FAM- vs. HEX-labeled FRET cassettes) compete in a single well: Homozygous Allele X clusters along the X-axis (FAM high, HEX low), Homozygous Allele Y clusters along the Y-axis (HEX high, FAM low), and Heterozygotes (XY) cluster along the 45° diagonal (both FAM and HEX high)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Reagent Functions in the Standard CTAB Plant Genomic DNA Extraction Protocol",
+        "headers": [
+          "CTAB Buffer Component",
+          "Typical Working Concentration",
+          "Biochemical & Physical Mechanism in Plant Lysate"
+        ],
+        "rows": [
+          [
+            "CTAB (Cationic Detergent)",
+            "2.0% (w/v)",
+            "Lyses lipid membranes; precipitates polysaccharides selectively when [NaCl] > 0.7 M"
+          ],
+          [
+            "NaCl (Monovalent Salt)",
+            "1.4 M",
+            "Neutralizes DNA backbone charge; keeps DNA soluble while CTAB complexes polysaccharides"
+          ],
+          [
+            "Tris-HCl Buffer",
+            "100 mM (pH 8.0)",
+            "Maintains slightly alkaline pH to prevent acid depurination of DNA"
+          ],
+          [
+            "EDTA (Chelating Agent)",
+            "20 mM",
+            "Sequester divalent Mg2+ and Ca2+ cofactors to inactivate endogenous plant DNases"
+          ],
+          [
+            "PVP-40 (Polyvinylpyrrolidone)",
+            "1.0 – 2.0% (w/v)",
+            "Hydrogen-bonds phenolic compounds, preventing their co-precipitation with DNA"
+          ],
+          [
+            "β-Mercaptoethanol",
+            "0.2 – 0.5% (v/v)",
+            "Cleaves protein disulfide bonds and reduces polyphenols to block quinone browning"
+          ],
+          [
+            "Chloroform : Isoamyl Alcohol (24:1)",
+            "1 : 1 volume ratio",
+            "Denatures proteins at the interphase; isoamyl alcohol prevents foaming"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-7.1",
+      "title": "Figure 7.1: Chloroplast Thylakoid Z-Scheme, Proton Pumping & Linear vs. Cyclic Electron Flow",
+      "sub_module_ref": "7.3",
+      "thumbnail_caption": "Redox potential trajectory (E°' from +1.2 V to -0.7 V) across PSII (P680), Plastoquinone, Cytochrome b6f, PSI (P700), and Ferredoxin-NADP+ Reductase. Tap to expand.",
+      "svg_template_id": "svg_thylakoid_zscheme_7_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>PHOTOSYNTHETIC Z-SCHEME: REDOX POTENTIALS (E°') &amp; CYCLIC ELECTRON SHUNT</text><line x1='75' y1='55' x2='75' y2='295' stroke='#a0c4e2' stroke-width='2'/><line x1='75' y1='295' x2='780' y2='295' stroke='#a0c4e2' stroke-width='2'/><text x='65' y='70' fill='#00ff87' font-family='monospace' font-size='11' text-anchor='end'>-1.0 V</text><text x='65' y='175' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='end'>0.0 V</text><text x='65' y='280' fill='#ff6b8b' font-family='monospace' font-size='11' text-anchor='end'>+1.2 V</text><circle cx='145' cy='255' r='16' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='145' y='259' fill='#fff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>H2O</text><text x='145' y='285' fill='#ff6b8b' font-family='monospace' font-size='10' text-anchor='middle'>OEC (Mn4CaO5)</text><rect x='205' y='245' width='65' height='32' rx='6' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='237' y='265' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>P680</text><rect x='205' y='95' width='65' height='32' rx='6' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='237' y='115' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>P680*</text><path d='M 237 242 L 237 132' stroke='#ffca28' stroke-width='3.5'/><text x='200' y='190' fill='#ffca28' font-family='monospace' font-size='11' font-weight='bold' text-anchor='end'>hν (680 nm)</text><path d='M 162 255 L 202 260' stroke='#ff6b8b' stroke-width='2.5'/><rect x='335' y='155' width='85' height='45' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='377' y='175' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Cyt b6f</text><text x='377' y='191' fill='#a0e2ff' font-family='monospace' font-size='9' text-anchor='middle'>Pumps H+ (Q-Cycle)</text><path d='M 270 112 L 335 170' stroke='#00f2fe' stroke-width='3'/><text x='305' y='132' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='middle'>Pheo → PQ</text><rect x='485' y='205' width='65' height='32' rx='6' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='517' y='225' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>P700</text><path d='M 420 185 L 485 220' stroke='#00f2fe' stroke-width='3'/><text x='452' y='215' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='middle'>PC (Cu)</text><rect x='485' y='65' width='65' height='32' rx='6' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='517' y='85' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>P700*</text><path d='M 517 202 L 517 102' stroke='#ffca28' stroke-width='3.5'/><text x='555' y='155' fill='#ffca28' font-family='monospace' font-size='11' font-weight='bold'>hν (700 nm)</text><circle cx='635' cy='105' r='22' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='635' y='109' fill='#b388ff' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Fd</text><path d='M 550 82 L 613 100' stroke='#00ff87' stroke-width='3'/><rect x='695' y='125' width='80' height='42' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='735' y='145' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>FNR</text><text x='735' y='160' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>→ NADPH</text><path d='M 657 112 L 695 138' stroke='#00ff87' stroke-width='3'/><path d='M 620 88 Q 490 35 377 152' fill='none' stroke='#b388ff' stroke-dasharray='6,4' stroke-width='2.5'/><text x='485' y='52' fill='#b388ff' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Cyclic Electron Flow (Fd → Cyt b6f: ATP Only, No NADPH/O2)</text><text x='425' y='325' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Net Linear Flow (2 H2O → O2): 4 e- + 12 H+ (Lumen) → 2 NADPH + ~2.57 ATP (via CF0CF1 c14-ring)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-7-1a",
+          "x_pct": 17.7,
+          "y_pct": 72.8,
+          "label": "Oxygen-Evolving Complex (Mn4CaO5)",
+          "scale_link": "1.5nm",
+          "detail": "Splits 2 H2O into O2 + 4 H+ (released directly into the acidic thylakoid lumen) across 4 sequential single-photon oxidation steps (S0 -> S4 Kok clock)."
+        },
+        {
+          "pin_id": "pin-7-1b",
+          "x_pct": 77.4,
+          "y_pct": 30.0,
+          "label": "Ferredoxin Branch Point (Linear vs. Cyclic)",
+          "scale_link": "5nm",
+          "detail": "Reduced Ferredoxin (Fd) either transfers electrons to FNR to synthesize NADPH (Linear Flow) or recycles electrons back to Plastoquinone / Cytochrome b6f (Cyclic Flow) to boost the ATP:NADPH ratio to 3:2."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-7.2",
+      "title": "Figure 7.2: Phytochrome Red/Far-Red Photoreversibility & The Coen-Meyerowitz ABC(E) Floral Quartet Model",
+      "sub_module_ref": "7.4",
+      "thumbnail_caption": "Pr (660 nm) <-> Pfr (730 nm) photoequilibrium switch alongside concentric floral whorl specification by Class A, B, C, and E MADS-box genes. Tap to expand.",
+      "svg_template_id": "svg_phytochrome_abc_flower_7_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. PHYTOCHROME PHOTOREVERSIBLE SWITCH</text><text x='415' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. ABC(E) MODEL OF FLORAL ORGAN IDENTITY</text><line x1='390' y1='20' x2='390' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><rect x='45' y='90' width='115' height='60' rx='10' fill='#102a43' stroke='#00f2fe' stroke-width='2.5'/><text x='102' y='118' fill='#00f2fe' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'>Pr Form</text><text x='102' y='136' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>Inactive (Cytosol)</text><rect x='240' y='90' width='120' height='60' rx='10' fill='#0b382c' stroke='#00ff87' stroke-width='2.5'/><text x='300' y='118' fill='#00ff87' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'>Pfr Form</text><text x='300' y='136' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>Active (Nucleus)</text><path d='M 165 105 L 235 105' stroke='#ff4081' stroke-width='3'/><text x='200' y='95' fill='#ff4081' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Red (660 nm)</text><path d='M 235 135 L 165 135' stroke='#b388ff' stroke-width='3'/><text x='200' y='155' fill='#b388ff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Far-Red (730 nm)</text><rect x='45' y='195' width='315' height='95' rx='8' fill='#0d2538' stroke='#4facfe' stroke-width='1.5'/><text x='202' y='220' fill='#fff' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>R : FR Ratio &amp; Shade Avoidance</text><text x='202' y='242' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>Direct Sunlight (High R:FR ~ 1.2) → High Pfr/P_tot</text><text x='202' y='262' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>Canopy Shade (Low R:FR ~ 0.2) → PIFs elongate stem</text><text x='202' y='280' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>Last flash of light (R vs. FR) dictates seed germination</text><rect x='425' y='65' width='85' height='45' rx='6' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='467' y='85' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Whorl 1</text><text x='467' y='101' fill='#fff' font-family='sans-serif' font-size='11' text-anchor='middle'>Sepals</text><rect x='518' y='65' width='85' height='45' rx='6' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='560' y='85' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Whorl 2</text><text x='560' y='101' fill='#fff' font-family='sans-serif' font-size='11' text-anchor='middle'>Petals</text><rect x='611' y='65' width='85' height='45' rx='6' fill='#2b1d38' stroke='#ffca28' stroke-width='2'/><text x='653' y='85' fill='#ffca28' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Whorl 3</text><text x='653' y='101' fill='#fff' font-family='sans-serif' font-size='11' text-anchor='middle'>Stamens</text><rect x='704' y='65' width='85' height='45' rx='6' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='746' y='85' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Whorl 4</text><text x='746' y='101' fill='#fff' font-family='sans-serif' font-size='11' text-anchor='middle'>Carpels</text><rect x='518' y='130' width='178' height='36' rx='6' fill='rgba(255, 202, 40, 0.2)' stroke='#ffca28' stroke-width='2'/><text x='607' y='153' fill='#ffca28' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Class B (AP3 / PI)</text><rect x='425' y='178' width='178' height='36' rx='6' fill='rgba(0, 255, 135, 0.2)' stroke='#00ff87' stroke-width='2'/><text x='514' y='201' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Class A (AP1 / AP2)</text><rect x='611' y='178' width='178' height='36' rx='6' fill='rgba(255, 107, 139, 0.2)' stroke='#ff6b8b' stroke-width='2'/><text x='700' y='201' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Class C (AGAMOUS)</text><rect x='425' y='226' width='364' height='32' rx='6' fill='rgba(0, 242, 254, 0.15)' stroke='#00f2fe' stroke-width='1.5'/><text x='607' y='247' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Class E (SEPALLATA 1–4) Required Across All 4 Whorls</text><text x='607' y='290' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>Mutual Antagonism: Class A ⊣|⊢ Class C (Loss of one expands the other)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-7-2a",
+          "x_pct": 36.6,
+          "y_pct": 35.0,
+          "label": "Active Pfr Nuclear Translocation",
+          "scale_link": "10nm",
+          "detail": "Red light (660 nm) converts Pr to Pfr (~85% Pfr at photoequilibrium), exposing a nuclear localization signal that imports PhyB into the nucleus to ubiquitylate PIF transcription factors."
+        },
+        {
+          "pin_id": "pin-7-2b",
+          "x_pct": 74.0,
+          "y_pct": 58.0,
+          "label": "A <-> C Mutual Antagonism Boundary",
+          "scale_link": "cell",
+          "detail": "APETALA2 (Class A) represses AGAMOUS (Class C) in Whorls 1 & 2, while AGAMOUS represses Class A in Whorls 3 & 4."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-7.3",
+      "title": "Figure 7.3: Signature Plant Genotyping: KASP Bi-Allelic SNP Cluster Plot & Agrobacterium Ti-Binary Vector",
+      "sub_module_ref": "7.5",
+      "thumbnail_caption": "Endpoint FAM vs. HEX fluorescence allelic discrimination plot (AA, Aa, aa, NTC) alongside T-DNA Left/Right Border binary vector architecture. Tap to expand.",
+      "svg_template_id": "svg_plant_genotyping_snp_7_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. KASP / TAQMAN SNP ALLELIC DISCRIMINATION PLOT</text><text x='440' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. AGROBACTERIUM T-DNA BINARY VECTOR</text><line x1='415' y1='20' x2='415' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><line x1='75' y1='265' x2='375' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='75' y1='65' x2='75' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='75' y1='265' x2='355' y2='75' stroke='#1e3a5f' stroke-dasharray='4,4'/><circle cx='95' cy='248' r='16' fill='rgba(160, 196, 226, 0.2)' stroke='#a0c4e2' stroke-dasharray='3,3'/><text x='135' y='252' fill='#a0c4e2' font-family='monospace' font-size='10'>NTC (Blank)</text><ellipse cx='115' cy='105' rx='28' ry='18' fill='rgba(255, 107, 139, 0.25)' stroke='#ff6b8b' stroke-width='2'/><circle cx='110' cy='102' r='4' fill='#ff6b8b'/><circle cx='122' cy='108' r='4' fill='#ff6b8b'/><circle cx='114' cy='112' r='4' fill='#ff6b8b'/><text x='160' y='92' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold'>Homozygous Allele Y (aa)</text><ellipse cx='265' cy='125' rx='28' ry='18' fill='rgba(0, 255, 135, 0.25)' stroke='#00ff87' stroke-width='2'/><circle cx='260' cy='122' r='4' fill='#00ff87'/><circle cx='272' cy='128' r='4' fill='#00ff87'/><circle cx='264' cy='132' r='4' fill='#00ff87'/><text x='265' y='95' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Heterozygous F1/F2 (Aa)</text><ellipse cx='325' cy='235' rx='28' ry='18' fill='rgba(0, 242, 254, 0.25)' stroke='#00f2fe' stroke-width='2'/><circle cx='320' cy='232' r='4' fill='#00f2fe'/><circle cx='332' cy='238' r='4' fill='#00f2fe'/><circle cx='324' cy='242' r='4' fill='#00f2fe'/><text x='325' y='205' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Homozygous Allele X (AA)</text><text x='225' y='292' fill='#00f2fe' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Allele X Fluorescence (FAM — RFU)</text><text x='35' y='165' fill='#ff6b8b' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle' transform='rotate(-90 35 165)'>Allele Y (HEX / VIC)</text><rect x='445' y='115' width='340' height='65' rx='10' fill='#102a43' stroke='#4facfe' stroke-width='2'/><rect x='455' y='105' width='28' height='85' rx='4' fill='#ffca28'/><text x='469' y='95' fill='#ffca28' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>LB</text><rect x='495' y='125' width='95' height='45' rx='6' fill='#381d2a' stroke='#ff6b8b' stroke-width='1.5'/><text x='542' y='145' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Plant Marker</text><text x='542' y='160' fill='#ffb8c6' font-family='monospace' font-size='9' text-anchor='middle'>NOS-P :: nptII (KanR)</text><rect x='602' y='125' width='130' height='45' rx='6' fill='#0b382c' stroke='#00ff87' stroke-width='1.5'/><text x='667' y='145' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Gene of Interest</text><text x='667' y='160' fill='#a0e2c4' font-family='monospace' font-size='9' text-anchor='middle'>CaMV 35S :: Transgene</text><rect x='745' y='105' width='28' height='85' rx='4' fill='#ffca28'/><text x='759' y='95' fill='#ffca28' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>RB (5')</text><text x='615' y='220' fill='#00f2fe' font-family='monospace' font-size='11' text-anchor='middle'>VirD2 nicks 25-bp Right Border (RB) &amp; pilots ssDNA T-Strand</text><text x='615' y='245' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>Acetosyringone (Wound Phenolic) → VirA/VirG → VirB/D4 T4SS Transfer</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-7-3a",
+          "x_pct": 32.3,
+          "y_pct": 36.7,
+          "label": "Co-Dominant Heterozygote Cluster (Aa)",
+          "scale_link": "assay",
+          "detail": "In KASP or TaqMan SNP genotyping, F1/F2 heterozygotes cleave both FAM and HEX probes equally, clustering at a 45° angle between the two homozygous axes."
+        },
+        {
+          "pin_id": "pin-7-3b",
+          "x_pct": 92.5,
+          "y_pct": 43.0,
+          "label": "Right Border (RB) Polarity & VirD2",
+          "scale_link": "10nm",
+          "detail": "T-DNA transfer is directional (5' -> 3' from Right Border to Left Border). Placing the selectable marker (nptII) near the Left Border ensures recovered kanamycin-resistant plants received the entire T-DNA."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_plant_water_potential_spac_7_2",
+      "title": "Plant Water Potential (Ψw), Van 't Hoff Solute Potential & Turgor Simulator",
+      "sub_module_ref": "7.2",
+      "type": "plant-biophysics-calculator",
+      "description": "Configure intracellular sucrose molarity (C), ionization factor (i), temperature (T), cell wall turgor pressure (Ψp), and external soil water potential (Ψw,soil) to compute cellular Solute Potential (Ψs), Total Water Potential (Ψw,cell), and the direction of osmotic water flux.",
+      "controls": [
+        {
+          "id": "sucrose_molarity_m",
+          "label": "Intracellular Solute Molarity (C)",
+          "min": 0.05,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.3,
+          "unit": "M (mol/L)"
+        },
+        {
+          "id": "vant_hoff_i",
+          "label": "Van 't Hoff Ionization Factor (i; 1=Sucrose, 2=NaCl)",
+          "min": 1.0,
+          "max": 3.0,
+          "step": 0.5,
+          "default": 1.0,
+          "unit": "ions/formula"
+        },
+        {
+          "id": "turgor_psi_p",
+          "label": "Cell Wall Turgor Pressure (Ψp)",
+          "min": 0.0,
+          "max": 1.5,
+          "step": 0.05,
+          "default": 0.35,
+          "unit": "MPa"
+        },
+        {
+          "id": "soil_psi_w",
+          "label": "External Soil Solution Water Potential (Ψw,soil)",
+          "min": -2.0,
+          "max": 0.0,
+          "step": 0.05,
+          "default": -0.2,
+          "unit": "MPa"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "solute_potential_mpa",
+          "label": "Cellular Solute / Osmotic Potential (Ψs = -iCRT at 298 K)",
+          "formula_js": "-vant_hoff_i * sucrose_molarity_m * 0.008314 * 298",
+          "unit": "MPa"
+        },
+        {
+          "output_id": "cell_total_psi_w",
+          "label": "Total Cellular Water Potential (Ψw,cell = Ψs + Ψp)",
+          "formula_js": "(-vant_hoff_i * sucrose_molarity_m * 0.008314 * 298) + turgor_psi_p",
+          "unit": "MPa"
+        },
+        {
+          "output_id": "driving_gradient_mpa",
+          "label": "Inward Water Driving Force (ΔΨw = Ψw,soil - Ψw,cell; >0 = Endosmosis)",
+          "formula_js": "soil_psi_w - ((-vant_hoff_i * sucrose_molarity_m * 0.008314 * 298) + turgor_psi_p)",
+          "unit": "MPa"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_c3_c4_photosynthesis_phytochrome_7_3",
+      "title": "C3 vs. C4 Photosynthetic Energetics & Phytochrome Photoequilibrium Simulator",
+      "sub_module_ref": "7.3",
+      "type": "photosynthesis-photobiology-simulator",
+      "description": "Calculate total ATP and NADPH molecules required to synthesize hexose/sucrose in C3 (with variable photorespiration oxygenation ratio) versus C4 pathways, and evaluate active nuclear Phytochrome fraction (Pfr / P_total).",
+      "controls": [
+        {
+          "id": "co2_fixed_moles",
+          "label": "Moles of CO2 Fixed into Carbohydrate (6 = 1 Hexose)",
+          "min": 3,
+          "max": 36,
+          "step": 3,
+          "default": 6,
+          "unit": "mol CO2"
+        },
+        {
+          "id": "photorespiration_ratio",
+          "label": "Rubisco Oxygenation-to-Carboxylation Ratio (v_o / v_c in C3)",
+          "min": 0.0,
+          "max": 0.5,
+          "step": 0.05,
+          "default": 0.25,
+          "unit": "ratio"
+        },
+        {
+          "id": "red_far_red_ratio",
+          "label": "Incident Light Red : Far-Red Ratio (R:FR)",
+          "min": 0.1,
+          "max": 1.5,
+          "step": 0.1,
+          "default": 1.2,
+          "unit": "ratio"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "c3_atp_ideal",
+          "label": "C3 Ideal ATP Cost (0% Photorespiration: 3 ATP / CO2)",
+          "formula_js": "3 * co2_fixed_moles",
+          "unit": "mol ATP"
+        },
+        {
+          "output_id": "c3_atp_with_photoresp",
+          "label": "C3 Actual ATP Cost with Photorespiration",
+          "formula_js": "co2_fixed_moles * ((3 + (3.5 * photorespiration_ratio)) / (1 - (0.5 * photorespiration_ratio)))",
+          "unit": "mol ATP"
+        },
+        {
+          "output_id": "c4_atp_cost",
+          "label": "C4 Pathway ATP Cost (5 ATP / CO2 via PPDK)",
+          "formula_js": "5 * co2_fixed_moles",
+          "unit": "mol ATP"
+        },
+        {
+          "output_id": "pfr_ptotal_fraction",
+          "label": "Active Phytochrome Photoequilibrium (Pfr / P_total)",
+          "formula_js": "0.85 * (red_far_red_ratio / (0.35 + red_far_red_ratio))",
+          "unit": "fraction"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-7.1",
+      "title": "Plant Water Potential (Ψw) & Van 't Hoff Osmotic/Solute Potential (Ψs)",
+      "latex": "\\Psi_w = \\Psi_s + \\Psi_p + \\Psi_g + \\Psi_m, \\qquad \\Psi_s = -iCRT, \\qquad \\Psi_g = \\rho_w g h \\approx +0.01\\text{ MPa/m}",
+      "description": "Governs passive water movement across cell membranes and through the xylem column from higher (less negative) Ψw to lower (more negative) Ψw.",
+      "variables": [
+        {
+          "symbol": "\\Psi_w, \\Psi_s, \\Psi_p",
+          "definition": "Total water potential, solute potential (≤ 0), and hydrostatic pressure/turgor potential",
+          "unit": "MPa (1 MPa = 10 bar)"
+        },
+        {
+          "symbol": "i",
+          "definition": "Van 't Hoff dissociation factor (1.0 for sucrose/glucose; ~1.8–2.0 for NaCl)",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "C",
+          "definition": "Molarity of dissolved solutes",
+          "unit": "mol/L (M)"
+        },
+        {
+          "symbol": "R",
+          "definition": "Pressure gas constant = 0.008314 L·MPa/(mol·K) [so RT ≈ 2.478 L·MPa/mol at 25°C]",
+          "unit": "L·MPa/(mol·K)"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-7.2",
+      "title": "Photosynthetic Quantum Yield (Φ), Quantum Requirement & Z-Scheme Stoichiometry",
+      "latex": "\\Phi = \\frac{\\text{Moles of O}_2\\text{ evolved (or CO}_2\\text{ fixed)}}{\\text{Moles of photons (Einsteins) absorbed}}, \\qquad \\text{Theoretical Min}: 8\\text{ photons (4 PSII + 4 PSI)} \\longrightarrow 1\\text{ O}_2 + 2\\text{ NADPH} + \\sim 3\\text{ ATP}",
+      "description": "Relates absorbed light quanta to photochemical electron transfer (2 H2O -> O2 + 4 H+ + 4 e- requires 4 turnovers of PSII and 4 turnovers of PSI = 8 photons minimum; empirically 9–10 photons).",
+      "variables": [
+        {
+          "symbol": "\\Phi",
+          "definition": "Maximum quantum yield of photosynthesis (theoretical max = 1/8 = 0.125 mol O2/mol quanta; C3 empirical ~0.09–0.10)",
+          "unit": "mol / Einstein"
+        },
+        {
+          "symbol": "1/\\Phi",
+          "definition": "Quantum requirement (minimum number of photons required per O2 evolved or CO2 fixed)",
+          "unit": "photons / O2"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-7.3",
+      "title": "Calvin-Benson Cycle (C3) vs. C4 Pathway Bioenergetic Stoichiometry",
+      "latex": "\\text{C}_3\\text{ Hexose}: 6\\text{ CO}_2 + 18\\text{ ATP} + 12\\text{ NADPH} \\rightarrow \\text{C}_6\\text{H}_{12}\\text{O}_6, \\qquad \\text{C}_4\\text{ Hexose}: 6\\text{ CO}_2 + 30\\text{ ATP} + 12\\text{ NADPH} \\rightarrow \\text{C}_6\\text{H}_{12}\\text{O}_6",
+      "description": "Compares the baseline ATP and NADPH budget per fixed carbon (3 ATP : 2 NADPH in C3 vs. 5 ATP : 2 NADPH in C4 due to AMP -> ATP regeneration by PPDK + adenylate kinase).",
+      "variables": [
+        {
+          "symbol": "\\text{ATP/CO}_2",
+          "definition": "3.0 in C3 (without photorespiration); 5.0 in C4; increases sharply in C3 as photorespiration rises",
+          "unit": "mol ATP / mol CO2"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-7.4",
+      "title": "Rubisco Carboxylation vs. Oxygenation Selectivity Factor (S_rel)",
+      "latex": "\\frac{v_c}{v_o} = S_{\\text{rel}} \\cdot \\frac{[\\text{CO}_2]}{[\\text{O}_2]} \\quad \\text{where } S_{\\text{rel}} = \\frac{V_{\\max,c} / K_{m,c}}{V_{\\max,o} / K_{m,o}}",
+      "description": "Determines the ratio of Rubisco carboxylation velocity (v_c, Calvin cycle) to oxygenation velocity (v_o, C2 photorespiration) as a function of dissolved [CO2]/[O2] and enzyme specificity factor S_rel (~80–100 in higher plants).",
+      "variables": [
+        {
+          "symbol": "v_c, v_o",
+          "definition": "Rates of RuBP carboxylation and oxygenation",
+          "unit": "μmol/(mg·min)"
+        },
+        {
+          "symbol": "S_{\\text{rel}}",
+          "definition": "Rubisco relative specificity factor for CO2 over O2",
+          "unit": "dimensionless"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-7.5",
+      "title": "Phytochrome Photoequilibrium (Φ_λ) & Beer-Lambert Chlorophyll Quantification (Arnon Equations)",
+      "latex": "\\Phi_{\\lambda} = \\frac{[\\text{P}_{\\text{fr}}]}{[\\text{P}_{\\text{total}}]} = \\frac{[\\text{P}_{\\text{fr}}]}{[\\text{P}_{\\text{r}}] + [\\text{P}_{\\text{fr}}]}, \\qquad \\text{Chl } a\\ (\\mu\\text{g/mL}) = 12.7 A_{663} - 2.69 A_{645}, \\qquad \\text{Chl } b\\ (\\mu\\text{g/mL}) = 22.9 A_{645} - 4.68 A_{663}",
+      "description": "Defines the fraction of total phytochrome in the active Pfr state at wavelength λ (~0.85 in Red light; ~0.02 in Far-Red light) and Arnon's simultaneous spectrophotometric equations for Chlorophyll a and b in 80% acetone.",
+      "variables": [
+        {
+          "symbol": "\\Phi_{\\lambda}",
+          "definition": "Photoequilibrium fraction of active Pfr",
+          "unit": "0 to 1"
+        },
+        {
+          "symbol": "A_{663}, A_{645}",
+          "definition": "Absorbance of 80% acetone leaf pigment extract at 663 nm and 645 nm (1 cm pathlength)",
+          "unit": "AU"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-7.1",
+        "title": "Thermodynamics of Plant Water Potential: Root Cortical Cell vs. Soil Solution & Turgor Loss Point",
+        "difficulty": "Foundational",
+        "statement": "A root cortical cell of a dicot seedling contains dissolved solutes equivalent to C = 0.250 M sucrose (non-ionizing, i = 1.0) at a soil temperature of 25°C (298 K) and exhibits a positive cell wall turgor pressure of Ψp = +0.320 MPa. The surrounding soil water contains dissolved mineral salts with a total water potential of Ψw,soil = -0.180 MPa (ignore gravity Ψg at root level, and use R = 0.008314 L·MPa·mol^-1·K^-1). Calculate: (a) the solute potential (Ψs) and total water potential (Ψw,cell) of the root cortical cell, (b) the direction and magnitude of the water potential driving force (ΔΨw) between soil and cell, and (c) the equilibrium turgor pressure (Ψp,eq) the cell will reach once water movement ceases.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the intracellular solute potential (Ψs = -iCRT) at T = 298 K:",
+            "equation_latex": "\\Psi_s = -(1.0)(0.250\\text{ mol/L})(0.008314\\text{ L}\\cdot\\text{MPa}\\cdot\\text{mol}^{-1}\\cdot\\text{K}^{-1})(298\\text{ K}) = -0.6194\\text{ MPa} \\approx -0.620\\text{ MPa}"
+          },
+          {
+            "step": 2,
+            "explanation": "Add the turgor pressure potential (Ψp = +0.320 MPa) to obtain the cell's total water potential (Ψw,cell):",
+            "equation_latex": "\\Psi_{w,\\text{cell}} = \\Psi_s + \\Psi_p = -0.620\\text{ MPa} + 0.320\\text{ MPa} = -0.300\\text{ MPa}"
+          },
+          {
+            "step": 3,
+            "explanation": "Compare Ψw,soil (-0.180 MPa) and Ψw,cell (-0.300 MPa). Since -0.180 MPa > -0.300 MPa, water flows spontaneously from the soil INTO the root cell:",
+            "equation_latex": "\\Delta\\Psi_w = \\Psi_{w,\\text{soil}} - \\Psi_{w,\\text{cell}} = (-0.180) - (-0.300) = +0.120\\text{ MPa (Endosmosis into root cell)}"
+          },
+          {
+            "step": 4,
+            "explanation": "At osmotic equilibrium (assuming negligible cell volume change due to the rigid cell wall), Ψw,cell equals Ψw,soil (-0.180 MPa):",
+            "equation_latex": "\\Psi_{p,\\text{eq}} = \\Psi_{w,\\text{soil}} - \\Psi_s = -0.180\\text{ MPa} - (-0.620\\text{ MPa}) = +0.440\\text{ MPa}"
+          }
+        ],
+        "final_answer": "(a) Ψs = -0.620 MPa, Ψw,cell = -0.300 MPa; (b) Water flows from soil into the root cell driven by ΔΨw = +0.120 MPa; (c) Equilibrium turgor pressure Ψp,eq = +0.440 MPa."
+      },
+      {
+        "problem_id": "SP-7.2",
+        "title": "Xylem Cohesion-Tension Biophysics across a 100-Meter Giant Sequoia Tree",
+        "difficulty": "Intermediate",
+        "statement": "In a 100-meter-tall Coast Redwood (Sequoia sempervirens), water is pulled from the base of the trunk (height h = 0 m, where xylem water potential is Ψw,base = -0.20 MPa) to the uppermost canopy leaves at h = 100 m. Assume xylem sap has a negligible solute concentration (Ψs,xylem ≈ -0.02 MPa throughout), the gravitational potential gradient is ρ_w·g = +0.0098 MPa/m (~0.010 MPa/m), and viscous frictional resistance through tracheids requires an additional pressure drop of -0.015 MPa/m during midday transpiration. Calculate: (a) the gravitational potential (Ψg) at the 100 m canopy top, (b) the minimum negative hydrostatic tension (Ψp,top) and total xylem water potential (Ψw,top) required in the upper canopy xylem to sustain upward transpiration flow.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the gravitational potential component (Ψg = ρ_w·g·h) at h = 100 m relative to the ground:",
+            "equation_latex": "\\Psi_{g,\\text{top}} = (+0.0098\\text{ MPa/m})(100\\text{ m}) = +0.98\\text{ MPa} \\approx +1.00\\text{ MPa}"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate the frictional pressure drop required to pull water through 100 m of tracheid conduits:",
+            "equation_latex": "\\Delta\\Psi_{\\text{friction}} = (-0.015\\text{ MPa/m})(100\\text{ m}) = -1.50\\text{ MPa}"
+          },
+          {
+            "step": 3,
+            "explanation": "To overcome frictional resistance (-1.50 MPa) starting from Ψw,base = -0.20 MPa, total xylem water potential at the canopy top must be:",
+            "equation_latex": "\\Psi_{w,\\text{top}} = \\Psi_{w,\\text{base}} + \\Delta\\Psi_{\\text{friction}} = -0.20\\text{ MPa} - 1.50\\text{ MPa} = -1.70\\text{ MPa}"
+          },
+          {
+            "step": 4,
+            "explanation": "Substitute Ψw,top = -1.70 MPa, Ψs = -0.02 MPa, and Ψg = +0.98 MPa into Ψw = Ψs + Ψp + Ψg to solve for the xylem hydrostatic tension (Ψp,top):",
+            "equation_latex": "\\Psi_{p,\\text{top}} = \\Psi_{w,\\text{top}} - \\Psi_s - \\Psi_{g,\\text{top}} = -1.70 - (-0.02) - 0.98 = -2.66\\text{ MPa} \\quad (-26.6\\text{ atmospheres of tension!})"
+          }
+        ],
+        "final_answer": "(a) Ψg = +0.98 MPa; (b) Total canopy xylem water potential Ψw,top = -1.70 MPa, requiring a negative hydrostatic tension of Ψp,top = -2.66 MPa."
+      },
+      {
+        "problem_id": "SP-7.3",
+        "title": "Bioenergetics of C3 vs. C4 Photosynthesis & Photorespiratory ATP/NADPH Penalty",
+        "difficulty": "Advanced",
+        "statement": "Compare the bioenergetic cost of synthesizing 1 mole of Sucrose (C12H22O11, requiring 12 moles of CO2 fixed into four triose-phosphates, plus 1 UTP [= 1 ATP equivalent] for UDP-glucose formation by sucrose-phosphate synthase) in: (a) a C3 plant (e.g., rice) operating at 15°C in high CO2 where photorespiration is negligible (v_o = 0), (b) a C4 plant (e.g., maize) operating at 35°C where PEP carboxylase + PPDK suppresses photorespiration to zero, and (c) the C3 plant operating at 35°C where Rubisco catalyzes 1 oxygenation reaction for every 3 carboxylation reactions (v_o / v_c = 1/3).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "In an ideal C3 plant (v_o = 0), fixing 1 mol CO2 into triose-P requires 3 ATP and 2 NADPH. For 12 mol CO2 (4 triose-P -> 2 hexose-P -> 1 sucrose + 1 UTP):",
+            "equation_latex": "\\text{C}_3\\text{ (No Photorespiration)}: \\quad \\text{ATP} = 12(3) + 1\\text{ (UTP)} = 37\\text{ mol ATP}, \\qquad \\text{NADPH} = 12(2) = 24\\text{ mol NADPH}"
+          },
+          {
+            "step": 2,
+            "explanation": "In a C4 plant, regenerating PEP from pyruvate via PPDK (Pyruvate + ATP + Pi -> PEP + AMP + PPi) consumes 2 ATP equivalents per CO2 fixed (total 5 ATP and 2 NADPH per CO2):",
+            "equation_latex": "\\text{C}_4\\text{ Pathway}: \\quad \\text{ATP} = 12(5) + 1\\text{ (UTP)} = 61\\text{ mol ATP}, \\qquad \\text{NADPH} = 12(2) = 24\\text{ mol NADPH}"
+          },
+          {
+            "step": 3,
+            "explanation": "In a C3 plant with v_o / v_c = 1/3 (3 carboxylations : 1 oxygenation): 3 carboxylations fix 3 CO2, while 1 oxygenation produces one 2-phosphoglycolate (requiring 0.5 cycles of the C2 salvage pathway, which releases 0.5 CO2). Thus, net carbon fixed per 3 carboxylations + 1 oxygenation = 3 - 0.5 = 2.5 net CO2:",
+            "equation_latex": "\\text{ATP per 3 } v_c + 1\\ v_o = 3(3\\text{ ATP}) + 1(3.5\\text{ ATP}) = 12.5\\text{ ATP for } 2.5\\text{ net CO}_2 \\implies \\frac{12.5}{2.5} = 5.0\\text{ ATP / net CO}_2"
+          },
+          {
+            "step": 4,
+            "explanation": "Similarly, NADPH equivalents per 3 v_c + 1 v_o = 3(2) + 1(2) = 8.0 NADPH for 2.5 net CO2 (= 3.2 NADPH / net CO2). For 12 net CO2 into sucrose (+1 UTP):",
+            "equation_latex": "\\text{C}_3\\text{ at 35}^\\circ\\text{C }(v_o/v_c = 1/3): \\quad \\text{ATP} = 12(5.0) + 1 = 61\\text{ mol ATP}, \\qquad \\text{NADPH} = 12(3.2) = 38.4\\text{ mol NADPH}"
+          }
+        ],
+        "final_answer": "(a) Ideal C3: 37 ATP + 24 NADPH; (b) C4: 61 ATP + 24 NADPH; (c) C3 with v_o/v_c = 1/3: 61 ATP + 38.4 NADPH (at 35°C, C3 wastes 14.4 extra moles of NADPH per sucrose compared to C4!)."
+      },
+      {
+        "problem_id": "SP-7.4",
+        "title": "Spectrophotometric Chlorophyll a & b Quantification (Arnon Method) in Leaf Extracts",
+        "difficulty": "Foundational",
+        "statement": "To compare chlorophyll retention in a stay-green mutant vs. wild-type rice leaf, a plant physiologist grinds 0.250 g (250 mg) of fresh leaf tissue in 10.0 mL of 80% (v/v) aqueous acetone, centrifuges the homogenate, and measures the absorbance of the clear supernatant in a 1.0 cm cuvette against an 80% acetone blank, obtaining: A_663 = 0.800 and A_645 = 0.300. Using Arnon's simultaneous equations, calculate: (a) the concentrations of Chlorophyll a, Chlorophyll b, and Total Chlorophyll in the acetone extract (in μg/mL), (b) the Chlorophyll a : b ratio, and (c) the Total Chlorophyll content expressed in mg per gram of fresh leaf weight (mg/g FW).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Substitute A_663 = 0.800 and A_645 = 0.300 into Arnon's equation for Chlorophyll a (μg/mL):",
+            "equation_latex": "[\\text{Chl } a] = 12.7(A_{663}) - 2.69(A_{645}) = 12.7(0.800) - 2.69(0.300) = 10.160 - 0.807 = 9.353\\ \\mu\\text{g/mL}"
+          },
+          {
+            "step": 2,
+            "explanation": "Substitute A_663 and A_645 into Arnon's equation for Chlorophyll b (μg/mL):",
+            "equation_latex": "[\\text{Chl } b] = 22.9(A_{645}) - 4.68(A_{663}) = 22.9(0.300) - 4.68(0.800) = 6.870 - 3.744 = 3.126\\ \\mu\\text{g/mL}"
+          },
+          {
+            "step": 3,
+            "explanation": "Compute Total Chlorophyll concentration and the Chl a / Chl b ratio:",
+            "equation_latex": "[\\text{Chl}_{\\text{total}}] = 9.353 + 3.126 = 12.479\\ \\mu\\text{g/mL}, \\qquad \\frac{\\text{Chl } a}{\\text{Chl } b} = \\frac{9.353}{3.126} = 2.99 \\approx 3.0:1"
+          },
+          {
+            "step": 4,
+            "explanation": "Convert extract concentration (12.479 μg/mL in V = 10.0 mL total extract from W = 0.250 g tissue) into mg/g Fresh Weight:",
+            "equation_latex": "\\text{Total Chl (mg/g FW)} = \\frac{12.479\\ \\mu\\text{g/mL} \\times 10.0\\text{ mL}}{1000\\ \\mu\\text{g/mg} \\times 0.250\\text{ g FW}} = \\frac{0.12479\\text{ mg}}{0.250\\text{ g}} = 0.499\\text{ mg/g FW}"
+          }
+        ],
+        "final_answer": "(a) Chl a = 9.35 μg/mL, Chl b = 3.13 μg/mL, Total Chl = 12.48 μg/mL; (b) Chl a : b ratio = 2.99 (~3:1, typical of sun-adapted C3 leaves); (c) 0.50 mg Chl / g Fresh Weight."
+      },
+      {
+        "problem_id": "SP-7.5",
+        "title": "Plant Genotyping: Formulating 100 mL of CTAB Extraction Buffer & Interpreting Co-Dominant F2 Markers",
+        "difficulty": "Intermediate",
+        "statement": "Part A: A plant molecular breeding laboratory prepares 100.0 mL of fresh 1× CTAB DNA Extraction Buffer containing: 2.0% (w/v) CTAB, 1.40 M NaCl (MW = 58.44 g/mol), 100 mM Tris-HCl pH 8.0 (from a 1.0 M stock), 20 mM EDTA pH 8.0 (from a 0.50 M stock), 1.5% (w/v) PVP-40, and 0.3% (v/v) β-Mercaptoethanol (added just before use). Calculate the exact masses (in g) of solid CTAB, NaCl, and PVP-40, and the volumes (in mL) of 1.0 M Tris-HCl, 0.50 M EDTA, and β-Mercaptoethanol required.\nPart B: You genotype 200 F2 rice seedlings for a co-dominant SSR marker tightly linked (0 cM) to the bacterial blight resistance gene Xa21, observing 48 homozygous resistant (P1 band: 250 bp), 104 heterozygous (250 bp + 190 bp bands), and 48 homozygous susceptible (P2 band: 190 bp) seedlings. How many individual alleles were scored across the 200 diploid plants, and what are the exact allele frequencies p (250 bp) and q (190 bp)?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Part A, calculate the masses of solid reagents for V = 100.0 mL (0.100 L):",
+            "equation_latex": "\\text{Mass}_{\\text{CTAB}} = 2.0\\% \\times 100\\text{ mL} = 2.00\\text{ g}, \\qquad \\text{Mass}_{\\text{PVP-40}} = 1.5\\% \\times 100\\text{ mL} = 1.50\\text{ g}"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate the mass of NaCl (Molarity × Volume_L × MW):",
+            "equation_latex": "\\text{Mass}_{\\text{NaCl}} = (1.40\\text{ mol/L})(0.100\\text{ L})(58.44\\text{ g/mol}) = 8.18\\text{ g NaCl}"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the liquid stock volumes using C1·V1 = C2·V2:",
+            "equation_latex": "V_{\\text{Tris}} = \\frac{100\\text{ mM} \\times 100\\text{ mL}}{1000\\text{ mM}} = 10.0\\text{ mL}, \\qquad V_{\\text{EDTA}} = \\frac{20\\text{ mM} \\times 100\\text{ mL}}{500\\text{ mM}} = 4.00\\text{ mL}, \\qquad V_{\\beta\\text{-ME}} = 0.3\\% \\times 100\\text{ mL} = 0.300\\text{ mL } (300\\ \\mu\\text{L})"
+          },
+          {
+            "step": 4,
+            "explanation": "For Part B, 200 diploid plants contain 2 × 200 = 400 total alleles. Because the SSR marker is co-dominant, count alleles directly:",
+            "equation_latex": "p = \\frac{2(48) + 104}{400} = \\frac{200}{400} = 0.500, \\qquad q = \\frac{2(48) + 104}{400} = \\frac{200}{400} = 0.500"
+          }
+        ],
+        "final_answer": "Part A: 2.00 g CTAB, 8.18 g NaCl, 1.50 g PVP-40, 10.0 mL 1M Tris-HCl, 4.00 mL 0.5M EDTA, and 0.30 mL (300 μL) β-Mercaptoethanol brought to 100 mL with dH2O; Part B: 400 alleles scored; p = 0.500 and q = 0.500."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-7.1",
+        "question": "A flaccid plant mesophyll cell (initial Ψp = 0 MPa) with a solute potential of Ψs = -0.75 MPa is placed in a beaker of pure distilled water (Ψw = 0 MPa). Assuming cell volume changes by less than 2%, what are the cell's Ψs, Ψp, and total Ψw at full turgor equilibrium?",
+        "bold_answer": "Ψs = -0.75 MPa, Ψp = +0.75 MPa, and Total Ψw = 0.00 MPa",
+        "collapsible_derivation": "Water enters the cell from the pure water bath (Ψw = 0 MPa) until the cell's total water potential equals that of the bath (Ψw,cell = 0 MPa). Since Ψw = Ψs + Ψp = 0 and Ψs remains -0.75 MPa, hydrostatic turgor pressure builds to Ψp = -Ψs = +0.75 MPa."
+      },
+      {
+        "problem_id": "PP-7.2",
+        "question": "Lettuce seeds (Lactuca sativa) are imbibed in water in darkness and exposed to the following sequence of brief monochromatic light flashes: Red (660 nm) -> Far-Red (730 nm) -> Red (660 nm) -> Far-Red (730 nm). Will the seeds germinate or remain dormant, and why?",
+        "bold_answer": "Remain Dormant; the final flash is Far-Red (730 nm), which converts active Pfr back into inactive Pr",
+        "collapsible_derivation": "Phytochrome photoreversibility obeys the 'last-flash rule': regardless of how many alternating flashes precede it, the final flash of Far-Red light (730 nm) converts ~98% of active nuclear Pfr back into inactive Pr, allowing PIF1 (PIL5) to maintain ABA biosynthesis and repress Gibberellin synthesis, keeping the seeds dormant."
+      },
+      {
+        "problem_id": "PP-7.3",
+        "question": "In Arabidopsis thaliana, what floral organ arrangement (from outermost Whorl 1 to innermost Whorl 4) will develop in a double mutant lacking both Class B and Class C homeotic gene function (genotype: ap3/ap3 ag/ag, or b- c-)?",
+        "bold_answer": "Sepal — Sepal — Sepal — Sepal (indeterminate repeating whorls of Sepals only)",
+        "collapsible_derivation": "Without Class C (agamous), Class A activity expands from Whorls 1–2 into Whorls 3–4 (and floral meristem determinacy is lost). Without Class B (ap3), petals and stamens cannot form. Consequently, Class A (+ Class E SEPALLATA) acts alone across all four whorls, specifying Sepals in every whorl indeterminately."
+      },
+      {
+        "problem_id": "PP-7.4",
+        "question": "During a CTAB genomic DNA extraction from mature tea or mango leaves (which are exceptionally rich in tannins/polyphenols), a student forgets to add PVP and β-Mercaptoethanol, resulting in a dark brown DNA pellet that fails to amplify in PCR. What chemical reaction caused the brown color and PCR inhibition?",
+        "bold_answer": "Polyphenol Oxidase oxidized vacuolar polyphenols into o-quinones, which covalently cross-linked to DNA and co-precipitated to inhibit Taq Polymerase",
+        "collapsible_derivation": "Upon cell lysis, vacuolar polyphenols mix with plastid/cytosolic Polyphenol Oxidases (PPO) and oxygen, oxidizing into highly reactive ortho-quinones (brown pigment) that irreversibly alkylate and cross-link nucleophilic amine groups on DNA and inhibit Taq polymerase."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Ecophysiological & Biotech Case Study: Facultative CAM Induction in Portulacaria afra (Elephant Bush) & Golden Rice Provitamin A Metabolic Engineering",
+    "scenario": "Case A (Succulent Ecophysiology): A potted Portulacaria afra (Mini Jade / Elephant Bush) watered regularly exhibits daytime stomatal opening and C3-like gas exchange. When water is withheld for 14 days, daytime stomatal conductance drops to near zero, yet nocturnal vacuolar titratable acidity (malic acid) surges 10-fold between dusk and dawn. Case B (Plant Metabolic Engineering): Rice endosperm naturally lacks β-carotene (provitamin A), causing blindness in vitamin-A-deficient populations, even though the diterpene precursor Geranylgeranyl Diphosphate (GGPP) is abundant in rice grains.",
+    "mechanistic_analysis": "In Case A, Portulacaria afra is a classic C3–CAM facultative succulent. Under well-watered conditions, it operates via the lower-ATP-cost C3 pathway (3 ATP / CO2). Drought-induced Abscisic Acid (ABA) signaling transcriptionally upregulates nocturnal PEP Carboxylase (PEPC) and tonoplast V-type H+-ATPase/malate channels, switching the plant to Crassulacean Acid Metabolism (CAM) to cut transpiration water loss by ~85%. In Case B (Golden Rice 2 - Beyer & Potrykus), Agrobacterium-mediated co-transformation introduced just two missing enzymes under an endosperm-specific glutelin promoter—maize Phytoene Synthase (psy) and Erwinia uredovora Carotene Desaturase (crtI)—reconstituting the entire GGPP -> Phytoene -> Lycopene -> β-Carotene pathway in the grain.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook2",
+        "topic": "Chloroplast CF0CF1 c14-Ring ATP Synthase & V-Type Tonoplast H+-ATPase"
+      },
+      {
+        "target_textbook": "TextBook4",
+        "topic": "Marker-Assisted Backcrossing (MABC) & QTL LOD Mapping in Crops"
+      },
+      {
+        "target_textbook": "TextBook5",
+        "topic": "PCR Amplification, Agarose Gel Electrophoresis & KASP/TaqMan Chemistry"
+      },
+      {
+        "target_textbook": "TextBook6",
+        "topic": "Rhizobium Root Nodulation & Arbuscular Mycorrhizal Symbioses"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-7.1",
+      "question": "Why does cyclic electron flow around Photosystem I (PSI) become essential in the bundle sheath chloroplasts of C4 plants (such as maize) and during high-temperature stress?",
+      "options": [
+        "Cyclic electron flow oxidizes water at Photosystem I to release extra O2 for photorespiration",
+        "Cyclic electron flow transfers electrons from Ferredoxin back through Cytochrome b6f to pump protons and synthesize extra ATP without generating NADPH, matching the higher 5 ATP : 2 NADPH stoichiometry required by the C4 cycle",
+        "Cyclic electron flow directly fixes CO2 into oxaloacetate in the thylakoid lumen",
+        "Cyclic electron flow replaces Rubisco with PEP Carboxylase in C3 plants"
+      ],
+      "correct_index": 1,
+      "explanation": "Linear electron flow from H2O to NADP+ generates a fixed ratio of ~1.28 ATP per NADPH (2.57 ATP : 2 NADPH), which is insufficient for the C3 Calvin cycle (3 ATP : 2 NADPH) and especially for C4 bundle sheath cells (which require 2 extra ATP per CO2 for PPDK). Cyclic electron flow around PSI -> Fd -> Cyt b6f -> PC -> PSI pumps H+ to generate ATP exclusively."
+    },
+    {
+      "question_id": "Q-7.2",
+      "question": "How does Abscisic Acid (ABA) trigger rapid stomatal closure in guard cells during acute soil drought?",
+      "options": [
+        "ABA activates plasma membrane H+-ATPases to pump K+ into the guard cell vacuole",
+        "ABA binds PYR/PYL receptors to inhibit PP2C phosphatases, activating SnRK2 (OST1) kinases that open SLAC1 anion channels; Cl-/malate2- efflux depolarizes the membrane, driving K+ efflux and osmotic water loss (turgor drop)",
+        "ABA cleaves cellulose microfibrils in the guard cell wall via expansins",
+        "ABA converts C3 Rubisco into C4 PEP Carboxylase inside guard cells"
+      ],
+      "correct_index": 1,
+      "explanation": "Stomatal closure requires guard cell turgor loss. ABA-bound PYR/PYL inhibits PP2C, releasing SnRK2 to phosphorylate and open SLAC1 anion channels. Anion efflux depolarizes the plasma membrane, opening outward-rectifying K+ channels; the massive efflux of K+ and anions raises intracellular Ψs (less negative), causing water to exit osmotically and the pore to close."
+    },
+    {
+      "question_id": "Q-7.3",
+      "question": "In Agrobacterium tumefaciens-mediated plant transformation, why is Acetosyringone routinely added to the bacterial co-cultivation medium when transforming monocot crops (such as rice or wheat)?",
+      "options": [
+        "Acetosyringone acts as a selective antibiotic that kills untransformed plant cells",
+        "Monocots naturally produce very low levels of wound phenolic compounds; exogenous Acetosyringone binds the bacterial VirA histidine kinase receptor to induce transcription of the vir operon required for T-DNA excision and transfer",
+        "Acetosyringone precipitates polysaccharides during CTAB DNA extraction",
+        "Acetosyringone inhibits the 3'->5' exonuclease of plant DNA polymerases"
+      ],
+      "correct_index": 1,
+      "explanation": "Dicot wounds naturally exude phenolic compounds like acetosyringone that activate the Agrobacterium VirA/VirG two-component system. Because wounded monocot tissues do not secrete sufficient phenolics to trigger vir gene induction, adding synthetic acetosyringone is essential for high-efficiency monocot T-DNA transfer."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "The War of the Whorls: Genetic Interactions Controlling Flower Development (Coen & Meyerowitz, Nature 1991) & Chemical Regulation of Growth and Organ Formation in Plant Tissues Cultured In Vitro (Skoog & Miller, 1957)",
+    "imrad_breakdown": {
+      "abstract_summary": "Skoog and Miller (1957) discovered that the quantitative ratio of auxin (IAA) to cytokinin (kinetin) controls whether cultured tobacco pith callus forms roots, shoots, or undifferentiated cells. Coen and Meyerowitz (1991) synthesized homeotic mutant studies in Arabidopsis thaliana and Antirrhinum majus to formulate the universal ABC model of floral organ identity.",
+      "key_method": "In vitro tobacco pith callus bioassays across a 2D matrix of IAA and kinetin concentrations; genetic epistasis analysis and in situ mRNA hybridization of MADS-box genes (AP1, AP2, AP3, PI, AG) in single, double, and triple floral mutants.",
+      "critical_takeaway": "Plant organogenesis and developmental identity are governed by quantitative combinatorial logic—whether hormone ratios in tissue culture regeneration or MADS-box transcription factor quartets in floral whorls."
+    },
+    "further_reading": [
+      "Taiz, L., Zeiger, E., Møller, I. M., & Murphy, A. Plant Physiology and Development — Chapters 3, 4, 7, 8, 9, 17 & 20 (Water Potential, Xylem/Phloem, Photosynthesis, Phytochrome & Floral Development).",
+      "Buchanan, B. B., Gruissem, W., & Jones, R. L. Biochemistry & Molecular Biology of Plants — Chloroplast Bioenergetics, Phytohormone Signaling & Agrobacterium Transformation.",
+      "Doyle, J. J., & Doyle, J. L. (1987). A Rapid DNA Isolation Procedure for Small Quantities of Fresh Leaf Tissue. Phytochemical Bulletin, 19, 11–15 (The Canonical CTAB Protocol)."
+    ]
+  }
+}

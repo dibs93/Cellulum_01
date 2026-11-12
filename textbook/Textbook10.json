@@ -1,0 +1,841 @@
+{
+  "textbook_id": "TextBook10",
+  "branch_number": 10,
+  "branch_title": "Developmental Biology: Fertilization, Embryogenesis, Morphogen Gradients, Stem Cell Pluripotency & Organogenesis",
+  "subtitle": "Acrosomal & Cortical Granule Mechanics, Cleavage & Gastrulation, Spemann-Mangold Organizer, Reaction-Diffusion Morphogen Physics & Hox Gene Collinearity",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Developmental Biology",
+    "upstream_nodes": [
+      "TextBook2",
+      "TextBook3",
+      "TextBook4",
+      "TextBook8"
+    ],
+    "downstream_nodes": [
+      "TextBook11",
+      "TextBook12",
+      "TextBook14"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Homeodomain DNA-Binding Helix",
+        "scale_m": 2.5e-9,
+        "display_scale": "2.5 nm (60 aa)",
+        "example": "Helix-turn-helix major-groove recognition by Hox / Bicoid TFs"
+      },
+      {
+        "level": "Morphogen Signaling Ligand",
+        "scale_m": 4.5e-9,
+        "display_scale": "4–6 nm (20–45 kDa)",
+        "example": "Secreted Sonic Hedgehog (Shh-N), BMP4, Nodal, Wnt3a"
+      },
+      {
+        "level": "Cortical Granule & Acrosomal Vesicle",
+        "scale_m": 2.5e-7,
+        "display_scale": "200–300 nm",
+        "example": "IP3/Ca2+-triggered oocyte exocytic block to polyspermy"
+      },
+      {
+        "level": "Mammalian Blastocyst & Inner Cell Mass",
+        "scale_m": 0.00012,
+        "display_scale": "100–150 μm",
+        "example": "Oct4/Nanog pluripotent ICM + Cdx2 trophectoderm"
+      },
+      {
+        "level": "Drosophila Syncytial Blastoderm & Amphibian Gastrula",
+        "scale_m": 0.0005,
+        "display_scale": "0.5–1.5 mm",
+        "example": "500 μm Bicoid AP gradient; Spemann-Mangold dorsal lip"
+      },
+      {
+        "level": "Vertebrate Somite & Limb Bud Field",
+        "scale_m": 0.003,
+        "display_scale": "1–5 mm",
+        "example": "Clock-and-wavefront somitogenesis; ZPA/AER limb patterning"
+      }
+    ],
+    "explorer_pathways": [
+      "Future Molecular Biologist",
+      "Geneticist",
+      "Biotechnologist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "10.1",
+      "title": "Fertilization, Polyspermy Blocks & Early Cleavage Mechanics",
+      "overview": "Development begins when a haploid sperm and haploid oocyte fuse to form a diploid zygote, triggering an intracellular Ca2+ wave that blocks polyspermy, restarts meiosis, and initiates rapid mitotic cleavage divisions without net cell growth.",
+      "core_concepts": [
+        {
+          "concept_id": "10.1.1",
+          "heading": "Chemotaxis, The Acrosomal Reaction & Fast vs. Slow Blocks to Polyspermy",
+          "theory": "Species-specific gamete recognition prevents cross-species hybridization and ensures monospermic fertilization. Penetration of a single sperm must immediately lock out additional sperm; polyspermy introduces multiple centrioles (in most animals), resulting in tripolar/multipolar mitotic spindles and lethal aneuploidy.",
+          "key_principles": [
+            "Sea Urchin (External) vs. Mammalian (Internal) Sperm Activation: In sea urchins, egg jelly Resact peptide attracts sperm chemotactically via a receptor guanylyl cyclase (↑cGMP -> Ca2+ influx), while sulfated polysaccharides trigger the Acrosomal Reaction—exocytosis of proteolytic enzymes and polymerization of G-actin into an Acrosomal Process coated with Bindin (which binds species-specific egg EBR1 receptors). In mammals, sperm must first undergo Capacitation in the female reproductive tract (cholesterol efflux via albumin, K+ hyperpolarization, and PKA tyrosine phosphorylation) before binding the Zona Pellucida glycoprotein ZP2/ZP3 and fusing with the oolemma via sperm Izumo1 and oocyte Juno (folate receptor 4).",
+            "Fast Block to Polyspermy (Electrical — Sea Urchins/Amphibians): Within 1–3 seconds of sperm-egg fusion, Na+ influx depolarizes the egg resting potential from -70 mV to +20 mV for ~60 seconds. Because sperm membrane fusion is voltage-sensitive, additional sperm cannot fuse at +20 mV (Note: Mammalian oocytes do NOT use an electrical fast block).",
+            "Slow Block to Polyspermy (Mechanical/Biochemical — The Cortical Granule Reaction): Sperm fusion activates Phospholipase C (PLCγ in echinoderms; sperm-delivered PLCζ in mammals), cleaving PIP2 into IP3 and DAG. IP3 opens ER IP3-receptor Ca2+ channels, launching a self-propagating wave of free Ca2+ (from ~50 nM to 1–5 μM) across the egg from the point of sperm entry. Ca2+ triggers exocytosis of ~15,000 sub-membranous Cortical Granules, releasing: (1) Cortical granule serine proteases (cleave vitelline-to-membrane protein posts) or Ovastacin (cleaves mammalian ZP2 so sperm can no longer bind); (2) Mucopolysaccharides (osmotically swell the perivitelline space to lift the Fertilization Envelope); and (3) Ovoperoxidase (cross-links tyrosine residues to harden the fertilization envelope)."
+          ]
+        },
+        {
+          "concept_id": "10.1.2",
+          "heading": "Cleavage Patterns, The Mid-Blastula Transition (MBT) & Blastocyst Compaction",
+          "theory": "Following pronuclear fusion, the zygote undergoes rapid mitotic divisions (Cleavage) that partition the large cytoplasmic volume into smaller nucleated blastomeres without G1/G2 growth phases (driven purely by maternal mRNAs and proteins).",
+          "key_principles": [
+            "Yolk Content & Cleavage Geometry: (1) Holoblastic (Complete) Cleavage occurs in isolecithal (sparse, even yolk: echinoderms [radial], mammals [rotational], nematodes [asymmetric], mollusks [spiral]) and mesolecithal eggs (moderate vegetal yolk: amphibians [displaced radial]); (2) Meroblastic (Incomplete) Cleavage occurs when dense yolk physically blocks cytokinesis—either Discoidal (birds, reptiles, teleost fish: cleavage restricted to the animal-pole blastodisc) or Superficial (insects like Drosophila: 13 rounds of nuclear karyokinesis without cytokinesis form a 6,000-nucleus Syncytial Blastoderm before cellularization).",
+            "The Mid-Blastula Transition (MBT) & Maternal-to-Zygotic Transition (MZT): As blastomere number doubles ($2^n$) while total cytoplasm stays constant, the Exponential Nuclear-to-Cytoplasmic (N/C) Volume Ratio rises until chromatin titrates out maternal replication factors and free histones (at Cycle 12 in Xenopus, Cycle 14 in Drosophila, and the 2- to 8-cell stage in mammals). This triggers the MBT: G1 and G2 phases appear, cell division becomes asynchronous, maternal mRNAs are cleared (e.g., via miR-430/Smaug), and Zygotic Genome Activation (ZGA) begins.",
+            "Mammalian Compaction & First Lineage Bifurcation: At the 8-cell morula stage, E-cadherin expression causes blastomeres to flatten tightly against one another (Compaction). Apico-basal polarization and Hippo signaling bifurcate cells into the outer Trophectoderm (polar cells: Hippo OFF -> nuclear Yap/Tead4 induces Cdx2 -> forms embryonic placenta/chorion) and the Inner Cell Mass (apolar interior cells: Hippo ON -> cytoplasmic phosphorylated Yap -> Oct4/Sox2/Nanog -> forms embryo proper)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Comparative Classification of Animal Cleavage Patterns by Egg Yolk Distribution",
+        "headers": [
+          "Cleavage Type",
+          "Yolk Amount & Distribution",
+          "Symmetry / Geometric Pattern",
+          "Representative Taxa"
+        ],
+        "rows": [
+          [
+            "Holoblastic — Isolecithal",
+            "Sparse, evenly distributed yolk",
+            "Radial (Sea urchin), Spiral (Mollusks), Rotational (Mammals), Bilateral (Tunicates)",
+            "Echinoderms, Snails, Mammals, C. elegans"
+          ],
+          [
+            "Holoblastic — Mesolecithal",
+            "Moderate yolk concentrated at vegetal pole",
+            "Displaced Radial (Faster division at animal pole -> micromeres vs. macromeres)",
+            "Amphibians (Xenopus laevis, Salamanders)"
+          ],
+          [
+            "Meroblastic — Telolecithal",
+            "Dense, abundant yolk throughout egg except animal disc",
+            "Discoidal (Cleavage restricted to thin cytoplasmic blastodisc) or Bilateral",
+            "Birds (Chick), Reptiles, Zebrafish, Cephalopods"
+          ],
+          [
+            "Meroblastic — Centrolecithal",
+            "Yolk concentrated in central core of egg",
+            "Superficial (Syncytial nuclear divisions migrate to periphery before cellularization)",
+            "Insects (Drosophila melanogaster) & Arthropods"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "10.2",
+      "title": "Embryogenesis, Gastrulation, The Spemann-Mangold Organizer & Germ Layer Specification",
+      "overview": "As Lewis Wolpert famously remarked, 'It is not birth, marriage, or death, but gastrulation which is truly the most important time in your life.' Gastrulation reorganizes the hollow blastula into a triploblastic embryo with Ectoderm, Mesoderm, and Endoderm along defined Anterior-Posterior and Dorsal-Ventral axes.",
+      "core_concepts": [
+        {
+          "concept_id": "10.2.1",
+          "heading": "Morphogenetic Cell Movements of Gastrulation & The Three Germ Layers",
+          "theory": "Gastrulation combines five coordinated epithelial and mesenchymal morphogenetic movements to internalize mesoderm and endoderm while spreading ectoderm over the exterior surface.",
+          "key_principles": [
+            "Five Canonical Gastrulation Movements: (1) Invagination: Infolding of an epithelial sheet via apical actomyosin constriction (e.g., sea urchin vegetal plate archenteron; Drosophila ventral furrow driven by Twist/Snail); (2) Involution: Inward rolling of an expanding outer layer over a blastopore lip (e.g., amphibian dorsal chordamesoderm); (3) Ingression: Epithelial-to-Mesenchymal Transition (EMT, downregulating E-cadherin via Snail/Slug) of individual cells migrating into the blastocoel (e.g., sea urchin Primary Mesenchyme Cells; amniote Primitive Streak / Hensen's Node); (4) Delamination: Splitting of one cellular sheet into two parallel layers (e.g., mammalian/avian hypoblast formation); (5) Epiboly: Thinning and spreading of animal-pole ectoderm to envelop the entire embryo via radial intercalation.",
+            "Triploblastic Germ Layer Derivatives: (1) Ectoderm: Surface Ectoderm (epidermis, hair, nails, lens/cornea, tooth enamel, anterior pituitary), Neural Tube (brain, spinal cord, motor neurons, retina, posterior pituitary), and Neural Crest ('the 4th germ layer': peripheral sensory/autonomic ganglia, Schwann cells, adrenal medulla chromaffin cells, melanocytes, craniofacial bone/cartilage, odontoblasts); (2) Mesoderm: Chordamesoderm (notochord), Paraxial/Somitic Mesoderm (sclerotome [vertebrae/ribs], myotome [skeletal muscle], dermatome [dermis]), Intermediate Mesoderm (kidneys, gonads), and Lateral Plate Mesoderm (heart, blood vessels, erythrocytes/leukocytes, smooth muscle, limb bones, adrenal cortex); (3) Endoderm: Epithelial lining of the GI tract, respiratory tract (trachea/lungs), thyroid, parathyroid, thymus, liver hepatocytes, pancreas, and urinary bladder."
+          ]
+        },
+        {
+          "concept_id": "10.2.2",
+          "heading": "Autonomous vs. Conditional Specification & The Spemann-Mangold Organizer",
+          "theory": "Embryonic blastomeres acquire cell fate via two classical modes: Autonomous (Mosaic) Specification—where cells inherit cytoplasmic determinants partitioned asymmetrically during cleavage (e.g., tunicate yellow crescent muscle determinant Macho-1; C. elegans P-granules) and develop into their fixed fate even if isolated—versus Conditional (Regulative) Specification—where cell fate depends on inductive signaling from neighboring cells (allowing isolated vertebrate twin blastomeres to regulate and form two complete embryos).",
+          "key_principles": [
+            "Cortical Rotation & The Nieuwkoop Center in Amphibians: Sperm entry triggers a 30° microtubule-driven rotation of the egg cortex toward the sperm entry site, transporting Dishevelled (Dsh) and Wnt11 to the opposite Dorsal Vegetal side. Dsh inhibits GSK-3β, stabilizing nuclear β-Catenin on the dorsal side. Dorsal vegetal cells with both maternal VegT/Vg1 (Nodal-related TGF-β) and nuclear β-Catenin form the Nieuwkoop Center, which induces the overlying dorsal marginal zone mesoderm to become the Spemann-Mangold Organizer (expressing Goosecoid, Siamois).",
+            "Spemann & Mangold's (1924) Dorsal Blastopore Lip Transplantation & The 'Default Model' of Neural Induction: Transplanting the Dorsal Lip of the Blastopore from a pigmented donor newt gastrula into the ventral ectoderm of an unpigmented host induces a complete secondary conjoined twin axis (recruiting host ventral ectoderm to form a secondary neural tube!). Mechanistically, ventral/lateral ectoderm is bathed in Bone Morphogenetic Protein 4 (BMP4 -> Smad1/5/8), which instructs ectoderm to become Epidermis. The Spemann-Mangold Organizer secretes a cocktail of soluble BMP Antagonists—Chordin, Noggin, and Follistatin (plus Wnt antagonists Dickkopf/Frzb/Cerberus anteriorly)—that bind BMP4 in the extracellular space, blocking BMP receptor activation so the dorsal ectoderm reverts to its intrinsic default fate: Neural Plate (Neuroectoderm)!"
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Experimental Embryology: Autonomous, Conditional & Syncytial Specification Modes",
+        "headers": [
+          "Specification Mode",
+          "Molecular Mechanism",
+          "Blastomere Isolation Outcome",
+          "Blastomere Transplantation Outcome",
+          "Canonical Model Organisms"
+        ],
+        "rows": [
+          [
+            "Autonomous (Mosaic)",
+            "Asymmetric segregation of maternal mRNAs/proteins (cytoplasmic determinants)",
+            "Isolated blastomere forms ONLY its normal part; remainder of embryo lacks that part",
+            "Transplanted cell retains original committed fate regardless of new neighbors",
+            "Tunicates (Styela), Mollusks (Ilyanassa), C. elegans (early P-lineage)"
+          ],
+          [
+            "Conditional (Regulative)",
+            "Position-dependent paracrine/juxtacrine induction (Wnt, TGF-β/BMP, FGF, Notch)",
+            "Isolated blastomere regulates to form a smaller, complete whole embryo (monozygotic twinning)",
+            "Transplanted cell (prior to determination) reprogrammed by new neighborhood cues",
+            "Vertebrates (Amphibians, Mammals, Birds), Sea Urchin (early)"
+          ],
+          [
+            "Syncytial",
+            "Diffusion of transcription factors across a shared multinucleate cytoplasm",
+            "N/A prior to cellularization (nuclei share common ooplasm)",
+            "Nuclear transplantation shows nuclei remain totipotent; position in gradient dictates fate",
+            "Insects (Drosophila melanogaster Cycles 1–13)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "10.3",
+      "title": "Stem Cells, Pluripotency Networks & Waddington's Epigenetic Landscape",
+      "overview": "Stem cells balance self-renewal with lineage differentiation across a hierarchy of developmental potency, governed by core transcription factor circuitry (Oct4, Sox2, Nanog) and reversible epigenetic chromatin remodeling.",
+      "core_concepts": [
+        {
+          "concept_id": "10.3.1",
+          "heading": "Potency Hierarchy, Stem Cell Niches & Yamanaka iPSC Reprogramming",
+          "theory": "Conrad Waddington (1957) conceptualized development as a marble rolling down a bifurcating epigenetic valley landscape: as cells progress from zygote to terminal differentiation, permissive euchromatin is progressively locked down by PRC2 H3K27me3 and DNMT DNA methylation.",
+          "key_principles": [
+            "Hierarchy of Developmental Potency: (1) Totipotent: Can form the entire organism including extraembryonic placental trophoblast (Zygote and 2- to 4-cell mammalian blastomeres); (2) Pluripotent: Can differentiate into all derivatives of the three embryonic germ layers (Ectoderm, Mesoderm, Endoderm) and germ cells, but NOT extraembryonic trophoblast (Blastocyst Inner Cell Mass / Embryonic Stem Cells [ESCs]); (3) Multipotent: Restricted to multiple cell types within a single tissue lineage (e.g., Hematopoietic Stem Cells [HSCs: Lin- Sca1+ c-Kit+ CD34+] generating all myeloid/lymphoid blood cells; Intestinal Lgr5+ crypt stem cells); (4) Unipotent: Generates a single mature cell type (e.g., Spermatogonial stem cells).",
+            "Core Pluripotency Network & Asymmetric Division: Pluripotency in ESCs is maintained by an autoregulatory positive-feedback triad of transcription factors—Oct4 (Pou5f1), Sox2, and Nanog—supported by LIF/STAT3 (in mouse naive ESCs) or FGF2/Activin (in human primed ESCs). In adult stem cell niches (e.g., Drosophila germarium or mammalian bone marrow endosteal/vascular niche), stem cells divide asymmetrically so one daughter remains anchored to niche signals (Wnt/BMP/Notch) for self-renewal while the displaced daughter becomes a transit-amplifying progenitor.",
+            "Induced Pluripotent Stem Cells (iPSCs — Shinya Yamanaka, 2006): Ectopic expression of just four transcription factors—Oct4, Sox2, Klf4, and c-Myc ('OSKM' Yamanaka Factors)—erases somatic epigenetic marks in terminally differentiated adult fibroblasts, reprogramming them back uphill to fully pluripotent iPSCs capable of patient-specific regenerative therapy and disease modeling without embryonic destruction or HLA rejection."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Hierarchy of Stem Cell Potency, Markers & Regenerative Applications",
+        "headers": [
+          "Potency Level",
+          "Anatomical / Developmental Source",
+          "Lineage Differentiation Capacity",
+          "Key Molecular Markers"
+        ],
+        "rows": [
+          [
+            "Totipotent",
+            "Zygote & Early Morula (1- to 4-cell stage)",
+            "All embryonic germ layers + Extraembryonic Trophoblast (Placenta)",
+            "Maternal/early ZGA factors (Dux, Zscan4)"
+          ],
+          [
+            "Pluripotent (ESCs / iPSCs)",
+            "Blastocyst Inner Cell Mass (ICM) or OSKM-reprogrammed soma",
+            "All 3 germ layers (Ectoderm, Mesoderm, Endoderm) + PGCs; forms Teratomas",
+            "Oct4 (Pou5f1), Sox2, Nanog, SSEA-4, TRA-1-60"
+          ],
+          [
+            "Multipotent (Adult / Somatic)",
+            "Bone Marrow, Umbilical Cord, Intestinal Crypts, Neural SVZ",
+            "Multiple cell types restricted to one organ/germ layer system",
+            "CD34+/c-Kit+ (HSCs), Lgr5+ (Gut), Nestin/Sox2 (Neural)"
+          ],
+          [
+            "Unipotent",
+            "Testis Basal Lamina, Epidermal Basal Layer, Satellite Cells",
+            "Single differentiated cell lineage (e.g., spermatozoa, myofibers)",
+            "Pax7 (Muscle satellite), Plzf/GFRα1 (Spermatogonia)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "10.4",
+      "title": "Morphogen Gradients, Drosophila Axis Patterning, Hox Collinearity & Organogenesis",
+      "overview": "Spatial patterning of the embryonic body plan relies on concentration-dependent Morphogen gradients (Wolpert's French Flag Model) that activate hierarchical gene regulatory networks—from Drosophila maternal/gap/pair-rule cascades to conserved Bilaterian Hox complexes and vertebrate limb fields.",
+      "core_concepts": [
+        {
+          "concept_id": "10.4.1",
+          "heading": "Reaction-Diffusion Morphogen Physics & The Drosophila Segmentation Cascade",
+          "theory": "A Morphogen (Alan Turing, 1952; Lewis Wolpert, 1969) is a diffusible signaling molecule secreted from a localized source that specifies multiple distinct cell fates along a spatial axis via concentration thresholds ('French Flag': High > T1 = Blue; Intermediate T2–T1 = White; Low < T2 = Red).",
+          "key_principles": [
+            "Fickian Synthesis-Diffusion-Degradation (SDD) Exponential Decay: When a morphogen is synthesized at x = 0, diffuses with coefficient D, and is degraded uniformly at first-order rate k, its steady-state concentration profile decays exponentially with distance: C(x) = C0 · e^(-x/λ), where the characteristic decay length is λ = √(D/k).",
+            "Drosophila Maternal Effect Genes (Anterior-Posterior & Dorsal-Ventral): Maternal mRNAs are tethered to the oocyte poles by nurse cells along polarized microtubules prior to fertilization: (1) Anterior: bicoid mRNA (anchored at minus-ends via Swallow/Exuperantia) is translated after fertilization into a transcription factor morphogen that activates hunchback anteriorly and translationally represses caudal mRNA; (2) Posterior: nanos mRNA (anchored at plus-ends via Oskar) translationally represses maternal hunchback mRNA posteriorly; (3) Terminal: Torso receptor tyrosine kinase specifies acron and telson; (4) Dorsal-Ventral: Ventral Spätzle ligand activates the maternal Toll receptor -> degrades Cactus (IκB homolog) -> nuclear gradient of Dorsal (NF-κB homolog) protein, which is highest ventrally (activating Twist/Snail -> mesoderm), intermediate laterally (neuroectoderm), and absent dorsally (Decapentaplegic [Dpp, BMP homolog] -> dorsal epidermis).",
+            "Zygotic Segmentation Hierarchy (Gap -> Pair-Rule -> Segment Polarity -> Homeotic): Maternal gradients activate Zygotic Gap Genes (hunchback, Krüppel, knirps, giant; expressed in broad ~3-segment domains; mutants lack contiguous blocks of segments) -> Pair-Rule Genes (even-skipped [eve], fushi tarazu [ftz]; expressed in 7 alternating stripes; mutants lack every other segment) -> Segment Polarity Genes (engrailed, wingless [Wnt], hedgehog; expressed in 14 single-segment stripes defining parasegment compartments)."
+          ]
+        },
+        {
+          "concept_id": "10.4.2",
+          "heading": "Hox Gene Spatial/Temporal Collinearity & Vertebrate Limb Bud Organogenesis",
+          "theory": "Once segments are established, Homeotic Selector (Hox) Genes assign each segment its unique anatomical identity (e.g., antennae vs. legs vs. wings/halteres in insects; cervical vs. thoracic vs. lumbar vertebrae in vertebrates).",
+          "key_principles": [
+            "Spatial & Temporal Collinearity of Hox Clusters (Ed Lewis): All Hox genes encode a conserved 60-amino-acid Homeodomain (180 bp Homeobox) transcription factor. Remarkably, the physical 3' -> 5' chromosomal order of Hox genes along the cluster (Labial -> Proboscipedia -> Deformed -> Scr -> Antennapedia -> Ubx -> abd-A -> Abd-B in Drosophila; duplicated into 4 paralogous clusters HOXA, HOXB, HOXC, HOXD in mammals) matches their Anterior -> Posterior order of expression and their Early -> Late timing of activation. Posterior Hox genes dominate over anterior Hox genes ('Posterior Prevalence').",
+            "Classic Homeotic Transformations: Gain-of-function Antennapedia mutation (expressing Antp in the head) transforms antennae into mesothoracic legs; loss-of-function Ultrabithorax (Ubx bithorax) mutation transforms the 3rd thoracic segment (T3 halteres) into a duplicated 2nd thoracic segment (T2 wings), creating a four-winged fly.",
+            "Three-Axis Vertebrate Limb Bud Organogenesis: Initiated by lateral plate mesoderm Tbx5 (forelimb) or Tbx4 (hindlimb) inducing FGF10 -> ectodermal FGF8 loop: (1) Proximal-Distal Axis (Stylopod [humerus] -> Zeugopod [radius/ulna] -> Autopod [digits]): Controlled by the Apical Ectodermal Ridge (AER) secreting FGF8/FGF4 (removal of AER truncates distal limb structures depending on stage); (2) Anterior-Posterior Axis (Thumb [Digit 1] -> Pinky [Digit 5]): Controlled by the posterior Zone of Polarizing Activity (ZPA) secreting Sonic Hedgehog (Shh) morphogen (grafting a second ZPA to the anterior margin induces a mirror-image duplication of digits: 4-3-2-2-3-4); (3) Dorsal-Ventral Axis (Knuckles vs. Palm): Dorsal ectoderm Wnt7a induces Lmx1b (dorsal fate), while ventral Engrailed-1 represses Wnt7a."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Drosophila Segmentation Cascade & Vertebrate Limb Patterning Centers",
+        "headers": [
+          "Regulatory Tier / Signaling Center",
+          "Key Genes / Secreted Morphogens",
+          "Wild-Type Expression Pattern",
+          "Loss-of-Function / Graft Mutant Phenotype"
+        ],
+        "rows": [
+          [
+            "Maternal Effect Genes (AP Axis)",
+            "bicoid (Anterior), nanos (Posterior), torso",
+            "Exponential protein gradients across syncytial embryo",
+            "bicoid- mothers produce two-tailed (double-telson) embryos lacking head & thorax"
+          ],
+          [
+            "Zygotic Gap Genes",
+            "hunchback, Krüppel, knirps, giant",
+            "Broad aperiodic bands spanning 3–4 future segments",
+            "Deletion of a contiguous block of several adjacent body segments"
+          ],
+          [
+            "Zygotic Pair-Rule Genes",
+            "even-skipped (eve), fushi tarazu (ftz), hairy",
+            "7 transverse stripes (two-segment periodicity)",
+            "Deletion of every alternate segment (half the normal segment number)"
+          ],
+          [
+            "Segment Polarity Genes",
+            "engrailed (en), wingless (wg), hedgehog (hh)",
+            "14 narrow stripes (one stripe per segment)",
+            "Loss of posterior compartment of every segment; mirror-image denticle lawns"
+          ],
+          [
+            "Homeotic Selector (Hox) Genes",
+            "ANT-C (lab, Antp) & BX-C (Ubx, abd-A, Abd-B)",
+            "Segment-specific domains along 3' (Anterior) -> 5' (Posterior)",
+            "Homeotic transformation (e.g., Ubx- converts T3 halteres into T2 wings)"
+          ],
+          [
+            "Vertebrate Limb AER (Proximal-Distal)",
+            "FGF8, FGF4 (Apical Ectodermal Ridge)",
+            "Distal rim of ectoderm overlying progress zone",
+            "AER excision causes distal limb truncation (phocomelia/amelia)"
+          ],
+          [
+            "Vertebrate Limb ZPA (Anterior-Posterior)",
+            "Sonic Hedgehog (Shh) morphogen",
+            "Posterior mesenchyme at base of limb bud",
+            "Anterior ZPA/Shh graft produces mirror-image polydactyly (digits 4-3-2-2-3-4)"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-10.1",
+      "title": "Figure 10.1: Drosophila Syncytial Maternal Morphogens (Bicoid/Nanos) & The French Flag Threshold Model",
+      "sub_module_ref": "10.4",
+      "thumbnail_caption": "Exponential Bicoid/Nanos reaction-diffusion gradients driving Gap -> Pair-Rule (7 stripes) -> Segment Polarity (14 stripes) and Wolpert's French Flag boundaries. Tap to expand.",
+      "svg_template_id": "svg_drosophila_morphogen_10_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. DROSOPHILA MATERNAL MORPHOGEN GRADIENTS: C(x) = C_0 · e^(-x/λ)</text><line x1='75' y1='215' x2='745' y2='215' stroke='#a0c4e2' stroke-width='2'/><line x1='75' y1='60' x2='75' y2='215' stroke='#a0c4e2' stroke-width='2'/><line x1='75' y1='115' x2='745' y2='115' stroke='#00f2fe' stroke-dasharray='5,4' stroke-width='1.5'/><text x='70' y='119' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='end'>T_1</text><line x1='75' y1='165' x2='745' y2='165' stroke='#ffca28' stroke-dasharray='5,4' stroke-width='1.5'/><text x='70' y='169' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='end'>T_2</text><path d='M 75 65 Q 200 185 680 213' fill='none' stroke='#00f2fe' stroke-width='4'/><text x='185' y='88' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold'>Bicoid + Hunchback (Anterior)</text><path d='M 140 213 Q 600 185 745 65' fill='none' stroke='#ff6b8b' stroke-width='4'/><text x='615' y='88' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='end'>Nanos + Caudal (Posterior)</text><line x1='225' y1='60' x2='225' y2='285' stroke='#00f2fe' stroke-dasharray='3,3'/><line x1='385' y1='60' x2='385' y2='285' stroke='#ffca28' stroke-dasharray='3,3'/><rect x='75' y='240' width='150' height='42' rx='4' fill='#005c8a' stroke='#00f2fe' stroke-width='2'/><text x='150' y='265' fill='#fff' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Head / Acron (C &gt; T_1)</text><rect x='225' y='240' width='160' height='42' rx='4' fill='#102a43' stroke='#ffca28' stroke-width='2'/><text x='305' y='265' fill='#ffca28' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Thorax T1–T3 (T_2 &lt; C &lt; T_1)</text><rect x='385' y='240' width='360' height='42' rx='4' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='565' y='265' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Abdomen A1–A8 (C &lt; T_2; Nanos Represses hb)</text><text x='75' y='230' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>x = 0 μm</text><text x='225' y='230' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='middle'>x_1 = λ ln(C0/T1)</text><text x='385' y='230' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>x_2 = λ ln(C0/T2)</text><text x='745' y='230' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>x = 500 μm</text><text x='410' y='318' fill='#00ff87' font-family='monospace' font-size='11' text-anchor='middle'>Gene Dosage Shift: Doubling Maternal bicoid Copies (2× C_0) Shifts Boundary Posteriorly by Δx = +λ · ln(2)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-10-1a",
+          "x_pct": 27.4,
+          "y_pct": 47.0,
+          "label": "French Flag Threshold Boundary (x_th)",
+          "scale_link": "500um",
+          "detail": "Cells read local Bicoid concentration via enhancer binding affinity: low-affinity enhancers require high [Bicoid] (anterior head), whereas high-affinity enhancers respond further posteriorly (thorax)."
+        },
+        {
+          "pin_id": "pin-10-1b",
+          "x_pct": 68.0,
+          "y_pct": 75.0,
+          "label": "Nanos Translational Repression of Hunchback",
+          "scale_link": "10nm",
+          "detail": "Posterior Nanos forms a complex with Pumilio on the Nanos Response Element (NRE) in the 3' UTR of maternal hunchback mRNA, deadenylating and blocking its translation so abdomen segments can form."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-10.2",
+      "title": "Figure 10.2: Amphibian Nieuwkoop Center, Spemann-Mangold Organizer & Neural Induction Default Model",
+      "sub_module_ref": "10.2",
+      "thumbnail_caption": "Cortical rotation stabilizing dorsal β-Catenin, Dorsal Blastopore Lip transplantation, and Chordin/Noggin antagonism of ventral BMP4. Tap to expand.",
+      "svg_template_id": "svg_spemann_organizer_10_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. AMPHIBIAN DORSAL-VENTRAL AXIS SPECIFICATION</text><text x='430' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. DEFAULT MODEL OF NEURAL INDUCTION</text><line x1='405' y1='20' x2='405' y2='330' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><circle cx='205' cy='180' r='115' fill='#102a43' stroke='#4facfe' stroke-width='2.5'/><path d='M 90 180 L 320 180' stroke='#1e3a5f' stroke-dasharray='4,4'/><rect x='235' y='195' width='80' height='50' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='275' y='216' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Nieuwkoop</text><text x='275' y='232' fill='#a0e2c4' font-family='monospace' font-size='9' text-anchor='middle'>VegT + β-Cat</text><rect x='235' y='115' width='82' height='55' rx='8' fill='#2b1d38' stroke='#b388ff' stroke-width='2.5'/><text x='276' y='138' fill='#b388ff' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Spemann</text><text x='276' y='152' fill='#fff' font-family='sans-serif' font-size='10' font-weight='bold' text-anchor='middle'>Organizer</text><text x='276' y='164' fill='#d2b8ff' font-family='monospace' font-size='8' text-anchor='middle'>(Dorsal Lip)</text><path d='M 275 195 L 275 172' stroke='#00ff87' stroke-width='3'/><text x='145' y='145' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Ventral Zone</text><text x='145' y='162' fill='#ffb8c6' font-family='monospace' font-size='10' text-anchor='middle'>High BMP4</text><text x='145' y='178' fill='#ffb8c6' font-family='monospace' font-size='10' text-anchor='middle'>→ Epidermis</text><text x='205' y='88' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Animal Pole (Ectoderm)</text><text x='205' y='282' fill='#ffca28' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Vegetal Pole (Endoderm)</text><rect x='435' y='65' width='350' height='95' rx='10' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='610' y='92' fill='#ff6b8b' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>1. Ventral Ectoderm (No Organizer)</text><text x='610' y='115' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>BMP4 → BMPR-I/II → Phospho-Smad1/5/8</text><text x='610' y='138' fill='#ffca28' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Result: Epidermal Fate (Skin) + Ventral Mesoderm</text><rect x='435' y='185' width='350' height='115' rx='10' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='610' y='212' fill='#00ff87' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>2. Dorsal Ectoderm (+ Spemann Organizer)</text><text x='610' y='235' fill='#00f2fe' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Chordin, Noggin &amp; Follistatin</text><text x='610' y='255' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>Sequester BMP4 in Extracellular Space (BMP4 ⊣| BMPR)</text><text x='610' y='280' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Result: Default Neural Plate Fate (Brain &amp; Spinal Cord)</text><text x='410' y='328' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Spemann-Mangold Graft (1924): Dorsal Lip Grafted to Ventral Side Induces Secondary Twin Neural Axis</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-10-2a",
+          "x_pct": 33.6,
+          "y_pct": 40.0,
+          "label": "Spemann-Mangold Organizer (Dorsal Lip)",
+          "scale_link": "500um",
+          "detail": "Self-differentiates into dorsal chordamesoderm (notochord) while secreting paracrine BMP/Wnt inhibitors that dorsalize surrounding mesoderm into somites and induce overlying ectoderm into neural tube."
+        },
+        {
+          "pin_id": "pin-10-2b",
+          "x_pct": 74.4,
+          "y_pct": 68.0,
+          "label": "Chordin, Noggin & Follistatin (BMP Antagonists)",
+          "scale_link": "5nm",
+          "detail": "Isolated ectoderm cells dispersed in culture automatically differentiate into neurons unless exogenous BMP4 is added—proving that 'Neural' is the default state of ectoderm."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-10.3",
+      "title": "Figure 10.3: Waddington's Epigenetic Pluripotency Landscape & Conservation of Hox Gene Collinearity",
+      "sub_module_ref": "10.3",
+      "thumbnail_caption": "Totipotent/Pluripotent valley bifurcations (and OSKM iPSC reprogramming uphill) alongside 3'->5' Hox cluster spatial collinearity in Drosophila and Mammals. Tap to expand.",
+      "svg_template_id": "svg_waddington_hox_10_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. WADDINGTON EPIGENETIC LANDSCAPE &amp; iPSCs</text><text x='430' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. 3' → 5' HOX SPATIAL COLLINEARITY</text><line x1='405' y1='20' x2='405' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><circle cx='205' cy='72' r='14' fill='#00ff87' stroke='#fff' stroke-width='2'/><text x='205' y='52' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>ICM / ESC (Oct4/Sox2/Nanog)</text><path d='M 205 86 L 130 165 L 75 255 M 130 165 L 175 255 M 205 86 L 280 165 L 235 255 M 280 165 L 335 255' fill='none' stroke='#4facfe' stroke-width='3'/><circle cx='75' cy='265' r='11' fill='#00f2fe'/><text x='75' y='292' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='middle'>Neuron</text><circle cx='175' cy='265' r='11' fill='#b388ff'/><text x='175' y='292' fill='#b388ff' font-family='monospace' font-size='10' text-anchor='middle'>Myocyte</text><circle cx='235' cy='265' r='11' fill='#ffca28'/><text x='235' y='292' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>Hepatocyte</text><circle cx='335' cy='265' r='11' fill='#ff6b8b'/><text x='335' y='292' fill='#ff6b8b' font-family='monospace' font-size='10' text-anchor='middle'>Fibroblast</text><path d='M 345 250 Q 385 150 225 70' fill='none' stroke='#ff4081' stroke-dasharray='5,3' stroke-width='3'/><text x='320' y='120' fill='#ff4081' font-family='sans-serif' font-size='11' font-weight='bold'>+ OSKM Factors</text><text x='320' y='135' fill='#ffb8c6' font-family='monospace' font-size='9'>(iPSC Reprogramming)</text><line x1='440' y1='115' x2='780' y2='115' stroke='#a0c4e2' stroke-width='3'/><text x='435' y='95' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold'>3' End (Anterior / Early)</text><text x='780' y='95' fill='#ff6b8b' font-family='monospace' font-size='12' font-weight='bold' text-anchor='end'>5' End (Posterior / Late)</text><rect x='455' y='102' width='55' height='26' rx='4' fill='#005c8a' stroke='#00f2fe'/><text x='482' y='119' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>Hox1-3</text><rect x='530' y='102' width='65' height='26' rx='4' fill='#0b382c' stroke='#00ff87'/><text x='562' y='119' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>Hox4-6</text><rect x='615' y='102' width='65' height='26' rx='4' fill='#2b1d38' stroke='#ffca28'/><text x='647' y='119' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>Hox7-9</text><rect x='700' y='102' width='65' height='26' rx='4' fill='#381d2a' stroke='#ff6b8b'/><text x='732' y='119' fill='#ff6b8b' font-family='monospace' font-size='10' text-anchor='middle'>Hox10-13</text><rect x='455' y='175' width='70' height='45' rx='8' fill='#005c8a' stroke='#00f2fe' stroke-width='2'/><text x='490' y='196' fill='#fff' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Hindbrain</text><text x='490' y='211' fill='#a0e2ff' font-family='monospace' font-size='9' text-anchor='middle'>Rhombomeres</text><rect x='535' y='175' width='75' height='45' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='572' y='196' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Cervical</text><text x='572' y='211' fill='#a0e2c4' font-family='monospace' font-size='9' text-anchor='middle'>C1–C7</text><rect x='620' y='175' width='75' height='45' rx='8' fill='#2b1d38' stroke='#ffca28' stroke-width='2'/><text x='657' y='196' fill='#ffca28' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Thoracic</text><text x='657' y='211' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>Ribs (T1–T12)</text><rect x='705' y='175' width='75' height='45' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='742' y='196' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Lumbosacral</text><text x='742' y='211' fill='#ffb8c6' font-family='monospace' font-size='9' text-anchor='middle'>Hox10 Blocks Ribs</text><text x='610' y='265' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>Retinoic Acid (RA) Anteriorizes; FGF/Wnt/Gdf11 Posteriorizes</text><text x='610' y='288' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>Hox10 Paralogs (a10/c10/d10) Knockout → Lumbar Vertebrae Grow Ribs!</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-10-3a",
+          "x_pct": 39.0,
+          "y_pct": 38.0,
+          "label": "Yamanaka OSKM Reprogramming",
+          "scale_link": "cell",
+          "detail": "Oct4, Sox2, Klf4, and c-Myc pioneer factors open condensed somatic heterochromatin, reactivating endogenous Nanog/Oct4 loops and erasing differentiation marks."
+        },
+        {
+          "pin_id": "pin-10-3b",
+          "x_pct": 89.2,
+          "y_pct": 58.0,
+          "label": "Hox10 Paralogs & Lumbar Rib Suppression",
+          "scale_link": "2mm",
+          "detail": "In mice, triple knockout of Hoxa10, Hoxc10, and Hoxd10 causes all lumbar vertebrae to homeotically transform into thoracic-like vertebrae bearing ribs."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_morphogen_french_flag_10_4",
+      "title": "Reaction-Diffusion Morphogen Gradient & French Flag Boundary Simulator",
+      "sub_module_ref": "10.4",
+      "type": "morphogen-biophysics-simulator",
+      "description": "Simulate Wolpert's French Flag morphogen model (e.g., Bicoid in Drosophila or Sonic Hedgehog in the limb bud): adjust source concentration (C0 / maternal gene dosage), diffusion coefficient (D), degradation rate (k), and target gene activation threshold (T_th) to compute decay length (λ) and exact boundary position (x_th).",
+      "controls": [
+        {
+          "id": "source_c0_nm",
+          "label": "Morphogen Source Concentration (C_0; 100 = 2n WT)",
+          "min": 25.0,
+          "max": 400.0,
+          "step": 25.0,
+          "default": 100.0,
+          "unit": "nM"
+        },
+        {
+          "id": "diff_coeff_d",
+          "label": "Diffusion Coefficient (D)",
+          "min": 1.0,
+          "max": 50.0,
+          "step": 1.0,
+          "default": 10.0,
+          "unit": "μm²/s"
+        },
+        {
+          "id": "deg_rate_k",
+          "label": "First-Order Degradation Constant (k)",
+          "min": 0.0002,
+          "max": 0.01,
+          "step": 0.0002,
+          "default": 0.001,
+          "unit": "s^-1"
+        },
+        {
+          "id": "threshold_t_nm",
+          "label": "Target Gene Activation Threshold (T_th)",
+          "min": 5.0,
+          "max": 80.0,
+          "step": 5.0,
+          "default": 20.0,
+          "unit": "nM"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "decay_length_lambda_um",
+          "label": "Characteristic Decay Length (λ = √(D / k))",
+          "formula_js": "Math.sqrt(diff_coeff_d / deg_rate_k)",
+          "unit": "μm"
+        },
+        {
+          "output_id": "boundary_position_x_um",
+          "label": "French Flag Threshold Boundary Position (x_th)",
+          "formula_js": "source_c0_nm <= threshold_t_nm ? 0 : Math.sqrt(diff_coeff_d / deg_rate_k) * Math.log(source_c0_nm / threshold_t_nm)",
+          "unit": "μm from Anterior"
+        },
+        {
+          "output_id": "conc_at_200um",
+          "label": "Morphogen Concentration at x = 200 μm",
+          "formula_js": "source_c0_nm * Math.exp(-200 / Math.sqrt(diff_coeff_d / deg_rate_k))",
+          "unit": "nM"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_cleavage_mbt_somite_clock_10_1",
+      "title": "Embryonic Cleavage N/C Ratio & Somite Clock-and-Wavefront Simulator",
+      "sub_module_ref": "10.1",
+      "type": "embryonic-kinetics-simulator",
+      "description": "Track exponential blastomere proliferation (2^n), single-blastomere volume reduction, and Nuclear-to-Cytoplasmic (N/C) ratio approaching the Mid-Blastula Transition (MBT), alongside vertebrate somite length (S = v · T_clock) determined by the Hes/Notch segmentation clock.",
+      "controls": [
+        {
+          "id": "cleavage_cycle_n",
+          "label": "Synchronous Cleavage Division Cycle (n)",
+          "min": 1,
+          "max": 14,
+          "step": 1,
+          "default": 12,
+          "unit": "cycles"
+        },
+        {
+          "id": "egg_diameter_um",
+          "label": "Initial Fertilized Egg Diameter",
+          "min": 100,
+          "max": 1500,
+          "step": 50,
+          "default": 1200,
+          "unit": "μm"
+        },
+        {
+          "id_somite": "wavefront_vel_v",
+          "id": "wavefront_vel_v",
+          "label": "FGF/Wnt Determination Front Regression Speed (v)",
+          "min": 0.5,
+          "max": 10.0,
+          "step": 0.5,
+          "default": 3.0,
+          "unit": "μm/min"
+        },
+        {
+          "id": "clock_period_min",
+          "label": "Notch/Hes Segmentation Clock Period (T_clock)",
+          "min": 15,
+          "max": 180,
+          "step": 5,
+          "default": 90,
+          "unit": "minutes"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "blastomere_count",
+          "label": "Total Blastomeres / Nuclei at Cycle n (2^n)",
+          "formula_js": "Math.pow(2, cleavage_cycle_n)",
+          "unit": "cells"
+        },
+        {
+          "output_id": "somite_length_um",
+          "label": "Formed Somite Length (S = v × T_clock)",
+          "formula_js": "wavefront_vel_v * clock_period_min",
+          "unit": "μm / somite"
+        },
+        {
+          "output_id": "somites_per_day",
+          "label": "Somite Pairs Formed per 24 Hours",
+          "formula_js": "1440 / clock_period_min",
+          "unit": "somite pairs/day"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-10.1",
+      "title": "Fick's Second Law of Reaction-Diffusion & Steady-State Morphogen Decay",
+      "latex": "\\frac{\\partial C}{\\partial t} = D \\frac{\\partial^2 C}{\\partial x^2} - k C = 0 \\implies C(x) = C_0 e^{-x/\\lambda} \\quad \\text{where } \\lambda = \\sqrt{\\frac{D}{k}} = \\sqrt{\\frac{D \\cdot t_{1/2}}{\\ln 2}}",
+      "description": "Derives the steady-state exponential concentration profile C(x) of a morphogen diffusing from a localized source (C_0 at x = 0) with diffusion coefficient D and first-order clearance constant k.",
+      "variables": [
+        {
+          "symbol": "C(x), C_0",
+          "definition": "Morphogen concentration at distance x and at the source boundary (x = 0)",
+          "unit": "nM or molecules/μm³"
+        },
+        {
+          "symbol": "D",
+          "definition": "Effective tissue diffusion coefficient of the morphogen",
+          "unit": "μm²/s"
+        },
+        {
+          "symbol": "k",
+          "definition": "First-order degradation/clearance rate constant (k = ln(2) / t_1/2)",
+          "unit": "s^-1"
+        },
+        {
+          "symbol": "\\lambda",
+          "definition": "Characteristic decay length (distance over which C drops to C_0 / e ≈ 36.8%)",
+          "unit": "μm"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-10.2",
+      "title": "Wolpert's French Flag Threshold Position (x_th) & Maternal Gene Dosage Shift (Δx)",
+      "latex": "x_{\\text{th}} = \\lambda \\ln\\left(\\frac{C_0}{T_{\\text{th}}}\\right), \\qquad \\Delta x = x_{\\text{th}}^{\\prime} - x_{\\text{th}} = \\lambda \\ln\\left(\\frac{C_0^{\\prime}}{C_0}\\right)",
+      "description": "Predicts the exact spatial coordinate (x_th) where morphogen concentration crosses a target gene's activation threshold (T_th), and how changing maternal gene dosage (C'_0 / C_0) shifts the fate boundary.",
+      "variables": [
+        {
+          "symbol": "T_{\\text{th}}",
+          "definition": "Threshold morphogen concentration required to activate target enhancer (e.g., hunchback)",
+          "unit": "nM"
+        },
+        {
+          "symbol": "\\Delta x",
+          "definition": "Spatial shift in cell-fate boundary when source production changes from C_0 to C'_0",
+          "unit": "μm"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-10.3",
+      "title": "Cleavage Blastomere Scaling & Nuclear-to-Cytoplasmic (N/C) Volume Ratio at MBT",
+      "latex": "N_{\\text{cells}} = 2^n, \\qquad V_{\\text{blastomere}}(n) = \\frac{V_{\\text{egg}}}{2^n}, \\qquad \\text{Ratio}_{N/C}(n) = \\frac{2^n \\cdot V_{\\text{nucleus}}}{V_{\\text{egg}} - 2^n \\cdot V_{\\text{nucleus}}}",
+      "description": "Models synchronous cleavage divisions where total embryonic volume (V_egg) remains constant while nuclear count doubles every cycle (2^n), exponentially increasing the N/C ratio until the Mid-Blastula Transition (MBT) threshold is reached.",
+      "variables": [
+        {
+          "symbol": "n",
+          "definition": "Number of synchronous cleavage division cycles elapsed",
+          "unit": "cycles"
+        },
+        {
+          "symbol": "V_{\\text{egg}}, V_{\\text{blastomere}}",
+          "definition": "Total fertilized egg volume and individual blastomere volume at cycle n",
+          "unit": "μm³ or nL"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-10.4",
+      "title": "Clock-and-Wavefront Model of Vertebrate Somitogenesis (Cooke & Zeeman)",
+      "latex": "S = v \\cdot T_{\\text{clock}} = \\frac{v}{f_{\\text{clock}}}",
+      "description": "Relates the physical anterior-posterior length of each formed somite (S) to the posterior regression velocity of the FGF8/Wnt3a determination wavefront (v) and the oscillation period of the Notch/Hes/Lunatic-fringe segmentation clock (T_clock).",
+      "variables": [
+        {
+          "symbol": "S",
+          "definition": "Anterior-posterior length of one somite unit",
+          "unit": "μm"
+        },
+        {
+          "symbol": "v",
+          "definition": "Velocity of wavefront regression along the presomitic mesoderm (PSM)",
+          "unit": "μm/min"
+        },
+        {
+          "symbol": "T_{\\text{clock}}",
+          "definition": "Period of one segmentation clock oscillation (e.g., 30 min in zebrafish, 90 min in chick, 120 min in mouse, 4–5 h in human)",
+          "unit": "min"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-10.5",
+      "title": "Turing Reaction-Diffusion Activator-Inhibitor Instability Condition",
+      "latex": "D_{\\text{inhibitor}} \\gg D_{\\text{activator}} \\qquad \\text{(Local Self-Activation + Long-Range Lateral Inhibition)}",
+      "description": "Alan Turing and Gierer-Meinhardt condition for spontaneous periodic pattern formation (e.g., hair follicles, feather buds, digit spacing, zebrafish stripes): a short-range autocatalytic Activator (u) must induce a rapidly diffusing Inhibitor (v) with D_v >> D_u.",
+      "variables": [
+        {
+          "symbol": "D_{\\text{inhibitor}}, D_{\\text{activator}}",
+          "definition": "Diffusion coefficients of the secreted inhibitor (e.g.,Lefty, DKK, BMP) and activator (e.g., Nodal, Wnt)",
+          "unit": "μm²/s"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-10.1",
+        "title": "Morphogen Reaction-Diffusion Physics: Bicoid Decay Length (λ), Threshold Boundary & Gene Dosage Shift",
+        "difficulty": "Intermediate",
+        "statement": "In a Drosophila melanogaster syncytial blastoderm embryo of total anterior-posterior length L = 500 μm, maternal Bicoid protein is synthesized at the anterior pole (x = 0 μm), diffuses posteriorly with an effective diffusion coefficient of D = 7.00 μm²/s, and undergoes first-order degradation with a rate constant of k = 7.00 × 10^-4 s^-1. In a wild-type embryo (from a mother carrying 2 copies of the bicoid+ gene), the anterior source concentration is C_0 = 120 nM, and the zygotic gap gene hunchback (hb) is activated wherever [Bicoid] ≥ T_th = 24.0 nM. Calculate: (a) the characteristic decay length (λ) and protein half-life (t_1/2) of Bicoid, (b) the exact position of the posterior hunchback border (x_th in μm and % Egg Length) in a wild-type embryo, and (c) the new border position (x'_th) if the mother carries 4 copies of bicoid+ (doubling C'_0 to 240 nM).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the characteristic decay length λ = √(D / k) and protein half-life t_1/2 = ln(2) / k:",
+            "equation_latex": "\\lambda = \\sqrt{\\frac{D}{k}} = \\sqrt{\\frac{7.00\\ \\mu\\text{m}^2/\\text{s}}{7.00 \\times 10^{-4}\\text{ s}^{-1}}} = \\sqrt{10,000\\ \\mu\\text{m}^2} = 100.0\\ \\mu\\text{m}, \\qquad t_{1/2} = \\frac{0.69315}{7.00 \\times 10^{-4}\\text{ s}^{-1}} = 990.2\\text{ s} \\ (16.5\\text{ min})"
+          },
+          {
+            "step": 2,
+            "explanation": "Substitute λ = 100.0 μm, C_0 = 120 nM, and T_th = 24.0 nM into the French Flag threshold equation x_th = λ · ln(C_0 / T_th):",
+            "equation_latex": "x_{\\text{th}} = (100.0\\ \\mu\\text{m}) \\ln\\left(\\frac{120\\text{ nM}}{24.0\\text{ nM}}\\right) = 100.0 \\ln(5.00) = 100.0(1.6094) = 160.9\\ \\mu\\text{m} \\quad \\left(\\frac{160.9}{500} = 32.2\\%\\text{ Egg Length}\\right)"
+          },
+          {
+            "step": 3,
+            "explanation": "When maternal bicoid gene dosage is doubled (4 copies -> C'_0 = 2 C_0 = 240 nM), calculate the posterior shift Δx = λ · ln(2) and new boundary x'_th:",
+            "equation_latex": "\\Delta x = \\lambda \\ln\\left(\\frac{240}{120}\\right) = 100.0 \\ln(2) = +69.3\\ \\mu\\text{m} \\implies x_{\\text{th}}^{\\prime} = 160.9 + 69.3 = 230.2\\ \\mu\\text{m} \\quad (46.0\\%\\text{ Egg Length})"
+          }
+        ],
+        "final_answer": "(a) Decay length λ = 100.0 μm, t_1/2 = 16.5 min; (b) Wild-type hunchback boundary x_th = 160.9 μm (32.2% EL from anterior); (c) In a 4-copy bicoid mother, the boundary shifts posteriorly by +69.3 μm to 230.2 μm (46.0% EL), producing an embryo with an enlarged head/thorax."
+      },
+      {
+        "problem_id": "SP-10.2",
+        "title": "Cleavage Kinetics & The Mid-Blastula Transition (MBT) Nuclear-to-Cytoplasmic Volume Ratio",
+        "difficulty": "Foundational",
+        "statement": "A spherical Xenopus laevis fertilized egg has a diameter of 1,200 μm (radius R_egg = 600 μm) and undergoes 12 rounds of rapid, synchronous holoblastic cleavage without any net change in total embryonic volume before reaching the Mid-Blastula Transition (MBT). Assuming each interphase blastomere nucleus has a spherical radius of r_nuc = 10.0 μm: (a) Calculate the total number of blastomeres and the average volume of a single blastomere at Cycle 12 (2^12). (b) By what factor has the total Nuclear-to-Cytoplasmic volume ratio increased between the 1-cell zygote (n = 0) and the Cycle 12 MBT blastula (n = 12), and what percentage of the total embryo volume is occupied by nuclei at Cycle 12?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the number of blastomeres at Cycle 12 (N = 2^12), the total egg volume V_egg = (4/3)πR_egg³, and the single blastomere volume V_blastomere = V_egg / 2^12:",
+            "equation_latex": "N_{12} = 2^{12} = 4,096\\text{ blastomeres}, \\qquad V_{\\text{egg}} = \\frac{4}{3}\\pi (600\\ \\mu\\text{m})^3 = 9.048 \\times 10^8\\ \\mu\\text{m}^3 \\ (0.905\\ \\mu\\text{L})"
+          },
+          {
+            "step": 2,
+            "explanation": "Divide V_egg by 4,096 to find the average single blastomere volume at Cycle 12:",
+            "equation_latex": "V_{\\text{blastomere}}(12) = \\frac{9.048 \\times 10^8\\ \\mu\\text{m}^3}{4,096} = 2.209 \\times 10^5\\ \\mu\\text{m}^3"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the volume of a single nucleus V_nuc = (4/3)π(10.0 μm)³ and the total nuclear volume of 4,096 nuclei:",
+            "equation_latex": "V_{\\text{nuc}} = \\frac{4}{3}\\pi (10.0)^3 = 4,189\\ \\mu\\text{m}^3 \\implies V_{\\text{nuclei,total}}(12) = 4,096 \\times 4,189 = 1.716 \\times 10^7\\ \\mu\\text{m}^3"
+          },
+          {
+            "step": 4,
+            "explanation": "Between n = 0 (1 nucleus) and n = 12 (4,096 nuclei), total nuclear volume increases 4,096-fold while total egg volume is constant. Calculate the percentage of total embryonic volume occupied by nuclei at Cycle 12:",
+            "equation_latex": "\\%\\text{ Nuclear Volume} = \\frac{1.716 \\times 10^7}{9.048 \\times 10^8} \\times 100\\% = 1.90\\% \\quad \\left(\\text{or simply } 4096 \\times \\left(\\frac{10}{600}\\right)^3 = 4096 \\times \\frac{1}{216,000} = 1.90\\%\\right)"
+          }
+        ],
+        "final_answer": "(a) 4,096 blastomeres at Cycle 12, each with an average volume of 2.21 × 10^5 μm³; (b) The nuclear-to-egg volume ratio increases 4,096-fold, reaching 1.90% of total embryo volume (titrating out maternal histone H3/H4 and replication factors to trigger the MBT)."
+      },
+      {
+        "problem_id": "SP-10.3",
+        "title": "Clock-and-Wavefront Somite Patterning Kinetics in Vertebrate Organogenesis",
+        "difficulty": "Intermediate",
+        "statement": "During vertebrate axial development, paraxial presomitic mesoderm (PSM) segments periodically into somite pairs governed by the Cooke-Zeeman Clock-and-Wavefront mechanism (S = v · T_clock). In a developing chick embryo, the Hes1/Lunatic-fringe Notch segmentation clock oscillates with a period of T_clock = 90.0 minutes, and the FGF8/Wnt3a determination wavefront regresses posteriorly at a constant speed of v = 2.50 μm/min. (a) Calculate the initial anterior-posterior length (S in μm) of each newly formed somite and the number of somite pairs formed over 24.0 hours. (b) If an experimental embryo is treated with a small-molecule FGFR inhibitor (SU5402) that doubles the apparent regression velocity of the determination wavefront to v' = 5.00 μm/min without altering the Notch clock period (T_clock = 90.0 min), how does the size and total number of somites formed from a 1,800 μm presomitic mesoderm rod change?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Compute the normal somite length S = v × T_clock and the number of somite pairs formed in 24.0 h (1,440 min):",
+            "equation_latex": "S = (2.50\\ \\mu\\text{m/min})(90.0\\text{ min}) = 225.0\\ \\mu\\text{m/somite}, \\qquad N_{24\\text{h}} = \\frac{1,440\\text{ min}}{90.0\\text{ min/pair}} = 16.0\\text{ somite pairs}"
+          },
+          {
+            "step": 2,
+            "explanation": "In a 1,800 μm PSM rod under normal conditions, the total number of somites formed is 1,800 μm / 225 μm = 8.0 somites. When FGFR inhibition doubles wavefront speed to v' = 5.00 μm/min at constant T_clock = 90.0 min:",
+            "equation_latex": "S^{\\prime} = (5.00\\ \\mu\\text{m/min})(90.0\\text{ min}) = 450.0\\ \\mu\\text{m/somite (Twice as large!)}"
+          },
+          {
+            "step": 3,
+            "explanation": "Divide the fixed 1,800 μm PSM length by the new somite length S' = 450.0 μm:",
+            "equation_latex": "N_{\\text{PSM}}^{\\prime} = \\frac{1,800\\ \\mu\\text{m}}{450.0\\ \\mu\\text{m/somite}} = 4.0\\text{ somites (Half as many somites!)}"
+          }
+        ],
+        "final_answer": "(a) Normal somite length S = 225.0 μm, with 16 somite pairs formed per 24 hours; (b) Inhibiting FGF signaling accelerates wavefront regression, producing half as many somites (4 vs. 8) that are each twice as long (450.0 μm)."
+      },
+      {
+        "problem_id": "SP-10.4",
+        "title": "Drosophila Maternal vs. Zygotic Epistasis & Reciprocal Cross Phenotype Prediction",
+        "difficulty": "Intermediate",
+        "statement": "Contrast the genetic inheritance and embryonic phenotypes of two recessive loss-of-function mutations in Drosophila melanogaster:\n• Gene 1: bicoid (bcd^-), a recessive Maternal-Effect gene on Chromosome 3.\n• Gene 2: Krüppel (Kr^-), a recessive Zygotic Gap gene on Chromosome 2.\nPredict the exact phenotypic proportions of the F1 embryonic progeny produced by the following three crosses:\nCross A: Homozygous bcd^- / bcd^- female × Homozygous wild-type (bcd^+ / bcd^+) male.\nCross B: Heterozygous bcd^+ / bcd^- female × Homozygous bcd^- / bcd^- male.\nCross C: Heterozygous Kr^+ / Kr^- female × Heterozygous Kr^+ / Kr^- male.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For a Maternal-Effect gene (bicoid), the embryonic phenotype is dictated 100% by the MOTHER'S genotype (which deposits bicoid mRNA into the oocyte prior to fertilization), completely independent of the father's sperm genotype:",
+            "equation_latex": "\\text{Cross A } (\\text{Mother } bcd^-/bcd^- \\times \\text{Father } bcd^+/bcd^+): \\text{ All F1 zygotes are } bcd^+/bcd^-, \\text{ but } \\mathbf{100\\%\\text{ die as headless double-abdomen mutants!}}"
+          },
+          {
+            "step": 2,
+            "explanation": "In Cross B, the mother is heterozygous (bcd^+ / bcd^-); her nurse cells carry one functional copy of bicoid+ and deposit wild-type bicoid mRNA into 100% of her oocytes:",
+            "equation_latex": "\\text{Cross B } (\\text{Mother } bcd^+/bcd^- \\times \\text{Father } bcd^-/bcd^-): \\text{ Genotypes are } 50\\%\\ bcd^+/bcd^- \\text{ and } 50\\%\\ bcd^-/bcd^-, \\text{ but } \\mathbf{100\\%\\text{ develop into phenotypically NORMAL adults!}}"
+          },
+          {
+            "step": 3,
+            "explanation": "In Cross C, Krüppel (Kr) is a Zygotic Gap gene transcribed from the embryo's own diploid nucleus after fertilization, so it obeys standard Mendelian 3:1 segregation:",
+            "equation_latex": "\\text{Cross C } (Kr^+/Kr^- \\times Kr^+/Kr^-): \\mathbf{75\\%\\text{ Normal } (1/4\\ Kr^+/Kr^+ + 2/4\\ Kr^+/Kr^-)} : \\mathbf{25\\%\\text{ Gap Mutant } (1/4\\ Kr^-/Kr^-, \\text{ lacking thoracic/anterior abdominal segments})}"
+          }
+        ],
+        "final_answer": "Cross A: 100% mutant embryos (no head/thorax, despite being genotypically heterozygous bcd+/bcd-); Cross B: 100% phenotypically normal embryos (even the 50% that are genotypically bcd-/bcd-!); Cross C: 75% normal : 25% Krüppel gap mutant embryos."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-10.1",
+        "question": "If a microinjection needle delivers the calcium chelator EGTA into a sea urchin egg prior to insemination, and the egg is then fertilized in normal seawater, how does this affect the Fast Block versus the Slow Block to polyspermy?",
+        "bold_answer": "The Fast Block (Na+ depolarization to +20 mV) occurs normally, but the Slow Block (Cortical Granule exocytosis) is completely abolished, resulting in polyspermy once the membrane repolarizes",
+        "collapsible_derivation": "The Fast Block is mediated by extracellular Na+ influx across the plasma membrane and does not require intracellular Ca2+ release. The Slow Block strictly requires the IP3-gated intracellular Ca2+ wave to trigger cortical granule fusion; chelating cytosolic Ca2+ with EGTA prevents fertilization envelope elevation, so supernumerary sperm fuse as soon as the transient 1-minute fast block decays."
+      },
+      {
+        "problem_id": "PP-10.2",
+        "question": "In a classical chick embryology experiment, a researcher excises the Zone of Polarizing Activity (ZPA, or implants a bead soaked in Sonic Hedgehog [Shh]) from the posterior margin of a donor wing bud and grafts it into the ANTERIOR margin of a host wing bud (which retains its own endogenous posterior ZPA). What digit pattern (normally 2-3-4 from anterior to posterior in the chick wing) develops in the host limb?",
+        "bold_answer": "Mirror-image duplication of digits: 4 - 3 - 2 - 2 - 3 - 4 (or 4-3-2-3-4)",
+        "collapsible_derivation": "Sonic Hedgehog (Shh) secreted by the ZPA acts as a diffusive morphogen along the Anterior-Posterior axis: highest concentration (closest to ZPA) specifies Digit 4, intermediate specifies Digit 3, and low specifies Digit 2. Placing a second ZPA at the anterior margin creates two opposing U-shaped Shh gradients, inducing a mirror-image duplication of digits (4-3-2-2-3-4)."
+      },
+      {
+        "problem_id": "PP-10.3",
+        "question": "If an early amphibian gastrula is treated with Lithium Chloride (LiCl)—which directly inhibits GSK-3β throughout all blastomeres of the embryo—what embryonic axis defect is produced, and why?",
+        "bold_answer": "A hyper-dorsalized embryo (radial dorsalization / enlarged head and notochord with loss of ventral belly tissues)",
+        "collapsible_derivation": "Normally, GSK-3β is active on the ventral side (degrading β-Catenin) and inhibited only on the dorsal side by cortical-rotation-localized Dishevelled. LiCl globally inhibits GSK-3β across the entire embryo, stabilizing nuclear β-Catenin in ventral as well as dorsal vegetal cells, converting the entire marginal zone into Spemann-Mangold Organizer tissue."
+      },
+      {
+        "problem_id": "PP-10.4",
+        "question": "During mammalian pre-implantation development, if the Hippo signaling kinase Lats1/2 is genetically knocked out in all blastomeres at the 8-to-16-cell morula stage, what happens to the specification of the Inner Cell Mass (ICM) versus Trophectoderm (TE)?",
+        "bold_answer": "All cells (both inside and outside) adopt the Trophectoderm fate (expressing Cdx2), and no Inner Cell Mass (Oct4+) forms",
+        "collapsible_derivation": "In wild-type inner apolar blastomeres, active Hippo/Lats1/2 phosphorylates Yap, trapping it in the cytoplasm so Oct4/Nanog specify the ICM. In outer polar blastomeres, Hippo is OFF, allowing unphosphorylated Yap to enter the nucleus, bind Tead4, and activate Cdx2 (Trophectoderm). Knocking out Lats1/2 turns Hippo OFF in all cells, driving nuclear Yap/Cdx2 and converting the entire embryo into a hollow trophoblast vesicle."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Teratology & Regenerative Medicine Case Study: Cyclopamine Inhibition of Sonic Hedgehog (Holoprosencephaly) & Patient-Specific iPSC Therapy",
+    "scenario": "Case A (Developmental Teratology): In the 1950s, pregnant ewes grazing on wild corn lilies (Veratrum californicum) in Idaho gave birth to lambs with fatal cyclopia (a single central eye) and fused cerebral hemispheres (holoprosencephaly). Phytochemical isolation identified the steroidal alkaloid Cyclopamine. Case B (Regenerative Medicine): A patient with age-related macular degeneration (AMD) or β-thalassemia has skin fibroblasts harvested, reprogrammed via episomal OSKM factors into iPSCs, CRISPR-corrected, and differentiated into retinal pigment epithelium (RPE) or hematopoietic progenitors.",
+    "mechanistic_analysis": "In Case A, the vertebrate forebrain begins as a single continuous eye field and prosencephalic vesicle. Sonic Hedgehog (Shh) secreted from the prechordal plate and ventral floor plate acts as the midline morphogen that splits the single eye field into left and right eyes (repressing Pax6 at the midline while inducing Pax2 in the optic stalks) and divides the forebrain into two telencephalic hemispheres. Normally, cholesterol-modified Shh binds the 12-pass receptor Patched (Ptch1), relieving Ptch1's inhibition of the 7-TM protein Smoothened (Smo), which activates Gli1/Gli2 transcription factors. Cyclopamine binds directly to the transmembrane heptahelical bundle of Smoothened (Smo), locking the Hedgehog pathway OFF and phenocopying Shh loss-of-function (holoprosencephaly and cyclopia)—while paradoxically serving today as the structural template for Vismodegib (an FDA-approved Smo antagonist for Ptch1-mutant Basal Cell Carcinoma!). In Case B, OSKM reprogramming resets the epigenetic landscape of adult fibroblasts back to an ICM-like state without requiring human embryos, allowing autologous transplantation free of MHC Class I/II graft rejection.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook2",
+        "topic": "Primary Cilium Microtubule Trafficking of Hedgehog (Ptch1/Smo/Gli) Components"
+      },
+      {
+        "target_textbook": "TextBook3",
+        "topic": "Epigenetic Chromatin Remodeling (PRC2 H3K27me3 & DNMTs) in Waddington's Landscape"
+      },
+      {
+        "target_textbook": "TextBook5",
+        "topic": "CRISPR-Cas9 Homology-Directed Repair (HDR) in Patient-Derived iPSCs"
+      },
+      {
+        "target_textbook": "TextBook7",
+        "topic": "Comparison of Animal Hox Homeotic Genes vs. Plant MADS-Box ABC Floral Quartets"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-10.1",
+      "question": "According to the 'Default Model' of vertebrate neural induction, why do dorsal ectoderm cells overlying the Spemann-Mangold Organizer differentiate into the neural plate (brain and spinal cord) rather than epidermis?",
+      "options": [
+        "The Organizer secretes high concentrations of BMP4 that bind directly to ectodermal receptors to activate neural genes",
+        "Ectoderm cells intrinsically default to a neural fate unless instructed by BMP4 to become epidermis; the Organizer secretes Chordin, Noggin, and Follistatin, which bind and block BMP4 in the extracellular space",
+        "The Organizer injects maternal nanos mRNA into the overlying ectoderm via gap junctions",
+        "Sonic Hedgehog from the ventral mesoderm converts epidermis into neural crest"
+      ],
+      "correct_index": 1,
+      "explanation": "Throughout the blastula/gastrula ectoderm, autocrine/paracrine BMP4 signaling (via Smad1/5/8) actively suppresses neural genes and induces epidermal keratin genes. The Spemann-Mangold Organizer (dorsal lip) secretes soluble BMP antagonists (Chordin, Noggin, Follistatin) that sequester BMP4 away from its receptors, allowing dorsal ectoderm to execute its default neuroectodermal program."
+    },
+    {
+      "question_id": "Q-10.2",
+      "question": "What is the rule of 'Spatial and Temporal Collinearity' exhibited by the Hox gene clusters in bilaterian animals?",
+      "options": [
+        "Hox genes are arranged randomly on the chromosome but are spliced together into a single polycistronic mRNA",
+        "The physical 3'-to-5' order of Hox genes along the chromosome directly matches their Anterior-to-Posterior order of expression domains and their Early-to-Late timing of activation in the embryo",
+        "5'-located Hox genes are expressed exclusively in the anterior head and forebrain, while 3' Hox genes are expressed in the tail",
+        "Hox genes are expressed only in extraembryonic trophoblast tissues"
+      ],
+      "correct_index": 1,
+      "explanation": "In both invertebrates (Drosophila) and vertebrates (HOXA–D clusters), the 3'-most Hox genes (e.g., lab / Hox1) are activated earliest and specify the most anterior rhombomeric/cervical structures, whereas progressively more 5' Hox genes (e.g., Abd-B / Hox9–13) are activated later via progressive chromatin opening and specify posterior thoracic, lumbar, sacral, and distal limb structures."
+    },
+    {
+      "question_id": "Q-10.3",
+      "question": "Which set of four transcription factors ('Yamanaka Factors') was shown by Shinya Yamanaka (2006) to reprogram terminally differentiated adult somatic fibroblasts back into Induced Pluripotent Stem Cells (iPSCs)?",
+      "options": [
+        "Bicoid, Nanos, Hunchback, and Caudal",
+        "Oct4 (Pou5f1), Sox2, Klf4, and c-Myc",
+        "Chordin, Noggin, Follistatin, and BMP4",
+        "MyoD, Pax6, GATA1, and Cdx2"
+      ],
+      "correct_index": 1,
+      "explanation": "Yamanaka screened 24 candidate embryonic stem cell factors and demonstrated that retroviral or episomal expression of Oct4, Sox2, Klf4, and c-Myc (OSKM) suffices to remodel somatic chromatin and reactivate the endogenous pluripotency network."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "Über Induktion von Embryonalanlagen durch Implantation artfremder Organisatoren (Spemann & Mangold, 1924) & Induction of Pluripotent Stem Cells from Mouse Embryonic and Adult Fibroblast Cultures by Defined Factors (Takahashi & Yamanaka, Cell 2006)",
+    "imrad_breakdown": {
+      "abstract_summary": "Spemann and Hilde Mangold (1924) transplanted the dorsal blastopore lip between differently pigmented newt species (Triturus cristatus and T. taeniatus), proving that a small signaling center ('the Organizer') can instruct surrounding host tissues to assemble a complete vertebrate body plan. Takahashi and Yamanaka (2006) overturned the dogma of irreversible somatic differentiation by reprogramming adult fibroblasts into pluripotent iPSCs using Oct4, Sox2, Klf4, and c-Myc.",
+      "key_method": "Heteroplastic microsurgical dorsal lip grafting using natural melanosome pigmentation as a lineage tracer; Fbx15-βgeo reporter knock-in selection testing combinations of 24 candidate transcription factors in mouse fibroblasts, validated by teratoma and chimeric mouse germline transmission.",
+      "critical_takeaway": "Embryonic cell fate is governed by dynamic, reversible gene regulatory networks and extracellular morphogen signals—meaning any nucleated somatic cell retains the complete genomic blueprint to rebuild any tissue when its epigenetic state is reset."
+    },
+    "further_reading": [
+      "Barresi, M. J. F., & Gilbert, S. F. Developmental Biology — Chapters 3, 4, 7, 9, 11 & 17 (Cell Specification, Stem Cells, Fertilization, Drosophila Axis Patterning, Amphibians & Limb Development).",
+      "Wolpert, L., Tickle, C., & Martinez Arias, A. Principles of Development — Morphogen Gradients, French Flag Model, Hox Collinearity & Organogenesis.",
+      "Alberts, B., et al. Molecular Biology of the Cell — Chapter 21 (Development of Multicellular Organisms) & Chapter 22 (Stem Cells and Tissue Renewal)."
+    ]
+  }
+}

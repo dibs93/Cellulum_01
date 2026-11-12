@@ -1,0 +1,899 @@
+{
+  "textbook_id": "TextBook11",
+  "branch_number": 11,
+  "branch_title": "Bioinformatics: Biological Databases, Sequence Alignment, Multi-Omics & AI in Biology",
+  "subtitle": "Primary/Secondary Repositories, Dynamic Programming & BLAST Heuristics, PAM/BLOSUM Matrices, WGS/RNA-Seq Normalization (TPM/RPKM) & AlphaFold Structural AI",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Bioinformatics",
+    "upstream_nodes": [
+      "TextBook3",
+      "TextBook4",
+      "TextBook5",
+      "TextBook7",
+      "TextBook9"
+    ],
+    "downstream_nodes": [
+      "TextBook12",
+      "TextBook13",
+      "TextBook14"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Nucleotide / Amino Acid Token",
+        "scale_m": 3.4e-10,
+        "display_scale": "1 bp / 1 aa (ASCII / 2-bit)",
+        "example": "Single FASTA character or Phred-scored FASTQ basecall"
+      },
+      {
+        "level": "K-mer Seed & Alignment Motif",
+        "scale_m": 3.7e-9,
+        "display_scale": "3–11 nt / aa",
+        "example": "BLAST word seed (W=11 for DNA, W=3 for protein); PWM transcription factor motif"
+      },
+      {
+        "level": "3D Protein Domain & PDB Coordinate",
+        "scale_m": 5e-9,
+        "display_scale": "3–10 nm (100–300 aa)",
+        "example": "AlphaFold2 Evoformer-predicted Cα backbone (pLDDT > 90)"
+      },
+      {
+        "level": "Transcriptome Isoform & Contig",
+        "scale_m": 1e-6,
+        "display_scale": "1–50 kb",
+        "example": "Splice-aware STAR/HISAT2 aligned mRNA; De Bruijn graph assembled contig"
+      },
+      {
+        "level": "Reference Genome Assembly",
+        "scale_m": 1.0,
+        "display_scale": "4.6 Mb (E. coli) – 3.2 Gb (Human)",
+        "example": "Telomere-to-Telomere (T2T-CHM13) chromosome-scale FASTA"
+      },
+      {
+        "level": "Global Petabase Cloud Repositories",
+        "scale_m": 10000000.0,
+        "display_scale": "10^15 – 10^18 bases (Petabytes)",
+        "example": "INSDC (NCBI GenBank / EMBL-EBI / DDBJ), SRA, UniProt & AlphaFold DB"
+      }
+    ],
+    "explorer_pathways": [
+      "Future Molecular Biologist",
+      "Geneticist",
+      "Biotechnologist",
+      "Plant Scientist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "11.1",
+      "title": "Biological Databases: Primary vs. Secondary Repositories, Data Formats & Curation",
+      "overview": "Bioinformatics organizes exponentially growing molecular data into standardized, cross-referenced repositories categorized into Primary (archival experimental submissions) and Secondary/Curated (value-added, non-redundant annotated knowledgebases).",
+      "core_concepts": [
+        {
+          "concept_id": "11.1.1",
+          "heading": "The International Nucleotide Sequence Database Collaboration (INSDC) & Protein Repositories",
+          "theory": "Global sequence synchronization is maintained by the INSDC triad—NCBI GenBank (USA), EMBL-EBI European Nucleotide Archive (UK/Europe), and DDBJ (DNA Data Bank of Japan)—which exchange newly submitted archival sequences daily so accession numbers remain universally retrievable.",
+          "key_principles": [
+            "Primary (Archival) vs. Secondary (Curated) Databases: Primary databases store raw or assembled experimental data submitted directly by researchers without editorial modification (e.g., GenBank/ENA/DDBJ for nucleotides; NCBI Sequence Read Archive [SRA] for raw FASTQ NGS reads; Protein Data Bank [PDB] for X-ray, NMR, and Cryo-EM 3D atomic coordinates). Because primary databases contain redundant entries and variable annotation quality, Secondary databases apply expert manual curation and automated pipelines: NCBI RefSeq provides non-redundant reference sequences (easily recognized by an underscore in the accession prefix: NM_ for mRNA, NP_ for protein, NC_ for chromosome, vs. GenBank's no-underscore format); UniProtKB partitions into TrEMBL (computationally translated, unreviewed) and Swiss-Prot (manually curated gold-standard protein annotations).",
+            "Domain, Pathway & Structural Classification Databases: Pfam and InterPro classify protein families using Hidden Markov Models (HMMs) of conserved domains; CATH (Class, Architecture, Topology, Homologous superfamily) and SCOP classify 3D protein folds; KEGG (Kyoto Encyclopedia of Genes and Genomes) and Reactome map metabolic and signaling networks.",
+            "Standard Bioinformatic File Formats: (1) FASTA (.fa/.fasta): Header line starting with '>' followed by raw nucleotide or single-letter amino acid sequence; (2) FASTQ (.fq): 4 lines per sequencing read—Line 1: '@Read_ID', Line 2: raw sequence, Line 3: '+', Line 4: ASCII-encoded Phred quality scores (Q = -10 log10 P_e); (3) SAM/BAM: Sequence Alignment/Map (tab-delimited text vs. compressed binary) storing read-to-reference coordinates and CIGAR alignment strings; (4) VCF (Variant Call Format): Stores SNPs, indels, and structural variants relative to a reference genome; (5) PDB / mmCIF: 3D Cartesian (X, Y, Z) atomic coordinates and B-factor thermal displacement parameters."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Taxonomy of Major Global Bioinformatics Databases & File Standards",
+        "headers": [
+          "Database Name",
+          "Tier / Curation Level",
+          "Primary Biological Data Type",
+          "Canonical Accession / Identifier Format"
+        ],
+        "rows": [
+          [
+            "NCBI GenBank / EMBL-ENA / DDBJ",
+            "Primary (Archival INSDC)",
+            "Assembled nucleotide sequences (DNA/mRNA)",
+            "2 letters + 6 digits (e.g., AY123456.1 — no underscore)"
+          ],
+          [
+            "NCBI SRA (Sequence Read Archive)",
+            "Primary (Archival Raw Reads)",
+            "Raw high-throughput sequencing reads (FASTQ)",
+            "SRR / SRX / SRP + digits (e.g., SRR1042891)"
+          ],
+          [
+            "NCBI RefSeq",
+            "Secondary (Non-redundant curated)",
+            "Reference genomes, transcripts, and proteins",
+            "2 letters + underscore + digits (NM_000546, NP_000537)"
+          ],
+          [
+            "UniProtKB / Swiss-Prot",
+            "Secondary (Expert manually curated)",
+            "Protein sequences, post-translational sites, function",
+            "6-character alphanumeric (e.g., P04637 for human p53)"
+          ],
+          [
+            "UniProtKB / TrEMBL",
+            "Primary/Automated translation",
+            "Computationally translated coding sequences",
+            "6- or 10-character alphanumeric"
+          ],
+          [
+            "RCSB PDB (Protein Data Bank)",
+            "Primary (3D Structural Archive)",
+            "X-ray, Cryo-EM, and NMR 3D atomic coordinates",
+            "4-character alphanumeric code (e.g., 1TUP, 6VXX)"
+          ],
+          [
+            "Pfam / InterPro",
+            "Secondary (Profile HMM families)",
+            "Conserved protein domains and functional repeats",
+            "PF + 5 digits (e.g., PF00069 for Protein Kinase domain)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "11.2",
+      "title": "Sequence Analysis: Pairwise Dynamic Programming, Substitution Matrices, BLAST & Phylogenetics",
+      "overview": "Sequence alignment infers evolutionary homology (orthology vs. paralogy) and functional conservation by maximizing a quantitative similarity score across nucleotide or amino acid residues while penalizing insertions and deletions (gaps).",
+      "core_concepts": [
+        {
+          "concept_id": "11.2.1",
+          "heading": "Homology (Orthologs vs. Paralogs) & Substitution Matrices (PAM vs. BLOSUM)",
+          "theory": "Walter Fitch (1970) established the critical distinction between Sequence Similarity (an observable quantitative metric, e.g., 42% identity) and Homology (an evolutionary conclusion: two sequences share a common ancestor—homology is binary, never a percentage!).",
+          "key_principles": [
+            "Orthologs vs. Paralogs: Orthologs are homologous genes in different species that diverged via a Speciation event (e.g., human β-globin and mouse β-globin) and typically retain the same physiological function. Paralogs are homologous genes within a genome that arose via a Gene Duplication event (e.g., human α-globin, β-globin, and myoglobin) and frequently diverge to acquire novel or sub-specialized functions.",
+            "Amino Acid Substitution Matrices (Log-Odds Scoring): Protein alignments are far more sensitive than DNA alignments for distant homologs (20-letter alphabet with physicochemical conservation vs. 4-letter alphabet where 25% identity occurs by random chance). Substitution matrices assign log-odds scores s(i,j) = log(q_ij / (p_i · p_j)), comparing observed substitution frequency in homologous alignments (q_ij) to random background expectation (p_i · p_j).",
+            "PAM (Margaret Dayhoff) vs. BLOSUM (Henikoff & Henikoff) Matrices: PAM (Point Accepted Mutation) matrices are extrapolated via Markov chains from global alignments of closely related proteins (>85% identity, where PAM1 = 1% amino acid change). Higher PAM numbers correspond to GREATER evolutionary divergence (PAM250 for distant homologs; PAM30 for close homologs). Conversely, BLOSUM (Blocks Substitution Matrix) matrices are derived directly from ungapped local blocks of conserved motifs clustered at a threshold identity percentage: Higher BLOSUM numbers correspond to CLOSER evolutionary relationships (BLOSUM80 for closely related proteins; BLOSUM62 [the BLASTP default] for intermediate divergence; BLOSUM45 for distantly related proteins)."
+          ]
+        },
+        {
+          "concept_id": "11.2.2",
+          "heading": "Exact Dynamic Programming (Needleman-Wunsch vs. Smith-Waterman) & Heuristic BLAST",
+          "theory": "Exact pairwise alignment algorithms construct an (m + 1) × (n + 1) dynamic programming matrix guaranteed to find the mathematically optimal alignment, normally using Affine Gap Penalties (P_gap = d + e(L - 1), where gap opening penalty d > gap extension penalty e because a single mutational indel event often spans multiple residues).",
+          "key_principles": [
+            "Global Alignment (Needleman-Wunsch, 1970) vs. Local Alignment (Smith-Waterman, 1981): Needleman-Wunsch aligns two sequences end-to-end across their entire lengths (ideal for proteins of similar length and colinear domain structure); negative scores are permitted, initialization sets the top row/left column to cumulative gap penalties, and trace-back starts at the bottom-right corner (m, n). Smith-Waterman identifies the highest-scoring conserved local sub-segment (ideal for multi-domain proteins sharing only a single domain, or mapping an exon to a genome); any cell score dropping below 0 is reset to 0, first row/column are initialized to 0, and trace-back starts at the maximum score anywhere in the grid and stops at a 0.",
+            "Heuristic Database Searching (BLAST — Altschul et al., 1990): Because dynamic programming scales as O(m·n), searching a petabase database is computationally slow. BLAST (Basic Local Alignment Search Tool) achieves a 50- to 100-fold speedup via a 3-step heuristic: (1) Seeding: Break query into short k-mer words (default W = 11 exact matches for BLASTN; W = 3 high-scoring neighborhood words ≥ threshold T for BLASTP); (2) Two-Hit Ungapped Extension: Extend seed matches bidirectionally without gaps to find High-Scoring Segment Pairs (HSPs); (3) Gapped Extension & Karlin-Altschul Statistics: Perform local gapped alignment on significant HSPs and compute the Bit Score (S', normalized for scoring matrix) and Expect Value (E-value).",
+            "The Five Canonical BLAST Programs: (1) BLASTN: Nucleotide query vs. Nucleotide DB; (2) BLASTP: Protein query vs. Protein DB; (3) BLASTX: Nucleotide query (translated in all 6 reading frames) vs. Protein DB (ideal for unannotated cDNA/EST reads); (4) TBLASTN: Protein query vs. Nucleotide DB (translated in all 6 frames, ideal for finding unannotated genes in a raw genome assembly); (5) TBLASTX: 6-frame translated Nucleotide query vs. 6-frame translated Nucleotide DB."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Algorithmic Comparison of Global, Local & Heuristic Sequence Alignment Methods",
+        "headers": [
+          "Feature / Parameter",
+          "Needleman-Wunsch (Global)",
+          "Smith-Waterman (Local)",
+          "BLAST (Heuristic Local)"
+        ],
+        "rows": [
+          [
+            "Alignment Scope",
+            "End-to-end across entire query & subject lengths",
+            "Highest-scoring local conserved sub-region(s)",
+            "Seeded local High-Scoring Segment Pairs (HSPs)"
+          ],
+          [
+            "Matrix Initialization (Row 0 / Col 0)",
+            "Cumulative gap penalties: 0, -g, -2g, -3g...",
+            "Filled entirely with zeros (0, 0, 0...)",
+            "K-mer hash table / suffix lookup index"
+          ],
+          [
+            "Negative Cell Scores Allowed?",
+            "Yes (Scores can be negative)",
+            "No (Any score < 0 is floored to 0)",
+            "Ungapped/gapped drop-off threshold X"
+          ],
+          [
+            "Trace-Back Starting Point & Stop",
+            "Starts at bottom-right cell (m, n) -> top-left (0, 0)",
+            "Starts at highest value in entire matrix -> stops at 0",
+            "Extends bidirectionally from k-mer word hits"
+          ],
+          [
+            "Optimality Guarantee & Complexity",
+            "Mathematically optimal; O(m·n) time",
+            "Mathematically optimal; O(m·n) time",
+            "Heuristic approximation (may miss weak hits); O(N) fast"
+          ],
+          [
+            "Ideal Biological Use Case",
+            "Comparing two full-length orthologous proteins/genes",
+            "Finding a shared catalytic domain in mosaic proteins",
+            "Searching 1 query against millions of GenBank/UniProt sequences"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "11.3",
+      "title": "Omics Sciences: Genome Assembly, RNA-Seq Normalization (RPKM/TPM) & Proteomics",
+      "overview": "High-throughput Omics technologies quantify biological systems globally across four layers: Genomics (de novo assembly & variant calling), Transcriptomics (RNA-seq expression & differential splicing), Proteomics (LC-MS/MS peptide identification), and Metabolomics.",
+      "core_concepts": [
+        {
+          "concept_id": "11.3.1",
+          "heading": "Genome Assembly (OLC vs. De Bruijn Graphs), Coverage Depth & Contig N50",
+          "theory": "Whole-Genome Shotgun (WGS) sequencing shears genomic DNA into millions of overlapping reads. Reconstructing chromosomes requires sufficient Sequencing Coverage Depth (C = N·L / G, where Lander-Waterman Poisson statistics predict the fraction of unsequenced bases as e^-C) and assembly algorithms tailored to read length.",
+          "key_principles": [
+            "Overlap-Layout-Consensus (OLC) vs. De Bruijn k-mer Graphs: Long-read assemblers (for PacBio HiFi and Oxford Nanopore) use Overlap-Layout-Consensus (computing all-vs-all pairwise read overlaps). For hundreds of millions of short Illumina reads, OLC is computationally intractable; short-read assemblers (SPAdes, Velvet) shred reads into overlapping substrings of length k (k-mers) and construct an Eulerian De Bruijn Graph where nodes/edges represent k-mers.",
+            "The N50 Assembly Continuity Metric: To evaluate assembly quality, all assembled contigs (or scaffolds) are sorted from longest to shortest, and their lengths are summed until the cumulative length reaches ≥50% of the total assembled genome size. The length of the contig at that 50% midpoint is the N50 (higher N50 = more contiguous assembly; L50 is the count of contigs needed to reach 50%)."
+          ]
+        },
+        {
+          "concept_id": "11.3.2",
+          "heading": "Transcriptomics (RNA-Seq): Why TPM Replaces RPKM/FPKM & Volcano PlotFDR Control",
+          "theory": "In RNA-Seq, raw read counts mapping to a gene (r_i) cannot be compared directly between genes or samples because (1) longer transcripts generate more fragments at equal molar abundance (length bias), and (2) deeper sequencing runs generate more total reads (library size bias).",
+          "key_principles": [
+            "RPKM / FPKM (Reads/Fragments Per Kilobase Million) vs. TPM (Transcripts Per Million): RPKM normalizes by dividing raw read count by total library reads (in millions) FIRST, and then dividing by gene length (in kilobases). Because of this order, the sum of all RPKMs in a sample varies depending on the length distribution of expressed genes, making RPKM invalid for comparing relative molar proportions across samples! Wagner et al. (2012) introduced TPM (Transcripts Per Million), which divides raw read count (r_i) by gene length in kilobases (L_i) FIRST (giving a reads-per-kilobase rate q_i = r_i / L_i), and then normalizes by the sum of all q_j across the transcriptome × 10^6. Consequently, the sum of all TPMs in every sample is ALWAYS exactly 1,000,000, preserving true relative molar RNA proportions!",
+            "Differential Gene Expression (DESeq2 / edgeR) & Benjamini-Hochberg FDR: When testing 20,000 human genes simultaneously at a standard p < 0.05 cutoff, 20,000 × 0.05 = 1,000 false-positive genes would appear significant by random chance (the Multiple Testing Problem). Differential expression pipelines model count overdispersion using the Negative Binomial distribution and control the False Discovery Rate (FDR / adjusted p-value q) via the Benjamini-Hochberg step-up procedure, visualizing results on a Volcano Plot (-log10(q-value) vs. log2(Fold Change))."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Comparison of High-Throughput Omics Normalization & Quality Metrics",
+        "headers": [
+          "Omics Metric",
+          "Mathematical Order of Operations",
+          "Sample-to-Sample Sum Invariant?",
+          "Primary Bioinformatic Interpretation"
+        ],
+        "rows": [
+          [
+            "Coverage Depth (C)",
+            "C = (Read Count N × Read Length L) / Genome Size G",
+            "No (Scales with sequencing depth)",
+            "Average number of reads overlapping each genomic base"
+          ],
+          [
+            "Contig N50",
+            "Length of shortest contig at ≥50% of total assembly length",
+            "No (Depends on repeat resolution)",
+            "Weighted median contig size measuring assembly continuity"
+          ],
+          [
+            "RPKM / FPKM",
+            "1. Divide by Total Reads (10^6); 2. Divide by Length (kb)",
+            "No (Sum of RPKMs varies between samples!)",
+            "Within-sample gene length normalization (legacy metric)"
+          ],
+          [
+            "TPM (Transcripts Per Million)",
+            "1. Divide by Length (r_i / L_i); 2. Divide by ∑(r_j/L_j) × 10^6",
+            "Yes (∑ TPM = 1,000,000 in every sample)",
+            "Gold-standard relative molar transcript abundance across samples"
+          ],
+          [
+            "DESeq2 Size Factors",
+            "Median of ratios to geometric mean across samples",
+            "Normalized count matrix",
+            "Accounts for composition bias in differential expression testing"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "11.4",
+      "title": "AI in Biology: AlphaFold Protein Structure Prediction, Molecular Docking & Drug Discovery",
+      "overview": "Deep learning and transformer attention architectures have solved the 50-year-old protein folding problem (Anfinsen's Dogma) and transformed in silico structure-based drug discovery.",
+      "core_concepts": [
+        {
+          "concept_id": "11.4.1",
+          "heading": "Coevolutionary Contact Prediction & AlphaFold2/3 Evoformer Architecture",
+          "theory": "Christian Anfinsen (1972) demonstrated that a protein's primary amino acid sequence contains all the thermodynamic information required to specify its native 3D tertiary fold (the global minimum of Gibbs free energy). However, Cyrus Levinthal's Paradox noted that a 100-residue polypeptide has ~3^100 conformations—requiring >10^27 years if sampled randomly, proving folding proceeds down a funnel-like energy landscape.",
+          "key_principles": [
+            "Multiple Sequence Alignment (MSA) Coevolutionary Coupling: If residue i and residue j are separated by 150 amino acids in sequence but pack tightly together in the 3D hydrophobic core, a bulky or charged mutation at position i exerts evolutionary selection pressure for a compensatory mutation at position j across orthologous species. Correlated mutations in deep MSAs therefore reveal 3D spatial contact maps.",
+            "AlphaFold2 / AlphaFold3 Architecture (Jumper & Hassabis, Nobel Prize 2024): AlphaFold processes a query sequence through two coupled neural network representations inside its 48-block Evoformer transformer: (1) the MSA Representation (extracting coevolutionary residue couplings across species) and (2) the Pair Representation (enforcing geometric triangle inequality constraints in 3D space: d_ij ≤ d_ik + d_kj), followed by an SE(3)-equivariant Structure Module that directly predicts 3D atomic coordinates with near-experimental accuracy (median backbone RMSD < 1.0 Å).",
+            "Confidence Metrics (pLDDT & PAE): AlphaFold outputs a per-residue confidence score—pLDDT (predicted Local Distance Difference Test, scaled 0 to 100): pLDDT > 90 indicates high-accuracy side-chain and backbone geometry; 70–90 indicates reliable backbone fold; < 50 typically marks Intrinsically Disordered Regions (IDRs) that remain unstructured in solution unless bound to a partner. The Predicted Aligned Error (PAE) matrix quantifies confidence in the relative orientation between distinct domains or protein-protein complexes.",
+            "Structure-Based Drug Discovery & Molecular Docking: Using experimental (PDB) or AlphaFold-predicted receptor structures, virtual screening docks millions of small-molecule ligands into the catalytic/allosteric pocket, scoring binding free energy (ΔG_bind = ΔG_vdW + ΔG_hbond + ΔG_elec + ΔG_desolv) and filtering candidates by Lipinski's Rule of Five for oral bioavailability (MW ≤ 500 Da, LogP ≤ 5, H-bond donors ≤ 5, H-bond acceptors ≤ 10)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Evolution of Protein Structure Determination & Computational Prediction Methods",
+        "headers": [
+          "Method / Platform",
+          "Experimental or Computational?",
+          "Primary Input Data",
+          "Typical Resolution / Accuracy & Limitations"
+        ],
+        "rows": [
+          [
+            "X-Ray Crystallography",
+            "Experimental",
+            "X-ray diffraction of crystallized protein lattice",
+            "1.0 – 2.5 Å (Atomic gold standard; membrane proteins resist crystallization)"
+          ],
+          [
+            "Cryo-EM (Single Particle)",
+            "Experimental",
+            "2D electron micrographs of vitrified flash-frozen complexes",
+            "1.8 – 3.5 Å (Ideal for megadalton complexes, ribosomes, ion channels)"
+          ],
+          [
+            "NMR Spectroscopy",
+            "Experimental",
+            "Nuclear spin relaxation / NOE distances in solution",
+            "Solution dynamics & intrinsically disordered proteins (<40 kDa size limit)"
+          ],
+          [
+            "Homology (Comparative) Modeling",
+            "Computational (Template-based)",
+            "Known PDB structure with >30% sequence identity (SWISS-MODEL)",
+            "Accurate only when a close homologous template already exists in PDB"
+          ],
+          [
+            "AlphaFold2 / AlphaFold3",
+            "Deep Learning AI (Ab initio + MSA)",
+            "Primary sequence + Deep Multiple Sequence Alignment",
+            "~1.0 Å backbone RMSD across >200M proteins; AlphaFold3 docks DNA/RNA/ligands"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-11.1",
+      "title": "Figure 11.1: Dynamic Programming Alignment Matrix (Needleman-Wunsch vs. Smith-Waterman Trace-Back)",
+      "sub_module_ref": "11.2",
+      "thumbnail_caption": "Three-directional recurrence step (Diagonal Match/Mismatch, Up/Left Gap Penalty) and optimal trace-back path across the alignment grid. Tap to expand.",
+      "svg_template_id": "svg_dynamic_programming_11_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>DYNAMIC PROGRAMMING MATRIX: RECURRENCE CELL &amp; OPTIMAL TRACE-BACK</text><rect x='45' y='60' width='355' height='255' rx='10' fill='#102a43' stroke='#4facfe' stroke-width='2'/><text x='222' y='85' fill='#00f2fe' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Recurrence Relation at Cell F(i, j)</text><rect x='85' y='105' width='105' height='65' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='137' y='132' fill='#00ff87' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>F(i-1, j-1)</text><text x='137' y='152' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>+ s(x_i, y_j)</text><rect x='245' y='105' width='105' height='65' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='297' y='132' fill='#ff6b8b' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>F(i-1, j)</text><text x='297' y='152' fill='#ffb8c6' font-family='monospace' font-size='10' text-anchor='middle'>- d (Gap in Y)</text><rect x='85' y='215' width='105' height='65' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='137' y='242' fill='#ff6b8b' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>F(i, j-1)</text><text x='137' y='262' fill='#ffb8c6' font-family='monospace' font-size='10' text-anchor='middle'>- d (Gap in X)</text><rect x='245' y='215' width='105' height='65' rx='8' fill='#2b1d38' stroke='#ffca28' stroke-width='2.5'/><text x='297' y='242' fill='#ffca28' font-family='monospace' font-size='13' font-weight='bold' text-anchor='middle'>F(i, j) = MAX</text><text x='297' y='262' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>(or 0 in Local)</text><path d='M 185 165 L 245 218' stroke='#00ff87' stroke-width='3'/><path d='M 297 170 L 297 215' stroke='#ff6b8b' stroke-width='3'/><path d='M 190 247 L 245 247' stroke='#ff6b8b' stroke-width='3'/><rect x='435' y='60' width='345' height='255' rx='10' fill='#0b192c' stroke='#00f2fe' stroke-width='2'/><text x='607' y='85' fill='#00ff87' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Needleman-Wunsch Trace-Back Grid</text><text x='525' y='115' fill='#ffca28' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>-</text><text x='575' y='115' fill='#ffca28' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>A</text><text x='625' y='115' fill='#ffca28' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>T</text><text x='675' y='115' fill='#ffca28' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>G</text><text x='725' y='115' fill='#ffca28' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>C</text><text x='475' y='145' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>-</text><text x='475' y='180' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>A</text><text x='475' y='215' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>G</text><text x='475' y='250' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>C</text><circle cx='525' cy='140' r='13' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='525' y='144' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>0</text><circle cx='575' cy='175' r='13' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='575' y='179' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>+2</text><circle cx='625' cy='175' r='13' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='625' y='179' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>0</text><circle cx='675' cy='210' r='13' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='675' y='214' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>+2</text><circle cx='725' cy='245' r='13' fill='#0b382c' stroke='#00ff87' stroke-width='2.5'/><text x='725' y='249' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>+4</text><path d='M 715 235 L 685 218 M 665 202 L 635 182 M 612 175 L 588 175 M 565 165 L 535 148' stroke='#00ff87' stroke-width='2.5'/><text x='607' y='292' fill='#fff' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>Optimal Alignment: A T G C / A - G C (Score = +4)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-11-1a",
+          "x_pct": 36.2,
+          "y_pct": 70.0,
+          "label": "Dynamic Programming Recurrence",
+          "scale_link": "algorithm",
+          "detail": "Each cell F(i,j) is computed once from its three neighbors: diagonal (match/mismatch), vertical (gap in sequence 2), and horizontal (gap in sequence 1)."
+        },
+        {
+          "pin_id": "pin-11-1b",
+          "x_pct": 88.4,
+          "y_pct": 70.0,
+          "label": "Trace-Back Path Reconstruction",
+          "scale_link": "algorithm",
+          "detail": "Following pointers backward from the terminal cell reconstructs the alignment: a diagonal step aligns two residues, while a horizontal/vertical step inserts a gap ('-')."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-11.2",
+      "title": "Figure 11.2: Transcriptomics: RNA-Seq TPM vs. RPKM Normalization & Differential Expression Volcano Plot",
+      "sub_module_ref": "11.3",
+      "thumbnail_caption": "Why TPM preserves sample-to-sample invariance (∑TPM = 10^6) alongside a differential expression Volcano Plot (-log10 FDR vs. log2 Fold Change). Tap to expand.",
+      "svg_template_id": "svg_rnaseq_volcano_11_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. RNA-SEQ NORMALIZATION: RPKM vs. TPM</text><text x='435' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. DIFFERENTIAL EXPRESSION VOLCANO PLOT</text><line x1='410' y1='20' x2='410' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><rect x='45' y='62' width='340' height='105' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='215' y='86' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>RPKM / FPKM (Legacy — Sum Varies!)</text><text x='215' y='110' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>Step 1: Normalize by Total Reads (RPM)</text><text x='215' y='132' fill='#ffb8c6' font-family='monospace' font-size='11' text-anchor='middle'>Step 2: Divide by Gene Length in kb (L_i)</text><text x='215' y='152' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>Flaw: ∑ RPKM_sampleA ≠ ∑ RPKM_sampleB</text><rect x='45' y='185' width='340' height='115' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='215' y='209' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>TPM — Transcripts Per Million (Gold Standard)</text><text x='215' y='233' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>Step 1: Divide Reads by Length FIRST (q_i = r_i / L_i)</text><text x='215' y='255' fill='#a0e2c4' font-family='monospace' font-size='11' text-anchor='middle'>Step 2: Normalize by ∑ q_j × 10^6</text><text x='215' y='280' fill='#00f2fe' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Advantage: ∑ TPM = 1,000,000 in ALL Samples!</text><line x1='465' y1='265' x2='780' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='465' y1='60' x2='465' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='465' y1='175' x2='780' y2='175' stroke='#ffca28' stroke-dasharray='4,4' stroke-width='1.5'/><text x='775' y='168' fill='#ffca28' font-family='monospace' font-size='9' text-anchor='end'>FDR q = 0.05</text><line x1='585' y1='60' x2='585' y2='265' stroke='#1e3a5f' stroke-dasharray='4,4'/><line x1='660' y1='60' x2='660' y2='265' stroke='#1e3a5f' stroke-dasharray='4,4'/><circle cx='510' cy='95' r='5' fill='#00f2fe'/><circle cx='530' cy='115' r='5' fill='#00f2fe'/><circle cx='545' cy='140' r='5' fill='#00f2fe'/><circle cx='495' cy='130' r='5' fill='#00f2fe'/><text x='525' y='78' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Downregulated</text><circle cx='725' cy='85' r='5' fill='#00ff87'/><circle cx='705' cy='110' r='5' fill='#00ff87'/><circle cx='690' cy='135' r='5' fill='#00ff87'/><circle cx='745' cy='120' r='5' fill='#00ff87'/><text x='715' y='72' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Upregulated</text><circle cx='610' cy='230' r='4' fill='#627d98'/><circle cx='625' cy='215' r='4' fill='#627d98'/><circle cx='635' cy='240' r='4' fill='#627d98'/><circle cx='595' cy='205' r='4' fill='#627d98'/><text x='622' y='292' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>log2(Fold Change) [Cutoff: |log2FC| ≥ 1.0]</text><text x='435' y='165' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle' transform='rotate(-90 435 165)'>-log10(Adjusted p-value)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-11-2a",
+          "x_pct": 26.2,
+          "y_pct": 72.0,
+          "label": "TPM Molar Proportion Invariance",
+          "scale_link": "omics",
+          "detail": "By dividing read counts by transcript length (kb) first, q_i = r_i / L_i is directly proportional to the molar concentration of transcript i in the RNA sample."
+        },
+        {
+          "pin_id": "pin-11-2b",
+          "x_pct": 87.2,
+          "y_pct": 30.0,
+          "label": "Volcano Plot Upper-Right Quadrant",
+          "scale_link": "omics",
+          "detail": "Genes in the upper-right quadrant exhibit both biological magnitude (log2 Fold Change ≥ +1, i.e., ≥2-fold upregulation) and statistical significance (-log10 Benjamini-Hochberg FDR > 1.3, i.e., q < 0.05)."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-11.3",
+      "title": "Figure 11.3: AlphaFold2/3 Deep Learning Pipeline: MSA Coevolution, Evoformer & 3D Structure Module",
+      "sub_module_ref": "11.4",
+      "thumbnail_caption": "Coevolving residue pairs in Multiple Sequence Alignments (MSAs) feeding into the 48-block Evoformer attention network to predict 3D atomic coordinates. Tap to expand.",
+      "svg_template_id": "svg_alphafold_pipeline_11_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>ALPHAFOLD ARCHITECTURE: FROM COEVOLUTIONARY MSA TO 3D ATOMIC STRUCTURE</text><rect x='40' y='75' width='185' height='185' rx='10' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='132' y='100' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>1. Deep MSA Search</text><text x='132' y='128' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>Human: M K [R] G ... [E] L</text><text x='132' y='148' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>Mouse: M K [K] G ... [D] L</text><text x='132' y='168' fill='#00ff87' font-family='monospace' font-size='11' text-anchor='middle'>Zfish: M K [E] G ... [R] L</text><text x='132' y='188' fill='#ffca28' font-family='monospace' font-size='11' text-anchor='middle'>Plant: M R [D] G ... [K] L</text><text x='132' y='225' fill='#a0c4e2' font-family='sans-serif' font-size='10' text-anchor='middle'>Coevolving Charge Swap</text><text x='132' y='242' fill='#00ff87' font-family='sans-serif' font-size='10' font-weight='bold' text-anchor='middle'>→ Residues i &amp; j Contact in 3D!</text><rect x='275' y='75' width='245' height='185' rx='10' fill='#2b1d38' stroke='#b388ff' stroke-width='2.5'/><text x='397' y='100' fill='#b388ff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>2. Evoformer (48 Blocks)</text><rect x='295' y='118' width='205' height='52' rx='6' fill='#102a43' stroke='#00f2fe'/><text x='397' y='140' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>MSA Representation (s × r)</text><text x='397' y='158' fill='#a0c4e2' font-family='monospace' font-size='9' text-anchor='middle'>Row &amp; Column Axial Attention</text><rect x='295' y='188' width='205' height='52' rx='6' fill='#0b382c' stroke='#00ff87'/><text x='397' y='210' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Pair Representation (r × r)</text><text x='397' y='228' fill='#a0e2c4' font-family='monospace' font-size='9' text-anchor='middle'>Triangle Inequality: d_ij ≤ d_ik + d_kj</text><rect x='570' y='75' width='210' height='185' rx='10' fill='#0b382c' stroke='#00ff87' stroke-width='2.5'/><text x='675' y='100' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>3. Structure Module (SE3)</text><circle cx='645' cy='165' r='22' fill='#005c8a' stroke='#00f2fe' stroke-width='2.5'/><text x='645' y='169' fill='#fff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Res i</text><circle cx='705' cy='165' r='22' fill='#381d2a' stroke='#ff6b8b' stroke-width='2.5'/><text x='705' y='169' fill='#fff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Res j</text><line x1='667' y1='165' x2='683' y2='165' stroke='#ffca28' stroke-width='4'/><text x='675' y='215' fill='#ffca28' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Salt Bridge (&lt; 4.0 Å)</text><text x='675' y='240' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>pLDDT &gt; 90 (High Confidence)</text><path d='M 225 167 L 275 167' stroke='#00f2fe' stroke-width='3'/><path d='M 520 167 L 570 167' stroke='#00ff87' stroke-width='3'/><text x='410' y='305' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Iterative Recycling (3× passes) refines backbone torsion angles (φ, ψ) &amp; side-chain rotamers (χ1–χ4)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-11-3a",
+          "x_pct": 16.1,
+          "y_pct": 50.0,
+          "label": "Coevolutionary Charge Swaps",
+          "scale_link": "5nm",
+          "detail": "When a positively charged Arg (R) and negatively charged Glu (E) form an essential buried salt bridge, an R->E mutation in one lineage is compensated by an E->R mutation at the partner position."
+        },
+        {
+          "pin_id": "pin-11-3b",
+          "x_pct": 48.4,
+          "y_pct": 63.0,
+          "label": "Triangle Multiplicative Attention",
+          "scale_link": "5nm",
+          "detail": "Enforces 3D Euclidean geometry inside the Pair Representation: if residue i touches residue k, and residue k touches residue j, then distance d(i,j) is strictly constrained by the triangle inequality."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_blast_evalue_bitscore_11_2",
+      "title": "BLAST Karlin-Altschul Bit Score (S') & Expect Value (E-Value) Simulator",
+      "sub_module_ref": "11.2",
+      "type": "blast-statistics-calculator",
+      "description": "Explore how raw alignment score (S), query length (m), database size in residues (n), and Karlin-Altschul statistical parameters (λ = 0.267, K = 0.041 for BLOSUM62) govern the normalized Bit Score (S'), Expect Value (E), and homology p-value.",
+      "controls": [
+        {
+          "id": "raw_score_s",
+          "label": "Raw Alignment Score (S)",
+          "min": 30,
+          "max": 300,
+          "step": 5,
+          "default": 120,
+          "unit": "score units"
+        },
+        {
+          "id": "query_len_m",
+          "label": "Query Sequence Length (m)",
+          "min": 50,
+          "max": 2000,
+          "step": 50,
+          "default": 300,
+          "unit": "aa / nt"
+        },
+        {
+          "id": "db_residues_millions",
+          "label": "Database Size (n, in Millions of Residues)",
+          "min": 1,
+          "max": 1000,
+          "step": 10,
+          "default": 100,
+          "unit": "×10^6 residues"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "bit_score_s_prime",
+          "label": "Normalized Bit Score (S' = [λS - ln K] / ln 2)",
+          "formula_js": "((0.267 * raw_score_s) - Math.log(0.041)) / Math.LN2",
+          "unit": "bits"
+        },
+        {
+          "output_id": "search_space_mn",
+          "label": "Effective Search Space (m × n)",
+          "formula_js": "(query_len_m * db_residues_millions) / 1000",
+          "unit": "×10^9 Comparisons"
+        },
+        {
+          "output_id": "expect_e_value",
+          "label": "BLAST Expect Value (E = m · n · 2^-S')",
+          "formula_js": "(query_len_m * (db_residues_millions * 1e6)) * Math.pow(2, -(((0.267 * raw_score_s) - Math.log(0.041)) / Math.LN2))",
+          "unit": "expected random hits"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_rnaseq_tpm_normalizer_11_3",
+      "title": "RNA-Seq Transcripts Per Million (TPM) vs. RPKM Normalization Simulator",
+      "sub_module_ref": "11.3",
+      "type": "transcriptomics-tpm-calculator",
+      "description": "Input raw mapped read counts and gene lengths (in kilobases) for a 3-gene transcriptome model to compute exact Reads Per Kilobase (q_i = r_i / L_i) and normalized TPM values (verifying that TPM1 + TPM2 + TPM3 = 1,000,000).",
+      "controls": [
+        {
+          "id": "reads_gene1",
+          "label": "Gene 1 Raw Read Count (r_1)",
+          "min": 100,
+          "max": 50000,
+          "step": 100,
+          "default": 4000,
+          "unit": "reads"
+        },
+        {
+          "id": "length_kb_gene1",
+          "label": "Gene 1 Exon Length (L_1)",
+          "min": 0.5,
+          "max": 10.0,
+          "step": 0.5,
+          "default": 2.0,
+          "unit": "kb"
+        },
+        {
+          "id": "reads_gene2",
+          "label": "Gene 2 Raw Read Count (r_2)",
+          "min": 100,
+          "max": 50000,
+          "step": 100,
+          "default": 9000,
+          "unit": "reads"
+        },
+        {
+          "id": "length_kb_gene2",
+          "label": "Gene 2 Exon Length (L_2)",
+          "min": 0.5,
+          "max": 10.0,
+          "step": 0.5,
+          "default": 3.0,
+          "unit": "kb"
+        },
+        {
+          "id": "reads_gene3",
+          "label": "Gene 3 Raw Read Count (r_3; Length fixed at 5.0 kb)",
+          "min": 100,
+          "max": 50000,
+          "step": 100,
+          "default": 15000,
+          "unit": "reads"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "rpk_sum",
+          "label": "Sum of Reads Per Kilobase (∑ q_j = r_1/L_1 + r_2/L_2 + r_3/5.0)",
+          "formula_js": "(reads_gene1 / length_kb_gene1) + (reads_gene2 / length_kb_gene2) + (reads_gene3 / 5.0)",
+          "unit": "reads/kb"
+        },
+        {
+          "output_id": "tpm_gene1",
+          "label": "Gene 1 Normalized Expression (TPM_1)",
+          "formula_js": "((reads_gene1 / length_kb_gene1) / ((reads_gene1 / length_kb_gene1) + (reads_gene2 / length_kb_gene2) + (reads_gene3 / 5.0))) * 1e6",
+          "unit": "TPM"
+        },
+        {
+          "output_id": "tpm_gene2",
+          "label": "Gene 2 Normalized Expression (TPM_2)",
+          "formula_js": "((reads_gene2 / length_kb_gene2) / ((reads_gene1 / length_kb_gene1) + (reads_gene2 / length_kb_gene2) + (reads_gene3 / 5.0))) * 1e6",
+          "unit": "TPM"
+        },
+        {
+          "output_id": "tpm_gene3",
+          "label": "Gene 3 Normalized Expression (TPM_3)",
+          "formula_js": "((reads_gene3 / 5.0) / ((reads_gene1 / length_kb_gene1) + (reads_gene2 / length_kb_gene2) + (reads_gene3 / 5.0))) * 1e6",
+          "unit": "TPM"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-11.1",
+      "title": "Pairwise Dynamic Programming Recurrence & Affine Gap Penalty",
+      "latex": "F(i,j) = \\max \\begin{cases} F(i-1, j-1) + s(x_i, y_j) \\\\ F(i-1, j) - d \\\\ F(i, j-1) - d \\\\ 0 \\quad \\text{(Smith-Waterman only)} \\end{cases} \\qquad P_{\\text{gap}}(L) = d + e(L - 1)",
+      "description": "Defines the exact dynamic programming step for Needleman-Wunsch (Global) and Smith-Waterman (Local) sequence alignment, alongside the affine gap penalty for a gap of length L residues.",
+      "variables": [
+        {
+          "symbol": "s(x_i, y_j)",
+          "definition": "Log-odds substitution score for aligning residue x_i with y_j (from PAM/BLOSUM or match/mismatch)",
+          "unit": "score units"
+        },
+        {
+          "symbol": "d, e",
+          "definition": "Gap opening penalty (d) and gap extension penalty (e, where d > e)",
+          "unit": "score units"
+        },
+        {
+          "symbol": "L",
+          "definition": "Total number of contiguous gap positions in an insertion/deletion",
+          "unit": "residues / bp"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-11.2",
+      "title": "Karlin-Altschul BLAST Expect Value (E-Value), Bit Score (S') & Homology P-Value",
+      "latex": "E = K \\cdot m \\cdot n \\cdot e^{-\\lambda S} = m \\cdot n \\cdot 2^{-S^{\\prime}}, \\qquad S^{\\prime} = \\frac{\\lambda S - \\ln K}{\\ln 2}, \\qquad P(\\text{at least 1 hit}) = 1 - e^{-E}",
+      "description": "Quantifies the number of alignments with score ≥ S expected to occur purely by random chance when searching a query of length m against a database of total length n residues.",
+      "variables": [
+        {
+          "symbol": "E",
+          "definition": "Expect value (statistically significant homology typically requires E < 10^-5)",
+          "unit": "expected random hits"
+        },
+        {
+          "symbol": "S, S^{\\prime}",
+          "definition": "Raw alignment score (S) and matrix-normalized Bit Score (S')",
+          "unit": "raw units, bits"
+        },
+        {
+          "symbol": "\\lambda, K",
+          "definition": "Karlin-Altschul extreme-value distribution scale and search-space constants",
+          "unit": "matrix-specific"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-11.3",
+      "title": "Log-Odds Amino Acid Substitution Matrix Entry (PAM / BLOSUM)",
+      "latex": "s_{ij} = \\text{round}\\left( c \\cdot \\log_2 \\left( \\frac{q_{ij}}{p_i \\cdot p_j} \\right) \\right)",
+      "description": "Computes the substitution matrix score s_ij for replacing amino acid i with amino acid j based on the ratio of observed homologous pairing frequency (q_ij) to random background probability (p_i · p_j).",
+      "variables": [
+        {
+          "symbol": "q_{ij}",
+          "definition": "Observed frequency of amino acids i and j aligned in true homologous blocks",
+          "unit": "probability"
+        },
+        {
+          "symbol": "p_i, p_j",
+          "definition": "Background frequencies of amino acids i and j in the proteome",
+          "unit": "probability"
+        },
+        {
+          "symbol": "c",
+          "definition": "Scaling multiplier (e.g., c = 2 for half-bits in BLOSUM62)",
+          "unit": "bits^-1"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-11.4",
+      "title": "RNA-Seq Normalization: Transcripts Per Million (TPM) vs. RPKM/FPKM",
+      "latex": "\\text{TPM}_i = \\left( \\frac{r_i / L_i}{\\sum_{j=1}^{G} (r_j / L_j)} \\right) \\times 10^6, \\qquad \\text{RPKM}_i = \\frac{r_i}{L_i\\text{ (kb)} \\times \\left(\\frac{\\sum r_j}{10^6}\\right)}",
+      "description": "Normalizes raw mapped RNA-seq read count (r_i) by transcript exonic length in kilobases (L_i) first, then scales to 10^6 so that the sum of all TPMs in any sample is invariant (∑ TPM = 10^6).",
+      "variables": [
+        {
+          "symbol": "r_i",
+          "definition": "Number of sequencing reads (or fragments) mapped to gene/transcript i",
+          "unit": "reads"
+        },
+        {
+          "symbol": "L_i",
+          "definition": "Effective exonic length of transcript i (in kilobases, kb)",
+          "unit": "kb"
+        },
+        {
+          "symbol": "q_i = r_i / L_i",
+          "definition": "Reads Per Kilobase (RPK) rate proportional to molar transcript concentration",
+          "unit": "reads/kb"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-11.5",
+      "title": "Lander-Waterman Sequencing Coverage Depth, Unsequenced Gap Fraction & RMSD",
+      "latex": "C = \\frac{N \\cdot L}{G}, \\qquad P(0\\text{ coverage}) = e^{-C}, \\qquad \\text{RMSD} = \\sqrt{\\frac{1}{N_{\\text{atoms}}} \\sum_{i=1}^{N_{\\text{atoms}}} \\delta_i^2}",
+      "description": "Relates sequencing coverage depth (C) to the Poisson fraction of the genome left unsequenced (e^-C), and defines the Root-Mean-Square Deviation (RMSD in Å) between predicted (AlphaFold) and experimental 3D atomic coordinates.",
+      "variables": [
+        {
+          "symbol": "N, L, G",
+          "definition": "Number of reads (N), read length (L in bp), and haploid genome size (G in bp)",
+          "unit": "reads, bp, bp"
+        },
+        {
+          "symbol": "\\delta_i",
+          "definition": "Euclidean distance (in Å) between atom i in the predicted vs. experimental structure",
+          "unit": "Å (0.1 nm)"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-11.1",
+        "title": "Pairwise Sequence Alignment Scoring with Linear vs. Affine Gap Penalties",
+        "difficulty": "Foundational",
+        "statement": "Consider the following global alignment of two short DNA sequences (each 12 nucleotides in length before gapping):\nSequence 1: 5'- A T G C C T A G G A T C -3'\nSequence 2: 5'- A T G - - - A G T A - C -3'\nEvaluate the total alignment score under two different scoring schemes, given Match = +2 and Mismatch (transition or transversion) = -1:\n(a) Scheme A (Linear Gap Penalty): Every individual gap character ('-') is penalized equally at g = -3.\n(b) Scheme B (Affine Gap Penalty): Gap opening penalty is d = -4 (for the 1st gap position in a contiguous indel) and gap extension penalty is e = -1 (for each additional contiguous gap position).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Count the exact number of Matches, Mismatches, and Indel Gaps across the 12 aligned columns:\n• Matches: A-A (pos 1), T-T (2), G-G (3), A-A (7), G-G (8), A-A (10), C-C (12) -> Total = 7 Matches.\n• Mismatches: G-T (pos 9) -> Total = 1 Mismatch.\n• Gaps: One 3-nt gap ('- - -' at pos 4–6) and one 1-nt gap ('-' at pos 11) -> Total = 4 gap characters organized into 2 separate gap opening events.",
+            "equation_latex": "\\text{Base Alignment Score (Matches + Mismatches)} = 7(+2) + 1(-1) = +14 - 1 = +13"
+          },
+          {
+            "step": 2,
+            "explanation": "For Scheme A (Linear Gap Penalty, g = -3 per gap character), subtract 4 × 3 = 12 from the base score:",
+            "equation_latex": "\\text{Score}_{\\text{Linear}} = +13 - 4(3) = +13 - 12 = +1"
+          },
+          {
+            "step": 3,
+            "explanation": "For Scheme B (Affine Gap Penalty, P_gap = d + e(L - 1) with d = 4, e = 1): The 3-nt gap costs 4 + 1(3 - 1) = 6, and the 1-nt gap costs 4 + 1(1 - 1) = 4 (Total gap penalty = 6 + 4 = 10):",
+            "equation_latex": "\\text{Score}_{\\text{Affine}} = +13 - [4 + 1(2)] - [4 + 1(0)] = +13 - 6 - 4 = +3"
+          }
+        ],
+        "final_answer": "(a) Linear Gap Score = +1; (b) Affine Gap Score = +3 (Affine gap scoring rewards grouping the 3-nt codon deletion into a single mutational event rather than penalizing it as 3 independent deletions)."
+      },
+      {
+        "problem_id": "SP-11.2",
+        "title": "BLAST Statistics: Computing Normalized Bit Score (S'), Expect Value (E) & Database Scaling",
+        "difficulty": "Intermediate",
+        "statement": "A researcher queries a 250-amino-acid plant disease-resistance protein (m = 250) against a protein database containing n = 4.0 × 10^8 total amino acid residues using BLASTP with the BLOSUM62 scoring matrix (Karlin-Altschul constants: λ = 0.267, K = 0.041). The top alignment hit achieves a raw alignment score of S = 150. Calculate: (a) the normalized Bit Score (S' in bits), (b) the Expect Value (E-value) and its biological interpretation, and (c) how the Bit Score (S') and E-value would change if the exact same hit were found in a 10-fold larger database (n' = 4.0 × 10^9 residues).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the normalized Bit Score S' = (λ·S - ln K) / ln(2) using λ = 0.267, S = 150, ln(0.041) = -3.1942, and ln(2) = 0.69315:",
+            "equation_latex": "S^{\\prime} = \\frac{(0.267)(150) - (-3.1942)}{0.69315} = \\frac{40.05 + 3.1942}{0.69315} = \\frac{43.244}{0.69315} = 62.39\\text{ bits}"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate the Expect Value E = m · n · 2^(-S') for m = 250 and n = 4.0 × 10^8 (so m·n = 1.0 × 10^11):",
+            "equation_latex": "E = (250)(4.0 \\times 10^8) \\times 2^{-62.39} = (1.0 \\times 10^{11})(1.615 \\times 10^{-19}) = 1.62 \\times 10^{-8}"
+          },
+          {
+            "step": 3,
+            "explanation": "Evaluate the effect of a 10-fold larger database (n' = 10 n): Because S' depends only on the alignment and scoring matrix (λ, K), the Bit Score remains strictly unchanged (62.39 bits). Because E is directly proportional to n, the E-value increases 10-fold:",
+            "equation_latex": "S^{\\prime}_{\\text{new}} = 62.39\\text{ bits (Invariant!)}, \\qquad E_{\\text{new}} = 10 \\times (1.62 \\times 10^{-8}) = 1.62 \\times 10^{-7}"
+          }
+        ],
+        "final_answer": "(a) Bit Score S' = 62.4 bits; (b) E = 1.62 × 10^-8 (highly significant homology; <2 in 100 million chance of occurring randomly); (c) In a 10-fold larger database, S' stays 62.4 bits while E increases 10-fold to 1.62 × 10^-7."
+      },
+      {
+        "problem_id": "SP-11.3",
+        "title": "RNA-Seq Transcriptomics: Calculating RPKM vs. TPM & Proving Sample-to-Sample Invariance",
+        "difficulty": "Intermediate",
+        "statement": "To understand why Transcripts Per Million (TPM) is superior to Reads Per Kilobase Million (RPKM), consider a simplified transcriptome containing 3 genes (Gene A: exonic length L_A = 1.0 kb; Gene B: L_B = 2.0 kb; Gene C: L_C = 4.0 kb) sequenced in Sample 1:\n• Gene A (1.0 kb): r_A = 1,000 mapped reads\n• Gene B (2.0 kb): r_B = 4,000 mapped reads\n• Gene C (4.0 kb): r_C = 20,000 mapped reads\nCalculate for each of the three genes: (a) the Reads Per Kilobase rate (q_i = r_i / L_i), (b) the normalized TPM values (verifying their sum), and (c) the RPKM values (and their sum).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Divide each gene's raw read count (r_i) by its length in kilobases (L_i) to obtain the Reads Per Kilobase (q_i) and sum them across all genes:",
+            "equation_latex": "q_A = \\frac{1,000}{1.0\\text{ kb}} = 1,000, \\quad q_B = \\frac{4,000}{2.0\\text{ kb}} = 2,000, \\quad q_C = \\frac{20,000}{4.0\\text{ kb}} = 5,000 \\implies \\sum q_j = 1,000 + 2,000 + 5,000 = 8,000\\text{ reads/kb}"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute the Transcripts Per Million (TPM_i = [q_i / ∑q_j] × 10^6) for each gene:",
+            "equation_latex": "\\text{TPM}_A = \\frac{1,000}{8,000} \\times 10^6 = 125,000, \\quad \\text{TPM}_B = \\frac{2,000}{8,000} \\times 10^6 = 250,000, \\quad \\text{TPM}_C = \\frac{5,000}{8,000} \\times 10^6 = 625,000 \\quad (\\sum \\text{TPM} = 1,000,000)"
+          },
+          {
+            "step": 3,
+            "explanation": "For RPKM, sum the total mapped reads first: N_total = 1,000 + 4,000 + 20,000 = 25,000 reads (= 0.025 million reads). Divide each q_i by 0.025:",
+            "equation_latex": "\\text{RPKM}_A = \\frac{1,000}{0.025} = 40,000, \\quad \\text{RPKM}_B = \\frac{2,000}{0.025} = 80,000, \\quad \\text{RPKM}_C = \\frac{5,000}{0.025} = 200,000 \\quad (\\sum \\text{RPKM} = 320,000)"
+          }
+        ],
+        "final_answer": "(a) q_A = 1,000, q_B = 2,000, q_C = 5,000 reads/kb; (b) TPM_A = 125,000 (12.5%), TPM_B = 250,000 (25.0%), TPM_C = 625,000 (62.5%), summing to exactly 1,000,000; (c) RPKM_A = 40,000, RPKM_B = 80,000, RPKM_C = 200,000 (summing to 320,000, which changes if a long gene is upregulated in another sample)."
+      },
+      {
+        "problem_id": "SP-11.4",
+        "title": "Genomics: Lander-Waterman Whole-Genome Sequencing Coverage & Contig N50 Calculation",
+        "difficulty": "Foundational",
+        "statement": "Part A: A plant genomics consortium sequences a diploid crop genome of haploid size G = 5.0 × 10^8 bp (500 Mb) on an Illumina platform generating N = 5.0 × 10^7 paired-end read pairs (each pair consisting of 2 × 150 bp = 300 bp total sequence). Calculate (1) the average sequencing coverage depth (C), and (2) the theoretical percentage and number of bases in the genome left unsequenced (0× coverage) according to the Lander-Waterman Poisson model (e^-30 ≈ 9.36 × 10^-14).\nPart B: De novo assembly of a small viral/plasmid metagenome yields 7 contigs of lengths: 45 kb, 30 kb, 25 kb, 15 kb, 12 kb, 8 kb, and 5 kb. Calculate the Total Assembly Size, the Contig N50, and the L50.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Part A, compute total sequenced bases (N_pairs × 300 bp) and divide by genome size G = 5.0 × 10^8 bp:",
+            "equation_latex": "C = \\frac{(5.0 \\times 10^7\\text{ pairs})(300\\text{ bp/pair})}{5.0 \\times 10^8\\text{ bp}} = \\frac{1.50 \\times 10^{10}\\text{ bp}}{5.0 \\times 10^8\\text{ bp}} = 30.0\\times\\text{ coverage}"
+          },
+          {
+            "step": 2,
+            "explanation": "By the Poisson distribution, the probability of a base receiving k = 0 reads at mean coverage C = 30 is P(0) = e^-30:",
+            "equation_latex": "P(0) = e^{-30} = 9.36 \\times 10^{-14} \\implies \\text{Unsequenced Bases} = (5.0 \\times 10^8)(9.36 \\times 10^{-14}) \\approx 0\\text{ bases (Virtually 100\\% covered outside GC/repeat dropouts)}"
+          },
+          {
+            "step": 3,
+            "explanation": "For Part B, sum all 7 contig lengths to find the Total Assembly Size and the 50% midpoint threshold:",
+            "equation_latex": "L_{\\text{total}} = 45 + 30 + 25 + 15 + 12 + 8 + 5 = 140\\text{ kb} \\implies 50\\%\\text{ Threshold} = \\frac{140\\text{ kb}}{2} = 70.0\\text{ kb}"
+          },
+          {
+            "step": 4,
+            "explanation": "Sum contigs in descending order (45 kb, 30 kb, 25 kb...) until reaching ≥ 70.0 kb: Contig 1 (45 kb) + Contig 2 (30 kb) = 75.0 kb (which crosses the 70.0 kb midpoint at the 2nd contig, of length 30 kb):",
+            "equation_latex": "\\text{Contig N50} = 30\\text{ kb}, \\qquad \\text{L50} = 2\\text{ contigs}"
+          }
+        ],
+        "final_answer": "Part A: Coverage C = 30×, Poisson unsequenced fraction = 9.36 × 10^-14 (~0 bases); Part B: Total assembly = 140 kb, N50 = 30 kb, L50 = 2 contigs."
+      },
+      {
+        "problem_id": "SP-11.5",
+        "title": "Deriving a Log-Odds Substitution Matrix Score & Benjamini-Hochberg FDR Adjustment",
+        "difficulty": "Advanced",
+        "statement": "Part A: In a curated database of ungapped homologous protein blocks, Tryptophan (W) occurs with a background frequency of p_W = 0.012 (1.2%), and aligned homologous W–W pairs occur at an observed frequency of q_WW = 0.0096. Calculate the BLOSUM-style half-bit log-odds score s(W,W) = round[2 · log2(q_WW / p_W²)].\nPart B: A researcher tests m = 5 candidate genes for differential expression and obtains the following unadjusted p-values: Gene 1 (p = 0.002), Gene 2 (p = 0.008), Gene 3 (p = 0.012), Gene 4 (p = 0.040), and Gene 5 (p = 0.045). Which genes remain statistically significant at a False Discovery Rate threshold of Q = 0.05 using the Benjamini-Hochberg procedure (where rank i's critical threshold is (i/m)Q)?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Part A, compute the expected random pairing probability of two tryptophans (p_W × p_W) and the likelihood ratio (q_WW / p_W²):",
+            "equation_latex": "p_W^2 = (0.012)^2 = 0.000144, \\qquad \\text{Odds Ratio} = \\frac{q_{WW}}{p_W^2} = \\frac{0.0096}{0.000144} = 66.67"
+          },
+          {
+            "step": 2,
+            "explanation": "Take 2 × log2(66.67) and round to the nearest integer (explaining why rare conserved residues like Trp and Cys receive the highest self-match scores in BLOSUM62!):",
+            "equation_latex": "s(W,W) = \\text{round}\\left[2 \\cdot \\log_2(66.67)\\right] = \\text{round}\\left[2 \\times 6.059\\right] = \\text{round}(12.12) = +12\\text{ (In BLOSUM62, W-W is +11)}"
+          },
+          {
+            "step": 3,
+            "explanation": "For Part B, rank the m = 5 p-values from smallest (i = 1) to largest (i = 5) and compare each against its Benjamini-Hochberg critical value p_crit(i) = (i / 5) × 0.05 = 0.01 × i (or compute adjusted q_i = p_i × m / i):",
+            "equation_latex": "\\begin{aligned} i=1\\text{ (Gene 1)}: &\\ p_1 = 0.002 \\le 0.010 \\quad (q_1 = 0.002 \\times 5/1 = 0.010 < 0.05) \\rightarrow \\text{Significant} \\\\ i=2\\text{ (Gene 2)}: &\\ p_2 = 0.008 \\le 0.020 \\quad (q_2 = 0.008 \\times 5/2 = 0.020 < 0.05) \\rightarrow \\text{Significant} \\\\ i=3\\text{ (Gene 3)}: &\\ p_3 = 0.012 \\le 0.030 \\quad (q_3 = 0.012 \\times 5/3 = 0.020 < 0.05) \\rightarrow \\text{Significant} \\\\ i=4\\text{ (Gene 4)}: &\\ p_4 = 0.040 \\le 0.040 \\quad (q_4 = 0.040 \\times 5/4 = 0.050 \\le 0.05) \\rightarrow \\text{Significant} \\\\ i=5\\text{ (Gene 5)}: &\\ p_5 = 0.045 < 0.050 \\quad (q_5 = 0.045 \\times 5/5 = 0.045 \\le 0.05) \\rightarrow \\text{All 5 pass BH (whereas Bonferroni } 0.05/5 = 0.01 \\text{ only passes Genes 1 & 2!)} \\end{aligned}"
+          }
+        ],
+        "final_answer": "Part A: s(W,W) = +12 half-bits; Part B: Under Benjamini-Hochberg FDR = 0.05, all 5 genes pass (since p_5 = 0.045 ≤ (5/5)×0.05), whereas strict Bonferroni family-wise correction (α/5 = 0.010) would reject Genes 3, 4, and 5."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-11.1",
+        "question": "You have sequenced a novel 900 bp plant cDNA transcript (containing potential sequencing frame-shift errors) and want to identify its homologous protein function by searching against the curated UniProtKB/Swiss-Prot protein database. Which of the 5 standard BLAST programs should you run, and why?",
+        "bold_answer": "BLASTX; it translates your 900 bp nucleotide query in all 6 reading frames (3 forward, 3 reverse) and searches them against the protein database",
+        "collapsible_derivation": "Because protein sequence comparisons (using BLOSUM62) are far more sensitive to distant homology than nucleotide comparisons (BLASTN), and you do not yet know which reading frame encodes the polypeptide (or if an indel shifted the frame), BLASTX translates the nucleotide query in all 6 frames prior to searching the protein database."
+      },
+      {
+        "problem_id": "PP-11.2",
+        "question": "When searching for very distantly related evolutionary homologs (e.g., comparing a bacterial metabolic enzyme to a human homolog sharing <25% sequence identity), which pair of substitution matrices is most appropriate: (a) PAM30 or PAM250? (b) BLOSUM80 or BLOSUM45?",
+        "bold_answer": "(a) PAM250 and (b) BLOSUM45",
+        "collapsible_derivation": "PAM and BLOSUM numbers scale in opposite directions! Higher PAM numbers (PAM250 = 250 accepted mutations per 100 residues) model greater evolutionary time/divergence. Lower BLOSUM numbers (BLOSUM45 = derived from blocks clustered at ≤45% identity) model more divergent homologs, whereas PAM30 and BLOSUM80 are designed for closely related sequences."
+      },
+      {
+        "problem_id": "PP-11.3",
+        "question": "In an AlphaFold2 structure prediction of a 450-amino-acid human transcription factor, residues 1–180 (the DNA-binding domain) exhibit pLDDT scores of 92–96, while residues 181–450 (the transactivation domain) exhibit pLDDT scores of 32–45 and appear as an extended ribbon. How should this low-pLDDT region be interpreted biologically?",
+        "bold_answer": "Residues 181–450 represent an Intrinsically Disordered Region (IDR) that lacks a fixed 3D globular structure in isolation (common in eukaryotic transcription factor transactivation domains)",
+        "collapsible_derivation": "Benchmarking studies show that AlphaFold pLDDT scores < 50 are one of the most accurate predictors of Intrinsic Disorder (IDRs). Rather than being a 'failed prediction', the extended low-pLDDT ribbon indicates a flexible domain that undergoes coupled folding-and-binding only when complexed with coactivators (e.g., Mediator or CBP/p300)."
+      },
+      {
+        "problem_id": "PP-11.4",
+        "question": "In a phylogenetic tree of vertebrate globin genes, how do you classify the evolutionary relationship between (a) Human β-globin and Chimpanzee β-globin, versus (b) Human β-globin and Human α-globin?",
+        "bold_answer": "(a) Orthologs (diverged via speciation); (b) Paralogs (diverged via ancestral gene duplication)",
+        "collapsible_derivation": "Human β-globin and Chimpanzee β-globin diverged from the single β-globin gene in the common ancestor of humans and chimpanzees during speciation (Orthologs). Human α-globin and β-globin arose from a gene duplication event ~450 million years ago in an ancestral jawed vertebrate (Paralogs)."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Genomic Surveillance & Structural AI Case Study: SARS-CoV-2 Spike Variant Phylodynamics & AlphaFold2 Nuclear Pore Complex Reconstruction",
+    "scenario": "Case A (Viral Genomics): Within hours of the first SARS-CoV-2 genome release on GenBank/GISAID (MN908947.3, 29,903 nt), bioinformaticians used TBLASTN/BLASTP and Hidden Markov Models to annotate the furin cleavage site (PRRAR) and Receptor-Binding Domain (RBD), enabling mRNA vaccine design in 48 hours. Case B (Integrative Structural Biology): The human Nuclear Pore Complex (NPC, ~120 MDa, ~1,000 protein subunits across 30 nucleoporins) resisted complete atomic resolution for decades because Cryo-EM maps had local resolution limits of 6–12 Å.",
+    "mechanistic_analysis": "In Case A, multiple sequence alignment (MAFFT) and maximum-likelihood phylogenetics (IQ-TREE) tracked nonsynonymous-to-synonymous substitution ratios (dN/dS) across Spike RBD residues (such as N501Y and E484K), identifying convergent positive selection before clinical surges occurred. In Case B, researchers combined AlphaFold2 atomic predictions of individual human Nucleoporins (and their Pair Representation interface contacts via AlphaFold-Multimer) with Cryo-EM electron density maps, docking the high-confidence pLDDT > 90 domains into the 3D cryo-tomography scaffold to build a complete near-atomic model of the 120 MDa human Nuclear Pore Complex.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook2",
+        "topic": "Nuclear Pore Complex (NPC) Ultrastructure & Ran-GTP Transport"
+      },
+      {
+        "target_textbook": "TextBook3",
+        "topic": "Genetic Code Reading Frames, Splicing Isoforms & mRNA Decay"
+      },
+      {
+        "target_textbook": "TextBook5",
+        "topic": "Illumina SBS vs. Oxford Nanopore Sequencing & Phred Q-Scores"
+      },
+      {
+        "target_textbook": "TextBook9",
+        "topic": "Nucleoside-Modified mRNA-LNP Vaccine Design from GenBank Sequences"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-11.1",
+      "question": "Why is the Smith-Waterman algorithm preferred over the Needleman-Wunsch algorithm when aligning two multi-domain eukaryotic proteins that share only a single conserved 100-amino-acid catalytic domain (such as a SH2 or Kinase domain) flanked by unrelated sequences?",
+      "options": [
+        "Smith-Waterman runs in O(1) constant time without constructing a scoring matrix",
+        "Needleman-Wunsch forces an end-to-end global alignment across the unrelated flanking regions (accumulating large negative mismatch and gap penalties that obscure the conserved domain), whereas Smith-Waterman resets negative scores to zero to isolate the highest-scoring local domain match",
+        "Smith-Waterman does not use amino acid substitution matrices like BLOSUM62",
+        "Needleman-Wunsch can only align nucleotide sequences, not proteins"
+      ],
+      "correct_index": 1,
+      "explanation": "In a global alignment (Needleman-Wunsch), unrelated N- and C-terminal domains are forced to align, penalizing the overall score. By flooring any negative score to 0 and starting trace-back at the maximum cell anywhere in the matrix, Smith-Waterman extracts the conserved local domain cleanly."
+    },
+    {
+      "question_id": "Q-11.2",
+      "question": "In RNA-Seq transcriptomics, why is Transcripts Per Million (TPM) mathematically superior to Reads Per Kilobase Million (RPKM) when comparing gene expression across different samples?",
+      "options": [
+        "TPM does not require knowing the length of the gene transcripts",
+        "TPM normalizes for gene length (r_i / L_i) BEFORE normalizing for sequencing depth, ensuring that the sum of all TPMs in every sample is identically 1,000,000 so each value represents a true relative molar proportion",
+        "RPKM can only be calculated for prokaryotic polycistronic operons",
+        "TPM automatically performs Benjamini-Hochberg p-value correction"
+      ],
+      "correct_index": 1,
+      "explanation": "Because RPKM divides by total library reads before dividing by gene length, the sum of all RPKMs across a transcriptome fluctuates from sample to sample depending on whether long or short genes are highly expressed. TPM divides by length first (producing a molar rate q_i = r_i / L_i) and scales by ∑q_j × 10^6, making sample sums invariant."
+    },
+    {
+      "question_id": "Q-11.3",
+      "question": "How can you immediately distinguish an NCBI RefSeq curated accession number (e.g., NM_000546.6) from an archival Primary GenBank submission accession number (e.g., U94788.1)?",
+      "options": [
+        "RefSeq accession numbers always contain an underscore ('_') after a two-letter prefix indicating the molecule type (e.g., NM_ for mRNA, NP_ for protein, NC_ for chromosome), whereas GenBank accessions never contain an underscore",
+        "GenBank accession numbers only contain numbers, whereas RefSeq only contains letters",
+        "RefSeq stores only 3D protein crystal structures",
+        "GenBank accessions are manually curated by Swiss-Prot editors"
+      ],
+      "correct_index": 0,
+      "explanation": "NCBI RefSeq is a secondary, curated, non-redundant database whose identifiers always feature a two-letter prefix followed by an underscore (NC_, NG_, NM_, NR_, NP_, XM_, XP_), whereas primary INSDC GenBank archival submissions use 1–2 letters + 5–6 digits without an underscore."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "Basic Local Alignment Search Tool (Altschul, Gish, Miller, Myers & Lipman, J. Mol. Biol. 1990) & Highly Accurate Protein Structure Prediction with AlphaFold (Jumper, Evans, Pritzel... & Hassabis, Nature 2021)",
+    "imrad_breakdown": {
+      "abstract_summary": "Altschul et al. (1990) combined k-mer word seeding with Karlin-Altschul extreme-value statistics to create BLAST—making rapid homology searches across global sequence databases possible in seconds. Jumper & Hassabis et al. (2021) introduced AlphaFold2 at CASP14, using the Evoformer attention architecture and SE(3)-equivariant structure module to predict 3D protein coordinates at atomic experimental accuracy.",
+      "key_method": "Finite-state automaton word-matching and ungapped/gapped HSP extension; 48-block Evoformer neural network coupling Multiple Sequence Alignment axial attention with geometric triangle multiplicative updates.",
+      "critical_takeaway": "Evolutionary sequence conservation (captured by BLAST alignments and MSAs) encodes both functional homology and 3D physical atomic geometry."
+    },
+    "further_reading": [
+      "Lesk, A. M. Introduction to Bioinformatics — Databases, Sequence Alignment, Phylogenetics, Structural Bioinformatics & Systems Biology.",
+      "Pevsner, J. Bioinformatics and Functional Genomics — BLAST Statistics, Substitution Matrices, Next-Generation Sequencing & RNA-Seq Analysis.",
+      "Wagner, G. P., Kin, K., & Lynch, V. J. (2012). Measurement of mRNA Abundance Using RNA-Seq Data: RPKM Measure is Inconsistent Among Samples. Theory in Biosciences, 131, 281–285."
+    ]
+  }
+}

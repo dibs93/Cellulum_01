@@ -1,0 +1,1019 @@
+{
+  "textbook_id": "TextBook4",
+  "branch_number": 4,
+  "branch_title": "Genetics: Mendelian Inheritance, Linkage Mapping, Human Pedigrees, Population & Plant Quantitative Genetics",
+  "subtitle": "Segregation & Epistasis, Three-Point Recombination Mapping, Bayesian Pedigree Analysis, Hardy-Weinberg Dynamics & Marker-Assisted Plant Breeding",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Genetics",
+    "upstream_nodes": [
+      "TextBook2",
+      "TextBook3"
+    ],
+    "downstream_nodes": [
+      "TextBook5",
+      "TextBook7",
+      "TextBook11",
+      "TextBook12"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Single Nucleotide Polymorphism (SNP)",
+        "scale_m": 3.4e-10,
+        "display_scale": "0.34 nm (1 bp)",
+        "example": "Bi-allelic point substitution (e.g., HbS Glu6Val)"
+      },
+      {
+        "level": "Microsatellite / SSR Locus",
+        "scale_m": 3.4e-8,
+        "display_scale": "10–100 nm (30–300 bp)",
+        "example": "Co-dominant tandem repeat polymorphism (CA)n"
+      },
+      {
+        "level": "Synaptonemal Complex & Chiasma",
+        "scale_m": 2e-7,
+        "display_scale": "100–250 nm",
+        "example": "Pachytene homologous recombination crossover nodule"
+      },
+      {
+        "level": "Genetic Linkage Map Interval",
+        "scale_m": 0.00034,
+        "display_scale": "1 cM (~1 Mb in humans)",
+        "example": "1% meiotic crossover frequency interval"
+      },
+      {
+        "level": "Segregating Organism / Crop Progeny",
+        "scale_m": 1.0,
+        "display_scale": "0.1–2 m",
+        "example": "Pisum sativum F2 segregants, Zea mays RIL population"
+      },
+      {
+        "level": "Mendelian Population / Deme",
+        "scale_m": 10000.0,
+        "display_scale": "1–100 km",
+        "example": "Panmictic gene pool in Hardy-Weinberg equilibrium"
+      }
+    ],
+    "explorer_pathways": [
+      "Geneticist",
+      "Plant Scientist",
+      "Future Molecular Biologist",
+      "Biotechnologist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "4.1",
+      "title": "Mendelian Genetics: Segregation, Independent Assortment & Probability Laws",
+      "overview": "Gregor Mendel's particulate theory of inheritance (1865) established that discrete hereditary units (alleles at genetic loci) segregate equally into gametes during meiosis I and assort independently when located on non-homologous chromosomes.",
+      "core_concepts": [
+        {
+          "concept_id": "4.1.1",
+          "heading": "Mendel's Laws & Cytological Meiotic Correlates",
+          "theory": "According to the Chromosome Theory of Inheritance (Sutton and Boveri, 1902), Mendel's abstract laws map directly onto the physical behavior of homologous chromosomes during Meiosis I. In a monohybrid cross (Aa × Aa), gametes receive either A or a with equal probability (p = 0.5), producing a 1 AA : 2 Aa : 1 aa genotypic ratio and a 3:1 dominant-to-recessive phenotypic ratio.",
+          "key_principles": [
+            "First Law (Law of Equal Segregation): Two alleles at a single diploid locus separate during Anaphase I of meiosis so that each haploid gamete carries exactly one allele.",
+            "Second Law (Law of Independent Assortment): Unlinked loci (or distant loci ≥50 cM apart on the same chromosome) align randomly at the Metaphase I equatorial plate, yielding four equiprobable gametes (1/4 AB : 1/4 Ab : 1/4 aB : 1/4 ab) and a 9:3:3:1 dihybrid F2 phenotypic ratio.",
+            "Testcross Verification: Crossing an individual of dominant phenotype (A_B_) to a homozygous recessive tester (aabb) directly reveals the gametic frequencies of the dominant parent (1:1:1:1 if unlinked; skewed toward parental classes if linked)."
+          ]
+        },
+        {
+          "concept_id": "4.1.2",
+          "heading": "Combinatorial Probability & Chi-Square Goodness-of-Fit",
+          "theory": "Predicting multi-locus genetic outcomes relies on the Product Rule (independent events occurring together: P(A and B) = P(A) × P(B)), the Sum Rule (mutually exclusive events: P(A or B) = P(A) + P(B)), and Binomial Expansion for unordered progeny families.",
+          "key_principles": [
+            "Scaling with Heterozygous Loci (n): An individual heterozygous at n unlinked loci produces 2^n distinct gamete genotypes, 3^n distinct F2 zygotic genotypes, and 2^n distinct phenotypes (assuming complete dominance).",
+            "Chi-Square (χ²) Statistical Validation: Tests whether deviations between observed progeny counts (O) and Mendelian expected counts (E) are attributable to random sampling chance (Null Hypothesis H0 accepted if p > 0.05) or a biological distortion such as linkage, lethality, or epistasis (H0 rejected if p < 0.05), with degrees of freedom df = k - 1 (where k = number of phenotypic classes)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Combinatorial Scaling of Multi-Hybrid Crosses (for n Unlinked Heterozygous Loci)",
+        "headers": [
+          "Genetic Parameter",
+          "General Formula (n loci)",
+          "Monohybrid (n = 1)",
+          "Dihybrid (n = 2)",
+          "Trihybrid (n = 3)",
+          "Tetrahybrid (n = 4)"
+        ],
+        "rows": [
+          [
+            "Distinct Gamete Genotypes",
+            "2^n",
+            "2",
+            "4",
+            "8",
+            "16"
+          ],
+          [
+            "F2 Zygotic Combinations (Punnett Grid)",
+            "4^n",
+            "4",
+            "16",
+            "64",
+            "256"
+          ],
+          [
+            "Distinct F2 Genotypes",
+            "3^n",
+            "3",
+            "9",
+            "27",
+            "81"
+          ],
+          [
+            "Distinct F2 Phenotypes (Complete Dominance)",
+            "2^n",
+            "2 (3:1)",
+            "4 (9:3:3:1)",
+            "8 (27:9:9:9:3:3:3:1)",
+            "16"
+          ],
+          [
+            "Proportion of F2 Homozygous Recessive Across All Loci",
+            "(1/4)^n",
+            "1/4 (25%)",
+            "1/16 (6.25%)",
+            "1/64 (1.56%)",
+            "1/256 (0.39%)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "4.2",
+      "title": "Advanced Genetics: Allelic Dominance, Epistasis, Linkage & Recombination Mapping",
+      "overview": "Classical Mendelian ratios are modified by single-locus allelic interactions (incomplete dominance, codominance, lethality), multi-locus biochemical pathway interactions (epistasis), and physical chromosomal linkage.",
+      "core_concepts": [
+        {
+          "concept_id": "4.2.1",
+          "heading": "Dominance Series, Epistasis & Complementation Analysis",
+          "theory": "Dominance is not an intrinsic property of an allele alone, but a reflection of how haplosufficient or haploinsufficient its protein product is within a biochemical or structural pathway. Epistasis occurs when alleles at one locus mask or modify the phenotypic expression of alleles at a second locus.",
+          "key_principles": [
+            "Incomplete Dominance vs. Codominance: In incomplete dominance (e.g., Antirrhinum flower color), the heterozygote (CRCW) exhibits an intermediate dosage phenotype (pink), shifting the F2 phenotypic ratio to 1:2:1. In codominance (e.g., human ABO IAIB blood group or MN antigens), both alleles are fully and simultaneously expressed on the cell surface.",
+            "Complementation Test (cis-trans Test - Seymour Benzer): Crosses two independent recessive mutants with the same mutant phenotype (m1/m1 × m2/m2). If the F1 trans-heterozygote is wild-type, the mutations complement and reside in different genes (cistrons); if the F1 remains mutant, the mutations fail to complement and are allelic (same gene)."
+          ]
+        },
+        {
+          "concept_id": "4.2.2",
+          "heading": "Chromosomal Linkage, Three-Point Testcrosses & Interference",
+          "theory": "Genes located close together on the same chromosome violate Mendel's Second Law and co-segregate unless separated by a chiasma (homologous crossover) between non-sister chromatids during Pachytene of Prophase I. Alfred Sturtevant (1913) demonstrated that Recombination Frequency (RF) is proportional to physical distance along a linear chromosome.",
+          "key_principles": [
+            "Coupling (cis) vs. Repulsion (trans) Phase: In coupling (AB / ab), parental gametes are AB and ab; in repulsion (Ab / aB), parental gametes are Ab and aB. Regardless of phase, Recombinant gametes always occur at ≤50% total frequency.",
+            "Maximum 50% Recombination Ceiling: Even if a crossover occurs in 100% of tetrads between two loci, each single crossover involves only 2 of the 4 chromatids, yielding 50% parental and 50% recombinant gametes (indistinguishable from independent assortment).",
+            "Three-Point Mapping & Chiasma Interference: In a trihybrid testcross (ABC / abc × abc / abc), the 8 progeny classes group into 4 pairs: the most frequent pair is Parental (NCO), the least frequent pair is Double Crossover (DCO), and comparing NCO vs. DCO reveals the middle gene. Positive chiasma interference (I = 1 - CoC > 0) occurs when one crossover physically inhibits a second crossover nearby."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Modified Dihybrid F2 Phenotypic Ratios in Epistatic & Biochemical Pathways",
+        "headers": [
+          "Interaction Type",
+          "Modified F2 Ratio",
+          "Genotypic Grouping (from 9 A_B_ : 3 A_bb : 3 aaB_ : 1 aabb)",
+          "Biochemical / Molecular Mechanism"
+        ],
+        "rows": [
+          [
+            "Complete Dominance (No Epistasis)",
+            "9 : 3 : 3 : 1",
+            "9 : 3 : 3 : 1",
+            "Independent traits on separate pathways"
+          ],
+          [
+            "Recessive Epistasis (Supplementary)",
+            "9 : 3 : 4",
+            "9 (A_B_) : 3 (A_bb) : 4 (3 aaB_ + 1 aabb)",
+            "Homozygous aa blocks upstream precursor synthesis (e.g., Labrador coat color E and B loci)"
+          ],
+          [
+            "Dominant Epistasis",
+            "12 : 3 : 1",
+            "12 (9 A_B_ + 3 A_bb) : 3 (aaB_) : 1 (aabb)",
+            "Dominant allele A masks expression of B/b locus (e.g., summer squash fruit color)"
+          ],
+          [
+            "Complementary Gene Action (Duplicate Recessive)",
+            "9 : 7",
+            "9 (A_B_) : 7 (3 A_bb + 3 aaB_ + 1 aabb)",
+            "Both enzymes A and B required in linear pathway (Precursor -> Intermediate -> Pigment)"
+          ],
+          [
+            "Duplicate Dominant Epistasis",
+            "15 : 1",
+            "15 (9 A_B_ + 3 A_bb + 3 aaB_) : 1 (aabb)",
+            "Redundant paralogous genes; either A or B alone suffices for wild-type phenotype"
+          ],
+          [
+            "Dominant & Recessive Epistasis (Inhibitory)",
+            "13 : 3",
+            "13 (9 A_B_ + 3 A_bb + 1 aabb) : 3 (aaB_)",
+            "Dominant allele A inhibits pigment synthesis produced by dominant B"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "4.3",
+      "title": "Human Genetics: Pedigree Analysis, Non-Mendelian Inheritance & Genetic Counseling",
+      "overview": "Because controlled experimental crosses are impossible in humans, medical genetics relies on multi-generation pedigree reconstruction, Bayesian conditional probability, and cytogenetic/molecular diagnostics.",
+      "core_concepts": [
+        {
+          "concept_id": "4.3.1",
+          "heading": "Mendelian Pedigree Modes & Diagnostic Hallmarks",
+          "theory": "Human genetic traits follow five primary transmission patterns depending on whether the locus resides on an autosome (Chromosomes 1–22), the X or Y sex chromosomes, or the maternal mitochondrial genome (mtDNA).",
+          "key_principles": [
+            "Autosomal Recessive (AR - e.g., Cystic Fibrosis, Sickle-Cell, PKU): Typically skips generations; unaffected heterozygous carrier parents (Aa × Aa) have a 1/4 risk of an affected child; incidence increases with consanguinity (first-cousin marriage coefficient of inbreeding F = 1/16).",
+            "Autosomal Dominant (AD - e.g., Huntington's Disease, Achondroplasia, Marfan Syndrome): Appears in every generation (vertical transmission); every affected child has at least one affected parent (unless a de novo mutation occurred); equal male-to-female transmission including father-to-son.",
+            "X-Linked Recessive (XR - e.g., Hemophilia A/B, Duchenne Muscular Dystrophy, Red-Green Colorblindness): Affects hemizygous males (X^aY) predominantly; never transmitted from father to son (fathers pass Y to sons); affected males transmit the allele to 100% of their daughters (obligate carriers), who pass it to 50% of their sons.",
+            "X-Linked Dominant (XD - e.g., Rett Syndrome, Hypophosphatemic Rickets) vs. Mitochondrial (Maternal): In XD, affected fathers pass the trait to 100% of daughters and 0% of sons. In Mitochondrial inheritance (e.g., LHON, MERRF), affected mothers transmit the trait to 100% of offspring (with variable heteroplasmy), whereas affected fathers transmit to 0% of offspring."
+          ]
+        },
+        {
+          "concept_id": "4.3.2",
+          "heading": "Incomplete Penetrance, Variable Expressivity & Bayesian Counseling",
+          "theory": "Not all individuals with a disease-predisposing genotype manifest the clinical phenotype identically.",
+          "key_principles": [
+            "Penetrance vs. Expressivity: Penetrance (P) is an all-or-none population probability—the percentage of individuals with a specific genotype who exhibit the phenotype at all (e.g., 80% penetrance means 20% of Aa individuals are phenotypically normal). Expressivity describes the severity or anatomical spectrum among affected individuals (e.g., Neurofibromatosis Type 1).",
+            "Bayesian Risk Revision in Genetic Counseling: Incorporates conditional phenotypic evidence (such as a prospective carrier mother already having 3 unaffected sons, or passing a certain age without symptoms) to update Prior Probability into Posterior Probability: P(Carrier | Data) = Joint_Carrier / (Joint_Carrier + Joint_NonCarrier)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Human Pedigree Inheritance Modes & Transmission Rules",
+        "headers": [
+          "Inheritance Mode",
+          "Sex Ratio of Affected",
+          "Generation Skipping?",
+          "Father-to-Son Transmission?",
+          "Offspring of Affected Mother",
+          "Offspring of Affected Father"
+        ],
+        "rows": [
+          [
+            "Autosomal Recessive (AR)",
+            "Equal (1M : 1F)",
+            "Yes (Horizontal pattern)",
+            "Possible (if mother is carrier)",
+            "Carriers (unless father carries)",
+            "Carriers (unless mother carries)"
+          ],
+          [
+            "Autosomal Dominant (AD)",
+            "Equal (1M : 1F)",
+            "No (unless <100% penetrant)",
+            "Yes (~50% of sons)",
+            "50% of sons & 50% of daughters",
+            "50% of sons & 50% of daughters"
+          ],
+          [
+            "X-Linked Recessive (XR)",
+            "Males >> Females",
+            "Yes (via carrier females)",
+            "Never (0%)",
+            "100% of sons affected; daughters carriers",
+            "0% sons affected; 100% daughters carriers"
+          ],
+          [
+            "X-Linked Dominant (XD)",
+            "Females ≈ 2× Males",
+            "No (Vertical pattern)",
+            "Never (0%)",
+            "50% of sons & 50% of daughters",
+            "0% of sons; 100% of daughters affected"
+          ],
+          [
+            "Y-Linked (Holandric)",
+            "Males Only",
+            "No",
+            "100% of sons",
+            "N/A",
+            "100% of sons; 0% of daughters"
+          ],
+          [
+            "Mitochondrial (Maternal)",
+            "Equal (Variable heteroplasmy)",
+            "No (Matrilineal)",
+            "Never (0%)",
+            "100% of sons & daughters",
+            "0% of offspring"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "4.4",
+      "title": "Population Genetics: Hardy-Weinberg Equilibrium, Drift & Natural Selection",
+      "overview": "Population genetics models microevolution as changes in allele frequencies (p, q) and genotype frequencies (p², 2pq, q²) within a Mendelian gene pool driven by non-random mating, mutation, migration, genetic drift, and natural selection.",
+      "core_concepts": [
+        {
+          "concept_id": "4.4.1",
+          "heading": "The Hardy-Weinberg Principle & Inbreeding Deviations",
+          "theory": "Formulated independently by G.H. Hardy and Wilhelm Weinberg (1908), in an infinitely large, randomly mating (panmictic) diploid population free from mutation, migration (gene flow), and natural selection, allele frequencies (p + q = 1) remain constant across generations, and genotype frequencies reach stable equilibrium (p² AA : 2pq Aa : q² aa) after a single generation of random mating.",
+          "key_principles": [
+            "Five Assumptions of HWE: (1) Infinite population size (no genetic drift); (2) Random mating (no assortative mating or inbreeding); (3) No net mutation; (4) No migration/gene flow; (5) No natural selection (equal viability and fertility across all genotypes).",
+            "Wright's Inbreeding Coefficient (F): Inbreeding (consanguinity or self-pollination) does not alter allele frequencies (p and q remain unchanged), but systematically reduces heterozygosity (H = 2pq(1 - F)) while increasing homozygosity (P_AA = p² + pqF; P_aa = q² + pqF). Complete selfing (as in Mendel's peas or Arabidopsis) halves heterozygosity every generation."
+          ]
+        },
+        {
+          "concept_id": "4.4.2",
+          "heading": "Evolutionary Forces: Natural Selection, Balancing Selection & Genetic Drift",
+          "theory": "When HWE assumptions are violated, allele frequencies change predictably (directional/balancing selection, migration) or stochastically (genetic drift).",
+          "key_principles": [
+            "Relative Fitness (w) & Selection Coefficient (s = 1 - w): Selection against a recessive lethal allele (w_aa = 0, s = 1) reduces q slowly at low frequencies because most recessive alleles are hidden from selection inside phenotypically normal heterozygotes (2pq >> q²).",
+            "Heterozygote Advantage (Overdominance / Balancing Selection): When the heterozygote has higher fitness than either homozygote (w_AA = 1 - s1, w_Aa = 1, w_aa = 1 - s2, e.g., HbA/HbS sickle-cell trait in Plasmodium falciparum malaria regions), allele frequencies converge to a stable polymorphic equilibrium: q̂ = s1 / (s1 + s2).",
+            "Genetic Drift & Effective Population Size (Ne): Random sampling error in finite populations causes neutral alleles to fix (probability of fixation = initial frequency p0) or go extinct, eroding heterozygosity at a rate of 1 / (2Ne) per generation."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Impact of Evolutionary Forces on Genetic Variation Within and Between Populations",
+        "headers": [
+          "Evolutionary Force",
+          "Deterministic or Stochastic?",
+          "Effect on Within-Population Variation (Heterozygosity)",
+          "Effect on Between-Population Divergence (F_ST)"
+        ],
+        "rows": [
+          [
+            "Directional Selection",
+            "Deterministic",
+            "Decreases (drives favored allele toward fixation, p -> 1)",
+            "Increases (if environments differ) or Decreases (if uniform)"
+          ],
+          [
+            "Balancing Selection (Overdominance)",
+            "Deterministic",
+            "Maintains / Increases polymorphism (q̂ = s1 / (s1 + s2))",
+            "Decreases (maintains similar allele frequencies)"
+          ],
+          [
+            "Genetic Drift (Bottleneck / Founder)",
+            "Stochastic (Random)",
+            "Decreases at rate ΔH = -H / (2Ne) per generation",
+            "Strongly Increases (random fixation in isolated demes)"
+          ],
+          [
+            "Gene Flow / Migration (m)",
+            "Deterministic",
+            "Increases (introduces novel alleles from donor deme)",
+            "Decreases (homogenizes gene pools)"
+          ],
+          [
+            "Inbreeding (Non-Random Mating, F)",
+            "Deterministic (Genotypic)",
+            "Decreases observed heterozygotes (2pq(1 - F)); p & q unchanged",
+            "No change to allele frequencies directly"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "4.5",
+      "title": "Plant Genetics: Marker-Assisted Selection, QTL Mapping & Quantitative Inheritance",
+      "overview": "As a flagship Cellulum module, Plant Genetics integrates polygenic quantitative trait architecture (heritability, additive vs. dominance variance) with molecular marker technologies (SSR, SNP, QTL mapping) to accelerate crop improvement.",
+      "core_concepts": [
+        {
+          "concept_id": "4.5.1",
+          "heading": "Quantitative Trait Architecture, Heritability & Response to Selection",
+          "theory": "Agronomic traits such as grain yield, drought tolerance, plant height, and oil content are continuous (polygenic/quantitative) traits controlled by multiple Quantitative Trait Loci (QTLs) plus environmental effects: Phenotypic Variance (V_P) partitions into Genetic Variance (V_G = V_A + V_D + V_I) and Environmental Variance (V_E).",
+          "key_principles": [
+            "Broad-Sense (H²) vs. Narrow-Sense Heritability (h²): Broad-sense heritability (H² = V_G / V_P) measures total genetic contribution to phenotypic variance. Narrow-sense heritability (h² = V_A / V_P) isolates Additive Genetic Variance (V_A)—the only component reliably transmitted from parents to sexually reproduced progeny.",
+            "The Breeder's Equation (R = h² · S): Predicts the genetic gain or Response to Selection (R = mean of offspring - mean of parental population) from the Selection Differential (S = mean of selected parents - mean of parental population) and narrow-sense heritability (h²)."
+          ]
+        },
+        {
+          "concept_id": "4.5.2",
+          "heading": "Molecular Markers, QTL Mapping & Marker-Assisted Backcrossing (MABC)",
+          "theory": "DNA markers provide environmentally invariant tags across the plant genome. By genotyping segregating populations—such as F2, Backcross (BC1), Doubled Haploids (DH), or Recombinant Inbred Lines (RILs)—breeders map QTLs using Logarithm of the Odds (LOD) scores and introgress elite alleles via Marker-Assisted Selection (MAS).",
+          "key_principles": [
+            "Dominant vs. Co-Dominant Molecular Markers: RAPD and AFLP are dominant markers (cannot distinguish homozygote AA from heterozygote Aa without progeny testing). RFLP, SSR (Microsatellites), and SNPs (KASP/TaqMan/Genotyping-by-Sequencing) are co-dominant markers that resolve all three genotypes (AA, Aa, aa) in F2/BC populations.",
+            "QTL LOD Score Thresholds: The LOD score compares the likelihood that a trait locus and molecular marker are linked (at recombination fraction θ) versus unlinked (θ = 0.5): LOD = log10[L(θ) / L(0.5)]. A LOD score ≥ 3.0 indicates 1000:1 odds in favor of linkage.",
+            "Marker-Assisted Backcrossing (Foreground vs. Background Selection): Foreground selection uses flanking markers (<1–2 cM from target gene) to track the donor resistance/trait allele; Background selection uses genome-wide SNPs to accelerate recovery of the Recurrent Parent Genome (RPG), achieving >99% recurrent genome recovery in BC2–BC3 instead of BC6."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Comparison of Molecular Marker Systems in Plant Genotyping & Breeding",
+        "headers": [
+          "Marker System",
+          "Dominance Mode",
+          "PCR-Based?",
+          "Polymorphism Mechanism",
+          "Throughput & Breeding Application"
+        ],
+        "rows": [
+          [
+            "RFLP (Restriction Fragment Length)",
+            "Co-dominant",
+            "No (Southern blot)",
+            "Restriction site indel / point mutation",
+            "Low throughput; historical comparative mapping"
+          ],
+          [
+            "RAPD (Random Amplified Polymorphic DNA)",
+            "Dominant",
+            "Yes (10-mer arbitrary)",
+            "Primer binding site mismatch",
+            "Low reproducibility; quick preliminary diversity"
+          ],
+          [
+            "AFLP (Amplified Fragment Length)",
+            "Dominant",
+            "Yes (Restriction + PCR)",
+            "Selective adapter amplification",
+            "Medium throughput; unsequenced crop fingerprinting"
+          ],
+          [
+            "SSR (Simple Sequence Repeat / Microsatellite)",
+            "Co-dominant",
+            "Yes (Flanking primers)",
+            "Tandem repeat unit variation (e.g., (GA)n)",
+            "Multi-allelic (high PIC); ideal for F2/MABC foreground"
+          ],
+          [
+            "SNP (Single Nucleotide Polymorphism)",
+            "Co-dominant",
+            "Yes (KASP / Array / GBS)",
+            "Single base substitution (bi-allelic)",
+            "Ultra-high throughput; GWAS, Genomic Selection & background recovery"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-4.1",
+      "title": "Figure 4.1: Three-Point Testcross Meiotic Chiasmata & Genetic Linkage Map Construction",
+      "sub_module_ref": "4.2",
+      "thumbnail_caption": "Pachytene four-strand tetrad crossover topologies (NCO, SCO-1, SCO-2, DCO) and centiMorgan (cM) interference calculation. Tap to expand.",
+      "svg_template_id": "svg_three_point_linkage_4_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>THREE-POINT LINKAGE MAPPING &amp; DOUBLE CROSSOVER (DCO) TOPOLOGY</text><line x1='80' y1='90' x2='740' y2='90' stroke='#00f2fe' stroke-width='6' stroke-linecap='round'/><line x1='80' y1='145' x2='740' y2='145' stroke='#ff6b8b' stroke-width='6' stroke-linecap='round'/><path d='M 230 90 L 310 145 M 310 90 L 230 145' stroke='#ffca28' stroke-width='3'/><path d='M 510 90 L 590 145 M 590 90 L 510 145' stroke='#00ff87' stroke-width='3'/><circle cx='140' cy='90' r='12' fill='#07131e' stroke='#00f2fe' stroke-width='3'/><text x='140' y='70' fill='#00f2fe' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Locus A (v)</text><circle cx='410' cy='90' r='12' fill='#07131e' stroke='#ffca28' stroke-width='3'/><text x='410' y='70' fill='#ffca28' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Middle Locus B (cv)</text><circle cx='680' cy='90' r='12' fill='#07131e' stroke='#00ff87' stroke-width='3'/><text x='680' y='70' fill='#00ff87' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Locus C (ct)</text><text x='270' y='175' fill='#ffca28' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>Region I: RF_1 = SCO_1 + DCO</text><text x='550' y='175' fill='#00ff87' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>Region II: RF_2 = SCO_2 + DCO</text><rect x='50' y='205' width='720' height='115' rx='10' fill='#102a43' stroke='#4facfe' stroke-width='1.5'/><text x='410' y='232' fill='#fff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>STURTEVANT ADDITIVITY &amp; CHIASMA INTERFERENCE RULES</text><text x='410' y='258' fill='#00f2fe' font-family='monospace' font-size='12' text-anchor='middle'>1. Identify Parental (NCO = Most Frequent) vs. Double Crossover (DCO = Least Frequent) Classes</text><text x='410' y='280' fill='#ffca28' font-family='monospace' font-size='12' text-anchor='middle'>2. Outer Map Distance: d_AC = d_AB + d_BC = RF_obs(A-C) + 2(DCO) [since DCOs cancel A-C phase]</text><text x='410' y='302' fill='#00ff87' font-family='monospace' font-size='12' text-anchor='middle'>3. Coefficient of Coincidence (CoC) = Obs DCO / (RF_1 × RF_2 × N); Interference (I) = 1 - CoC</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-4-1a",
+          "x_pct": 50.0,
+          "y_pct": 25.7,
+          "label": "Determining the Middle Gene",
+          "scale_link": "cM",
+          "detail": "In a double crossover (DCO), only the middle allele switches chromosomal phase relative to the two flanking alleles."
+        },
+        {
+          "pin_id": "pin-4-1b",
+          "x_pct": 67.0,
+          "y_pct": 50.0,
+          "label": "Why d_AC = RF(A-C) + 2(DCO)",
+          "scale_link": "cM",
+          "detail": "Each DCO event involves 2 crossovers (one in Region I and one in Region II) but leaves outer markers A and C in their original parental coupling configuration."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-4.2",
+      "title": "Figure 4.2: Hardy-Weinberg Parabola (De Finetti Diagram) & Heterozygote Advantage Equilibrium",
+      "sub_module_ref": "4.4",
+      "thumbnail_caption": "Genotype frequency trajectories (p², 2pq, q²) across allele frequency q from 0 to 1, showing maximum heterozygosity (0.50) at p = q = 0.5. Tap to expand.",
+      "svg_template_id": "svg_hardy_weinberg_4_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>HARDY-WEINBERG EQUILIBRIUM GENOTYPE FREQUENCY PARABOLA (p² + 2pq + q² = 1)</text><line x1='90' y1='270' x2='730' y2='270' stroke='#a0c4e2' stroke-width='2'/><line x1='90' y1='60' x2='90' y2='270' stroke='#a0c4e2' stroke-width='2'/><line x1='730' y1='60' x2='730' y2='270' stroke='#a0c4e2' stroke-width='2'/><line x1='90' y1='165' x2='730' y2='165' stroke='#1e3a5f' stroke-dasharray='5,5'/><line x1='410' y1='60' x2='410' y2='270' stroke='#1e3a5f' stroke-dasharray='5,5'/><path d='M 90 60 Q 410 270 730 270' fill='none' stroke='#00f2fe' stroke-width='3.5'/><text x='200' y='115' fill='#00f2fe' font-family='sans-serif' font-size='13' font-weight='bold'>f(AA) = p²</text><path d='M 90 270 Q 410 270 730 60' fill='none' stroke='#ff6b8b' stroke-width='3.5'/><text x='610' y='115' fill='#ff6b8b' font-family='sans-serif' font-size='13' font-weight='bold'>f(aa) = q²</text><path d='M 90 270 Q 410 60 730 270' fill='none' stroke='#00ff87' stroke-width='3.5'/><text x='410' y='142' fill='#00ff87' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>f(Aa) = 2pq (Max = 0.50)</text><circle cx='410' cy='165' r='7' fill='#00ff87' stroke='#fff' stroke-width='2'/><text x='90' y='295' fill='#a0c4e2' font-family='monospace' font-size='12' text-anchor='middle'>q = 0 (p = 1)</text><text x='410' y='295' fill='#00ff87' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>q = 0.5 (p = 0.5)</text><text x='730' y='295' fill='#a0c4e2' font-family='monospace' font-size='12' text-anchor='middle'>q = 1.0 (p = 0)</text><text x='65' y='65' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='end'>1.0</text><text x='65' y='169' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='end'>0.5</text><text x='65' y='274' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='end'>0.0</text><text x='410' y='322' fill='#ffca28' font-family='monospace' font-size='11' text-anchor='middle'>Note: For rare recessive diseases (q ≪ 1), Carrier Frequency (2pq) ≫ Affected Frequency (q²); Ratio = 2p/q</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-4-2a",
+          "x_pct": 50.0,
+          "y_pct": 48.5,
+          "label": "Maximum Heterozygosity (2pq = 0.50)",
+          "scale_link": "population",
+          "detail": "For any bi-allelic locus under random mating, heterozygote frequency never exceeds 50%, reaching its peak at p = q = 0.5 (where p² = 0.25, 2pq = 0.50, q² = 0.25)."
+        },
+        {
+          "pin_id": "pin-4-2b",
+          "x_pct": 24.0,
+          "y_pct": 75.0,
+          "label": "Rare Recessive Carrier Reservoir",
+          "scale_link": "population",
+          "detail": "When q = 0.01 (1 in 10,000 affected), 2pq ≈ 0.0198 (~1 in 50 carriers). Thus, 99% of all recessive alleles in the population reside silently inside heterozygous carriers."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-4.3",
+      "title": "Figure 4.3: Plant QTL LOD Score Chromosome Profile & Co-Dominant SSR/SNP Marker Genotyping",
+      "sub_module_ref": "4.5",
+      "thumbnail_caption": "Chromosome linkage group scan showing a major Quantitative Trait Locus (LOD > 3.0 threshold) alongside F2 co-dominant marker band segregation. Tap to expand.",
+      "svg_template_id": "svg_plant_qtl_mas_4_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>A. PLANT QTL LIKELIHOOD ODDS (LOD) SCAN</text><text x='470' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>B. CO-DOMINANT SSR F2 GENOTYPING GEL</text><line x1='440' y1='20' x2='440' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><line x1='70' y1='240' x2='410' y2='240' stroke='#a0c4e2' stroke-width='2'/><line x1='70' y1='65' x2='70' y2='240' stroke='#a0c4e2' stroke-width='2'/><line x1='70' y1='155' x2='410' y2='155' stroke='#ff6b8b' stroke-dasharray='5,5' stroke-width='2'/><text x='355' y='147' fill='#ff6b8b' font-family='monospace' font-size='10' font-weight='bold'>LOD = 3.0 Threshold</text><path d='M 80 235 Q 130 225 160 195 Q 205 60 245 190 Q 300 235 340 175 Q 375 225 400 235' fill='rgba(0, 255, 135, 0.18)' stroke='#00ff87' stroke-width='3'/><circle cx='203' cy='125' r='6' fill='#00ff87' stroke='#fff' stroke-width='2'/><text x='203' y='105' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Major QTL Peak (LOD = 6.4)</text><rect x='80' y='265' width='320' height='16' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='1.5'/><text x='100' y='300' fill='#00f2fe' font-family='monospace' font-size='10'>M1 (0 cM)</text><text x='185' y='300' fill='#00ff87' font-family='monospace' font-size='10' font-weight='bold'>SSR-24 (42 cM)</text><text x='325' y='300' fill='#00f2fe' font-family='monospace' font-size='10'>M5 (100 cM)</text><rect x='475' y='65' width='310' height='210' rx='8' fill='#0b192c' stroke='#4facfe' stroke-width='2'/><text x='515' y='88' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>P1(AA)</text><text x='575' y='88' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>P2(aa)</text><text x='635' y='88' fill='#ffca28' font-family='monospace' font-size='11' text-anchor='middle'>F1(Aa)</text><text x='695' y='88' fill='#00ff87' font-family='monospace' font-size='11' text-anchor='middle'>F2-1</text><text x='750' y='88' fill='#00ff87' font-family='monospace' font-size='11' text-anchor='middle'>F2-2</text><rect x='495' y='125' width='40' height='8' rx='2' fill='#00f2fe'/><rect x='555' y='195' width='40' height='8' rx='2' fill='#ff6b8b'/><rect x='615' y='125' width='40' height='8' rx='2' fill='#00f2fe'/><rect x='615' y='195' width='40' height='8' rx='2' fill='#ff6b8b'/><rect x='675' y='125' width='40' height='8' rx='2' fill='#00f2fe'/><rect x='730' y='125' width='40' height='8' rx='2' fill='#00f2fe'/><rect x='730' y='195' width='40' height='8' rx='2' fill='#ff6b8b'/><text x='630' y='302' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Co-dominant SSR resolves 1 AA : 2 Aa : 1 aa in F2</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-4-3a",
+          "x_pct": 24.7,
+          "y_pct": 36.7,
+          "label": "Major QTL Peak (SSR-24 Interval)",
+          "scale_link": "cM",
+          "detail": "Flanking markers tightly linked (<2 cM) to the QTL peak enable Marker-Assisted Foreground Selection in seedling leaf punches prior to flowering."
+        },
+        {
+          "pin_id": "pin-4-3b",
+          "x_pct": 77.4,
+          "y_pct": 47.0,
+          "label": "Co-Dominant Heterozygote Banding",
+          "scale_link": "100nm",
+          "detail": "Unlike dominant RAPD markers, co-dominant SSR and KASP-SNP markers amplify both the 220 bp (P1) and 180 bp (P2) alleles in F1/F2 heterozygotes."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_linkage_recombination_mapper_4_2",
+      "title": "Three-Point Testcross & Haldane Mapping Function Simulator",
+      "sub_module_ref": "4.2",
+      "type": "genetic-linkage-calculator",
+      "description": "Input observed progeny counts for Parental (NCO), Single Crossover Region I (SCO1), Single Crossover Region II (SCO2), and Double Crossover (DCO) classes to calculate exact centiMorgan (cM) map distances, expected DCOs, Coefficient of Coincidence (CoC), and Chiasma Interference (I).",
+      "controls": [
+        {
+          "id": "nco_count",
+          "label": "Parental Non-Crossover Progeny (NCO)",
+          "min": 100,
+          "max": 2000,
+          "step": 10,
+          "default": 740,
+          "unit": "progeny"
+        },
+        {
+          "id": "sco1_count",
+          "label": "Single Crossover Region I (SCO1)",
+          "min": 5,
+          "max": 500,
+          "step": 5,
+          "default": 135,
+          "unit": "progeny"
+        },
+        {
+          "id": "sco2_count",
+          "label": "Single Crossover Region II (SCO2)",
+          "min": 5,
+          "max": 500,
+          "step": 5,
+          "default": 110,
+          "unit": "progeny"
+        },
+        {
+          "id": "dco_count",
+          "label": "Double Crossover Progeny (DCO)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 15,
+          "unit": "progeny"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "map_dist_region1_cm",
+          "label": "Map Distance Region I (d_1 in cM)",
+          "formula_js": "((sco1_count + dco_count) / (nco_count + sco1_count + sco2_count + dco_count)) * 100",
+          "unit": "cM"
+        },
+        {
+          "output_id": "map_dist_region2_cm",
+          "label": "Map Distance Region II (d_2 in cM)",
+          "formula_js": "((sco2_count + dco_count) / (nco_count + sco1_count + sco2_count + dco_count)) * 100",
+          "unit": "cM"
+        },
+        {
+          "output_id": "coc_value",
+          "label": "Coefficient of Coincidence (CoC)",
+          "formula_js": "(dco_count / (nco_count + sco1_count + sco2_count + dco_count)) / (((sco1_count + dco_count) / (nco_count + sco1_count + sco2_count + dco_count)) * ((sco2_count + dco_count) / (nco_count + sco1_count + sco2_count + dco_count)))",
+          "unit": "ratio"
+        },
+        {
+          "output_id": "interference_pct",
+          "label": "Chiasma Interference (I = 1 - CoC)",
+          "formula_js": "(1 - ((dco_count / (nco_count + sco1_count + sco2_count + dco_count)) / (((sco1_count + dco_count) / (nco_count + sco1_count + sco2_count + dco_count)) * ((sco2_count + dco_count) / (nco_count + sco1_count + sco2_count + dco_count))))) * 100",
+          "unit": "%"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_hardy_weinberg_breeder_4_4",
+      "title": "Hardy-Weinberg Inbreeding & Plant Breeder's Heritability Simulator",
+      "sub_module_ref": "4.4",
+      "type": "population-quantitative-genetics-simulator",
+      "description": "Compute genotype frequencies (AA, Aa, aa) under recessive allele frequency (q) and Wright's inbreeding coefficient (F), or predict crop yield genetic gain using the Breeder's Equation (R = h²S).",
+      "controls": [
+        {
+          "id": "allele_q",
+          "label": "Recessive Allele Frequency (q)",
+          "min": 0.01,
+          "max": 0.99,
+          "step": 0.01,
+          "default": 0.2,
+          "unit": "frequency"
+        },
+        {
+          "id": "inbreeding_f",
+          "label": "Wright's Inbreeding Coefficient (F)",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.0,
+          "unit": "F (0=random, 1=selfed)"
+        },
+        {
+          "id": "heritability_h2",
+          "label": "Narrow-Sense Heritability (h² = V_A / V_P)",
+          "min": 0.05,
+          "max": 0.95,
+          "step": 0.05,
+          "default": 0.4,
+          "unit": "ratio"
+        },
+        {
+          "id": "selection_diff_s",
+          "label": "Selection Differential (S = μ_selected - μ_pop)",
+          "min": 1.0,
+          "max": 50.0,
+          "step": 1.0,
+          "default": 15.0,
+          "unit": "g/plant"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "freq_heterozygote",
+          "label": "Observed Heterozygote Frequency f(Aa)",
+          "formula_js": "2 * (1 - allele_q) * allele_q * (1 - inbreeding_f)",
+          "unit": "proportion"
+        },
+        {
+          "output_id": "freq_recessive_homozygote",
+          "label": "Recessive Homozygote Frequency f(aa)",
+          "formula_js": "(allele_q * allele_q) + ((1 - allele_q) * allele_q * inbreeding_f)",
+          "unit": "proportion"
+        },
+        {
+          "output_id": "genetic_gain_r",
+          "label": "Predicted Response to Selection (R = h²·S)",
+          "formula_js": "heritability_h2 * selection_diff_s",
+          "unit": "g/plant gain"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-4.1",
+      "title": "Binomial Expansion & Chi-Square (χ²) Goodness-of-Fit Test",
+      "latex": "P(k\\text{ of } n) = \\frac{n!}{k!(n-k)!} p^k q^{n-k} \\qquad \\text{and} \\qquad \\chi^2 = \\sum_{i=1}^{c} \\frac{(O_i - E_i)^2}{E_i} \\quad (\\text{df} = c - 1)",
+      "description": "Computes the exact probability of obtaining k offspring of phenotype A (probability p) and (n - k) offspring of phenotype B (probability q) in a family of size n, and tests Mendelian ratio fit across c phenotypic classes.",
+      "variables": [
+        {
+          "symbol": "n, k",
+          "definition": "Total offspring count (n) and target outcome count (k)",
+          "unit": "individuals"
+        },
+        {
+          "symbol": "O_i, E_i",
+          "definition": "Observed and expected counts in phenotypic class i",
+          "unit": "individuals"
+        },
+        {
+          "symbol": "\\text{df}",
+          "definition": "Degrees of freedom (number of classes c minus 1 for fixed Mendelian ratios)",
+          "unit": "dimensionless"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-4.2",
+      "title": "Recombination Frequency (RF), Coefficient of Coincidence (CoC) & Haldane Mapping Function",
+      "latex": "\\text{RF} = \\frac{N_{\\text{SCO}} + N_{\\text{DCO}}}{N_{\\text{total}}} \\times 100\\text{ cM}, \\qquad I = 1 - \\text{CoC} = 1 - \\frac{\\text{Obs DCO}}{\\text{RF}_1 \\cdot \\text{RF}_2 \\cdot N_{\\text{total}}}, \\qquad d = -50 \\ln(1 - 2r)",
+      "description": "Quantifies genetic map distance in centiMorgans (1 cM = 1% recombination), chiasma interference (I), and Haldane's Poisson correction for multiple crossovers over large intervals (where r is recombination fraction < 0.5).",
+      "variables": [
+        {
+          "symbol": "\\text{RF}_1, \\text{RF}_2",
+          "definition": "Recombination frequencies (as decimals) in adjacent intervals I and II",
+          "unit": "decimal or %"
+        },
+        {
+          "symbol": "\\text{CoC}, I",
+          "definition": "Coefficient of Coincidence and Chiasma Interference",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "d",
+          "definition": "Haldane corrected map distance in centiMorgans",
+          "unit": "cM"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-4.3",
+      "title": "Hardy-Weinberg Equilibrium, Wright's Inbreeding (F) & Balancing Selection Equilibrium",
+      "latex": "p^2 + 2pq + q^2 = 1, \\qquad f(aa)_{F} = q^2 + pqF, \\qquad \\hat{q}_{\\text{eq}} = \\frac{s_1}{s_1 + s_2}",
+      "description": "Relates allele frequencies (p + q = 1) to genotype frequencies under random mating, consanguineous inbreeding (coefficient F), and heterozygote advantage (overdominance with selection coefficients s1 against AA and s2 against aa).",
+      "variables": [
+        {
+          "symbol": "p, q",
+          "definition": "Frequencies of dominant (A) and recessive (a) alleles",
+          "unit": "proportion (0 to 1)"
+        },
+        {
+          "symbol": "F",
+          "definition": "Wright's inbreeding coefficient (probability of Identity By Descent, IBD)",
+          "unit": "0 to 1"
+        },
+        {
+          "symbol": "s_1, s_2",
+          "definition": "Selection coefficients against homozygotes AA (1 - w_AA) and aa (1 - w_aa)",
+          "unit": "0 to 1"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-4.4",
+      "title": "Quantitative Genetics: Variance Partitioning, Heritability & The Breeder's Equation",
+      "latex": "V_P = V_A + V_D + V_I + V_E, \\qquad H^2 = \\frac{V_G}{V_P}, \\qquad h^2 = \\frac{V_A}{V_P}, \\qquad R = h^2 S",
+      "description": "Decomposes total phenotypic variance (V_P) into additive (V_A), dominance (V_D), epistatic (V_I), and environmental (V_E) components to predict evolutionary or breeding response (R) to artificial selection differential (S).",
+      "variables": [
+        {
+          "symbol": "H^2, h^2",
+          "definition": "Broad-sense (V_G/V_P) and Narrow-sense (V_A/V_P) heritability",
+          "unit": "0 to 1"
+        },
+        {
+          "symbol": "S",
+          "definition": "Selection differential (μ_selected parents - μ_base population)",
+          "unit": "Trait unit"
+        },
+        {
+          "symbol": "R",
+          "definition": "Response to selection (μ_progeny - μ_base population)",
+          "unit": "Trait unit"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-4.5",
+      "title": "Marker-Assisted Backcrossing (MABC) Recurrent Parent Genome Recovery & Marker PIC",
+      "latex": "\\text{RPG}(\\%)_{n} = \\left[1 - \\left(\\frac{1}{2}\\right)^{n+1}\\right] \\times 100\\%, \\qquad \\text{PIC} = 1 - \\sum_{i=1}^{k} p_i^2",
+      "description": "Calculates theoretical recovery of the Recurrent Parent Genome after n backcross generations (where F1 = BC0) and the Polymorphism Information Content (PIC / expected heterozygosity) of a molecular marker with k alleles.",
+      "variables": [
+        {
+          "symbol": "n",
+          "definition": "Number of backcross generations (BC1 -> n=1, BC2 -> n=2)",
+          "unit": "generations"
+        },
+        {
+          "symbol": "p_i",
+          "definition": "Population frequency of the i-th marker allele",
+          "unit": "proportion"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-4.1",
+        "title": "Three-Point Testcross Mapping in Zea mays: Gene Order, Map Distance & Chiasma Interference",
+        "difficulty": "Intermediate",
+        "statement": "In maize (Zea mays), a trihybrid plant heterozygous for three recessive kernel/seedling traits—colorless aleurone (c), shrunken endosperm (sh), and waxy starch (wx)—is testcrossed to a homozygous recessive tester (c sh wx / c sh wx). Inspection of 1,000 testcross progeny kernels yields the following 8 phenotypic classes:\n• c sh + : 402\n• + + wx : 398\n• c + wx : 79\n• + sh + : 81\n• c sh wx : 16\n• + + + : 14\n• c + + : 5\n• + sh wx : 5\nDetermine: (a) the exact parental genotype phase and the middle locus, (b) the genetic map distances (in cM) between the three linked loci, and (c) the Coefficient of Coincidence (CoC) and Chiasma Interference (I).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Identify the Parental Non-Crossover (NCO, largest pair: 402 + 398 = 800) and Double Crossover (DCO, smallest pair: 5 + 5 = 10) progeny classes:",
+            "equation_latex": "\\text{Parental (NCO)}: \\frac{c\\ sh\\ +}{+\\ +\\ wx} \\ (800), \\qquad \\text{Double Crossover (DCO)}: \\ c\\ +\\ + \\text{ and } +\\ sh\\ wx \\ (10)"
+          },
+          {
+            "step": 2,
+            "explanation": "Compare the Parental allele combinations (c sh + and + + wx) with the DCO combinations (c + + and + sh wx). Only the 'sh' locus has flipped its phase relative to flanking markers 'c' and 'wx'. Therefore, 'sh' is the middle gene (Order: c — sh — wx):",
+            "equation_latex": "\\text{Correct Gene Order & Parental Phase}: \\quad \\frac{c\\quad sh\\quad +}{+\\quad +\\quad wx}"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the Recombination Frequency in Region I (c to sh, represented by SCO1 pair [c + wx (79) and + sh + (81)] plus DCOs [5 + 5 = 10]) and Region II (sh to wx, represented by SCO2 pair [c sh wx (16) and + + + (14)] plus DCOs [10]):",
+            "equation_latex": "d_{c-sh} = \\frac{(79 + 81) + (5 + 5)}{1000} \\times 100 = \\frac{170}{1000} \\times 100 = 17.0\\text{ cM} \\ (\\text{RF}_1 = 0.170)"
+          },
+          {
+            "step": 4,
+            "explanation": "Compute Region II distance (sh to wx) and total map length:",
+            "equation_latex": "d_{sh-wx} = \\frac{(16 + 14) + (5 + 5)}{1000} \\times 100 = \\frac{40}{1000} \\times 100 = 4.0\\text{ cM} \\ (\\text{RF}_2 = 0.040), \\qquad d_{\\text{total}} = 17.0 + 4.0 = 21.0\\text{ cM}"
+          },
+          {
+            "step": 5,
+            "explanation": "Calculate Expected DCOs under independent crossover occurrence (N × RF_1 × RF_2), then compute CoC and Interference (I):",
+            "equation_latex": "\\text{Expected DCO} = 1000 \\times (0.170)(0.040) = 6.8\\text{ progeny}, \\qquad \\text{CoC} = \\frac{\\text{Obs DCO}}{\\text{Exp DCO}} = \\frac{10}{6.8} = 1.47, \\qquad I = 1 - 1.47 = -0.47"
+          }
+        ],
+        "final_answer": "(a) Middle gene is sh; parental genotype is (c sh +) / (+ + wx); (b) Map: c — 17.0 cM — sh — 4.0 cM — wx (Total = 21.0 cM); (c) CoC = 1.47, Interference I = -0.47 (negative interference in this dataset; if Obs DCO were 3, CoC = 3/6.8 = 0.44 and positive interference I = +55.9%)."
+      },
+      {
+        "problem_id": "SP-4.2",
+        "title": "Epistasis & Chi-Square (χ²) Goodness-of-Fit Verification in Plant Flower Pigmentation",
+        "difficulty": "Foundational",
+        "statement": "Two true-breeding white-flowered sweet pea (Lathyrus odoratus) lines are crossed (P1 white × P2 white). All F1 progeny produce purple flowers. Self-fertilization of the F1 plants yields 320 F2 progeny consisting of 189 purple-flowered plants and 131 white-flowered plants. (a) Propose the epistatic biochemical model and genotypes explaining this inheritance. (b) Perform a Chi-square (χ²) goodness-of-fit test against your proposed ratio and state whether the Null Hypothesis is accepted at α = 0.05 (given critical values: χ²_0.05,1 = 3.841; χ²_0.05,2 = 5.991; χ²_0.05,3 = 7.815).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Observe the F2 ratio: 189 / 320 = 59.1% purple and 131 / 320 = 40.9% white, which closely matches 9/16 (56.25%) purple : 7/16 (43.75%) white—the classic Complementary Gene Action (Duplicate Recessive Epistasis, 9:7) ratio where two enzymes (A and B) act in series to synthesize anthocyanin pigment from colorless precursors (P1 = AAbb × P2 = aaBB -> F1 = AaBb purple).",
+            "equation_latex": "E_{\\text{purple}} = \\frac{9}{16} \\times 320 = 180.0, \\qquad E_{\\text{white}} = \\frac{7}{16} \\times 320 = 140.0"
+          },
+          {
+            "step": 2,
+            "explanation": "Substitute Observed (O_1 = 189, O_2 = 131) and Expected (E_1 = 180, E_2 = 140) counts into the Chi-square formula:",
+            "equation_latex": "\\chi^2 = \\frac{(189 - 180)^2}{180} + \\frac{(131 - 140)^2}{140} = \\frac{(+9)^2}{180} + \\frac{(-9)^2}{140} = \\frac{81}{180} + \\frac{81}{140} = 0.450 + 0.579 = 1.029"
+          },
+          {
+            "step": 3,
+            "explanation": "Determine the degrees of freedom (df = number of phenotypic classes c - 1 = 2 - 1 = 1) and compare against the critical value at p = 0.05:",
+            "equation_latex": "\\text{df} = 2 - 1 = 1, \\qquad \\chi^2_{\\text{calc}} = 1.029 < \\chi^2_{0.05, 1} = 3.841 \\implies p > 0.30\\text{ (Fail to reject } H_0\\text{)}"
+          }
+        ],
+        "final_answer": "(a) Complementary gene action (9:7 duplicate recessive epistasis; A_B_ = purple, A_bb/aaB_/aabb = white); (b) χ² = 1.029 (df = 1), which is well below 3.841, confirming an excellent statistical fit to the 9:7 model."
+      },
+      {
+        "problem_id": "SP-4.3",
+        "title": "Bayesian Risk Calculation in Human Genetic Counseling for X-Linked Recessive Hemophilia A",
+        "difficulty": "Advanced",
+        "statement": "A woman (Consultand II-2) seeks genetic counseling because her brother (II-1) has severe X-linked recessive Hemophilia A (Factor VIII deficiency, X^hY). Her parents (I-1 and I-2) are phenotypically healthy, with no prior family history on the paternal side, establishing her mother (I-2) as an obligate carrier (X^H X^h). Consultand II-2 marries an unaffected man and has already given birth to 3 healthy, unaffected sons. Using Bayesian probability analysis, calculate (a) her Prior Probability of being a carrier before having children, (b) her Conditional Probability of having 3 healthy sons if she is a carrier vs. non-carrier, and (c) her revised Posterior Probability of being a carrier, along with the risk that her next (4th) son will have hemophilia.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Establish the Prior Probability for Hypothesis A (Consultand II-2 is a carrier, X^H X^h) versus Hypothesis B (II-2 is a non-carrier, X^H X^H) given mother X^H X^h × father X^H Y:",
+            "equation_latex": "P(\\text{Prior Carrier}) = \\frac{1}{2}, \\qquad P(\\text{Prior Non-Carrier}) = \\frac{1}{2}"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute the Conditional Probability of the observed phenotypic evidence (3 unaffected sons) under each hypothesis. If she is a carrier, each son has a 1/2 chance of being unaffected, so for 3 independent sons P = (1/2)^3 = 1/8. If she is a non-carrier, every son is unaffected with P = 1^3 = 1:",
+            "equation_latex": "P(3\\text{ healthy sons} \\mid \\text{Carrier}) = \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}, \\qquad P(3\\text{ healthy sons} \\mid \\text{Non-Carrier}) = 1^3 = 1"
+          },
+          {
+            "step": 3,
+            "explanation": "Multiply Prior × Conditional to obtain the Joint Probabilities:",
+            "equation_latex": "P_{\\text{Joint}}(\\text{Carrier}) = \\frac{1}{2} \\times \\frac{1}{8} = \\frac{1}{16}, \\qquad P_{\\text{Joint}}(\\text{Non-Carrier}) = \\frac{1}{2} \\times 1 = \\frac{1}{2} = \\frac{8}{16}"
+          },
+          {
+            "step": 4,
+            "explanation": "Normalize the Joint Probabilities via Bayes' Theorem to obtain the Posterior Carrier Probability, and multiply by 1/2 for the 4th son's risk:",
+            "equation_latex": "P(\\text{Posterior Carrier}) = \\frac{1/16}{(1/16) + (8/16)} = \\frac{1}{9} \\ (11.1\\%), \\qquad P(\\text{4th son affected}) = \\frac{1}{9} \\times \\frac{1}{2} = \\frac{1}{18} \\ (5.56\\%)"
+          }
+        ],
+        "final_answer": "(a) Prior Carrier Probability = 1/2 (50%); (b) Conditional probabilities = 1/8 vs. 1; (c) Posterior Carrier Probability drops from 50% to 1/9 (11.1%), and the risk that her 4th son will be affected is 1/18 (5.56%)."
+      },
+      {
+        "problem_id": "SP-4.4",
+        "title": "Population Genetics: Hardy-Weinberg Carrier Frequency, Consanguinity Risk & Balancing Selection",
+        "difficulty": "Intermediate",
+        "statement": "(a) Cystic Fibrosis (CFTR ΔF508, autosomal recessive) affects approximately 1 in 2,500 newborns in a panmictic population at Hardy-Weinberg equilibrium. Calculate the recessive allele frequency (q), dominant allele frequency (p), and heterozygous carrier frequency (2pq). (b) If two unrelated individuals from this population marry after first-cousin consanguinity is compared (where first-cousin marriage has Wright's inbreeding coefficient F = 1/16 = 0.0625), by what fold does first-cousin marriage increase the population incidence of this recessive disorder compared to random mating? (c) In a malaria-endemic region, if homozygotes for normal hemoglobin (HbA/HbA) suffer a 12% fitness loss due to severe malaria (s_1 = 0.12) and sickle-cell homozygotes (HbS/HbS) suffer an 88% fitness loss (s_2 = 0.88), calculate the stable equilibrium frequency of the HbS allele (q̂).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "From the affected recessive incidence q² = 1 / 2500 = 0.0004, take the square root to find q, then compute p and 2pq:",
+            "equation_latex": "q = \\sqrt{0.0004} = 0.020, \\qquad p = 1 - 0.020 = 0.980, \\qquad 2pq = 2(0.980)(0.020) = 0.0392 \\approx \\frac{1}{25.5}\\text{ carriers}"
+          },
+          {
+            "step": 2,
+            "explanation": "Use Wright's inbreeding genotype equation for recessive homozygotes under F = 1/16 = 0.0625:",
+            "equation_latex": "f(aa)_{F} = q^2 + pqF = 0.0004 + (0.980)(0.020)(0.0625) = 0.0004 + 0.001225 = 0.001625 \\quad \\left(\\text{Fold Increase} = \\frac{0.001625}{0.0004} = 4.06\\text{-fold}\\right)"
+          },
+          {
+            "step": 3,
+            "explanation": "For overdominance (heterozygote advantage) with s_1 = 0.12 and s_2 = 0.88, apply the balancing selection equilibrium equation:",
+            "equation_latex": "\\hat{q}_{\\text{HbS}} = \\frac{s_1}{s_1 + s_2} = \\frac{0.12}{0.12 + 0.88} = \\frac{0.12}{1.00} = 0.120 \\ (12.0\\%)"
+          }
+        ],
+        "final_answer": "(a) q = 0.02, p = 0.98, Carrier frequency 2pq = 3.92% (~1 in 25.5 people); (b) First-cousin inbreeding (F = 1/16) increases affected birth incidence 4.06-fold (from 4 per 10,000 to 16.25 per 10,000); (c) Equilibrium HbS allele frequency q̂ = 0.12."
+      },
+      {
+        "problem_id": "SP-4.5",
+        "title": "Plant Quantitative Genetics: Narrow-Sense Heritability, Breeder's Equation & SSR Marker PIC",
+        "difficulty": "Intermediate",
+        "statement": "(a) In a segregating wheat (Triticum aestivum) breeding population, total phenotypic variance for grain protein content is measured as V_P = 20.0 units². Partitioning variance via genetically uniform inbred parental lines and half-sib progeny arrays reveals Environmental Variance V_E = 8.0 units², Dominance Variance V_D = 4.0 units², and Epistatic Variance V_I = 0. Calculate Broad-Sense Heritability (H²) and Narrow-Sense Heritability (h²). (b) If the base wheat population has a mean grain weight of 40.0 g/plant, and the breeder selects the top 10% of plants with a mean of 55.0 g/plant to intercross, what will be the expected mean grain weight of the next generation (assuming the same h²)? (c) A co-dominant SSR marker linked to a rust-resistance QTL has 3 alleles in a germplasm panel at frequencies p_1 = 0.50, p_2 = 0.30, and p_3 = 0.20. Calculate the marker's Polymorphism Information Content (PIC / Nei's gene diversity).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate total Genetic Variance (V_G = V_P - V_E) and Additive Genetic Variance (V_A = V_G - V_D - V_I):",
+            "equation_latex": "V_G = 20.0 - 8.0 = 12.0, \\qquad V_A = 12.0 - 4.0 - 0 = 8.0"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute Broad-Sense (H²) and Narrow-Sense (h²) Heritability:",
+            "equation_latex": "H^2 = \\frac{V_G}{V_P} = \\frac{12.0}{20.0} = 0.60 \\ (60\\%), \\qquad h^2 = \\frac{V_A}{V_P} = \\frac{8.0}{20.0} = 0.40 \\ (40\\%)"
+          },
+          {
+            "step": 3,
+            "explanation": "Apply the Breeder's Equation (R = h² · S) where Selection Differential S = 55.0 - 40.0 = 15.0 g/plant:",
+            "equation_latex": "R = h^2 S = (0.40)(15.0\\text{ g}) = +6.0\\text{ g/plant} \\implies \\mu_{\\text{progeny}} = 40.0 + 6.0 = 46.0\\text{ g/plant}"
+          },
+          {
+            "step": 4,
+            "explanation": "Compute the SSR marker diversity / PIC from allele frequencies p_1 = 0.5, p_2 = 0.3, p_3 = 0.2:",
+            "equation_latex": "\\text{PIC} = 1 - \\sum_{i=1}^{3} p_i^2 = 1 - \\left[(0.50)^2 + (0.30)^2 + (0.20)^2\\right] = 1 - (0.25 + 0.09 + 0.04) = 1 - 0.38 = 0.62"
+          }
+        ],
+        "final_answer": "(a) H² = 0.60, h² = 0.40; (b) Selection response R = +6.0 g, yielding a next-generation mean of 46.0 g/plant; (c) SSR marker PIC = 0.62 (highly informative since PIC > 0.50)."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-4.1",
+        "question": "In a cross between two tetrahybrid pea plants (AaBbCcDd × AaBbCcDd, where all 4 loci assort independently and exhibit complete dominance), what fraction of the F2 progeny is expected to have the genotype AabbCcDD, and what fraction will display the dominant phenotype for all 4 traits (A_B_C_D_)?",
+        "bold_answer": "Genotype AabbCcDD = 1/64 (1.56%); Phenotype A_B_C_D_ = 81/256 (31.64%)",
+        "collapsible_derivation": "Using the Product Rule across independent monohybrid crosses: P(Aa) = 1/2, P(bb) = 1/4, P(Cc) = 1/2, P(DD) = 1/4. Multiplying gives (1/2)(1/4)(1/2)(1/4) = 1/64. For the dominant phenotype at all 4 loci, each locus has P(dominant) = 3/4, so (3/4)^4 = 81/256."
+      },
+      {
+        "problem_id": "PP-4.2",
+        "question": "Two loci (M and N) are separated by a genetic map distance of 16.0 cM on the same chromosome. If a plant heterozygous in repulsion phase (M n / m N) is self-pollinated (assuming equal male and female recombination rates and no interference), what percentage of the F2 progeny will be homozygous recessive for both traits (mm nn)?",
+        "bold_answer": "0.64% (or 64 per 10,000 F2 plants)",
+        "collapsible_derivation": "In repulsion phase (M n / m N), the gametes M n and m N are Parental (total 84%, or 42% each), while M N and m n are Recombinant (total 16.0%, so m n = 8.0% = 0.08). To produce an mm nn zygote upon selfing, a recombinant m n pollen grain (0.08) must fertilize a recombinant m n ovule (0.08): P(mm nn) = (0.08) × (0.08) = 0.0064 = 0.64%."
+      },
+      {
+        "problem_id": "PP-4.3",
+        "question": "An autosomal dominant disorder has a penetrance of 60% (P = 0.60). If a heterozygous affected father (Aa) and a homozygous normal mother (aa) have a child, what is the probability that the child will clinically express the disorder?",
+        "bold_answer": "30% (0.30)",
+        "collapsible_derivation": "The Mendelian probability that the child inherits the dominant allele (Aa) from the heterozygous father is 1/2 (0.50). Multiplying the probability of inheriting the genotype (0.50) by the probability of penetrance (0.60) gives P(affected) = 0.50 × 0.60 = 0.30 (30%)."
+      },
+      {
+        "problem_id": "PP-4.4",
+        "question": "In a rice Marker-Assisted Backcrossing (MABC) program to introgress the Sub1A submergence-tolerance QTL into an elite mega-variety, what theoretical percentage of the Recurrent Parent Genome (RPG%) is recovered by the BC3 generation under random segregation without background selection?",
+        "bold_answer": "93.75% (15/16 of the recurrent parent genome)",
+        "collapsible_derivation": "Using the backcross genome recovery formula RPG(%) = [1 - (1/2)^(n+1)] × 100%, where F1 = 50%, BC1 (n=1) = 75%, BC2 (n=2) = 87.5%, and BC3 (n=3) = [1 - (1/2)^4] × 100% = [1 - 1/16] × 100% = 93.75%."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Translational Genetics Case Study: The Bombay Phenotype (hh Epistasis) & Sub1A Marker-Assisted Rice Breeding",
+    "scenario": "Case A (Human Epistasis): A woman with blood type O and a man with blood type A have a daughter with blood type AB, prompting a paternity dispute—yet DNA microsatellite profiling confirms 99.999% paternity. Investigation reveals the mother is homozygous for the rare FUT1 (hh) mutation ('Bombay Phenotype'). Case B (Plant MAS): Breeders at IRRI introgressed the Sub1A ethylene-response-factor QTL from the low-yielding Indian landrace FR13A into the high-yielding mega-variety Swarna using SSR foreground, recombinant, and background markers.",
+    "mechanistic_analysis": "In Case A, the FUT1 (H) locus encodes α-1,2-fucosyltransferase, which synthesizes the H-antigen oligosaccharide precursor required for the ABO glycosyltransferases (IA and IB) to attach N-acetylgalactosamine or galactose. Because the mother is genotypically hh IB IB (or IB i), she cannot synthesize H-antigen and types phenotypically as group O on standard hemagglutination assays, even though she transmits an active IB allele to her daughter (who inherits a functional H allele from her IA father, producing Hh IA IB = type AB). This is a classic human example of Recessive Epistasis (9:3:4). In Case B, tightly linked flanking SSR markers eliminated 'linkage drag' around the Sub1A locus on Chromosome 9 while genome-wide background SSRs recovered >98% of the Swarna genome in just 2–3 backcrosses, creating 'Swarna-Sub1'—which survives 14 days of complete flash-flood submergence without yield penalty.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook2",
+        "topic": "Golgi O-Linked Glycosylation of ABO Red Blood Cell Antigens"
+      },
+      {
+        "target_textbook": "TextBook5",
+        "topic": "PCR Amplification of SSR Microsatellites & KASP SNP Genotyping"
+      },
+      {
+        "target_textbook": "TextBook7",
+        "topic": "Ethylene Signaling, Aerenchyma & Submergence Physiology in Plants"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-4.1",
+      "question": "Why can the observed Recombination Frequency (RF) between two loci on the same chromosome never exceed 50%, even if their genetic map distance is 120 cM?",
+      "options": [
+        "Chiasma interference prevents more than one crossover from occurring on any chromosome",
+        "Each single crossover event in a meiotic tetrad involves only 2 of the 4 sister chromatids, and multiple crossovers randomize outer markers equally between parental and recombinant configurations (yielding a 1:1 limit = 50%)",
+        "DNA Polymerase δ repairs all crossovers that exceed 50 cM during Pachytene",
+        "Loci separated by more than 50 cM translocate to non-homologous chromosomes"
+      ],
+      "correct_index": 1,
+      "explanation": "In any meiotic tetrad where at least one crossover occurs between two loci, averaging across single, double, triple, and quadruple crossovers involving 2, 3, or 4 chromatids mathematically converges to a 1:1 ratio of parental-to-recombinant chromatids (50% maximum RF), whereas map distance (cM) sums additive short intervals."
+    },
+    {
+      "question_id": "Q-4.2",
+      "question": "If a plant population undergoes continuous self-pollination (F -> 1) over several generations in the absence of selection, mutation, or migration, how do allele frequencies (p and q) and genotype frequencies (AA, Aa, aa) change?",
+      "options": [
+        "Both allele frequencies and heterozygote frequency decrease by 50% each generation",
+        "Allele frequencies (p and q) remain strictly constant, while heterozygote frequency (2pq) decreases by 50% each generation and splits equally into AA and aa homozygotes",
+        "The recessive allele q is eliminated from the population, leaving 100% AA homozygotes",
+        "Heterozygote frequency increases to 100% due to hybrid vigor"
+      ],
+      "correct_index": 1,
+      "explanation": "Self-fertilization (inbreeding) only rearranges alleles into genotypes without removing or adding alleles to the gene pool. In each selfing generation, AA × AA -> 100% AA and aa × aa -> 100% aa, while Aa × Aa produces 1/4 AA + 1/2 Aa + 1/4 aa, halving heterozygosity every generation while keeping p and q constant."
+    },
+    {
+      "question_id": "Q-4.3",
+      "question": "In a human pedigree, an affected mother transmits a rare genetic disorder to 100% of her sons and 100% of her daughters, whereas an affected father transmits the disorder to 0% of his sons and 0% of his daughters. What is the most likely mode of inheritance?",
+      "options": [
+        "X-Linked Dominant",
+        "Autosomal Dominant with male-limited expression",
+        "Mitochondrial (Maternal cytoplasmic) inheritance",
+        "Y-Linked holandric inheritance"
+      ],
+      "correct_index": 2,
+      "explanation": "Because the oocyte contributes virtually 100% of the zygote's cytoplasm and mitochondria (while paternal sperm mitochondria are eliminated via ubiquitin-mediated mitophagy after fertilization), mitochondrial DNA (mtDNA) mutations are transmitted exclusively from affected mothers to all offspring, and never from affected fathers."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "The Linear Arrangement of Six Sex-Linked Factors in Drosophila, as Shown by Their Mode of Association (Sturtevant, 1913) & Sub1A is an Ethylene-Response-Factor-Like Gene that Confers Submergence Tolerance to Rice (Xu et al., Nature 2006)",
+    "imrad_breakdown": {
+      "abstract_summary": "Sturtevant (1913), working as an undergraduate in T.H. Morgan's Fly Room, used recombination frequencies from three-point crosses to construct the world's first genetic linkage map. Xu et al. (2006) fine-mapped the Sub1 locus in rice using 4,022 F2 segregants and positional cloning to identify Sub1A-1, enabling precision Marker-Assisted Backcrossing into mega-varieties.",
+      "key_method": "Three-point testcross recombination scoring in Drosophila melanogaster; high-resolution SSR/CAPS/SNP recombinant breakpoint mapping and transgenic complementation in Oryza sativa.",
+      "critical_takeaway": "Recombination frequency is an additive metric over short chromosomal intervals (1 cM = 1% recombination), providing the mathematical foundation for positional cloning, QTL mapping, and modern genomic breeding."
+    },
+    "further_reading": [
+      "Griffiths, A. J. F., et al. Introduction to Genetic Analysis — Chapters 2, 3, 4, 6, 18 & 19 (Mendelian Analysis, Linkage Mapping, Epistasis, Population & Quantitative Genetics).",
+      "Stansfield, W. D. Schaum's Outline of Theory and Problems of Genetics — Worked Problems in Pedigrees, Three-Point Mapping, Chi-Square, and Hardy-Weinberg Equilibrium.",
+      "Collard, B. C. Y., & Mackill, D. J. (2008). Marker-Assisted Selection: An Approach for Precision Plant Breeding in the Twenty-First Century. Philosophical Transactions of the Royal Society B, 363, 557–572."
+    ]
+  }
+}

@@ -1,0 +1,925 @@
+{
+  "textbook_id": "TextBook6",
+  "branch_number": 6,
+  "branch_title": "Microbiology: Bacterial Ultrastructure & Growth Kinetics, Virology, Mycology & Microbiome Ecology",
+  "subtitle": "Peptidoglycan Cell Envelope Mechanics, Monod Chemostat & Batch Kinetics, Baltimore Viral Replication, Fungal Biology & Host-Microbiome Mutualism",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Microbiology",
+    "upstream_nodes": [
+      "TextBook1",
+      "TextBook2",
+      "TextBook3",
+      "TextBook5"
+    ],
+    "downstream_nodes": [
+      "TextBook7",
+      "TextBook8",
+      "TextBook9",
+      "TextBook12"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Peptidoglycan Glycan Cross-Link",
+        "scale_m": 2e-9,
+        "display_scale": "2.0 nm",
+        "example": "β-(1,4)-linked NAG-NAM disaccharide pentapeptide mesh"
+      },
+      {
+        "level": "Icosahedral Small RNA Virion",
+        "scale_m": 3e-8,
+        "display_scale": "28–30 nm",
+        "example": "Poliovirus / Rhinovirus T=3 capsid"
+      },
+      {
+        "level": "Enveloped Virion & Bacteriophage",
+        "scale_m": 1.2e-7,
+        "display_scale": "100–200 nm",
+        "example": "SARS-CoV-2 (120 nm), HIV-1 (120 nm), T4 Phage (200 nm)"
+      },
+      {
+        "level": "Prokaryotic Bacterial Cell",
+        "scale_m": 2e-6,
+        "display_scale": "0.5–5.0 μm",
+        "example": "Escherichia coli rod (1 × 2 μm), Staphylococcus aureus coccus (1 μm)"
+      },
+      {
+        "level": "Eukaryotic Yeast & Hyphal Cell",
+        "scale_m": 8e-6,
+        "display_scale": "5–15 μm",
+        "example": "Saccharomyces cerevisiae budding yeast, Candida albicans pseudohyphae"
+      },
+      {
+        "level": "Polymicrobial Biofilm & Rhizosphere",
+        "scale_m": 0.001,
+        "display_scale": "0.1–10 mm",
+        "example": "Quorum-sensing EPS matrix community, root nodule symbiosome"
+      }
+    ],
+    "explorer_pathways": [
+      "Microbiologist",
+      "Future Molecular Biologist",
+      "Biotechnologist",
+      "Plant Scientist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "6.1",
+      "title": "Bacteria: Cell Envelope Architecture, Taxonomy & Quantitative Growth Kinetics",
+      "overview": "Bacteria are metabolically versatile prokaryotes whose survival across diverse osmotic and chemical niches depends on a cross-linked peptidoglycan cell wall, specialized surface appendages, and tightly regulated exponential growth dynamics.",
+      "core_concepts": [
+        {
+          "concept_id": "6.1.1",
+          "heading": "Gram-Positive vs. Gram-Negative Cell Envelope & Peptidoglycan Biosynthesis",
+          "theory": "Developed by Hans Christian Gram (1884), the Gram stain differentiates bacteria based on the physical thickness and outer-membrane permeability of their cell envelope. Both groups rely on Peptidoglycan (murein)—a rigid macromolecular sacculus composed of alternating N-acetylglucosamine (NAG) and N-acetylmuramic acid (NAM) linked by β-(1,4) glycosidic bonds (cleaved by lysozyme) and cross-linked via short stem peptides.",
+          "key_principles": [
+            "Gram-Positive Envelope: Features a thick (20–80 nm) multi-layered peptidoglycan mesh threaded with negatively charged Teichoic Acids (covalently linked to NAM) and Lipoteichoic Acids (anchored to the plasma membrane), which bind divalent cations (Mg2+, Ca2+) and retain the Crystal Violet–Iodine complex during ethanol decolorization (staining purple). Cross-linking often uses a pentaglycine interbridge.",
+            "Gram-Negative Envelope: Features a thin (2–7 nm) single-layer peptidoglycan sheet housed within the Periplasmic Space, surrounded by an asymmetric Outer Membrane (OM). The inner leaflet of the OM consists of phospholipids, while the outer leaflet consists of Lipopolysaccharide (LPS = Lipid A endotoxin + Core polysaccharide + O-antigen). Trimeric Porin channels (OmpF/OmpC) allow passive diffusion of hydrophilic solutes <600 Da.",
+            "Peptidoglycan Transpeptidation & Antibiotic Targets: Cytoplasmic UDP-NAM-pentapeptide (terminating in D-Ala-D-Ala) is transferred to the Bactoprenol (C55 undecaprenyl pyrophosphate) lipid carrier to form Lipid II, flipped across the membrane, and polymerized by Penicillin-Binding Proteins (PBPs). β-Lactam antibiotics (penicillins, cephalosporins, carbapenems) are structural analogs of D-Ala-D-Ala that acylate the catalytic serine of PBPs, while Vancomycin binds the D-Ala-D-Ala substrate directly to sterically block transpeptidation."
+          ]
+        },
+        {
+          "concept_id": "6.1.2",
+          "heading": "Bacterial Growth Phases, Monod Substrate Kinetics & Thermal Death Rules",
+          "theory": "Bacteria divide asexualy by binary fission (mediated by the GTP-dependent FtsZ cytokinetic Z-ring). In a closed batch culture, growth progresses through four canonical phases, whereas an open continuous culture (chemostat) maintains indefinite exponential growth at a fixed dilution rate.",
+          "key_principles": [
+            "Four Phases of Batch Culture: (1) Lag Phase: Metabolic adaptation, transcription of inducible enzymes (e.g., lac operon), and ATP/ribosome synthesis without net cell division; (2) Exponential (Log) Phase: Balanced growth at constant maximum specific growth rate (μ or k) and minimum generation time (g), where cells are most susceptible to β-lactam antibiotics; (3) Stationary Phase: Nutrient depletion and toxic waste accumulation cause growth rate to equal death rate (cryptic growth), triggering σ^S (RpoS) stress responses, secondary metabolite (antibiotic) synthesis, and endospore formation in Bacillus/Clostridium; (4) Death Phase: Exponential loss of viability.",
+            "Monod Growth Kinetics & Chemostat Steady State: Analogous to Michaelis-Menten enzyme kinetics, specific growth rate (μ) is a hyperbolic function of limiting substrate concentration [S]: μ = μ_max [S] / (K_s + [S]). In a chemostat, setting the dilution rate D = F/V (flow rate / culture volume) forces the steady-state growth rate μ to equal D (as long as D < D_crit).",
+            "Decimal Reduction Time (D-value) & Z-value in Sterilization: Thermal or chemical sterilization follows first-order logarithmic death kinetics. The D-value is the time (in minutes at a fixed temperature) required to reduce the viable microbial population by 90% (1-log10 reduction). The Z-value is the temperature increase (°C) required to reduce the D-value by 10-fold (1 log)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Structural & Biochemical Comparison of Gram-Positive vs. Gram-Negative Bacteria",
+        "headers": [
+          "Envelope Feature",
+          "Gram-Positive (e.g., S. aureus, B. subtilis)",
+          "Gram-Negative (e.g., E. coli, P. aeruginosa)"
+        ],
+        "rows": [
+          [
+            "Gram Stain Reaction",
+            "Retains Crystal Violet–Iodine (Purple/Blue)",
+            "Decolorized by ethanol; counterstained by Safranin (Pink/Red)"
+          ],
+          [
+            "Peptidoglycan Thickness",
+            "Thick (20–80 nm; 50–90% of envelope dry weight)",
+            "Thin (2–7 nm; <10% of envelope dry weight)"
+          ],
+          [
+            "Peptide Cross-Linking",
+            "Often via pentaglycine interbridge (D-Ala -> L-Lys)",
+            "Direct peptide bond (D-Ala -> meso-Diaminopimelic acid [DAP])"
+          ],
+          [
+            "Teichoic & Lipoteichoic Acids",
+            "Present (Major surface antigens & Mg2+ chelators)",
+            "Absent"
+          ],
+          [
+            "Outer Membrane & LPS (Endotoxin)",
+            "Absent",
+            "Present (Lipid A triggers TLR4-mediated septic shock)"
+          ],
+          [
+            "Periplasmic Space & Porins",
+            "Narrow granular layer; no outer membrane porins",
+            "Distinct periplasm (20–40% cell volume); OmpF/C porins"
+          ],
+          [
+            "Lysozyme & Penicillin Sensitivity",
+            "Highly sensitive (exposed peptidoglycan)",
+            "Low intrinsic sensitivity (Outer membrane blocks access)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "6.2",
+      "title": "Virology: Capsid Geometry, Baltimore Classification & Replication Kinetics",
+      "overview": "Viruses are obligate intracellular parasites consisting of a DNA or RNA genome packaged inside a protein capsid (and optional lipid envelope) that hijack host translational and bioenergetic machinery to replicate via a one-step lytic or latent/lysogenic cycle.",
+      "core_concepts": [
+        {
+          "concept_id": "6.2.1",
+          "heading": "Virion Structural Symmetry & The Seven-Class Baltimore System",
+          "theory": "Because viral genomes have limited coding capacity, capsids are constructed from repeating protein protomers arranged in either Helical Symmetry (rod/filamentous, e.g., Tobacco Mosaic Virus, Rabies, Ebola—where length is dictated by genome size) or Icosahedral Symmetry (20 equilateral triangular faces, 12 vertices with 5-fold rotational symmetry, and 30 edges, governed by Caspar-Klug Triangulation Number T = h² + hk + k²).",
+          "key_principles": [
+            "David Baltimore's mRNA-Centric Classification (Classes I–VII): All viruses must synthesize positive-sense (+ssRNA) mRNA readable by host ribosomes. (I) dsDNA (Herpes, Adenovirus, T4 phage); (II) +ssDNA (Parvovirus, ΦX174 -> dsDNA intermediate); (III) dsRNA (Reovirus, Rotavirus -> virion-packaged RdRp); (IV) +ssRNA (Poliovirus, SARS-CoV-2, Dengue -> genome acts directly as mRNA); (V) -ssRNA (Influenza, Rabies, Measles, Ebola -> must carry virion RNA-dependent RNA polymerase [RdRp] to transcribe +mRNA first); (VI) +ssRNA Retrovirus (HIV-1 -> Reverse Transcriptase converts RNA to dsDNA provirus integrated by Integrase); (VII) Pararetrovirus / gapped dsDNA (Hepatitis B Virus -> replicates via an RNA pregenome intermediate using viral RT).",
+            "Infectious Naked Viral Genomes: Isolated, deproteinized genomic nucleic acid from Class IV (+ssRNA) viruses (e.g., Poliovirus) and most Class I nuclear dsDNA viruses is infectious when transfected into host cells because host ribosomes or host RNA Pol II can read them directly. Isolated Class V (-ssRNA) or Class III (dsRNA) naked RNA is NOT infectious without co-packaged viral RdRp."
+          ]
+        },
+        {
+          "concept_id": "6.2.2",
+          "heading": "One-Step Viral Growth Curve, Burst Size & Temperate Phage Lysogeny",
+          "theory": "Unlike bacteria (which double continuously by binary fission), viruses replicate by an assembly-line mechanism demonstrated in Ellis and Delbrück's (1939) One-Step Growth Experiment.",
+          "key_principles": [
+            "Eclipse Period vs. Latent Period: Following viral adsorption and penetration, the Eclipse Period is the phase during which the capsid is uncoated and zero infectious virions can be detected even if the host cell is artificially lysed (chloroform treatment). Once new capsids and genomes self-assemble intracellularly (Maturation), the Eclipse Period ends. The Latent Period is the total time from infection until spontaneous host cell lysis releases extracellular virions into the medium.",
+            "Burst Size & Multiplicity of Infection (MOI): Burst Size is the average number of infectious virions (PFU) released per infected host cell (Total PFU at plateau / Number of infected cells). At a given MOI (ratio of virions to host cells), the fraction of cells receiving exactly k virions follows the Poisson distribution: P(k) = (m^k · e^-m) / k!.",
+            "Bacteriophage λ Lytic vs. Lysogenic Switch: Controlled by a bistable genetic toggle between the CI Repressor (maintains lysogeny as an integrated prophage by binding OR1/OR2) and Cro (drives lytic replication). Host DNA damage activates RecA coprotease, which stimulates CI autocleavage, flipping the switch to lytic induction."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Baltimore Classification of Viruses: Genome Polarity, Polymerase Requirement & Canonical Examples",
+        "headers": [
+          "Baltimore Class",
+          "Genome Type",
+          "Virion-Packaged Polymerase Required?",
+          "Pathway to +mRNA",
+          "Representative Human / Plant Viruses"
+        ],
+        "rows": [
+          [
+            "Class I",
+            "dsDNA",
+            "No (except cytoplasm-replicating Poxviruses)",
+            "dsDNA -> +mRNA (Host RNA Pol II)",
+            "Herpesvirus (HSV), Adenovirus, HPV, Phage T4/λ"
+          ],
+          [
+            "Class II",
+            "ssDNA (+ or -)",
+            "No (Host DNA Pol repairs to dsDNA)",
+            "ssDNA -> dsDNA -> +mRNA",
+            "Parvovirus B19, Geminiviruses (Plant), Phage M13"
+          ],
+          [
+            "Class III",
+            "dsRNA (Segmented)",
+            "Yes (Virion RdRp mandatory)",
+            "dsRNA -> +mRNA (Conservative inside capsid)",
+            "Rotavirus, Reovirus, Bluetongue virus"
+          ],
+          [
+            "Class IV",
+            "+ssRNA",
+            "No (Genome translated directly by host 80S)",
+            "+ssRNA (= mRNA) -> -ssRNA -> +ssRNA",
+            "Poliovirus, SARS-CoV-2, Dengue, TMV (Plant)"
+          ],
+          [
+            "Class V",
+            "-ssRNA",
+            "Yes (Virion RdRp mandatory)",
+            "-ssRNA -> +mRNA -> -ssRNA genome",
+            "Influenza A/B (segmented), Rabies, Measles, Ebola"
+          ],
+          [
+            "Class VI",
+            "+ssRNA-RT (Retrovirus)",
+            "Yes (Reverse Transcriptase + Integrase)",
+            "+ssRNA -> RNA:DNA -> dsDNA provirus -> +mRNA",
+            "HIV-1, HTLV-1, Rous Sarcoma Virus"
+          ],
+          [
+            "Class VII",
+            "Gapped dsDNA-RT",
+            "Yes (Viral RT / DNA Polymerase)",
+            "rcDNA -> cccDNA -> pgRNA -> dsDNA",
+            "Hepatitis B Virus (HBV), Cauliflower Mosaic Virus"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "6.3",
+      "title": "Mycology: Fungal Cell Architecture, Dimorphism & Medical/Agricultural Importance",
+      "overview": "Fungi are absorptive heterotrophic eukaryotes characterized by chitinous cell walls, ergosterol-containing plasma membranes, and both unicellular (yeast) and multicellular filamentous (hyphal/mycelial) growth forms.",
+      "core_concepts": [
+        {
+          "concept_id": "6.3.1",
+          "heading": "Fungal Ultrastructure, Dimorphic Switching & Selective Antifungal Targets",
+          "theory": "Because fungi are eukaryotes (sharing 80S ribosomes, histone-packaged nuclear chromosomes, and mitochondria with human and plant hosts), selective chemotherapy targets biochemical pathways unique to the fungal cell envelope.",
+          "key_principles": [
+            "Chitin & β-Glucan Cell Wall vs. Ergosterol Membrane: Fungal cell walls lack peptidoglycan and cellulose; instead, they consist of an inner load-bearing mesh of β-(1,4)-linked N-acetylglucosamine polymers (Chitin), a middle layer of branched β-(1,3)- and β-(1,6)-D-glucans, and an outer layer of mannoproteins. Fungal plasma membranes utilize Ergosterol rather than mammalian cholesterol.",
+            "Mechanisms of Antifungal Classes: (1) Polyenes (Amphotericin B, Nystatin) bind directly to membrane ergosterol to form transmembrane ion-leaking pores; (2) Azoles (Fluconazole, Voriconazole, agricultural Tebuconazole) inhibit Lanosterol 14α-demethylase (CYP51), blocking ergosterol synthesis; (3) Allylamines (Terbinafine) inhibit Squalene epoxidase; (4) Echinocandins (Caspofungin, Micafungin) non-competitively inhibit β-(1,3)-D-glucan synthase (FKS1), causing osmotic lysis.",
+            "Thermal Dimorphism ('Mold in the Cold, Yeast in the Heat'): Systemic fungal pathogens (e.g., Histoplasma capsulatum, Blastomyces dermatitidis, Sporothrix schenckii) grow as saprophytic filamentous septate hyphae (mold) in soil at 25°C, but switch to parasitic budding yeasts at 37°C inside mammalian host tissues (Candida albicans forms invasive germ tubes and true hyphae at 37°C in serum)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Comparative Cellular & Biochemical Features of Bacteria, Fungi, and Mammalian Host Cells",
+        "headers": [
+          "Cellular Feature",
+          "Bacteria (Prokaryote)",
+          "Fungi (Yeast & Molds - Eukaryote)",
+          "Mammalian Host Cell (Eukaryote)"
+        ],
+        "rows": [
+          [
+            "Cell Wall Structural Polymer",
+            "Peptidoglycan (NAG-NAM + D-amino acids)",
+            "Chitin + β-(1,3)/β-(1,6)-D-Glucans + Mannans",
+            "Absent (Extracellular matrix only)"
+          ],
+          [
+            "Primary Membrane Sterol",
+            "Absent (Hopanoids in some; Sterols in Mycoplasma)",
+            "Ergosterol",
+            "Cholesterol"
+          ],
+          [
+            "Cytosolic Ribosome",
+            "70S (30S + 50S)",
+            "80S (40S + 60S)",
+            "80S (40S + 60S)"
+          ],
+          [
+            "Mode of Nutrition",
+            "Autotrophic, Phototrophic, or Heterotrophic",
+            "Absorptive Chemoheterotroph (Exoenzymes)",
+            "Ingestive / Absorptive Heterotroph"
+          ],
+          [
+            "Selective Antimicrobial Target",
+            "PBPs (β-lactams), 70S ribosome, DNA Gyrase",
+            "CYP51 (Azoles), Ergosterol (Polyenes), β-Glucan Synthase",
+            "Host Reference"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "6.4",
+      "title": "Microbiomes: Human Holobiont, Soil Biogeochemistry & Plant Symbioses",
+      "overview": "Microorganisms rarely exist as isolated monocultures in nature; they assemble into high-density, metabolically interdependent microbiomes that govern human mucosal immunity, global carbon/nitrogen biogeochemical cycles, and plant rhizosphere nutrition.",
+      "core_concepts": [
+        {
+          "concept_id": "6.4.1",
+          "heading": "The Human Microbiome, Short-Chain Fatty Acids & Colonization Resistance",
+          "theory": "The human body harbors ~3.8 × 10^13 microbial cells (roughly a 1:1 ratio with human somatic cells, predominantly in the colon), encoding >100-fold more unique genes than the human genome.",
+          "key_principles": [
+            "Dominant Gut Phyla & Fermentation Energetics: Dominated by strict anaerobes of the phyla Bacteroidota (Bacteroidetes) and Bacillota (Firmicutes), alongside Actinomycetota (Bifidobacterium) and Verrucomicrobiota (Akkermansia). Gut anaerobes ferment indigestible dietary plant polysaccharides into Short-Chain Fatty Acids (SCFAs: Acetate, Propionate, and Butyrate). Butyrate serves as the primary β-oxidation fuel for colonic epithelial cells (colonocytes) and inhibits histone deacetylases (HDACs) to induce Foxp3+ regulatory T cells (Tregs).",
+            "Colonization Resistance & Dysbiosis: Commensal microbiota exclude pathogens via bacteriocin secretion, nutrient competition, and secondary bile acid conversion (7α-dehydroxylation). Broad-spectrum antibiotics (e.g., clindamycin) collapse alpha-diversity, allowing endospore-forming Clostridioides difficile to germinate and secrete Toxins A and B (glucosyltransferases that inactivate host Rho GTPases)."
+          ]
+        },
+        {
+          "concept_id": "6.4.2",
+          "heading": "Plant-Microbe Symbioses: Rhizobium Nitrogen Fixation & Mycorrhizal Networks",
+          "theory": "Plants recruit a specialized Rhizosphere Microbiome through root exudates (flavonoids, strigolactones, organic acids) to acquire growth-limiting mineral nutrients (N and P).",
+          "key_principles": [
+            "Biological Nitrogen Fixation & The Oxygen Paradox: Atmospheric N2 (N≡N triple bond energy = 945 kJ/mol) is reduced to bioavailable ammonia (NH3) exclusively by prokaryotic Nitrogenase (dinitrogenase reductase Fe-protein + dinitrogenase MoFe-protein): N2 + 8 H+ + 8 e- + 16 MgATP -> 2 NH3 + H2 + 16 MgADP + 16 Pi. Because the Fe-S clusters of nitrogenase are irreversibly inactivated by O2, legume root nodules synthesize Leghemoglobin—an oxygen-buffering hemoprotein that maintains free O2 below 10 nM while delivering high O2 flux to bacteroid respiratory chains for ATP synthesis.",
+            "Nod Factor Signaling Cascade: Legume roots secrete specific Flavonoids that activate bacterial NodD transcription factors in Rhizobium/Bradyrhizobium. The bacteria synthesize lipochitooligosaccharide Nod Factors, which trigger root hair curling, infection thread invagination, and cortical cell dedifferentiation into a root nodule.",
+            "Arbuscular Mycorrhizal Fungi (AMF - Glomeromycota): Stimulated by root Strigolactones, obligate biotrophic AMF penetrate root cortical cells to form finely branched Arbuscules (periarbuscular membrane interface), trading soil orthophosphate (Pi) and water for up to 20% of the plant's photosynthetically fixed carbon."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Functional Comparison of Major Microbiome & Symbiotic Niches",
+        "headers": [
+          "Microbiome Niche",
+          "Dominant Microbial Taxa",
+          "Key Signaling / Metabolic Exchange",
+          "Physiological Impact on Host"
+        ],
+        "rows": [
+          [
+            "Human Colonic Lumen",
+            "Bacteroides, Faecalibacterium, Roseburia",
+            "Dietary fiber -> Butyrate, Propionate, Acetate (SCFAs); Vitamin K2/B12",
+            "Colonocyte ATP supply, tight-junction integrity, Treg induction"
+          ],
+          [
+            "Legume Root Nodule",
+            "Rhizobium, Bradyrhizobium, Sinorhizobium",
+            "Plant Flavonoids <-> Bacterial Nod Factors; Malate <-> Fixed NH4+",
+            "Fixes 100–300 kg N/ha/yr via O2-protected Nitrogenase (16 ATP/N2)"
+          ],
+          [
+            "Plant Mycorrhizosphere",
+            "Rhizophagus / Glomus (AMF, Glomeromycota)",
+            "Plant Strigolactones -> Hyphal branching; Hexoses <-> Soil Phosphate (Pi)",
+            "Expands root phosphorus & water depletion zone by 10- to 100-fold"
+          ],
+          [
+            "Ruminant Foregut (Rumen)",
+            "Fibrobacter, Ruminococcus, Methanobrevibacter",
+            "β-(1,4) Cellulose -> Volatile Fatty Acids + CH4 (Methanogenesis)",
+            "Enables herbivore digestion of lignocellulosic plant cell walls"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-6.1",
+      "title": "Figure 6.1: Gram-Positive vs. Gram-Negative Cell Envelope Ultrastructure & Antibiotic Targets",
+      "sub_module_ref": "6.1",
+      "thumbnail_caption": "Cross-sectional molecular comparison of Gram-positive teichoic/peptidoglycan wall versus Gram-negative LPS outer membrane, periplasm, and porins. Tap to expand.",
+      "svg_template_id": "svg_gram_envelope_6_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>A. GRAM-POSITIVE CELL ENVELOPE</text><text x='435' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>B. GRAM-NEGATIVE CELL ENVELOPE</text><line x1='410' y1='20' x2='410' y2='330' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><rect x='45' y='85' width='330' height='115' rx='8' fill='#2b1d38' stroke='#b388ff' stroke-width='2.5'/><text x='210' y='132' fill='#b388ff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Thick Peptidoglycan Mesh (20–80 nm)</text><text x='210' y='152' fill='#d2b8ff' font-family='monospace' font-size='10' text-anchor='middle'>NAG-NAM β(1,4) + Pentaglycine Cross-Links</text><text x='210' y='172' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>Target: Penicillins (PBPs), Vancomycin, Lysozyme</text><line x1='95' y1='55' x2='95' y2='200' stroke='#00ff87' stroke-width='4'/><line x1='325' y1='55' x2='325' y2='200' stroke='#00ff87' stroke-width='4'/><text x='210' y='68' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Lipoteichoic &amp; Wall Teichoic Acids (-PO4-)</text><rect x='45' y='212' width='330' height='22' rx='4' fill='#0d2538' stroke='#00f2fe' stroke-dasharray='3,3'/><text x='210' y='227' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='middle'>Narrow Periplasmic Space</text><rect x='45' y='245' width='330' height='45' rx='6' fill='#102a43' stroke='#4facfe' stroke-width='2'/><text x='210' y='272' fill='#4facfe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Cytoplasmic Membrane (Phospholipid Bilayer)</text><path d='M 465 55 L 465 85 M 515 55 L 515 85 M 655 55 L 655 85 M 725 55 L 725 85' stroke='#ff6b8b' stroke-width='3'/><text x='610' y='65' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>LPS (O-Antigen + Core + Lipid A Endotoxin)</text><rect x='445' y='85' width='330' height='45' rx='6' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='610' y='112' fill='#ffb8c6' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Outer Membrane (Asymmetric LPS / Lipid)</text><rect x='565' y='80' width='45' height='55' rx='6' fill='#005c8a' stroke='#00f2fe' stroke-width='2'/><text x='587' y='112' fill='#fff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Porin</text><rect x='445' y='140' width='330' height='92' rx='6' fill='#091e1a' stroke='#00ff87' stroke-dasharray='4,4'/><rect x='455' y='172' width='310' height='22' rx='4' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='610' y='187' fill='#d2b8ff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Thin Peptidoglycan (2–7 nm) in Periplasm</text><rect x='445' y='245' width='330' height='45' rx='6' fill='#102a43' stroke='#4facfe' stroke-width='2'/><text x='610' y='272' fill='#4facfe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Inner Cytoplasmic Membrane</text><text x='410' y='322' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Gram Stain Physics: Ethanol shrinks thick G+ pores (traps CV-I); dissolves G- Outer Membrane (washes out CV-I)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-6-1a",
+          "x_pct": 25.6,
+          "y_pct": 40.0,
+          "label": "Thick Peptidoglycan & PBPs",
+          "scale_link": "50nm",
+          "detail": "Up to 40 sheets of NAG-NAM cross-linked by Penicillin-Binding Proteins (transpeptidases). β-lactams mimic the D-Ala-D-Ala stem terminus."
+        },
+        {
+          "pin_id": "pin-6-1b",
+          "x_pct": 74.4,
+          "y_pct": 24.0,
+          "label": "Outer Membrane LPS & Porins",
+          "scale_link": "8nm",
+          "detail": "Lipid A anchors LPS in the outer leaflet and triggers host macrophage TLR4 signaling. Trimeric β-barrel porins exclude large glycopeptides like Vancomycin (~1,450 Da)."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-6.2",
+      "title": "Figure 6.2: Bacterial Batch Growth Curve vs. One-Step Viral Lytic Growth Kinetics",
+      "sub_module_ref": "6.2",
+      "thumbnail_caption": "Side-by-side kinetic comparison of bacterial binary fission phases (Lag, Log, Stationary, Death) versus viral Eclipse, Maturation, and Burst phases. Tap to expand.",
+      "svg_template_id": "svg_bacterial_viral_growth_6_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. BACTERIAL BATCH GROWTH CURVE (LOG10 CFU/mL)</text><text x='435' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. ONE-STEP VIRAL GROWTH CURVE (PFU / CELL)</text><line x1='410' y1='20' x2='410' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><line x1='60' y1='265' x2='385' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='60' y1='65' x2='60' y2='265' stroke='#a0c4e2' stroke-width='2'/><path d='M 65 225 L 120 225 Q 135 225 145 205 L 220 90 Q 230 75 250 75 L 320 75 Q 335 75 345 95 L 380 195' fill='none' stroke='#00ff87' stroke-width='3.5'/><line x1='125' y1='65' x2='125' y2='265' stroke='#1e3a5f' stroke-dasharray='4,4'/><line x1='235' y1='65' x2='235' y2='265' stroke='#1e3a5f' stroke-dasharray='4,4'/><line x1='330' y1='65' x2='330' y2='265' stroke='#1e3a5f' stroke-dasharray='4,4'/><text x='92' y='250' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>1. Lag</text><text x='180' y='195' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>2. Log (2^n)</text><text x='282' y='110' fill='#ffca28' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>3. Stationary</text><text x='358' y='140' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>4. Death</text><text x='220' y='295' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Time (h) — Slope in Log Phase = k / 2.303</text><line x1='460' y1='265' x2='785' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='460' y1='65' x2='460' y2='265' stroke='#a0c4e2' stroke-width='2'/><path d='M 465 210 L 500 258 L 580 258 Q 600 180 635 90 L 775 82' fill='none' stroke='#ff6b8b' stroke-dasharray='6,4' stroke-width='3'/><text x='575' y='145' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='end'>Intracellular Virions (Chloroform Lysed)</text><path d='M 465 210 L 635 210 Q 665 210 685 95 L 775 82' fill='none' stroke='#00f2fe' stroke-width='3.5'/><text x='720' y='125' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Extracellular Virions</text><line x1='465' y1='238' x2='580' y2='238' stroke='#ffca28' stroke-width='2'/><text x='522' y='232' fill='#ffca28' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Eclipse Period</text><line x1='465' y1='190' x2='645' y2='190' stroke='#00ff87' stroke-width='2'/><text x='555' y='182' fill='#00ff87' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Latent Period (Until Cell Lysis)</text><text x='735' y='73' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Burst Size</text><text x='622' y='295' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Minutes Post-Infection (Ellis-Delbrück Assay)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-6-2a",
+          "x_pct": 22.0,
+          "y_pct": 55.0,
+          "label": "Exponential (Log) Phase Slope",
+          "scale_link": "2um",
+          "detail": "Cell number doubles every generation time g: log10(N_t) = log10(N_0) + 0.301(t/g). Maximum sensitivity to cell-wall-active β-lactams."
+        },
+        {
+          "pin_id": "pin-6-2b",
+          "x_pct": 63.6,
+          "y_pct": 68.0,
+          "label": "Viral Eclipse vs. Latent Period",
+          "scale_link": "100nm",
+          "detail": "During the Eclipse period, viral genomes are uncoated and replicating, so even artificial lysis yields 0 PFU. Intracellular virions appear at the end of Eclipse; extracellular virions appear at the end of the Latent period."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-6.3",
+      "title": "Figure 6.3: Legume-Rhizobium Symbiosome & Nitrogenase Oxygen-Buffering Bioenergetics",
+      "sub_module_ref": "6.4",
+      "thumbnail_caption": "Flavonoid/Nod-factor signaling, bacteroid symbiosome membrane exchange, Leghemoglobin O2 buffering, and the 16-ATP Nitrogenase reaction. Tap to expand.",
+      "svg_template_id": "svg_rhizobium_symbiosome_6_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>PLANT-MICROBE SYMBIOSIS: RHIZOBIUM ROOT NODULE SYMBIOSOME BIOENERGETICS</text><rect x='40' y='55' width='740' height='250' rx='14' fill='#091e1a' stroke='#00ff87' stroke-width='2'/><text x='60' y='80' fill='#00ff87' font-family='sans-serif' font-size='13' font-weight='bold'>Legume Root Nodule Infected Cell Cytosol — High [Leghemoglobin-O2] (Free O2 &lt; 10 nM)</text><ellipse cx='430' cy='185' rx='260' ry='98' fill='#102a43' stroke='#00f2fe' stroke-width='3'/><text x='430' y='112' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Peribacteroid (Symbiosome) Membrane + Differentiated Bacteroid</text><rect x='300' y='138' width='260' height='75' rx='10' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='430' y='162' fill='#b388ff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Nitrogenase Complex (Fe + MoFe)</text><text x='430' y='182' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>N2 + 8H+ + 8e- + 16 ATP → 2 NH3 + H2</text><text x='430' y='200' fill='#ff6b8b' font-family='monospace' font-size='10' text-anchor='middle'>Strictly O2-Labile Fe-S / FeMo Cofactor</text><path d='M 90 145 L 285 145' stroke='#ffca28' stroke-width='3'/><text x='160' y='135' fill='#ffca28' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>C4-Dicarboxylates (Malate)</text><text x='160' y='165' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>From Plant Photosynthesis</text><path d='M 285 225 L 90 225' stroke='#00ff87' stroke-width='3'/><text x='160' y='215' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Fixed Ammonia (NH3 / NH4+)</text><text x='160' y='245' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>Assimilated via GS-GOGAT → Gln</text><circle cx='660' cy='185' r='38' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='660' y='182' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>cbb3 Oxidase</text><text x='660' y='198' fill='#ffb8c6' font-family='monospace' font-size='9' text-anchor='middle'>K_m(O2) ~ 7 nM</text><text x='410' y='325' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Symbiotic Trade: Plant supplies Malate + O2-buffered niche; Bacteroid supplies bioavailable Nitrogen</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-6-3a",
+          "x_pct": 52.4,
+          "y_pct": 51.5,
+          "label": "Nitrogenase 16-ATP Stoichiometry",
+          "scale_link": "10nm",
+          "detail": "Transfer of each electron from the Fe-protein (NifH) to the MoFe-protein (NifDK) requires hydrolysis of 2 MgATP (8 e- × 2 ATP = 16 ATP per N2 reduced, with 2 e- obligatorily reducing 2 H+ to H2)."
+        },
+        {
+          "pin_id": "pin-6-3b",
+          "x_pct": 80.5,
+          "y_pct": 54.4,
+          "label": "Leghemoglobin & High-Affinity cbb3 Oxidase",
+          "scale_link": "5nm",
+          "detail": "Leghemoglobin binds O2 with ultra-high affinity (Kd ~ 0.04 μM), keeping free cytosolic O2 too low to damage nitrogenase while entregar O2 to the bacteroid's high-affinity cbb3 terminal oxidase."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_bacterial_growth_chemostat_6_1",
+      "title": "Bacterial Exponential Growth, Monod Kinetics & Thermal D-Value Simulator",
+      "sub_module_ref": "6.1",
+      "type": "microbial-kinetics-calculator",
+      "description": "Compute final bacterial cell density (CFU/mL), number of generations (n), generation time (g), and specific growth rate (k) in batch culture, alongside Monod substrate-limited growth rate (μ) and autoclave log-reduction time.",
+      "controls": [
+        {
+          "id": "n0_log10",
+          "label": "Initial Inoculum log10(N0 in CFU/mL)",
+          "min": 2.0,
+          "max": 7.0,
+          "step": 0.5,
+          "default": 4.0,
+          "unit": "log10 CFU/mL"
+        },
+        {
+          "id": "gen_time_min",
+          "label": "Generation / Doubling Time (g)",
+          "min": 15,
+          "max": 180,
+          "step": 5,
+          "default": 20,
+          "unit": "minutes"
+        },
+        {
+          "id": "incubation_hr",
+          "label": "Exponential Incubation Time (t)",
+          "min": 1.0,
+          "max": 12.0,
+          "step": 0.5,
+          "default": 4.0,
+          "unit": "hours"
+        },
+        {
+          "id": "d_value_min",
+          "label": "Thermal Decimal Reduction Time (D_121°C)",
+          "min": 0.2,
+          "max": 5.0,
+          "step": 0.1,
+          "default": 1.5,
+          "unit": "min / log"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "num_generations_n",
+          "label": "Number of Generations (n = t / g)",
+          "formula_js": "(incubation_hr * 60) / gen_time_min",
+          "unit": "generations"
+        },
+        {
+          "output_id": "final_log10_cfu",
+          "label": "Final Cell Density log10(N_t)",
+          "formula_js": "n0_log10 + (((incubation_hr * 60) / gen_time_min) * Math.log10(2))",
+          "unit": "log10 CFU/mL"
+        },
+        {
+          "output_id": "specific_growth_rate_hr",
+          "label": "Specific Growth Rate Constant (k = ln(2) / g)",
+          "formula_js": "0.69315 / (gen_time_min / 60)",
+          "unit": "h^-1"
+        },
+        {
+          "output_id": "twelve_log_kill_min",
+          "label": "12-D Sterilization Time (12 × D-value)",
+          "formula_js": "12 * d_value_min",
+          "unit": "minutes"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_viral_moi_poisson_6_2",
+      "title": "Viral Multiplicity of Infection (MOI) Poisson Distribution & Burst Size Simulator",
+      "sub_module_ref": "6.2",
+      "type": "virology-poisson-simulator",
+      "description": "Adjust the viral Plaque Forming Units (PFU) added and host cell count to calculate Multiplicity of Infection (MOI = m) and the exact Poisson probabilities of uninfected cells P(0), singly infected cells P(1), and multiply infected cells P(≥2).",
+      "controls": [
+        {
+          "id": "moi_m",
+          "label": "Multiplicity of Infection (MOI = Virions / Host Cell)",
+          "min": 0.1,
+          "max": 10.0,
+          "step": 0.1,
+          "default": 2.0,
+          "unit": "PFU/cell"
+        },
+        {
+          "id": "host_cells_millions",
+          "label": "Total Host Cells in Culture",
+          "min": 0.5,
+          "max": 10.0,
+          "step": 0.5,
+          "default": 1.0,
+          "unit": "×10^6 cells"
+        },
+        {
+          "id": "burst_size_pfu",
+          "label": "Viral Burst Size per Infected Cell",
+          "min": 10,
+          "max": 500,
+          "step": 10,
+          "default": 150,
+          "unit": "PFU/cell"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "prob_uninfected_pct",
+          "label": "Uninfected Cells P(0) = e^(-m)",
+          "formula_js": "Math.exp(-moi_m) * 100",
+          "unit": "%"
+        },
+        {
+          "output_id": "prob_single_pct",
+          "label": "Singly Infected Cells P(1) = m · e^(-m)",
+          "formula_js": "moi_m * Math.exp(-moi_m) * 100",
+          "unit": "%"
+        },
+        {
+          "output_id": "prob_multiple_pct",
+          "label": "Multiply Infected Cells P(k ≥ 2) = 1 - e^(-m)(1 + m)",
+          "formula_js": "(1 - (Math.exp(-moi_m) * (1 + moi_m))) * 100",
+          "unit": "%"
+        },
+        {
+          "output_id": "total_progeny_yield_millions",
+          "label": "Total One-Step Viral Yield (Infected Cells × Burst Size)",
+          "formula_js": "host_cells_millions * (1 - Math.exp(-moi_m)) * burst_size_pfu",
+          "unit": "×10^6 PFU"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-6.1",
+      "title": "Bacterial Binary Fission Exponential Growth & Generation Time",
+      "latex": "N_t = N_0 \\cdot 2^n = N_0 e^{kt}, \\qquad n = \\frac{t}{g} = \\frac{\\log_{10}(N_t) - \\log_{10}(N_0)}{0.3010}, \\qquad k = \\frac{\\ln 2}{g} = \\frac{0.6931}{g}",
+      "description": "Relates final population density (N_t) after time t to initial inoculum (N_0), number of generations (n), doubling/generation time (g), and specific growth rate constant (k).",
+      "variables": [
+        {
+          "symbol": "N_t, N_0",
+          "definition": "Viable cell concentration at time t and time 0",
+          "unit": "cells/mL or CFU/mL"
+        },
+        {
+          "symbol": "n",
+          "definition": "Number of cell division generations elapsed in time t",
+          "unit": "generations"
+        },
+        {
+          "symbol": "g",
+          "definition": "Generation (doubling) time required for population to double",
+          "unit": "min or h"
+        },
+        {
+          "symbol": "k\\text{ (or }\\mu\\text{)}",
+          "definition": "Instantaneous specific growth rate constant",
+          "unit": "h^-1 or min^-1"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-6.2",
+      "title": "Monod Substrate-Limited Growth & Continuous Culture Chemostat Steady State",
+      "latex": "\\mu = \\mu_{\\max} \\left(\\frac{[S]}{K_s + [S]}\\right), \\qquad \\text{At Chemostat Steady State: } \\mu = D = \\frac{F}{V} \\implies [\\tilde{S}] = \\frac{K_s D}{\\mu_{\\max} - D}",
+      "description": "Models specific growth rate (μ) as a function of limiting nutrient concentration [S], and shows how the dilution rate (D) of a chemostat controls steady-state substrate concentration [S̃].",
+      "variables": [
+        {
+          "symbol": "\\mu_{\\max}",
+          "definition": "Maximum specific growth rate at saturating nutrient concentration",
+          "unit": "h^-1"
+        },
+        {
+          "symbol": "K_s",
+          "definition": "Monod saturation (half-velocity) constant ([S] at which μ = 0.5 μ_max)",
+          "unit": "mg/L or mM"
+        },
+        {
+          "symbol": "D",
+          "definition": "Chemostat dilution rate (medium flow rate F divided by vessel volume V)",
+          "unit": "h^-1"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-6.3",
+      "title": "Poisson Distribution of Viral Infection (MOI) & One-Step Burst Size",
+      "latex": "P(k) = \\frac{m^k e^{-m}}{k!}, \\qquad P(0) = e^{-m}, \\qquad P(k \\ge 1) = 1 - e^{-m}, \\qquad \\text{Burst Size} = \\frac{\\text{Total Progeny PFU}}{N_{\\text{cells}}(1 - e^{-m})}",
+      "description": "Calculates the fraction of host cells infected by exactly k viral particles when a population is exposed to an average Multiplicity of Infection m = PFU / Host Cells.",
+      "variables": [
+        {
+          "symbol": "m\\text{ (MOI)}",
+          "definition": "Average ratio of infectious virions (PFU) to target host cells",
+          "unit": "PFU / cell"
+        },
+        {
+          "symbol": "P(0)",
+          "definition": "Fraction of host cells remaining completely uninfected",
+          "unit": "0 to 1"
+        },
+        {
+          "symbol": "P(k \\ge 1)",
+          "definition": "Total fraction of host cells infected by at least one virion",
+          "unit": "0 to 1"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-6.4",
+      "title": "Viable Plate Count (CFU/mL), Viral Titer (PFU/mL) & Thermal Sterilization D-Value",
+      "latex": "\\text{CFU/mL} = \\frac{\\text{Colonies}}{V_{\\text{plated (mL)}} \\times \\text{DF}_{\\text{total}}}, \\qquad t_{\\text{steril}} = D_T \\cdot \\log_{10}\\left(\\frac{N_0}{N_f}\\right), \\qquad \\log_{10}\\left(\\frac{D_{T_2}}{D_{T_1}}\\right) = -\\frac{T_2 - T_1}{Z}",
+      "description": "Computes original microbial concentration from serial dilution plates (30–300 countable range) and quantifies thermal sterilization time using the Decimal Reduction Time (D_T) and thermal resistance Z-value.",
+      "variables": [
+        {
+          "symbol": "\\text{DF}_{\\text{total}}",
+          "definition": "Total cumulative dilution factor (e.g., 10^-6)",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "D_T",
+          "definition": "Time at temperature T required to kill 90% (1-log10) of spores/cells",
+          "unit": "minutes"
+        },
+        {
+          "symbol": "Z",
+          "definition": "Temperature change (°C) required to change D_T by a factor of 10",
+          "unit": "°C"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-6.5",
+      "title": "Biological Nitrogen Fixation Stoichiometry & Caspar-Klug Icosahedral Capsid Geometry",
+      "latex": "\\text{N}_2 + 8\\text{H}^+ + 8e^- + 16\\text{MgATP} \\xrightarrow{\\text{Nitrogenase}} 2\\text{NH}_3 + \\text{H}_2 + 16\\text{MgADP} + 16\\text{P}_i, \\qquad T = h^2 + hk + k^2 \\quad (N_{\\text{subunits}} = 60T)",
+      "description": "Defines the obligatory 16-ATP bioenergetic cost of prokaryotic nitrogen fixation (including H2 evolution) and the Caspar-Klug triangulation number (T) governing icosahedral viral capsid subunit counts (60T protomers; 12 pentamers + 10(T-1) hexamers).",
+      "variables": [
+        {
+          "symbol": "T",
+          "definition": "Caspar-Klug triangulation number (for integers h, k ≥ 0: T = 1, 3, 4, 7, 9, 12, 13...)",
+          "unit": "integer"
+        },
+        {
+          "symbol": "N_{\\text{subunits}}",
+          "definition": "Total number of capsid protein subunits (60T) forming 12 pentons and 10(T-1) hexons",
+          "unit": "subunits"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-6.1",
+        "title": "Bacterial Exponential Growth Kinetics: Generation Time (g), Divisions (n) & Specific Growth Rate (k)",
+        "difficulty": "Foundational",
+        "statement": "A flask of Luria-Bertani (LB) broth is inoculated with an exponentially growing culture of Escherichia coli at an initial density of N_0 = 5.0 × 10^4 CFU/mL. After t = 4.0 hours (240 minutes) of aerobic incubation at 37°C without lag phase, viable plate counting reveals a density of N_t = 3.2768 × 10^9 CFU/mL. Calculate: (a) the total number of generations (n) that occurred during the 4-hour period, (b) the generation (doubling) time (g) in minutes, and (c) the specific growth rate constant (k) in h^-1.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Use the logarithmic form of the binary fission equation N_t = N_0 · 2^n to solve for the number of generations (n):",
+            "equation_latex": "\\frac{N_t}{N_0} = \\frac{3.2768 \\times 10^9}{5.0 \\times 10^4} = 65,536 = 2^n \\implies n = \\frac{\\log_{10}(65,536)}{\\log_{10}(2)} = \\frac{4.81648}{0.30103} = 16.0\\text{ generations}"
+          },
+          {
+            "step": 2,
+            "explanation": "Divide the total elapsed time (t = 240 min = 4.0 h) by the number of generations (n = 16.0) to obtain the generation time (g):",
+            "equation_latex": "g = \\frac{t}{n} = \\frac{240\\text{ min}}{16.0\\text{ generations}} = 15.0\\text{ min/generation} \\quad (0.250\\text{ h})"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the specific growth rate constant (k = ln(2) / g):",
+            "equation_latex": "k = \\frac{\\ln 2}{g} = \\frac{0.69315}{0.250\\text{ h}} = 2.773\\text{ h}^{-1} \\quad (0.0462\\text{ min}^{-1})"
+          }
+        ],
+        "final_answer": "(a) n = 16.0 generations; (b) Generation time g = 15.0 minutes; (c) Specific growth rate k = 2.77 h^-1."
+      },
+      {
+        "problem_id": "SP-6.2",
+        "title": "Continuous Culture Chemostat Bioengineering: Steady-State Substrate Concentration & Washout",
+        "difficulty": "Advanced",
+        "statement": "A bacterium is grown in a 2.0 L continuous-flow chemostat fed with a sterile medium containing a limiting carbon source (glucose) at an inflow concentration of S_R = 10.0 g/L. The organism exhibits Monod growth parameters of μ_max = 0.80 h^-1, half-saturation constant K_s = 0.15 g/L, and a growth yield coefficient of Y_(X/S) = 0.50 g dry cell mass per g glucose consumed. (a) If the medium pump flow rate is set to F = 1.20 L/h, calculate the dilution rate (D), the steady-state specific growth rate (μ), and the steady-state residual glucose concentration ([S̃]) in the vessel. (b) Calculate the steady-state bacterial biomass concentration ([X̃] in g/L). (c) What is the critical washout dilution rate (D_crit) above which the bacteria are flushed out of the reactor?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the dilution rate D = F / V. At steady state inside a chemostat (dX/dt = 0), the specific growth rate μ equals the dilution rate D:",
+            "equation_latex": "D = \\frac{F}{V} = \\frac{1.20\\text{ L/h}}{2.0\\text{ L}} = 0.60\\text{ h}^{-1} \\implies \\mu = D = 0.60\\text{ h}^{-1}"
+          },
+          {
+            "step": 2,
+            "explanation": "Substitute μ = D = 0.60 h^-1, μ_max = 0.80 h^-1, and K_s = 0.15 g/L into the rearranged Monod equation to find the steady-state residual glucose concentration [S̃]:",
+            "equation_latex": "[\\tilde{S}] = \\frac{K_s D}{\\mu_{\\max} - D} = \\frac{(0.15\\text{ g/L})(0.60\\text{ h}^{-1})}{0.80 - 0.60} = \\frac{0.090}{0.20} = 0.45\\text{ g/L}"
+          },
+          {
+            "step": 3,
+            "explanation": "Compute steady-state biomass [X̃] from the consumed substrate (S_R - [S̃]) multiplied by the yield coefficient Y_(X/S):",
+            "equation_latex": "[\\tilde{X}] = Y_{X/S}(S_R - [\\tilde{S}]) = 0.50 \\times (10.0 - 0.45\\text{ g/L}) = 0.50 \\times 9.55 = 4.775\\text{ g/L}"
+          },
+          {
+            "step": 4,
+            "explanation": "Evaluate the critical washout dilution rate D_crit (where [S̃] approaches S_R = 10.0 g/L):",
+            "equation_latex": "D_{\\text{crit}} = \\mu_{\\max}\\left(\\frac{S_R}{K_s + S_R}\\right) = 0.80\\left(\\frac{10.0}{0.15 + 10.0}\\right) = 0.80(0.9852) = 0.788\\text{ h}^{-1}"
+          }
+        ],
+        "final_answer": "(a) D = μ = 0.60 h^-1, residual glucose [S̃] = 0.45 g/L; (b) Steady-state biomass [X̃] = 4.78 g/L; (c) Washout occurs if D exceeds D_crit = 0.788 h^-1 (F > 1.58 L/h)."
+      },
+      {
+        "problem_id": "SP-6.3",
+        "title": "Virology: Poisson Distribution of Multiplicity of Infection (MOI) & One-Step Burst Size",
+        "difficulty": "Intermediate",
+        "statement": "A suspension of 2.0 × 10^7 susceptible bacterial host cells is mixed with 4.0 × 10^7 Plaque Forming Units (PFU) of virulent bacteriophage T4. Assume 100% adsorption efficiency. After 30 minutes (completion of the latent period and cell lysis), the total phage titer in the culture flask reaches 3.106 × 10^9 PFU. Using the Poisson distribution (e^-2 ≈ 0.1353): (a) Calculate the Multiplicity of Infection (MOI = m). (b) Calculate the exact percentage and number of host cells that are uninfected [P(0)], infected by exactly 1 phage [P(1)], and infected by 2 or more phages [P(k ≥ 2)]. (c) Calculate the average viral Burst Size (PFU released per infected cell).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Compute the Multiplicity of Infection (m) as the ratio of input PFU to host cells:",
+            "equation_latex": "m = \\text{MOI} = \\frac{4.0 \\times 10^7\\text{ PFU}}{2.0 \\times 10^7\\text{ cells}} = 2.0\\text{ PFU/cell}"
+          },
+          {
+            "step": 2,
+            "explanation": "Apply the Poisson formula P(k) = (m^k · e^-m) / k! for k = 0, k = 1, and k ≥ 2 (with m = 2.0 and e^-2 = 0.13534):",
+            "equation_latex": "P(0) = e^{-2} = 0.1353 \\ (13.53\\%), \\qquad P(1) = 2.0 \\cdot e^{-2} = 0.2707 \\ (27.07\\%), \\qquad P(k \\ge 2) = 1 - [P(0) + P(1)] = 1 - 0.4060 = 0.5940 \\ (59.40\\%)"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the total number of actively infected cells N_infected = N_total × [1 - P(0)]:",
+            "equation_latex": "N_{\\text{infected}} = (2.0 \\times 10^7\\text{ cells})(1 - 0.13534) = (2.0 \\times 10^7)(0.86466) = 1.7293 \\times 10^7\\text{ infected cells}"
+          },
+          {
+            "step": 4,
+            "explanation": "Divide the final progeny phage yield (3.106 × 10^9 PFU) by the number of infected cells (1.7293 × 10^7):",
+            "equation_latex": "\\text{Burst Size} = \\frac{3.106 \\times 10^9\\text{ PFU}}{1.7293 \\times 10^7\\text{ infected cells}} = 179.6 \\approx 180\\text{ PFU / infected cell}"
+          }
+        ],
+        "final_answer": "(a) MOI = 2.0; (b) P(0) = 13.53% (2.71 × 10^6 cells), P(1) = 27.07% (5.41 × 10^6 cells), P(k ≥ 2) = 59.40% (1.19 × 10^7 cells); (c) Burst Size = 180 PFU/infected cell."
+      },
+      {
+        "problem_id": "SP-6.4",
+        "title": "Thermal Sterilization Kinetics: Autoclave D-Value, Z-Value & 12-Log Spore Reduction",
+        "difficulty": "Intermediate",
+        "statement": "Endospores of Geobacillus stearothermophilus (the biological indicator used to validate steam autoclaves) exhibit a Decimal Reduction Time of D_121 = 1.50 minutes at 121°C and a thermal resistance Z-value of Z = 10.0°C. A 10 L fermenter vessel is contaminated with N_0 = 1.0 × 10^6 viable endospores. (a) How many minutes of steam exposure at 121°C are required to achieve a '12-D process' (reducing the survival probability to N_f = 10^-6 spores per vessel, or a 1-in-1,000,000 chance of a single surviving spore)? (b) If the autoclave malfunctions and only reaches 111°C, what is the new D_111 value and how long would the same 12-log reduction take?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the total log10 reduction required from N_0 = 10^6 down to N_f = 10^-6:",
+            "equation_latex": "\\text{Log Reduction} = \\log_{10}\\left(\\frac{N_0}{N_f}\\right) = \\log_{10}\\left(\\frac{10^6}{10^{-6}}\\right) = 12.0\\text{ logs (12-D)}"
+          },
+          {
+            "step": 2,
+            "explanation": "Multiply the 12-log reduction by D_121 = 1.50 min/log:",
+            "equation_latex": "t_{121^\\circ\\text{C}} = 12.0 \\times 1.50\\text{ min} = 18.0\\text{ minutes at } 121^\\circ\\text{C}"
+          },
+          {
+            "step": 3,
+            "explanation": "Use the Z-value relationship log10(D_T2 / D_T1) = -(T2 - T1) / Z for T1 = 121°C, T2 = 111°C, and Z = 10.0°C:",
+            "equation_latex": "\\log_{10}\\left(\\frac{D_{111}}{1.50}\\right) = -\\frac{111 - 121}{10.0} = +1.0 \\implies D_{111} = 1.50 \\times 10^{1.0} = 15.0\\text{ min/log}"
+          },
+          {
+            "step": 4,
+            "explanation": "Multiply D_111 = 15.0 min/log by 12 logs:",
+            "equation_latex": "t_{111^\\circ\\text{C}} = 12.0 \\times 15.0\\text{ min} = 180.0\\text{ minutes (3.0 hours)}"
+          }
+        ],
+        "final_answer": "(a) 18.0 minutes at 121°C; (b) Dropping the temperature by 10°C (= 1 Z-value) increases D_111 10-fold to 15.0 min, requiring 180.0 minutes (3 hours) for the same sterilization level."
+      },
+      {
+        "problem_id": "SP-6.5",
+        "title": "Bioenergetics of Symbiotic Nitrogen Fixation & Caspar-Klug Viral Capsid Geometry",
+        "difficulty": "Intermediate",
+        "statement": "Part A: In a soybean (Glycine max)–Bradyrhizobium japonicum root nodule symbiosis, how many moles of MgATP and how many moles of NADH/ferredoxin electrons (e-) are consumed by the bacterial Nitrogenase complex to fix 14.0 g of atmospheric nitrogen gas (N2, MW = 28.0 g/mol) into bioavailable ammonia (NH3)?\nPart B: An icosahedral plant virus capsid has Caspar-Klug lattice indices of h = 2 and k = 1. Calculate its Triangulation Number (T), total number of capsid protein subunits (protomers), and the number of pentameric vs. hexameric capsomeres.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Part A, convert 14.0 g of N2 into moles of N2:",
+            "equation_latex": "\\text{Moles of N}_2 = \\frac{14.0\\text{ g}}{28.0\\text{ g/mol}} = 0.500\\text{ mol N}_2\\text{ (yielding } 1.00\\text{ mol NH}_3\\text{)}"
+          },
+          {
+            "step": 2,
+            "explanation": "Apply the Nitrogenase stoichiometry (16 mol MgATP and 8 mol e- per 1 mol N2 reduced):",
+            "equation_latex": "\\text{MgATP Consumed} = 0.500\\text{ mol N}_2 \\times 16 = 8.00\\text{ mol MgATP}, \\qquad e^-\\text{ Consumed} = 0.500 \\times 8 = 4.00\\text{ mol } e^-"
+          },
+          {
+            "step": 3,
+            "explanation": "For Part B, substitute h = 2 and k = 1 into the Caspar-Klug equation T = h² + hk + k²:",
+            "equation_latex": "T = (2)^2 + (2)(1) + (1)^2 = 4 + 2 + 1 = 7 \\quad (T = 7\\text{ laevo/dextro lattice})"
+          },
+          {
+            "step": 4,
+            "explanation": "Compute total protein subunits (60T), pentamers (always 12 vertices), and hexamers [10(T - 1)]:",
+            "equation_latex": "N_{\\text{subunits}} = 60 \\times 7 = 420\\text{ protomers}, \\qquad \\text{Pentamers} = 12, \\qquad \\text{Hexamers} = 10(7 - 1) = 60\\text{ (Total capsomeres} = 72\\text{)}"
+          }
+        ],
+        "final_answer": "Part A: 8.00 moles of MgATP and 4.00 moles of electrons (generating 1.00 mol NH3 and 0.50 mol H2); Part B: T = 7, composed of 420 protein subunits arranged into 12 pentamers and 60 hexamers (72 total capsomeres)."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-6.1",
+        "question": "To determine the viable bacterial titer of a water sample, a microbiologist performs four sequential 1:100 dilutions (each transferring 0.1 mL into 9.9 mL of sterile saline) and spreads 0.1 mL (100 μL) from the 3rd dilution tube onto a nutrient agar plate. After incubation, 145 colonies are counted on the plate. What was the original bacterial concentration in CFU/mL?",
+        "bold_answer": "1.45 × 10^9 CFU/mL",
+        "collapsible_derivation": "Each 1:100 dilution is a 10^-2 dilution factor. After three sequential 1:100 dilutions, the cumulative dilution factor in the 3rd tube is (10^-2)^3 = 10^-6. Plating 0.1 mL (10^-1 mL) introduces an additional 10-fold factor: CFU/mL = 145 / (0.1 mL × 10^-6) = 145 / 10^-7 = 1.45 × 10^9 CFU/mL."
+      },
+      {
+        "problem_id": "PP-6.2",
+        "question": "What minimum Multiplicity of Infection (MOI = m) must a virologist use to ensure that at least 99.0% of the host cells in a culture dish are infected by at least one virus particle?",
+        "bold_answer": "MOI ≥ 4.61 PFU/cell",
+        "collapsible_derivation": "If 99.0% of cells are infected [P(k ≥ 1) = 0.99], then the fraction of uninfected cells is P(0) = e^(-m) = 1 - 0.99 = 0.01. Taking the natural logarithm of both sides gives -m = ln(0.01) = -4.605, so m = 4.61 PFU/cell."
+      },
+      {
+        "problem_id": "PP-6.3",
+        "question": "A patient with cryptococcal meningitis is treated with a combination of Amphotericin B and Flucytosine, followed by Fluconazole maintenance therapy. Why are both Amphotericin B and Fluconazole completely ineffective against bacterial infections (such as Streptococcus pneumoniae), except for Mycoplasma?",
+        "bold_answer": "Amphotericin B binds Ergosterol and Fluconazole inhibits Lanosterol 14α-demethylase (ergosterol biosynthesis); bacteria lack sterols in their plasma membranes",
+        "collapsible_derivation": "Fungal plasma membranes rely on ergosterol for structural integrity. Amphotericin B forms transmembrane pores by complexing with ergosterol, and Fluconazole blocks CYP51-mediated ergosterol synthesis. Because prokaryotic bacteria (with the exception of wall-less Mycoplasma that scavenge host cholesterol) lack membrane sterols entirely, both drugs have zero target in bacteria."
+      },
+      {
+        "problem_id": "PP-6.4",
+        "question": "If purified, protein-free genomic RNA is extracted from Poliovirus (Baltimore Class IV, +ssRNA) and from Rabies virus (Baltimore Class V, -ssRNA) and separately electroporated into permissive mammalian host cells, which transfection will produce infectious progeny virions and why?",
+        "bold_answer": "Only Poliovirus (+ssRNA) naked RNA is infectious; Rabies (-ssRNA) naked RNA is non-infectious",
+        "collapsible_derivation": "Poliovirus has a positive-sense (+ssRNA) genome that serves directly as mRNA; host 80S ribosomes immediately translate it into the viral polyprotein (including the viral RNA-dependent RNA polymerase). Rabies virus has a negative-sense (-ssRNA) genome that cannot be translated by host ribosomes, and mammalian host cells lack any RNA-dependent RNA polymerase to transcribe -ssRNA into +mRNA; thus, Class V viruses require their virion-packaged RdRp protein to initiate infection."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Clinical & Agricultural Microbiology Case Study: MRSA MecA/PBP2a β-Lactam Resistance, C. difficile Dysbiosis & Rhizobium Inoculant Failure",
+    "scenario": "Case A (Hospital Infectious Disease): A surgical patient treated with broad-spectrum cephalosporins develops a wound infection with Methicillin-Resistant Staphylococcus aureus (MRSA) followed by severe pseudomembranous colitis caused by Clostridioides difficile. Case B (Agronomic Symbiosis): Soybeans planted in nitrogen-poor, high-nitrate fertilized soil fail to form pink, nitrogen-fixing root nodules despite inoculation with viable Bradyrhizobium japonicum.",
+    "mechanistic_analysis": "In Case A, MRSA carries the mobile SCCmec cassette encoding mecA, which produces an alternative transpeptidase—Penicillin-Binding Protein 2a (PBP2a). PBP2a has a closed active-site cleft with ultra-low affinity for β-lactams, allowing peptidoglycan cross-linking to continue unhindered, while Vancomycin (which binds the D-Ala-D-Ala substrate peptide directly) remains effective. Simultaneously, cephalosporin therapy wipes out colonic Bacteroidota/Bacillota commensals, abolishing secondary bile acid conversion (deoxycholate/lithocholate normally inhibit C. difficile vegetative growth) while primary taurocholate triggers C. difficile endospore germination. In Case B, high soil nitrate (NO3-) activates plant autoregulation of nodulation (AON via CLE peptides and HAR1/SUNN receptor kinases), suppressing flavonoid exudation and blocking infection thread formation because symbiotic N2 fixation (16 ATP/N2) is bioenergetically more expensive than direct root nitrate assimilation.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook2",
+        "topic": "Endosymbiotic Origin of Mitochondria/Plastids (70S Ribosomes & Cardiolipin)"
+      },
+      {
+        "target_textbook": "TextBook3",
+        "topic": "Prokaryotic Operons, Phage λ CI/Cro Repressor Switch & Fluoroquinolones"
+      },
+      {
+        "target_textbook": "TextBook7",
+        "topic": "Plant Mineral Nutrition, Root Nodulation & Strigolactone Signaling"
+      },
+      {
+        "target_textbook": "TextBook9",
+        "topic": "Innate TLR4 Recognition of LPS Endotoxin & Mucosal IgA Immunity"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-6.1",
+      "question": "Why does treatment of a Gram-negative septicemia patient with high-dose bactericidal cell-wall-lysing antibiotics sometimes trigger an acute worsening of fever, hypotension, and septic shock?",
+      "options": [
+        "Gram-negative bacteria synthesize lipoteichoic acid superantigens when exposed to β-lactams",
+        "Massive lysis of the Gram-negative outer membrane releases Lipid A ( the hydrophobic anchor of Lipopolysaccharide, LPS), which binds host CD14/TLR4 receptors on macrophages to trigger a TNF-α / IL-1β / IL-6 cytokine storm",
+        "Antibiotic cleavage of porin channels depolarizes host vascular smooth muscle directly",
+        "Gram-negative peptidoglycan is converted into botulinum-like neurotoxins upon hydrolysis"
+      ],
+      "correct_index": 1,
+      "explanation": "Lipopolysaccharide (LPS) in the outer leaflet of the Gram-negative outer membrane contains Lipid A (endotoxin). Rapid bacteriolysis sheds large quantities of free LPS/Lipid A into the bloodstream, hyperactivating macrophage TLR4 signaling and inducing systemic vasodilation, disseminated intravascular coagulation (DIC), and septic shock."
+    },
+    {
+      "question_id": "Q-6.2",
+      "question": "During the Eclipse Period of a one-step bacteriophage lytic growth cycle, what is observed if the host cells are artificially lysed with chloroform and plated on a lawn of indicator bacteria?",
+      "options": [
+        "The plaque count equals the final Burst Size because virions assemble immediately upon entry",
+        "Zero (or near-zero) infectious plaques are detected because the parental virions have uncoated their genomes into naked nucleic acid and progeny capsids have not yet assembled",
+        "The plaque count equals exactly the input Multiplicity of Infection (MOI)",
+        "The phage immediately converts into a lysogenic prophage"
+      ],
+      "correct_index": 1,
+      "explanation": "Upon penetration and uncoating, the parental virion disassembles to release its genome for replication and transcription. Until new structural capsid proteins package progeny genomes at the end of the Eclipse Period (Maturation), no intact infectious virions exist inside or outside the cell."
+    },
+    {
+      "question_id": "Q-6.3",
+      "question": "What is the primary physiological role of Leghemoglobin in the root nodules of nitrogen-fixing legumes?",
+      "options": [
+        "It directly catalyzes the reduction of N2 to 2 NH3 in place of bacterial nitrogenase",
+        "It buffers free intracellular oxygen at nanomolar levels (<10 nM) to prevent O2 inactivation of the oxygen-labile Nitrogenase Fe-S clusters while facilitating high O2 flux to bacteroid respiratory chains for ATP synthesis",
+        "It transports fixed glutamine through the plant xylem to the leaves",
+        "It synthesizes lipochitooligosaccharide Nod factors on the root hair surface"
+      ],
+      "correct_index": 1,
+      "explanation": "Nitrogenase is rapidly and irreversibly destroyed by molecular O2, yet reducing N2 requires 16 MgATP per N2 generated by aerobic oxidative phosphorylation in the bacteroid. Leghemoglobin solves this 'Oxygen Paradox' by binding O2 tightly (keeping free [O2] < 10 nM) while delivering a high diffusive flux of O2 to high-affinity bacteroid cbb3 terminal oxidases."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "The Growth of Bacteriophage (Ellis & Delbrück, 1939) & Structure and Function of the Human Gut Microbiome (The Human Microbiome Project Consortium, Nature 2012)",
+    "imrad_breakdown": {
+      "abstract_summary": "Ellis and Delbrück (1939) devised the One-Step Growth Experiment by diluting phage-infected bacteria after adsorption to prevent secondary reinfection, proving that viruses do not divide by binary fission but assemble intracellularly during a latent period before bursting. The HMP Consortium (2012) sequenced 16S rRNA and whole-metagenome shotgun reads across 242 healthy adults, revealing that while taxonomic species composition varies dramatically between individuals, core metabolic pathways (such as SCFA fermentation and vitamin biosynthesis) remain remarkably conserved.",
+      "key_method": "Synchronized phage adsorption, 1:10,000 dilution to halt re-adsorption, and timed plaque assays; 16S rRNA V3–V5 amplicon sequencing coupled with Illumina shotgun metagenomic functional profiling.",
+      "critical_takeaway": "Microbial kinetics (whether viral step-burst assembly or microbiome functional redundancy) obeys strict quantitative laws that govern host health, biotechnology fermentation, and ecosystem nutrient cycling."
+    },
+    "further_reading": [
+      "Madigan, M. T., et al. Brock Biology of Microorganisms — Chapters 2, 5, 8, 10 & 23 (Microbial Cell Structure, Growth Kinetics, Virology, Symbioses & Microbiomes).",
+      "Flint, S. J., et al. Principles of Virology — Baltimore Classification, Viral Structure & One-Step Replication Kinetics.",
+      "Alcamo, I. E. Schaum's Outline of Theory and Problems of Microbiology — Worked Calculations in Binary Fission, Chemostats, D-Values, and Viral MOI."
+    ]
+  }
+}

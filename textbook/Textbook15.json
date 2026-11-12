@@ -1,0 +1,795 @@
+{
+  "textbook_id": "TextBook15",
+  "branch_number": 15,
+  "branch_title": "Integrated Metabolic Biochemistry & Bioenergetics Master Reference",
+  "subtitle": "Glycolysis, Gluconeogenesis, Pentose Phosphate Pathway, PDH/TCA Cycle, Fatty Acid β-Oxidation, Urea Cycle & Allosteric Hormonal Integration",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Integrated Metabolic Biochemistry",
+    "upstream_nodes": [
+      "TextBook1",
+      "TextBook2",
+      "TextBook7",
+      "TextBook8"
+    ],
+    "downstream_nodes": [
+      "TextBook11",
+      "TextBook14"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "High-Energy Thioester & Phosphoryl Bond",
+        "scale_m": 5e-10,
+        "display_scale": "0.5–1.0 nm",
+        "example": "Phosphoenolpyruvate (ΔG°' = -61.9 kJ/mol), Acetyl-CoA thioester (-31.4 kJ/mol)"
+      },
+      {
+        "level": "Allosteric Regulatory Enzyme Tetramer",
+        "scale_m": 9e-9,
+        "display_scale": "8–12 nm (~340 kDa)",
+        "example": "Phosphofructokinase-1 (PFK-1), Fructose-1,6-bisphosphatase-1 (FBPase-1)"
+      },
+      {
+        "level": "Pyruvate Dehydrogenase Multienzyme Complex (PDC)",
+        "scale_m": 4.5e-8,
+        "display_scale": "45–50 nm (~9.5 MDa)",
+        "example": "60-subunit E1-E2-E3 icosahedral lipoamide swinging-arm machine"
+      },
+      {
+        "level": "Mitochondrial Matrix & Cytosolic Compartments",
+        "scale_m": 1e-6,
+        "display_scale": "0.5–2.0 μm",
+        "example": "Carnitine palmitoyltransferase (CPT-I/II) & Malate-Aspartate shuttle across IMM"
+      },
+      {
+        "level": "Metabolically Specialized Parenchymal Cell",
+        "scale_m": 2.5e-5,
+        "display_scale": "20–40 μm",
+        "example": "Periportal vs. Perivenous Hepatocyte; Skeletal Myocyte; Adipocyte"
+      },
+      {
+        "level": "Inter-Organ Metabolic Cori & Cahill Cycles",
+        "scale_m": 1.5,
+        "display_scale": "0.5–1.8 m",
+        "example": "Liver–Muscle–Brain–Adipose Fed vs. Fasting fuel integration"
+      }
+    ],
+    "explorer_pathways": [
+      "Future Molecular Biologist",
+      "Biotechnologist",
+      "Plant Scientist",
+      "Microbiologist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "15.1",
+      "title": "Carbohydrate Metabolism: Glycolysis, Reciprocal Gluconeogenesis & The Pentose Phosphate Pathway",
+      "overview": "Cytosolic carbohydrate metabolism balances ATP generation (Glycolysis), endogenous glucose synthesis during fasting (Gluconeogenesis), and reducing power/pentose biosynthesis (Pentose Phosphate Pathway) without futile ATP-hydrolyzing cycles via reciprocal allosteric and covalent hormonal control.",
+      "core_concepts": [
+        {
+          "concept_id": "15.1.1",
+          "heading": "Embden-Meyerhof-Parnas Glycolysis: Payoff vs. Preparatory Phases & Substrate-Level Phosphorylation",
+          "theory": "Glycolysis oxidizes 1 molecule of Glucose (6C) into 2 molecules of Pyruvate (3C) across 10 cytosolic enzymatic steps: Steps 1–5 constitute the Preparatory Phase (investing 2 ATP at Hexokinase and PFK-1 to cleave hexose into two Glyceraldehyde-3-phosphate [G3P] molecules via Aldolase and Triosephosphate Isomerase), while Steps 6–10 constitute the Payoff Phase (generating 4 ATP and 2 NADH, for a net yield of 2 ATP and 2 NADH per glucose).",
+          "key_principles": [
+            "Three Irreversible Regulated Kinases (ΔG << 0 in vivo): (1) Hexokinase I–III (muscle/brain, low Km ~0.1 mM, allosterically inhibited by product Glucose-6-P) vs. Glucokinase / Hexokinase IV (liver/pancreatic β-cells, high Km ~10 mM, Hill cooperativity nH ≈ 1.7, sequestered in the nucleus by GKRP in the presence of Fructose-6-P); (2) Phosphofructokinase-1 (PFK-1, the committed rate-limiting step): phosphorylates Fructose-6-P to Fructose-1,6-bisphosphate; allosterically inhibited by high ATP and Citrate, and potently activated by AMP, ADP, and Fructose-2,6-bisphosphate (F-2,6-BP); (3) Pyruvate Kinase (PK): transfers a phosphoryl group from Phosphoenolpyruvate (PEP) to ADP; activated via feed-forward allostery by Fructose-1,6-BP and inhibited in liver (L-isozyme) by ATP, Alanine, and PKA phosphorylation.",
+            "Two Substrate-Level Phosphorylations: Unlike oxidative phosphorylation (which requires a membrane proton gradient Δp), Substrate-Level Phosphorylation transfers a phosphoryl group directly from a high-energy metabolic intermediate (ΔG°' < -30.5 kJ/mol) to ADP: Step 7 (Phosphoglycerate Kinase: 1,3-Bisphosphoglycerate [ΔG°' = -49.3 kJ/mol] + ADP -> 3-PG + ATP) and Step 10 (Pyruvate Kinase: PEP [ΔG°' = -61.9 kJ/mol] + ADP -> Pyruvate + ATP, driven by tautomerization of enol-pyruvate to keto-pyruvate).",
+            "Redox Balance & Anaerobic Fermentation (Lactic vs. Alcoholic): Because cytosolic NAD+ is present in trace catalytic amounts, GAPDH (Step 6) halts unless NADH is re-oxidized to NAD+. Under hypoxia or in erythrocytes (lacking mitochondria), Lactate Dehydrogenase (LDH) reduces Pyruvate + NADH + H+ -> L-Lactate + NAD+ (exported to the liver in the Cori Cycle). In yeast and flooded plant roots, Pyruvate Decarboxylase (TPP cofactor) cleaves pyruvate to Acetaldehyde + CO2, and Alcohol Dehydrogenase reduces Acetaldehyde + NADH -> Ethanol + NAD+."
+          ]
+        },
+        {
+          "concept_id": "15.1.2",
+          "heading": "Gluconeogenesis Bypass Reactions, The F-2,6-BP Switch & The Pentose Phosphate Pathway",
+          "theory": "Gluconeogenesis synthesizes glucose from non-carbohydrate precursors (lactate, glycerol, glucogenic amino acids like alanine, and propionate in ruminants/plants via the glyoxylate cycle) primarily in the liver (90%) and renal cortex (10%). It shares 7 reversible enzymes with glycolysis but uses 4 bypass enzymes to circumvent the 3 irreversible glycolytic kinases.",
+          "key_principles": [
+            "The Three Gluconeogenic Bypasses & Energetic Cost (4 ATP + 2 GTP + 2 NADH per Glucose): (1) Bypass 1 (Pyruvate -> PEP requires 2 high-energy bonds): Mitochondrial Pyruvate Carboxylase (a Biotin-dependent enzyme obligately allosterically activated by Acetyl-CoA!) carboxylates Pyruvate + HCO3- + ATP -> Oxaloacetate (OAA), which is reduced to malate, exported to the cytosol, re-oxidized to OAA, and decarboxylated/phosphorylated by PEP Carboxykinase (PEPCK): OAA + GTP -> PEP + GDP + CO2; (2) Bypass 2: Fructose-1,6-Bisphosphatase-1 (FBPase-1) hydrolyzes F-1,6-BP + H2O -> Fructose-6-P + Pi (inhibited by AMP and F-2,6-BP); (3) Bypass 3: ER-luminal Glucose-6-Phosphatase (present in liver/kidney, absent in muscle/brain!) hydrolyzes G6P -> free Glucose + Pi.",
+            "The Bifunctional PFK-2 / FBPase-2 Hormonal Switch: Fructose-2,6-bisphosphate (F-2,6-BP) is NOT a glycolytic intermediate; it is a potent allosteric regulator synthesized and degraded by a single tandem bifunctional enzyme (PFK-2/FBPase-2). In the Fed State (High Insulin / Low Glucagon), Protein Phosphatase-1 dephosphorylates the tandem enzyme, activating its PFK-2 kinase domain -> ↑[F-2,6-BP] -> activates PFK-1 (Glycolysis ON) and inhibits FBPase-1 (Gluconeogenesis OFF). In the Fasting State (High Glucagon -> cAMP -> PKA), PKA phosphorylates Ser32 on the tandem enzyme, activating its FBPase-2 phosphatase domain -> ↓[F-2,6-BP] -> inhibits PFK-1 and relieves inhibition of FBPase-1 (Gluconeogenesis ON).",
+            "The Pentose Phosphate Pathway (PPP / Hexose Monophosphate Shunt): Operates in the cytosol across two phases: (1) Irreversible Oxidative Phase (rate-limiting enzyme: Glucose-6-Phosphate Dehydrogenase [G6PD], allosterically regulated by the NADP+/NADPH ratio): oxidizes G6P -> 6-Phosphoglucono-δ-lactone -> Ribulose-5-Phosphate + CO2 + 2 NADPH (supplying reducing equivalents for fatty acid/cholesterol biosynthesis and Glutathione Reductase [GSH] protection against reactive oxygen species in erythrocytes); and (2) Reversible Non-Oxidative Phase (Transketolase [TPP cofactor] and Transaldolase): interconverts Ribose-5-Phosphate (for nucleotide/DNA/RNA synthesis) with glycolytic intermediates (Fructose-6-P and G3P)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Reciprocal Allosteric & Hormonal Regulation of Glycolysis vs. Gluconeogenesis",
+        "headers": [
+          "Regulatory Step",
+          "Glycolytic Enzyme",
+          "Glycolytic Activators (+) / Inhibitors (-)",
+          "Gluconeogenic Bypass Enzyme",
+          "Gluconeogenic Activators (+) / Inhibitors (-)"
+        ],
+        "rows": [
+          [
+            "Step 1 / Bypass 3",
+            "Hexokinase I–III / Glucokinase (IV)",
+            "(+) Glucose (GK); (-) Glucose-6-P (HK I-III), F6P/GKRP",
+            "Glucose-6-Phosphatase (ER lumen)",
+            "(+) High [G6P], Fasting transcription"
+          ],
+          [
+            "Step 3 / Bypass 2 (Rate-Limiting)",
+            "Phosphofructokinase-1 (PFK-1)",
+            "(+) Fructose-2,6-BP, AMP, ADP; (-) ATP, Citrate, H+",
+            "Fructose-1,6-Bisphosphatase-1 (FBPase-1)",
+            "(+) Citrate; (-) Fructose-2,6-BP, AMP"
+          ],
+          [
+            "Step 10 / Bypass 1",
+            "Pyruvate Kinase (PK-L in Liver)",
+            "(+) Fructose-1,6-BP (feed-forward), Insulin; (-) ATP, Alanine, Glucagon/PKA",
+            "Pyruvate Carboxylase (PC) + PEPCK",
+            "(+) Acetyl-CoA (obligate for PC!), Glucagon/Cortisol transcription; (-) ADP"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "15.2",
+      "title": "The Pyruvate Dehydrogenase Complex, Citric Acid (TCA) Cycle & NADH Shuttles",
+      "overview": "In aerobic respiration, cytosolic pyruvate enters the mitochondrial matrix via the Mitochondrial Pyruvate Carrier (MPC) and undergoes oxidative decarboxylation to Acetyl-CoA, which is completely oxidized to 2 CO2 in the Citric Acid (Krebs / TCA) Cycle while conserving free energy in 3 NADH, 1 FADH2, and 1 GTP/ATP per turn.",
+      "core_concepts": [
+        {
+          "concept_id": "15.2.1",
+          "heading": "The Pyruvate Dehydrogenase Complex (PDC): 5 Cofactors & Irreversible Gatekeeping",
+          "theory": "The Pyruvate Dehydrogenase Complex (PDC) catalyzes the irreversible link between glycolysis and the TCA cycle: Pyruvate + CoA-SH + NAD+ -> Acetyl-CoA + CO2 + NADH + H+ (ΔG°' = -33.4 kJ/mol). Because PDC is completely irreversible (and animals lack the glyoxylate cycle), mammals cannot convert Acetyl-CoA (or even-chain fatty acids) into net glucose!",
+          "key_principles": [
+            "Three Enzymes (E1, E2, E3) & Five Coenzymes ('Tender Loving Care For Nancy'): (1) E1 (Pyruvate Dehydrogenase): uses Thiamine Pyrophosphate (TPP, Vitamin B1) to decarboxylate pyruvate into hydroxyethyl-TPP; (2) E2 (Dihydrolipoyl Transacetylase): uses a covalently attached Lipoamide swinging arm (lipoic acid linked to a lysine ε-amino group) to oxidize the 2-carbon unit and transfer it to Coenzyme A (Vitamin B5, pantothenic acid) to release Acetyl-CoA; (3) E3 (Dihydrolipoyl Dehydrogenase): uses bound FAD (Vitamin B2, riboflavin) to re-oxidize reduced dihydrolipoamide and transfer electrons to mobile NAD+ (Vitamin B3, niacin) to form NADH. (Arsenite AsO3^3- and organic mercury poison PDC and α-ketoglutarate dehydrogenase by chelating the reduced dithiol -SH groups of lipoamide!).",
+            "Allosteric & Covalent Regulation (PDH Kinase vs. PDH Phosphatase): PDC is inhibited by its products (Acetyl-CoA and NADH) and regulated covalently by E1 phosphorylation: PDH Kinase (PDK, activated by high ATP, Acetyl-CoA, and NADH) phosphorylates E1 to turn PDC OFF; PDH Phosphatase (PDP, activated by Ca2+ in contracting muscle and Insulin in adipose/liver) dephosphorylates E1 to turn PDC ON."
+          ]
+        },
+        {
+          "concept_id": "15.2.2",
+          "heading": "The Citric Acid (TCA) Cycle, Amphibolic Anaplerosis & Cytosolic NADH Shuttles",
+          "theory": "Elucidated by Hans Krebs (1937), the TCA cycle condenses Acetyl-CoA (2C) with Oxaloacetate (4C) to form Citrate (6C), which undergoes two sequential oxidative decarboxylations (Isocitrate Dehydrogenase and α-Ketoglutarate Dehydrogenase) and a 4-carbon regeneration sequence (Succinyl-CoA -> Succinate -> Fumarate -> L-Malate -> Oxaloacetate).",
+          "key_principles": [
+            "Three Rate-Limiting Exergonic Steps of the TCA Cycle: (1) Citrate Synthase (OAA + Acetyl-CoA + H2O -> Citrate + CoA-SH, ΔG°' = -32.2 kJ/mol; inhibited by ATP, NADH, Succinyl-CoA, and Citrate); (2) Isocitrate Dehydrogenase (Isocitrate + NAD+ -> α-Ketoglutarate + CO2 + NADH, ΔG°' = -20.9 kJ/mol; allosterically activated by ADP and Ca2+, inhibited by ATP and NADH); (3) α-Ketoglutarate Dehydrogenase Complex (homologous to PDC using TPP, Lipoamide, CoA, FAD, NAD+: α-KG + CoA + NAD+ -> Succinyl-CoA + CO2 + NADH, ΔG°' = -33.5 kJ/mol; activated by Ca2+, inhibited by Succinyl-CoA and NADH).",
+            "Amphibolic Role & Anaplerotic ('Filling-Up') Reactions: Because TCA intermediates are continuously siphoned off for biosynthesis (Citrate -> cytosolic fatty acids/sterols; α-KG -> glutamate/purines; Succinyl-CoA -> porphyrin heme; OAA -> aspartate/gluconeogenesis), Anaplerotic reactions replenish the cycle—most notably Pyruvate Carboxylase (Pyruvate + CO2 + ATP -> OAA) in animals and PEP Carboxylase in plants/bacteria.",
+            "Malate-Aspartate vs. Glycerol-3-Phosphate Cytosolic NADH Shuttles: Because the Inner Mitochondrial Membrane (IMM) is completely impermeable to cytosolic NADH generated by glycolysis, reducing equivalents are shuttled into the matrix via two systems: (1) Malate-Aspartate Shuttle (Liver, Kidney, Heart): Reversible cytosolic/mitochondrial Malate Dehydrogenase transfers electrons from cytosolic NADH to matrix NAD+ -> yields full ~2.5 ATP per cytosolic NADH (total **32 ATP** per glucose); (2) Glycerol-3-Phosphate Shuttle (Skeletal Muscle, Brain): Cytosolic G3P dehydrogenase transfers electrons to a mitochondrial inner-membrane FAD-linked G3P dehydrogenase -> QH2 (bypassing Complex I) -> yields ~1.5 ATP per cytosolic NADH (total **30 ATP** per glucose)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Complete Bioenergetic ATP / NADH / FADH2 Ledger for Aerobic Oxidation of 1 Mole of Glucose",
+        "headers": [
+          "Metabolic Stage / Reaction",
+          "Direct Cofactor Yield per Glucose",
+          "ATP Equivalent Yield (Modern Stoichiometry: NADH=2.5, FADH2=1.5)",
+          "ATP Equivalent Yield (Classical Textbook: NADH=3, FADH2=2)"
+        ],
+        "rows": [
+          [
+            "Glycolysis Preparatory Phase (HK + PFK-1)",
+            "-2 ATP (Consumed)",
+            "-2.0 ATP",
+            "-2.0 ATP"
+          ],
+          [
+            "Glycolysis Payoff Phase (PGK + PK)",
+            "+4 ATP (Substrate-level)",
+            "+4.0 ATP",
+            "+4.0 ATP"
+          ],
+          [
+            "Glycolysis Cytosolic NADH (2 × GAPDH)",
+            "+2 Cytosolic NADH",
+            "+5.0 ATP (Malate-Asp shuttle) OR +3.0 ATP (G3P shuttle)",
+            "+6.0 ATP OR +4.0 ATP"
+          ],
+          [
+            "Pyruvate Dehydrogenase Complex (2 × Pyruvate)",
+            "+2 Matrix NADH",
+            "+5.0 ATP (2 × 2.5)",
+            "+6.0 ATP (2 × 3)"
+          ],
+          [
+            "TCA Cycle GTP/ATP (2 × Succinyl-CoA Synthetase)",
+            "+2 GTP (= 2 ATP)",
+            "+2.0 ATP",
+            "+2.0 ATP"
+          ],
+          [
+            "TCA Cycle Matrix NADH (2 turns × 3 NADH)",
+            "+6 Matrix NADH (ICD, α-KGDH, MDH)",
+            "+15.0 ATP (6 × 2.5)",
+            "+18.0 ATP (6 × 3)"
+          ],
+          [
+            "TCA Cycle FADH2 (2 turns × 1 Succinate DH)",
+            "+2 Matrix FADH2 (Complex II)",
+            "+3.0 ATP (2 × 1.5)",
+            "+4.0 ATP (2 × 2)"
+          ],
+          [
+            "TOTAL NET YIELD PER GLUCOSE",
+            "4 ATP/GTP + 10 NADH + 2 FADH2",
+            "32.0 ATP (Liver/Heart) OR 30.0 ATP (Muscle/Brain)",
+            "38.0 ATP OR 36.0 ATP"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "15.3",
+      "title": "Lipid & Nitrogen Metabolism: Fatty Acid β-Oxidation, Ketogenesis, The Urea Cycle & Fed/Fasting Integration",
+      "overview": "Triacylglycerols represent the body's most energy-dense fuel reservoir (~38 kJ/g anhydrous fat vs. ~17 kJ/g hydrated glycogen), mobilized via Hormone-Sensitive Lipase, Carnitine shuttle transport, and mitochondrial β-oxidation, while toxic ammonia from amino acid deamination is detoxified via the hepatic Krebs-Henseleit Urea Cycle.",
+      "core_concepts": [
+        {
+          "concept_id": "15.3.1",
+          "heading": "Carnitine Shuttle (CPT-I), Mitochondrial β-Oxidation Spiral & Ketone Bodies",
+          "theory": "Free fatty acids mobilized from adipocytes are activated in the outer mitochondrial membrane / cytosol by Acyl-CoA Synthetase: Fatty Acid + CoA-SH + ATP -> Fatty Acyl-CoA + AMP + PPi (followed by PPi -> 2 Pi hydrolysis by inorganic pyrophosphatase, consuming **2 high-energy phosphate bond equivalents**).",
+          "key_principles": [
+            "Carnitine Palmitoyltransferase-I (CPT-I) & Malonyl-CoA Regulation: Long-chain fatty acyl-CoAs (>12 carbons) cannot cross the Inner Mitochondrial Membrane directly. CPT-I (outer membrane) transfers the acyl group to Carnitine (forming Acyl-Carnitine), which crosses the IMM via Carnitine-Acylcarnitine Translocase and is regenerated to matrix Acyl-CoA by CPT-II. Crucially, CPT-I is potently allosterically inhibited by **Malonyl-CoA** (the first committed intermediate of cytosolic fatty acid synthesis produced by Acetyl-CoA Carboxylase [ACC])—preventing simultaneous synthesis and β-oxidation of fatty acids!",
+            "The Four-Step β-Oxidation Spiral: Each cycle shortens a saturated fatty acyl-CoA of 2k carbons by 2 carbons (releasing 1 Acetyl-CoA) via four sequential steps mirroring the final steps of the TCA cycle: (1) Oxidation by Acyl-CoA Dehydrogenase (FAD -> FADH2, forming a trans-Δ2-enoyl-CoA); (2) Hydration by Enoyl-CoA Hydratase (forming L-β-hydroxyacyl-CoA); (3) Oxidation by β-Hydroxyacyl-CoA Dehydrogenase (NAD+ -> NADH, forming β-ketoacyl-CoA); and (4) Thiolytic Cleavage by Acyl-CoA Acetyltransferase (Thiolase, using CoA-SH to release 1 Acetyl-CoA + a shortened (2k - 2) Acyl-CoA). For an even-chain saturated fatty acid of length 2k carbons (e.g., Palmitate, 16:0, k = 8), complete cleavage requires **(k - 1) = 7 β-oxidation spirals** to yield **k = 8 Acetyl-CoA**, **7 FADH2**, and **7 NADH**.",
+            "Odd-Chain Fatty Acids (Propionyl-CoA -> Vitamin B12 Mutase) & Hepatic Ketogenesis: Odd-chain fatty acids yield Propionyl-CoA (3C) in the final thiolysis step, which is carboxylated by Propionyl-CoA Carboxylase (Biotin) to D-Methylmalonyl-CoA, epimerized to L-Methylmalonyl-CoA, and rearranged by Methylmalonyl-CoA Mutase (requiring **5'-Deoxyadenosylcobalamin [Vitamin B12]**!) into Succinyl-CoA (the ONLY glucogenic part of a fatty acid). During prolonged fasting or uncontrolled Type 1 Diabetes, hepatic gluconeogenesis depletes Oxaloacetate, stalling the TCA cycle; excess hepatic Acetyl-CoA is diverted via HMG-CoA Synthase/Lyase into **Ketone Bodies** (Acetoacetate, D-β-Hydroxybutyrate, and volatile Acetone) exported to fuel the brain and heart (Note: the liver lacks Succinyl-CoA:Acetoacetate CoA-Transferase [Thiophorase / SCOT], so the liver cannot consume the ketone bodies it produces!)."
+          ]
+        },
+        {
+          "concept_id": "15.3.2",
+          "heading": "Amino Acid Transamination (PLP), Glutamate Dehydrogenase & The Urea Cycle",
+          "theory": "Because excess amino acids cannot be stored, their α-amino nitrogen is removed in the liver and excreted as non-toxic, water-soluble Urea (in ureotelic mammals/amphibians), while their carbon skeletons enter the TCA cycle or gluconeogenesis/ketogenesis.",
+          "key_principles": [
+            "Transamination (Aminotransferases + PLP) & Oxidative Deamination: Cytosolic Aminotransferases (Transaminases, such as ALT [Alanine Aminotransferase] and AST [Aspartate Aminotransferase], all requiring **Pyridoxal Phosphate [PLP, Vitamin B6]** as a Schiff-base electron-sink cofactor) funnel α-amino groups from diverse amino acids onto α-Ketoglutarate to form L-Glutamate. L-Glutamate enters the hepatocyte mitochondrial matrix, where **Glutamate Dehydrogenase (GDH)** catalyzes oxidative deamination: Glutamate + NAD(P)+ + H2O -> α-Ketoglutarate + NH4+ + NAD(P)H (allosterically activated by ADP/GDP and inhibited by GTP/ATP).",
+            "The Five-Enzyme Urea Cycle (Mitochondrial Matrix + Cytosol) & Aspartate-Argininosuccinate Bicycle: (1) Matrix: **Carbamoyl Phosphate Synthetase I (CPS-I)**—the rate-limiting step—condenses free NH3 + HCO3- + **2 ATP** -> Carbamoyl Phosphate + 2 ADP + Pi; CPS-I has an **absolute obligate allosteric requirement for N-Acetylglutamate (NAG)** (synthesized from Acetyl-CoA + Glutamate by NAG Synthase when amino acid levels are high); (2) Matrix: Ornithine Transcarbamoylase (OTC) condenses Ornithine + Carbamoyl-P -> Citrulline (exported to cytosol); (3) Cytosol: Argininosuccinate Synthetase condenses Citrulline + **Aspartate** (which donates the 2nd nitrogen atom of urea!) + **ATP -> AMP + PPi** (consuming 2 ATP equivalents) -> Argininosuccinate; (4) Cytosol: Argininosuccinate Lyase cleaves Argininosuccinate -> Arginine + **Fumarate** (which is hydrated to Malate -> OAA, linking the Urea Cycle directly to the TCA cycle in the 'Krebs Bicycle' and generating 1 NADH = 2.5 ATP!); (5) Cytosol: Arginase cleaves Arginine + H2O -> **Urea** + Ornithine (re-imported into the matrix)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Classification of the 20 Standard Amino Acids by Metabolic Fate (Glucogenic vs. Ketogenic)",
+        "headers": [
+          "Metabolic Classification",
+          "Amino Acids",
+          "Degradation End-Products",
+          "Physiological Consequence in Fasting"
+        ],
+        "rows": [
+          [
+            "Strictly Ketogenic (2)",
+            "Leucine (Leu), Lysine (Lys) — Mnemonic: 'The Two L's'",
+            "Acetyl-CoA or Acetoacetyl-CoA ONLY",
+            "Cannot yield net glucose in mammals (convert to ketone bodies / lipids)"
+          ],
+          [
+            "Both Glucogenic & Ketogenic (5)",
+            "Isoleucine (Ile), Phenylalanine (Phe), Tryptophan (Trp), Tyrosine (Tyr), Threonine (Thr) — 'FITTT'",
+            "Acetyl-CoA/Acetoacetate AND Pyruvate/Fumarate/Succinyl-CoA",
+            "Contribute to both hepatic gluconeogenesis and ketogenesis"
+          ],
+          [
+            "Strictly Glucogenic (13)",
+            "Ala, Arg, Asn, Asp, Cys, Glu, Gln, Gly, His, Met, Pro, Ser, Val",
+            "Pyruvate, α-Ketoglutarate, Succinyl-CoA, Fumarate, or Oxaloacetate",
+            "Replenish TCA intermediates (anaplerosis) to drive PEPCK gluconeogenesis"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-15.1",
+      "title": "Figure 15.1: Reciprocal Regulation of Glycolysis (PFK-1) & Gluconeogenesis (FBPase-1) via the PFK-2/FBPase-2 Switch",
+      "sub_module_ref": "15.1",
+      "thumbnail_caption": "Insulin (PP1 dephosphorylation -> high F-2,6-BP) versus Glucagon (cAMP/PKA phosphorylation -> low F-2,6-BP) controlling the F6P <-> F-1,6-BP substrate cycle. Tap to expand.",
+      "svg_template_id": "svg_pfk1_fbpase1_switch_15_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>RECIPROCAL CONTROL OF GLYCOLYSIS &amp; GLUCONEOGENESIS: THE F-2,6-BP SWITCH</text><rect x='305' y='60' width='210' height='45' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='410' y='87' fill='#00f2fe' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Fructose-6-Phosphate (F6P)</text><rect x='295' y='245' width='230' height='45' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='410' y='272' fill='#00ff87' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Fructose-1,6-Bisphosphate</text><path d='M 365 110 L 365 240' stroke='#00ff87' stroke-width='4'/><polygon points='358,235 365,245 372,235' fill='#00ff87'/><rect x='225' y='152' width='125' height='48' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='287' y='173' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>PFK-1 (Glycolysis)</text><text x='287' y='190' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>(-) ATP, Citrate</text><path d='M 455 240 L 455 110' stroke='#ff6b8b' stroke-width='4'/><polygon points='448,115 455,105 462,115' fill='#ff6b8b'/><rect x='470' y='152' width='140' height='48' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='540' y='173' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>FBPase-1 (Gluco)</text><text x='540' y='190' fill='#ffb8c6' font-family='monospace' font-size='9' text-anchor='middle'>(+) Citrate; (-) AMP</text><rect x='35' y='115' width='165' height='125' rx='10' fill='#1f4068' stroke='#ffca28' stroke-width='2'/><text x='117' y='140' fill='#ffca28' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Fructose-2,6-BP</text><text x='117' y='160' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>Allosteric Master Regulator</text><text x='117' y='182' fill='#00ff87' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>(+) Activates PFK-1</text><text x='117' y='202' fill='#ff6b8b' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>(-) Inhibits FBPase-1</text><text x='117' y='224' fill='#a0c4e2' font-family='monospace' font-size='9' text-anchor='middle'>Made by PFK-2 / FBPase-2</text><rect x='635' y='115' width='155' height='125' rx='10' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='712' y='140' fill='#b388ff' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Hormonal Control</text><text x='712' y='165' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>Fed (↑Insulin → PP1):</text><text x='712' y='180' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>PFK-2 ON → ↑F-2,6-BP</text><text x='712' y='205' fill='#ff6b8b' font-family='monospace' font-size='10' text-anchor='middle'>Fasting (↑Glucagon→PKA):</text><text x='712' y='220' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>FBPase-2 ON → ↓F-2,6-BP</text><text x='410' y='325' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Prevents Futile Substrate Cycling (Net ATP + H2O → ADP + Pi Heat Loss) in Hepatocytes</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-15-1a",
+          "x_pct": 14.3,
+          "y_pct": 50.0,
+          "label": "Fructose-2,6-Bisphosphate Allostery",
+          "scale_link": "1nm",
+          "detail": "F-2,6-BP increases the affinity of PFK-1 for Fructose-6-P (converting its sigmoidal curve into a hyperbolic curve) while reducing the inhibitory effect of ATP."
+        },
+        {
+          "pin_id": "pin-15-1b",
+          "x_pct": 86.8,
+          "y_pct": 50.0,
+          "label": "Tandem PFK-2 / FBPase-2 Phosphorylation",
+          "scale_link": "10nm",
+          "detail": "A single polypeptide contains both a kinase domain (PFK-2) and a phosphatase domain (FBPase-2). PKA phosphorylation inactivates PFK-2 and activates FBPase-2, destroying F-2,6-BP so the liver exports glucose to the brain during fasting."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-15.2",
+      "title": "Figure 15.2: Mitochondrial Carnitine Shuttle (CPT-I/II), Malonyl-CoA Gate & The 4-Step β-Oxidation Spiral",
+      "sub_module_ref": "15.3",
+      "thumbnail_caption": "Outer-membrane CPT-I inhibition by Malonyl-CoA, Carnitine-Acylcarnitine Translocase, and the 4-step matrix β-oxidation spiral (FADH2 + NADH + Acetyl-CoA). Tap to expand.",
+      "svg_template_id": "svg_carnitine_beta_oxidation_15_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. CARNITINE SHUTTLE (CPT-I / CPT-II)</text><text x='430' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. 4-STEP MATRIX β-OXIDATION SPIRAL</text><line x1='405' y1='20' x2='405' y2='330' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><rect x='40' y='60' width='340' height='55' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='210' y='83' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Cytosol / OMM: Fatty Acid → Acyl-CoA (-2 ~P)</text><text x='210' y='102' fill='#ff6b8b' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>CPT-I Inhibited by Malonyl-CoA (Fed State)</text><rect x='40' y='140' width='340' height='60' rx='8' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='210' y='166' fill='#b388ff' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>IMM: Carnitine-Acylcarnitine Translocase</text><text x='210' y='186' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>Acyl-Carnitine In ⇄ Free Carnitine Out</text><rect x='40' y='225' width='340' height='65' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='210' y='252' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Matrix: CPT-II Regenerates Fatty Acyl-CoA</text><text x='210' y='272' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>Enters β-Oxidation Spiral (C_2k → C_2k-2)</text><path d='M 210 115 L 210 140 M 210 200 L 210 225' stroke='#ffca28' stroke-width='3'/><rect x='440' y='60' width='345' height='48' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='612' y='81' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>1. Oxidation (Acyl-CoA Dehydrogenase)</text><text x='612' y='98' fill='#ffca28' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>FAD → FADH2 (+1.5 ATP via ETF-QO)</text><rect x='440' y='122' width='345' height='42' rx='8' fill='#1f4068' stroke='#4facfe' stroke-width='1.5'/><text x='612' y='147' fill='#fff' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>2. Hydration (Enoyl-CoA Hydratase: +H2O → L-3-OH)</text><rect x='440' y='178' width='345' height='48' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='612' y='199' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>3. Oxidation (β-Hydroxyacyl-CoA DH)</text><text x='612' y='216' fill='#00ff87' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>NAD+ → NADH + H+ (+2.5 ATP via Complex I)</text><rect x='440' y='240' width='345' height='52' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='612' y='261' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>4. Thiolysis (β-Ketothiolase + CoA-SH)</text><text x='612' y='280' fill='#fff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Releases 1 Acetyl-CoA (+10 ATP in TCA) + C_(2k-2)-CoA</text><text x='410' y='325' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Palmitate (16:0): 7 Spirals (7 FADH2 + 7 NADH) + 8 Acetyl-CoA - 2 ATP (Activation) = 106 Net ATP!</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-15-2a",
+          "x_pct": 25.6,
+          "y_pct": 28.0,
+          "label": "Malonyl-CoA Allosteric Block on CPT-I",
+          "scale_link": "10nm",
+          "detail": "In the fed state, insulin activates Acetyl-CoA Carboxylase (ACC) to produce Malonyl-CoA for lipid synthesis. Malonyl-CoA binds CPT-I, preventing newly synthesized fatty acids from entering mitochondria to be burned."
+        },
+        {
+          "pin_id": "pin-15-2b",
+          "x_pct": 74.6,
+          "y_pct": 75.0,
+          "label": "7 Spirals Yield 8 Acetyl-CoA (C16 Palmitate)",
+          "scale_link": "matrix",
+          "detail": "Because the final 4-carbon butyryl-CoA cycle cleaves into TWO 2-carbon Acetyl-CoA molecules simultaneously, a 2k-carbon fatty acid requires only (k - 1) β-oxidation cycles to yield k Acetyl-CoA molecules."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-15.3",
+      "title": "Figure 15.3: The Krebs Bicycle: Mitochondrial/Cytosolic Urea Cycle Linked to the TCA Cycle",
+      "sub_module_ref": "15.3",
+      "thumbnail_caption": "Compartmentalized nitrogen detoxification: Matrix CPS-I (+N-acetylglutamate) & OTC connected to Cytosolic Argininosuccinate/Fumarate/Aspartate shunt. Tap to expand.",
+      "svg_template_id": "svg_urea_krebs_bicycle_15_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>THE KREBS BICYCLE: HEPATIC UREA CYCLE &amp; TCA ASPARTATE-FUMARATE SHUNT</text><rect x='40' y='58' width='290' height='245' rx='12' fill='#091e1a' stroke='#00ff87' stroke-width='2.5'/><text x='185' y='82' fill='#00ff87' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>MITOCHONDRIAL MATRIX</text><rect x='65' y='100' width='240' height='68' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='185' y='122' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>1. CPS-I (Rate-Limiting)</text><text x='185' y='140' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>NH3 + HCO3- + 2 ATP → Carb-P</text><text x='185' y='157' fill='#ffca28' font-family='monospace' font-size='9' font-weight='bold' text-anchor='middle'>Obligate Activator: N-Acetylglutamate</text><rect x='65' y='195' width='240' height='60' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='185' y='218' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>2. Ornithine Transcarbamoylase</text><text x='185' y='238' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>Ornithine + Carb-P → Citrulline</text><rect x='365' y='58' width='415' height='245' rx='12' fill='#102a43' stroke='#4facfe' stroke-width='2'/><text x='572' y='82' fill='#4facfe' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>HEPATOCYTE CYTOSOL</text><rect x='390' y='100' width='205' height='58' rx='8' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='492' y='120' fill='#b388ff' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>3. Argininosuccinate Syn.</text><text x='492' y='138' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>+ Aspartate (2nd N!) + ATP→AMP+PPi</text><rect x='615' y='100' width='145' height='58' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='687' y='122' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>4. AS Lyase</text><text x='687' y='140' fill='#ffb8c6' font-family='monospace' font-size='9' text-anchor='middle'>→ Arginine + Fumarate</text><rect x='390' y='195' width='185' height='60' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='482' y='218' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>5. Arginase</text><text x='482' y='238' fill='#fff' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>Arginine → UREA + Ornithine</text><rect x='595' y='195' width='165' height='60' rx='8' fill='#1f4068' stroke='#ffca28' stroke-width='2'/><text x='677' y='218' fill='#ffca28' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>TCA Shunt (Bicycle)</text><text x='677' y='238' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>Fumarate → Malate → OAA → Asp</text><path d='M 305 225 L 390 130' stroke='#00ff87' stroke-width='2.5'/><path d='M 390 225 L 305 235' stroke='#00f2fe' stroke-width='2.5'/><text x='410' y='328' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Energetic Cost: 4 ~P Consumed (2 ATP at CPS-I + 2 ~P at ASS) minus 2.5 ATP from Malate→OAA NADH = 1.5 Net ATP/Urea</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-15-3a",
+          "x_pct": 22.5,
+          "y_pct": 38.0,
+          "label": "CPS-I & N-Acetylglutamate (NAG)",
+          "scale_link": "10nm",
+          "detail": "CPS-I is completely inactive in the absence of N-acetylglutamate. High protein meals elevate hepatic glutamate and acetyl-CoA, activating NAG synthase to switch on urea synthesis."
+        },
+        {
+          "pin_id": "pin-15-3b",
+          "x_pct": 82.5,
+          "y_pct": 64.0,
+          "label": "Fumarate-Malate-Aspartate Recovery",
+          "scale_link": "matrix",
+          "detail": "Fumarate released in the cytosol is hydrated by cytosolic fumarase to L-malate, which is oxidized to OAA (generating 1 NADH = 2.5 ATP) and transaminated back to Aspartate, cutting the net energetic cost of urea synthesis from 4 ATP to 1.5 ATP."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_beta_oxidation_atp_ledger_15_3",
+      "title": "Fatty Acid β-Oxidation & Aerobic Glucose ATP Bioenergetic Ledger Simulator",
+      "sub_module_ref": "15.3",
+      "type": "metabolic-atp-ledger-calculator",
+      "description": "Compute exact β-oxidation spiral cycles, Acetyl-CoA units, FADH2/NADH cofactors, and net ATP yield for any even-chain saturated fatty acid (2k carbons, from C4 Butyrate to C24 Lignocerate) using modern (2.5 / 1.5) vs. classical (3.0 / 2.0) P/O stoichiometries.",
+      "controls": [
+        {
+          "id": "fatty_acid_carbons_2k",
+          "label": "Saturated Fatty Acid Chain Length (2k Carbons)",
+          "min": 4,
+          "max": 24,
+          "step": 2,
+          "default": 16,
+          "unit": "carbons"
+        },
+        {
+          "id": "unsaturations_double_bonds",
+          "label": "Number of cis-Double Bonds (each reduces FADH2 by 1)",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "default": 0,
+          "unit": "C=C bonds"
+        },
+        {
+          "id": "glucose_moles",
+          "label": "Moles of Glucose Oxidized Aerobically (Malate-Asp Shuttle)",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "default": 1,
+          "unit": "mol Glc"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "beta_ox_spirals",
+          "label": "Number of β-Oxidation Spiral Turns (k - 1)",
+          "formula_js": "(fatty_acid_carbons_2k / 2) - 1",
+          "unit": "spirals"
+        },
+        {
+          "output_id": "acetyl_coa_yield",
+          "label": "Total Acetyl-CoA Molecules Produced (k)",
+          "formula_js": "fatty_acid_carbons_2k / 2",
+          "unit": "Acetyl-CoA"
+        },
+        {
+          "output_id": "net_atp_fatty_acid_modern",
+          "label": "Net ATP Yield from Fatty Acid (Modern: 2.5/NADH, 1.5/FADH2, -2 Activation)",
+          "formula_js": "(((fatty_acid_carbons_2k / 2) * 10) + (((fatty_acid_carbons_2k / 2) - 1) * 4) - (unsaturations_double_bonds * 1.5)) - 2",
+          "unit": "mol ATP"
+        },
+        {
+          "output_id": "net_atp_glucose_modern",
+          "label": "Net ATP Yield from Glucose (Modern: 32 ATP/mol)",
+          "formula_js": "glucose_moles * 32",
+          "unit": "mol ATP"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_atkinson_energy_charge_urea_15_1",
+      "title": "Atkinson Adenylate Energy Charge (AEC) & Nitrogen Urea Budget Simulator",
+      "sub_module_ref": "15.1",
+      "type": "energy-charge-urea-simulator",
+      "description": "Calculate Daniel Atkinson's Adenylate Energy Charge (AEC, normal physiological range 0.80–0.95) from intracellular [ATP], [ADP], and [AMP] concentrations, and compute the ATP cost of detoxifying amino acid nitrogen via the Urea Cycle.",
+      "controls": [
+        {
+          "id": "atp_conc_mm",
+          "label": "Intracellular [ATP]",
+          "min": 0.5,
+          "max": 10.0,
+          "step": 0.5,
+          "default": 4.0,
+          "unit": "mM"
+        },
+        {
+          "id": "adp_conc_mm",
+          "label": "Intracellular [ADP]",
+          "min": 0.1,
+          "max": 5.0,
+          "step": 0.1,
+          "default": 0.8,
+          "unit": "mM"
+        },
+        {
+          "id": "amp_conc_mm",
+          "label": "Intracellular [AMP]",
+          "min": 0.01,
+          "max": 2.0,
+          "step": 0.05,
+          "default": 0.1,
+          "unit": "mM"
+        },
+        {
+          "id": "nitrogen_mol_detox",
+          "label": "Moles of Toxic NH4+ / Aspartate Nitrogen Detoxified",
+          "min": 1.0,
+          "max": 20.0,
+          "step": 1.0,
+          "default": 4.0,
+          "unit": "mol N"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "adenylate_energy_charge",
+          "label": "Adenylate Energy Charge (AEC = ([ATP] + 0.5[ADP]) / Total)",
+          "formula_js": "(atp_conc_mm + (0.5 * adp_conc_mm)) / (atp_conc_mm + adp_conc_mm + amp_conc_mm)",
+          "unit": "AEC (0 to 1)"
+        },
+        {
+          "output_id": "urea_produced_mol",
+          "label": "Moles of Urea Synthesized (2 N atoms per Urea)",
+          "formula_js": "nitrogen_mol_detox / 2",
+          "unit": "mol Urea"
+        },
+        {
+          "output_id": "gross_atp_urea_cost",
+          "label": "Gross High-Energy Phosphate Cost (4 ~P per Urea)",
+          "formula_js": "(nitrogen_mol_detox / 2) * 4",
+          "unit": "mol ~P"
+        },
+        {
+          "output_id": "net_atp_urea_cost",
+          "label": "Net ATP Cost Accounting for Malate->OAA NADH (1.5 ATP per Urea)",
+          "formula_js": "(nitrogen_mol_detox / 2) * 1.5",
+          "unit": "mol net ATP"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-15.1",
+      "title": "Aerobic Glucose Oxidation & Anaerobic Fermentation Stoichiometries",
+      "latex": "\\text{Aerobic}: \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{ O}_2 + 32\\text{ ADP} + 32\\text{ P}_i \\longrightarrow 6\\text{ CO}_2 + 6\\text{ H}_2\\text{O} + 32\\text{ ATP}",
+      "description": "Overall stoichiometric balance for complete oxidation of 1 mole of glucose via Glycolysis (+2 ATP, +2 NADH), PDC (+2 NADH), and 2 turns of the TCA cycle (+2 GTP, +6 NADH, +2 FADH2) using the Malate-Aspartate shuttle (30 ATP via G3P shuttle; 2 ATP in anaerobic lactic/alcoholic fermentation).",
+      "variables": [
+        {
+          "symbol": "32\\text{ ATP}",
+          "definition": "Net ATP yield using modern P/O ratios (2.5 ATP/NADH, 1.5 ATP/FADH2); 38 ATP using classical integer ratios (3/NADH, 2/FADH2)",
+          "unit": "mol ATP / mol Glucose"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-15.2",
+      "title": "Gluconeogenesis Energetic Cost from Pyruvate (6 High-Energy Bonds per Glucose)",
+      "latex": "2\\text{ Pyruvate} + 4\\text{ ATP} + 2\\text{ GTP} + 2\\text{ NADH} + 2\\text{ H}^+ + 6\\text{ H}_2\\text{O} \\longrightarrow \\text{Glucose} + 4\\text{ ADP} + 2\\text{ GDP} + 6\\text{ P}_i + 2\\text{ NAD}^+",
+      "description": "Synthesizing 1 mole of glucose from 2 moles of pyruvate consumes 6 high-energy nucleotide triphosphates (2 ATP at Pyruvate Carboxylase, 2 GTP at PEPCK, and 2 ATP at Phosphoglycerate Kinase) plus 2 cytosolic NADH—4 more ~P bonds than the 2 ATP yielded by glycolysis, making the net pathway exergonic (ΔG°' = -37.7 kJ/mol).",
+      "variables": [
+        {
+          "symbol": "4\\text{ ATP} + 2\\text{ GTP}",
+          "definition": "Total high-energy phosphate bonds hydrolyzed to drive uphill glucose synthesis",
+          "unit": "mol ~P / mol Glucose"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-15.3",
+      "title": "Fatty Acid β-Oxidation General ATP Formula (Even-Chain Saturated Fatty Acid of 2k Carbons)",
+      "latex": "\\text{ATP}_{\\text{net}} = 10k + 4(k - 1) - 2 = 14k - 6 \\quad \\text{(Modern P/O)} \\qquad \\text{or} \\qquad \\text{ATP}_{\\text{net}} = 12k + 5(k - 1) - 2 = 17k - 7 \\quad \\text{(Classical P/O)}",
+      "description": "General closed-form equation for the net ATP yield from complete oxidation of a saturated even-chain fatty acid containing 2k carbons (where k = number of Acetyl-CoA units, k - 1 = number of β-oxidation spirals, and -2 accounts for ATP -> AMP + PPi activation by Acyl-CoA Synthetase).",
+      "variables": [
+        {
+          "symbol": "2k",
+          "definition": "Total number of carbon atoms in the even-chain saturated fatty acid (e.g., 2k = 16 for Palmitate -> k = 8)",
+          "unit": "carbons"
+        },
+        {
+          "symbol": "10k\\text{ (or }12k\\text{)}",
+          "definition": "ATP generated from k moles of Acetyl-CoA in the TCA cycle (3 NADH + 1 FADH2 + 1 GTP = 10 ATP modern / 12 classical)",
+          "unit": "mol ATP"
+        },
+        {
+          "symbol": "4(k-1)\\text{ (or }5(k-1)\\text{)}",
+          "definition": "ATP generated from (k - 1) β-oxidation spirals (1 FADH2 + 1 NADH = 4 ATP modern / 5 classical per spiral)",
+          "unit": "mol ATP"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-15.4",
+      "title": "Atkinson's Adenylate Energy Charge (AEC) & Adenylate Kinase Equilibrium",
+      "latex": "\\text{AEC} = \\frac{[\\text{ATP}] + \\frac{1}{2}[\\text{ADP}]}{[\\text{ATP}] + [\\text{ADP}] + [\\text{AMP}]}, \\qquad 2\\text{ ADP} \\xleftrightarrow{\\text{Adenylate Kinase}} \\text{ATP} + \\text{AMP} \\quad (K_{\\text{eq}} \\approx 1.0)",
+      "description": "Quantifies the fractional phosphorylation state of the cellular adenylate pool (ranging from 0 when 100% AMP to 1.0 when 100% ATP; healthy cells buffer AEC tightly between 0.80 and 0.95). Adenylate kinase amplifies small percentage drops in [ATP] into massive fold-increases in [AMP], making AMP (activating AMPK and PFK-1) the primary sensor of cellular energy stress.",
+      "variables": [
+        {
+          "symbol": "\\text{AEC}",
+          "definition": "Adenylate Energy Charge (catabolic pathways are activated when AEC < 0.80; anabolic pathways are activated when AEC > 0.85)",
+          "unit": "dimensionless (0 to 1)"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-15.5",
+      "title": "Krebs-Henseleit Urea Cycle Stoichiometry & Net Energetic Cost",
+      "latex": "\\text{NH}_4^+ + \\text{HCO}_3^- + \\text{Aspartate} + 3\\text{ ATP} + \\text{H}_2\\text{O} \\longrightarrow \\text{Urea} + \\text{Fumarate} + 2\\text{ ADP} + \\text{AMP} + \\text{PP}_i + 2\\text{ P}_i",
+      "description": "Synthesizing 1 molecule of Urea (CH4N2O) incorporates 1 nitrogen from free mitochondrial NH4+ and 1 nitrogen from cytosolic Aspartate, consuming 4 high-energy phosphate bonds (2 ATP -> 2 ADP at CPS-I, plus 1 ATP -> AMP + PPi at Argininosuccinate Synthetase), partially offset by 1 NADH (+2.5 ATP) when Fumarate -> Malate -> OAA in the Krebs Bicycle.",
+      "variables": [
+        {
+          "symbol": "4\\ \\sim\\text{P gross}",
+          "definition": "4 high-energy phosphate equivalents consumed per urea molecule (net 1.5 ATP after malate dehydrogenase recovery)",
+          "unit": "mol ~P / mol Urea"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-15.1",
+        "title": "Bioenergetic Ledger: Complete Oxidation of Stearic Acid (18:0) vs. Oleic Acid (18:1 cis-Δ9)",
+        "difficulty": "Intermediate",
+        "statement": "Calculate the exact number of β-oxidation spirals, Acetyl-CoA molecules, FADH2, NADH, and the net ATP yield (using modern P/O ratios: NADH = 2.5 ATP, FADH2 = 1.5 ATP, and subtracting 2 ATP equivalents for initial fatty acyl-CoA activation) for the complete aerobic oxidation of: (a) 1 mole of saturated Stearic Acid (18:0, octadecanoic acid), and (b) 1 mole of monounsaturated Oleic Acid (18:1 cis-Δ9). Also state the classical textbook ATP yield (NADH = 3, FADH2 = 2) for Stearic Acid.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Stearic Acid (18:0, where 2k = 18 -> k = 9 Acetyl-CoA units), the number of β-oxidation spirals is k - 1 = 9 - 1 = 8 spirals:",
+            "equation_latex": "8\\text{ Spirals} \\longrightarrow 8\\text{ FADH}_2 + 8\\text{ NADH}, \\qquad 9\\text{ Acetyl-CoA in TCA} \\longrightarrow 9(3\\text{ NADH} + 1\\text{ FADH}_2 + 1\\text{ GTP}) = 27\\text{ NADH} + 9\\text{ FADH}_2 + 9\\text{ GTP}"
+          },
+          {
+            "step": 2,
+            "explanation": "Sum total cofactors (35 NADH, 17 FADH2, 9 GTP) and apply modern P/O ratios (or use the closed formula 14k - 6 = 14(9) - 6):",
+            "equation_latex": "\\text{ATP}_{\\text{Stearate (Modern)}} = 35(2.5) + 17(1.5) + 9(1.0) - 2\\text{ (Activation)} = 87.5 + 25.5 + 9.0 - 2.0 = 120.0\\text{ mol ATP}"
+          },
+          {
+            "step": 3,
+            "explanation": "Using classical integer P/O ratios (17k - 7 = 17(9) - 7):",
+            "equation_latex": "\\text{ATP}_{\\text{Stearate (Classical)}} = 35(3) + 17(2) + 9 - 2 = 105 + 34 + 9 - 2 = 146.0\\text{ mol ATP}"
+          },
+          {
+            "step": 4,
+            "explanation": "For monounsaturated Oleic Acid (18:1 cis-Δ9): After 3 normal β-oxidation spirals remove 6 carbons, the cis-Δ3-dodecenoyl-CoA intermediate already contains a double bond and is isomerized directly by Δ3,Δ2-Enoyl-CoA Isomerase into trans-Δ2-dodecenoyl-CoA—bypassing the FAD-dependent Acyl-CoA Dehydrogenase step in the 4th spiral! Thus, 1 less FADH2 (-1.5 ATP modern / -2.0 ATP classical) is produced:",
+            "equation_latex": "\\text{ATP}_{\\text{Oleate (Modern)}} = 120.0 - 1.5 = 118.5\\text{ mol ATP} \\quad (\\text{Classical} = 146.0 - 2.0 = 144.0\\text{ mol ATP})"
+          }
+        ],
+        "final_answer": "(a) Stearic Acid (18:0): 8 spirals, 9 Acetyl-CoA, 35 total NADH, 17 total FADH2, 9 GTP -> **120.0 net ATP** (modern) or **146.0 net ATP** (classical); (b) Oleic Acid (18:1): **118.5 net ATP** (modern) or **144.0 net ATP** (classical)."
+      },
+      {
+        "problem_id": "SP-15.2",
+        "title": "Odd-Chain Fatty Acid Oxidation: Propionyl-CoA Glucogenic Entry & Total ATP Yield of Margaric Acid (17:0)",
+        "difficulty": "Advanced",
+        "statement": "Ruminant milk fat and marine lipids contain odd-chain saturated fatty acids such as Heptadecanoic (Margaric) Acid (17:0). When 1 mole of Heptadecanoic Acid (17:0) undergoes complete β-oxidation in the liver: (a) How many β-oxidation spirals occur, and how many moles of Acetyl-CoA (2C) and Propionyl-CoA (3C) are produced? (b) If the resulting Propionyl-CoA is converted via Propionyl-CoA Carboxylase (consumes 1 ATP) and Vitamin B12-dependent Methylmalonyl-CoA Mutase into Succinyl-CoA, and that Succinyl-CoA is oxidized completely to 4 CO2 (via Malic Enzyme -> Pyruvate -> PDC -> TCA cycle), calculate the net modern ATP yield of 1 mole of 17:0.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "A 17-carbon fatty acid undergoes 7 β-oxidation spirals (removing 7 × 2 = 14 carbons as 7 Acetyl-CoA molecules), leaving a 3-carbon terminal fragment as 1 Propionyl-CoA:",
+            "equation_latex": "\\text{C}_{17}\\text{-CoA} \\xrightarrow{7\\text{ Spirals}} 7\\text{ Acetyl-CoA} + 1\\text{ Propionyl-CoA} + 7\\text{ FADH}_2 + 7\\text{ NADH}"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute the ATP yield from the 7 spirals (7 × 4 = 28 ATP) and the 7 Acetyl-CoA molecules in the TCA cycle (7 × 10 = 70 ATP), minus 2 ATP for initial activation:",
+            "equation_latex": "\\text{ATP}_{\\text{from 7 spirals + 7 Acetyl-CoA}} = 28.0 + 70.0 - 2.0 = 96.0\\text{ ATP}"
+          },
+          {
+            "step": 3,
+            "explanation": "Track the Propionyl-CoA (3C) pathway: Propionyl-CoA + HCO3- + ATP -> Succinyl-CoA (-1 ATP). Converting Succinyl-CoA -> Succinate (+1 GTP = +1 ATP) -> Fumarate (+1 FADH2 = +1.5 ATP) -> Malate -> Pyruvate (+1 NADPH/NADH = +2.5 ATP) -> Acetyl-CoA (+1 NADH = +2.5 ATP) -> TCA cycle (+10 ATP) yields:",
+            "equation_latex": "\\text{Net ATP}_{\\text{Propionyl-CoA}} = -1.0\\text{ (Carboxylase)} + 1.0\\text{ (GTP)} + 1.5\\text{ (FADH}_2\\text{)} + 2.5\\text{ (Malate)} + 2.5\\text{ (PDC)} + 10.0\\text{ (TCA)} = +16.5\\text{ ATP}"
+          },
+          {
+            "step": 4,
+            "explanation": "Add the Propionyl-CoA contribution (+16.5 ATP) to the 96.0 ATP from Step 2:",
+            "equation_latex": "\\text{Total Net ATP}_{17:0} = 96.0 + 16.5 = 112.5\\text{ mol ATP}"
+          }
+        ],
+        "final_answer": "(a) 7 β-oxidation spirals yielding 7 Acetyl-CoA + 1 Propionyl-CoA + 7 FADH2 + 7 NADH; (b) Total net yield = 112.5 mol ATP (and if the Succinyl-CoA -> Malate is instead exported to the cytosol for gluconeogenesis, 2 moles of Propionyl-CoA synthesize 1 net mole of Glucose!)."
+      },
+      {
+        "problem_id": "SP-15.3",
+        "title": "Atkinson Adenylate Energy Charge (AEC) & Adenylate Kinase AMP Signal Amplification",
+        "difficulty": "Intermediate",
+        "statement": "In a resting normoxic cardiomyocyte, the total adenylate nucleotide pool ([ATP] + [ADP] + [AMP]) is 5.00 mM, with [ATP] = 4.50 mM, [ADP] = 0.45 mM, and [AMP] = 0.05 mM. During acute ischemia/exercise, 10% of the cell's ATP is hydrolyzed (dropping [ATP] by 0.45 mM to 4.05 mM). Because Adenylate Kinase (2 ADP <-> ATP + AMP) rapidly re-equilibrates the pool so that [ADP] rises to only 0.65 mM while [AMP] rises to 0.30 mM: Calculate (a) the Adenylate Energy Charge (AEC) in the resting state vs. the ischemic state, and (b) compare the percentage drop in [ATP] against the fold-increase in [AMP] (explaining why PFK-1 and AMPK sense [AMP] rather than [ATP] alone).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Compute the resting Adenylate Energy Charge using AEC = ([ATP] + 0.5[ADP]) / ([ATP] + [ADP] + [AMP]):",
+            "equation_latex": "\\text{AEC}_{\\text{rest}} = \\frac{4.50 + 0.5(0.45)}{4.50 + 0.45 + 0.05} = \\frac{4.50 + 0.225}{5.00} = \\frac{4.725}{5.00} = 0.945"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute the ischemic Adenylate Energy Charge (with [ATP] = 4.05 mM, [ADP] = 0.65 mM, [AMP] = 0.30 mM):",
+            "equation_latex": "\\text{AEC}_{\\text{ischemia}} = \\frac{4.05 + 0.5(0.65)}{4.05 + 0.65 + 0.30} = \\frac{4.05 + 0.325}{5.00} = \\frac{4.375}{5.00} = 0.875"
+          },
+          {
+            "step": 3,
+            "explanation": "Compare the relative change in [ATP] versus the relative fold-change in [AMP]:",
+            "equation_latex": "\\Delta [\\text{ATP}] = \\frac{4.05 - 4.50}{4.50} \\times 100\\% = -10.0\\%\\text{ drop}, \\qquad \\text{Fold-Increase in } [\\text{AMP}] = \\frac{0.30\\text{ mM}}{0.05\\text{ mM}} = 6.0\\text{-fold} \\ (+500\\%\\text{ surge!})"
+          }
+        ],
+        "final_answer": "(a) Resting AEC = 0.945, Ischemic AEC = 0.875; (b) A modest 10% drop in [ATP] is amplified by Adenylate Kinase into a 600% (6.0-fold) surge in [AMP], providing an ultrasensitive allosteric trigger for AMPK and PFK-1."
+      },
+      {
+        "problem_id": "SP-15.4",
+        "title": "Isotopic Carbon Tracing (14C) Through Glycolysis, PDC & The Citric Acid Cycle",
+        "difficulty": "Advanced",
+        "statement": "A suspension of respiring yeast cells is incubated aerobically with glucose specifically radiolabeled with Carbon-14 at Either Carbon-1 ([1-14C]-Glucose) OR Carbon-3 ([3-14C]-Glucose). Track the exact atomic fate of the 14C label through Glycolysis, the Pyruvate Dehydrogenase Complex (PDC), and the FIRST turn of the Citric Acid Cycle, determining which substrate releases 14CO2 immediately at PDC versus during theTCA cycle.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "In Glycolysis, Aldolase cleaves the 6-carbon Fructose-1,6-bisphosphate between C-3 and C-4, and Triosephosphate Isomerase equilibrates the two 3-carbon trioses so that:\n• C-3 and C-4 of Glucose become the **C-1 (Carboxyl carbon)** of Pyruvate.\n• C-2 and C-5 of Glucose become the **C-2 (Carbonyl carbon)** of Pyruvate.\n• C-1 and C-6 of Glucose become the **C-3 (Methyl carbon)** of Pyruvate.",
+            "equation_latex": "\\text{Glucose (C1,C6)} \\rightarrow \\text{Pyruvate C-3 (Methyl)}; \\quad \\text{Glucose (C2,C5)} \\rightarrow \\text{Pyruvate C-2}; \\quad \\text{Glucose (C3,C4)} \\rightarrow \\text{Pyruvate C-1 (Carboxyl)}"
+          },
+          {
+            "step": 2,
+            "explanation": "Evaluate **[3-14C]-Glucose**: C-3 of glucose becomes C-1 (the carboxyl group, -COO-) of Pyruvate. The Pyruvate Dehydrogenase Complex (PDC) specifically decarboxylates C-1 of Pyruvate! Therefore, **100% of the 14C label from [3-14C]-Glucose (and [4-14C]-Glucose) is released immediately as 14CO2 at the PDC step** before ever entering the TCA cycle:",
+            "equation_latex": "[3\text{-}^{14}\\text{C}]\\text{-Glucose} \\xrightarrow{\\text{Glycolysis}} [1\text{-}^{14}\\text{C}]\\text{-Pyruvate} \\xrightarrow{\\text{PDC}} \\mathbf{^{14}\\text{CO}_2\\uparrow} + \\text{Unlabeled Acetyl-CoA}"
+          },
+          {
+            "step": 3,
+            "explanation": "Evaluate **[1-14C]-Glucose**: C-1 of glucose becomes C-3 (the methyl group, -CH3) of Pyruvate, which becomes C-2 (the methyl carbon) of Acetyl-CoA. In the 1st turn of the TCA cycle, Citrate Synthase condenses [2-14C]-Acetyl-CoA with unlabeled OAA. Because the two CO2 molecules released in the 1st turn of the TCA cycle (at Isocitrate DH and α-KG DH) derive exclusively from the **two carboxyl carbons of the original Oxaloacetate**, **0% of the 14C from [1-14C]-Glucose is released as 14CO2 in the 1st turn**! Instead, the 14C label is scrambled 50:50 between the two inner methylene carbons (C-2 and C-3) of symmetrical Succinate -> Oxaloacetate, and only begins exiting as 14CO2 in the 3rd/subsequent turns:",
+            "equation_latex": "[1\text{-}^{14}\\text{C}]\\text{-Glucose} \\rightarrow [2\text{-}^{14}\\text{C}]\\text{-Acetyl-CoA} \\xrightarrow{\\text{1st TCA Turn}} \\mathbf{0\\%\\ ^{14}\\text{CO}_2}\\text{ (Label retained in C-2/C-3 of Succinate/OAA!)}"
+          }
+        ],
+        "final_answer": "[3-14C]-Glucose releases 100% of its 14C label as 14CO2 at the Pyruvate Dehydrogenase Complex step; [1-14C]-Glucose releases 0% of its 14C label at PDC and 0% during the 1st turn of the TCA cycle (retaining 100% of the label at C-2/C-3 of regenerated Oxaloacetate)."
+      },
+      {
+        "problem_id": "SP-15.5",
+        "title": "The Cori Cycle & Cahill (Glucose-Alanine) Cycle: Inter-Organ ATP & Nitrogen Energetics",
+        "difficulty": "Intermediate",
+        "statement": "During a 400-meter sprint, anaerobic glycolysis in skeletal muscle converts 3.0 moles of Glucose into 6.0 moles of L-Lactate, which are exported via the bloodstream to the liver and reconverted into 3.0 moles of Glucose via hepatic Gluconeogenesis (the Cori Cycle). Calculate: (a) the net moles of ATP generated in the sprinting skeletal muscle, (b) the moles of high-energy phosphate bonds (ATP + GTP) consumed in the liver to resynthesize the 3.0 moles of glucose, and (c) the net whole-body ATP deficit of running 3.0 moles of glucose through the Cori Cycle.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "In skeletal muscle, anaerobic glycolysis yields 2 net ATP per mole of glucose converted to 2 lactate:",
+            "equation_latex": "\\text{Muscle ATP Generated} = 3.0\\text{ mol Glucose} \\times 2\\text{ ATP/mol} = +6.0\\text{ mol ATP}"
+          },
+          {
+            "step": 2,
+            "explanation": "In the liver, converting 2 moles of lactate back into 1 mole of glucose via gluconeogenesis consumes 6 high-energy phosphate bonds (4 ATP + 2 GTP):",
+            "equation_latex": "\\text{Liver ATP/GTP Consumed} = 3.0\\text{ mol Glucose} \\times 6\\ \\sim\\text{P/mol} = -18.0\\text{ mol ATP/GTP equivalents}"
+          },
+          {
+            "step": 3,
+            "explanation": "Sum the muscle gain (+6.0 mol) and hepatic cost (-18.0 mol) to find the net whole-body energetic cost (paid for by aerobic fatty acid β-oxidation in the liver):",
+            "equation_latex": "\\text{Net Whole-Body Balance} = +6.0 - 18.0 = -12.0\\text{ mol ATP (4 net ATP cost per glucose cycled)}"
+          }
+        ],
+        "final_answer": "(a) Muscle gains +6.0 mol ATP rapidly without oxygen; (b) Liver expends 18.0 mol ATP/GTP equivalents; (c) Net whole-body cost = -12.0 mol ATP (the Cori Cycle shifts the metabolic burden from hypoxic muscle to aerobic liver mitochondria)."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-15.1",
+        "question": "If a cell requires large quantities of Ribose-5-Phosphate for rapid DNA/RNA nucleotide synthesis (e.g., an S-phase dividing tumor cell) but does NOT need extra NADPH, how does the Pentose Phosphate Pathway produce Ribose-5-Phosphate without running the oxidative G6PD phase?",
+        "bold_answer": "By running the reversible Non-Oxidative Phase backward: Transketolase and Transaldolase convert 5 molecules of glycolytic Fructose-6-P and Glyceraldehyde-3-P directly into 6 molecules of Ribose-5-P (consuming 0 NADP+)",
+        "collapsible_derivation": "When [Ribose-5-P] demand exceeds [NADPH] demand, Glycolysis converts Glucose-6-P into Fructose-6-P (6C) and Glyceraldehyde-3-P (3C). Transketolase (2C transfer) and Transaldolase (3C transfer) are completely reversible (ΔG ≈ 0), rearranging 2 F6P (12C) + 1 G3P (3C) <-> 3 Ribose-5-Phosphate (15C) without producing any NADPH."
+      },
+      {
+        "problem_id": "PP-15.2",
+        "question": "Why does severe chronic Alcoholism (excessive ethanol metabolism in hepatocytes without food intake) cause both Lactic Acidosis and Fasting Hypoglycemia?",
+        "bold_answer": "Alcohol Dehydrogenase and Acetaldehyde Dehydrogenase flood the hepatocyte cytosol and mitochondria with a high [NADH]/[NAD+] ratio, which drives Pyruvate -> Lactate and Oxaloacetate -> Malate, starving PEPCK and Pyruvate Carboxylase of gluconeogenic substrates",
+        "collapsible_derivation": "Ethanol oxidation (Ethanol + NAD+ -> Acetaldehyde + NADH -> Acetate + NADH) consumes free NAD+ and causes the intracellular [NADH]/[NAD+] ratio to skyrocket. By Le Chatelier's principle, high [NADH] forces Lactate Dehydrogenase backward (Pyruvate + NADH -> Lactate, causing lactic acidosis) and Malate Dehydrogenase backward (Oxaloacetate + NADH -> Malate), depleting the Pyruvate and Oxaloacetate required for hepatic gluconeogenesis."
+      },
+      {
+        "problem_id": "PP-15.3",
+        "question": "Why does genetic deficiency of Glucose-6-Phosphate Dehydrogenase (G6PD, an X-linked recessive trait affecting 400 million people worldwide) cause acute hemolytic anemia when patients ingest primaquine, sulfonamide antibiotics, or fava beans (vicine), yet confer evolutionary heterozygote advantage against Plasmodium falciparum malaria?",
+        "bold_answer": "Mature erythrocytes lack mitochondria, so G6PD (the first step of the Pentose Phosphate Pathway) is their ONLY source of NADPH to regenerate reduced Glutathione (GSH); without GSH, H2O2 oxidizes hemoglobin into Heinz bodies that lyse RBCs",
+        "collapsible_derivation": "Glutathione Peroxidase detoxifies H2O2 using reduced glutathione (2 GSH -> GSSG), and Glutathione Reductase requires NADPH to regenerate 2 GSH from GSSG. Because red blood cells have no other NADPH-producing enzyme besides G6PD, oxidative drugs trigger methemoglobinemia, Heinz body precipitation, and hemolysis (while increased oxidative stress in G6PD-deficient RBCs impairs Plasmodium ring-stage survival)."
+      },
+      {
+        "problem_id": "PP-15.4",
+        "question": "In an infant presenting with severe hyperammonemia (elevated blood NH3), cerebral edema, and respiratory alkalosis 48 hours after birth, laboratory urinalysis reveals markedly elevated urinary **Orotic Acid** with low blood citrulline and BUN. Which urea cycle enzyme is deficient, and why does orotic acid accumulate?",
+        "bold_answer": "Ornithine Transcarbamoylase (OTC) deficiency (the only X-linked urea cycle disorder); accumulated mitochondrial Carbamoyl Phosphate leaks into the cytosol and enters the de novo pyrimidine synthesis pathway (via CAD -> Orotic acid)",
+        "collapsible_derivation": "When mitochondrial OTC is deficient, Carbamoyl Phosphate synthesized by CPS-I cannot condense with ornithine to form citrulline. Excess mitochondrial Carbamoyl Phosphate spills out into the hepatocyte cytosol, where it serves as the substrate for aspartate transcarbamoylase in the de novo pyrimidine biosynthetic pathway, overproducing Orotic Acid (which distinguishes OTC deficiency from CPS-I or NAG synthase deficiency, where orotic acid is low/absent)."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Metabolic Integration Case Study: Von Gierke Disease (G6PC Deficiency), MCAD β-Oxidation Deficiency & The Warburg Effect in Oncology",
+    "scenario": "Case A (Glycogen Storage Disease Type Ia — Von Gierke Disease): An infant presents with severe fasting hypoglycemia, massive hepatomegaly, lactic acidosis, hyperuricemia (gout), and hypertriglyceridemia, with zero blood glucose rise after a glucagon challenge. Case B (MCAD Deficiency): A 10-month-old infant develops acute **non-ketotic (hypoketotic) hypoglycemia** and lethargy after an overnight viral fast, with C8–C10 medium-chain acylcarnitines elevated on tandem mass spectrometry. Case C (Cancer Metabolism): Positron Emission Tomography (18F-FDG PET) scans light up metastatic tumors due to a 20-fold surge in glucose uptake and lactate secretion even in the presence of ample oxygen (Otto Warburg's Aerobic Glycolysis).",
+    "mechanistic_analysis": "In Case A (Von Gierke), deficiency of ER-luminal Glucose-6-Phosphatase blocks the final common step of BOTH glycogenolysis and gluconeogenesis; trapped G6P floods glycolysis (-> lactic acidosis), the Pentose Phosphate Pathway (-> excess PRPP -> uric acid), and de novo lipogenesis (-> VLDL triglycerides). In Case B (Medium-Chain Acyl-CoA Dehydrogenase [MCAD] deficiency), fasting β-oxidation halts at C6–C12 fatty acids: without hepatic β-oxidation to generate ATP, NADH, and Acetyl-CoA (the obligate activator of Pyruvate Carboxylase and substrate for ketogenesis), the liver can neither synthesize ketone bodies nor run gluconeogenesis, causing fatal hypoketotic hypoglycemia. In Case C (Warburg Effect), oncogenic Myc/HIF-1α/PI3K-Akt signaling upregulates GLUT1, Hexokinase II, and the embryonic M2 splice isoform of Pyruvate Kinase (PKM2)—diverting glycolytic intermediates into the Pentose Phosphate Pathway (Ribose-5-P and NADPH) and serine/glycine one-carbon pathways to build biomass for rapid cell division.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook1",
+        "topic": "Thermodynamic Coupling of Exergonic ATP Hydrolysis to Endergonic Biosynthesis"
+      },
+      {
+        "target_textbook": "TextBook2",
+        "topic": "Mitochondrial Matrix Compartmentalization, ETC Complexes I–IV & F0F1-ATP Synthase"
+      },
+      {
+        "target_textbook": "TextBook7",
+        "topic": "Comparison of Mitochondrial TCA/β-Oxidation vs. Chloroplast Calvin/Photorespiratory Cycles"
+      },
+      {
+        "target_textbook": "TextBook8",
+        "topic": "Insulin RTK vs. Glucagon GPCR (cAMP/PKA) Signaling & Diabetic Ketoacidosis"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-15.1",
+      "question": "Why are humans and other mammals biochemically incapable of converting even-chain fatty acids (or Acetyl-CoA) into net new Glucose during starvation, whereas germinating oilseed plants (such as castor bean or Arabidopsis) can?",
+      "options": [
+        "Mammalian adipocytes cannot release free fatty acids into the bloodstream",
+        "The Pyruvate Dehydrogenase Complex (Pyruvate -> Acetyl-CoA + CO2) is thermodynamically irreversible, and the 2 carbons of Acetyl-CoA entering the mammalian TCA cycle are balanced by 2 carbons lost as CO2 (at Isocitrate DH and α-KG DH); plants and bacteria possess the Glyoxylate Cycle (Isocitrate Lyase and Malate Synthase) which bypasses both decarboxylations",
+        "Mammalian Hexokinase converts Acetyl-CoA directly into cholesterol",
+        "Beta-oxidation only occurs in erythrocytes, which lack gluconeogenic enzymes"
+      ],
+      "correct_index": 1,
+      "explanation": "To synthesize net glucose via PEPCK, there must be a net gain of 4-carbon Oxaloacetate. Because PDC is irreversible, Acetyl-CoA cannot go backward to pyruvate; when 2 carbons of Acetyl-CoA enter the mammalian TCA cycle, 2 carbons are obligatorily lost as 2 CO2 before OAA is regenerated (zero net carbon gain). Plants and bacteria use glyoxysomal Isocitrate Lyase and Malate Synthase to convert 2 Acetyl-CoA (4C) into 1 net Succinate (4C) -> OAA -> Glucose."
+    },
+    {
+      "question_id": "Q-15.2",
+      "question": "How does a rise in hepatic Glucagon during fasting simultaneously inhibit Glycolysis and activate Gluconeogenesis at the Fructose-6-Phosphate <-> Fructose-1,6-Bisphosphate control point?",
+      "options": [
+        "Glucagon binds directly to the active site of PFK-1 as a competitive inhibitor",
+        "Glucagon activates Gαs -> Adenylate Cyclase -> cAMP -> PKA, which phosphorylates the bifunctional enzyme PFK-2/FBPase-2 (inactivating its PFK-2 kinase domain and activating its FBPase-2 phosphatase domain); the resulting drop in [Fructose-2,6-bisphosphate] deactivates PFK-1 and relieves inhibition of FBPase-1",
+        "Glucagon increases intracellular [AMP] to activate FBPase-1",
+        "Glucagon cleaves Fructose-1,6-bisphosphate into two molecules of Acetyl-CoA"
+      ],
+      "correct_index": 1,
+      "explanation": "Fructose-2,6-bisphosphate is the master reciprocal signal in hepatocytes. Glucagon-activated PKA phosphorylates the tandem PFK-2/FBPase-2 enzyme, switching it to a phosphatase that hydrolyzes F-2,6-BP back to F6P. Without F-2,6-BP, PFK-1 is inhibited by physiological ATP/citrate (halting glycolysis) while FBPase-1 is disinhibited (driving gluconeogenesis)."
+    },
+    {
+      "question_id": "Q-15.3",
+      "question": "Which metabolite serves as an obligate allosteric activator of mitochondrial Pyruvate Carboxylase (the first enzyme of gluconeogenesis) AND simultaneously inhibits the Pyruvate Dehydrogenase Complex (PDC), thereby directing pyruvate toward glucose synthesis when fatty acid β-oxidation is active?",
+      "options": [
+        "Malonyl-CoA",
+        "Acetyl-CoA",
+        "Fructose-2,6-bisphosphate",
+        "Carbamoyl phosphate"
+      ],
+      "correct_index": 1,
+      "explanation": "During fasting, rapid β-oxidation of fatty acids in hepatocyte mitochondria produces high concentrations of Acetyl-CoA. Acetyl-CoA inhibits PDC (preventing oxidation of pyruvate) while acting as an obligate allosteric activator of Pyruvate Carboxylase (converting pyruvate to oxaloacetate for PEPCK gluconeogenesis)."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "The Role of Citric Acid in Intermediate Metabolism in Animal Tissues (Krebs & Johnson, 1937) & Fructose-2,6-Bisphosphate, a New Regulator of Phosphofructokinase (Van Schaftingen, Hue & Hers, 1980)",
+    "imrad_breakdown": {
+      "abstract_summary": "Hans Krebs and William Johnson (1937) demonstrated that citrate is synthesized from oxaloacetate and a 2-carbon pyruvate derivative in pigeon breast muscle, establishing the cyclic nature of aerobic respiration. Van Schaftingen and Hers (1980) discovered Fructose-2,6-bisphosphate—an acid-labile allosteric regulator missed for decades—solving how insulin and glucagon reciprocally switch hepatic glycolysis and gluconeogenesis.",
+      "key_method": "Manometric Warburg respirometry of minced pigeon breast muscle poisoned with malonate (a competitive inhibitor of succinate dehydrogenase) to prove stoichiometric succinate accumulation from citrate; mild alkaline extraction preserving acid-labile F-2,6-BP in glucagon- vs. glucose-perfused rat livers.",
+      "critical_takeaway": "Metabolic pathways are not isolated linear chains, but thermodynamically coupled, compartmentally segregated cycles governed by allosteric energy-charge sensors (AMP, Citrate, Acetyl-CoA) and hormonal second-messenger switches (F-2,6-BP)."
+    },
+    "further_reading": [
+      "Nelson, D. L., & Cox, M. M. Lehninger Principles of Biochemistry — Chapters 14, 15, 16, 17, 18 & 23 (Glycolysis, Gluconeogenesis, Glycogen Regulation, TCA Cycle, Fatty Acid Catabolism, Urea Cycle & Hormonal Integration).",
+      "Berg, J. M., Tymoczko, J. L., Gatto, G. J., & Stryer, L. Biochemistry — Metabolic Stoichiometry, Cofactor Mechanisms & Clinical Inborn Errors of Metabolism.",
+      "Kuchel, P. W., & Ralston, G. B. Schaum's Outline of Theory and Problems of Biochemistry — Worked Calculations in ATP Bioenergetic Ledgers, 14C Isotopic Tracing & Adenylate Energy Charge."
+    ]
+  }
+}

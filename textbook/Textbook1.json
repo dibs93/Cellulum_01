@@ -1,0 +1,755 @@
+{
+  "textbook_id": "TextBook1",
+  "branch_number": 1,
+  "branch_title": "Foundations of Life & Biological Thermodynamics",
+  "subtitle": "Open Thermodynamic Systems, Multi-Scale Organization, Homeostatic Control & Experimental Rigor",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Foundations of Life",
+    "upstream_nodes": [],
+    "downstream_nodes": [
+      "TextBook2",
+      "TextBook3",
+      "TextBook13"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Atom",
+        "scale_m": 1e-10,
+        "display_scale": "0.1 nm",
+        "example": "Carbon / Hydrogen / Oxygen nuclei"
+      },
+      {
+        "level": "Molecule",
+        "scale_m": 1e-9,
+        "display_scale": "1–2 nm",
+        "example": "ATP, Phospholipids, Glucose"
+      },
+      {
+        "level": "Macromolecular Complex",
+        "scale_m": 1e-8,
+        "display_scale": "8–25 nm",
+        "example": "F0F1-ATP Synthase, 80S Ribosome"
+      },
+      {
+        "level": "Organelle",
+        "scale_m": 5e-7,
+        "display_scale": "500 nm – 2 μm",
+        "example": "Mitochondrion, Chloroplast, Lysosome"
+      },
+      {
+        "level": "Cell",
+        "scale_m": 1e-5,
+        "display_scale": "10–100 μm",
+        "example": "Hepatocyte, Palisade Mesophyll Cell"
+      },
+      {
+        "level": "Tissue",
+        "scale_m": 0.001,
+        "display_scale": "1–10 mm",
+        "example": "Epithelial Sheet, Vascular Xylem"
+      },
+      {
+        "level": "Organ",
+        "scale_m": 0.1,
+        "display_scale": "10 cm",
+        "example": "Human Heart, Plant Leaf"
+      },
+      {
+        "level": "Organism",
+        "scale_m": 1.0,
+        "display_scale": "1–100 m",
+        "example": "Homo sapiens, Sequoia sempervirens"
+      }
+    ],
+    "explorer_pathways": [
+      "Future Molecular Biologist",
+      "Plant Scientist",
+      "Geneticist",
+      "Biotechnologist",
+      "Microbiologist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "1.1",
+      "title": "What is Life? Thermodynamic & Organizational Foundations",
+      "overview": "Living organisms are open, self-regulating thermodynamic systems that maintain a state of low internal entropy (high structural order) by continuously extracting free energy from their environment and exporting heat and entropy.",
+      "core_concepts": [
+        {
+          "concept_id": "1.1.1",
+          "heading": "Open Thermodynamic Systems & Free Energy Coupling",
+          "theory": "Unlike isolated systems that spontaneously decay toward thermodynamic equilibrium (maximum entropy, Delta G = 0), a living cell exists in a non-equilibrium steady state. It couples exergonic catabolic pathways (such as nutrient oxidation, Delta G < 0) to endergonic anabolic work (biosynthesis, active ion pumping, and mechanical motion, Delta G > 0) via phosphorylated intermediates, primarily Adenosine Triphosphate (ATP) and reduced cofactors (NADH, NADPH, FADH2).",
+          "key_principles": [
+            "First Law of Thermodynamics: Energy is conserved; cells transduce chemical bond energy into electrical, mechanical, and osmotic work.",
+            "Second Law of Thermodynamics: Total entropy of the universe (System + Surroundings) always increases (Delta S_univ > 0). Cells decrease internal entropy (Delta S_sys < 0) by releasing heat and metabolic byproducts that increase surrounding entropy (Delta S_surr > |Delta S_sys|).",
+            "Actual vs. Standard Biochemical Free Energy: Standard transformed free energy (Delta G°') assumes pH 7.0, 298 K, and 1 M concentrations of all reactants and products. Actual intracellular physiological free energy (Delta G) depends on the real-time mass-action ratio (Gamma = [Products]/[Reactants])."
+          ]
+        },
+        {
+          "concept_id": "1.1.2",
+          "heading": "Emergent Properties Across Biological Scales",
+          "theory": "Biological organization is strictly hierarchical: Atoms -> Molecules -> Macromolecules -> Organelles -> Cells -> Tissues -> Organs -> Organisms -> Populations -> Ecosystems. At each ascending spatial scale, novel 'emergent properties' arise from the non-linear interactions of component parts—properties that cannot be predicted solely by inspecting isolated molecules.",
+          "key_principles": [
+            "Spatial Compartmentalization: Membrane-bound organelles maintain distinct microenvironments (e.g., lysosomal lumen at pH 4.5–5.0 vs. mitochondrial matrix at pH 7.8–8.0), allowing incompatible biochemical reactions to run simultaneously.",
+            "Allometric Metabolic Scaling (Kleiber's Law): Across 27 orders of magnitude of biological mass, basal metabolic rate (B) scales with body mass (M) to the 3/4 power (B = B0 * M^0.75) due to fractal-like vascular and respiratory distribution networks."
+          ]
+        },
+        {
+          "concept_id": "1.1.3",
+          "heading": "Homeostasis & Cybernetic Feedback Loops",
+          "theory": "Homeostasis is the active maintenance of stable internal physiological variables (temperature, pH, osmolarity, ATP/ADP ratio, blood glucose) despite external fluctuations. Control systems rely on a Sensor (receptor), an Integrator (control center comparing input against a physiological set-point), and an Effector.",
+          "key_principles": [
+            "Negative Feedback Loops: The primary stabilizing mechanism in biology. Deviation from a set-point triggers an opposing response that restores equilibrium (e.g., allosteric inhibition of Phosphofructokinase-1 by high ATP and citrate; insulin/glucagon glycemic control).",
+            "Positive Feedback Loops: Self-amplifying cascades that drive rapid, irreversible state transitions to completion (e.g., Hodgkin cycle of voltage-gated Na+ channel opening during an action potential; LH surge in ovulation; blood coagulation cascade).",
+            "Closed-Loop Feedback Gain: A quantitative measure of control efficiency defined as the ratio of the correction applied by the control system to the residual error remaining."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Comparison of Thermodynamic States in Physical vs. Biological Systems",
+        "headers": [
+          "Parameter",
+          "Isolated Equilibrium System",
+          "Living Cell (Open Steady-State)",
+          "Dead / Lysed Cell"
+        ],
+        "rows": [
+          [
+            "Matter & Energy Exchange",
+            "None (Closed to both)",
+            "Continuous flux of matter & energy",
+            "Uncontrolled equilibration"
+          ],
+          [
+            "Gibbs Free Energy (Delta G)",
+            "Delta G = 0 (No work possible)",
+            "Delta G << 0 (Drives cellular work)",
+            "Approaches 0 rapidly"
+          ],
+          [
+            "Mass-Action Ratio (Gamma)",
+            "Gamma = K_eq",
+            "Gamma != K_eq (Displaced from eq.)",
+            "Gamma -> K_eq"
+          ],
+          [
+            "Internal Entropy (S_sys)",
+            "Maximum",
+            "Maintained low at expense of environment",
+            "Increases toward maximum"
+          ],
+          [
+            "Membrane Potential (Delta Psi)",
+            "0 mV",
+            "-70 mV (plasma) / -180 mV (IMM)",
+            "0 mV (Depolarized)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "1.2",
+      "title": "Scientific Inquiry, Experimental Design & Quantitative Rigor",
+      "overview": "Scientific inquiry in the life sciences translates empirical observations into falsifiable hypotheses tested via controlled, reproducible quantitative experiments.",
+      "core_concepts": [
+        {
+          "concept_id": "1.2.1",
+          "heading": "Hypothesis Architecture & Variable Control",
+          "theory": "Every rigorous experiment distinguishes between the Null Hypothesis (H0: no statistically significant effect exists between treatment and control) and the Alternative Hypothesis (H1: a true mechanistic effect exists). Valid causal inference requires isolating the Independent Variable while holding confounding parameters strictly constant.",
+          "key_principles": [
+            "Independent Variable (Manipulated): The parameter systematically varied by the investigator (e.g., substrate concentration [S], inhibitor dose, annealing temperature).",
+            "Dependent Variable (Measured Response): The quantitative readout (e.g., absorbance at 450 nm, initial reaction velocity V0, cycle threshold Ct).",
+            "Positive Control: A treatment known to produce the expected maximum response—verifies that all reagents, enzymes, and detection instruments are functional (guards against False Negatives).",
+            "Negative Control (Vehicle / No-Template Control): A treatment lacking the active experimental agent or template—establishes baseline background noise and detects contamination (guards against False Positives)."
+          ]
+        },
+        {
+          "concept_id": "1.2.2",
+          "heading": "Precision, Accuracy, Replicates & Signal-to-Noise",
+          "theory": "Experimental measurements are subject to both systematic error (bias shifting accuracy away from the true value) and random error (scatter reducing precision). Distinguishing biological reality from technical noise requires proper replication and assay validation.",
+          "key_principles": [
+            "Biological vs. Technical Replicates: Biological replicates are independent biological samples (e.g., 5 separate mice or 5 independent cell culture flasks) that capture true population variance. Technical replicates are repeated measurements of the same single biological sample (e.g., pipetting the same lysate into 3 qPCR wells) that only measure instrument/pipetting precision.",
+            "Z'-Factor (Assay Quality Metric): In high-throughput biology and diagnostic assay validation, the Z'-factor quantifies separation between positive and negative controls relative to their standard deviations. A Z'-factor between 0.5 and 1.0 indicates an excellent, robust assay."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Experimental Control Matrix in Molecular & Cellular Assays",
+        "headers": [
+          "Control Type",
+          "Composition",
+          "Primary Purpose",
+          "Failure Consequence"
+        ],
+        "rows": [
+          [
+            "Positive Control",
+            "Known active target / reference standard",
+            "Validates enzyme activity, reagents & detector",
+            "False Negative (Type II error)"
+          ],
+          [
+            "Negative / NTC Control",
+            "Buffer/water only (no template or analyte)",
+            "Detects reagent contamination or non-specific binding",
+            "False Positive (Type I error)"
+          ],
+          [
+            "Vehicle / Mock Control",
+            "Solvent only (e.g., 0.1% DMSO without drug)",
+            "Isolates solvent toxicity from drug effect",
+            "Confounded treatment effect"
+          ],
+          [
+            "Internal Housekeeping Control",
+            "Constitutive gene/protein (e.g., GAPDH, Beta-actin)",
+            "Normalizes sample loading & extraction efficiency",
+            "Skewed relative quantification"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-1.1",
+      "title": "Figure 1.1: Multi-Scale Biological Organization & Spatial Resolution Spectrum",
+      "sub_module_ref": "1.1",
+      "thumbnail_caption": "Logarithmic spatial hierarchy from 0.1 nm atomic bonds to 1 m multicellular organisms with optical/electron microscopy boundaries. Tap to expand.",
+      "svg_template_id": "svg_multiscale_hierarchy_1_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 800 320' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='scaleGrad' x1='0%' y1='0%' x2='100%' y2='0%'><stop offset='0%' stop-color='#00f2fe'/><stop offset='50%' stop-color='#4facfe'/><stop offset='100%' stop-color='#00ff87'/></linearGradient></defs><rect width='800' height='320' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='38' fill='#e2f1ff' font-family='sans-serif' font-size='16' font-weight='bold'>MULTI-SCALE BIOLOGICAL HIERARCHY (LOGARITHMIC SCALE)</text><line x1='50' y1='170' x2='750' y2='170' stroke='url(#scaleGrad)' stroke-width='6' stroke-linecap='round'/><g fill='#ffffff' font-family='monospace' font-size='12' text-anchor='middle'><circle cx='70' cy='170' r='9' fill='#00f2fe' stroke='#fff' stroke-width='2'/><text x='70' y='140' fill='#00f2fe' font-weight='bold'>Atom</text><text x='70' y='205'>0.1 nm</text><circle cx='180' cy='170' r='9' fill='#18d8fe' stroke='#fff' stroke-width='2'/><text x='180' y='140' fill='#18d8fe' font-weight='bold'>Molecule (ATP)</text><text x='180' y='205'>1 nm</text><circle cx='300' cy='170' r='9' fill='#30befe' stroke='#fff' stroke-width='2'/><text x='300' y='140' fill='#30befe' font-weight='bold'>ATP Synthase</text><text x='300' y='205'>10 nm</text><circle cx='430' cy='170' r='9' fill='#4facfe' stroke='#fff' stroke-width='2'/><text x='430' y='140' fill='#4facfe' font-weight='bold'>Mitochondrion</text><text x='430' y='205'>500 nm – 1 μm</text><circle cx='560' cy='170' r='9' fill='#28d5c2' stroke='#fff' stroke-width='2'/><text x='560' y='140' fill='#28d5c2' font-weight='bold'>Eukaryotic Cell</text><text x='560' y='205'>10–50 μm</text><circle cx='710' cy='170' r='9' fill='#00ff87' stroke='#fff' stroke-width='2'/><text x='710' y='140' fill='#00ff87' font-weight='bold'>Organ / Organism</text><text x='710' y='205'>10 cm – 1 m</text></g><rect x='60' y='240' width='320' height='32' rx='6' fill='#0d2538' stroke='#00f2fe' stroke-width='1'/><text x='220' y='260' fill='#00f2fe' font-family='sans-serif' font-size='11' text-anchor='middle'>Cryo-EM &amp; X-Ray Crystallography (0.1 nm – 100 nm)</text><rect x='400' y='240' width='330' height='32' rx='6' fill='#0d2b2a' stroke='#00ff87' stroke-width='1'/><text x='565' y='260' fill='#00ff87' font-family='sans-serif' font-size='11' text-anchor='middle'>Super-Resolution &amp; Light Microscopy (200 nm – 1 cm)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-1",
+          "x_pct": 8.7,
+          "y_pct": 53.1,
+          "label": "Atomic Scale (0.1 nm)",
+          "scale_link": "0.1nm",
+          "detail": "Covalent bond lengths (C-C = 0.154 nm) and hydrogen bonding radii."
+        },
+        {
+          "pin_id": "pin-2",
+          "x_pct": 37.5,
+          "y_pct": 53.1,
+          "label": "Nanomachinery (8-10 nm)",
+          "scale_link": "8nm",
+          "detail": "Lipid bilayer thickness (~5 nm) and F0F1-ATP synthase rotary motor (~10 nm)."
+        },
+        {
+          "pin_id": "pin-3",
+          "x_pct": 53.7,
+          "y_pct": 53.1,
+          "label": "Organelle Scale (500 nm)",
+          "scale_link": "500nm",
+          "detail": "Mitochondria and bacterial cells; near the Abbe diffraction limit of visible light (~200 nm)."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-1.2",
+      "title": "Figure 1.2: Free Energy Coupling (ATP/ADP Cycle) & Homeostatic Negative Feedback Loop",
+      "sub_module_ref": "1.1",
+      "thumbnail_caption": "Thermodynamic coupling of exergonic catabolism to endergonic cellular work alongside cybernetic feedback control. Tap to expand.",
+      "svg_template_id": "svg_atp_coupling_feedback_1_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 800 340' xmlns='http://www.w3.org/2000/svg'><rect width='800' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='36' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>A. BIOENERGETIC FREE ENERGY COUPLING</text><text x='430' y='36' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>B. HOMEOSTATIC NEGATIVE FEEDBACK</text><line x1='400' y1='20' x2='400' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><rect x='40' y='65' width='130' height='55' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='105' y='90' fill='#00f2fe' font-family='sans-serif' font-size='12' text-anchor='middle' font-weight='bold'>Catabolism</text><text x='105' y='108' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>ΔG &lt; 0 (Exergonic)</text><rect x='220' y='65' width='140' height='55' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='290' y='90' fill='#00ff87' font-family='sans-serif' font-size='12' text-anchor='middle' font-weight='bold'>ATP + H2O</text><text x='290' y='108' fill='#a0e2c4' font-family='monospace' font-size='11' text-anchor='middle'>High Phosphoryl Potential</text><rect x='220' y='215' width='140' height='55' rx='8' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='290' y='240' fill='#b388ff' font-family='sans-serif' font-size='12' text-anchor='middle' font-weight='bold'>ADP + Pi</text><text x='290' y='258' fill='#d2b8ff' font-family='monospace' font-size='11' text-anchor='middle'>Low Energy State</text><rect x='40' y='215' width='130' height='55' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='105' y='240' fill='#ff6b8b' font-family='sans-serif' font-size='12' text-anchor='middle' font-weight='bold'>Cellular Work</text><text x='105' y='258' fill='#ffb8c6' font-family='monospace' font-size='11' text-anchor='middle'>ΔG &gt; 0 (Endergonic)</text><path d='M 175 92 L 215 92' stroke='#00f2fe' stroke-width='3'/><path d='M 290 125 L 290 210' stroke='#00ff87' stroke-width='3'/><text x='335' y='172' fill='#00ff87' font-family='monospace' font-size='11' text-anchor='middle'>ΔG = -47 kJ/mol</text><path d='M 215 242 L 175 242' stroke='#ff6b8b' stroke-width='3'/><rect x='440' y='75' width='140' height='50' rx='8' fill='#102a43' stroke='#4facfe' stroke-width='2'/><text x='510' y='105' fill='#fff' font-family='sans-serif' font-size='12' text-anchor='middle'>Stimulus (Perturbation)</text><rect x='620' y='75' width='140' height='50' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='690' y='105' fill='#00f2fe' font-family='sans-serif' font-size='12' text-anchor='middle'>Sensor / Receptor</text><rect x='620' y='195' width='140' height='55' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='690' y='220' fill='#00ff87' font-family='sans-serif' font-size='12' text-anchor='middle'>Integrator (Set-Point)</text><text x='690' y='238' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>Error = SetPoint - Input</text><rect x='440' y='195' width='140' height='55' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='510' y='220' fill='#ff6b8b' font-family='sans-serif' font-size='12' text-anchor='middle'>Effector Response</text><text x='510' y='238' fill='#ffb8c6' font-family='monospace' font-size='10' text-anchor='middle'>(-) Opposes Stimulus</text><line x1='580' y1='100' x2='620' y2='100' stroke='#00f2fe' stroke-width='2.5'/><line x1='690' y1='125' x2='690' y2='195' stroke='#00ff87' stroke-width='2.5'/><line x1='620' y1='222' x2='580' y2='222' stroke='#ff6b8b' stroke-width='2.5'/><line x1='510' y1='195' x2='510' y2='125' stroke='#ff6b8b' stroke-dasharray='4,4' stroke-width='2.5'/></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-2a",
+          "x_pct": 36.2,
+          "y_pct": 27.0,
+          "label": "Physiological ATP Potential",
+          "scale_link": "1nm",
+          "detail": "Maintained far from equilibrium by oxidative phosphorylation ([ATP]/[ADP] ratio ~ 3 to 10)."
+        },
+        {
+          "pin_id": "pin-2b",
+          "x_pct": 86.2,
+          "y_pct": 65.0,
+          "label": "Cybernetic Error Signal",
+          "scale_link": "cell",
+          "detail": "Feedback Gain = Correction / Residual Error. High gain minimizes steady-state deviation."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-1.3",
+      "title": "Figure 1.3: Assay Validation & Z'-Factor Signal-to-Noise Separation",
+      "sub_module_ref": "1.2",
+      "thumbnail_caption": "Gaussian distribution of Negative (Background) vs. Positive Control signals illustrating dynamic range and Z'-factor assay quality. Tap to expand.",
+      "svg_template_id": "svg_zfactor_assay_1_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 800 300' xmlns='http://www.w3.org/2000/svg'><rect width='800' height='300' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='36' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>HIGH-THROUGHPUT ASSAY VALIDATION: Z'-FACTOR SEPARATION WINDOW</text><line x1='60' y1='240' x2='740' y2='240' stroke='#a0c4e2' stroke-width='2'/><line x1='60' y1='60' x2='60' y2='240' stroke='#a0c4e2' stroke-width='2'/><path d='M 80 240 Q 170 240 200 100 Q 230 240 320 240' fill='rgba(0, 242, 254, 0.2)' stroke='#00f2fe' stroke-width='3'/><path d='M 460 240 Q 550 240 580 70 Q 610 240 700 240' fill='rgba(0, 255, 135, 0.2)' stroke='#00ff87' stroke-width='3'/><line x1='200' y1='80' x2='200' y2='240' stroke='#00f2fe' stroke-dasharray='4,4' stroke-width='2'/><line x1='580' y1='60' x2='580' y2='240' stroke='#00ff87' stroke-dasharray='4,4' stroke-width='2'/><text x='200' y='265' fill='#00f2fe' font-family='monospace' font-size='12' text-anchor='middle'>μ_neg (3σ_neg)</text><text x='580' y='265' fill='#00ff87' font-family='monospace' font-size='12' text-anchor='middle'>μ_pos (3σ_pos)</text><line x1='260' y1='160' x2='520' y2='160' stroke='#ffca28' stroke-width='2.5'/><text x='390' y='150' fill='#ffca28' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Separation Band: Z' = 1 - [3(σ_p + σ_n) / |μ_p - μ_n|]</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-3a",
+          "x_pct": 25.0,
+          "y_pct": 40.0,
+          "label": "Negative Control (μ_n ± 3σ_n)",
+          "scale_link": "assay",
+          "detail": "Defines baseline background noise and limit of blank (LoB)."
+        },
+        {
+          "pin_id": "pin-3b",
+          "x_pct": 72.5,
+          "y_pct": 35.0,
+          "label": "Positive Control (μ_p ± 3σ_p)",
+          "scale_link": "assay",
+          "detail": "Z' >= 0.5 indicates an ideal assay with wide dynamic range and minimal coefficient of variation (CV%)."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_organization_thermodynamics_1_1",
+      "title": "Multi-Scale Organization & Intracellular Gibbs Free Energy Simulator",
+      "sub_module_ref": "1.1",
+      "type": "dual-mode-calculator-explorer",
+      "description": "Slide across 10 orders of spatial magnitude from atomic orbitals to whole organisms, or adjust physiological [ATP], [ADP], [Pi], and temperature to compute real-time intracellular Delta G.",
+      "controls": [
+        {
+          "id": "scale_exp",
+          "label": "Spatial Scale Exponent (10^x meters)",
+          "min": -10,
+          "max": 0,
+          "step": 0.5,
+          "default": -6.3,
+          "unit": "log10(m)"
+        },
+        {
+          "id": "atp_mm",
+          "label": "Intracellular [ATP]",
+          "min": 0.1,
+          "max": 10.0,
+          "step": 0.1,
+          "default": 3.5,
+          "unit": "mM"
+        },
+        {
+          "id": "adp_mm",
+          "label": "Intracellular [ADP]",
+          "min": 0.05,
+          "max": 5.0,
+          "step": 0.05,
+          "default": 1.2,
+          "unit": "mM"
+        },
+        {
+          "id": "pi_mm",
+          "label": "Intracellular [Pi]",
+          "min": 0.5,
+          "max": 20.0,
+          "step": 0.1,
+          "default": 4.8,
+          "unit": "mM"
+        },
+        {
+          "id": "temp_k",
+          "label": "Temperature (T)",
+          "min": 273,
+          "max": 320,
+          "step": 1,
+          "default": 310,
+          "unit": "K"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "mass_action_gamma",
+          "label": "Mass-Action Ratio (Γ)",
+          "formula_js": "((adp_mm * 1e-3) * (pi_mm * 1e-3)) / (atp_mm * 1e-3)",
+          "unit": "M"
+        },
+        {
+          "output_id": "actual_delta_g",
+          "label": "Actual Intracellular ΔG",
+          "formula_js": "-30.5 + ((8.314 * temp_k / 1000) * Math.log(((adp_mm * 1e-3) * (pi_mm * 1e-3)) / (atp_mm * 1e-3)))",
+          "unit": "kJ/mol"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_experimental_design_zfactor_1_2",
+      "title": "Design Your Own Experiment & Assay Z'-Factor Simulator",
+      "sub_module_ref": "1.2",
+      "type": "assay-validation-simulator",
+      "description": "Configure positive and negative control means and standard deviations (technical noise) to evaluate assay robustness, Z'-factor, Signal-to-Background ratio, and statistical validity.",
+      "controls": [
+        {
+          "id": "mean_pos",
+          "label": "Positive Control Mean Signal (μ_pos)",
+          "min": 100,
+          "max": 10000,
+          "step": 50,
+          "default": 5000,
+          "unit": "RFU"
+        },
+        {
+          "id": "sd_pos",
+          "label": "Positive Control Std Dev (σ_pos)",
+          "min": 10,
+          "max": 1000,
+          "step": 10,
+          "default": 250,
+          "unit": "RFU"
+        },
+        {
+          "id": "mean_neg",
+          "label": "Negative Control Mean Signal (μ_neg)",
+          "min": 10,
+          "max": 2000,
+          "step": 10,
+          "default": 200,
+          "unit": "RFU"
+        },
+        {
+          "id": "sd_neg",
+          "label": "Negative Control Std Dev (σ_neg)",
+          "min": 5,
+          "max": 500,
+          "step": 5,
+          "default": 30,
+          "unit": "RFU"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "z_prime_factor",
+          "label": "Assay Z'-Factor",
+          "formula_js": "1 - ((3 * (sd_pos + sd_neg)) / Math.abs(mean_pos - mean_neg))",
+          "unit": "dimensionless"
+        },
+        {
+          "output_id": "signal_to_background",
+          "label": "Signal-to-Background Ratio (S/B)",
+          "formula_js": "mean_pos / mean_neg",
+          "unit": "fold"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-1.1",
+      "title": "Gibbs Free Energy & Thermodynamic Spontaneity",
+      "latex": "\\Delta G = \\Delta H - T\\Delta S",
+      "description": "Relates changes in Gibbs free energy (ΔG) to enthalpy change (ΔH, bond energy/heat content) and entropy change (ΔS, disorder) at absolute temperature T.",
+      "variables": [
+        {
+          "symbol": "\\Delta G",
+          "definition": "Gibbs free energy change (< 0 exergonic/spontaneous; > 0 endergonic)",
+          "unit": "J/mol or kJ/mol"
+        },
+        {
+          "symbol": "\\Delta H",
+          "definition": "Enthalpy change (< 0 exothermic; > 0 endothermic)",
+          "unit": "J/mol or kJ/mol"
+        },
+        {
+          "symbol": "T",
+          "definition": "Absolute temperature (K = °C + 273.15)",
+          "unit": "K"
+        },
+        {
+          "symbol": "\\Delta S",
+          "definition": "Entropy change of the system",
+          "unit": "J/(mol·K)"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-1.2",
+      "title": "Actual Physiological Free Energy vs. Standard Equilibrium Constant",
+      "latex": "\\Delta G = \\Delta G^{\\circ\\prime} + RT \\ln\\left(\\frac{[\\text{Products}]}{[\\text{Reactants}]}\\right) \\quad \\text{where} \\quad \\Delta G^{\\circ\\prime} = -RT \\ln K_{\\text{eq}}^{\\prime}",
+      "description": "Determines the actual driving force of a biochemical reaction inside a living cell given non-standard intracellular molar concentrations.",
+      "variables": [
+        {
+          "symbol": "\\Delta G^{\\circ\\prime}",
+          "definition": "Standard transformed free energy change at pH 7.0, 298 K, 1 M reactants/products",
+          "unit": "kJ/mol"
+        },
+        {
+          "symbol": "R",
+          "definition": "Universal gas constant (8.314)",
+          "unit": "J/(mol·K)"
+        },
+        {
+          "symbol": "K_{\\text{eq}}^{\\prime}",
+          "definition": "Apparent equilibrium constant at pH 7.0 when ΔG = 0",
+          "unit": "dimensionless"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-1.3",
+      "title": "Kleiber's Allometric Metabolic Scaling Law",
+      "latex": "B = B_0 M^{3/4} \\quad \\Longrightarrow \\quad \\log_{10}(B) = \\log_{10}(B_0) + 0.75 \\log_{10}(M)",
+      "description": "Describes how whole-organism basal metabolic rate (B) scales nonlinearly with organismal body mass (M), while mass-specific metabolic rate (B/M) scales as M^(-1/4).",
+      "variables": [
+        {
+          "symbol": "B",
+          "definition": "Whole-organism basal metabolic rate",
+          "unit": "Watts (J/s) or kcal/day"
+        },
+        {
+          "symbol": "B_0",
+          "definition": "Taxon-specific normalization constant",
+          "unit": "W / kg^(0.75)"
+        },
+        {
+          "symbol": "M",
+          "definition": "Total organism body mass",
+          "unit": "kg or g"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-1.4",
+      "title": "Homeostatic Closed-Loop Feedback Gain",
+      "latex": "\\text{Gain} = \\left| \\frac{\\text{Correction}}{\\text{Residual Error}} \\right| = \\left| \\frac{\\Delta X_{\\text{uncontrolled}} - \\Delta X_{\\text{controlled}}}{\\Delta X_{\\text{controlled}}} \\right|",
+      "description": "Quantifies the effectiveness of a physiological negative feedback loop in resisting external perturbations.",
+      "variables": [
+        {
+          "symbol": "\\text{Correction}",
+          "definition": "Amount of perturbation compensated by the homeostatic effector",
+          "unit": "Physiological unit (°C, mmHg, mM)"
+        },
+        {
+          "symbol": "\\text{Residual Error}",
+          "definition": "Remaining deviation from set-point with feedback active (ΔX_controlled)",
+          "unit": "Physiological unit"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-1.5",
+      "title": "Assay Validation Z'-Factor (Zhang et al.)",
+      "latex": "Z^{\\prime} = 1 - \\frac{3(\\sigma_p + \\sigma_n)}{|\\mu_p - \\mu_n|}",
+      "description": "Evaluates the statistical quality and signal-to-noise separation between positive and negative controls in an experimental assay.",
+      "variables": [
+        {
+          "symbol": "\\mu_p, \\mu_n",
+          "definition": "Mean signal of positive control and negative control replicates",
+          "unit": "Assay readout (OD, RFU, Ct)"
+        },
+        {
+          "symbol": "\\sigma_p, \\sigma_n",
+          "definition": "Standard deviation of positive control and negative control replicates",
+          "unit": "Assay readout"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-1.1",
+        "title": "Intracellular Gibbs Free Energy of ATP Hydrolysis under Physiological Steady State",
+        "difficulty": "Intermediate",
+        "statement": "In a resting mammalian hepatocyte at physiological temperature (37°C = 310 K), the intracellular concentrations of ATP, ADP, and inorganic phosphate (Pi) are maintained by homeostatic control at [ATP] = 3.50 mM, [ADP] = 1.20 mM, and [Pi] = 4.80 mM. Given that the biochemical standard free energy of ATP hydrolysis (ATP + H2O <-> ADP + Pi) is ΔG°' = -30.5 kJ/mol and R = 8.314 J/(mol·K), calculate (a) the actual physiological free energy change (ΔG) in the hepatocyte, and (b) the apparent equilibrium constant (K'_eq) at 310 K.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Write the mass-action ratio (Γ) for ATP hydrolysis using molar (M) concentrations (where 1 mM = 10^-3 M):",
+            "equation_latex": "\\Gamma = \\frac{[\\text{ADP}][\\text{P}_i]}{[\\text{ATP}]} = \\frac{(1.20 \\times 10^{-3}\\text{ M})(4.80 \\times 10^{-3}\\text{ M})}{3.50 \\times 10^{-3}\\text{ M}} = 1.646 \\times 10^{-3}\\text{ M}"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute the concentration-dependent thermal term RT ln(Γ) at T = 310 K:",
+            "equation_latex": "RT \\ln(\\Gamma) = (8.314\\text{ J}\\cdot\\text{mol}^{-1}\\cdot\\text{K}^{-1})(310\\text{ K}) \\ln(1.646 \\times 10^{-3}) = (2577.34\\text{ J/mol})(-6.4094) = -16,519\\text{ J/mol} = -16.52\\text{ kJ/mol}"
+          },
+          {
+            "step": 3,
+            "explanation": "Substitute into the Gibbs free energy equation to obtain the actual intracellular ΔG:",
+            "equation_latex": "\\Delta G = \\Delta G^{\\circ\\prime} + RT \\ln(\\Gamma) = -30.5\\text{ kJ/mol} + (-16.52\\text{ kJ/mol}) = -47.02\\text{ kJ/mol}"
+          },
+          {
+            "step": 4,
+            "explanation": "Calculate the apparent equilibrium constant K'_eq from ΔG°' = -RT ln(K'_eq):",
+            "equation_latex": "K_{\\text{eq}}^{\\prime} = e^{-\\Delta G^{\\circ\\prime} / RT} = e^{-(-30,500) / 2577.34} = e^{11.834} \\approx 1.378 \\times 10^{5}"
+          }
+        ],
+        "final_answer": "(a) ΔG = -47.02 kJ/mol; (b) K'_eq = 1.38 × 10^5 (Note: Because Γ = 1.65 × 10^-3 is 8 orders of magnitude smaller than K'_eq, ATP hydrolysis is held far from equilibrium to maximize cellular work capacity)."
+      },
+      {
+        "problem_id": "SP-1.2",
+        "title": "Thermodynamic Coupling of Endergonic Metabolite Phosphorylation to ATP Hydrolysis",
+        "difficulty": "Foundational",
+        "statement": "The first step of glycolysis phosphorylates glucose to glucose-6-phosphate (G6P): Glucose + Pi -> G6P + H2O, which is thermodynamically unfavorable with ΔG°'_1 = +13.8 kJ/mol. In the cell, Hexokinase couples this reaction to the exergonic hydrolysis of ATP (ATP + H2O -> ADP + Pi, ΔG°'_2 = -30.5 kJ/mol). Calculate (a) the net standard free energy change (ΔG°'_net) of the coupled reaction, and (b) the net equilibrium constant (K'_eq,net) at 25°C (298 K).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Sum the two half-reactions by canceling common intermediates (Pi and H2O) to exploit the additivity of Gibbs free energy:",
+            "equation_latex": "\\text{Glucose} + \\text{ATP} \\xrightarrow{\\text{Hexokinase}} \\text{Glucose-6-Phosphate} + \\text{ADP}"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate ΔG°'_net by adding the individual standard free energy changes:",
+            "equation_latex": "\\Delta G^{\\circ\\prime}_{\\text{net}} = \\Delta G^{\\circ\\prime}_1 + \\Delta G^{\\circ\\prime}_2 = (+13.8\\text{ kJ/mol}) + (-30.5\\text{ kJ/mol}) = -16.7\\text{ kJ/mol}"
+          },
+          {
+            "step": 3,
+            "explanation": "Compute the coupled equilibrium constant K'_eq,net at T = 298 K (RT = 8.314 × 298 = 2477.6 J/mol):",
+            "equation_latex": "K_{\\text{eq,net}}^{\\prime} = e^{-\\Delta G^{\\circ\\prime}_{\\text{net}} / RT} = e^{-(-16,700) / 2477.6} = e^{6.740} \\approx 845.8"
+          }
+        ],
+        "final_answer": "(a) ΔG°'_net = -16.7 kJ/mol (spontaneous); (b) K'_eq,net = 846 (coupling shifts the equilibrium constant by more than 5 orders of magnitude)."
+      },
+      {
+        "problem_id": "SP-1.3",
+        "title": "Quantitative Cybernetics: Calculating Homeostatic Negative Feedback Gain",
+        "difficulty": "Intermediate",
+        "statement": "In an experimental physiology study on arterial baroreceptor homeostasis, a volume infusion causes mean arterial blood pressure (MAP) to rise from 100 mmHg to 175 mmHg in denervated animals lacking baroreceptor reflexes. When the same volume infusion is administered to intact animals with functional negative feedback baroreceptors, MAP rises from 100 mmHg to only 115 mmHg. Calculate (a) the total correction applied by the homeostatic system, (b) the residual error, and (c) the closed-loop negative feedback gain.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Determine the uncontrolled perturbation (ΔX_uncontrolled) and the controlled deviation or residual error (ΔX_controlled) relative to the 100 mmHg set-point:",
+            "equation_latex": "\\Delta X_{\\text{uncontrolled}} = 175 - 100 = +75\\text{ mmHg}, \\quad \\text{Residual Error } (\\Delta X_{\\text{controlled}}) = 115 - 100 = +15\\text{ mmHg}"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate the magnitude of the homeostatic correction:",
+            "equation_latex": "\\text{Correction} = \\Delta X_{\\text{cloned}} - \\Delta X_{\\text{uncontrolled}} = 115 - 175 = -60\\text{ mmHg}"
+          },
+          {
+            "step": 3,
+            "explanation": "Compute the closed-loop Feedback Gain:",
+            "equation_latex": "\\text{Gain} = \\left| \\frac{\\text{Correction}}{\\text{Residual Error}} \\right| = \\frac{60\\text{ mmHg}}{15\\text{ mmHg}} = 4.0"
+          }
+        ],
+        "final_answer": "(a) Correction = -60 mmHg; (b) Residual Error = +15 mmHg; (c) Feedback Gain = 4.0 (meaning the baroreceptor system eliminates 80% of the disturbance)."
+      },
+      {
+        "problem_id": "SP-1.4",
+        "title": "Allometric Metabolic Scaling Across Mammalian Body Sizes (Kleiber's Law)",
+        "difficulty": "Intermediate",
+        "statement": "Compare the bioenergetic scaling of a 25 g laboratory mouse (0.025 kg) and a 4,000 kg African elephant using Kleiber's allometric law (B = B_0 * M^0.75, where B_0 = 3.4 W/kg^0.75 for placental mammals). Calculate (a) the whole-organism basal metabolic rate (B) for each species in Watts, and (b) the ratio of the mouse's mass-specific metabolic rate (Watts per kg of tissue) to that of the elephant.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Compute the whole-organism basal metabolic rate (B) for the mouse (M_mouse = 0.025 kg) and elephant (M_elephant = 4000 kg):",
+            "equation_latex": "B_{\\text{mouse}} = 3.4 \\times (0.025)^{0.75} = 3.4 \\times 0.06287 = 0.214\\text{ W}"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute B for the elephant:",
+            "equation_latex": "B_{\\text{elephant}} = 3.4 \\times (4000)^{0.75} = 3.4 \\times 502.97 = 1710.1\\text{ W}"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the mass-specific metabolic rate (B/M = B_0 * M^-0.25) for each organism and take their ratio:",
+            "equation_latex": "\\frac{(B/M)_{\\text{mouse}}}{(B/M)_{\\text{elephant}}} = \\left(\\frac{M_{\\text{mouse}}}{M_{\\text{elephant}}}\\right)^{-0.25} = \\left(\\frac{4000}{0.025}\\right)^{0.25} = (160,000)^{0.25} = 20.0"
+          }
+        ],
+        "final_answer": "(a) B_mouse = 0.214 W, B_elephant = 1,710 W; (b) Mass-specific ratio = 20.0 (1 gram of mouse tissue consumes oxygen and turns over ATP 20 times faster than 1 gram of elephant tissue)."
+      },
+      {
+        "problem_id": "SP-1.5",
+        "title": "Experimental Assay Validation: Computing the Z'-Factor & Dynamic Range",
+        "difficulty": "Advanced",
+        "statement": "During validation of a 96-well fluorometric enzyme assay, 48 Positive Control wells (full enzyme + substrate) yield a mean fluorescence signal of μ_p = 4,850 RFU with a standard deviation of σ_p = 210 RFU. The 48 Negative Control wells (no-enzyme buffer blank) yield a mean of μ_n = 250 RFU with a standard deviation of σ_n = 40 RFU. Calculate (a) the Signal-to-Background ratio (S/B), (b) the Z'-factor, and (c) state whether the assay passes quality control for high-throughput screening.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the Signal-to-Background ratio (S/B) and total dynamic range |μ_p - μ_n|:",
+            "equation_latex": "\\text{S/B} = \\frac{\\mu_p}{\\mu_n} = \\frac{4850}{250} = 19.4\\text{-fold}, \\quad |\\mu_p - \\mu_n| = 4850 - 250 = 4600\\text{ RFU}"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate the sum of the 3-sigma noise bands for both controls:",
+            "equation_latex": "3(\\sigma_p + \\sigma_n) = 3(210 + 40) = 3(250) = 750\\text{ RFU}"
+          },
+          {
+            "step": 3,
+            "explanation": "Substitute into the Zhang Z'-factor equation:",
+            "equation_latex": "Z^{\\prime} = 1 - \\frac{3(\\sigma_p + \\sigma_n)}{|\\mu_p - \\mu_n|} = 1 - \\frac{750}{4600} = 1 - 0.163 = 0.837"
+          }
+        ],
+        "final_answer": "(a) S/B = 19.4; (b) Z' = 0.84; (c) Because Z' > 0.5 (and approaches 1.0), the assay exhibits an excellent separation band and passes rigorous QC."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-1.1",
+        "question": "A biochemical isomerization reaction A <-> B has a standard transformed free energy change of ΔG°' = +5.70 kJ/mol at 25°C (298 K). Calculate the maximum intracellular ratio of [B]/[A] below which the forward conversion A -> B becomes thermodynamically spontaneous (ΔG < 0).",
+        "bold_answer": "[B]/[A] < 0.100 (or 1:10 ratio)",
+        "collapsible_derivation": "Set ΔG < 0 in ΔG = ΔG°' + RT ln([B]/[A]). At equilibrium (ΔG = 0), ln([B]/[A]) = -ΔG°' / RT = -5700 / (8.314 × 298) = -2.301. Taking the exponential gives [B]/[A] = e^(-2.301) = 0.100. Whenever intracellular [B]/[A] is kept below 0.100 by downstream enzymes, ΔG becomes negative and A -> B proceeds spontaneously."
+      },
+      {
+        "problem_id": "PP-1.2",
+        "question": "In human thermoregulation, exposing a subject without autonomic thermoregulatory reflexes to a cold chamber causes core body temperature to drop by 4.2°C. In a healthy control subject with intact hypothalamic negative feedback, the same exposure causes core body temperature to drop by only 0.15°C. Calculate the closed-loop feedback gain of the human thermoregulatory system.",
+        "bold_answer": "Gain = 27.0",
+        "collapsible_derivation": "Uncontrolled deviation = -4.2°C; Residual error (controlled deviation) = -0.15°C. Correction = -4.2 - (-0.15) = -4.05°C. Feedback Gain = |Correction / Residual Error| = 4.05 / 0.15 = 27.0."
+      },
+      {
+        "problem_id": "PP-1.3",
+        "question": "A researcher designs an experiment comparing wild-type vs. drug-treated hepatocyte cultures. They grow 1 flask of wild-type cells and 1 flask of drug-treated cells, and then pipette 6 aliquots from each flask into a 12-well plate to measure ATP luminescence. What is the true biological sample size (n) per group for statistical hypothesis testing?",
+        "bold_answer": "n = 1 biological replicate (with 6 technical replicates)",
+        "collapsible_derivation": "Pipetting 6 aliquots from a single culture flask only measures technical/pipetting variance (technical replicates), not independent biological variation. Because only 1 independent flask was treated per condition, the true biological sample size is n = 1, which provides 0 degrees of freedom (df = n - 1 = 0) for valid biological inference."
+      },
+      {
+        "problem_id": "PP-1.4",
+        "question": "According to Kleiber's allometric law (B ∝ M^0.75), if Organism X has a body mass 10,000 times greater than Organism Y (M_X / M_Y = 10^4), how many times greater is the total daily caloric requirement of Organism X compared to Organism Y?",
+        "bold_answer": "1,000-fold greater (10^3)",
+        "collapsible_derivation": "Using the scaling ratio B_X / B_Y = (M_X / M_Y)^0.75 = (10^4)^(3/4) = 10^(4 × 3/4) = 10^3 = 1,000."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Clinical & Bioenergetic Case Study: 2,4-Dinitrophenol (DNP) Uncoupling & Homeostatic Collapse",
+    "scenario": "A patient presents with severe hyperthermia (core temperature 41.2°C), profuse sweating, rapid breathing (tachypnea), and profound intracellular ATP depletion after ingesting 2,4-dinitrophenol (DNP), a lipophilic weak acid protonophore.",
+    "mechanistic_analysis": "DNP shuttles protons across the inner mitochondrial membrane, collapsing the proton-motive force (Δp -> 0). Because electron transport is uncoupled from ATP synthesis, the mass-action ratio [ADP][Pi]/[ATP] rises sharply, driving catabolic fuel oxidation at maximum velocity. With no ATP produced, nearly 100% of the Gibbs free energy of NADH oxidation (ΔG°' = -220 kJ/mol) is dissipated directly as heat (ΔH), overwhelming the hypothalamic thermoregulatory negative feedback loop.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook2",
+        "topic": "Mitochondrial Cristae & Chemiosmotic Proton-Motive Force"
+      },
+      {
+        "target_textbook": "TextBook8",
+        "topic": "Hypothalamic Thermoregulation & Respiratory Compensation"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-1.1",
+      "question": "Which thermodynamic condition characterizes a metabolically active living cell?",
+      "options": [
+        "ΔG = 0 across all metabolic pathways, with Γ = K'_eq",
+        "An open steady state where ΔS_system < 0 is maintained by ΔS_surroundings > |ΔS_system|",
+        "An isolated system where enthalpy (H) increases while entropy (S) decreases",
+        "Standard biochemical state where all intracellular metabolites are held at 1.0 M"
+      ],
+      "correct_index": 1,
+      "explanation": "Living cells are open thermodynamic systems in a non-equilibrium steady state (ΔG != 0). They maintain internal order (ΔS_sys < 0) by exporting heat and catabolic waste to the surroundings so that total universal entropy increases (ΔS_univ = ΔS_sys + ΔS_surr > 0)."
+    },
+    {
+      "question_id": "Q-1.2",
+      "question": "In a colorimetric diagnostic assay validation, what does a Z'-factor of 0.78 indicate?",
+      "options": [
+        "The assay has failed due to high background contamination in the negative control",
+        "The standard deviations of the controls exceed the difference between their means",
+        "An excellent assay with wide separation between positive and negative controls and low variance",
+        "78% of the samples tested are false positives"
+      ],
+      "correct_index": 2,
+      "explanation": "A Z'-factor between 0.5 and 1.0 indicates a wide dynamic separation band where 3(σ_p + σ_n) is small compared to |μ_p - μ_n|, making it an excellent assay for quantitative screening."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "On the Universal Scaling of Metabolic Rate and Thermodynamic Efficiency in Living Systems",
+    "imrad_breakdown": {
+      "abstract_summary": "Demonstrates how fractal vascular and intracellular transport geometry constrains metabolic scaling to M^(3/4) across prokaryotes, unicellular eukaryotes, and metazoans.",
+      "key_method": "Microcalorimetry coupled with 31P-NMR spectroscopy to measure real-time intracellular [ATP], [ADP], [Pi], and heat dissipation in intact cells.",
+      "critical_takeaway": "Intracellular ATP/ADP disequilibrium is held near a universal thermodynamic operating point (~ -47 to -54 kJ/mol) across diverse phyla."
+    },
+    "further_reading": [
+      "Nelson, D. L., & Cox, M. M. Lehninger Principles of Biochemistry — Chapter 1 & Chapter 13 (Bioenergetics and Thermodynamics).",
+      "Kuchel, P. W., & Ralston, G. B. Schaum's Outline of Theory and Problems of Biochemistry — Bioenergetics & Equilibrium Calculations.",
+      "Zhang, J. H., Chung, T. D., & Oldenburg, K. R. (1999). A Simple Statistical Parameter for Use in Evaluation and Validation of High Throughput Screening Assays. Journal of Biomolecular Screening, 4(2), 67-73."
+    ]
+  }
+}

@@ -1,0 +1,822 @@
+{
+  "textbook_id": "TextBook9",
+  "branch_number": 9,
+  "branch_title": "Immunology: Innate Defense, Complement Cascades, Adaptive T/B Cell Immunity, V(D)J Recombination & Vaccine Engineering",
+  "subtitle": "PRR/TLR Pathogen Sensing, Phagolysosome Respiratory Burst, Immunoglobulin Architecture, Somatic Recombination, MHC Class I/II Antigen Presentation & mRNA/Subunit Vaccine Kinetics",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Immunology",
+    "upstream_nodes": [
+      "TextBook2",
+      "TextBook3",
+      "TextBook5",
+      "TextBook6",
+      "TextBook8"
+    ],
+    "downstream_nodes": [
+      "TextBook10",
+      "TextBook11",
+      "TextBook13",
+      "TextBook14"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Antigenic Epitope & CDR Paratope Loop",
+        "scale_m": 1.5e-9,
+        "display_scale": "1.5–2.0 nm (8–15 aa)",
+        "example": "Linear MHC-bound peptide (9-mer) or conformational B-cell epitope"
+      },
+      {
+        "level": "MHC Class I/II & IgG Monomer",
+        "scale_m": 1.2e-8,
+        "display_scale": "10–15 nm (~150 kDa)",
+        "example": "Y-shaped IgG1 (H2L2, 150 kDa); HLA-A2 + β2-microglobulin"
+      },
+      {
+        "level": "Complement MAC Pore & Secreted IgM Pentamer",
+        "scale_m": 3e-8,
+        "display_scale": "25–35 nm (~970 kDa)",
+        "example": "C5b-9 Membrane Attack Complex (10 nm inner pore); J-chain IgM"
+      },
+      {
+        "level": "mRNA Lipid Nanoparticle (LNP) Vaccine",
+        "scale_m": 8e-8,
+        "display_scale": "80–100 nm",
+        "example": "Ionizable lipid + PEG-lipid nanoparticle encapsulating N1-methylpseudouridine mRNA"
+      },
+      {
+        "level": "Immunological Synapse & Lymphocyte",
+        "scale_m": 8e-6,
+        "display_scale": "7–12 μm",
+        "example": "TCR-pMHC cSMAC/pSMAC bullseye interface; Naive CD4+/CD8+ T cell"
+      },
+      {
+        "level": "Secondary Lymphoid Germinal Center",
+        "scale_m": 0.001,
+        "display_scale": "0.5–2 mm",
+        "example": "Lymph node / Spleen Dark & Light Zones for somatic hypermutation"
+      }
+    ],
+    "explorer_pathways": [
+      "Microbiologist",
+      "Biotechnologist",
+      "Future Molecular Biologist",
+      "Geneticist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "9.1",
+      "title": "Innate Immunity: Anatomical Barriers, PRR/TLR Signaling, Phagocytosis & The Complement System",
+      "overview": "Innate immunity provides immediate, non-specific first-line defense (0–96 hours) by recognizing conserved microbial molecular signatures via germline-encoded Pattern Recognition Receptors (PRRs), executing oxidative phagocytosis, and activating the serum complement protease cascade.",
+      "core_concepts": [
+        {
+          "concept_id": "9.1.1",
+          "heading": "Pattern Recognition Receptors (PRRs), PAMPs/DAMPs & Phagocytic Respiratory Burst",
+          "theory": "Formulated by Charles Janeway (1989), innate immune cells (macrophages, neutrophils, dendritic cells) distinguish infectious non-self from self by detecting Pathogen-Associated Molecular Patterns (PAMPs—conserved microbial structures essential for pathogen survival) and Damage-Associated Molecular Patterns (DAMPs—host nuclear/mitochondrial alarmins released during necrotic lysis).",
+          "key_principles": [
+            "Toll-Like Receptors (TLRs 1–10 in Humans) & Subcellular Localization: Plasma-membrane TLRs sense extracellular microbial surfaces: TLR4 (with MD-2/CD14) recognizes Gram-negative Lipopolysaccharide (LPS Lipid A); TLR2 (heterodimerized with TLR1 or TLR6) recognizes Gram-positive lipoteichoic acids and peptidoglycan; TLR5 recognizes bacterial flagellin. Endosomal TLRs sense nucleic acids released after virion/bacterial degradation: TLR3 senses dsRNA (via TRIF -> IRF3 -> Type I Interferons IFN-α/β); TLR7/8 sense ssRNA; TLR9 senses unmethylated CpG DNA (signaling via MyD88 -> IRAK4 -> TRAF6 -> IKK -> NF-κB nuclear translocation to transcribe TNF-α, IL-1β, and IL-6).",
+            "Cytosolic Sensors & The NLRP3 Inflammasome: RIG-I and MDA5 sense cytosolic viral RNA, while cGAS-STING senses cytosolic dsDNA. NOD1/NOD2 sense cytosolic peptidoglycan muramyl dipeptides. NLRP3 assembles with ASC adaptor to activate Caspase-1, which cleaves pro-IL-1β and pro-IL-18 into active pyrogenic cytokines and cleaves Gasdermin D to trigger inflammatory Pyroptosis.",
+            "Phagolysosome Acidification & Respiratory (Oxidative) Burst: Neutrophils and macrophages engulf opsonized microbes into a phagosome that fuses with lysosomes. Membrane-bound NADPH Oxidase (NOX2) reduces O2 to Superoxide radical (O2•-), which Superoxide Dismutase (SOD) converts to H2O2; Myeloperoxidase (MPO) uses H2O2 + Cl- to generate bactericidal Hypochlorous acid (HOCl, household bleach), while inducible Nitric Oxide Synthase (iNOS) generates NO• and peroxynitrite (ONOO-)."
+          ]
+        },
+        {
+          "concept_id": "9.1.2",
+          "heading": "The Three Complement Pathways & Membrane Attack Complex (MAC)",
+          "theory": "The complement system comprises >30 heat-labile plasma zymogens (synthesized by the liver) that converge on the cleavage of C3 into C3a and C3b via a C3 Convertase, executing three effector functions: (1) Opsonization (C3b coats microbes for CR1-mediated phagocytosis); (2) Anaphylatoxin Inflammation (C5a > C3a > C4a recruit neutrophils and degranulate mast cells); and (3) Direct Osmotic Lysis via the Membrane Attack Complex (C5b-6-7-8-9n).",
+          "key_principles": [
+            "Three Initiation Pathways Converging on C3 Convertase: (1) Classical Pathway: Initiated when C1q binds the Fc region of antigen-bound IgM (pentamer) or IgG (IgG3/IgG1 doublet), activating C1r/C1s serine proteases to cleave C4 and C2 into the C4b2a C3 convertase; (2) Lectin Pathway: Mannose-Binding Lectin (MBL) or ficolins bind microbial terminal mannose/fucose carbohydrates, activating MASP-1/2 to form the identical C4b2a convertase (antibody-independent); (3) Alternative Pathway: Spontaneous tick-over hydrolysis of C3 (C3(H2O)) or microbial surface C3b binds Factor B, which is cleaved by Factor D (stabilized by Properdin) to form the C3bBb C3 convertase.",
+            "Host Self-Protection Regulators: Host cells prevent accidental autologous complement lysis by expressing CD55 (Decay-Accelerating Factor, DAF, which dissociates C3 convertases), Factor H (which binds host sialic acid to assist Factor I cleavage of C3b into inactive iC3b), and CD59 (Protectin, a GPI-anchored protein that blocks C9 polymerization into the MAC pore)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Mechanistic Comparison of the Three Complement Activation Pathways",
+        "headers": [
+          "Complement Pathway",
+          "Initiating Trigger / Recognition Molecule",
+          "Early Protease Complex",
+          "C3 Convertase",
+          "C5 Convertase",
+          "Evolutionary Role"
+        ],
+        "rows": [
+          [
+            "Classical Pathway",
+            "Antigen-bound IgM (1 molecule) or IgG1/IgG3 (≥2 molecules)",
+            "C1q-C1r2-C1s2 (Ca2+-dependent)",
+            "C4b2a",
+            "C4b2a3b",
+            "Links adaptive humoral antibodies to innate lysis"
+          ],
+          [
+            "Lectin Pathway",
+            "Microbial terminal Mannose / N-acetylglucosamine",
+            "MBL + MASP-1 / MASP-2",
+            "C4b2a",
+            "C4b2a3b",
+            "Innate antibody-independent carbohydrate sensing"
+          ],
+          [
+            "Alternative Pathway",
+            "Spontaneous C3 tick-over on surfaces lacking sialic acid",
+            "Factor D + Factor B + Properdin (Mg2+)",
+            "C3bBb",
+            "C3bBb3b",
+            "Immediate innate amplification loop on foreign surfaces"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "9.2",
+      "title": "Adaptive Immunity: Immunoglobulin Structure, V(D)J Recombination, MHC Presentation & T/B Activation",
+      "overview": "Adaptive immunity generates exquisite antigen specificity, clonal expansion, self/non-self tolerance, and lifelong immunological memory through somatic genomic rearrangement of B-Cell Receptors (BCR/Antibodies) and T-Cell Receptors (TCR).",
+      "core_concepts": [
+        {
+          "concept_id": "9.2.1",
+          "heading": "Immunoglobulin (Antibody) Architecture, Isotypes & Somatic V(D)J Recombination",
+          "theory": "Resolved by Rodney Porter and Gerald Edelman (1959), a monomeric antibody (e.g., IgG, ~150 kDa) is a symmetric heterotetramer (H2L2) consisting of two identical Heavy Chains (~50 kDa each) and two identical Light Chains (~25 kDa each, either κ OR λ, never both in the same B cell due to allelic/isotypic exclusion) linked by inter-chain disulfide bonds.",
+          "key_principles": [
+            "Fab vs. Fc Regions & CDR Hypervariable Loops: Papain protease cleaves above the hinge disulfide bonds to yield two monovalent antigen-binding fragments (2 Fab) and one crystallizable effector fragment (1 Fc, which binds Fc receptors and C1q). Pepsin cleaves below the hinge to yield one bivalent F(ab')2 fragment (which can precipitate/agglutinate antigen but lacks Fc effector function). Within the N-terminal Variable domains (VH and VL), three Complementarity-Determining Regions (CDR1, CDR2, CDR3—with CDR3 being the most diverse) form the antigen-binding Paratope.",
+            "Tonegawa's Somatic V(D)J Recombination (RAG1/RAG2): Because the human genome contains only ~20,000 genes yet produces >10^11 distinct antibodies, developing B cells in the bone marrow (and T cells in the thymus) somatically recombine Variable (V), Diversity (D, in Heavy chains only), and Joining (J) gene segments. RAG1/RAG2 recombinase recognizes Recombination Signal Sequences (RSS: conserved Heptamer + 12-bp or 23-bp Spacer + Nonamer, obeying the '12/23 Rule'), introduces hairpin dsDNA breaks, and joins segments via Artemis, Ku70/80, and Terminal Deoxynucleotidyl Transferase (TdT, which adds random template-independent N-nucleotides at coding joints to massively amplify CDR3 junctional diversity).",
+            "Germinal Center Affinity Maturation & Class-Switch Recombination (AID): Upon T-dependent activation in lymph node Germinal Centers, Activation-Induced Cytidine Deaminase (AID) deaminates cytosine to uracil (C -> U) in V-exons (driving Somatic Hypermutation [SHM] so only B-cell clones with higher affinity Ka survive follicular dendritic cell selection) and in switch (S) regions (driving Class-Switch Recombination [CSR] from IgM/IgD to IgG, IgA, or IgE without altering VH/VL antigen specificity!)."
+          ]
+        },
+        {
+          "concept_id": "9.2.2",
+          "heading": "MHC Class I vs. Class II Antigen Processing & The Two-Signal T-Cell Activation Rule",
+          "theory": "Unlike B-cell antibodies (which bind intact 3D conformational epitopes on native proteins, polysaccharides, or lipids in solution), αβ T-Cell Receptors (TCRs) are strictly MHC-Restricted (Zinkernagel & Doherty, 1974): they only recognize short linear peptide fragments bound inside the polymorphic groove of self Major Histocompatibility Complex (MHC / human HLA) molecules.",
+          "key_principles": [
+            "MHC Class I (Endogenous / Cytosolic Pathway -> CD8+ Cytotoxic T Cells): Expressed on ALL nucleated cells (and platelets, but absent on mature anucleate erythrocytes). Composed of a polymorphic α-chain (α1, α2, α3 domains; HLA-A, HLA-B, HLA-C) non-covalently paired with invariant β2-Microglobulin. Cytosolic viral or tumor proteins are ubiquitylated, degraded by the 26S Immunoproteasome into 8–10 amino acid peptides (closed-ended groove), pumped into the Rough ER lumen by the TAP1/TAP2 ABC transporter, loaded onto MHC-I, and trafficked to the surface. Recognized by the TCR + CD8 coreceptor (which binds the α3 domain); activated CD8+ CTLs release Perforin (forms membrane pores) and Granzyme B (activates host caspases to induce apoptosis) or engage FasL–Fas.",
+            "MHC Class II (Exogenous / Endolysosomal Pathway -> CD4+ Helper T Cells): Expressed constitutively ONLY on Professional Antigen-Presenting Cells (pAPCs: Dendritic Cells, Macrophages, and B Lymphocytes; inducible by IFN-γ). Composed of polymorphic α (α1, α2) and β (β1, β2) chains (HLA-DP, HLA-DQ, HLA-DR) with an open-ended groove accommodating 13–25 amino acid peptides. Newly synthesized MHC-II in the ER has its groove blocked by the Invariant Chain (Ii / CD74), which targets MHC-II to acidified endolysosomes where cathepsins cleave Ii to leave a stub called CLIP. HLA-DM catalyzes the swap of CLIP for exogenous phagocytosed peptides. Recognized by TCR + CD4 coreceptor.",
+            "Two-Signal Activation & Co-Stimulation Checkpoints: Naive T-cell activation requires: Signal 1 (TCR binding peptide-MHC + CD3/ζ ITAM phosphorylation by Lck/ZAP-70) AND Signal 2 (Co-stimulation: CD28 on T cell binding CD80/CD86 [B7-1/B7-2] on the pAPC). Signal 1 without Signal 2 induces clonal Anergy (peripheral tolerance). Activated T cells upregulate inhibitory CTLA-4 (outcompetes CD28 for B7) and PD-1 (binds PD-L1); monoclonal antibodies blocking CTLA-4 (Ipilimumab) or PD-1 (Pembrolizumab/Nivolumab) release the brakes for cancer immunotherapy."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Structural, Biophysical & Functional Properties of the Five Human Immunoglobulin Isotypes",
+        "headers": [
+          "Isotype",
+          "Heavy Chain & Secreted Valence",
+          "Serum Concentration & Half-Life (t_1/2)",
+          "Crosses Placenta (FcRn)?",
+          "Activates Classical Complement (C1q)?",
+          "Primary Physiological & Mucosal Functions"
+        ],
+        "rows": [
+          [
+            "IgG (IgG1–4)",
+            "γ (Monomer; Valence = 2)",
+            "8 – 16 mg/mL (~75–80% of total Ig); t_1/2 = 21–23 days",
+            "Yes (ONLY isotype crossing placenta via neonatal FcRn)",
+            "Yes (IgG3 > IgG1 > IgG2; IgG4 does not)",
+            "Secondary response, opsonization (FcγR), toxin/virus neutralization, ADCC (NK cells)"
+          ],
+          [
+            "IgM",
+            "μ (Pentamer + J-chain; Valence = 10)",
+            "0.5 – 2.0 mg/mL (~5–10%); t_1/2 = 5 days",
+            "No",
+            "Strongest activator (1 pentamer suffices to bind C1q)",
+            "Primary immune response (acute infection diagnostic); monomer acts as naive B-cell receptor"
+          ],
+          [
+            "IgA (IgA1–2)",
+            "α (Monomer in serum; Dimer + J-chain + Secretory Component in mucosa; Valence = 4)",
+            "1 – 4 mg/mL (~10–15%; most abundant produced daily); t_1/2 = 6 days",
+            "No (Transferred in breast milk colostrum)",
+            "No (Activates Alternative/Lectin only)",
+            "Mucosal immune exclusion in gut, respiratory tract, tears, saliva & breast milk (via pIgR transcytosis)"
+          ],
+          [
+            "IgD",
+            "δ (Monomer; Valence = 2)",
+            "0.03 mg/mL (<0.5%); t_1/2 = 3 days",
+            "No",
+            "No",
+            "Co-expressed with IgM on mature naive B cells via alternative RNA splicing; basophil activation"
+          ],
+          [
+            "IgE",
+            "ε (Monomer; Valence = 2; 4 CH domains)",
+            "0.0001 mg/mL (~0.002%, lowest); t_1/2 = 2 days in serum (weeks on mast cells)",
+            "No",
+            "No",
+            "Binds high-affinity FcεRI on Mast Cells & Basophils; helminth parasite expulsion (eosinophils) & Type I allergy"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "9.3",
+      "title": "Vaccines & Immunotherapeutics: Attenuated, Conjugate, LNP-mRNA & Monoclonal Engineering",
+      "overview": "Vaccination pre-emptively primes adaptive B- and T-cell memory without causing pathogenic disease, while hybridoma and recombinant antibody engineering provide targeted passive immunotherapies and diagnostic reagents.",
+      "core_concepts": [
+        {
+          "concept_id": "9.3.1",
+          "heading": "Vaccine Platforms: Live-Attenuated, Polysaccharide-Conjugate & Modified mRNA-LNP",
+          "theory": "Effective long-term vaccination requires generating high-affinity neutralizing antibodies (IgG/sIgA), CD4+ T follicular helper (Tfh) support, and—for intracellular pathogens—CD8+ cytotoxic T-cell memory.",
+          "key_principles": [
+            "Live-Attenuated vs. Inactivated/Subunit Vaccines: Live-attenuated vaccines (MMR, Oral Polio Sabin, BCG, Varicella) replicate transiently inside host cells, loading viral peptides onto BOTH MHC Class I and MHC Class II to elicit robust CD8+ CTL and CD4+/IgG/IgA lifelong immunity (contraindicated in pregnancy/immunodeficiency). Inactivated (Salk Polio, Rabies) and Recombinant Subunit vaccines (Hepatitis B HBsAg, HPV L1 virus-like particles) are non-replicating and safe in immunocompromised hosts, but enter the exogenous MHC-II pathway predominantly and require adjuvants (e.g., alum, AS01/AS04 TLR agonists) and booster doses.",
+            "Polysaccharide-Protein Conjugate Vaccines (Hapten-Carrier Effect): Pure bacterial capsular polysaccharides (e.g., Streptococcus pneumoniae, Haemophilus influenzae type b [Hib], Neisseria meningitidis) are T-Independent (TI-2) antigens that cross-link BCRs to produce only short-lived IgM without MHC-II presentation, class switching, or memory in infants (<2 years). Covalently conjugating the polysaccharide to an immunogenic protein carrier (e.g., Diphtheria CRM197 or Tetanus toxoid) allows polysaccharide-specific B cells to internalize the conjugate, present carrier peptides on MHC Class II to CD4+ Tfh cells, and undergo AID-mediated class switching to high-affinity IgG and memory B cells.",
+            "Nucleoside-Modified mRNA–Lipid Nanoparticle (LNP) Vaccines (Karikó & Weissman): Unmodified exogenous in vitro transcribed mRNA triggers endosomal TLR7/TLR8, inducing an IFN-α/β translational shutdown before antigen can be synthesized. Substituting uridine with N1-methylpseudouridine (m1Ψ) evades TLR7/8 sensing while increasing ribosomal translation yield. Encapsulation inside 80–100 nm Lipid Nanoparticles (containing an ionizable cationic lipid that becomes protonated at acidic endosomal pH to disrupt the endosome membrane) delivers mRNA into the host cytosol—where host 80S ribosomes translate the viral antigen (e.g., prefusion-stabilized Spike), routing it simultaneously into the endogenous Proteasome/TAP/MHC-I pathway (strong CD8+ CTLs) and secreted exogenous MHC-II/BCR pathway (neutralizing IgG)."
+          ]
+        },
+        {
+          "concept_id": "9.3.2",
+          "heading": "Köhler-Milstein Hybridoma Monoclonal Antibodies & Epidemiological Herd Immunity",
+          "theory": "While polyclonal antisera contain a heterogeneous mixture of antibodies recognizing multiple epitopes with varying affinities, Monoclonal Antibodies (mAbs) derive from a single immortalized B-cell clone recognizing a single defined epitope with uniform affinity (Kd).",
+          "key_principles": [
+            "Hybridoma HAT Selection Mechanics (Köhler & Milstein, 1975): Normal splenic plasma B cells secrete antibody (HGPRT+, Ig+) but die within days in culture; myeloma tumor cells are immortal (HGPRT-, Ig-) because they lack Hypoxanthine-Guanine Phosphoribosyltransferase (the salvage pathway enzyme for purine synthesis). After PEG-mediated cell fusion, cells are cultured in HAT Medium (Hypoxanthine, Aminopterin, Thymidine): Aminopterin blocks dihydrofolate reductase (de novo purine/thymidylate synthesis). Unfused myeloma cells die because they lack both de novo and HGPRT salvage pathways; unfused B cells die naturally after a few divisions; ONLY fused B-cell–Myeloma Hybridomas survive indefinitely and secrete monoclonal antibody.",
+            "Antibody Humanization Nomenclature: Murine mAbs (-momab) trigger human anti-mouse antibody (HAMA) clearance; Chimeric mAbs (-ximab, e.g., Rituximab, Infliximab: ~65% human constant + 35% mouse VH/VL), Humanized mAbs (-zumab, e.g., Trastuzumab, Pembrolizumab: >90% human with only mouse CDR loops grafted), and Fully Human mAbs (-umab, e.g., Adalimumab via phage display or transgenic mice) minimize immunogenicity."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Immunological & Mechanistic Comparison of Major Vaccine Platforms",
+        "headers": [
+          "Vaccine Platform",
+          "Antigen Formulation",
+          "MHC Presentation Pathway",
+          "Primary Immune Effectors",
+          "Canonical Clinical Examples"
+        ],
+        "rows": [
+          [
+            "Live-Attenuated",
+            "Weakened replication-competent pathogen",
+            "Both MHC Class I (Endogenous) & MHC Class II",
+            "Strong CD8+ CTL + CD4+ Th + IgG + mucosal IgA",
+            "MMR (Measles/Mumps/Rubella), Sabin OPV, BCG, Yellow Fever"
+          ],
+          [
+            "Inactivated (Killed)",
+            "Formalin / β-propiolactone killed whole pathogen",
+            "Predominantly MHC Class II (Exogenous)",
+            "Humoral neutralizing IgG + CD4+ Th (Minimal CD8+)",
+            "Salk IPV (Polio), Rabies, Hepatitis A, Whole-cell Pertussis"
+          ],
+          [
+            "Recombinant Subunit / VLP",
+            "Purified recombinant surface protein / capsid",
+            "MHC Class II (plus cross-presentation with adjuvants)",
+            "High-titer neutralizing IgG + CD4+ Tfh memory",
+            "Hepatitis B (HBsAg), HPV (L1 VLP), Shingrix (gE + AS01B)"
+          ],
+          [
+            "Toxoid",
+            "Formaldehyde-inactivated bacterial exotoxin",
+            "MHC Class II (T-dependent protein)",
+            "Neutralizing anti-toxin IgG (requires 10-yr boosters)",
+            "Tetanus Toxoid (TT), Diphtheria Toxoid (DT / DTaP)"
+          ],
+          [
+            "Polysaccharide Conjugate",
+            "Bacterial capsule covalently linked to CRM197/TT protein",
+            "BCR binds sugar; MHC-II presents carrier peptide to CD4+",
+            "Converts TI-2 response into T-dependent IgG + infant memory",
+            "Hib, Pneumococcal (PCV13/20), Meningococcal (MenACWY)"
+          ],
+          [
+            "mRNA-LNP / Viral Vector",
+            "m1Ψ-modified mRNA in LNP or replication-deficient AdV",
+            "Host cell translation -> Both MHC Class I & MHC Class II",
+            "Potent CD8+ CTLs + CD4+ Th1/Tfh + Neutralizing IgG",
+            "SARS-CoV-2 mRNA (BNT162b2 / mRNA-1273), ChAdOx1"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-9.1",
+      "title": "Figure 9.1: Immunoglobulin (IgG) Domain Architecture & Somatic V(D)J Recombination Locus",
+      "sub_module_ref": "9.2",
+      "thumbnail_caption": "H2L2 disulfide topology (VH/VL CDR paratope loops, Hinge, Fc region, Papain vs. Pepsin cleavage) and RAG1/2 heavy-chain V-D-J rearrangement. Tap to expand.",
+      "svg_template_id": "svg_igg_vdj_recombination_9_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. IgG MONOMER ARCHITECTURE (150 kDa)</text><text x='415' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. HEAVY CHAIN (IGH) SOMATIC V(D)J RECOMBINATION</text><line x1='395' y1='20' x2='395' y2='330' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><path d='M 110 75 L 185 165 L 185 305 M 290 75 L 215 165 L 215 305' fill='none' stroke='#00f2fe' stroke-width='12' stroke-linecap='round'/><path d='M 75 100 L 140 175 M 325 100 L 260 175' fill='none' stroke='#00ff87' stroke-width='10' stroke-linecap='round'/><line x1='185' y1='182' x2='215' y2='182' stroke='#ffca28' stroke-width='3'/><line x1='185' y1='192' x2='215' y2='192' stroke='#ffca28' stroke-width='3'/><text x='200' y='68' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>CDR1–3 Paratope Loops (VH + VL)</text><text x='85' y='72' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Fab Arm</text><text x='315' y='72' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Fab Arm</text><text x='115' y='188' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='end'>Papain Cut ↑</text><text x='285' y='208' fill='#ff6b8b' font-family='monospace' font-size='10'>↓ Pepsin Cut</text><rect x='155' y='225' width='90' height='75' rx='8' fill='rgba(0, 242, 254, 0.12)' stroke='#4facfe' stroke-dasharray='4,4'/><text x='200' y='325' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Fc Region (CH2–CH3: Binds FcγR, FcRn &amp; C1q)</text><text x='425' y='68' fill='#a0c4e2' font-family='monospace' font-size='11' font-weight='bold'>1. Germline IGH Locus (~40 V_H, 23 D_H, 6 J_H):</text><rect x='425' y='78' width='65' height='26' rx='4' fill='#005c8a' stroke='#00f2fe'/><text x='457' y='95' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>V1..V40</text><rect x='505' y='78' width='65' height='26' rx='4' fill='#0b382c' stroke='#00ff87'/><text x='537' y='95' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>D1..D23</text><rect x='585' y='78' width='55' height='26' rx='4' fill='#381d2a' stroke='#ff6b8b'/><text x='612' y='95' fill='#ff6b8b' font-family='monospace' font-size='10' text-anchor='middle'>J1..J6</text><rect x='655' y='78' width='125' height='26' rx='4' fill='#2b1d38' stroke='#b388ff'/><text x='717' y='95' fill='#d2b8ff' font-family='monospace' font-size='10' text-anchor='middle'>Cμ - Cδ - Cγ - Cα</text><text x='425' y='138' fill='#ffca28' font-family='monospace' font-size='11' font-weight='bold'>2. Somatic Recombination (RAG1/2 + TdT N-Additions):</text><rect x='425' y='148' width='185' height='32' rx='6' fill='#102a43' stroke='#00ff87' stroke-width='2'/><text x='517' y='168' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Rearranged V_H-D_H-J_H Exon</text><rect x='630' y='148' width='150' height='32' rx='6' fill='#2b1d38' stroke='#b388ff'/><text x='705' y='168' fill='#d2b8ff' font-family='monospace' font-size='11' text-anchor='middle'>Cμ / Cγ Constant</text><rect x='425' y='208' width='360' height='102' rx='8' fill='#0d2538' stroke='#4facfe' stroke-width='1.5'/><text x='605' y='230' fill='#fff' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Sources of Antibody Diversity (&gt;10^11 Repertoire)</text><text x='605' y='252' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='middle'>• Combinatorial V-D-J (Heavy) × V-J (κ/λ Light) ≈ 1.9 × 10^6</text><text x='605' y='272' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>• Junctional P- &amp; TdT N-Nucleotide Addition at CDR3 (&gt;10^4×)</text><text x='605' y='292' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>• AID Somatic Hypermutation in Germinal Centers (Affinity ↑)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-9-1a",
+          "x_pct": 24.4,
+          "y_pct": 53.0,
+          "label": "Papain vs. Pepsin Hinge Cleavage",
+          "scale_link": "12nm",
+          "detail": "Papain cleaves N-terminal to the inter-heavy-chain disulfide bonds, yielding 2 monovalent Fab fragments + 1 Fc fragment. Pepsin cleaves C-terminal to the hinge disulfides, yielding 1 bivalent F(ab')2 fragment + degraded Fc peptides."
+        },
+        {
+          "pin_id": "pin-9-1b",
+          "x_pct": 63.0,
+          "y_pct": 46.8,
+          "label": "RAG1/2 & TdT Junctional Diversity",
+          "scale_link": "10nm",
+          "detail": "D-to-J joining occurs first, followed by V-to-DJ joining. Terminal Deoxynucleotidyl Transferase (TdT) adds up to 20 random non-templated N-nucleotides at the V-D and D-J junctions, making CDR3 the primary determinant of antigen specificity."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-9.2",
+      "title": "Figure 9.2: MHC Class I (Endogenous Proteasome/TAP) vs. MHC Class II (Exogenous CLIP/HLA-DM) Pathways",
+      "sub_module_ref": "9.2",
+      "thumbnail_caption": "Side-by-side comparison of cytosolic viral peptide loading onto MHC-I (for CD8+ CTLs) versus endolysosomal peptide loading onto MHC-II (for CD4+ Th cells). Tap to expand.",
+      "svg_template_id": "svg_mhc_presentation_9_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. MHC CLASS I: ENDOGENOUS PATHWAY (CD8+ CTL)</text><text x='430' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. MHC CLASS II: EXOGENOUS PATHWAY (CD4+ Th)</text><line x1='410' y1='20' x2='410' y2='330' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><rect x='45' y='245' width='125' height='55' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='107' y='270' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Cytosolic Viral Protein</text><text x='107' y='287' fill='#ffb8c6' font-family='monospace' font-size='9' text-anchor='middle'>→ 26S Proteasome (8-10aa)</text><rect x='215' y='175' width='165' height='125' rx='10' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='297' y='198' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Rough ER Lumen</text><rect x='195' y='225' width='38' height='32' rx='4' fill='#ffca28'/><text x='214' y='245' fill='#07131e' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>TAP</text><text x='310' y='242' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>MHC-I α + β2m</text><text x='310' y='260' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>+ 9-mer Peptide</text><rect x='115' y='65' width='220' height='75' rx='10' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='225' y='92' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>All Nucleated Cells (HLA-A/B/C)</text><text x='225' y='112' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>Recognized by TCR + CD8 Coreceptor</text><text x='225' y='128' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>Effector: Perforin / Granzyme Apoptosis</text><path d='M 297 175 L 255 140' stroke='#00ff87' stroke-width='3'/><rect x='445' y='245' width='135' height='55' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='2'/><text x='512' y='270' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>ER: MHC-II (αβ)</text><text x='512' y='287' fill='#a0c4e2' font-family='monospace' font-size='9' text-anchor='middle'>+ Invariant Chain (Ii/CLIP)</text><rect x='615' y='175' width='165' height='125' rx='10' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='697' y='198' fill='#b388ff' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>MIIC Endolysosome</text><text x='697' y='222' fill='#d2b8ff' font-family='monospace' font-size='10' text-anchor='middle'>Endocytosed Antigen</text><text x='697' y='242' fill='#ffca28' font-family='monospace' font-size='10' font-weight='bold' text-anchor='middle'>HLA-DM swaps CLIP</text><text x='697' y='262' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>for 15-mer Peptide</text><rect x='515' y='65' width='235' height='75' rx='10' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='632' y='92' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Professional APCs Only (HLA-DR/DP/DQ)</text><text x='632' y='112' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>Recognized by TCR + CD4 Coreceptor</text><text x='632' y='128' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>Effector: Th1 / Th2 / Th17 / Tfh Cytokines</text><path d='M 697 175 L 655 140' stroke='#00ff87' stroke-width='3'/></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-9-2a",
+          "x_pct": 26.1,
+          "y_pct": 70.0,
+          "label": "TAP1/TAP2 Transporter",
+          "scale_link": "10nm",
+          "detail": "Herpes Simplex Virus ICP47 and Cytomegalovirus US6 block the TAP transporter to prevent viral peptide presentation on MHC Class I (evading CD8+ CTLs, though triggering 'missing-self' NK cell killing)."
+        },
+        {
+          "pin_id": "pin-9-2b",
+          "x_pct": 85.0,
+          "y_pct": 68.0,
+          "label": "Invariant Chain (Ii), CLIP & HLA-DM",
+          "scale_link": "12nm",
+          "detail": "The Invariant Chain blocks the MHC-II groove in the ER so endogenous peptides cannot bind. In the acidic MIIC endolysosome, cathepsins cleave Ii to CLIP, and HLA-DM catalyzes CLIP replacement with exogenous 13–25 aa peptides."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-9.3",
+      "title": "Figure 9.3: Scatchard Plot of Antibody-Antigen Affinity (Ka, Valence n) & Primary vs. Secondary Serology",
+      "sub_module_ref": "9.3",
+      "thumbnail_caption": "Linear Scatchard equilibrium dialysis plot (r/[L] vs. r) alongside Primary (IgM peak) vs. Secondary Memory (high-affinity IgG surge) antibody kinetics. Tap to expand.",
+      "svg_template_id": "svg_scatchard_serology_9_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. SCATCHARD PLOT: r/[L] = n·K_a - r·K_a</text><text x='430' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. PRIMARY vs. SECONDARY IMMUNE RESPONSE</text><line x1='405' y1='20' x2='405' y2='320' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><line x1='80' y1='260' x2='370' y2='260' stroke='#a0c4e2' stroke-width='2'/><line x1='80' y1='65' x2='80' y2='260' stroke='#a0c4e2' stroke-width='2'/><line x1='80' y1='85' x2='280' y2='260' stroke='#00f2fe' stroke-width='3.5'/><circle cx='80' cy='85' r='6' fill='#00ff87' stroke='#fff' stroke-width='2'/><text x='92' y='82' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold'>Y-Int = n · K_a</text><circle cx='280' cy='260' r='6' fill='#ffca28' stroke='#fff' stroke-width='2'/><text x='280' y='282' fill='#ffca28' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>X-Int (n) = 2.0 (IgG) or 10 (IgM)</text><text x='215' y='162' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold'>Slope = -K_a = -1/K_d</text><text x='215' y='310' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>r = Bound Hapten / Total Antibody</text><text x='35' y='165' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle' transform='rotate(-90 35 165)'>r / [L] (M^-1)</text><line x1='455' y1='260' x2='785' y2='260' stroke='#a0c4e2' stroke-width='2'/><line x1='455' y1='65' x2='455' y2='260' stroke='#a0c4e2' stroke-width='2'/><path d='M 475 258 L 500 258 Q 520 175 540 175 Q 565 175 595 250 L 635 255 Q 655 185 675 185 Q 700 185 735 252' fill='none' stroke='#ff6b8b' stroke-dasharray='5,3' stroke-width='3'/><text x='535' y='162' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Primary IgM</text><path d='M 475 258 L 520 258 Q 545 195 565 195 Q 595 195 625 235 Q 650 65 695 68 Q 745 72 780 125' fill='none' stroke='#00ff87' stroke-width='3.5'/><text x='695' y='58' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Secondary IgG Surge (100-1000×)</text><text x='500' y='282' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>↑ 1st Ag Dose</text><text x='630' y='282' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>↑ 2nd Booster</text><text x='620' y='310' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Time (Days) — Shorter Lag, Higher Titer &amp; Affinity (SHM)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-9-3a",
+          "x_pct": 34.1,
+          "y_pct": 76.5,
+          "label": "Scatchard X-Intercept (Valence n)",
+          "scale_link": "12nm",
+          "detail": "At saturating free ligand ([L] -> ∞, so r/[L] -> 0), the X-intercept reveals the exact number of antigen-binding sites per antibody molecule: n = 2 for IgG/IgD/IgE, n = 4 for secretory dimeric IgA, and n = 10 for pentameric IgM."
+        },
+        {
+          "pin_id": "pin-9-3b",
+          "x_pct": 84.7,
+          "y_pct": 20.0,
+          "label": "Secondary Memory IgG Response",
+          "scale_link": "cell",
+          "detail": "Driven by long-lived CD27+ memory B cells and CD4+ Tfh cells: lag phase shrinks from 7–10 days to 1–3 days, peak titer rises 100- to 1,000-fold, and average antibody affinity (Ka) increases by orders of magnitude via somatic hypermutation."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_scatchard_affinity_vdj_9_2",
+      "title": "Scatchard Antibody Affinity (Ka / Kd) & V(D)J Repertoire Combinatorial Simulator",
+      "sub_module_ref": "9.2",
+      "type": "immunochemistry-repertoire-calculator",
+      "description": "Calculate free-energy of antigen binding (ΔG°'), dissociation constant (Kd), fractional paratope occupancy (r / n), and Scatchard ratio (r / [L]) for a monoclonal IgG or IgM antibody, alongside baseline combinatorial V(D)J diversity.",
+      "controls": [
+        {
+          "id": "kd_nm",
+          "label": "Antibody Dissociation Constant (K_d = 1 / K_a)",
+          "min": 0.1,
+          "max": 100.0,
+          "step": 0.5,
+          "default": 2.0,
+          "unit": "nM"
+        },
+        {
+          "id": "free_ligand_nm",
+          "label": "Free Antigen / Hapten Concentration ([L])",
+          "min": 0.1,
+          "max": 100.0,
+          "step": 0.5,
+          "default": 6.0,
+          "unit": "nM"
+        },
+        {
+          "id": "antibody_valence_n",
+          "label": "Antibody Valence (n; 2=IgG, 4=sIgA, 10=IgM)",
+          "min": 2,
+          "max": 10,
+          "step": 2,
+          "default": 2,
+          "unit": "sites/molecule"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "ka_molar_inv",
+          "label": "Equilibrium Association Constant (K_a in ×10^8 M^-1)",
+          "formula_js": "(1 / (kd_nm * 1e-9)) / 1e8",
+          "unit": "×10^8 M^-1"
+        },
+        {
+          "output_id": "bound_per_ab_r",
+          "label": "Average Bound Antigen per Antibody Molecule (r)",
+          "formula_js": "(antibody_valence_n * free_ligand_nm) / (kd_nm + free_ligand_nm)",
+          "unit": "mol Ag / mol Ab"
+        },
+        {
+          "output_id": "fractional_saturation_theta",
+          "label": "Fractional Paratope Saturation (θ = r / n)",
+          "formula_js": "(free_ligand_nm / (kd_nm + free_ligand_nm)) * 100",
+          "unit": "%"
+        },
+        {
+          "output_id": "delta_g_binding_kj",
+          "label": "Standard Binding Free Energy at 37°C (ΔG°' = RT ln K_d)",
+          "formula_js": "(8.314 * 310 * Math.log(kd_nm * 1e-9)) / 1000",
+          "unit": "kJ/mol"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_vaccine_herd_immunity_elisa_9_3",
+      "title": "Epidemiological Herd Immunity Threshold (HIT) & Vaccine Efficacy Simulator",
+      "sub_module_ref": "9.3",
+      "type": "vaccine-epidemiology-simulator",
+      "description": "Adjust a pathogen's Basic Reproduction Number (R0) and real-world Vaccine Effectiveness against transmission (VE) to calculate the theoretical Herd Immunity Threshold (HIT) and the Critical Vaccination Coverage (Vc) required to drive the Effective Reproduction Number (Re) below 1.0.",
+      "controls": [
+        {
+          "id": "r_zero",
+          "label": "Basic Reproduction Number (R_0)",
+          "min": 1.2,
+          "max": 18.0,
+          "step": 0.2,
+          "default": 5.0,
+          "unit": "secondary cases"
+        },
+        {
+          "id": "vaccine_efficacy_pct",
+          "label": "Vaccine Efficacy Against Transmission (E_v)",
+          "min": 50.0,
+          "max": 100.0,
+          "step": 1.0,
+          "default": 90.0,
+          "unit": "%"
+        },
+        {
+          "id": "current_vax_coverage_pct",
+          "label": "Current Population Vaccination Coverage (V)",
+          "min": 0.0,
+          "max": 100.0,
+          "step": 2.0,
+          "default": 75.0,
+          "unit": "%"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "herd_threshold_hit_pct",
+          "label": "Theoretical Herd Immunity Threshold (HIT = 1 - 1/R0)",
+          "formula_js": "(1 - (1 / r_zero)) * 100",
+          "unit": "%"
+        },
+        {
+          "output_id": "critical_vax_coverage_vc",
+          "label": "Required Critical Vaccination Coverage (V_c = HIT / E_v)",
+          "formula_js": "((1 - (1 / r_zero)) / (vaccine_efficacy_pct / 100)) * 100",
+          "unit": "%"
+        },
+        {
+          "output_id": "effective_re_number",
+          "label": "Effective Reproduction Number (R_e at Current Coverage)",
+          "formula_js": "r_zero * (1 - ((current_vax_coverage_pct / 100) * (vaccine_efficacy_pct / 100)))",
+          "unit": "R_e (<1.0 halts epidemic)"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-9.1",
+      "title": "Antibody-Antigen Equilibrium Affinity (Ka, Kd) & Binding Free Energy",
+      "latex": "K_a = \\frac{[\\text{Ab}\\cdot\\text{Ag}]}{[\\text{Ab}][\\text{Ag}]} = \\frac{k_{\\text{on}}}{k_{\\text{off}}} = \\frac{1}{K_d}, \\qquad \\Delta G^{\\circ\\prime} = -RT \\ln K_a = +RT \\ln K_d",
+      "description": "Quantifies the intrinsic affinity of a single antibody paratope for its antigenic epitope (where K_d is the free antigen concentration at which 50% of binding sites are occupied).",
+      "variables": [
+        {
+          "symbol": "K_a",
+          "definition": "Equilibrium association (affinity) constant (typically 10^7 to 10^11 M^-1)",
+          "unit": "M^-1 (L/mol)"
+        },
+        {
+          "symbol": "K_d",
+          "definition": "Equilibrium dissociation constant (typically 10^-7 to 10^-11 M)",
+          "unit": "M (mol/L) or nM"
+        },
+        {
+          "symbol": "k_{\\text{on}}, k_{\\text{off}}",
+          "definition": "Bimolecular association rate constant (M^-1·s^-1) and unimolecular dissociation rate constant (s^-1)",
+          "unit": "M^-1·s^-1, s^-1"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-9.2",
+      "title": "Scatchard Equation for Antibody Valence (n) & Affinity Determination",
+      "latex": "\\frac{r}{[L]} = n K_a - r K_a \\qquad \\text{where} \\qquad r = \\frac{[\\text{Bound Ligand}]}{[\\text{Total Antibody}]} = \\frac{n K_a [L]}{1 + K_a [L]}",
+      "description": "Linearizes equilibrium dialysis binding data: plotting r/[L] (Y-axis) against r (X-axis) yields a straight line with Slope = -K_a, Y-intercept = n·K_a, and X-intercept = n (antibody valence).",
+      "variables": [
+        {
+          "symbol": "r",
+          "definition": "Moles of bound hapten/antigen per mole of total antibody molecules",
+          "unit": "dimensionless (0 to n)"
+        },
+        {
+          "symbol": "[L]",
+          "definition": "Concentration of free (unbound) hapten/antigen at equilibrium",
+          "unit": "M or nM"
+        },
+        {
+          "symbol": "n",
+          "definition": "Total number of equivalent, independent antigen-binding sites per antibody molecule (2 for IgG, 4 for dimeric sIgA, 10 for pentameric IgM)",
+          "unit": "sites / Ab"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-9.3",
+      "title": "Combinatorial V(D)J Baseline Repertoire Calculation",
+      "latex": "N_{\\text{combinatorial}} = \\left(N_{V_H} \\times N_{D_H} \\times N_{J_H}\\right) \\times \\left[\\left(N_{V_\\kappa} \\times N_{J_\\kappa}\\right) + \\left(N_{V_\\lambda} \\times N_{J_\\lambda}\\right)\\right]",
+      "description": "Computes the baseline number of distinct antigen receptors generated purely by combinatorial joining of Heavy Chain (V-D-J) and Light Chain (κ or λ V-J) gene segments prior to junctional TdT N-nucleotide diversification.",
+      "variables": [
+        {
+          "symbol": "N_{V_H}, N_{D_H}, N_{J_H}",
+          "definition": "Number of functional germline Heavy Chain V, D, and J gene segments",
+          "unit": "segments"
+        },
+        {
+          "symbol": "N_{V_\\kappa}, N_{J_\\kappa}, N_{V_\\lambda}, N_{J_\\lambda}",
+          "definition": "Number of functional κ and λ Light Chain V and J segments",
+          "unit": "segments"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-9.4",
+      "title": "Epidemiological Herd Immunity Threshold (HIT) & Imperfect Vaccine Critical Coverage (Vc)",
+      "latex": "\\text{HIT} = 1 - \\frac{1}{R_0}, \\qquad V_c = \\frac{\\text{HIT}}{E_v} = \\frac{1 - (1/R_0)}{E_v}, \\qquad R_e = R_0 \\left(1 - V \\cdot E_v\\right)",
+      "description": "Determines the minimum proportion of a population that must be immunized (V_c) with a vaccine of transmission efficacy E_v to reduce the Effective Reproduction Number (R_e) below 1.0 and halt epidemic spread.",
+      "variables": [
+        {
+          "symbol": "R_0",
+          "definition": "Basic Reproduction Number in a 100% susceptible population",
+          "unit": "secondary infections"
+        },
+        {
+          "symbol": "E_v",
+          "definition": "Fractional vaccine efficacy against infection/transmission (0 to 1)",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "V_c",
+          "definition": "Critical vaccination coverage required (if V_c > 1.0, vaccine alone cannot achieve herd immunity)",
+          "unit": "proportion or %"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-9.5",
+      "title": "Diagnostic Serology & Clinical Assay Metrics (Sensitivity, Specificity, PPV, NPV)",
+      "latex": "\\text{Sensitivity} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}}, \\qquad \\text{Specificity} = \\frac{\\text{TN}}{\\text{TN} + \\text{FP}}, \\qquad \\text{PPV} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}}",
+      "description": "Evaluates clinical performance of ELISA, Lateral Flow, and RT-PCR diagnostic kits across diseased and healthy cohorts, demonstrating how Positive Predictive Value (PPV) depends on both Specificity and disease Prevalence.",
+      "variables": [
+        {
+          "symbol": "\\text{TP, FN}",
+          "definition": "True Positives and False Negatives among truly infected individuals",
+          "unit": "patients"
+        },
+        {
+          "symbol": "\\text{TN, FP}",
+          "definition": "True Negatives and False Positives among truly uninfected individuals",
+          "unit": "patients"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-9.1",
+        "title": "Equilibrium Dialysis & Scatchard Plot Analysis: Determining Antibody Valence (n), Ka, Kd & Binding ΔG°'",
+        "difficulty": "Intermediate",
+        "statement": "To characterize a purified monoclonal antibody (either monomeric IgG or pentameric IgM) raised against the 2,4-dinitrophenyl (DNP) hapten, an immunochemist performs equilibrium dialysis at 37°C (310 K, R = 8.314 J·mol^-1·K^-1) with a fixed total antibody concentration of [Ab]_total = 1.0 × 10^-8 M (10 nM) inside the dialysis bag:\n• Experiment 1: At an equilibrium free hapten concentration of [L]_1 = 2.0 × 10^-9 M (2.0 nM), the bound hapten concentration is [Bound]_1 = 1.0 × 10^-8 M (10.0 nM).\n• Experiment 2: At an equilibrium free hapten concentration of [L]_2 = 6.0 × 10^-9 M (6.0 nM), the bound hapten concentration is [Bound]_2 = 1.5 × 10^-8 M (15.0 nM).\nDetermine: (a) the values of r and r/[L] for both experiments, (b) the Association Constant (K_a), Dissociation Constant (K_d), and Antibody Valence (n—identifying the isotype), and (c) the standard Gibbs free energy of binding (ΔG°') per paratope site at 37°C.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the molar binding ratio r = [Bound] / [Ab]_total and the Scatchard ratio r / [L] for Experiment 1 and Experiment 2:",
+            "equation_latex": "r_1 = \\frac{10.0\\text{ nM}}{10.0\\text{ nM}} = 1.00, \\quad \\frac{r_1}{[L]_1} = \\frac{1.00}{2.0 \\times 10^{-9}\\text{ M}} = 5.00 \\times 10^8\\text{ M}^{-1}"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute r_2 and r_2 / [L]_2 for Experiment 2:",
+            "equation_latex": "r_2 = \\frac{15.0\\text{ nM}}{10.0\\text{ nM}} = 1.50, \\quad \\frac{r_2}{[L]_2} = \\frac{1.50}{6.0 \\times 10^{-9}\\text{ M}} = 2.50 \\times 10^8\\text{ M}^{-1}"
+          },
+          {
+            "step": 3,
+            "explanation": "Use the linear Scatchard equation (r/[L] = n·K_a - r·K_a) where Slope = -K_a = (y_2 - y_1) / (r_2 - r_1):",
+            "equation_latex": "\\text{Slope} = -K_a = \\frac{2.50 \\times 10^8 - 5.00 \\times 10^8}{1.50 - 1.00} = \\frac{-2.50 \\times 10^8}{0.50} = -5.00 \\times 10^8\\text{ M}^{-1} \\implies K_a = 5.00 \\times 10^8\\text{ M}^{-1}, \\quad K_d = \\frac{1}{K_a} = 2.00 \\times 10^{-9}\\text{ M } (2.0\\text{ nM})"
+          },
+          {
+            "step": 4,
+            "explanation": "Substitute r_1 = 1.00, r_1/[L]_1 = 5.00 × 10^8 M^-1, and K_a = 5.00 × 10^8 M^-1 into the Scatchard equation to solve for valence n:",
+            "equation_latex": "5.00 \\times 10^8 = n(5.00 \\times 10^8) - (1.00)(5.00 \\times 10^8) \\implies n = 2.0\\text{ binding sites/molecule (Monomeric IgG!)}"
+          },
+          {
+            "step": 5,
+            "explanation": "Calculate the standard free energy of binding (ΔG°' = -RT ln K_a) at T = 310 K:",
+            "equation_latex": "\\Delta G^{\\circ\\prime} = -(8.314\\text{ J}\\cdot\\text{mol}^{-1}\\cdot\\text{K}^{-1})(310\\text{ K}) \\ln(5.00 \\times 10^8) = -(2577.34)(20.030) = -51,625\\text{ J/mol} = -51.63\\text{ kJ/mol}"
+          }
+        ],
+        "final_answer": "(a) r_1 = 1.0, r_2 = 1.5; (b) K_a = 5.00 × 10^8 M^-1, K_d = 2.00 nM, Valence n = 2.0 (confirming monomeric bivalent IgG); (c) ΔG°' = -51.63 kJ/mol."
+      },
+      {
+        "problem_id": "SP-9.2",
+        "title": "Combinatorial V(D)J Recombination Diversity in the Human Immunoglobulin Repertoire",
+        "difficulty": "Foundational",
+        "statement": "The human germline Immunoglobulin loci contain the following approximate numbers of functional, rearrangeable gene segments:\n• Heavy Chain Locus (IGH on Chromosome 14): 40 V_H segments, 23 D_H segments, and 6 J_H segments\n• Kappa (κ) Light Chain Locus (IGK on Chromosome 2): 35 V_κ segments and 5 J_κ segments\n• Lambda (λ) Light Chain Locus (IGL on Chromosome 22): 30 V_λ segments and 4 J_λ segments\nAssuming any functional V, D, and J segment can recombine with equal probability: (a) Calculate the number of distinct Heavy Chains, κ Light Chains, and λ Light Chains that can be produced by combinatorial V(D)J joining alone. (b) Calculate the total baseline combinatorial antibody repertoire (H2L2) before junctional P/N-nucleotide diversity and somatic hypermutation.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Compute the number of combinatorial Heavy Chain variable domains (V_H × D_H × J_H):",
+            "equation_latex": "N_{\\text{Heavy}} = 40 \\times 23 \\times 6 = 5,520\\text{ distinct Heavy Chain combinations}"
+          },
+          {
+            "step": 2,
+            "explanation": "Compute the number of combinatorial κ Light Chains (V_κ × J_κ) and λ Light Chains (V_λ × J_λ), and sum them for total Light Chain possibilities:",
+            "equation_latex": "N_{\\kappa} = 35 \\times 5 = 175, \\qquad N_{\\lambda} = 30 \\times 4 = 120 \\implies N_{\\text{Light,total}} = 175 + 120 = 295\\text{ distinct Light Chains}"
+          },
+          {
+            "step": 3,
+            "explanation": "Multiply Heavy Chain combinations by Total Light Chain combinations to obtain the combinatorial H + L pairing repertoire:",
+            "equation_latex": "N_{\\text{combinatorial}} = N_{\\text{Heavy}} \\times (N_{\\kappa} + N_{\\lambda}) = 5,520 \\times 295 = 1,628,400 \\approx 1.63 \\times 10^6\\text{ distinct antibodies}"
+          }
+        ],
+        "final_answer": "(a) 5,520 Heavy chains, 175 κ chains, 120 λ chains (295 total light chains); (b) 1,628,400 (~1.63 × 10^6) baseline combinatorial antibodies (which TdT N-nucleotide addition expands >10,000-fold to >10^10–10^11!)."
+      },
+      {
+        "problem_id": "SP-9.3",
+        "title": "Vaccine Epidemiology: Herd Immunity Threshold (HIT) & Critical Vaccination Coverage (Vc)",
+        "difficulty": "Intermediate",
+        "statement": "Compare the vaccination epidemiology of two viral pathogens:\n• Pathogen A (e.g., ancestral Poliovirus / Smallpox): Basic Reproduction Number R_0 = 5.0.\n• Pathogen B (e.g., Measles virus): Basic Reproduction Number R_0 = 15.0.\n(a) Calculate the theoretical Herd Immunity Threshold (HIT%) for Pathogen A and Pathogen B assuming a 100% sterilizing vaccine. (b) If the available vaccine for Pathogen A has an efficacy against transmission of E_v = 85.0% (0.85), what Critical Vaccination Coverage (V_c%) of the population must be vaccinated to halt endemic transmission (R_e < 1)? (c) If a candidate vaccine for Pathogen B (R_0 = 15.0) had an efficacy of only E_v = 90.0% (0.90), could herd immunity be achieved by vaccination alone?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the theoretical Herd Immunity Threshold HIT = 1 - (1 / R_0) for Pathogen A (R_0 = 5.0) and Pathogen B (R_0 = 15.0):",
+            "equation_latex": "\\text{HIT}_A = 1 - \\frac{1}{5.0} = 0.800 \\ (80.0\\%), \\qquad \\text{HIT}_B = 1 - \\frac{1}{15.0} = \\frac{14}{15} = 0.9333 \\ (93.3\\%)"
+          },
+          {
+            "step": 2,
+            "explanation": "Divide HIT_A (0.800) by the vaccine efficacy E_v = 0.850 to find the required Critical Vaccination Coverage (V_c) for Pathogen A:",
+            "equation_latex": "V_{c,A} = \\frac{\\text{HIT}_A}{E_v} = \\frac{0.800}{0.850} = 0.9412 \\quad (94.1\\% \\text{ of the population must be vaccinated})"
+          },
+          {
+            "step": 3,
+            "explanation": "Evaluate V_c for Pathogen B (HIT_B = 0.9333) with a vaccine of efficacy E_v = 0.900:",
+            "equation_latex": "V_{c,B} = \\frac{0.9333}{0.900} = 1.037 \\ (103.7\\% > 100\\%!)"
+          },
+          {
+            "step": 4,
+            "explanation": "Because V_c,B exceeds 100% (even at 100% vaccination coverage, only 90.0% of the population is protected, which is less than the required 93.3% HIT; R_e = 15 × (1 - 0.90) = 1.50 > 1), a 90%-effective vaccine cannot eliminate Measles—explaining why Measles eradication requires the MMR vaccine's ~97% two-dose efficacy!",
+            "equation_latex": "\\text{Minimum } E_v \\text{ for } R_0=15: \\quad E_{v,\\min} > 1 - \\frac{1}{15} = 93.3\\%"
+          }
+        ],
+        "final_answer": "(a) HIT_A = 80.0%, HIT_B = 93.3%; (b) V_c,A = 94.1% coverage; (c) No (V_c = 103.7% > 100%; at 100% coverage R_e = 1.50, so a pathogen with R_0 = 15 requires a vaccine with >93.3% efficacy)."
+      },
+      {
+        "problem_id": "SP-9.4",
+        "title": "Clinical Immunodiagnostics: Sensitivity, Specificity & Positive Predictive Value (PPV) in Low-Prevalence Screening",
+        "difficulty": "Intermediate",
+        "statement": "A newly developed Rapid Lateral Flow IgG/IgM Immunoassay is validated and found to have a clinical Sensitivity of 98.0% and a Specificity of 99.0%. The assay is deployed to screen N = 100,000 asymptomatic blood donors in a region where the true prevalence of the viral infection is 0.50% (p = 0.0050). Calculate: (a) the exact numbers of True Positives (TP), False Negatives (FN), True Negatives (TN), and False Positives (FP) in the 100,000-donor cohort, and (b) the Positive Predictive Value (PPV%) and Negative Predictive Value (NPV%) of the test in this population.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Partition the N = 100,000 donors into Truly Infected (Prevalence = 0.005 × 100,000 = 500) and Truly Uninfected (100,000 - 500 = 99,500):",
+            "equation_latex": "N_{\\text{infected}} = 500\\text{ donors}, \\qquad N_{\\text{uninfected}} = 99,500\\text{ donors}"
+          },
+          {
+            "step": 2,
+            "explanation": "Apply Sensitivity (98.0% = 0.98) to the 500 infected donors to find TP and FN:",
+            "equation_latex": "\\text{TP} = 0.980 \\times 500 = 490, \\qquad \\text{FN} = 500 - 490 = 10"
+          },
+          {
+            "step": 3,
+            "explanation": "Apply Specificity (99.0% = 0.99) to the 99,500 uninfected donors to find TN and FP (where False Positive Rate = 1 - Specificity = 1.0% = 0.01):",
+            "equation_latex": "\\text{TN} = 0.990 \\times 99,500 = 98,505, \\qquad \\text{FP} = 0.010 \\times 99,500 = 995"
+          },
+          {
+            "step": 4,
+            "explanation": "Compute Positive Predictive Value [PPV = TP / (TP + FP)] and Negative Predictive Value [NPV = TN / (TN + FN)]:",
+            "equation_latex": "\\text{PPV} = \\frac{490}{490 + 995} = \\frac{490}{1,485} = 0.3300 \\ (33.0\\%), \\qquad \\text{NPV} = \\frac{98,505}{98,505 + 10} = 0.99990 \\ (99.99\\%)"
+          }
+        ],
+        "final_answer": "(a) TP = 490, FN = 10, TN = 98,505, FP = 995; (b) PPV = 33.0% and NPV = 99.99% (because prevalence [0.5%] is lower than the false-positive rate [1.0%], two-thirds of positive screening tests are false positives—requiring a confirmatory RT-PCR or Western blot test!)."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-9.1",
+        "question": "A purified human IgG1 molecule (MW = 150 kDa; two Heavy chains of 50 kDa each and two Light chains of 25 kDa each) is analyzed under three conditions: (1) SDS-PAGE with β-mercaptoethanol (reducing); (2) Papain digestion followed by non-reducing size-exclusion chromatography; and (3) Pepsin digestion followed by non-reducing chromatography. What molecular weight bands/peaks are observed in each condition?",
+        "bold_answer": "(1) Reducing SDS-PAGE: 50 kDa and 25 kDa bands; (2) Papain: 50 kDa peak (two 50 kDa Fab + one 50 kDa Fc); (3) Pepsin: 100 kDa F(ab')2 peak + small degraded Fc peptides",
+        "collapsible_derivation": "(1) β-mercaptoethanol cleaves all inter-chain disulfide bonds, separating IgG into two 50 kDa Heavy chains and two 25 kDa Light chains (2 bands on SDS-PAGE). (2) Papain cleaves above the hinge disulfide bond, generating two 50 kDa monovalent Fab fragments and one 50 kDa intact Fc fragment (all eluting at ~50 kDa). (3) Pepsin cleaves below the hinge disulfide bond, leaving the two Fab arms joined as a single 100 kDa bivalent F(ab')2 fragment while digesting the Fc stem into small peptides."
+      },
+      {
+        "problem_id": "PP-9.2",
+        "question": "During hybridoma production (Köhler & Milstein protocol), spleen B cells from an immunized mouse (HGPRT+, Ig+) are fused with mouse myeloma cells (HGPRT-, Ig-) using polyethylene glycol (PEG) and plated in HAT medium (Hypoxanthine, Aminopterin, Thymidine). What is the biochemical role of Aminopterin, and why do unfused myeloma cells die in HAT medium?",
+        "bold_answer": "Aminopterin competitively inhibits Dihydrofolate Reductase (blocking de novo purine and TMP synthesis); unfused myeloma cells lack HGPRT and cannot use the hypoxanthine purine salvage pathway",
+        "collapsible_derivation": "Mammalian cells synthesize purine nucleotides via two pathways: the de novo pathway (requiring tetrahydrofolate generated by DHFR, which is blocked by Aminopterin) and the salvage pathway (requiring HGPRT to phosphoribosylate Hypoxanthine, and Thymidine Kinase to phosphorylate Thymidine). Because myeloma cells are engineered to be HGPRT-negative, blocking the de novo pathway with Aminopterin starves unfused myeloma cells of purines, leaving only B-cell–myeloma hybridomas (which inherit functional HGPRT+ from the B cell and immortality from the myeloma) alive."
+      },
+      {
+        "problem_id": "PP-9.3",
+        "question": "Compare the intrinsic affinity (K_d per single paratope) versus functional avidity (effective K_d of the multivalent complex) when an early primary-response IgM pentamer (10 binding sites, intrinsic K_d = 10^-6 M) binds a repetitive viral capsid surface compared to a monomeric IgG (2 binding sites, affinity-matured intrinsic K_d = 10^-9 M).",
+        "bold_answer": "IgM has lower single-site intrinsic affinity (10^-6 M vs. 10^-9 M) but achieves ultra-high multivalent Avidity (effective K_d ≈ 10^-11 M) because all 10 Fab sites would have to dissociate simultaneously for the pentamer to detach",
+        "collapsible_derivation": "Affinity measures the strength of a single paratope-epitope bond, whereas Avidity measures the combined synergistic strength of multiple simultaneous bonds. Although naive IgM has not undergone somatic hypermutation (low intrinsic affinity), its decavalent (n = 10) pentameric architecture gives it immense functional avidity against polyvalent microbial surfaces."
+      },
+      {
+        "problem_id": "PP-9.4",
+        "question": "Many metastatic tumors evade CD8+ Cytotoxic T-Lymphocyte (CTL) destruction by epigenetically downregulating β2-microglobulin or TAP1/2, thereby eliminating all MHC Class I molecules from their cell surface. Which innate lymphoid cell population specifically detects and kills host cells that have lost surface MHC Class I ('missing-self' recognition), and by what receptor balance?",
+        "bold_answer": "Natural Killer (NK) Cells; loss of MHC Class I removes inhibitory KIR (Killer-cell Immunoglobulin-like Receptor) ITIM signaling, allowing activating receptors (NKG2D / CD16) to trigger Perforin/Granzyme lysis",
+        "collapsible_derivation": "According to Klas Kärre's 'Missing-Self Hypothesis', NK cells continuously scan host cells using two opposing receptor families: Activating Receptors (e.g., NKG2D binding stress ligands MICA/MICB) and Inhibitory Receptors (KIRs and CD94/NKG2A that bind self MHC Class I and recruit SHP-1/2 phosphatases via ITIM motifs to block killing). When a virus-infected or tumor cell downregulates MHC Class I to hide from CD8+ T cells, the inhibitory KIR signal is lost, and the NK cell executes Perforin/Granzyme apoptosis."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Clinical Immunogenetics Case Study: Hyper-IgM Syndrome (CD40L Deficiency), Bare Lymphocyte Syndrome & CAR-T Immunotherapy",
+    "scenario": "Case A (Primary Immunodeficiency): A 9-month-old boy presents with recurrent sinopulmonary infections and Pneumocystis jirovecii pneumonia. Quantitative serum immunoglobulins reveal markedly elevated IgM (950 mg/dL) butundetectable IgG, IgA, and IgE, with complete absence of lymph node Germinal Centers. Genetic sequencing identifies an X-linked mutation in CD40LG (CD154). Case B (Missing MHC-II): A child with Severe Combined Immunodeficiency (Bare Lymphocyte Syndrome Type II) has normal numbers of B cells and CD8+ T cells, but almost zero CD4+ T cells due to a mutation in the CIITA transcription factor.",
+    "mechanistic_analysis": "In Case A (X-Linked Hyper-IgM Syndrome), B-cell Class-Switch Recombination (CSR) and Somatic Hypermutation (SHM) in Germinal Centers strictly require T-follicular helper (Tfh) cell contact: CD40L (CD154) on the activated CD4+ T cell must bind CD40 on the B cell (alongside IL-4/IL-21 cytokines) to induce expression of Activation-Induced Cytidine Deaminase (AID). Without functional CD40L, B cells can still respond to antigens by secreting default pentameric IgM, but can never activate AID to switch heavy-chain constant exons to IgG, IgA, or IgE. In Case B, CIITA (Class II Transactivator) is the master transcriptional coactivator required to express HLA-DP, HLA-DQ, and HLA-DR on thymic epithelial cells and pAPCs; without MHC Class II in the thymus, developing CD4+ thymocytes fail positive selection.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook3",
+        "topic": "Alternative Pre-mRNA Splicing of Membrane IgM/IgD vs. Secreted Antibodies"
+      },
+      {
+        "target_textbook": "TextBook4",
+        "topic": "X-Linked Recessive Pedigrees & Co-Dominant HLA Haplotype Inheritance"
+      },
+      {
+        "target_textbook": "TextBook5",
+        "topic": "Sandwich ELISA, Lateral Flow AuNP Conjugates & Hybridoma mAb Production"
+      },
+      {
+        "target_textbook": "TextBook6",
+        "topic": "Gram-Negative LPS TLR4 Septic Shock & Viral Immune Evasion"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-9.1",
+      "question": "Why does a B cell that undergoes Class-Switch Recombination (CSR) from IgM to IgG1 in a germinal center retain the exact same antigen-binding specificity as its parental IgM clone?",
+      "options": [
+        "IgM and IgG1 use the exact same Cμ constant heavy chain domain",
+        "AID-mediated Class-Switch Recombination deletes intervening constant-region exons (Cμ/Cδ) between switch (S) regions downstream of the rearranged VDJ exon, leaving the variable V_H-D_H-J_H domain and Light chain completely unchanged",
+        "RAG1 and RAG2 re-recombine identical V, D, and J segments onto the Cγ1 locus",
+        "Class switching occurs exclusively in the Light chain constant domain"
+      ],
+      "correct_index": 1,
+      "explanation": "Antigen specificity is determined by the N-terminal V_H-D_H-J_H and V_L-J_L variable exons. During Class-Switch Recombination, AID introduces double-strand breaks in intronic Switch (S) regions located upstream of the Constant (C_H) exons, looping out Cμ and Cδ to bring Cγ1, Cα, or Cε directly adjacent to the existing V_H-D_H-J_H exon—changing Fc effector function while preserving the paratope."
+    },
+    {
+      "question_id": "Q-9.2",
+      "question": "Why were nucleoside modifications—specifically substituting uridine with N1-methylpseudouridine (m1Ψ)—critical for the clinical success of mRNA-LNP vaccines (Karikó & Weissman, 2005)?",
+      "options": [
+        "m1Ψ allows the mRNA to integrate permanently into the host nuclear genome via reverse transcriptase",
+        "Unmodified exogenous single-stranded RNA activates endosomal TLR7 and TLR8, triggering a potent Type I Interferon (IFN-α/β) inflammatory response that shuts down host ribosomal translation before sufficient viral antigen can be produced",
+        "m1Ψ enables the mRNA to cross the plasma membrane without a Lipid Nanoparticle",
+        "m1Ψ prevents the 26S proteasome from degrading the translated spike protein"
+      ],
+      "correct_index": 1,
+      "explanation": "Innate endosomal sensors (TLR7/TLR8) and cytosolic sensors (RIG-I/PKR/OAS) recognize unmodified foreign ssRNA and halt cellular protein synthesis via eIF2α phosphorylation and RNase L activation. Incorporating N1-methylpseudouridine (m1Ψ) shields the mRNA from TLR7/8 recognition and boosts ribosomal translation output of the target antigen."
+    },
+    {
+      "question_id": "Q-9.3",
+      "question": "What is the functional consequence if a naive CD4+ T cell receives Signal 1 (TCR binding to peptide–MHC Class II) on an antigen-presenting cell that lacks Signal 2 (CD80/CD86 [B7] co-stimulation binding to CD28)?",
+      "options": [
+        "The T cell immediately differentiates into a cytotoxic CD8+ killer cell",
+        "The T cell undergoes clonal Anergy (functional unresponsiveness) or apoptosis, serving as a peripheral tolerance safeguard against autoimmunity",
+        "The T cell secretes massive amounts of IL-2 and proliferates uncontrollably",
+        "The MHC Class II molecule is converted into MHC Class I"
+      ],
+      "correct_index": 1,
+      "explanation": "Resting tissue cells and non-activated APCs in the absence of infection (no PAMPs/TLR signaling) do not express high levels of B7 (CD80/CD86) co-stimulatory molecules. Requiring both Signal 1 (TCR-pMHC) and Signal 2 (CD28-B7) ensures that naive T cells recognizing self-antigens on healthy tissues are rendered anergic rather than triggering autoimmune attack."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "Continuous Cultures of Fused Cells Secreting Antibody of Predefined Specificity (Köhler & Milstein, Nature 1975) & Suppression of RNA Recognition by Toll-like Receptors: The Impact of Nucleoside Modification (Karikó & Weissman, Immunity 2005)",
+    "imrad_breakdown": {
+      "abstract_summary": "Köhler and Milstein (1975) fused sheep-red-blood-cell-immunized mouse spleen B cells with HGPRT-deficient P3-X63Ag8 myeloma cells in HAT medium to create immortal hybridomas secreting pure monoclonal antibodies—revolutionizing diagnostics (ELISA, Lateral Flow) and therapeutics. Karikó and Weissman (2005) discovered that tRNA-like nucleoside modifications (pseudouridine, m1Ψ, m5C) abrogate TLR3/TLR7/TLR8 activation by in vitro transcribed mRNA.",
+      "key_method": "Sendai virus / PEG cell fusion, HAT metabolic selection, and hemolytic plaque assays; human monocyte-derived dendritic cell and HEK293-TLR3/7/8 reporter assays challenged with modified vs. unmodified IVT mRNAs.",
+      "critical_takeaway": "Both hybridoma mAb engineering and nucleoside-modified mRNA vaccines succeeded by mastering the molecular rules of B-cell somatic genetics and innate PRR self/non-self discrimination."
+    },
+    "further_reading": [
+      "Murphy, K., & Weaver, C. Janeway's Immunobiology — Chapters 2, 3, 4, 5, 6 & 16 (Innate Immunity, Complement, Antibody Structure, V(D)J Recombination, MHC Presentation & Vaccination).",
+      "Punt, J., Stranford, S., Jones, P., & Owen, J. A. Kuby Immunology — Quantitative Scatchard Affinity Analysis, Hybridoma Technology & Clinical Immunodeficiencies.",
+      "Pinchuk, G. Schaum's Outline of Theory and Problems of Immunology — Worked Problems in Serology, Complement, V(D)J Genetics, and Vaccine Herd Immunity."
+    ]
+  }
+}

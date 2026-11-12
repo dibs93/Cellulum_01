@@ -1,0 +1,840 @@
+{
+  "textbook_id": "TextBook12",
+  "branch_number": 12,
+  "branch_title": "Ecology & Evolution: Population Dynamics, Biogeochemistry, Molecular Evolution, Radiometric Geochronology & Conservation Biology",
+  "subtitle": "Logistic & Lotka-Volterra Differential Kinetics, Trophic Energetics, Neutral Theory & dN/dS Clocks, 40K/40Ar & 40Ar/39Ar Radiometric Dating, Island Biogeography & Biodiversity Indices",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Ecology & Evolution",
+    "upstream_nodes": [
+      "TextBook1",
+      "TextBook4",
+      "TextBook6",
+      "TextBook7",
+      "TextBook11"
+    ],
+    "downstream_nodes": [
+      "TextBook13",
+      "TextBook14"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Radioactive Isotope & Codon Substitution",
+        "scale_m": 2e-10,
+        "display_scale": "0.2–0.34 nm",
+        "example": "40K -> 40Ar electron capture nucleus; Synonymous (dS) vs. Non-synonymous (dN) site"
+      },
+      {
+        "level": "Zircon / Sanidine Crystal Lattice & Molecular Clock",
+        "scale_m": 0.0001,
+        "display_scale": "50–200 μm",
+        "example": "Volcanic tephra sanidine crystal trapping radiogenic 40Ar*"
+      },
+      {
+        "level": "Individual Organism & Life-History Strategy",
+        "scale_m": 1.0,
+        "display_scale": "1 mm – 30 m",
+        "example": "r-selected vs. K-selected reproductive allocation; Hamilton's kin selection"
+      },
+      {
+        "level": "Population Deme & Metapopulation Patch",
+        "scale_m": 10000.0,
+        "display_scale": "1–100 km",
+        "example": "Logistic carrying capacity (K); Levins source-sink metapopulation"
+      },
+      {
+        "level": "Community Food Web & Island Archipelago",
+        "scale_m": 500000.0,
+        "display_scale": "10–1,000 km",
+        "example": "Lotka-Volterra phase plane; MacArthur-Wilson Island Biogeography"
+      },
+      {
+        "level": "Global Biosphere & Deep Geological Time",
+        "scale_m": 12700000.0,
+        "display_scale": "12,742 km / 4.54 Ga",
+        "example": "Global Carbon/Nitrogen/Argon reservoirs & Phanerozoic mass extinctions"
+      }
+    ],
+    "explorer_pathways": [
+      "Plant Scientist",
+      "Geneticist",
+      "Microbiologist",
+      "Future Molecular Biologist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "12.1",
+      "title": "Population, Community & Ecosystem Ecology: Growth Kinetics, Lotka-Volterra & Trophic Biogeochemistry",
+      "overview": "Ecology quantifies how organisms interact with their abiotic environment and with one another across population demes (exponential vs. logistic growth, life tables), multi-species communities (competitive exclusion, predation), and global ecosystems (Lindeman trophic efficiency and biogeochemical cycles).",
+      "core_concepts": [
+        {
+          "concept_id": "12.1.1",
+          "heading": "Population Demography, Logistic Carrying Capacity (K) & Life-History Theory",
+          "theory": "In an unlimited environment, a population grows exponentially at its intrinsic rate of natural increase (r = b - d, where dN/dt = rN). In nature, density-dependent resource limitation (intraspecific competition, predation, disease) decelerates growth according to the Verhulst-Pearl Logistic Equation: dN/dt = rN[(K - N)/K], generating a sigmoidal S-curve that asymptotes at the environmental Carrying Capacity (K).",
+          "key_principles": [
+            "Maximum Sustainable Yield (MSY) Inflection Point: The absolute population growth rate (dN/dt) is NOT highest at N = K (where dN/dt = 0); instead, dN/dt reaches its mathematical maximum at the inflection point N = K/2, where max(dN/dt) = rK / 4.",
+            "r-Selected vs. K-Selected Life-History Continuum (MacArthur & Wilson; Pianka) & Survivorship Curves: r-selected species (opportunistic weeds, insects, bacteria) maximize intrinsic growth rate r in unstable environments via early maturity, large clutch sizes, small offspring, and Type III survivorship (high juvenile mortality). K-selected species (elephants, whales, climax forest trees) maximize competitive efficiency near carrying capacity K via late maturity, few large offspring, parental investment, and Type I survivorship (high survival until senescence; Type II exhibits constant mortality rate across all ages, e.g., songbirds).",
+            "Lincoln-Petersen Mark-Recapture & Euler-Lotka Demography: For mobile animal populations, total population size (N) is estimated by capturing, marking, and releasing M individuals, then capturing a second sample of C individuals and counting R recaptured marks: N = (M × C) / R. Age-structured life tables track age-specific survivorship (l_x) and fecundity (m_x) to compute the Net Reproductive Rate (R0 = ∑ l_x m_x; population grows if R0 > 1)."
+          ]
+        },
+        {
+          "concept_id": "12.1.2",
+          "heading": "Lotka-Volterra Competition, Predator-Prey Oscillations & Trophic Energetics",
+          "theory": "Gause's Competitive Exclusion Principle states that two species competing for the exact same limiting resource cannot coexist indefinitely if ecological factors remain constant. Lotka-Volterra competition equations incorporate competition coefficients (α_12 and α_21) to measure the per-capita inhibitory effect of Species 2 on Species 1 and vice versa.",
+          "key_principles": [
+            "Zero-Net-Growth Isoclines (ZNGIs) & Stable Coexistence: Stable two-species coexistence (niche partitioning) occurs ONLY when intraspecific competition is stronger than interspecific competition for both species: α_12 < K1 / K2 AND α_21 < K2 / K1 (i.e., each species inhibits itself more than it inhibits its competitor).",
+            "Lotka-Volterra Predator-Prey Coupled Oscillations: Prey density (V) and Predator density (P) cycle 90° (1/4 period) out of phase: dV/dt = rV - aVP and dP/dt = baVP - mP, with neutral equilibrium center at V* = m/(ba) and P* = r/a. Holling's Functional Responses (Type I linear filter-feeding; Type II hyperbolic saturation due to handling time T_h; Type III sigmoidal prey-switching/learning) stabilize real-world food webs.",
+            "Lindeman's 10% Trophic Efficiency Law & Biogeochemical Reservoirs: Gross Primary Production (GPP) minus autotrophic respiration (R_a) yields Net Primary Production (NPP = GPP - R_a). Ecological Efficiency (Trophic Transfer Efficiency) averages ~10% between adjacent trophic levels due to Assimilation Efficiency, Production Efficiency (endotherms ~1–3% vs. ectotherms ~10–40%), and respiratory heat loss. While energy flows unidirectionally, matter (Carbon, Nitrogen, Phosphorus, Sulfur) cycles between biotic and abiotic reservoirs alongside inert atmospheric tracers (such as Argon-40, constituting 0.934% of Earth's atmosphere as the radiogenic daughter of crustal Potassium-40)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Four-Outcome Phase-Plane Logic of Lotka-Volterra Interspecific Competition",
+        "headers": [
+          "Competitive Outcome",
+          "Isocline Inequality Condition (K_1, K_2, α_12, α_21)",
+          "Biological Mechanism",
+          "Equilibrium State (N_1*, N_2*)"
+        ],
+        "rows": [
+          [
+            "1. Species 1 Always Wins (Exclusion)",
+            "K_1 > K_2 / α_21 AND K_1 / α_12 > K_2",
+            "Species 1 is a superior competitor; inhibits Species 2 strongly",
+            "(K_1, 0) — Globally Stable"
+          ],
+          [
+            "2. Species 2 Always Wins (Exclusion)",
+            "K_2 > K_1 / α_12 AND K_2 / α_21 > K_1",
+            "Species 2 is a superior competitor; drives Species 1 extinct",
+            "(0, K_2) — Globally Stable"
+          ],
+          [
+            "3. Unstable Equilibrium (Priority Effect)",
+            "α_12 > K_1 / K_2 AND α_21 > K_2 / K_1",
+            "Interspecific competition > Intraspecific (e.g., allelopathy); founder wins",
+            "(K_1, 0) or (0, K_2) depending on initial N_0"
+          ],
+          [
+            "4. Stable Coexistence (Niche Partitioning)",
+            "α_12 < K_1 / K_2 AND α_21 < K_2 / K_1",
+            "Intraspecific competition > Interspecific (resource partitioning)",
+            "Stable coexistence node (N_1* > 0, N_2* > 0)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "12.2",
+      "title": "Evolutionary Biology & Geochronology: Speciation, Molecular Evolution & Full Argon (40K-40Ar / 40Ar-39Ar) Dating Logic",
+      "overview": "Macroevolutionary divergence—calibrated across deep geological time by radiometric Argon geochronology and molecular substitution clocks—arises from natural selection, genetic drift, reproductive isolation, and kin selection.",
+      "core_concepts": [
+        {
+          "concept_id": "12.2.1",
+          "heading": "Modes of Selection, Reproductive Isolation, Speciation & Hamilton's Kin Selection",
+          "theory": "Under the Modern Evolutionary Synthesis, natural selection acts on heritable phenotypic variation via three primary modes: Directional Selection (shifts mean toward one extreme), Stabilizing Selection (favors intermediate phenotypes, reducing variance—e.g., human birth weight), and Disruptive/Diversifying Selection (favors both extremes, increasing variance and driving sympatric divergence).",
+          "key_principles": [
+            "Biological Species Concept (Ernst Mayr) & Reproductive Isolating Barriers: Species are reproductively isolated gene pools separated by Prezygotic Barriers (habitat/ecological, temporal, behavioral, mechanical, gametic) and Postzygotic Barriers (hybrid inviability, hybrid sterility [e.g., mule, 2n=63], hybrid breakdown—governed by Dobzhansky-Muller genetic incompatibilities).",
+            "Allopatric vs. Sympatric Speciation: Allopatric speciation requires a physical geographic barrier (Vicariance or Peripatric founder dispersal) interrupting gene flow (m = 0). Sympatric speciation occurs without geographic separation via host-shift disruptive selection (e.g., Rhagoletis pomonella hawthorn/apple flies) or instantaneous polyploidization in plants (Autopolyploidy via unreduced 2n gametes vs. Allopolyploidy via interspecific hybridization followed by chromosome doubling, e.g., bread wheat Triticum aestivum 2n = 6x = 42, AABBDD).",
+            "Hamilton's Rule of Kin Selection & Inclusive Fitness (rB > C): Explains the evolution of apparent altruism (e.g., sterile eusocial Hymenoptera workers, alarm calling in ground squirrels). An altruistic allele spreads if the benefit to the recipient (B) weighted by the Wright coefficient of genetic relatedness (r = 0.5 for full siblings/offspring, 0.25 for half-siblings/grand-offspring, 0.125 for first cousins, 0.75 for haplodiploid sisters) exceeds the reproductive cost to the actor (C)."
+          ]
+        },
+        {
+          "concept_id": "12.2.2",
+          "heading": "Kimura's Neutral Theory, The Molecular Clock & dN/dS Selection Signatures",
+          "theory": "Motoo Kimura (1968) formulated the Neutral Theory of Molecular Evolution: at the DNA and protein sequence level, the vast majority of evolutionary substitutions fixed between species are selectively neutral (s ≈ 0, |s| < 1 / 2N_e) and driven to fixation by random genetic drift rather than positive Darwinian selection.",
+          "key_principles": [
+            "Identity of Substitution Rate (k) and Mutation Rate (μ_0) for Neutral Alleles: In a diploid population of effective size N_e, the total number of new neutral mutations arising per generation across the population is 2N_e · μ_0. Because the probability that any single neutral mutation eventually reaches 100% fixation is exactly its initial frequency, P_fix = 1 / (2N_e), the long-term rate of neutral molecular evolution (substitution rate k) is: k = (2N_e · μ_0) × [1 / (2N_e)] = μ_0! Remarkably, N_e cancels out—proving that the neutral molecular clock ticks at the neutral mutation rate μ_0, independent of population size.",
+            "Synonymous vs. Non-Synonymous Substitution Ratio (ω = d_N / d_S or K_a / K_s): Comparing the rate of amino-acid-changing substitutions per non-synonymous site (d_N) to silent substitutions per synonymous site (d_S) reveals the regime of natural selection: (1) ω = d_N / d_S < 1 (typically 0.01–0.25): Purifying (Negative) Selection eliminating deleterious amino acid changes (e.g., Histone H4); (2) ω = d_N / d_S = 1.0: Neutral Evolution (e.g., pseudogenes); (3) ω = d_N / d_S > 1.0: Positive (Diversifying) Darwinian Selection favoring rapid amino acid innovation (e.g., MHC peptide-binding groove, viral surface spike proteins)."
+          ]
+        },
+        {
+          "concept_id": "12.2.3",
+          "heading": "Full Argon Geochronology Logic: Branched 40K -> 40Ar Decay & High-Precision 40Ar/39Ar Laser-Fusion Dating",
+          "theory": "Calibrating molecular clocks and dating fossil hominid/paleontological strata across the Cenozoic, Mesozoic, and Precambrian relies on Potassium-Argon (40K–40Ar) and Argon-Argon (40Ar/39Ar) radiometric geochronology—exploiting the noble-gas physics of Argon.",
+          "key_principles": [
+            "Branched Radioactive Decay of Potassium-40 (40K): Naturally occurring 40K (t_1/2 = 1.248 × 10^9 years; total decay constant λ_total = 5.543 × 10^-10 yr^-1) undergoes branched decay into two daughter isotopes: (1) 89.52% decays by β- (negatron) emission into stable Calcium-40 (40Ca, λ_β = 4.962 × 10^-10 yr^-1—which is unusable for routine dating because non-radiogenic 40Ca is already ubiquitous in rock-forming minerals); and (2) 10.48% decays by Electron Capture (EC) and positron (β+) emission into stable Argon-40 gas (40Ar*, branching constant λ_e = 0.581 × 10^-10 yr^-1, branching fraction f_e = λ_e / λ_total = 0.1048).",
+            "The Noble Gas 'Zeroing' Clock in Volcanic Tephra: Because Argon (Z = 18) is an inert noble gas with a filled valence octet (3s²3p⁶), it forms no chemical bonds in silicate magmas. When volcanic ash (tephra) or lava erupts in a molten state above the mineral Closure Temperature (T_c ≈ 300–500°C for sanidine feldspar, biotite, and hornblende), all pre-existing primordial/inherited 40Ar degasses completely into the atmosphere—resetting the radiometric clock to 40Ar* = 0 at the moment of eruption and cooling! Once the crystal cools below T_c, its lattice becomes a closed trap, accumulating radiogenic 40Ar* from in situ 40K decay according to the branched age equation: t = (1 / λ_total) · ln[1 + (λ_total / λ_e) · (40Ar* / 40K)].",
+            "Atmospheric Argon Contamination Correction (40Ar / 36Ar = 298.56): Modern Earth's atmosphere contains 0.934% Argon, which has a fixed isotopic ratio of 40Ar / 36Ar = 298.56 (traditionally 295.5). Because 36Ar is purely non-radiogenic, mass spectrometry of a rock sample measures non-radiogenic 36Ar_measured to subtract atmospheric contamination and isolate pure radiogenic 40Ar*: 40Ar* = 40Ar_total - 298.56 × (36Ar_measured).",
+            "The 40Ar / 39Ar Step-Heating Innovation: Classical K–Ar dating required splitting a rock into two aliquots (measuring K wet-chemically on one and Ar mass-spectrometrically on the other, introducing heterogeneity errors). In 40Ar/39Ar dating, a single mineral grain is irradiated with fast neutrons in a nuclear reactor, transmuting stable Potassium-39 into Argon-39 via the 39K(n,p)39Ar reaction (proportional to total K). Co-irradiating a standard mineral of known age determines the irradiation parameter J. By incrementally laser-heating the single grain in steps, a flat 'Age Plateau' across sequential temperature steps diagnoses a pristine, undisturbed closed system (whereas thermally metamorposed rocks losing Argon at crystal rims show younger ages at low-temperature steps) using: t = (1 / λ_total) · ln[1 + J · (40Ar* / 39Ar_K)]."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Radiometric Geochronology & Molecular Evolution Calibration Systems",
+        "headers": [
+          "Dating / Clock System",
+          "Parent -> Daughter / Metric",
+          "Half-Life (t_1/2) or Rate",
+          "Effective Dating Window & Primary Material"
+        ],
+        "rows": [
+          [
+            "Radiocarbon (14C -> 14N)",
+            "14C -> 14N + β- + ν̄",
+            "t_1/2 = 5,730 years (λ = 1.209 × 10^-4 yr^-1)",
+            "100 – 50,000 years (Organic wood, bone collagen, charcoal)"
+          ],
+          [
+            "Potassium-Argon (40K -> 40Ar*)",
+            "40K -> 40Ar* (10.48% EC) + 40Ca (89.52% β-)",
+            "t_1/2 = 1.248 × 10^9 years (1.25 Ga)",
+            "10,000 years – 4.54 Ga (Volcanic sanidine, biotite, hornblende)"
+          ],
+          [
+            "Argon-Argon (40Ar* / 39Ar_K)",
+            "39K(n,p)39Ar irradiation + laser step-heating",
+            "Same 40K decay (λ_tot = 5.543 × 10^-10 yr^-1)",
+            "Single-grain hominid tephra (e.g., 3.18 Ma Australopithecus) & K-Pg boundary (66.0 Ma)"
+          ],
+          [
+            "Uranium-Lead (238U / 235U -> Pb)",
+            "238U -> 206Pb; 235U -> 207Pb (Concordia)",
+            "4.468 Ga (238U) & 0.704 Ga (235U)",
+            "1 Ma – 4.54 Ga (Refractory Zircon ZrSiO4 crystals; rejects Pb at crystallization)"
+          ],
+          [
+            "Neutral Molecular Clock (d_S)",
+            "Synonymous / Neutral DNA substitutions (k = μ_0)",
+            "~10^-8 – 10^-9 substitutions / site / yr",
+            "Divergence time T = d / (2k) calibrated against Argon/U-Pb fossil nodes"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "12.3",
+      "title": "Conservation Biology: Biodiversity Indices, Island Biogeography & Extinction Vortex Dynamics",
+      "overview": "Conservation biology applies ecological and population-genetic theory to quantify alpha/beta/gamma biodiversity, design nature reserves using Island Biogeography, and rescue endangered populations from the Extinction Vortex.",
+      "core_concepts": [
+        {
+          "concept_id": "12.3.1",
+          "heading": "Quantifying Biodiversity (Shannon-Wiener H', Simpson's D) & MacArthur-Wilson Island Biogeography",
+          "theory": "Biodiversity is partitioned spatially by Whittaker (1960) into Alpha Diversity (local species richness and evenness within a single habitat patch), Beta Diversity (species turnover between habitats: β = γ / α), and Gamma Diversity (total regional landscape richness).",
+          "key_principles": [
+            "Species Richness (S) vs. Species Evenness (E_H): Two communities can have the exact same Species Richness (S = 4 tree species) yet differ drastically in diversity if Community A has 25% of each species while Community B is 97% dominated by a single species. The Shannon-Wiener Index (H' = -∑ p_i ln p_i) and Simpson's Diversity Index (1 - D = 1 - ∑ p_i²) weight both richness and evenness, reaching H'_max = ln(S) when all species are equally abundant (Evenness J' = H' / ln S = 1.0).",
+            "MacArthur & Wilson's (1967) Equilibrium Theory of Island Biogeography: The equilibrium number of species on an island or isolated habitat patch (Ŝ) is determined by the intersection of the Immigration Rate curve (I, which decreases as island species richness S approaches the mainland pool P, and is higher on Near islands than Far islands) and the Extinction Rate curve (E, which increases with S due to competition, and is lower on Large islands than Small islands). Consequently: Large, Near islands support the highest equilibrium species richness (Ŝ_LN > Ŝ_LF / Ŝ_SN > Ŝ_SF) with low species turnover.",
+            "Species-Area Relationship (Arrhenius Power Law: S = c · A^z): Across islands and continental habitat fragments (with exponent z ≈ 0.15–0.35; typically z ≈ 0.25–0.30 for islands), a 90% loss of habitat area (leaving 10% remaining area: 0.10^0.30 ≈ 0.50) results in an eventual loss of ~50% of all resident species!"
+          ]
+        },
+        {
+          "concept_id": "12.3.2",
+          "heading": "Minimum Viable Population (MVP), Effective Population Size (Ne) & The Extinction Vortex",
+          "theory": "Small, fragmented populations enter a positive-feedback downward spiral termed the Extinction Vortex (Gilpin & Soulé, 1986), where demographic stochasticity, environmental catastrophes, Allee effects, genetic drift, and inbreeding depression reinforce one another.",
+          "key_principles": [
+            "Effective Population Size (N_e) vs. Census Size (N_c): Because of unequal sex ratios [N_e = (4 N_m N_f) / (N_m + N_f)], variance in family size, and population bottlenecks (where multi-generation N_e is the harmonic mean of population sizes, dominated by the smallest bottleneck year), genetic N_e typically averages only 10–20% of the census headcount N_c.",
+            "The 50 / 500 Conservation Rule (Franklin, 1980): An effective population size of at least N_e ≥ 50 is required in the short term to keep the inbreeding rate (ΔF = 1 / 2N_e ≤ 1% per generation) below the threshold of acute inbreeding depression; an effective population size of N_e ≥ 500 (often revised to 1,000) is required in the long term so new mutational variance balances loss of quantitative genetic variation by genetic drift."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Predictions of MacArthur-Wilson Island Biogeography & Reserve Design (SLOSS Debate)",
+        "headers": [
+          "Island / Reserve Category",
+          "Distance to Mainland Source",
+          "Habitat Area Size",
+          "Immigration Rate (I)",
+          "Extinction Rate (E)",
+          "Equilibrium Species Richness (Ŝ)"
+        ],
+        "rows": [
+          [
+            "Large, Near Patch",
+            "Near (High dispersal connectivity)",
+            "Large (High K, diverse microhabitats)",
+            "High",
+            "Low",
+            "Highest (Ŝ_max)"
+          ],
+          [
+            "Small, Near Patch",
+            "Near (Stepping-stone / corridor)",
+            "Small (High edge-to-interior ratio)",
+            "High",
+            "High",
+            "Intermediate (High turnover rate)"
+          ],
+          [
+            "Large, Far Patch",
+            "Far (Isolated oceanic / fragmented)",
+            "Large (Low demographic extinction)",
+            "Low",
+            "Low",
+            "Intermediate (Low turnover; high endemism)"
+          ],
+          [
+            "Small, Far Patch",
+            "Far (No rescue effect)",
+            "Small (Small population sizes -> drift)",
+            "Lowest",
+            "Highest",
+            "Lowest (Ŝ_min; prone to Extinction Vortex)"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-12.1",
+      "title": "Figure 12.1: Exponential vs. Logistic Growth (MSY at K/2) & Lotka-Volterra Coexistence Phase Plane",
+      "sub_module_ref": "12.1",
+      "thumbnail_caption": "Verhulst logistic S-curve showing maximum growth rate dN/dt at N = K/2 alongside Zero-Net-Growth Isoclines (ZNGIs) for stable 2-species coexistence. Tap to expand.",
+      "svg_template_id": "svg_logistic_lotka_volterra_12_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. EXPONENTIAL vs. LOGISTIC GROWTH (dN/dt)</text><text x='435' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. LOTKA-VOLTERRA STABLE COEXISTENCE ZNGIs</text><line x1='410' y1='20' x2='410' y2='330' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><line x1='70' y1='265' x2='385' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='70' y1='60' x2='70' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='70' y1='80' x2='385' y2='80' stroke='#ff6b8b' stroke-dasharray='5,4' stroke-width='2'/><text x='320' y='72' fill='#ff6b8b' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Carrying Capacity (K)</text><line x1='70' y1='172' x2='385' y2='172' stroke='#1e3a5f' stroke-dasharray='4,4'/><text x='62' y='176' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='end'>K/2</text><path d='M 75 260 Q 140 250 165 60' fill='none' stroke='#00f2fe' stroke-dasharray='5,3' stroke-width='3'/><text x='135' y='105' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='end'>Exponential (rN)</text><path d='M 75 260 Q 165 255 215 172 Q 265 85 380 82' fill='none' stroke='#00ff87' stroke-width='3.5'/><circle cx='215' cy='172' r='6' fill='#ffca28' stroke='#fff' stroke-width='2'/><text x='275' y='182' fill='#ffca28' font-family='sans-serif' font-size='11' font-weight='bold'>Inflection (N = K/2)</text><text x='275' y='198' fill='#fff' font-family='monospace' font-size='10'>Max dN/dt = rK/4 (MSY)</text><text x='225' y='295' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Time (t) — Logistic: dN/dt = rN(1 - N/K)</text><line x1='465' y1='265' x2='780' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='465' y1='60' x2='465' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='465' y1='85' x2='745' y2='265' stroke='#00f2fe' stroke-width='3'/><text x='485' y='78' fill='#00f2fe' font-family='monospace' font-size='10' font-weight='bold'>K_1 / α_12</text><text x='695' y='282' fill='#ff6b8b' font-family='monospace' font-size='10' font-weight='bold'>K_1</text><line x1='465' y1='135' x2='760' y2='265' stroke='#ff6b8b' stroke-width='3'/><text x='458' y='138' fill='#ff6b8b' font-family='monospace' font-size='10' font-weight='bold' text-anchor='end'>K_2</text><text x='755' y='282' fill='#00f2fe' font-family='monospace' font-size='10' font-weight='bold'>K_2 / α_21</text><circle cx='600' cy='195' r='8' fill='#00ff87' stroke='#fff' stroke-width='2.5'/><text x='645' y='168' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Stable Coexistence Node</text><text x='645' y='184' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>α_12 &lt; K1/K2 &amp; α_21 &lt; K2/K1</text><text x='620' y='315' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Species 1 Density (N_1) vs. Species 2 (N_2)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-12-1a",
+          "x_pct": 26.2,
+          "y_pct": 49.1,
+          "label": "Maximum Sustainable Yield (N = K/2)",
+          "scale_link": "population",
+          "detail": "Harvesting a population down to N = K/2 maximizes its net recruitment rate dN/dt = rK/4; harvesting below K/2 risks stock collapse."
+        },
+        {
+          "pin_id": "pin-12-1b",
+          "x_pct": 73.1,
+          "y_pct": 55.7,
+          "label": "Stable Coexistence Equilibrium",
+          "scale_link": "community",
+          "detail": "Because both K1 < K2/α21 and K2 < K1/α12, each species limits its own growth via intraspecific competition before it can drive its competitor extinct."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-12.2",
+      "title": "Figure 12.2: Full Argon Geochronology Logic: 40K Branched Decay, Magma Degassing Reset & 40Ar/39Ar Step-Heating Plateau",
+      "sub_module_ref": "12.2",
+      "thumbnail_caption": "40K branched decay (10.48% EC to 40Ar*, 89.52% β- to 40Ca), volcanic closure temperature resetting, and 40Ar/39Ar laser step-heating plateau. Tap to expand.",
+      "svg_template_id": "svg_argon_geochronology_12_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 350' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='350' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>A. 40K BRANCHED DECAY &amp; NOBLE GAS RESET</text><text x='430' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='14' font-weight='bold'>B. 40Ar / 39Ar STEP-HEATING AGE SPECTRUM</text><line x1='410' y1='20' x2='410' y2='330' stroke='#1e3a5f' stroke-dasharray='5,5' stroke-width='2'/><circle cx='115' cy='115' r='36' fill='#2b1d38' stroke='#b388ff' stroke-width='2.5'/><text x='115' y='112' fill='#b388ff' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'>40K</text><text x='115' y='128' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>t_1/2 = 1.248 Ga</text><rect x='245' y='62' width='135' height='48' rx='8' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><text x='312' y='83' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>40Ar* Gas (10.48%)</text><text x='312' y='100' fill='#a0e2c4' font-family='monospace' font-size='9' text-anchor='middle'>Electron Capture (λ_e)</text><rect x='245' y='125' width='135' height='48' rx='8' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='312' y='146' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>40Ca Solid (89.52%)</text><text x='312' y='163' fill='#ffb8c6' font-family='monospace' font-size='9' text-anchor='middle'>β- Decay (λ_β)</text><path d='M 151 102 L 245 86' stroke='#00ff87' stroke-width='3'/><path d='M 151 128 L 245 148' stroke='#ff6b8b' stroke-width='3'/><rect x='45' y='192' width='340' height='118' rx='8' fill='#102a43' stroke='#00f2fe' stroke-width='1.5'/><text x='215' y='214' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Why Argon (Z=18) Resets the Geological Clock</text><text x='215' y='236' fill='#fff' font-family='monospace' font-size='10' text-anchor='middle'>1. Molten Magma (T &gt; T_c): Inert 40Ar bubbles out → 40Ar* = 0</text><text x='215' y='256' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>2. Cooling &lt; T_c (~350°C): Crystal lattice traps new 40Ar*</text><text x='215' y='276' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>3. Atmospheric Correction: 40Ar* = 40Ar_tot - 298.56(36Ar)</text><text x='215' y='296' fill='#b388ff' font-family='monospace' font-size='10' text-anchor='middle'>4. Age: t = (1/λ_tot) · ln[1 + (λ_tot/λ_e)(40Ar* / 40K)]</text><line x1='465' y1='265' x2='780' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='465' y1='65' x2='465' y2='265' stroke='#a0c4e2' stroke-width='2'/><rect x='475' y='205' width='30' height='16' fill='rgba(255, 107, 139, 0.35)' stroke='#ff6b8b'/><rect x='505' y='160' width='35' height='16' fill='rgba(255, 202, 40, 0.35)' stroke='#ffca28'/><rect x='540' y='115' width='55' height='12' fill='rgba(0, 255, 135, 0.35)' stroke='#00ff87' stroke-width='2'/><rect x='595' y='115' width='60' height='12' fill='rgba(0, 255, 135, 0.35)' stroke='#00ff87' stroke-width='2'/><rect x='655' y='115' width='60' height='12' fill='rgba(0, 255, 135, 0.35)' stroke='#00ff87' stroke-width='2'/><rect x='715' y='115' width='55' height='12' fill='rgba(0, 255, 135, 0.35)' stroke='#00ff87' stroke-width='2'/><text x='655' y='98' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>True Eruption Age Plateau (40Ar* / 39Ar_K Constant)</text><text x='515' y='242' fill='#ff6b8b' font-family='sans-serif' font-size='10' font-weight='bold'>Low-T Rim Loss</text><text x='515' y='255' fill='#ffb8c6' font-family='monospace' font-size='9'>(Partial Thermal Reset)</text><text x='625' y='295' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Cumulative % of 39Ar_K Released (Laser Step-Heating 500°C → 1400°C)</text><text x='438' y='165' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle' transform='rotate(-90 438 165)'>Apparent Age (Ma)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-12-2a",
+          "x_pct": 38.0,
+          "y_pct": 24.5,
+          "label": "10.48% Electron Capture Branching (λ_e / λ_tot)",
+          "scale_link": "0.2nm",
+          "detail": "Because only 10.48% of decaying 40K atoms become 40Ar* (while 89.52% become 40Ca), the ratio of measured 40Ar*/40K must be multiplied by λ_tot / λ_e = 1 / 0.1048 = 9.542 in the age equation!"
+        },
+        {
+          "pin_id": "pin-12-2b",
+          "x_pct": 79.8,
+          "y_pct": 34.0,
+          "label": "40Ar/39Ar Step-Heating Plateau",
+          "scale_link": "100um",
+          "detail": "Irradiating the rock converts 39K to 39Ar. Step-heating releases argon from outer crystal rims first (revealing any secondary thermal loss) before hitting the flat high-temperature plateau that records the true crystallization age."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-12.3",
+      "title": "Figure 12.3: MacArthur-Wilson Island Biogeography Equilibrium Model (Ŝ) & Species-Area Curve",
+      "sub_module_ref": "12.3",
+      "thumbnail_caption": "Intersection of Near/Far Immigration curves (I) with Small/Large Extinction curves (E) determining equilibrium species richness (Ŝ) and turnover. Tap to expand.",
+      "svg_template_id": "svg_island_biogeography_12_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 340' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='340' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>MACARTHUR-WILSON EQUILIBRIUM THEORY OF ISLAND BIOGEOGRAPHY</text><line x1='85' y1='265' x2='735' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='85' y1='60' x2='85' y2='265' stroke='#a0c4e2' stroke-width='2'/><line x1='735' y1='60' x2='735' y2='265' stroke='#a0c4e2' stroke-width='2'/><path d='M 85 75 Q 350 185 735 265' fill='none' stroke='#00ff87' stroke-width='3.5'/><text x='185' y='92' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold'>I_Near (High Immigration)</text><path d='M 85 160 Q 350 225 735 265' fill='none' stroke='#00f2fe' stroke-dasharray='6,3' stroke-width='3'/><text x='185' y='198' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold'>I_Far (Low Immigration)</text><path d='M 85 265 Q 320 215 540 65' fill='none' stroke='#ff6b8b' stroke-width='3.5'/><text x='505' y='88' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='end'>E_Small (High Extinction)</text><path d='M 85 265 Q 450 235 715 75' fill='none' stroke='#ffca28' stroke-dasharray='6,3' stroke-width='3'/><text x='685' y='115' fill='#ffca28' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='end'>E_Large (Low Extinction)</text><circle cx='278' cy='213' r='7' fill='#ff6b8b' stroke='#fff' stroke-width='2'/><line x1='278' y1='213' x2='278' y2='265' stroke='#ff6b8b' stroke-dasharray='3,3'/><text x='278' y='285' fill='#ff6b8b' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Ŝ_Small,Far</text><circle cx='508' cy='198' r='7' fill='#00ff87' stroke='#fff' stroke-width='2'/><line x1='508' y1='198' x2='508' y2='265' stroke='#00ff87' stroke-dasharray='3,3'/><text x='508' y='285' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Ŝ_Large,Near (Max)</text><text x='735' y='285' fill='#fff' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>P (Mainland Pool)</text><text x='410' y='318' fill='#a0c4e2' font-family='monospace' font-size='11' text-anchor='middle'>Number of Species Present on Island (S) — At Equilibrium: Immigration Rate I(Ŝ) = Extinction Rate E(Ŝ)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-12-3a",
+          "x_pct": 33.9,
+          "y_pct": 62.6,
+          "label": "Small, Isolated Patch (Ŝ_Small,Far)",
+          "scale_link": "10km",
+          "detail": "Suffers both low colonization from the mainland and high local extinction due to small population sizes, yielding the lowest equilibrium biodiversity."
+        },
+        {
+          "pin_id": "pin-12-3b",
+          "x_pct": 62.0,
+          "y_pct": 58.2,
+          "label": "Large, Connected Reserve (Ŝ_Large,Near)",
+          "scale_link": "100km",
+          "detail": "Maximizes equilibrium species richness Ŝ by combining high immigration (or wildlife corridor rescue effect) with large carrying capacity (low extinction)."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_argon_geochronology_clock_12_2",
+      "title": "40K/40Ar & 40Ar/39Ar Radiometric Geochronology & Molecular Clock Simulator",
+      "sub_module_ref": "12.2",
+      "type": "radiometric-argon-calculator",
+      "description": "Compute exact geological eruption ages using full Potassium-Argon branched decay logic (λ_e = 0.581 × 10^-10 yr^-1, λ_total = 5.543 × 10^-10 yr^-1), correct total measured 40Ar for atmospheric contamination using 36Ar (40Ar/36Ar = 298.56), and calibrate synonymous molecular clock divergence rates.",
+      "controls": [
+        {
+          "id": "ar40_rad_to_k40_ratio",
+          "label": "Measured Radiogenic Ratio (40Ar* / 40K)",
+          "min": 0.0001,
+          "max": 0.5,
+          "step": 0.0005,
+          "default": 0.00385,
+          "unit": "molar ratio"
+        },
+        {
+          "id": "ar40_total_fmol",
+          "label": "Total Measured 40Ar in Crystal (40Ar_total)",
+          "min": 10.0,
+          "max": 1000.0,
+          "step": 10.0,
+          "default": 500.0,
+          "unit": "fmol"
+        },
+        {
+          "id": "ar36_measured_fmol",
+          "label": "Measured Non-Radiogenic 36Ar (Atmospheric)",
+          "min": 0.0,
+          "max": 2.0,
+          "step": 0.05,
+          "default": 0.5,
+          "unit": "fmol"
+        },
+        {
+          "id": "seq_divergence_d",
+          "label": "Pairwise Neutral Sequence Divergence (d_S)",
+          "min": 0.01,
+          "max": 0.5,
+          "step": 0.01,
+          "default": 0.12,
+          "unit": "substitutions/site"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "pure_radiogenic_ar40_fmol",
+          "label": "Atmospheric-Corrected Radiogenic 40Ar* (40Ar_tot - 298.56 × 36Ar)",
+          "formula_js": "Math.max(0, ar40_total_fmol - (298.56 * ar36_measured_fmol))",
+          "unit": "fmol 40Ar*"
+        },
+        {
+          "output_id": "radiogenic_yield_pct",
+          "label": "Percentage Radiogenic Argon (%40Ar*)",
+          "formula_js": "(Math.max(0, ar40_total_fmol - (298.56 * ar36_measured_fmol)) / ar40_total_fmol) * 100",
+          "unit": "%"
+        },
+        {
+          "output_id": "eruption_age_ma",
+          "label": "Calculated 40K–40Ar Geological Age (t in Million Years, Ma)",
+          "formula_js": "((1 / 5.543e-10) * Math.log(1 + ((5.543 / 0.581) * ar40_rad_to_k40_ratio))) / 1e6",
+          "unit": "Ma (Million Years)"
+        },
+        {
+          "output_id": "calibrated_clock_rate",
+          "label": "Calibrated Molecular Substitution Rate k = d_S / (2t)",
+          "formula_js": "seq_divergence_d / (2 * (((1 / 5.543e-10) * Math.log(1 + ((5.543 / 0.581) * ar40_rad_to_k40_ratio))) / 1e6))",
+          "unit": "substitutions/site/Ma"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_logistic_shannon_ecology_12_1",
+      "title": "Logistic Population Growth (MSY) & Shannon-Wiener Biodiversity Simulator",
+      "sub_module_ref": "12.1",
+      "type": "ecology-population-diversity-simulator",
+      "description": "Calculate instantaneous logistic growth rate (dN/dt), per-capita growth rate, and Maximum Sustainable Yield (MSY = rK/4), plus Lincoln-Petersen Mark-Recapture population estimates.",
+      "controls": [
+        {
+          "id": "intrinsic_r",
+          "label": "Intrinsic Growth Rate (r = b - d)",
+          "min": 0.05,
+          "max": 1.5,
+          "step": 0.05,
+          "default": 0.4,
+          "unit": "yr^-1"
+        },
+        {
+          "id": "carrying_cap_k",
+          "label": "Carrying Capacity (K)",
+          "min": 100,
+          "max": 10000,
+          "step": 100,
+          "default": 2000,
+          "unit": "individuals"
+        },
+        {
+          "id": "current_pop_n",
+          "label": "Current Population Size (N)",
+          "min": 50,
+          "max": 10000,
+          "step": 50,
+          "default": 1000,
+          "unit": "individuals"
+        },
+        {
+          "id": "marked_m",
+          "label": "Mark-Recapture: Initially Marked (M; C=100, R=20)",
+          "min": 20,
+          "max": 500,
+          "step": 10,
+          "default": 150,
+          "unit": "marked"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "instantaneous_dndt",
+          "label": "Instantaneous Logistic Growth Rate (dN/dt)",
+          "formula_js": "intrinsic_r * current_pop_n * ((carrying_cap_k - current_pop_n) / carrying_cap_k)",
+          "unit": "individuals / yr"
+        },
+        {
+          "output_id": "msy_max_yield",
+          "label": "Maximum Sustainable Yield at N = K/2 (MSY = rK / 4)",
+          "formula_js": "(intrinsic_r * carrying_cap_k) / 4",
+          "unit": "individuals / yr"
+        },
+        {
+          "output_id": "lincoln_petersen_n",
+          "label": "Lincoln-Petersen Estimated Population (with C=100, R=20)",
+          "formula_js": "(marked_m * 100) / 20",
+          "unit": "total individuals"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-12.1",
+      "title": "Verhulst Logistic Population Growth, Maximum Sustainable Yield (MSY) & Mark-Recapture",
+      "latex": "\\frac{dN}{dt} = rN\\left(\\frac{K - N}{K}\\right), \\qquad \\text{MSY}_{\\text{at } N=K/2} = \\frac{rK}{4}, \\qquad N_{\\text{est}} = \\frac{M \\times C}{R}",
+      "description": "Models density-dependent population growth approaching carrying capacity K (with peak recruitment MSY at N = K/2) and estimates total mobile population size via Lincoln-Petersen mark-recapture.",
+      "variables": [
+        {
+          "symbol": "r, K",
+          "definition": "Intrinsic per-capita rate of increase (b - d) and environmental Carrying Capacity",
+          "unit": "time^-1, individuals"
+        },
+        {
+          "symbol": "M, C, R",
+          "definition": "Number marked in 1st catch (M), total 2nd catch (C), and recaptured marked individuals (R)",
+          "unit": "individuals"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-12.2",
+      "title": "Lotka-Volterra Interspecific Competition & Predator-Prey Differential Equations",
+      "latex": "\\frac{dN_1}{dt} = r_1 N_1 \\left(\\frac{K_1 - N_1 - \\alpha_{12}N_2}{K_1}\\right), \\qquad \\frac{dV}{dt} = rV - aVP, \\qquad \\frac{dP}{dt} = baVP - mP",
+      "description": "Quantifies competitive inhibition between Species 1 and Species 2 via competition coefficient α_12, and models coupled oscillations between Prey (V) and Predator (P).",
+      "variables": [
+        {
+          "symbol": "\\alpha_{12}",
+          "definition": "Competition coefficient converting each individual of Species 2 into equivalents of Species 1",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "a, b, m",
+          "definition": "Predator capture efficiency (a), conversion efficiency (b), and per-capita predator mortality (m)",
+          "unit": "rate constants"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-12.3",
+      "title": "Full Argon Geochronology: Branched 40K -> 40Ar* & 40Ar/39Ar Age Equations + Atmospheric Correction",
+      "latex": "t = \\frac{1}{\\lambda_{\\text{tot}}} \\ln\\left[ 1 + \\frac{\\lambda_{\\text{tot}}}{\\lambda_e} \\left(\\frac{^{40}\\text{Ar}^*}{^{40}\\text{K}}\\right) \\right], \\qquad t = \\frac{1}{\\lambda_{\\text{tot}}} \\ln\\left[ 1 + J \\left(\\frac{^{40}\\text{Ar}^*}{^{39}\\text{Ar}_{\\text{K}}}\\right) \\right], \\qquad ^{40}\\text{Ar}^* = ^{40}\\text{Ar}_{\\text{tot}} - 298.56\\left(^{36}\\text{Ar}_{\\text{meas}}\\right)",
+      "description": "Exact branched radiometric age equation accounting for the 10.48% electron-capture decay of 40K to 40Ar* (where λ_tot / λ_e = 5.543 / 0.581 = 9.5404), neutron-activation 40Ar/39Ar J-factor dating, and subtraction of atmospheric Argon using non-radiogenic 36Ar.",
+      "variables": [
+        {
+          "symbol": "\\lambda_{\\text{tot}}",
+          "definition": "Total decay constant of 40K = λ_e + λ_β = 5.543 × 10^-10 yr^-1 (t_1/2 = 1.248 × 10^9 yr)",
+          "unit": "yr^-1"
+        },
+        {
+          "symbol": "\\lambda_e",
+          "definition": "Electron-capture decay constant of 40K -> 40Ar* = 0.581 × 10^-10 yr^-1 (10.48% branch)",
+          "unit": "yr^-1"
+        },
+        {
+          "symbol": "^{40}\\text{Ar}^*",
+          "definition": "Moles/atoms of pure radiogenic Argon-40 trapped since cooling below closure temperature T_c",
+          "unit": "mol or fmol"
+        },
+        {
+          "symbol": "J",
+          "definition": "Dimensionless neutron fluence irradiation parameter calibrated via co-irradiated monitor standard",
+          "unit": "dimensionless"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-12.4",
+      "title": "Kimura Neutral Molecular Clock, Selection Ratio (ω = dN/dS) & Hamilton's Kin Selection Rule",
+      "latex": "k = 2N_e \\mu_0 \\left(\\frac{1}{2N_e}\\right) = \\mu_0, \\qquad \\omega = \\frac{d_N}{d_S}, \\qquad rB > C \\iff \\frac{B}{C} > \\frac{1}{r}",
+      "description": "Proves that the neutral substitution rate (k) equals the neutral mutation rate (μ_0), classifies selection via non-synonymous/synonymous ratio (ω), and states Hamilton's condition for altruistic evolution.",
+      "variables": [
+        {
+          "symbol": "d_N, d_S",
+          "definition": "Non-synonymous substitutions per non-synonymous site and synonymous substitutions per synonymous site",
+          "unit": "substitutions/site"
+        },
+        {
+          "symbol": "r, B, C",
+          "definition": "Wright's coefficient of relatedness (r), reproductive benefit to recipient (B), and cost to actor (C)",
+          "unit": "offspring equivalents"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-12.5",
+      "title": "Biodiversity Indices (Shannon-Wiener H', Evenness J', Simpson's 1-D) & Species-Area Power Law",
+      "latex": "H^{\\prime} = -\\sum_{i=1}^{S} p_i \\ln(p_i), \\qquad J^{\\prime} = \\frac{H^{\\prime}}{\\ln(S)}, \\qquad 1 - D = 1 - \\sum_{i=1}^{S} p_i^2, \\qquad S = c A^z",
+      "description": "Quantifies community species diversity and evenness from relative species proportions (p_i = n_i / N) and relates island/patch species richness (S) to habitat area (A).",
+      "variables": [
+        {
+          "symbol": "S",
+          "definition": "Species richness (total number of distinct species present)",
+          "unit": "species"
+        },
+        {
+          "symbol": "p_i",
+          "definition": "Proportional abundance of species i in the community (∑ p_i = 1)",
+          "unit": "0 to 1"
+        },
+        {
+          "symbol": "A, z",
+          "definition": "Habitat area (A) and Arrhenius scaling exponent (z ≈ 0.15–0.35)",
+          "unit": "km² or ha, dimensionless"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-12.1",
+        "title": "Full Argon Geochronology: Atmospheric 36Ar Correction & Branched 40K–40Ar Dating of a Hominid Volcanic Tuff",
+        "difficulty": "Advanced",
+        "statement": "Paleoanthropologists excavating a fossil hominid cranium in the East African Rift Valley collect pristine sanidine feldspar crystals from a volcanic ash layer (tuff) directly overlying the fossil. Isotope-dilution noble gas mass spectrometry and potassium analysis on a single crystal aliquot yield:\n• Total Potassium-40 content: 40K = 2.000 × 10^-9 mol (2,000 pmol)\n• Total Measured Argon-40 gas released upon laser fusion: 40Ar_total = 7.4785 × 10^-13 mol (0.74785 pmol)\n• Measured Non-Radiogenic Argon-36 gas: 36Ar_measured = 1.000 × 10^-15 mol (0.00100 pmol)\nGiven the atmospheric 40Ar / 36Ar ratio = 298.56, the electron-capture decay constant λ_e = 0.581 × 10^-10 yr^-1, the β- decay constant λ_β = 4.962 × 10^-10 yr^-1, and total decay constant λ_tot = 5.543 × 10^-10 yr^-1:\nCalculate: (a) the moles of atmospheric 40Ar contamination and the moles (and percentage) of pure radiogenic 40Ar* in the crystal, (b) the radiogenic daughter-to-parent ratio (40Ar* / 40K), and (c) the exact geological eruption age (t in Million Years, Ma) of the volcanic tuff using the branched 40K decay equation.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Use the measured non-radiogenic 36Ar (1.000 × 10^-15 mol) and the atmospheric ratio (40Ar / 36Ar = 298.56) to subtract atmospheric Argon contamination from 40Ar_total:",
+            "equation_latex": "^{40}\\text{Ar}_{\\text{atm}} = 298.56 \\times (1.000 \\times 10^{-15}\\text{ mol}) = 2.9856 \\times 10^{-13}\\text{ mol}"
+          },
+          {
+            "step": 2,
+            "explanation": "Subtract 40Ar_atm from 40Ar_total (7.4785 × 10^-13 mol) to isolate pure in-situ radiogenic 40Ar*:",
+            "equation_latex": "^{40}\\text{Ar}^* = (7.4785 \\times 10^{-13}) - (2.9856 \\times 10^{-13}) = 4.4929 \\times 10^{-13}\\text{ mol} \\quad \\left(\\%^{40}\\text{Ar}^* = \\frac{4.4929}{7.4785} \\times 100 = 60.08\\%\\right)"
+          },
+          {
+            "step": 3,
+            "explanation": "Compute the molar ratio of radiogenic daughter 40Ar* to parent 40K:",
+            "equation_latex": "\\frac{^{40}\\text{Ar}^*}{^{40}\\text{K}} = \\frac{4.4929 \\times 10^{-13}\\text{ mol}}{2.000 \\times 10^{-9}\\text{ mol}} = 2.24645 \\times 10^{-4}"
+          },
+          {
+            "step": 4,
+            "explanation": "Account for the branched decay of 40K (where only λ_e / λ_tot = 0.581 / 5.543 = 10.48% of decaying 40K atoms become 40Ar*, so λ_tot / λ_e = 9.54045) and substitute into the branched age equation:",
+            "equation_latex": "t = \\frac{1}{5.543 \\times 10^{-10}\\text{ yr}^{-1}} \\ln\\left[ 1 + \\left(\\frac{5.543}{0.581}\\right)(2.24645 \\times 10^{-4}) \\right] = (1.8041 \\times 10^9\\text{ yr}) \\ln(1 + 0.0021432)"
+          },
+          {
+            "step": 5,
+            "explanation": "Evaluate the natural logarithm ln(1.0021432) = 0.0021409 and multiply by 1 / λ_tot:",
+            "equation_latex": "t = (1.8041 \\times 10^9\\text{ yr})(0.0021409) = 3.862 \\times 10^6\\text{ years} = 3.86\\text{ Ma}"
+          }
+        ],
+        "final_answer": "(a) Atmospheric 40Ar = 2.986 × 10^-13 mol; Radiogenic 40Ar* = 4.493 × 10^-13 mol (60.1% radiogenic); (b) 40Ar* / 40K = 2.246 × 10^-4; (c) Eruption age t = 3.86 Million Years (Ma, corresponding to the early Australopithecus anamensis / afarensis transition)."
+      },
+      {
+        "problem_id": "SP-12.2",
+        "title": "40Ar/39Ar Laser Step-Heating Dating of the Cretaceous-Paleogene (K-Pg) Impact Boundary",
+        "difficulty": "Intermediate",
+        "statement": "To date the Chicxulub asteroid impact tektites at the Cretaceous-Paleogene (K-Pg) mass extinction boundary using the single-grain 40Ar/39Ar method, a tektite glass shard is co-irradiated with fast neutrons alongside the Fish Canyon Tuff sanidine standard, establishing a neutron fluence irradiation parameter of J = 0.01020. High-temperature laser step-heating plateau steps yield a constant atmospheric-corrected radiogenic-to-potassium-derived Argon ratio of (40Ar* / 39Ar_K) = 3.655. Given λ_total = 5.543 × 10^-10 yr^-1, calculate the exact age (in Ma) of the K-Pg mass extinction boundary.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Multiply the irradiation parameter J (0.01020) by the plateau isotopic ratio (40Ar* / 39Ar_K = 3.655):",
+            "equation_latex": "J \\cdot \\left(\\frac{^{40}\\text{Ar}^*}{^{39}\\text{Ar}_{\\text{K}}}\\right) = (0.01020)(3.655) = 0.037281"
+          },
+          {
+            "step": 2,
+            "explanation": "Substitute into the 40Ar/39Ar age equation t = (1 / λ_total) · ln[1 + J · (40Ar* / 39Ar_K)]:",
+            "equation_latex": "t = \\frac{1}{5.543 \\times 10^{-10}\\text{ yr}^{-1}} \\ln(1 + 0.037281) = (1.80408 \\times 10^9\\text{ yr}) \\ln(1.037281)"
+          },
+          {
+            "step": 3,
+            "explanation": "Evaluate ln(1.037281) = 0.036603 and compute the age in Million Years (Ma):",
+            "equation_latex": "t = (1.80408 \\times 10^9\\text{ yr})(0.036603) = 6.603 \\times 10^7\\text{ years} = 66.03\\text{ Ma}"
+          }
+        ],
+        "final_answer": "t = 66.03 Ma (matching the high-precision astronomical and 40Ar/39Ar age of the K-Pg Chicxulub boundary)."
+      },
+      {
+        "problem_id": "SP-12.3",
+        "title": "Population Ecology: Logistic Growth Rate (dN/dt), Maximum Sustainable Yield & Mark-Recapture",
+        "difficulty": "Foundational",
+        "statement": "Part A: Wildlife biologists studying a Bengal tiger prey population of Spotted Deer (Axis axis) in a reserve capture, ear-tag, and release M = 180 deer. Two weeks later, a random survey captures C = 150 deer, of which R = 15 carry ear tags. Estimate the current deer population size (N).\nPart B: If this reserve has a Carrying Capacity of K = 3,600 deer and an intrinsic per-capita growth rate of r = 0.30 yr^-1: (1) Calculate the instantaneous population growth rate (dN/dt in deer/year) at the current population size N estimated in Part A. (2) At what population size (N_MSY) does the deer herd achieve its Maximum Sustainable Yield, and what is the maximum number of deer added per year at that point?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Part A, apply the Lincoln-Petersen Mark-Recapture equation N = (M × C) / R:",
+            "equation_latex": "N = \\frac{M \\times C}{R} = \\frac{180 \\times 150}{15} = 1,800\\text{ deer}"
+          },
+          {
+            "step": 2,
+            "explanation": "For Part B, substitute N = 1,800, K = 3,600, and r = 0.30 yr^-1 into the Verhulst logistic equation dN/dt = rN[(K - N)/K]:",
+            "equation_latex": "\\frac{dN}{dt} = (0.30\\text{ yr}^{-1})(1,800)\\left(\\frac{3,600 - 1,800}{3,600}\\right) = (540)(0.500) = 270\\text{ deer/year}"
+          },
+          {
+            "step": 3,
+            "explanation": "Notice that N = 1,800 is exactly half the carrying capacity (N_MSY = K / 2 = 3,600 / 2 = 1,800), which is the inflection point where dN/dt is at its absolute maximum (MSY = rK / 4):",
+            "equation_latex": "N_{\\text{MSY}} = \\frac{K}{2} = 1,800\\text{ deer}, \\qquad \\text{MSY} = \\frac{rK}{4} = \\frac{(0.30)(3,600)}{4} = 270\\text{ deer/year}"
+          }
+        ],
+        "final_answer": "Part A: Estimated population N = 1,800 deer; Part B: Current growth rate dN/dt = 270 deer/year, which is already at the Maximum Sustainable Yield inflection point (N_MSY = K/2 = 1,800)."
+      },
+      {
+        "problem_id": "SP-12.4",
+        "title": "Community Biodiversity: Computing Shannon-Wiener Diversity (H'), Evenness (J') & Simpson's Index (1-D)",
+        "difficulty": "Intermediate",
+        "statement": "Two forest plots (Plot A in an undisturbed Himalayan oak-rhododendron reserve; Plot B in a disturbed monoculture plantation edge) both contain exactly S = 4 tree species and N = 100 total sampled trees, with the following species abundances:\n• Plot A: Species 1 = 25, Species 2 = 25, Species 3 = 25, Species 4 = 25\n• Plot B: Species 1 = 85, Species 2 = 5, Species 3 = 5, Species 4 = 5\nCalculate and compare for Plot A and Plot B: (a) the Shannon-Wiener Diversity Index (H'), (b) Pielou's Evenness Index (J' = H' / ln S), and (c) Gini-Simpson's Index of Diversity (1 - D = 1 - ∑p_i²).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Plot A, all four species have equal proportional abundance p_i = 25/100 = 0.25 (with ln(0.25) = -1.3863 and ln(S) = ln(4) = 1.3863):",
+            "equation_latex": "H^{\\prime}_A = -\\sum_{i=1}^{4} (0.25)\\ln(0.25) = -4(0.25)(-1.3863) = 1.386, \\qquad J^{\\prime}_A = \\frac{1.386}{1.386} = 1.000, \\qquad (1 - D)_A = 1 - 4(0.25)^2 = 1 - 0.25 = 0.750"
+          },
+          {
+            "step": 2,
+            "explanation": "For Plot B, p_1 = 0.85 [p_1 ln(p_1) = 0.85 × (-0.1625) = -0.1381] and p_2 = p_3 = p_4 = 0.05 [each p_i ln(p_i) = 0.05 × (-2.9957) = -0.1498]:",
+            "equation_latex": "H^{\\prime}_B = -\\left[ -0.1381 + 3(-0.1498) \\right] = 0.1381 + 0.4494 = 0.5875 \\approx 0.588"
+          },
+          {
+            "step": 3,
+            "explanation": "Compute Evenness (J'_B) and Simpson's Diversity (1 - D)_B for Plot B:",
+            "equation_latex": "J^{\\prime}_B = \\frac{0.5875}{\\ln(4)} = \\frac{0.5875}{1.3863} = 0.424, \\qquad (1 - D)_B = 1 - \\left[(0.85)^2 + 3(0.05)^2\\right] = 1 - (0.7225 + 0.0075) = 1 - 0.730 = 0.270"
+          }
+        ],
+        "final_answer": "Plot A: H' = 1.386, Evenness J' = 1.00, Simpson's (1-D) = 0.750; Plot B: H' = 0.588, Evenness J' = 0.424, Simpson's (1-D) = 0.270 (demonstrating how severe dominance reduces biodiversity metrics despite identical species richness S = 4)."
+      },
+      {
+        "problem_id": "SP-12.5",
+        "title": "Molecular Evolution & Behavioral Ecology: dN/dS Selection Regimes & Hamilton's Kin Selection",
+        "difficulty": "Intermediate",
+        "statement": "Part A: Comparative coding-sequence alignment between two diverged plant species across three genes reveals the following rates of non-synonymous (d_N) and synonymous (d_S) substitutions per site:\n• Gene 1 (Ubiquitin-60S ribosomal protein): d_N = 0.004, d_S = 0.200\n• Gene 2 (Transposable element pseudogene): d_N = 0.180, d_S = 0.180\n• Gene 3 (NBS-LRR pathogen-recognition receptor domain): d_N = 0.360, d_S = 0.150\nCalculate ω = d_N / d_S for each gene and classify the evolutionary selection regime.\nPart B: In a diploid mammal (where full siblings share relatedness r = 0.50 and first cousins share r = 0.125), an individual spots a predator and can emit an alarm call that saves a group of relatives, but doing so reduces the caller's own expected lifetime offspring from 4.0 to 3.0 (Cost C = 1.0 offspring). According to Hamilton's Rule (rB > C), what is the minimum number of (1) full-sibling offspring equivalents or (2) first-cousin offspring equivalents that must be saved for the alarm-calling allele to be favored by kin selection?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "For Part A, compute ω = d_N / d_S for each of the three loci:",
+            "equation_latex": "\\omega_1 = \\frac{0.004}{0.200} = 0.020 \\ll 1 \\text{ (Strong Purifying Selection)}; \\quad \\omega_2 = \\frac{0.180}{0.180} = 1.00 \\text{ (Neutral Drift)}; \\quad \\omega_3 = \\frac{0.360}{0.150} = 2.40 > 1 \\text{ (Positive Diversifying Selection)}"
+          },
+          {
+            "step": 2,
+            "explanation": "For Part B, apply Hamilton's Inequality r·B > C -> B > C / r (with C = 1.0 offspring lost by the caller) for full siblings (r = 0.50):",
+            "equation_latex": "B_{\\text{siblings}} > \\frac{C}{r} = \\frac{1.0}{0.50} = 2.0\\text{ full-sibling offspring equivalents}"
+          },
+          {
+            "step": 3,
+            "explanation": "Repeat for first cousins (r = 1/8 = 0.125)— illustrating J.B.S. Haldane's famous quip ('I would lay down my life for two brothers or eight cousins'):",
+            "equation_latex": "B_{\\text{cousins}} > \\frac{1.0}{0.125} = 8.0\\text{ first-cousin offspring equivalents}"
+          }
+        ],
+        "final_answer": "Part A: Gene 1 (ω = 0.02, Purifying selection), Gene 2 (ω = 1.00, Neutral evolution), Gene 3 (ω = 2.40, Positive selection); Part B: Must save >2.0 full-sibling equivalents or >8.0 first-cousin equivalents."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-12.1",
+        "question": "Why is Potassium-Argon (40K–40Ar) dating invalid on a newly erupted liquid basalt lava flow (resulting in an age of ~0 years, or an 'excess argon' error if submarine), and why does 40K decay into 40Ca (89.52% of decays) almost never get used for routine radiometric dating?",
+        "bold_answer": "Liquid lava degasses 100% of pre-existing Argon until it cools below its mineral closure temperature (so a fresh flow has 40Ar* = 0); 40Ca cannot be used routinely because non-radiogenic 40Ca (96.9% of natural calcium) is already abundant in silicate minerals at crystallization",
+        "collapsible_derivation": "For a radiometric clock to measure crystallization age accurately, the daughter isotope must be excluded at T = 0 or distinguishable from initial background. Inert 40Ar gas escapes molten magma completely (40Ar*_initial = 0), making every atom of 40Ar* trapped after cooling a direct measure of time elapsed since solidification. Conversely, Calcium is a major structural cation in plagioclase/clinopyroxene, so minuscule radiogenic 40Ca additions are swamped by initial non-radiogenic 40Ca."
+      },
+      {
+        "problem_id": "PP-12.2",
+        "question": "In a terrestrial grassland ecosystem, primary producers fix 20,000 kcal/m²/yr of Net Primary Production (NPP). If the average Lindeman Trophic Transfer Efficiency is 10% across each consumer level, how much energy (in kcal/m²/yr) is incorporated into the biomass of Tertiary Consumers (4th trophic level: apex predators)?",
+        "bold_answer": "20 kcal/m²/yr (20,000 × 0.10³)",
+        "collapsible_derivation": "Trophic Level 1 (Primary Producers) = 20,000 kcal/m²/yr -> Level 2 (Primary Consumers / Herbivores, 10%) = 2,000 kcal/m²/yr -> Level 3 (Secondary Consumers, 10%) = 200 kcal/m²/yr -> Level 4 (Tertiary Consumers, 10%) = 20 kcal/m²/yr."
+      },
+      {
+        "problem_id": "PP-12.3",
+        "question": "A conservation reserve contains an isolated population of 200 adult Greater One-Horned Rhinoceroses consisting of N_m = 20 breeding bulls (males) and N_f = 180 breeding cows (females). Calculate the genetically Effective Population Size (N_e) and the single-generation inbreeding rate (ΔF = 1 / 2N_e).",
+        "bold_answer": "N_e = 72 individuals (only 36% of the census size N = 200); ΔF = 0.0069 (0.69% per generation)",
+        "collapsible_derivation": "Using Wright's sex-ratio formula: N_e = (4 × N_m × N_f) / (N_m + N_f) = (4 × 20 × 180) / (20 + 180) = 14,400 / 200 = 72.0. The rate of heterozygosity loss / inbreeding per generation is ΔF = 1 / (2 × 72) = 1 / 144 = 0.00694 (0.69%)."
+      },
+      {
+        "problem_id": "PP-12.4",
+        "question": "Two species of paramecia (Species 1 with K_1 = 200 and Species 2 with K_2 = 150) compete in a laboratory microcosm with Lotka-Volterra competition coefficients α_12 = 0.50 and α_21 = 0.60. Predict whether one species drives the other extinct or if they achieve stable coexistence.",
+        "bold_answer": "Stable Coexistence (at N_1* = 141.2 and N_2* = 117.6)",
+        "collapsible_derivation": "Check the stable coexistence inequalities: K_1 / K_2 = 200 / 150 = 1.33, and α_12 = 0.50 < 1.33 (satisfied!). K_2 / K_1 = 150 / 200 = 0.75, and α_21 = 0.60 < 0.75 (satisfied!). Because both species inhibit themselves more strongly than they inhibit their competitor, they coexist stably at N_1* = (K_1 - α_12 K_2) / (1 - α_12 α_21) = (200 - 75) / (1 - 0.30) = 125 / 0.70 = 178.6 and N_2* = (150 - 0.60×200) / 0.70 = 30 / 0.70 = 42.9."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Geochronology & Conservation Case Study: 40Ar/39Ar Dating of 'Lucy' (Hadar AL 288-1) & Trophic Cascade Restoration",
+    "scenario": "Case A (Paleoanthropological Argon Geochronology): In 1974, Donald Johanson discovered the 40%-complete skeleton of Australopithecus afarensis ('Lucy', AL 288-1) in the Hadar Formation of Ethiopia. Because sedimentary mudstones and fossil bones cannot be dated directly by 14C (which maxes out at ~50,000 years), geologists targeted the Kada Hadar Tuff (KHT) volcanic ash horizon immediately below the fossil. Case B (Ecosystem Trophic Cascade): Extirpation of apex predators (wolves in Yellowstone or sea otters in kelp forests) triggers an explosion of herbivore prey (elk or sea urchins) that overgraze primary producers.",
+    "mechanistic_analysis": "In Case A, single-crystal laser-fusion 40Ar/39Ar dating of volcanic sanidine feldspars in the Hadar tuffs yielded a flat step-heating plateau age of 3.18 ± 0.01 Ma. Because the volcanic ash was erupted and deposited subaerially, high-temperature magma degassing had reset 40Ar* to zero at eruption, while irradiation-induced 39Ar_K allowed single-grain precision and 36Ar correction removed atmospheric Argon—anchoring the divergence of bipedal hominids against the molecular clock of human-chimpanzee genomic divergence (~6–7 Ma). In Case B, reintroducing the keystone apex predator restores a Top-Down Trophic Cascade (Hairston-Smith-Slobodkin 'Green World' hypothesis): predators suppress herbivore density and alter foraging behavior ('landscape of fear'), releasing willow/aspen or giant kelp (Macrocystis) Net Primary Production and increasing community Shannon diversity (H').",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook4",
+        "topic": "Population Genetics (Hardy-Weinberg, Genetic Drift N_e & Polyploid Speciation)"
+      },
+      {
+        "target_textbook": "TextBook6",
+        "topic": "Rhizobium Nitrogen Fixation & Microbial Biogeochemical Nitrification/Denitrification"
+      },
+      {
+        "target_textbook": "TextBook7",
+        "topic": "C3/C4/CAM Net Primary Production (NPP) & Global Carbon Fixation"
+      },
+      {
+        "target_textbook": "TextBook11",
+        "topic": "Phylogenetic Trees, Ortholog/Paralog Divergence & Molecular Clock Calibration"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-12.1",
+      "question": "Why does Potassium-Argon (40K–40Ar) and 40Ar/39Ar radiometric dating accurately measure the solidification age of volcanic ash (tephra) and lava flows, even though the parent magma resided in Earth's mantle/crust for billions of years before erupting?",
+      "options": [
+        "Potassium-40 only begins radioactive decay after it is exposed to atmospheric oxygen",
+        "Argon (Z = 18) is a chemically inert noble gas; while the rock is molten above its mineral closure temperature, all previously accumulated 40Ar escapes into the atmosphere (resetting 40Ar* to zero), and only 40Ar* produced after crystal solidification is trapped inside the mineral lattice",
+        "Volcanic eruptions convert all Argon-40 back into Potassium-40 via reverse electron capture",
+        "Atmospheric Argon-36 decays into Argon-40 with a half-life of 5,730 years"
+      ],
+      "correct_index": 1,
+      "explanation": "Because Argon is a noble gas that forms no chemical bonds in silicate minerals, any 40Ar produced while the magma is molten diffuses out and escapes. Once the volcanic ash or lava cools below its mineral closure temperature (T_c ≈ 300–500°C), the crystal lattice locks shut, trapping all subsequent radiogenic 40Ar* produced from the 10.48% electron-capture branch of 40K."
+    },
+    {
+      "question_id": "Q-12.2",
+      "question": "According to Motoo Kimura's Neutral Theory of Molecular Evolution, how does the long-term rate of neutral nucleotide substitution per year/generation (k) depend on the effective population size (N_e)?",
+      "options": [
+        "k increases exponentially in large populations because more mutations occur",
+        "k is completely independent of population size (k = μ_0), because the number of new mutations per generation (2N_e·μ_0) is multiplied by the fixation probability of a neutral allele (1 / 2N_e), causing 2N_e to cancel out",
+        "k is zero in all finite populations",
+        "k is inversely proportional to the square of N_e"
+      ],
+      "correct_index": 1,
+      "explanation": "In a diploid population of size N_e, 2N_e·μ_0 new neutral mutations arise each generation, but each new mutation has only a 1/(2N_e) probability of drifting to 100% fixation. Multiplying the two gives k = (2N_e·μ_0) × [1/(2N_e)] = μ_0, proving that the neutral molecular clock ticks at the neutral mutation rate regardless of population size."
+    },
+    {
+      "question_id": "Q-12.3",
+      "question": "In the Verhulst-Pearl logistic growth model dN/dt = rN[(K - N)/K], at what population size (N) is the net number of new individuals added per unit time (dN/dt) at its absolute maximum?",
+      "options": [
+        "At N = K (the carrying capacity)",
+        "At N = K / 2 (the inflection point of the sigmoidal curve, where dN/dt = rK / 4)",
+        "At N = 0",
+        "At N = 2K"
+      ],
+      "correct_index": 1,
+      "explanation": "While the per-capita growth rate [(1/N) dN/dt = r(1 - N/K)] is highest as N -> 0, the total population growth rate dN/dt = rN - (r/K)N² is a downward-opening parabola in N whose vertex (maximum derivative d²N/dt² = 0) occurs at N = K/2, yielding the Maximum Sustainable Yield MSY = rK/4."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "Evolutionary Rate at the Molecular Level (Kimura, Nature 1968), Potassium-Argon Dating by Activation with Fast Neutrons (Merrihue & Turner, 1966) & The Theory of Island Biogeography (MacArthur & Wilson, 1967)",
+    "imrad_breakdown": {
+      "abstract_summary": "Kimura (1968) calculated hemoglobin/cytochrome c evolutionary rates across mammals to establish the Neutral Theory of Molecular Evolution. Merrihue and Turner (1966) invented the 40Ar/39Ar fast-neutron activation step-heating method, eliminating the need to measure K and Ar on separate rock splits. MacArthur and Wilson (1967) unified island colonization and extinction dynamics into quantitative equilibrium ecology.",
+      "key_method": "Comparative amino acid substitution rate analysis across fossil-calibrated vertebrate lineages; nuclear reactor 39K(n,p)39Ar irradiation coupled with incremental thermal degassing mass spectrometry; experimental defaunation and recolonization censuses of Florida Keys mangrove islands (Simberloff & Wilson).",
+      "critical_takeaway": "Combining radiometric Argon geochronology (physical time) with neutral molecular substitution clocks (genomic time) and island/population models (ecological space) provides a unified quantitative framework for the history and conservation of life on Earth."
+    },
+    "further_reading": [
+      "Futuyma, D. J., & Kirkpatrick, M. Evolution — Speciation, Neutral Theory, dN/dS Selection, Kin Selection & Radiometric Geochronology.",
+      "Begon, M., Townsend, C. R., & Harper, J. L. Ecology: From Individuals to Ecosystems — Logistic Growth, Lotka-Volterra Competition/Predation & Biodiversity.",
+      "McDougall, I., & Harrison, T. M. Geochronology and Thermochronology by the 40Ar/39Ar Method — Oxford University Press (Full Branched 40K Decay, Atmospheric 36Ar Correction & Step-Heating Plateaus)."
+    ]
+  }
+}

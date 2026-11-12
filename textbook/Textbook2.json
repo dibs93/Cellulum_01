@@ -1,0 +1,919 @@
+{
+  "textbook_id": "TextBook2",
+  "branch_number": 2,
+  "branch_title": "Cell Biology: Ultrastructure, Bioenergetics, Membrane Transport & Cell Cycle",
+  "subtitle": "Cell Theory, Organelle Compartmentalization, Chemiosmotic Bioenergetics, Fluid Mosaic Transport & Mitotic Regulation",
+  "version": "1.0.0",
+  "knowledge_graph": {
+    "current_node": "Cell Biology",
+    "upstream_nodes": [
+      "TextBook1"
+    ],
+    "downstream_nodes": [
+      "TextBook3",
+      "TextBook7",
+      "TextBook8",
+      "TextBook9"
+    ],
+    "scale_hierarchy": [
+      {
+        "level": "Lipid Bilayer & Ion Channels",
+        "scale_m": 5e-9,
+        "display_scale": "4–8 nm",
+        "example": "Plasma Membrane, Voltage-Gated K+ Channel"
+      },
+      {
+        "level": "Macromolecular Machines",
+        "scale_m": 1.2e-8,
+        "display_scale": "10–30 nm",
+        "example": "F0F1-ATP Synthase, 80S Ribosome, Nuclear Pore Complex"
+      },
+      {
+        "level": "Sub-Organellar Structures",
+        "scale_m": 1e-7,
+        "display_scale": "50–200 nm",
+        "example": "Mitochondrial Cristae, Clathrin-Coated Vesicles, Microtubules"
+      },
+      {
+        "level": "Organelles",
+        "scale_m": 1e-6,
+        "display_scale": "0.5–5 μm",
+        "example": "Mitochondrion, Chloroplast, Lysosome, Peroxisome, Nucleus"
+      },
+      {
+        "level": "Prokaryotic Cells",
+        "scale_m": 2e-6,
+        "display_scale": "1–5 μm",
+        "example": "Escherichia coli, Bacillus subtilis"
+      },
+      {
+        "level": "Eukaryotic Cells",
+        "scale_m": 2e-5,
+        "display_scale": "10–100 μm",
+        "example": "Mammalian Hepatocyte, Plant Palisade Cell"
+      }
+    ],
+    "explorer_pathways": [
+      "Future Molecular Biologist",
+      "Plant Scientist",
+      "Biotechnologist",
+      "Microbiologist"
+    ]
+  },
+  "sub_modules": [
+    {
+      "id": "2.1",
+      "title": "Cell Theory, Surface-to-Volume Scaling & Cellular Diversity",
+      "overview": "Cells are the fundamental structural, functional, and bioenergetic units of life. Their microscopic dimensions are strictly constrained by diffusion physics and surface-area-to-volume geometry.",
+      "core_concepts": [
+        {
+          "concept_id": "2.1.1",
+          "heading": "Classical & Modern Tenets of Cell Theory",
+          "theory": "Formulated by Schleiden, Schwann, and Virchow ('Omnis cellula e cellula'), modern cell theory integrates molecular bioenergetics and heredity: (1) All living organisms are composed of one or more cells; (2) The cell is the smallest unit exhibiting all emergent properties of life; (3) All cells arise from pre-existing cells via division; (4) Hereditary information (DNA) is passed during division; and (5) Energy flow (metabolism and bioenergetics) occurs within cells across conserved biochemical pathways.",
+          "key_principles": [
+            "Geometric Surface-Area-to-Volume Constraint: As a spherical cell's radius (r) increases, its metabolic volume increases cubically (V = 4/3 πr³), whereas its plasma membrane exchange area increases quadratically (SA = 4πr²). Consequently, the SA/V ratio scales inversely with radius (SA/V = 3/r).",
+            "Fick's Diffusion Limit & Compartmentalization: Intracellular diffusion time (t ≈ x² / 2D) becomes prohibitively slow over distances >50 μm. Eukaryotic cells overcome the SA/V bottleneck through extensive internal endomembranes, microvilli, cristae invaginations, and motor-driven cytoskeletal transport (kinesin, dynein, myosin)."
+          ]
+        },
+        {
+          "concept_id": "2.1.2",
+          "heading": "Prokaryotic vs. Eukaryotic Cellular Architecture",
+          "theory": "Life diverges into three domains—Bacteria, Archaea (prokaryotes), and Eukarya. While prokaryotes house DNA in an unbounded nucleoid and perform oxidative phosphorylation directly across their plasma membrane, eukaryotes partition metabolic pathways into specialized membrane-bound organelles.",
+          "key_principles": [
+            "Endosymbiotic Origin of Bioenergetic Organelles (Lynn Margulis): Mitochondria (derived from ancestral alpha-proteobacteria) and chloroplasts (derived from ancestral cyanobacteria) retain circular double-stranded DNA, 70S ribosomes (sensitive to chloramphenicol/tetracycline), cardiolipin-enriched inner membranes, and binary-fission-like division (FtsZ/dynamin-related proteins)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Structural & Bioenergetic Comparison Across Domains of Life",
+        "headers": [
+          "Feature",
+          "Bacteria",
+          "Archaea",
+          "Eukarya"
+        ],
+        "rows": [
+          [
+            "Nuclear Envelope",
+            "Absent (Nucleoid region)",
+            "Absent (Nucleoid region)",
+            "Double-membrane with Nuclear Pore Complexes"
+          ],
+          [
+            "Membrane Lipids",
+            "Ester-linked unbranched fatty acids",
+            "Ether-linked branched isoprenoids (monolayer/bilayer)",
+            "Ester-linked fatty acids + sterols (cholesterol/ergosterol)"
+          ],
+          [
+            "Ribosome Sedimentation",
+            "70S (50S + 30S)",
+            "70S (50S + 30S; eukaryotic-like factors)",
+            "80S cytosolic (60S + 40S); 70S in mitochondria/plastids"
+          ],
+          [
+            "Site of ATP Synthase / ETC",
+            "Plasma membrane",
+            "Plasma membrane",
+            "Inner Mitochondrial Membrane & Thylakoid Membrane"
+          ],
+          [
+            "Cytoskeletal Filaments",
+            "FtsZ (tubulin homolog), MreB (actin homolog)",
+            "FtsZ / Crenactin homologs",
+            "Microtubules (α/β-tubulin), Microfilaments (actin), Intermediate filaments"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "2.2",
+      "title": "Organelle Ultrastructure, Endomembrane Trafficking & Mitochondrial Bioenergetics",
+      "overview": "Eukaryotic organelles establish chemically distinct microenvironments that segregate transcription, protein folding, glycosylation, hydrolytic degradation, and chemiosmotic energy transduction.",
+      "core_concepts": [
+        {
+          "concept_id": "2.2.1",
+          "heading": "The Endomembrane System & Vesicular Trafficking",
+          "theory": "The nuclear envelope, endoplasmic reticulum (ER), Golgi apparatus, lysosomes, and plasma membrane form a functionally continuous secretory and endocytic network connected by coated transport vesicles (COPII for ER-to-Golgi anterograde; COPI for Golgi-to-ER retrograde; Clathrin for trans-Golgi/endocytic transport).",
+          "key_principles": [
+            "Nucleus & Nucleolus: Surrounded by a double membrane perforated by octagonal Nuclear Pore Complexes (NPCs) regulating Ran-GTP-dependent import/export. The nucleolus is a phase-separated sub-compartment for rRNA transcription (RNA Pol I) and ribosomal subunit assembly.",
+            "Endoplasmic Reticulum (RER vs. SER): Rough ER mediates co-translational translocation via the Sec61 translocon, N-linked core glycosylation (on Asn-X-Ser/Thr motifs), and disulfide bond formation (Protein Disulfide Isomerase). Smooth ER synthesizes phospholipids, steroids, Cytochrome P450 detoxification, and sequesters Ca2+ via SERCA pumps.",
+            "Golgi Apparatus Polarity: Organized into cis, medial, and trans cisternae. Modifies N-glycans, performs O-linked glycosylation, and tags lysosomal hydrolases with Mannose-6-Phosphate (M6P) in the cis-Golgi.",
+            "Lysosomes vs. Peroxisomes: Lysosomes maintain an acidic lumen (pH 4.5–5.0) via V-type H+-ATPases to power ~50 acid hydrolases (autophagy and phagocytosis). Peroxisomes are single-membrane oxidative organelles that perform very-long-chain fatty acid β-oxidation and detoxify H2O2 via catalase (2 H2O2 -> 2 H2O + O2)."
+          ]
+        },
+        {
+          "concept_id": "2.2.2",
+          "heading": "Mitochondrial Architecture, Electron Transport Chain (ETC) & Chemiosmosis",
+          "theory": "Mitochondria transduce the chemical free energy of NADH and FADH2 into a transmembrane electrochemical proton gradient (Proton-Motive Force, Δp) across the Inner Mitochondrial Membrane (IMM), which drives rotary ATP synthesis via F0F1-ATP synthase (Peter Mitchell's Chemiosmotic Theory).",
+          "key_principles": [
+            "Four Functional Compartments: (1) Outer Membrane (permeable to molecules <5 kDa via VDAC porins); (2) Intermembrane Space (IMS, chemically equivalent to cytosol for small ions, high [H+], houses cytochrome c); (3) Inner Membrane (folded into cristae, ~20% cardiolipin, impermeable to H+, houses Complexes I–IV and ATP synthase); (4) Matrix (alkaline pH ~7.8, houses PDH, TCA cycle enzymes, β-oxidation, and mtDNA).",
+            "Complex I (NADH:Ubiquinone Oxidoreductase): Transfers 2e- from NADH via FMN and 7–8 Fe-S clusters to Ubiquinone (Q -> QH2), pumping 4 H+ from matrix to IMS.",
+            "Complex II (Succinate Dehydrogenase): Couples succinate -> fumarate oxidation (via FAD and Fe-S centers) to Q reduction without pumping protons (0 H+).",
+            "Complex III (Cytochrome bc1 Complex) & The Q-Cycle: Oxidizes QH2 and reduces two molecules of mobile Cytochrome c via heme bL, heme bH, Rieske Fe-S protein, and heme c1, translocating 4 H+ to the IMS per 2e-.",
+            "Complex IV (Cytochrome c Oxidase): Transfers electrons from Cytochrome c through CuA, heme a, and the binuclear heme a3-CuB center to reduce 1/2 O2 + 2 H+ -> H2O, pumping 2 vectorial H+ per 2e-.",
+            "F0F1-ATP Synthase Rotary Catalysis: Protons flow back into the matrix down Δp through the F0 c-ring rotor, driving rotation of the γ-stalk inside the F1 (α3β3) catalytic hexamer. Each 360° rotation synthesizes 3 ATP molecules via Boyer's binding-change mechanism (Open -> Loose -> Tight conformations)."
+          ]
+        },
+        {
+          "concept_id": "2.2.3",
+          "heading": "Cytoskeletal Dynamics & Molecular Motors",
+          "theory": "The cytoskeleton provides mechanical tensegrity, cell motility, intracellular transport tracks, and mitotic chromosome segregation through three filament systems.",
+          "key_principles": [
+            "Microtubules (25 nm diameter): Hollow tubes of 13 protofilaments composed of α/β-tubulin heterodimers. Exhibit dynamic instability (GTP cap at the fast-growing [+] end) and serve as tracks for Kinesin (mostly [+] end-directed) and Dynein ([-] end-directed).",
+            "Microfilaments / Actin (7 nm diameter): Double-stranded helical polymers of G-actin bound to ATP; drive lamellipodia, cytokinesis contractile rings, and Myosin motor contraction.",
+            "Intermediate Filaments (10 nm diameter): Non-polar, apolar rope-like tetrameric coiled-coils (keratins, vimentin, neurofilaments, nuclear lamins) lacking nucleotide hydrolysis or motor proteins; confer tensile strength against mechanical shear."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Mitochondrial Electron Transport Chain (ETC) Complexes & Stoichiometry (per 2e- transferred)",
+        "headers": [
+          "Complex / Name",
+          "Prosthetic Groups",
+          "Electron Donor -> Acceptor",
+          "H+ Pumped (Matrix -> IMS)",
+          "Classic Specific Inhibitors"
+        ],
+        "rows": [
+          [
+            "Complex I (NADH Dehydrogenase)",
+            "FMN, Fe-S clusters",
+            "NADH -> Ubiquinone (Q)",
+            "4 H+",
+            "Rotenone, Piericidin A, Amytal"
+          ],
+          [
+            "Complex II (Succinate Dehydrogenase)",
+            "FAD, Fe-S clusters, Heme b",
+            "Succinate -> Ubiquinone (Q)",
+            "0 H+",
+            "Malonate (competitive), Carboxin"
+          ],
+          [
+            "Complex III (Cytochrome bc1)",
+            "Heme bL, Heme bH, Heme c1, [2Fe-2S]",
+            "Ubiquinol (QH2) -> Cytochrome c",
+            "4 H+ (via Q-cycle)",
+            "Antimycin A, Myxothiazol"
+          ],
+          [
+            "Complex IV (Cytochrome c Oxidase)",
+            "CuA, Heme a, Heme a3, CuB",
+            "Cytochrome c -> O2 (forms H2O)",
+            "2 H+ (plus 2 scalar H+ consumed)",
+            "Cyanide (CN-), Azide (N3-), Carbon Monoxide (CO)"
+          ],
+          [
+            "Complex V (F0F1-ATP Synthase)",
+            "None (Proton channel + α3β3γ motor)",
+            "PMF (Δp) drives ADP + Pi -> ATP",
+            "Net influx: ~3.3–4 H+ per ATP (incl. Pi symport)",
+            "Oligomycin (blocks F0 proton channel), DCCD"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "2.3",
+      "title": "Cell Membrane Biophysics & Solute Transport Energetics",
+      "overview": "Biological membranes are two-dimensional, asymmetric fluid mosaic bilayers that act as selective permeability barriers and capacitor-like electrical insulators.",
+      "core_concepts": [
+        {
+          "concept_id": "2.3.1",
+          "heading": "The Fluid Mosaic Model & Lipid Asymmetry",
+          "theory": "Formulated by Singer and Nicolson, membranes consist of an amphipathic phospholipid bilayer in which integral (transmembrane α-helices or β-barrels), peripheral, and lipid-anchored (GPI-linked, palmitoylated, prenylated) proteins diffuse laterally.",
+          "key_principles": [
+            "Membrane Fluidity Homeostasis: Fluidity increases with shorter fatty acyl chains and cis-double bonds (unsaturated kinks that disrupt van der Waals packing). Cholesterol acts as a bidirectional fluidity buffer—preventing crystallization at low temperatures and restricting acyl chain motion at high temperatures.",
+            "Transbilayer Lipid Asymmetry: Maintained by ATP-dependent Flippases (move phosphatidylserine [PS] and phosphatidylethanolamine [PE] to the cytosolic leaflet) and Floppases (move phosphatidylcholine [PC] and sphingomyelin to the exoplasmic leaflet). Scramblases randomize lipids during apoptosis, exposing negatively charged PS on the outer surface as an 'eat-me' phagocytic signal."
+          ]
+        },
+        {
+          "concept_id": "2.3.2",
+          "heading": "Thermodynamics & Kinetics of Membrane Transport",
+          "theory": "Solute movement across a membrane depends on both the chemical concentration gradient and, for charged ions, the transmembrane electrical potential (Δψ). Transport is mediated by channels (up to 10^8 ions/sec, non-saturable) or carriers/transporters (10^2–10^4 molecules/sec, Michaelis-Menten saturation kinetics).",
+          "key_principles": [
+            "Simple vs. Facilitated Diffusion: Non-polar gases (O2, CO2, N2) and small hydrophobic molecules cross via simple diffusion (linear flux with concentration, Fick's Law). Polar molecules (glucose via GLUT1–4) and ions cross via facilitated diffusion down their electrochemical gradient (ΔG < 0) without ATP input.",
+            "Primary Active Transport: Directly couples uphill solute transport (ΔG > 0) to an exergonic chemical reaction, predominantly ATP hydrolysis. Classes include P-type ATPases (Na+/K+-ATPase, SERCA Ca2+-ATPase, H+/K+-ATPase—form a phosphorylated Asp intermediate), V-type H+-ATPases (acidify lysosomes/vacuoles), and ABC Transporters (MDR1/P-glycoprotein, CFTR).",
+            "Secondary Active Transport (Cotransport): Uses the inward electrochemical gradient of one ion (e.g., Na+ in animal cells, H+ in bacteria/plants) established by primary pumps to drive the uphill transport of a second solute via Symporters (SGLT1 Na+/Glucose cotransporter) or Antiporters (NCX Na+/Ca2+ exchanger)."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Kinetic & Bioenergetic Classification of Membrane Transport Mechanisms",
+        "headers": [
+          "Transport Mode",
+          "Driving Force",
+          "ΔG of Solute Movement",
+          "Kinetics & Saturation",
+          "Canonical Examples"
+        ],
+        "rows": [
+          [
+            "Simple Diffusion",
+            "Concentration gradient",
+            "ΔG < 0 (Downhill)",
+            "Linear (Non-saturable)",
+            "O2, CO2, Steroid hormones, Ethanol"
+          ],
+          [
+            "Facilitated Diffusion (Channel)",
+            "Electrochemical gradient",
+            "ΔG < 0 (Downhill)",
+            "Near-diffusion limit (10^7–10^8 /s)",
+            "Aquaporins, Voltage-gated Na+/K+ channels"
+          ],
+          [
+            "Facilitated Diffusion (Carrier)",
+            "Electrochemical gradient",
+            "ΔG < 0 (Downhill)",
+            "Hyperbolic (Saturable at Vmax, Km)",
+            "GLUT1 erythrocyte glucose uniporter"
+          ],
+          [
+            "Primary Active Transport",
+            "ATP hydrolysis (or light/redox)",
+            "ΔG > 0 (Uphill; coupled ΔG_net < 0)",
+            "Saturable (ATP-dependent)",
+            "Na+/K+-ATPase (3 Na+ out, 2 K+ in per ATP)"
+          ],
+          [
+            "Secondary Active Transport",
+            "Dissipation of primary ion gradient",
+            "ΔG_solute > 0 (ΔG_ion << 0)",
+            "Saturable (Ion-coupled)",
+            "SGLT1 (2 Na+ : 1 Glucose symport)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "2.4",
+      "title": "The Eukaryotic Cell Cycle, Checkpoints & Cancer Dysregulation",
+      "overview": "Cell division is governed by an autonomous biochemical oscillator of Cyclins and Cyclin-Dependent Kinases (CDKs) reinforced by surveillance checkpoints and ubiquitin-mediated proteolysis.",
+      "core_concepts": [
+        {
+          "concept_id": "2.4.1",
+          "heading": "Phases of the Cell Cycle & The Cyclin-CDK Engine",
+          "theory": "The cell cycle progresses through Interphase—comprising G1 (Gap 1, growth and origin licensing), S phase (DNA replication and histone synthesis), and G2 (Gap 2, tetraploid 4C verification)—followed by M phase (Mitosis: Prophase, Prometaphase, Metaphase, Anaphase, Telophase, and Cytokinesis). Non-dividing cells exit G1 into quiescence (G0).",
+          "key_principles": [
+            "CDK Activation Mechanics: CDKs are serine/threonine kinases whose levels remain constant throughout the cycle, but they are catalytically inactive until bound by phase-specific Cyclins (whose levels oscillate via synthesis and ubiquitin-proteasome degradation). Full CDK activation requires T-loop phosphorylation by CAK (CDK-Activating Kinase) and removal of inhibitory phosphates (Tyr15/Thr14) by Cdc25 phosphatase (which opposes Wee1 kinase).",
+            "Phase-Specific Cyclin-CDK Complexes: G1-CDK (Cyclin D + CDK4/6) phosphorylates Retinoblastoma (Rb) to release E2F transcription factors; G1/S-CDK (Cyclin E + CDK2) commits the cell past the Restriction Point; S-CDK (Cyclin A + CDK2) triggers origin firing and blocks re-replication; M-CDK (Cyclin B + CDK1, or MPF) drives nuclear envelope breakdown, chromosome condensation, and spindle assembly."
+          ]
+        },
+        {
+          "concept_id": "2.4.2",
+          "heading": "Surveillance Checkpoints, Ubiquitin Ligases & Oncogenesis",
+          "theory": "Irreversible transitions between cell cycle phases are enforced by two master E3 ubiquitin ligase complexes—SCF (active in G1/S) and APC/C (Anaphase-Promoting Complex/Cyclosome, active in M/G1)—alongside three major DNA/spindle checkpoints.",
+          "key_principles": [
+            "G1/S Restriction Checkpoint (DNA Damage): ATM/ATR kinases phosphorylate Chk1/Chk2, stabilizing the tumor suppressor p53 ('Guardian of the Genome'). p53 transcriptionally induces p21 (CDKN1A), a stoichiometric CDK inhibitor (CKI) that halts Cyclin E/CDK2 until DNA is repaired or triggers intrinsic apoptosis (BAX/BAK -> Cytochrome c -> Caspase-9/3).",
+            "Spindle Assembly Checkpoint (SAC - Metaphase-to-Anaphase): Unattached kinetochores generate the Mitotic Checkpoint Complex (Mad2/BubR1), which sequesters Cdc20 and inhibits APC/C. Once all sister kinetochores achieve bi-oriented amphitelic tension on spindle microtubules, APC/C^Cdc20 ubiquitylates Securin, liberating Separase to cleave Cohesin rings (Scc1/Rad21) and trigger Anaphase A/B.",
+            "Oncogenes vs. Tumor Suppressors (Knudson's Two-Hit Hypothesis): Proto-oncogenes (e.g., Ras, Myc, Cyclin D1, HER2) promote proliferation via dominant gain-of-function mutations (1 hit required). Tumor suppressors (e.g., Rb, p53, BRCA1/2, APC) act as cellular brakes and require recessive loss-of-function in both alleles (2 hits required) to permit malignant transformation."
+          ]
+        }
+      ],
+      "comparison_table": {
+        "title": "Vertebrate Cell Cycle Regulators, Targets & Checkpoint Controls",
+        "headers": [
+          "Cell Cycle Phase / Transition",
+          "Cyclin Partner",
+          "CDK Partner",
+          "Key Phosphorylation / Ubiquitylation Substrates",
+          "Primary Inhibitors / Checkpoint Brakes"
+        ],
+        "rows": [
+          [
+            "Mid-G1 (Mitogen Sensing)",
+            "Cyclin D (D1, D2, D3)",
+            "CDK4, CDK6",
+            "Partial phosphorylation of Rb pocket protein",
+            "INK4 family (p16^INK4a, p15, p18, p19)"
+          ],
+          [
+            "Late G1 -> S (Restriction Point)",
+            "Cyclin E",
+            "CDK2",
+            "Hyperphosphorylation of Rb (releases E2F); p27 degradation via SCF",
+            "CIP/KIP family (p21^Cip1, p27^Kip1, p57) via p53"
+          ],
+          [
+            "S Phase (DNA Replication)",
+            "Cyclin A",
+            "CDK2",
+            "Cdc6, ORC, MCM helicase activation (prevents re-licensing)",
+            "ATR -> Chk1 -> Cdc25A degradation"
+          ],
+          [
+            "G2 -> M Entry (Mitotic Entry)",
+            "Cyclin B",
+            "CDK1 (Cdc2)",
+            "Nuclear lamins, Condensins, Golgi matrix, Microtubule motors",
+            "Wee1 kinase (inhibitory Tyr15-P); ATM/Chk2 blocks Cdc25C"
+          ],
+          [
+            "Metaphase -> Anaphase Exit",
+            "Cyclin B (degraded)",
+            "APC/C + Cdc20",
+            "Ubiquitylates Securin (frees Separase) and Cyclin B",
+            "Mad2 / BubR1 Spindle Assembly Checkpoint (SAC)"
+          ]
+        ]
+      }
+    }
+  ],
+  "expandable_figures": [
+    {
+      "figure_id": "Fig-2.1",
+      "title": "Figure 2.1: Mitochondrial Ultrastructure, ETC Proton Pumping & Chemiosmotic ATP Synthase",
+      "sub_module_ref": "2.2",
+      "thumbnail_caption": "Inner mitochondrial membrane respiratory chain (Complexes I–IV), Q-cycle electron flow, and F0F1-ATP Synthase rotary catalysis. Tap to expand.",
+      "svg_template_id": "svg_mito_etc_chemiosmosis_2_1",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 360' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='immGrad' x1='0%' y1='0%' x2='0%' y2='100%'><stop offset='0%' stop-color='#102a43'/><stop offset='100%' stop-color='#07131e'/></linearGradient></defs><rect width='820' height='360' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>MITOCHONDRIAL ELECTRON TRANSPORT CHAIN &amp; CHEMIOSMOTIC COUPLING</text><rect x='30' y='50' width='760' height='65' rx='8' fill='#0b2239' stroke='#00f2fe' stroke-dasharray='4,4'/><text x='45' y='72' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold'>INTERMEMBRANE SPACE (IMS) — High [H+] (pH ~7.0, Positive Ψ, P-side)</text><rect x='30' y='135' width='760' height='95' rx='6' fill='url(#immGrad)' stroke='#4facfe' stroke-width='2'/><text x='45' y='222' fill='#4facfe' font-family='sans-serif' font-size='10'>INNER MITOCHONDRIAL MEMBRANE (IMM — 20% Cardiolipin, Impermeable to Ions)</text><rect x='30' y='250' width='760' height='90' rx='8' fill='#091e1a' stroke='#00ff87' stroke-dasharray='4,4'/><text x='45' y='325' fill='#00ff87' font-family='monospace' font-size='12' font-weight='bold'>MITOCHONDRIAL MATRIX — Low [H+] (pH ~7.8, Negative Ψ, N-side)</text><rect x='75' y='120' width='90' height='120' rx='10' fill='#005c8a' stroke='#00f2fe' stroke-width='2'/><text x='120' y='175' fill='#fff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Complex I</text><text x='120' y='192' fill='#a0e2ff' font-family='monospace' font-size='10' text-anchor='middle'>FMN / Fe-S</text><path d='M 120 265 L 120 90' stroke='#00f2fe' stroke-width='2.5'/><text x='120' y='82' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>4 H+</text><text x='120' y='285' fill='#fff' font-family='monospace' font-size='11' text-anchor='middle'>NADH → NAD+</text><rect x='200' y='150' width='75' height='85' rx='10' fill='#1f4068' stroke='#4facfe' stroke-width='2'/><text x='237' y='188' fill='#fff' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>Complex II</text><text x='237' y='204' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>FAD (0 H+)</text><circle cx='305' cy='180' r='18' fill='#0f3460' stroke='#ffca28' stroke-width='2'/><text x='305' y='184' fill='#ffca28' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>Q</text><rect x='350' y='120' width='90' height='120' rx='10' fill='#006978' stroke='#00f2fe' stroke-width='2'/><text x='395' y='175' fill='#fff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Complex III</text><text x='395' y='192' fill='#a0e2ff' font-family='monospace' font-size='10' text-anchor='middle'>Cyt bc1 / Q-Cycle</text><path d='M 395 265 L 395 90' stroke='#00f2fe' stroke-width='2.5'/><text x='395' y='82' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>4 H+</text><ellipse cx='472' cy='122' rx='22' ry='13' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><text x='472' y='126' fill='#ff6b8b' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>Cyt c</text><rect x='515' y='120' width='90' height='120' rx='10' fill='#007769' stroke='#00ff87' stroke-width='2'/><text x='560' y='175' fill='#fff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>Complex IV</text><text x='560' y='192' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>CuA / Heme a3</text><path d='M 560 265 L 560 90' stroke='#00f2fe' stroke-width='2.5'/><text x='560' y='82' fill='#00f2fe' font-family='monospace' font-size='12' font-weight='bold' text-anchor='middle'>2 H+</text><text x='560' y='285' fill='#00ff87' font-family='monospace' font-size='11' text-anchor='middle'>½ O2 + 2H+ → H2O</text><rect x='665' y='125' width='75' height='85' rx='8' fill='#2b1d38' stroke='#b388ff' stroke-width='2'/><text x='702' y='168' fill='#fff' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>F0 Rotor</text><text x='702' y='184' fill='#d2b8ff' font-family='monospace' font-size='10' text-anchor='middle'>c-ring</text><circle cx='702' cy='252' r='32' fill='#3b2254' stroke='#00ff87' stroke-width='2.5'/><text x='702' y='250' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>F1 (α3β3)</text><text x='702' y='265' fill='#fff' font-family='monospace' font-size='9' text-anchor='middle'>3 ATP / 360°</text><path d='M 702 85 L 702 298' stroke='#00ff87' stroke-width='3'/><text x='702' y='76' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>H+ Return (Δp)</text><text x='702' y='312' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>ADP + Pi → ATP</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-2-1a",
+          "x_pct": 14.6,
+          "y_pct": 48.0,
+          "label": "Complex I (NADH Dehydrogenase)",
+          "scale_link": "10nm",
+          "detail": "L-shaped 45-subunit complex (~1 MDa); transfers 2e- from NADH to Q and pumps 4 H+ across the IMM."
+        },
+        {
+          "pin_id": "pin-2-1b",
+          "x_pct": 48.2,
+          "y_pct": 48.0,
+          "label": "Complex III & The Q-Cycle",
+          "scale_link": "10nm",
+          "detail": "Bifurcates 2e- from Ubiquinol (QH2): one electron reduces Cytochrome c via the Rieske Fe-S center, while the second recycles through heme bL/bH to reduce Q at the Qi site."
+        },
+        {
+          "pin_id": "pin-2-1c",
+          "x_pct": 85.6,
+          "y_pct": 70.0,
+          "label": "F0F1-ATP Synthase (Complex V)",
+          "scale_link": "8nm",
+          "detail": "World's smallest rotary molecular motor (~10 nm diameter). Proton translocation through F0 drives γ-subunit rotation at >100 rev/sec."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-2.2",
+      "title": "Figure 2.2: Fluid Mosaic Membrane Thermodynamics & Transport Energetics",
+      "sub_module_ref": "2.3",
+      "thumbnail_caption": "Comparison of Simple Diffusion, Channel/Carrier Facilitated Diffusion, Primary ATPase Pumps, and Secondary Symport/Antiport. Tap to expand.",
+      "svg_template_id": "svg_membrane_transport_2_2",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 330' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='330' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>MEMBRANE TRANSPORT MECHANISMS &amp; ELECTROCHEMICAL ENERGETICS</text><text x='45' y='68' fill='#00f2fe' font-family='monospace' font-size='12'>EXTRACELLULAR FLUID — High [Na+] (145 mM), Low [K+] (4 mM), V_out = 0 mV</text><rect x='30' y='115' width='760' height='95' rx='8' fill='#102a43' stroke='#4facfe' stroke-width='2'/><line x1='30' y1='162' x2='790' y2='162' stroke='#1e3a5f' stroke-dasharray='6,6' stroke-width='1.5'/><text x='45' y='275' fill='#00ff87' font-family='monospace' font-size='12'>CYTOSOL — Low [Na+] (12 mM), High [K+] (140 mM), Resting Potential Δψ = -70 mV</text><path d='M 105 80 L 105 245' stroke='#00f2fe' stroke-width='3'/><text x='105' y='300' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>1. Simple Diffusion</text><text x='105' y='316' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>O2, CO2 (ΔG &lt; 0)</text><rect x='230' y='105' width='75' height='115' rx='12' fill='#005c8a' stroke='#00f2fe' stroke-width='2'/><path d='M 267 80 L 267 245' stroke='#00f2fe' stroke-width='3'/><text x='267' y='300' fill='#00f2fe' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>2. Facilitated</text><text x='267' y='316' fill='#a0c4e2' font-family='monospace' font-size='10' text-anchor='middle'>GLUT / Ion Channel</text><rect x='430' y='105' width='110' height='115' rx='12' fill='#381d2a' stroke='#ff6b8b' stroke-width='2'/><path d='M 465 245 L 465 80' stroke='#ff6b8b' stroke-width='3'/><text x='465' y='73' fill='#ff6b8b' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>3 Na+ Out</text><path d='M 505 80 L 505 245' stroke='#00ff87' stroke-width='3'/><text x='505' y='260' fill='#00ff87' font-family='monospace' font-size='11' font-weight='bold' text-anchor='middle'>2 K+ In</text><text x='485' y='300' fill='#ff6b8b' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>3. Primary Active (P-Type)</text><text x='485' y='316' fill='#ffb8c6' font-family='monospace' font-size='10' text-anchor='middle'>Na+/K+-ATPase (ATP → ADP)</text><rect x='640' y='105' width='110' height='115' rx='12' fill='#0b382c' stroke='#00ff87' stroke-width='2'/><path d='M 675 80 L 675 245' stroke='#00f2fe' stroke-width='3'/><text x='675' y='73' fill='#00f2fe' font-family='monospace' font-size='10' text-anchor='middle'>2 Na+ (Downhill)</text><path d='M 715 80 L 715 245' stroke='#ffca28' stroke-width='3'/><text x='715' y='260' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>Glucose (Uphill)</text><text x='695' y='300' fill='#00ff87' font-family='sans-serif' font-size='12' font-weight='bold' text-anchor='middle'>4. Secondary Active</text><text x='695' y='316' fill='#a0e2c4' font-family='monospace' font-size='10' text-anchor='middle'>SGLT1 Na+/Glc Symport</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-2-2a",
+          "x_pct": 59.1,
+          "y_pct": 50.0,
+          "label": "Na+/K+-ATPase Electrogenic Pump",
+          "scale_link": "8nm",
+          "detail": "Consumes ~25–30% of total resting cellular ATP (up to 70% in neurons) to extrude 3 Na+ and import 2 K+, maintaining cell volume and resting membrane potential."
+        },
+        {
+          "pin_id": "pin-2-2b",
+          "x_pct": 84.7,
+          "y_pct": 50.0,
+          "label": "SGLT1 Secondary Symporter",
+          "scale_link": "8nm",
+          "detail": "Harnesses the steep inward electrochemical gradient of 2 Na+ ions (ΔG < 0) to concentrate glucose inside intestinal/renal epithelial cells against a 100-fold concentration gradient."
+        }
+      ]
+    },
+    {
+      "figure_id": "Fig-2.3",
+      "title": "Figure 2.3: Cyclin-CDK Oscillation Waveforms & Cell Cycle Checkpoints",
+      "sub_module_ref": "2.4",
+      "thumbnail_caption": "Phase-specific accumulation and ubiquitin-proteasome degradation of Cyclins D, E, A, and B across G1, S, G2, and Mitosis. Tap to expand.",
+      "svg_template_id": "svg_cell_cycle_cyclins_2_3",
+      "visual_theme": "dark-aero-bioluminescent",
+      "svg_markup": "<svg viewBox='0 0 820 320' xmlns='http://www.w3.org/2000/svg'><rect width='820' height='320' rx='16' fill='#07131e' stroke='#1e3a5f' stroke-width='2'/><text x='30' y='34' fill='#e2f1ff' font-family='sans-serif' font-size='15' font-weight='bold'>EUKARYOTIC CELL CYCLE: CYCLIN-CDK OSCILLATIONS &amp; CHECKPOINTS</text><line x1='70' y1='250' x2='760' y2='250' stroke='#a0c4e2' stroke-width='2'/><line x1='70' y1='60' x2='70' y2='250' stroke='#a0c4e2' stroke-width='2'/><line x1='240' y1='60' x2='240' y2='250' stroke='#ff6b8b' stroke-dasharray='5,5' stroke-width='1.5'/><text x='240' y='52' fill='#ff6b8b' font-family='monospace' font-size='10' text-anchor='middle'>G1/S Checkpoint (p53/Rb)</text><line x1='450' y1='60' x2='450' y2='250' stroke='#1e3a5f' stroke-dasharray='4,4'/><line x1='610' y1='60' x2='610' y2='250' stroke='#ffca28' stroke-dasharray='5,5' stroke-width='1.5'/><text x='610' y='52' fill='#ffca28' font-family='monospace' font-size='10' text-anchor='middle'>G2/M (Wee1/Cdc25)</text><line x1='700' y1='60' x2='700' y2='250' stroke='#00ff87' stroke-dasharray='5,5' stroke-width='1.5'/><text x='705' y='72' fill='#00ff87' font-family='monospace' font-size='10' text-anchor='middle'>SAC (APC/C)</text><text x='155' y='275' fill='#e2f1ff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>G1 Phase (2C)</text><text x='345' y='275' fill='#e2f1ff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>S Phase (2C → 4C)</text><text x='530' y='275' fill='#e2f1ff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>G2 Phase (4C)</text><text x='685' y='275' fill='#e2f1ff' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>M Phase</text><path d='M 85 245 Q 160 110 450 115 Q 650 120 740 235' fill='none' stroke='#b388ff' stroke-width='3'/><text x='135' y='135' fill='#b388ff' font-family='sans-serif' font-size='11' font-weight='bold'>Cyclin D–CDK4/6</text><path d='M 140 248 Q 240 75 340 248' fill='none' stroke='#00f2fe' stroke-width='3.5'/><text x='240' y='95' fill='#00f2fe' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Cyclin E–CDK2</text><path d='M 230 248 Q 440 70 630 248' fill='none' stroke='#00ff87' stroke-width='3.5'/><text x='430' y='95' fill='#00ff87' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Cyclin A–CDK2/1</text><path d='M 430 248 Q 640 50 705 248' fill='none' stroke='#ff6b8b' stroke-width='3.5'/><text x='615' y='95' fill='#ff6b8b' font-family='sans-serif' font-size='11' font-weight='bold' text-anchor='middle'>Cyclin B–CDK1 (MPF)</text></svg>",
+      "interactive_pins": [
+        {
+          "pin_id": "pin-2-3a",
+          "x_pct": 29.2,
+          "y_pct": 30.0,
+          "label": "Restriction Point (R-Point)",
+          "scale_link": "cell",
+          "detail": "Cyclin E-CDK2 hyperphosphorylates Rb, releasing E2F transcription factors to transcribe S-phase genes (DNA Pol α, Thymidine kinase, PCNA)."
+        },
+        {
+          "pin_id": "pin-2-3b",
+          "x_pct": 85.3,
+          "y_pct": 30.0,
+          "label": "APC/C-Mediated Mitotic Exit",
+          "scale_link": "cell",
+          "detail": "Once all kinetochores attach to spindle microtubules, APC/C^Cdc20 ubiquitylates Cyclin B (causing MPF drop) and Securin (triggering sister chromatid separation)."
+        }
+      ]
+    }
+  ],
+  "interactive_simulators": [
+    {
+      "simulator_id": "sim_chemiosmotic_pmf_atp_2_2",
+      "title": "Mitochondrial Chemiosmotic Proton-Motive Force (Δp) & P/O Stoichiometry Simulator",
+      "sub_module_ref": "2.2",
+      "type": "bioenergetic-membrane-simulator",
+      "description": "Adjust the inner mitochondrial membrane electrical potential (Δψ), matrix-to-IMS pH gradient (ΔpH), temperature, and F0 c-ring subunit count to compute real-time Proton-Motive Force (mV), free energy per proton (kJ/mol), and theoretical ATP/2e- yield.",
+      "controls": [
+        {
+          "id": "delta_psi_mv",
+          "label": "Membrane Potential (Δψ, IMS positive)",
+          "min": 80,
+          "max": 220,
+          "step": 5,
+          "default": 170,
+          "unit": "mV"
+        },
+        {
+          "id": "delta_ph",
+          "label": "pH Gradient (ΔpH = pH_matrix - pH_IMS)",
+          "min": 0.0,
+          "max": 2.0,
+          "step": 0.1,
+          "default": 0.8,
+          "unit": "pH units"
+        },
+        {
+          "id": "temp_k",
+          "label": "Temperature (T)",
+          "min": 290,
+          "max": 315,
+          "step": 1,
+          "default": 310,
+          "unit": "K"
+        },
+        {
+          "id": "c_ring_subunits",
+          "label": "ATP Synthase F0 c-Ring Stoichiometry",
+          "min": 8,
+          "max": 15,
+          "step": 1,
+          "default": 8,
+          "unit": "subunits/ring"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "pmf_mv",
+          "label": "Total Proton-Motive Force (Δp)",
+          "formula_js": "delta_psi_mv + ((2.3026 * 8.314 * temp_k / 96485) * 1000 * delta_ph)",
+          "unit": "mV"
+        },
+        {
+          "output_id": "delta_g_proton",
+          "label": "Free Energy Released per H+ Imported (ΔG_H+)",
+          "formula_js": "-96485 * ((delta_psi_mv / 1000) + ((2.3026 * 8.314 * temp_k / 96485) * delta_ph)) / 1000",
+          "unit": "kJ/mol H+"
+        },
+        {
+          "output_id": "po_ratio_nadh",
+          "label": "Theoretical P/O Ratio for NADH (10 H+ pumped)",
+          "formula_js": "10 / ((c_ring_subunits / 3) + 1)",
+          "unit": "ATP / 2e-"
+        }
+      ]
+    },
+    {
+      "simulator_id": "sim_membrane_transport_nernst_2_3",
+      "title": "Visual Membrane Transport & Electrogenic Free Energy Simulator",
+      "sub_module_ref": "2.3",
+      "type": "electrochemical-transport-simulator",
+      "description": "Simulate solute transport across a lipid bilayer by configuring extracellular concentration [C]_out, intracellular concentration [C]_in, ion valence (z), and resting membrane potential (V_m) to compute the Nernst Equilibrium Potential and net ΔG_transport.",
+      "controls": [
+        {
+          "id": "c_out_mm",
+          "label": "Extracellular Concentration ([C]_out)",
+          "min": 0.1,
+          "max": 200.0,
+          "step": 0.5,
+          "default": 145.0,
+          "unit": "mM"
+        },
+        {
+          "id": "c_in_mm",
+          "label": "Intracellular Concentration ([C]_in)",
+          "min": 0.01,
+          "max": 200.0,
+          "step": 0.5,
+          "default": 12.0,
+          "unit": "mM"
+        },
+        {
+          "id": "ion_valence_z",
+          "label": "Solute Charge / Valence (z; 0 for uncharged)",
+          "min": -2,
+          "max": 2,
+          "step": 1,
+          "default": 1,
+          "unit": "charge"
+        },
+        {
+          "id": "vm_mv",
+          "label": "Resting Membrane Potential (V_m, inside vs. out)",
+          "min": -100,
+          "max": 60,
+          "step": 5,
+          "default": -70,
+          "unit": "mV"
+        }
+      ],
+      "computed_outputs": [
+        {
+          "output_id": "delta_g_inward",
+          "label": "Electrochemical ΔG for Inward Transport (Out -> In)",
+          "formula_js": "((8.314 * 310 * Math.log(c_in_mm / c_out_mm)) + (ion_valence_z * 96485 * (vm_mv / 1000))) / 1000",
+          "unit": "kJ/mol"
+        },
+        {
+          "output_id": "nernst_potential_mv",
+          "label": "Nernst Equilibrium Potential (E_ion, if z != 0)",
+          "formula_js": "ion_valence_z === 0 ? 0 : ((8.314 * 310) / (ion_valence_z * 96485)) * Math.log(c_out_mm / c_in_mm) * 1000",
+          "unit": "mV"
+        }
+      ]
+    }
+  ],
+  "schaums_math_box": [
+    {
+      "formula_id": "EQ-2.1",
+      "title": "Surface-Area-to-Volume Scaling & Fick's Diffusion Time",
+      "latex": "\\frac{\\text{SA}}{V} = \\frac{4\\pi r^2}{\\frac{4}{3}\\pi r^3} = \\frac{3}{r} \\qquad \\text{and} \\qquad t_{\\text{diff}} \\approx \\frac{x^2}{2D}",
+      "description": "Demonstrates why increasing cell radius (r) reduces membrane exchange surface per unit metabolic volume, while diffusion time (t_diff) grows quadratically with distance (x).",
+      "variables": [
+        {
+          "symbol": "r",
+          "definition": "Radius of a spherical cell or organelle",
+          "unit": "μm or m"
+        },
+        {
+          "symbol": "x",
+          "definition": "Root-mean-square diffusion distance",
+          "unit": "m or cm"
+        },
+        {
+          "symbol": "D",
+          "definition": "Diffusion coefficient of the solute in cytoplasm (~10^-6 cm²/s for small metabolites)",
+          "unit": "cm²/s or m²/s"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-2.2",
+      "title": "Redox Potential to Standard Gibbs Free Energy (Nernst Redox Relation)",
+      "latex": "\\Delta G^{\\circ\\prime} = -nF\\Delta E^{\\circ\\prime} = -nF\\left(E^{\\circ\\prime}_{\\text{acceptor}} - E^{\\circ\\prime}_{\\text{donor}}\\right)",
+      "description": "Calculates the standard free energy released when n moles of electrons flow from an electron donor to an electron acceptor in the mitochondrial ETC or chloroplast Z-scheme.",
+      "variables": [
+        {
+          "symbol": "n",
+          "definition": "Number of moles of electrons transferred per mole of reaction",
+          "unit": "mol e-"
+        },
+        {
+          "symbol": "F",
+          "definition": "Faraday constant (96,485 J·V^-1·mol^-1)",
+          "unit": "C/mol or J/(V·mol)"
+        },
+        {
+          "symbol": "\\Delta E^{\\circ\\prime}",
+          "definition": "Difference in standard transformed reduction potentials at pH 7.0",
+          "unit": "Volts (V)"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-2.3",
+      "title": "Mitchell's Proton-Motive Force (Δp) & Chemiosmotic Free Energy",
+      "latex": "\\Delta p = \\Delta \\psi + \\left(\\frac{2.303 RT}{F}\\right)\\Delta \\text{pH} \\qquad \\text{and} \\qquad \\Delta G_{H^+} = -F\\Delta p",
+      "description": "Combines the transmembrane electrical potential (Δψ) and chemical pH gradient (ΔpH = pH_matrix - pH_IMS) into a single proton-motive voltage driving ATP synthesis (at 37°C, 2.303 RT/F ≈ 61.5 mV per pH unit).",
+      "variables": [
+        {
+          "symbol": "\\Delta p",
+          "definition": "Proton-motive force across the inner mitochondrial membrane",
+          "unit": "mV or V"
+        },
+        {
+          "symbol": "\\Delta \\psi",
+          "definition": "Transmembrane electrical potential magnitude (IMS positive relative to matrix)",
+          "unit": "mV"
+        },
+        {
+          "symbol": "\\Delta \\text{pH}",
+          "definition": "Transmembrane pH difference (pH_matrix - pH_IMS, typically ~0.7–1.0 units)",
+          "unit": "pH units"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-2.4",
+      "title": "Electrochemical Free Energy of Membrane Solute Transport",
+      "latex": "\\Delta G_{\\text{transport}} = RT \\ln\\left(\\frac{[C]_{\\text{in}}}{[C]_{\\text{out}}}\\right) + zF V_m",
+      "description": "Quantifies the thermodynamic work required (or released) when transporting 1 mole of a charged ion (valence z) or uncharged molecule (z = 0) from the extracellular space into the cytosol across membrane potential V_m.",
+      "variables": [
+        {
+          "symbol": "[C]_{\\text{in}}, [C]_{\\text{out}}",
+          "definition": "Intracellular and extracellular molar concentrations of the solute",
+          "unit": "M or mM"
+        },
+        {
+          "symbol": "z",
+          "definition": "Electrical charge (valence) of the transported solute (+1 for Na+/K+, +2 for Ca2+, -1 for Cl-, 0 for glucose)",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "V_m",
+          "definition": "Membrane potential (V_in - V_out, typically -0.070 V in resting animal cells)",
+          "unit": "Volts (V)"
+        }
+      ]
+    },
+    {
+      "formula_id": "EQ-2.5",
+      "title": "Cell Cycle Phase Duration & Mitotic Index Kinetics",
+      "latex": "\\text{Mitotic Index (MI)} = \\frac{N_M}{N_{\\text{total}}} \\qquad \\text{and} \\qquad t_{\\text{phase}} \\approx \\left(\\frac{N_{\\text{phase}}}{N_{\\text{total}}}\\right) \\times T_C",
+      "description": "Relates the fraction of cells observed in a specific cell cycle stage (e.g., S phase or M phase) in an asynchronous population to the total cell cycle generation time (T_C).",
+      "variables": [
+        {
+          "symbol": "N_{\\text{phase}}",
+          "definition": "Number of cells counted in the target phase (via microscopy or flow cytometry)",
+          "unit": "cells"
+        },
+        {
+          "symbol": "N_{\\text{total}}",
+          "definition": "Total number of cells sampled in the population",
+          "unit": "cells"
+        },
+        {
+          "symbol": "T_C",
+          "definition": "Total duration of one complete cell cycle (generation time)",
+          "unit": "hours (h)"
+        }
+      ]
+    }
+  ],
+  "schaums_problem_solving": {
+    "solved_problems": [
+      {
+        "problem_id": "SP-2.1",
+        "title": "Thermodynamics of the Electron Transport Chain: NADH Oxidation by Complex I & Total Respiratory Cascade",
+        "difficulty": "Intermediate",
+        "statement": "In the mitochondrial electron transport chain, Complex I catalyzes the transfer of two electrons from NADH to Ubiquinone (Q). Given the standard transformed reduction potentials at pH 7.0: E°'(NAD+/NADH) = -0.320 V, E°'(Q/QH2) = +0.045 V, and E°'(1/2 O2/H2O) = +0.816 V, with Faraday's constant F = 96,485 J/(V·mol): (a) Calculate the standard free energy change (ΔG°') for electron transfer across Complex I alone. (b) Calculate the total ΔG°' for the complete oxidation of 1 mole of NADH by molecular oxygen (O2). (c) If Complex I pumps 4 moles of H+ against a proton-motive force of Δp = 0.200 V, calculate the thermodynamic efficiency of energy conservation at Complex I.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Compute the redox potential span (ΔE°') across Complex I (from donor NADH to acceptor Ubiquinone Q):",
+            "equation_latex": "\\Delta E^{\\circ\\prime}_{\\text{Complex I}} = E^{\\circ\\prime}_{\\text{acceptor}} - E^{\\circ\\prime}_{\\text{donor}} = (+0.045\\text{ V}) - (-0.320\\text{ V}) = +0.365\\text{ V}"
+          },
+          {
+            "step": 2,
+            "explanation": "Apply the Nernst free energy equation (ΔG°' = -nFΔE°') for n = 2 moles of electrons:",
+            "equation_latex": "\\Delta G^{\\circ\\prime}_{\\text{Complex I}} = -(2\\text{ mol } e^-)(96,485\\text{ J}\\cdot\\text{V}^{-1}\\cdot\\text{mol}^{-1})(+0.365\\text{ V}) = -70,434\\text{ J/mol} = -70.43\\text{ kJ/mol}"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the total redox span and standard free energy change from NADH (-0.320 V) all the way to terminal acceptor O2 (+0.816 V):",
+            "equation_latex": "\\Delta E^{\\circ\\prime}_{\\text{total}} = +0.816\\text{ V} - (-0.320\\text{ V}) = +1.136\\text{ V} \\implies \\Delta G^{\\circ\\prime}_{\\text{total}} = -(2)(96,485)(1.136) = -219,214\\text{ J/mol} = -219.2\\text{ kJ/mol}"
+          },
+          {
+            "step": 4,
+            "explanation": "Calculate the energy conserved by pumping 4 moles of H+ against Δp = 0.200 V (ΔG_pumped = 4 × F × Δp) and divide by |ΔG°'_Complex I|:",
+            "equation_latex": "\\Delta G_{\\text{conserved}} = (4\\text{ mol H}^+)(96,485\\text{ J/V}\\cdot\\text{mol})(0.200\\text{ V}) = 77,188\\text{ J} = 77.19\\text{ kJ}"
+          },
+          {
+            "step": 5,
+            "explanation": "(Note: Under physiological conditions where Δp = 0.180 V, ΔG_conserved = 4 × 96.485 × 0.180 = 69.47 kJ/mol; at Δp = 0.200 V with physiological NADH/NAD+ ratios, efficiency approaches ~95–100%. Using standard state magnitude for comparison against Δp = 0.160 V gives 61.75 / 70.43 = 87.7%, whereas at Δp = 0.200 V Complex I operates right at its thermodynamic equilibrium limit of ~77 kJ/mol).",
+            "equation_latex": "\\text{Max Proton Pumping Work at } \\Delta p = 0.180\\text{ V}: \\quad \\eta = \\frac{4 \\times 96.485 \\times 0.180}{70.43} \\times 100\\% = 98.6\\%"
+          }
+        ],
+        "final_answer": "(a) ΔG°'_Complex I = -70.43 kJ/mol; (b) ΔG°'_total = -219.2 kJ/mol; (c) Pumping 4 H+ across a physiological 180 mV gradient conserves 69.5 kJ/mol (~98.6% thermodynamic efficiency at Complex I)."
+      },
+      {
+        "problem_id": "SP-2.2",
+        "title": "Calculating Proton-Motive Force (Δp), Free Energy per Proton, and Rotational ATP Synthase P/O Ratios",
+        "difficulty": "Advanced",
+        "statement": "In actively respiring mammalian liver mitochondria at 37°C (310 K), the electrical potential across the inner mitochondrial membrane is Δψ = 165 mV (IMS positive relative to the matrix), the IMS pH is 7.0, and the matrix pH is 7.8. Given R = 8.314 J/(mol·K) and F = 96,485 J/(V·mol): (a) Calculate the total proton-motive force (Δp) in millivolts. (b) Calculate the free energy released (ΔG_H+) when 1 mole of H+ flows from the IMS into the matrix. (c) Mammalian F0F1-ATP synthase possesses 8 c-subunits in its F0 rotor ring (c8) and requires 1 additional H+ for Pi/H+ symport + ADP3-/ATP4- antiport translocation per ATP exported. Calculate the exact number of protons required per cytosolic ATP and the theoretical P/O ratio for NADH (10 H+ pumped) vs. FADH2 (6 H+ pumped).",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Evaluate the thermal pH conversion factor (2.3026 RT / F) at T = 310 K and compute ΔpH = pH_matrix - pH_IMS:",
+            "equation_latex": "\\frac{2.3026 RT}{F} = \\frac{2.3026 \\times 8.314 \\times 310}{96,485} = 0.06150\\text{ V} = 61.5\\text{ mV/pH unit}, \\qquad \\Delta\\text{pH} = 7.8 - 7.0 = 0.8\\text{ units}"
+          },
+          {
+            "step": 2,
+            "explanation": "Sum the electrical component (Δψ) and chemical pH component to obtain the total Proton-Motive Force (Δp):",
+            "equation_latex": "\\Delta p = \\Delta\\psi + (61.5\\text{ mV})\\Delta\\text{pH} = 165\\text{ mV} + (61.5 \\times 0.8)\\text{ mV} = 165 + 49.2 = 214.2\\text{ mV} = 0.2142\\text{ V}"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate the electrochemical free energy change per mole of protons imported into the matrix (ΔG_H+ = -FΔp):",
+            "equation_latex": "\\Delta G_{H^+} = -(96,485\\text{ J}\\cdot\\text{V}^{-1}\\cdot\\text{mol}^{-1})(0.2142\\text{ V}) = -20,667\\text{ J/mol H}^+ = -20.67\\text{ kJ/mol H}^+"
+          },
+          {
+            "step": 4,
+            "explanation": "Determine the proton cost per cytosolic ATP for an 8-subunit c-ring (1 full 360° turn = 8 H+ -> 3 ATP synthesized in matrix, plus 1 H+ per ATP for Adenine Nucleotide Translocase / Phosphate Carrier export):",
+            "equation_latex": "\\text{H}^+\\text{ per ATP} = \\frac{8\\text{ H}^+}{3\\text{ ATP}} + 1\\text{ H}^+_{\\text{transport}} = 2.67 + 1.00 = 3.67\\text{ H}^+/\\text{ATP}"
+          },
+          {
+            "step": 5,
+            "explanation": "Divide total protons pumped per pair of electrons (10 H+ for NADH; 6 H+ for FADH2/Succinate) by 3.67 H+/ATP:",
+            "equation_latex": "\\text{P/O}_{\\text{NADH}} = \\frac{10}{3.67} = 2.73\\text{ ATP}, \\qquad \\text{P/O}_{\\text{FADH}_2} = \\frac{6}{3.67} = 1.64\\text{ ATP}"
+          }
+        ],
+        "final_answer": "(a) Δp = 214.2 mV; (b) ΔG_H+ = -20.67 kJ/mol H+; (c) 3.67 H+/ATP, yielding theoretical P/O ratios of 2.73 for NADH and 1.64 for FADH2 (in yeast/bacteria with a c10 ring, 10/3 + 1 = 4.33 H+/ATP, giving P/O ratios of 2.31 and 1.38)."
+      },
+      {
+        "problem_id": "SP-2.3",
+        "title": "Bioenergetics of Electrogenic Membrane Transport: Driving Ca2+ into the Sarcoplasmic Reticulum vs. Cytosolic Influx",
+        "difficulty": "Intermediate",
+        "statement": "In a resting mammalian skeletal muscle cell at 37°C (310 K), the cytosolic free calcium concentration is maintained at [Ca2+]_in = 1.0 × 10^-7 M (100 nM), while the extracellular fluid concentration is [Ca2+]_out = 1.5 × 10^-3 M (1.5 mM). The resting plasma membrane potential is V_m = -80 mV (inside negative). Given R = 8.314 J/(mol·K), F = 96,485 J/(V·mol), and ion valence z = +2: (a) Calculate the chemical, electrical, and total electrochemical free energy change (ΔG_inward) when 1 mole of Ca2+ enters the cytosol through a voltage-gated Ca2+ channel. (b) Conversely, what is the minimum thermodynamic work (+ΔG_extrusion) required for the Plasma Membrane Ca2+-ATPase (PMCA) to pump 1 mole of Ca2+ out of the cell?",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Calculate the chemical concentration gradient contribution (ΔG_chem) for inward Ca2+ movement (from [Ca2+]_out = 1.5 × 10^-3 M to [Ca2+]_in = 1.0 × 10^-7 M):",
+            "equation_latex": "\\Delta G_{\\text{chem}} = RT \\ln\\left(\\frac{[\\text{Ca}^{2+}]_{\\text{in}}}{[\\text{Ca}^{2+}]_{\\text{out}}}\\right) = (8.314)(310)\\ln\\left(\\frac{1.0 \\times 10^{-7}}{1.5 \\times 10^{-3}}\\right) = (2577.34)\\ln(6.667 \\times 10^{-5}) = (2577.34)(-9.6158) = -24,783\\text{ J/mol} = -24.78\\text{ kJ/mol}"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate the electrical membrane potential contribution (ΔG_elec = zFV_m) for importing a divalent cation (z = +2) into a negatively charged interior (V_m = -0.080 V):",
+            "equation_latex": "\\Delta G_{\\text{elec}} = zFV_m = (+2)(96,485\\text{ J}\\cdot\\text{V}^{-1}\\cdot\\text{mol}^{-1})(-0.080\\text{ V}) = -15,438\\text{ J/mol} = -15.44\\text{ kJ/mol}"
+          },
+          {
+            "step": 3,
+            "explanation": "Sum the chemical and electrical terms to obtain the total inward electrochemical driving force (ΔG_inward):",
+            "equation_latex": "\\Delta G_{\\text{inward}} = \\Delta G_{\\text{chem}} + \\Delta G_{\\text{elec}} = (-24.78\\text{ kJ/mol}) + (-15.44\\text{ kJ/mol}) = -40.22\\text{ kJ/mol}"
+          },
+          {
+            "step": 4,
+            "explanation": "For outward extrusion (In -> Out), reverse the sign of ΔG_inward:",
+            "equation_latex": "\\Delta G_{\\text{extrusion}} = -\\Delta G_{\\text{inward}} = +40.22\\text{ kJ/mol}"
+          }
+        ],
+        "final_answer": "(a) ΔG_chem = -24.78 kJ/mol, ΔG_elec = -15.44 kJ/mol, Total ΔG_inward = -40.22 kJ/mol (highly exergonic rapid influx upon channel opening); (b) Minimum work to extrude 1 mol Ca2+ = +40.22 kJ/mol (easily driven by hydrolysis of 1 mol intracellular ATP yielding ~ -47 to -50 kJ/mol)."
+      },
+      {
+        "problem_id": "SP-2.4",
+        "title": "Cell Cycle Flow Cytometry & Pulse-Chase Kinetics: Determining Phase Durations",
+        "difficulty": "Foundational",
+        "statement": "An exponentially growing, asynchronous culture of human HeLa cells has a total generation (doubling) time of T_C = 20.0 hours. A sample of 10,000 cells is stained with propidium iodide (a stoichiometric DNA-binding fluorophore) and BrdU (an S-phase thymidine analog) and analyzed by flow cytometry, yielding the following distribution: 5,200 cells have 2C DNA content (G1 phase); 3,000 cells are BrdU-positive with intermediate 2C–4C DNA content (S phase); 1,350 cells have 4C DNA content without mitotic condensed chromatin (G2 phase); and 450 cells exhibit condensed mitotic chromosomes (M phase). Calculate (a) the Mitotic Index (MI), and (b) the approximate duration (in hours and minutes) of G1, S, G2, and M phases.",
+        "derivation_steps": [
+          {
+            "step": 1,
+            "explanation": "Compute the Mitotic Index (MI) as the fraction (or percentage) of total cells actively in M phase:",
+            "equation_latex": "\\text{MI} = \\frac{N_M}{N_{\\text{total}}} = \\frac{450}{10,000} = 0.045 \\quad (4.5\\%)"
+          },
+          {
+            "step": 2,
+            "explanation": "Calculate the duration of each phase using the steady-state fraction approximation t_phase = (N_phase / N_total) × T_C (with T_C = 20.0 h):",
+            "equation_latex": "t_{G1} = \\frac{5200}{10000} \\times 20.0\\text{ h} = 10.4\\text{ h} \\quad (10\\text{ h } 24\\text{ min})"
+          },
+          {
+            "step": 3,
+            "explanation": "Calculate S, G2, and M phase durations:",
+            "equation_latex": "t_S = \\frac{3000}{10000} \\times 20.0\\text{ h} = 6.0\\text{ h}, \\qquad t_{G2} = \\frac{1350}{10000} \\times 20.0\\text{ h} = 2.7\\text{ h} \\ (2\\text{ h } 42\\text{ min}), \\qquad t_M = 0.045 \\times 20.0\\text{ h} = 0.9\\text{ h} \\ (54\\text{ min})"
+          }
+        ],
+        "final_answer": "(a) Mitotic Index = 0.045 (4.5%); (b) t_G1 = 10.4 h, t_S = 6.0 h, t_G2 = 2.7 h, t_M = 0.9 h (54 min). Sum = 10.4 + 6.0 + 2.7 + 0.9 = 20.0 h."
+      }
+    ],
+    "practice_problems": [
+      {
+        "problem_id": "PP-2.1",
+        "question": "A spherical prokaryotic cell has a radius of r_1 = 0.5 μm, while a spherical eukaryotic lymphocyte has a radius of r_2 = 5.0 μm. By what factor does the Surface-Area-to-Volume ratio (SA/V) decrease in the eukaryotic cell compared to the prokaryote, and how many times longer does it take for a small metabolite (D = 5 × 10^-6 cm²/s) to diffuse from the plasma membrane to the center of the lymphocyte versus the prokaryote?",
+        "bold_answer": "SA/V decreases 10-fold; Diffusion time increases 100-fold (25 ms vs. 0.25 ms)",
+        "collapsible_derivation": "Since SA/V = 3/r, increasing radius 10-fold (from 0.5 μm to 5.0 μm) decreases SA/V by a factor of 10 (from 6.0 μm^-1 to 0.6 μm^-1). Because diffusion time scales with the square of distance (t ≈ r² / 2D), a 10-fold increase in radius increases diffusion time by 10² = 100-fold: t_prok = (0.5 × 10^-4 cm)² / (2 × 5 × 10^-6) = 0.25 ms, whereas t_euk = (5.0 × 10^-4 cm)² / (10^-5) = 25 ms."
+      },
+      {
+        "problem_id": "PP-2.2",
+        "question": "In plant chloroplasts, the F0F1-ATP synthase (CF0CF1) possesses a c-ring with 14 subunits (c14), and because ATP is consumed directly inside the chloroplast stroma by the Calvin cycle, there is no H+ cost for ATP/ADP translocation across the envelope. How many protons are required per ATP synthesized in the chloroplast stroma?",
+        "bold_answer": "4.67 H+ per ATP (14 H+ / 3 ATP)",
+        "collapsible_derivation": "One complete 360° rotation of the CF0 c14 rotor requires 14 protons and drives the synthesis of 3 ATP molecules at the CF1 catalytic head. With 0 transport protons required in the stroma, the stoichiometry is 14 / 3 = 4.67 H+ per ATP."
+      },
+      {
+        "problem_id": "PP-2.3",
+        "question": "An epithelial SGLT1 symporter couples the inward transport of 2 Na+ ions to 1 uncharged Glucose molecule at 37°C (310 K). If [Na+]_out = 140 mM, [Na+]_in = 14 mM, and the membrane potential is V_m = -60 mV, what is the maximum theoretical intracellular-to-extracellular glucose accumulation ratio ([Glc]_in / [Glc]_out) that this symporter can achieve at thermodynamic equilibrium?",
+        "bold_answer": "[Glc]_in / [Glc]_out ≈ 10,800-fold",
+        "collapsible_derivation": "For each Na+ ion entering, ΔG_Na+ = RT ln(14/140) + (+1)(96,485)(-0.060) = (2577.3)(-2.3026) - 5789.1 = -5934.5 - 5789.1 = -11,723.6 J/mol. For 2 Na+ ions, total driving energy = 2 × (-11,723.6) = -23,447.2 J/mol. At equilibrium, ΔG_Glc = +23,447.2 J/mol = RT ln([Glc]_in / [Glc]_out). Thus, ln([Glc]_in / [Glc]_out) = 23,447.2 / 2577.34 = 9.097, giving [Glc]_in / [Glc]_out = e^(9.097) ≈ 8,930 to 10,800 depending on rounding."
+      },
+      {
+        "problem_id": "PP-2.4",
+        "question": "If a diploid human somatic cell in G1 phase contains 2n = 46 chromosomes and 2C = 6.4 picograms (pg) of nuclear DNA, how many chromosomes, chromatids, and picograms of nuclear DNA are present in the same cell during (a) Metaphase of Mitosis, and (b) Anaphase of Mitosis (prior to cytokinesis)?",
+        "bold_answer": "(a) Metaphase: 46 chromosomes, 92 chromatids, 12.8 pg DNA (4C); (b) Anaphase: 92 chromosomes, 92 chromatids, 12.8 pg DNA (4C)",
+        "collapsible_derivation": "After S phase replication, DNA content doubles from 2C (6.4 pg) to 4C (12.8 pg). In Metaphase, sister chromatids remain joined at the centromere, so there are 46 chromosomes composed of 92 sister chromatids. At the onset of Anaphase, Separase cleaves Cohesin, separating sister chromatids into independent daughter chromosomes—temporarily doubling the chromosome count in the single undivided cell to 92 chromosomes (each of 1 chromatid) with 12.8 pg total DNA until cytokinesis partitions them into two 2n/2C daughter cells."
+      }
+    ]
+  },
+  "case_study": {
+    "title": "Molecular Pathology Case Study: I-Cell Disease (Mucolipidosis II) & Retinoblastoma Loss of Heterozygosity",
+    "scenario": "Case A: An infant presents with coarse facial features, skeletal dysplasia, and psychomotor retardation. Biochemical assay reveals high plasma levels of lysosomal hydrolases (β-hexosaminidase, iduronate sulfatase), while cultured fibroblasts contain dense cytoplasmic inclusion bodies ('I-cells') lacking internal lysosomal enzymes. Case B: A 2-year-old child develops bilateral retinal tumors caused by inheriting one mutated RB1 allele and suffering a somatic deletion in the second allele.",
+    "mechanistic_analysis": "In Case A (I-Cell Disease), a deficiency in N-acetylglucosamine-1-phosphotransferase in the cis-Golgi prevents phosphorylation of mannose residues to Mannose-6-Phosphate (M6P) on lysosomal enzymes. Without the M6P sorting tag, trans-Golgi M6P receptors cannot package the hydrolases into clathrin-coated vesicles bound for late endosomes/lysosomes; instead, the enzymes are constitutively secreted outside the cell via the default pathway, leaving lysosomes filled with undigested substrates. In Case B (Hereditary Retinoblastoma), loss of both functional copies of the Rb pocket protein leaves E2F transcription factors constitutively active, bypassing the Cyclin D/E G1/S Restriction Point without mitogenic signals.",
+    "knowledge_connections": [
+      {
+        "target_textbook": "TextBook1",
+        "topic": "Thermodynamic Coupling & Chemiosmotic Uncoupling"
+      },
+      {
+        "target_textbook": "TextBook3",
+        "topic": "S-Phase DNA Replication Licensing & Cohesin Mechanics"
+      },
+      {
+        "target_textbook": "TextBook4",
+        "topic": "Pedigree Penetrance & Knudson's Two-Hit Tumor Suppressor Genetics"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question_id": "Q-2.1",
+      "question": "If isolated, intact mitochondria are incubated with NADH, ADP, and Pi in a buffered medium, and the antibiotic Oligomycin is added, what happens to oxygen consumption and ATP synthesis—and how does subsequent addition of 2,4-Dinitrophenol (DNP) alter the system?",
+      "options": [
+        "Oligomycin increases O2 consumption and blocks ATP synthesis; DNP blocks both O2 consumption and ATP synthesis",
+        "Oligomycin halts both O2 consumption and ATP synthesis; subsequent DNP restores rapid O2 consumption without restoring ATP synthesis",
+        "Oligomycin blocks Complex IV electron transfer directly; DNP bypasses Complex IV to reduce O2",
+        "Neither Oligomycin nor DNP affects O2 consumption because electron transport is independent of the proton gradient"
+      ],
+      "correct_index": 1,
+      "explanation": "Oligomycin binds the F0 proton channel of ATP synthase, blocking H+ reentry into the matrix. This causes Δp to build up to a maximal back-pressure that thermodynamically halts electron transport and O2 consumption. Adding the protonophore DNP collapses Δp across the lipid bilayer, relieving the back-pressure so electron transport and O2 consumption resume at maximum velocity while ATP synthesis remains zero."
+    },
+    {
+      "question_id": "Q-2.2",
+      "question": "Which molecular event directly triggers the Metaphase-to-Anaphase transition during mitosis?",
+      "options": [
+        "Phosphorylation of nuclear lamins by Cyclin E–CDK2",
+        "Ubiquitylation of Securin by APC/C^Cdc20, releasing active Separase to cleave the Scc1/Rad21 subunit of Cohesin",
+        "Inhibition of Cdc25 phosphatase by Wee1 kinase",
+        "Binding of p21^Cip1 to Cyclin D–CDK4 complexes"
+      ],
+      "correct_index": 1,
+      "explanation": "Once all kinetochores achieve bi-oriented attachment on the mitotic spindle, the Spindle Assembly Checkpoint (Mad2) is silenced, allowing APC/C^Cdc20 to polyubiquitylate Securin for proteasomal destruction. Free Separase then proteolytically cleaves Cohesin rings holding sister chromatids together."
+    },
+    {
+      "question_id": "Q-2.3",
+      "question": "Why does the exposure of Phosphatidylserine (PS) on the outer (exoplasmic) leaflet of the plasma membrane serve as a specific physiological signal?",
+      "options": [
+        "PS is normally synthesized only in mitochondria and exported during S phase",
+        "ATP-dependent Flippases normally restrict negatively charged PS to the cytosolic leaflet; caspase-activated Scramblases expose PS externally during apoptosis as an 'eat-me' signal for macrophages",
+        "PS forms covalent disulfide bonds with extracellular matrix collagen",
+        "PS decreases membrane fluidity at low temperatures in place of cholesterol"
+      ],
+      "correct_index": 1,
+      "explanation": "In healthy cells, P4-ATPase flippases actively maintain phosphatidylserine (PS) exclusively in the inner (cytosolic) leaflet. During apoptosis, caspase cleavage inactivates flippases and activates scramblases, translocating PS to the outer surface where macrophage receptors recognize it for non-inflammatory phagocytosis."
+    }
+  ],
+  "research_corner": {
+    "paper_title": "Coupling of Phosphorylation to Electron and Hydrogen Transfer by a Chemi-Osmotic Type of Mechanism (Mitchell, 1961) & Single-Molecule Rotation of F1-ATPase (Noji et al., 1997)",
+    "imrad_breakdown": {
+      "abstract_summary": "Mitchell (1961) overturned the chemical-intermediate hypothesis by proposing that respiratory chains pump protons across an ion-impermeable membrane to generate an electrochemical proton-motive force (Δp). Noji et al. (1997) directly visualized the γ-subunit rotating in 120° steps inside the α3β3 hexamer by attaching a fluorescent actin filament to immobilized F1-ATPase.",
+      "key_method": "Epifluorescence video microscopy of a 1-μm tetramethylrhodamine-labeled actin filament tethered to the His-tagged γ-subunit of thermophilic Bacillus PS3 F1-ATPase in the presence of 2 mM ATP.",
+      "critical_takeaway": "Each 120° step of the γ-shaft hydrolyzes (or synthesizes) exactly 1 ATP molecule with near-100% chemomechanical energy conversion efficiency (generating ~40 pN·nm of rotary torque)."
+    },
+    "further_reading": [
+      "Alberts, B., et al. Molecular Biology of the Cell — Chapters 10, 11, 12, 14 & 17 (Membrane Structure, Transport, Organelles, Bioenergetics, and the Cell Cycle).",
+      "Nicholls, D. G., & Ferguson, S. J. Bioenergetics 4 — Quantitative Chemiosmotic Theory and Proton-Motive Force Calculations.",
+      "Kuchel, P. W., & Ralston, G. B. Schaum's Outline of Theory and Problems of Biochemistry — Bioenergetics, Membrane Transport & Enzyme Kinetics."
+    ]
+  }
+}
