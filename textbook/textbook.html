@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Cellulum Interactive Textbook Reader</title>
+  <title>Cellulum — Interactive Textbook & Schaum's Outlines</title>
+  <!-- FontAwesome Icons for Search, Coffee & UI Controls -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- KaTeX for Schaum's Math Boxes & Worked Derivations -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <!-- Custom Cellulum Cellular 'C' Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='50%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 76 25 A 37 37 0 1 0 76 75' fill='none' stroke='url(%23g)' stroke-width='15' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='13' fill='url(%23g)'/%3E%3Cpath d='M 29 42 A 22 22 0 0 1 39 29' fill='none' stroke='%2314b8a6' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 55 28 A 22 22 0 0 1 64 33' fill='none' stroke='%2306b6d4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 29 58 A 22 22 0 0 0 37 69' fill='none' stroke='%230284c7' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 54 72 A 22 22 0 0 0 64 67' fill='none' stroke='%231d4ed8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+
   <style>
     :root {
       --bg-deep: #0b111a;
@@ -42,36 +47,233 @@
       overflow-x: hidden;
     }
 
+    /* Sticky Two-Tier Cellulum Header */
     header.cellulum-header {
       position: sticky;
       top: 0;
       z-index: 120;
-      background: rgba(11, 17, 26, 0.95);
-      backdrop-filter: blur(12px);
+      background: rgba(11, 17, 26, 0.94);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 0.65rem 0.85rem;
+      padding: 0.55rem 0.9rem;
       display: flex;
       flex-direction: column;
-      gap: 0.55rem;
+      gap: 0.5rem;
     }
 
-    .header-row-1 {
+    /* Tier 1: Brand Logo + Search + Buy Me a Coffee + Main Page */
+    .header-brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .brand-lockup {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .brand-logo-svg {
+      height: 28px;
+      width: auto;
+      overflow: visible;
+      display: block;
+    }
+
+    @media (min-width: 640px) {
+      .brand-logo-svg {
+        height: 33px;
+      }
+    }
+
+    .brand-subtext {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      color: #6ee7b7;
+      padding-left: 2px;
+      margin-top: -1px;
+      white-space: nowrap;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    /* Desktop Search Pill */
+    .desktop-search-wrap {
+      position: relative;
+      display: none;
+      align-items: center;
+    }
+
+    @media (min-width: 680px) {
+      .desktop-search-wrap {
+        display: flex;
+      }
+      .btn-search-mobile {
+        display: none !important;
+      }
+    }
+
+    .desktop-search-wrap i {
+      position: absolute;
+      left: 0.75rem;
+      color: var(--accent-teal);
+      font-size: 0.78rem;
+      pointer-events: none;
+    }
+
+    input.desktop-search-input {
+      background: #141e2d;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.38rem 0.8rem 0.38rem 2.1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      width: 210px;
+      outline: none;
+      transition: width 0.2s, border-color 0.2s;
+    }
+
+    input.desktop-search-input:focus {
+      border-color: var(--accent-teal);
+      width: 250px;
+    }
+
+    /* Mobile Search Icon Button */
+    .btn-search-mobile {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: #141e2d;
+      border: 1px solid var(--border-subtle);
+      color: var(--accent-teal);
+      font-size: 0.85rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Buy Me a Coffee Button */
+    .btn-coffee {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(255, 202, 40, 0.14);
+      border: 1px solid rgba(255, 202, 40, 0.45);
+      color: var(--accent-amber);
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .btn-coffee:hover {
+      background: rgba(255, 202, 40, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .coffee-text {
+      display: none;
+    }
+
+    @media (min-width: 520px) {
+      .coffee-text {
+        display: inline;
+      }
+    }
+
+    /* Main Page Return Button */
+    .btn-main-page {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--accent-maroon-bg);
+      border: 1px solid var(--accent-maroon-border);
+      color: #fda4af;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Collapsible Mobile Search Drawer Row */
+    .mobile-search-row {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .mobile-search-row.open {
+      display: flex;
+    }
+
+    .mobile-search-wrap {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .mobile-search-wrap i {
+      position: absolute;
+      left: 0.85rem;
+      color: var(--accent-teal);
+      font-size: 0.82rem;
+      pointer-events: none;
+    }
+
+    input.mobile-search-input {
+      width: 100%;
+      background: #141e2d;
+      border: 1px solid var(--accent-teal);
+      color: var(--text-main);
+      padding: 0.45rem 0.85rem 0.45rem 2.25rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      outline: none;
+    }
+
+    /* Tier 2: Topic Outline Trigger + Active Chapter Title */
+    .header-outline-row {
       display: flex;
       align-items: center;
       gap: 0.65rem;
       width: 100%;
+      padding-top: 0.35rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     .btn-topic-outline {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.4rem;
       background: rgba(45, 212, 191, 0.14);
       border: 1px solid rgba(45, 212, 191, 0.4);
       color: var(--accent-teal);
-      padding: 0.42rem 0.85rem;
+      padding: 0.36rem 0.8rem;
       border-radius: 999px;
-      font-size: 0.84rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
@@ -79,7 +281,7 @@
     }
 
     .header-active-title {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       color: var(--text-main);
       white-space: nowrap;
@@ -88,60 +290,7 @@
       flex: 1;
     }
 
-    .header-row-2 {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      width: 100%;
-    }
-
-    .search-pill-wrap {
-      position: relative;
-      flex: 1;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 0.85rem;
-      color: var(--accent-teal);
-      font-size: 0.88rem;
-      pointer-events: none;
-    }
-
-    input.chapter-search {
-      width: 100%;
-      background: #141e2d;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 0.48rem 0.85rem 0.48rem 2.35rem;
-      border-radius: 999px;
-      font-size: 0.84rem;
-      outline: none;
-    }
-
-    input.chapter-search:focus {
-      border-color: var(--accent-teal);
-    }
-
-    .btn-main-page {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: var(--accent-maroon-bg);
-      border: 1px solid var(--accent-maroon-border);
-      color: #fda4af;
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.84rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
+    /* Slide-Out Left Drawer */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -156,7 +305,7 @@
 
     aside.topic-drawer {
       position: fixed;
-      top: 102px;
+      top: 98px;
       left: 0;
       bottom: 0;
       width: min(78vw, 330px);
@@ -466,33 +615,93 @@
 </head>
 <body>
 
-  <!-- Top Bar Identical to Screenshot -->
+  <!-- Upgraded Two-Tier Cellulum Header with Cellular Logo, Search & Buy Me a Coffee -->
   <header class="cellulum-header">
-    <div class="header-row-1">
+    
+    <!-- Row 1: Cellular 'C' Logo + Search + Buy Me a Coffee + Main Page -->
+    <div class="header-brand-row">
+      <a href="../index.html" class="brand-lockup" aria-label="Cellulum Home">
+        <svg class="brand-logo-svg" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cellCGrad" x1="12" y1="8" x2="72" y2="80" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#10b981" />
+              <stop offset="48%" stop-color="#06b6d4" />
+              <stop offset="100%" stop-color="#1d4ed8" />
+            </linearGradient>
+            <linearGradient id="nucleusGrad" x1="30" y1="30" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2dd4bf" />
+              <stop offset="100%" stop-color="#0284c7" />
+            </linearGradient>
+          </defs>
+          <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
+          <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#ffffff" stroke-width="3.0" stroke-linecap="round" fill="none" />
+          <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
+          <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
+          <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
+          <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
+          <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
+          <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
+        </svg>
+        <span class="brand-subtext">Interactive Textbook &amp; Outlines</span>
+      </a>
+
+      <!-- Right Action Buttons -->
+      <div class="header-actions">
+        <!-- Desktop Search Input -->
+        <div class="desktop-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            class="desktop-search-input"
+            id="desktopSearchInput"
+            placeholder="Search in this chapter..."
+            oninput="filterChapterContent(this.value)"
+          />
+        </div>
+
+        <!-- Mobile Search Toggle Button -->
+        <button class="btn-search-mobile" onclick="toggleMobileSearch()" title="Search in this chapter" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Buy Me a Coffee Button (Update href with your link!) -->
+        <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener noreferrer" id="bmcHeaderBtn" class="btn-coffee" title="Buy Me a Coffee">
+          <i class="fa-solid fa-mug-hot"></i>
+          <span class="coffee-text">Buy Me a Coffee</span>
+        </a>
+
+        <!-- Back to Main Observatory Page -->
+        <a href="../index.html" class="btn-main-page" title="Return to Main Observatory">
+          <span>✕ Main Page</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Collapsible Mobile Search Bar (Opens when tapping the magnifying glass on phone) -->
+    <div class="mobile-search-row" id="mobileSearchRow">
+      <div class="mobile-search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          class="mobile-search-input"
+          id="mobileSearchInput"
+          placeholder="Search pathways, equations, problems in this chapter..."
+          oninput="filterChapterContent(this.value)"
+        />
+      </div>
+    </div>
+
+    <!-- Row 2: Topic Outline Drawer Button + Active Module Title -->
+    <div class="header-outline-row">
       <button class="btn-topic-outline" onclick="toggleDrawer()">
-        <span>☷</span> Topic Outline
+        <i class="fa-solid fa-list-ul"></i>
+        <span>Topic Outline</span>
       </button>
       <div class="header-active-title" id="headerActiveTitle">
         MOD 01 • Foundations of Life &amp; Biological Thermodynamics
       </div>
     </div>
 
-    <div class="header-row-2">
-      <div class="search-pill-wrap">
-        <span class="search-icon">🔍</span>
-        <input
-          type="text"
-          class="chapter-search"
-          id="chapterSearchInput"
-          placeholder="Search in this chapter..."
-          oninput="filterChapterContent(this.value)"
-        />
-      </div>
-      <!-- Points up one level (../index.html) back to your main root Observatory -->
-      <a href="../index.html" class="btn-main-page">
-        ✕ Main Page
-      </a>
-    </div>
   </header>
 
   <!-- Slide-Out Left Drawer -->
@@ -565,6 +774,14 @@
     const moduleCache = {};
     let activeModId = "TextBook1";
 
+    function toggleMobileSearch() {
+      const row = document.getElementById("mobileSearchRow");
+      row.classList.toggle("open");
+      if (row.classList.contains("open")) {
+        document.getElementById("mobileSearchInput").focus();
+      }
+    }
+
     function toggleDrawer() {
       document.getElementById("topicDrawer").classList.toggle("open");
       document.getElementById("drawerBackdrop").classList.toggle("open");
@@ -618,7 +835,6 @@
         return;
       }
 
-      // Since textbook.html is inside textbook/, ./TextBook1.json is in the exact same folder
       const candidatePaths = [
         `./${modId}.json`,
         `${modId}.json`,
