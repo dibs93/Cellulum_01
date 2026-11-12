@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cellulum Interactive Textbook Reader</title>
+  <!-- KaTeX for Schaum's Math Boxes & Worked Derivations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <style>
+    :root {
+      --bg-deep: #0b111a;
+      --bg-drawer: rgba(13, 21, 33, 0.96);
+      --bg-panel: #131d2b;
+      --bg-card: #1a2636;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --accent-teal: #2dd4bf;
+      --accent-cyan: #00f2fe;
+      --accent-emerald: #00ff87;
+      --accent-amber: #ffca28;
+      --accent-maroon-bg: rgba(127, 29, 49, 0.45);
+      --accent-maroon-border: rgba(225, 29, 72, 0.55);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header.cellulum-header {
+      position: sticky;
+      top: 0;
+      z-index: 120;
+      background: rgba(11, 17, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.65rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .header-row-1 {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+    }
+
+    .btn-topic-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(45, 212, 191, 0.14);
+      border: 1px solid rgba(45, 212, 191, 0.4);
+      color: var(--accent-teal);
+      padding: 0.42rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .header-active-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    .header-row-2 {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+    }
+
+    .search-pill-wrap {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      color: var(--accent-teal);
+      font-size: 0.88rem;
+      pointer-events: none;
+    }
+
+    input.chapter-search {
+      width: 100%;
+      background: #141e2d;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.48rem 0.85rem 0.48rem 2.35rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      outline: none;
+    }
+
+    input.chapter-search:focus {
+      border-color: var(--accent-teal);
+    }
+
+    .btn-main-page {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--accent-maroon-bg);
+      border: 1px solid var(--accent-maroon-border);
+      color: #fda4af;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 130;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+    }
+
+    .drawer-backdrop.open {
+      display: block;
+    }
+
+    aside.topic-drawer {
+      position: fixed;
+      top: 102px;
+      left: 0;
+      bottom: 0;
+      width: min(78vw, 330px);
+      z-index: 140;
+      background: var(--bg-drawer);
+      backdrop-filter: blur(16px);
+      border-right: 1px solid var(--border-subtle);
+      padding: 1.1rem 1rem 2rem;
+      overflow-y: auto;
+      transform: translateX(-102%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    aside.topic-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: 0.55rem;
+    }
+
+    select.drawer-module-select {
+      width: 100%;
+      background: #141e2d;
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.65rem 0.85rem;
+      border-radius: 12px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      margin-bottom: 1.35rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .outline-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .outline-item {
+      padding: 0.55rem 0.4rem;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      border-radius: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .outline-item:hover,
+    .outline-item.active {
+      background: rgba(45, 212, 191, 0.12);
+      color: var(--accent-teal);
+    }
+
+    .outline-group-spacer {
+      height: 0.65rem;
+    }
+
+    button.floating-outline-fab {
+      position: fixed;
+      right: 1.1rem;
+      bottom: 5.5rem;
+      z-index: 125;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #111827;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    main.reader-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.1rem 0.95rem 4rem;
+    }
+
+    .offline-picker-bar {
+      background: rgba(255, 202, 40, 0.1);
+      border: 1px solid rgba(255, 202, 40, 0.35);
+      color: var(--accent-amber);
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .btn-small {
+      background: rgba(45, 212, 191, 0.18);
+      border: 1px solid var(--accent-teal);
+      color: var(--accent-teal);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chapter-hero-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .chapter-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-teal);
+      background: rgba(45, 212, 191, 0.12);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      padding: 0.18rem 0.55rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .chapter-h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .chapter-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .topic-section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-teal);
+      margin: 1.5rem 0 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .concept-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .concept-card h3 {
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.45rem;
+    }
+
+    .concept-meta-tag {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--accent-teal);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .concept-card p {
+      font-size: 0.88rem;
+      color: #dbeafe;
+      margin-bottom: 0.7rem;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .bullet-list li {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+      font-weight: bold;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      margin: 0.9rem 0;
+    }
+
+    table.cellulum-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      background: var(--bg-panel);
+    }
+
+    table.cellulum-table th {
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent-teal);
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    table.cellulum-table td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+    }
+
+    .svg-box {
+      background: #07131e;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 0.6rem 0;
+    }
+
+    .svg-box svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .sim-control-row {
+      background: var(--bg-panel);
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 0.6rem;
+    }
+
+    .sim-output-pill {
+      background: rgba(0, 255, 135, 0.1);
+      border-left: 3px solid var(--accent-emerald);
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+
+    .math-display {
+      background: #090f17;
+      padding: 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      text-align: center;
+      margin: 0.55rem 0;
+    }
+
+    .quiz-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: var(--bg-panel);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      margin-bottom: 0.45rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .quiz-btn.correct {
+      background: rgba(0, 255, 135, 0.18);
+      border-color: var(--accent-emerald);
+      color: var(--accent-emerald);
+      font-weight: 700;
+    }
+
+    .quiz-btn.wrong {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: #f43f5e;
+      color: #fda4af;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar Identical to Screenshot -->
+  <header class="cellulum-header">
+    <div class="header-row-1">
+      <button class="btn-topic-outline" onclick="toggleDrawer()">
+        <span>☷</span> Topic Outline
+      </button>
+      <div class="header-active-title" id="headerActiveTitle">
+        MOD 01 • Foundations of Life &amp; Biological Thermodynamics
+      </div>
+    </div>
+
+    <div class="header-row-2">
+      <div class="search-pill-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          class="chapter-search"
+          id="chapterSearchInput"
+          placeholder="Search in this chapter..."
+          oninput="filterChapterContent(this.value)"
+        />
+      </div>
+      <!-- Points up one level (../index.html) back to your main root Observatory -->
+      <a href="../index.html" class="btn-main-page">
+        ✕ Main Page
+      </a>
+    </div>
+  </header>
+
+  <!-- Slide-Out Left Drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+  <aside class="topic-drawer" id="topicDrawer">
+    <div class="drawer-label">SWITCH MODULE CHAPTER</div>
+    <select class="drawer-module-select" id="drawerModuleSelect" onchange="switchTextbookModule(this.value)">
+      <option value="TextBook1">MOD 01: Foundations of Life &amp; Thermodynamics</option>
+      <option value="TextBook2">MOD 02: Cell Biology &amp; Bioenergetics</option>
+      <option value="TextBook3">MOD 03: Molecular Biology &amp; Epigenetics</option>
+      <option value="TextBook4">MOD 04: Genetics &amp; Plant QTL Mapping</option>
+      <option value="TextBook5">MOD 05: Biotechnology, PCR, CRISPR &amp; LFD</option>
+      <option value="TextBook6">MOD 06: Microbiology, Virology &amp; Microbiomes</option>
+      <option value="TextBook7">MOD 07: Plant Sciences &amp; Genotyping</option>
+      <option value="TextBook8">MOD 08: Human Biology &amp; Enzyme Kinetics</option>
+      <option value="TextBook9">MOD 09: Immunology &amp; Vaccine Engineering</option>
+      <option value="TextBook10">MOD 10: Developmental Biology &amp; Morphogens</option>
+      <option value="TextBook11">MOD 11: Bioinformatics, RNA-Seq &amp; AlphaFold</option>
+      <option value="TextBook12">MOD 12: Ecology, Evolution &amp; 40Ar Dating</option>
+      <option value="TextBook13">MOD 13: Research Skills, Stats &amp; Lab Metrology</option>
+      <option value="TextBook14">MOD 14: Emerging Tech &amp; Explorer Pathways</option>
+      <option value="TextBook15">MOD 15: Integrated Metabolic Biochemistry</option>
+    </select>
+
+    <div class="drawer-label">CHAPTER TOPIC OUTLINE</div>
+    <ul class="outline-list" id="drawerOutlineList"></ul>
+
+    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+      <label class="btn-small" for="localJsonFiles" style="display:block;text-align:center;">
+        📂 Load Local TextBook JSONs
+      </label>
+      <input type="file" id="localJsonFiles" accept=".json" multiple style="display:none;" onchange="loadManualFiles(this.files)" />
+    </div>
+  </aside>
+
+  <!-- Floating Bottom-Right Outline Button -->
+  <button class="floating-outline-fab" onclick="toggleDrawer()" title="Toggle Topic Outline">
+    ⊸
+  </button>
+
+  <!-- Main Reader Content -->
+  <main class="reader-container">
+    <div class="offline-picker-bar" id="offlineNotice">
+      <span id="offlineNoticeText">Could not auto-fetch JSON file. Ensure TextBook1.json–TextBook15.json are inside the textbook/ folder:</span>
+      <label class="btn-small" for="localJsonFiles">Load JSONs</label>
+    </div>
+
+    <div id="chapterContentRoot"></div>
+  </main>
+
+  <script>
+    const MODULE_LABELS = {
+      TextBook1: "MOD 01 • Foundations of Life & Biological Thermodynamics",
+      TextBook2: "MOD 02 • Cell Biology: Ultrastructure, Bioenergetics & Cell Cycle",
+      TextBook3: "MOD 03 • Molecular Biology: Replication, RNA, Translation & Epigenetics",
+      TextBook4: "MOD 04 • Genetics: Mendelian, Linkage, Population & Plant QTL",
+      TextBook5: "MOD 05 • Biotechnology: PCR, Cloning, Sequencing, CRISPR & LFD",
+      TextBook6: "MOD 06 • Microbiology: Bacteria, Virology, Mycology & Microbiomes",
+      TextBook7: "MOD 07 • Plant Sciences: Physiology, Photosynthesis & Genotyping",
+      TextBook8: "MOD 08 • Human Biology: Neurophysiology, Hemodynamics & Enzymes",
+      TextBook9: "MOD 09 • Immunology: Innate, Adaptive, V(D)J & Vaccines",
+      TextBook10: "MOD 10 • Developmental Biology: Embryogenesis, Morphogens & Hox",
+      TextBook11: "MOD 11 • Bioinformatics: Alignment, BLAST, Multi-Omics & AlphaFold",
+      TextBook12: "MOD 12 • Ecology & Evolution: Dynamics, 40Ar Dating & Conservation",
+      TextBook13: "MOD 13 • Research Skills: IMRaD, Biostatistics & Lab Metrology",
+      TextBook14: "MOD 14 • Emerging Tech: Synthetic Biology, scRNA-Seq & Pathways",
+      TextBook15: "MOD 15 • Integrated Metabolic Biochemistry & Bioenergetics"
+    };
+
+    const moduleCache = {};
+    let activeModId = "TextBook1";
+
+    function toggleDrawer() {
+      document.getElementById("topicDrawer").classList.toggle("open");
+      document.getElementById("drawerBackdrop").classList.toggle("open");
+    }
+
+    function closeDrawer() {
+      document.getElementById("topicDrawer").classList.remove("open");
+      document.getElementById("drawerBackdrop").classList.remove("open");
+    }
+
+    function scrollToAnchor(elementId) {
+      closeDrawer();
+      const el = document.getElementById(elementId);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 115;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
+
+    function loadManualFiles(files) {
+      if (!files || !files.length) return;
+      let loadedCount = 0;
+      let firstId = null;
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          try {
+            const json = JSON.parse(e.target.result);
+            if (json && json.textbook_id) {
+              moduleCache[json.textbook_id] = json;
+              if (!firstId) firstId = json.textbook_id;
+            }
+          } catch (err) {}
+          loadedCount++;
+          if (loadedCount === files.length) {
+            document.getElementById("offlineNotice").style.display = "none";
+            switchTextbookModule(moduleCache[activeModId] ? activeModId : (firstId || activeModId));
+          }
+        };
+        reader.readAsText(file);
+      });
+    }
+
+    async function switchTextbookModule(modId) {
+      activeModId = modId;
+      document.getElementById("drawerModuleSelect").value = modId;
+      document.getElementById("headerActiveTitle").textContent = MODULE_LABELS[modId] || modId;
+
+      if (moduleCache[modId]) {
+        renderModuleAndOutline(moduleCache[modId]);
+        return;
+      }
+
+      // Since textbook.html is inside textbook/, ./TextBook1.json is in the exact same folder
+      const candidatePaths = [
+        `./${modId}.json`,
+        `${modId}.json`,
+        `/textbook/${modId}.json`
+      ];
+
+      for (const path of candidatePaths) {
+        try {
+          const res = await fetch(path);
+          if (res.ok) {
+            const data = await res.json();
+            moduleCache[modId] = data;
+            document.getElementById("offlineNotice").style.display = "none";
+            renderModuleAndOutline(data);
+            return;
+          }
+        } catch (e) {}
+      }
+
+      document.getElementById("offlineNotice").style.display = "flex";
+      document.getElementById("offlineNoticeText").innerHTML =
+        `Place <strong>${modId}.json</strong> inside the <code>textbook/</code> folder on GitHub (or tap <strong>Load JSONs</strong>).`;
+    }
+
+    function renderModuleAndOutline(data) {
+      const outlineList = document.getElementById("drawerOutlineList");
+      const contentRoot = document.getElementById("chapterContentRoot");
+
+      let outlineHtml = "";
+      let bodyHtml = `
+        <div class="chapter-hero-card searchable-block">
+          <span class="chapter-badge">${data.textbook_id} • BRANCH ${String(data.branch_number).padStart(2, '0')}</span>
+          <h1 class="chapter-h1">${data.branch_title}</h1>
+          <p class="chapter-sub">${data.subtitle || ""}</p>
+        </div>
+      `;
+
+      (data.sub_modules || []).forEach((sub, sIdx) => {
+        if (sIdx > 0) outlineHtml += `<li class="outline-group-spacer"></li>`;
+        const subAnchor = `sec-sub-${sub.id}`;
+        outlineHtml += `
+          <li class="outline-item" onclick="scrollToAnchor('${subAnchor}')" style="font-weight:700;color:var(--accent-teal);">
+            ${sub.id} ${sub.title}
+          </li>
+        `;
+
+        bodyHtml += `
+          <div id="${subAnchor}" class="topic-section-title searchable-block">
+            ${sub.id} — ${sub.title}
+          </div>
+        `;
+
+        (sub.core_concepts || []).forEach(c => {
+          const cAnchor = `sec-concept-${c.concept_id}`;
+          outlineHtml += `
+            <li class="outline-item" onclick="scrollToAnchor('${cAnchor}')">
+              ${c.concept_id} ${c.heading}
+            </li>
+          `;
+
+          bodyHtml += `
+            <article class="concept-card searchable-block" id="${cAnchor}">
+              <span class="concept-meta-tag">SECTION ${c.concept_id}</span>
+              <h3>${c.heading}</h3>
+              <p>${c.theory}</p>
+              <ul class="bullet-list">
+                ${(c.key_principles || []).map(kp => `<li>${kp}</li>`).join("")}
+              </ul>
+            </article>
+          `;
+        });
+
+        if (sub.comparison_table) {
+          const tb = sub.comparison_table;
+          bodyHtml += `
+            <div class="concept-card searchable-block">
+              <h3>📊 ${tb.title}</h3>
+              <div class="table-scroll">
+                <table class="cellulum-table">
+                  <thead>
+                    <tr>${tb.headers.map(h => `<th>${h}</th>`).join("")}</tr>
+                  </thead>
+                  <tbody>
+                    ${tb.rows.map(r => `<tr>${r.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      if (data.expandable_figures && data.expandable_figures.length) {
+        outlineHtml += `<li class="outline-group-spacer"></li>`;
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-figures')" style="color:var(--accent-cyan);">🖼️ Vector Figures (${data.expandable_figures.length})</li>`;
+        bodyHtml += `<div id="sec-figures" class="topic-section-title">🖼️ Ultrastructure &amp; Pathway Diagrams</div>`;
+        data.expandable_figures.forEach(fig => {
+          bodyHtml += `
+            <div class="concept-card searchable-block">
+              <h3>${fig.title}</h3>
+              <div class="svg-box">${fig.svg_markup}</div>
+              <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.4rem;">${fig.thumbnail_caption}</p>
+            </div>
+          `;
+        });
+      }
+
+      if (data.interactive_simulators && data.interactive_simulators.length) {
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-sims')" style="color:var(--accent-emerald);">🎛️ Interactive Simulators (${data.interactive_simulators.length})</li>`;
+        bodyHtml += `<div id="sec-sims" class="topic-section-title">🎛️ Interactive Quantitative Simulators</div>`;
+        data.interactive_simulators.forEach((sim, sIdx) => {
+          bodyHtml += `
+            <div class="concept-card searchable-block">
+              <h3>⚡ ${sim.title}</h3>
+              <p>${sim.description}</p>
+              ${sim.controls.map(ctrl => `
+                <div class="sim-control-row">
+                  <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:0.3rem;">
+                    <span>${ctrl.label}</span>
+                    <strong style="color:var(--accent-amber);font-family:var(--font-mono);" id="sval-${sIdx}-${ctrl.id}">${ctrl.default} ${ctrl.unit}</strong>
+                  </div>
+                  <input type="range" style="width:100%;accent-color:var(--accent-teal);"
+                    id="sinp-${sIdx}-${ctrl.id}"
+                    min="${ctrl.min}" max="${ctrl.max}" step="${ctrl.step}" value="${ctrl.default}"
+                    oninput="evalSim(${sIdx})" />
+                </div>
+              `).join("")}
+              ${sim.computed_outputs.map(out => `
+                <div class="sim-output-pill">
+                  <div style="font-size:0.76rem;color:var(--text-muted);">${out.label}</div>
+                  <div style="font-size:1.15rem;font-weight:800;color:var(--accent-emerald);font-family:var(--font-mono);" id="sout-${sIdx}-${out.output_id}">--</div>
+                </div>
+              `).join("")}
+            </div>
+          `;
+        });
+      }
+
+      if (data.schaums_math_box && data.schaums_math_box.length) {
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-math')" style="color:var(--accent-amber);">📐 Schaum's Math Box (${data.schaums_math_box.length})</li>`;
+        bodyHtml += `<div id="sec-math" class="topic-section-title">📐 Schaum's Formula &amp; Equation Box</div>`;
+        data.schaums_math_box.forEach(eq => {
+          bodyHtml += `
+            <div class="concept-card searchable-block">
+              <span class="concept-meta-tag">${eq.formula_id}</span>
+              <h3>${eq.title}</h3>
+              <div class="math-display" data-latex="${encodeURIComponent(eq.latex)}">${eq.latex}</div>
+              <p>${eq.description}</p>
+            </div>
+          `;
+        });
+      }
+
+      if (data.schaums_problem_solving) {
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-probs')" style="color:var(--accent-amber);">✏️ Worked &amp; Practice Problems</li>`;
+        bodyHtml += `<div id="sec-probs" class="topic-section-title">✏️ Schaum's Solved &amp; Practice Problems</div>`;
+        (data.schaums_problem_solving.solved_problems || []).forEach(sp => {
+          bodyHtml += `
+            <div class="concept-card searchable-block">
+              <span class="concept-meta-tag">${sp.problem_id} • ${sp.difficulty || 'Worked Derivation'}</span>
+              <h3>${sp.title}</h3>
+              <p style="white-space:pre-line;">${sp.statement}</p>
+              ${(sp.derivation_steps || []).map(st => `
+                <div style="background:var(--bg-panel);padding:0.65rem;border-radius:8px;margin-bottom:0.5rem;">
+                  <div style="font-size:0.82rem;color:var(--text-muted);"><strong>Step ${st.step}:</strong> ${st.explanation}</div>
+                  <div class="math-display" data-latex="${encodeURIComponent(st.equation_latex)}">${st.equation_latex}</div>
+                </div>
+              `).join("")}
+              <div style="color:var(--accent-emerald);font-weight:700;font-size:0.88rem;margin-top:0.5rem;">
+                ✔ ${sp.final_answer}
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      if (data.quiz && data.quiz.length) {
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-quiz')">❓ Mastery Quiz</li>`;
+        bodyHtml += `<div id="sec-quiz" class="topic-section-title">❓ Chapter Mastery Quiz</div>`;
+        data.quiz.forEach((q, qIdx) => {
+          bodyHtml += `
+            <div class="concept-card searchable-block" id="qcard-${qIdx}">
+              <h3>${q.question_id}: ${q.question}</h3>
+              ${q.options.map((opt, oIdx) => `
+                <button class="quiz-btn" onclick="gradeQuiz(${qIdx}, ${oIdx}, ${q.correct_index})">
+                  ${String.fromCharCode(65 + oIdx)}. ${opt}
+                </button>
+              `).join("")}
+              <div id="qexp-${qIdx}" style="display:none;margin-top:0.5rem;font-size:0.84rem;color:var(--accent-teal);">
+                <strong>Explanation:</strong> ${q.explanation}
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      outlineList.innerHTML = outlineHtml;
+      contentRoot.innerHTML = bodyHtml;
+      window.activeData = data;
+
+      if (data.interactive_simulators) {
+        data.interactive_simulators.forEach((_, idx) => evalSim(idx));
+      }
+      renderLatexEquations();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function evalSim(sIdx) {
+      const data = window.activeData;
+      if (!data || !data.interactive_simulators || !data.interactive_simulators[sIdx]) return;
+      const sim = data.interactive_simulators[sIdx];
+      const vars = {};
+      sim.controls.forEach(c => {
+        const el = document.getElementById(`sinp-${sIdx}-${c.id}`);
+        const val = el ? parseFloat(el.value) : c.default;
+        vars[c.id] = val;
+        const lbl = document.getElementById(`sval-${sIdx}-${c.id}`);
+        if (lbl) lbl.textContent = `${val} ${c.unit}`;
+      });
+      const keys = Object.keys(vars);
+      const vals = Object.values(vars);
+      sim.computed_outputs.forEach(out => {
+        const outEl = document.getElementById(`sout-${sIdx}-${out.output_id}`);
+        if (!outEl) return;
+        try {
+          const fn = new Function(...keys, `return (${out.formula_js});`);
+          const res = fn(...vals);
+          const disp = (typeof res === "number" && !isNaN(res))
+            ? ((Math.abs(res) > 0 && (Math.abs(res) < 0.001 || Math.abs(res) >= 1e6)) ? res.toExponential(3) : Number(res.toFixed(2)))
+            : res;
+          outEl.textContent = `${disp} ${out.unit}`;
+        } catch (e) {
+          outEl.textContent = "Error";
+        }
+      });
+    }
+
+    function gradeQuiz(qIdx, chosen, correct) {
+      const card = document.getElementById(`qcard-${qIdx}`);
+      card.querySelectorAll(".quiz-btn").forEach((btn, idx) => {
+        btn.classList.remove("correct", "wrong");
+        if (idx === correct) btn.classList.add("correct");
+        else if (idx === chosen) btn.classList.add("wrong");
+      });
+      document.getElementById(`qexp-${qIdx}`).style.display = "block";
+    }
+
+    function filterChapterContent(query) {
+      const q = (query || "").trim().toLowerCase();
+      document.querySelectorAll(".searchable-block").forEach(block => {
+        if (!q || block.textContent.toLowerCase().includes(q)) {
+          block.style.display = "";
+        } else {
+          block.style.display = "none";
+        }
+      });
+    }
+
+    function renderLatexEquations() {
+      if (!window.katex) {
+        setTimeout(renderLatexEquations, 200);
+        return;
+      }
+      document.querySelectorAll(".math-display").forEach(el => {
+        const tex = decodeURIComponent(el.getAttribute("data-latex") || "");
+        if (tex) {
+          try {
+            el.innerHTML = window.katex.renderToString(tex, { displayMode: true, throwOnError: false });
+          } catch (e) {}
+        }
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const startMod = params.get("module") || "TextBook1";
+      switchTextbookModule(startMod);
+    });
+  </script>
+</body>
+</html>
