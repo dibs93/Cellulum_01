@@ -12,19 +12,20 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='50%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 76 25 A 37 37 0 1 0 76 75' fill='none' stroke='url(%23g)' stroke-width='15' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='13' fill='url(%23g)'/%3E%3Cpath d='M 29 42 A 22 22 0 0 1 39 29' fill='none' stroke='%2314b8a6' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 55 28 A 22 22 0 0 1 64 33' fill='none' stroke='%2306b6d4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 29 58 A 22 22 0 0 0 37 69' fill='none' stroke='%230284c7' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 54 72 A 22 22 0 0 0 64 67' fill='none' stroke='%231d4ed8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 
   <style>
-    /* 1. Clean Top Header Layout */
+    /* 1. Clean Top Header Layout — Zero Overlap on Mobile */
     header.argon-header {
-      padding-left: 0.75rem !important;
-      padding-right: 0.75rem !important;
+      padding-left: 0.7rem !important;
+      padding-right: 0.7rem !important;
+      z-index: 90 !important; /* Lowered from 150 so full-screen modals/readers open cleanly on top! */
     }
 
     @media (max-width: 640px) {
       .cellulum-logo-svg {
-        height: 27px !important;
+        height: 26px !important;
       }
       .brand-subtitle {
-        font-size: 8.5px !important;
-        letter-spacing: 0.04em !important;
+        font-size: 8px !important;
+        letter-spacing: 0.03em !important;
         line-height: 1.15 !important;
         white-space: nowrap !important;
       }
@@ -51,18 +52,18 @@
         display: flex;
         flex-direction: column;
         border-radius: 24px !important;
-        background: linear-gradient(160deg, rgba(15, 25, 42, 0.95) 0%, rgba(9, 15, 26, 0.90) 100%) !important;
+        background: linear-gradient(160deg, rgba(15, 25, 42, 0.96) 0%, rgba(9, 15, 26, 0.92) 100%) !important;
         backdrop-filter: blur(26px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
         border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
         box-shadow: 12px 12px 38px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
       }
 
-      /* CRITICAL FIX: Prevent app.js mobile swipe card from stretching to the bottom of the drawer */
+      /* Lock top swipe module card to compact height */
       #moduleNavContainer {
         flex: 0 0 auto !important;
         height: auto !important;
-        max-height: 165px !important;
+        max-height: 160px !important;
         overflow-y: visible !important;
       }
       #moduleNavContainer * {
@@ -75,7 +76,7 @@
       position: fixed;
       right: 1.1rem;
       bottom: 5.5rem;
-      z-index: 125;
+      z-index: 85;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -166,7 +167,7 @@
     .drawer-subtopic-item {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0.55rem 0.75rem;
+      padding: 0.6rem 0.75rem;
       border-radius: 12px;
       font-size: 0.78rem;
       color: #e2e8f0;
@@ -186,8 +187,8 @@
 </head>
 <body class="argon-theme bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
-  <!-- Top Observatory Header -->
-  <header class="argon-header sticky top-0 z-[150] bg-slate-900/85 backdrop-blur-xl border-b border-slate-800 h-16 flex items-center justify-between">
+  <!-- Top Observatory Header (Only 3 Compact Circular Icons on Mobile Right so Logo + Subtitle Never Overlap!) -->
+  <header class="argon-header sticky top-0 bg-slate-900/85 backdrop-blur-xl border-b border-slate-800 h-16 flex items-center justify-between">
     <div class="flex items-center shrink-0">
       <div class="flex flex-col justify-center shrink-0">
         <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
@@ -213,24 +214,26 @@
             <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
           </svg>
         </a>
-        <p class="brand-subtitle text-[8.5px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
+        <p class="brand-subtitle text-[8px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
           Multi-Scale Life Sciences Observatory 
         </p>
       </div>
     </div>
 
-    <!-- Right Header Controls -->
-    <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
+    <!-- Right Header Controls: Compact Circular Icons on Mobile, Labeled Pills on Desktop -->
+    <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0" id="headerRightActions">
       <div class="relative hidden lg:block">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
         <input type="text" id="globalModuleSearch" placeholder="Search pathways, enzymes, units..." 
                class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-56 transition">
       </div>
 
-      <!-- Standalone Textbook Button -->
-      <a href="textbook/textbook.html" class="px-3 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow shrink-0">
+      <!-- Single Textbook Button (Circular Icon on Mobile, Pill on Desktop) -->
+      <a href="textbook/textbook.html" id="customTextbookLink"
+         class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow shrink-0"
+         title="Interactive Textbook">
         <i class="fa-solid fa-book-open"></i>
-        <span>Textbook</span>
+        <span class="hidden sm:inline">Textbook</span>
       </a>
 
       <!-- Buy Me a Coffee Icon Button -->
@@ -241,7 +244,7 @@
         <span class="hidden md:inline">Buy Me a Coffee</span>
       </a>
 
-      <!-- Study Bundle Button (Compact Circle on Mobile, Pill on Desktop) -->
+      <!-- Study Bundle Button -->
       <button id="openBundleModalBtn" class="argon-btn-primary w-8 h-8 sm:w-auto sm:h-auto sm:px-3.5 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow shrink-0" title="High-Yield Study Bundle">
         <i class="fa-solid fa-layer-group"></i>
         <span class="hidden sm:inline">High-Yield Study Bundle</span>
@@ -279,19 +282,19 @@
           </div>
         </div>
 
-        <!-- Top Module Navigator Container (Compact on Mobile, Full List on Desktop) -->
+        <!-- Top Module Navigator Container -->
         <div id="moduleNavContainer" class="space-y-1.5 lg:overflow-y-auto lg:max-h-[calc(100vh-220px)] pr-1">
           <!-- Populated dynamically via app.js -->
         </div>
 
-        <!-- Bottom Subtopic Stream (Option A: Visible on Mobile/Tablet Drawer Only) -->
+        <!-- Bottom Subtopic Stream (Option A: Clean Biological Subtopics & Scales Only) -->
         <div class="drawer-subtopic-stream lg:hidden" id="drawerSubtopicStream">
-          <div class="text-[10px] font-mono uppercase text-teal-400 tracking-wider mb-1 font-bold flex items-center justify-between">
+          <div class="text-[10px] font-mono uppercase text-teal-400 tracking-wider mb-1 font-bold flex items-center justify-between shrink-0">
             <span>Active Module Subtopics &amp; Scales</span>
             <span id="drawerActiveModTag" class="text-emerald-400">MOD 01</span>
           </div>
-          <div id="drawerSubtopicList" class="space-y-1.5 overflow-y-auto pr-1">
-            <!-- Dynamically synced from active module scales & hotspots -->
+          <div id="drawerSubtopicList" class="space-y-1.5 overflow-y-auto pr-1 flex-1">
+            <!-- Dynamically synced from active module hotspots -->
           </div>
         </div>
       </div>
@@ -300,7 +303,7 @@
     <!-- Center Column: Multi-Scale Interactive Viewport & Simulator -->
     <main class="lg:col-span-6 flex flex-col space-y-5">
       
-      <!-- Scale Transition Bar (Clean Descriptive Labels: Macro, Tissue, Cellular, Molecular) -->
+      <!-- Scale Transition Bar -->
       <div class="argon-panel p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4 bg-slate-900/60 border border-slate-800">
         <div>
           <span id="activeUnitTag" class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">MOD 01</span>
@@ -343,7 +346,7 @@
         </div>
       </div>
 
-      <!-- Interactive Simulator Panel (Collapsible) -->
+      <!-- Interactive Simulator Panel -->
       <div id="simulatorPanel" class="argon-panel p-5 rounded-2xl hidden bg-slate-900/60 border border-slate-800">
         <!-- Populated via app.js -->
       </div>
@@ -436,7 +439,16 @@
 
   <script src="app.js"></script>
   <script>
-    // Toggle Floating CSIR NET Curriculum Drawer
+    // Remove any duplicate Textbook or Search buttons injected into header by app.js
+    function removeDuplicateHeaderButtons() {
+      document.querySelectorAll("header.argon-header a, header.argon-header button").forEach(el => {
+        if (el.id === "appBrandTitle" || el.id === "customTextbookLink" || el.id === "bmcMainHeaderBtn" || el.id === "openBundleModalBtn") {
+          return;
+        }
+        el.style.display = "none";
+      });
+    }
+
     function toggleMobileCurriculumDrawer() {
       const drawer = document.getElementById("curriculumFloatingDrawer");
       const backdrop = document.getElementById("curriculumDrawerBackdrop");
@@ -454,7 +466,6 @@
       }
     }
 
-    // Toggle Floating Search Bar
     function toggleMobileFloatingSearch() {
       const nativeSearchBtn = Array.from(document.querySelectorAll("header.argon-header button")).find(
         b => b.id !== "openBundleModalBtn" && b.textContent && b.textContent.toLowerCase().includes("search")
@@ -479,7 +490,9 @@
       }
     }
 
-    // Dynamically reads the real active hotspots & scales rendered by app.js on the page
+    // Smart Filter: Only displays genuine biological subtopics (excludes "L2 #1", "Zoom In", "Zoom Out")
+    let validSubtopicElements = [];
+
     function syncDrawerSubtopics() {
       const streamList = document.getElementById("drawerSubtopicList");
       const modTagEl = document.getElementById("drawerActiveModTag");
@@ -490,81 +503,68 @@
         modTagEl.textContent = unitTag.textContent.split("•")[0].trim();
       }
 
-      // Collect any hotspot pins or topic cards currently rendered in main stage by app.js
-      const stageButtons = Array.from(
+      const candidates = Array.from(
         document.querySelectorAll("#hotspotCanvas button, main [data-hotspot], main .hotspot-pin, main h4, main .topic-card")
       );
 
+      validSubtopicElements = [];
       let html = "";
       const seen = new Set();
 
-      stageButtons.forEach((el, idx) => {
-        const label = (el.textContent || "").trim().replace(/\s+/g, " ");
-        if (label && label.length > 3 && label.length < 95 && !seen.has(label)) {
-          seen.add(label);
-          html += `
-            <div class="drawer-subtopic-item" onclick="triggerStageElement(${idx})">
-              <i class="fa-solid fa-circle-nodes text-teal-400 text-xs shrink-0"></i>
-              <span class="truncate">${label}</span>
-            </div>
-          `;
-        }
+      // Exclude UI utility buttons & short pin codes like "L2 #1", "Zoom In", "500 nm"
+      const ignorePattern = /^(zoom\s*(in|out)|l[1-4]\s*#?\d*|open\s*part-c|pathway\s*simulator|\d+\s*(nm|µm|um|mm|m)|\+|-)$/i;
+
+      candidates.forEach(el => {
+        let raw = (el.textContent || "").trim().replace(/\s+/g, " ");
+        if (!raw || raw.length < 8 || raw.length > 95) return;
+        if (ignorePattern.test(raw)) return;
+
+        // Clean up spacing after "#1", "#2", etc. (turns "#4Complex IV" into "#4 · Complex IV")
+        let cleanLabel = raw.replace(/^#(\d+)\s*/, "#$1 · ");
+
+        // Deduplicate if both "#1 · Complex I..." and "Complex I..." exist
+        const coreKey = cleanLabel.replace(/^#\d+\s*·\s*/, "").toLowerCase().slice(0, 22);
+        if (seen.has(coreKey)) return;
+        seen.add(coreKey);
+
+        const idx = validSubtopicElements.length;
+        validSubtopicElements.push(el);
+
+        html += `
+          <div class="drawer-subtopic-item" onclick="triggerValidSubtopic(${idx})">
+            <i class="fa-solid fa-circle-nodes text-teal-400 text-xs shrink-0"></i>
+            <span class="truncate">${cleanLabel}</span>
+          </div>
+        `;
       });
 
-      // Fallback to scale switcher buttons if no hotspot pins were detected
-      if (!html) {
-        document.querySelectorAll(".scale-btn").forEach((btn, idx) => {
-          const label = btn.textContent.trim();
-          html += `
-            <div class="drawer-subtopic-item" onclick="triggerScaleBtn(${idx})">
-              <i class="fa-solid fa-layer-group text-emerald-400 text-xs shrink-0"></i>
-              <span>Inspect ${label} Scale</span>
-            </div>
-          `;
-        });
+      streamList.innerHTML = html || `<div class="text-xs text-slate-400 px-2 py-2">Tap any optical scale on the stage to view subtopics.</div>`;
+    }
+
+    function triggerValidSubtopic(idx) {
+      if (validSubtopicElements[idx]) {
+        validSubtopicElements[idx].click();
+        validSubtopicElements[idx].scrollIntoView({ behavior: "smooth", block: "center" });
       }
-
-      streamList.innerHTML = html;
-    }
-
-    function triggerStageElement(idx) {
-      const stageButtons = Array.from(
-        document.querySelectorAll("#hotspotCanvas button, main [data-hotspot], main .hotspot-pin, main h4, main .topic-card")
-      );
-      if (stageButtons[idx]) stageButtons[idx].click();
-      closeMobileCurriculumDrawer();
-    }
-
-    function triggerScaleBtn(idx) {
-      const btns = document.querySelectorAll(".scale-btn");
-      if (btns[idx]) btns[idx].click();
       closeMobileCurriculumDrawer();
     }
 
     window.addEventListener("DOMContentLoaded", () => {
+      removeDuplicateHeaderButtons();
       setTimeout(() => {
-        // Hide only duplicate Textbook or Search buttons injected into header by app.js
-        document.querySelectorAll("header.argon-header button").forEach(btn => {
-          if (btn.id === "openBundleModalBtn") return;
-          const txt = (btn.textContent || "").trim().toLowerCase();
-          if (txt.includes("textbook") || txt.includes("search")) {
-            btn.style.display = "none";
-          }
-        });
-
-        // Strip "L1 · " prefixes if app.js re-renders scale buttons dynamically
-        document.querySelectorAll(".scale-btn").forEach(btn => {
-          btn.textContent = btn.textContent.replace(/^L[1-4]\s*[·•-]\s*/i, "");
-        });
-
+        removeDuplicateHeaderButtons();
         syncDrawerSubtopics();
+
+        const headerEl = document.querySelector("header.argon-header");
+        if (headerEl) {
+          new MutationObserver(() => removeDuplicateHeaderButtons()).observe(headerEl, { childList: true });
+        }
 
         const mainEl = document.querySelector("main");
         if (mainEl) {
-          const observer = new MutationObserver(() => syncDrawerSubtopics());
-          observer.observe(mainEl, { childList: true, subtree: true });
+          new MutationObserver(() => syncDrawerSubtopics()).observe(mainEl, { childList: true, subtree: true });
         }
-      }, 400);
+      }, 350);
     });
   </script>
 </body>
