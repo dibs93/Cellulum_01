@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Cellulum — Interactive Textbook & Schaum's Outlines</title>
-  <!-- FontAwesome Icons for Search, Coffee & UI Controls -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- KaTeX for Schaum's Math Boxes & Worked Derivations -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
@@ -14,19 +14,12 @@
 
   <style>
     :root {
-      /* Windows Aero Frosted Glass Light Theme Palette */
-      --bg-deep: #f1f5f9;
-      --bg-drawer: rgba(255, 255, 255, 0.92);
-      --bg-panel: rgba(255, 255, 255, 0.78);
-      --bg-card: rgba(255, 255, 255, 0.95);
-      --border-subtle: rgba(203, 213, 225, 0.7);
-      --accent-teal: #0d9488;
-      --accent-cyan: #0284c7;
-      --accent-emerald: #059669;
-      --accent-amber: #d97706;
-      --accent-maroon-bg: rgba(254, 226, 226, 0.85);
-      --accent-maroon-border: rgba(239, 68, 68, 0.45);
+      --accent-teal: #0f766e;
+      --accent-cyan: #0369a1;
+      --accent-emerald: #047857;
+      --accent-amber: #b45309;
       --text-main: #0f172a;
+      --text-body: #1e293b;
       --text-muted: #475569;
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
@@ -40,34 +33,80 @@
     }
 
     body {
-      background-color: var(--bg-deep);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(52, 211, 153, 0.12) 0px, transparent 50%);
+      background: linear-gradient(135deg, #cfe8fc 0%, #d8f3dc 50%, #e0e7ff 100%);
+      background-attachment: fixed;
       color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
 
-    /* Sticky Frosted Glass Header */
+    /* Ambient Aero Background Color Orbs (So Frosted Glass Cards Visibly Blur What's Behind Them!) */
+    .aero-bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .aero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(45px);
+      opacity: 0.65;
+    }
+
+    .aero-orb-1 {
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, #38bdf8 0%, #0284c7 100%);
+      top: -60px;
+      left: -80px;
+    }
+
+    .aero-orb-2 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #34d399 0%, #059669 100%);
+      top: 32%;
+      right: -110px;
+    }
+
+    .aero-orb-3 {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, #818cf8 0%, #4f46e5 100%);
+      bottom: 8%;
+      left: -70px;
+    }
+
+    .aero-orb-4 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, #2dd4bf 0%, #0ea5e9 100%);
+      bottom: -40px;
+      right: 10%;
+    }
+
+    /* True Windows Aero Frosted Glass Header */
     header.cellulum-header {
       position: sticky;
       top: 0;
       z-index: 120;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      padding: 0.5rem 0.5rem 0.55rem 0.6rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.48) 100%);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.88);
+      box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+      padding: 0.5rem 0.55rem 0.55rem 0.55rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.45rem;
     }
 
-    /* Tier 1: Brand Logo + Search + Buy Me a Coffee + Main Page */
     .header-brand-row {
       display: flex;
       align-items: center;
@@ -85,7 +124,7 @@
     }
 
     .brand-logo-svg {
-      height: 26px;
+      height: 27px;
       width: auto;
       overflow: visible;
       display: block;
@@ -93,7 +132,7 @@
 
     @media (min-width: 640px) {
       .brand-logo-svg {
-        height: 31px;
+        height: 32px;
       }
     }
 
@@ -102,10 +141,10 @@
       font-size: 8.5px;
       letter-spacing: 0.05em;
       color: var(--accent-teal);
-      padding-left: 1px;
-      margin-top: -2px;
+      padding-left: 2px;
+      margin-top: -1px;
       white-space: nowrap;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .header-actions {
@@ -133,28 +172,28 @@
     .desktop-search-wrap i {
       position: absolute;
       left: 0.75rem;
-      color: var(--text-muted);
+      color: var(--accent-teal);
       font-size: 0.78rem;
       pointer-events: none;
     }
 
     input.desktop-search-input {
-      background: rgba(241, 245, 249, 0.9);
-      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.06);
       color: var(--text-main);
       padding: 0.38rem 0.8rem 0.38rem 2.1rem;
       border-radius: 999px;
       font-size: 0.8rem;
       width: 190px;
       outline: none;
-      transition: width 0.2s, border-color 0.2s, background 0.2s;
+      transition: all 0.2s;
     }
 
     input.desktop-search-input:focus {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.92);
       border-color: var(--accent-teal);
       width: 230px;
-      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
     }
 
     /* Mobile Search Icon Button */
@@ -162,13 +201,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 33px;
+      height: 33px;
       border-radius: 999px;
-      background: rgba(241, 245, 249, 0.9);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+      color: var(--accent-teal);
+      font-size: 0.82rem;
       cursor: pointer;
       flex-shrink: 0;
     }
@@ -178,24 +218,18 @@
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      background: rgba(254, 243, 199, 0.9);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #b45309;
+      background: linear-gradient(135deg, rgba(254, 243, 199, 0.88), rgba(253, 230, 138, 0.75));
+      border: 1.5px solid rgba(245, 158, 11, 0.55);
+      color: #92400e;
       padding: 0.38rem 0.65rem;
       border-radius: 999px;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
-      transition: all 0.15s ease;
-      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.1);
-    }
-
-    .btn-coffee:hover {
-      background: rgba(253, 230, 138, 1);
-      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
     .coffee-text {
@@ -213,24 +247,21 @@
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      background: var(--accent-maroon-bg);
-      border: 1px solid var(--accent-maroon-border);
+      background: linear-gradient(135deg, rgba(254, 226, 226, 0.88), rgba(254, 202, 202, 0.72));
+      border: 1.5px solid rgba(239, 68, 68, 0.45);
       color: #9f1239;
       padding: 0.38rem 0.75rem;
       border-radius: 999px;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
-      transition: background 0.15s;
-    }
-    .btn-main-page:hover {
-      background: rgba(254, 202, 202, 0.9);
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
-    /* Collapsible Mobile Search Drawer Row */
+    /* Collapsible Mobile Search Row */
     .mobile-search-row {
       display: none;
       align-items: center;
@@ -252,56 +283,52 @@
     .mobile-search-wrap i {
       position: absolute;
       left: 0.85rem;
-      color: var(--text-muted);
+      color: var(--accent-teal);
       font-size: 0.82rem;
       pointer-events: none;
     }
 
     input.mobile-search-input {
       width: 100%;
-      background: #ffffff;
-      border: 1px solid var(--accent-teal);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px solid var(--accent-teal);
       color: var(--text-main);
       padding: 0.42rem 0.85rem 0.42rem 2.25rem;
       border-radius: 999px;
       font-size: 0.82rem;
       outline: none;
-      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
     }
 
     /* Tier 2: Topic Outline Trigger + Active Chapter Title */
     .header-outline-row {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
       width: 100%;
       padding-top: 0.35rem;
-      border-top: 1px solid rgba(203, 213, 225, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.65);
     }
 
     .btn-topic-outline {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(13, 148, 136, 0.12);
-      border: 1px solid rgba(13, 148, 136, 0.35);
+      background: linear-gradient(135deg, rgba(204, 251, 241, 0.85), rgba(153, 246, 228, 0.65));
+      border: 1.5px solid rgba(13, 148, 136, 0.4);
       color: var(--accent-teal);
-      padding: 0.36rem 0.8rem;
+      padding: 0.35rem 0.8rem;
       border-radius: 999px;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
-      transition: background 0.15s;
-    }
-    .btn-topic-outline:hover {
-      background: rgba(13, 148, 136, 0.2);
+      box-shadow: 0 2px 6px rgba(13, 148, 136, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
     .header-active-title {
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 700;
       color: var(--text-main);
       white-space: nowrap;
       overflow: hidden;
@@ -309,12 +336,12 @@
       flex: 1;
     }
 
-    /* Slide-Out Left Drawer */
+    /* Slide-Out Aero Frosted Glass Drawer */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
       z-index: 130;
-      background: rgba(15, 23, 42, 0.4);
+      background: rgba(15, 23, 42, 0.25);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       display: none;
@@ -326,16 +353,16 @@
 
     aside.topic-drawer {
       position: fixed;
-      top: 98px;
+      top: 96px;
       left: 0;
       bottom: 0;
-      width: min(78vw, 330px);
+      width: min(80vw, 330px);
       z-index: 140;
-      background: var(--bg-drawer);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-right: 1px solid var(--border-subtle);
-      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.08);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.78) 0%, rgba(240, 249, 255, 0.62) 100%);
+      backdrop-filter: blur(25px) saturate(190%);
+      -webkit-backdrop-filter: blur(25px) saturate(190%);
+      border-right: 1.5px solid rgba(255, 255, 255, 0.92);
+      box-shadow: 12px 0 36px rgba(15, 23, 42, 0.12);
       padding: 1.1rem 1rem 2rem;
       overflow-y: auto;
       transform: translateX(-102%);
@@ -357,43 +384,44 @@
 
     select.drawer-module-select {
       width: 100%;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.85);
       color: var(--text-main);
-      border: 1px solid var(--border-subtle);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
       padding: 0.65rem 0.85rem;
       border-radius: 12px;
-      font-size: 0.86rem;
-      font-weight: 500;
+      font-size: 0.85rem;
+      font-weight: 600;
       margin-bottom: 1.35rem;
       outline: none;
       cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
     }
 
     .outline-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.15rem;
+      gap: 0.18rem;
     }
 
     .outline-item {
-      padding: 0.55rem 0.4rem;
-      font-size: 0.88rem;
-      color: #334155;
+      padding: 0.55rem 0.5rem;
+      font-size: 0.87rem;
+      color: var(--text-body);
       cursor: pointer;
       border-radius: 8px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      transition: background 0.15s, color 0.15s;
+      transition: all 0.15s;
     }
 
     .outline-item:hover,
     .outline-item.active {
-      background: rgba(13, 148, 136, 0.1);
+      background: rgba(255, 255, 255, 0.75);
       color: var(--accent-teal);
-      font-weight: 600;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
     }
 
     .outline-group-spacer {
@@ -408,36 +436,39 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      font-size: 1.15rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      color: var(--accent-teal);
+      font-size: 1.2rem;
+      font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      transition: transform 0.15s;
-    }
-    button.floating-outline-fab:hover {
-      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15), inset 0 1px 1px rgba(255, 255, 255, 1);
     }
 
     main.reader-container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 1.1rem 0.95rem 4rem;
+      padding: 1.1rem 0.9rem 4rem;
     }
 
-    .chapter-hero-card {
-      background: var(--bg-panel);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-      border-radius: 14px;
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
+    /* TRUE WINDOWS AERO FROSTED GLASS CARDS */
+    .chapter-hero-card,
+    .concept-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.34) 100%);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1.5px solid rgba(255, 255, 255, 0.88);
+      box-shadow:
+        0 10px 32px rgba(31, 38, 135, 0.08),
+        inset 0 1px 1px rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
     }
 
     .chapter-badge {
@@ -445,12 +476,13 @@
       font-family: var(--font-mono);
       font-size: 0.72rem;
       color: var(--accent-teal);
-      background: rgba(13, 148, 136, 0.1);
-      border: 1px solid rgba(13, 148, 136, 0.25);
-      padding: 0.18rem 0.55rem;
-      border-radius: 6px;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(13, 148, 136, 0.35);
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      margin-bottom: 0.55rem;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(13, 148, 136, 0.08);
     }
 
     .chapter-h1 {
@@ -458,66 +490,61 @@
       font-weight: 800;
       color: var(--text-main);
       margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
     }
 
     .chapter-sub {
       font-size: 0.88rem;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
     .topic-section-title {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.12rem;
+      font-weight: 800;
       color: var(--accent-teal);
-      margin: 1.5rem 0 0.75rem;
-      padding-bottom: 0.35rem;
-      border-bottom: 2px solid rgba(203, 213, 225, 0.7);
-    }
-
-    .concept-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-      border-radius: 12px;
-      padding: 1.1rem;
-      margin-bottom: 0.9rem;
+      margin: 1.6rem 0 0.8rem;
+      padding: 0.45rem 0.75rem;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.15));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-left: 4px solid var(--accent-teal);
+      border-radius: 0 10px 10px 0;
     }
 
     .concept-card h3 {
-      font-size: 1rem;
+      font-size: 1.02rem;
       color: var(--text-main);
       margin-bottom: 0.45rem;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .concept-meta-tag {
       font-family: var(--font-mono);
-      font-size: 0.76rem;
-      color: var(--accent-teal);
-      margin-bottom: 0.5rem;
+      font-size: 0.74rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.4rem;
       display: block;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .concept-card p {
-      font-size: 0.88rem;
-      color: #334155;
-      margin-bottom: 0.7rem;
+      font-size: 0.89rem;
+      color: var(--text-body);
+      margin-bottom: 0.75rem;
     }
 
     .bullet-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.5rem;
     }
 
     .bullet-list li {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      padding-left: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-body);
+      padding-left: 1.1rem;
       position: relative;
     }
 
@@ -531,39 +558,41 @@
 
     .table-scroll {
       overflow-x: auto;
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
       margin: 0.9rem 0;
+      background: rgba(255, 255, 255, 0.55);
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
     }
 
     table.cellulum-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.82rem;
-      background: #ffffff;
     }
 
     table.cellulum-table th {
-      background: rgba(13, 148, 136, 0.1);
+      background: rgba(13, 148, 136, 0.14);
       color: var(--accent-teal);
       text-align: left;
-      padding: 0.6rem 0.75rem;
-      border-bottom: 1px solid var(--border-subtle);
-      font-weight: 700;
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid rgba(13, 148, 136, 0.25);
+      font-weight: 800;
     }
 
     table.cellulum-table td {
       padding: 0.55rem 0.75rem;
-      border-bottom: 1px solid #f1f5f9;
-      color: #334155;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+      color: var(--text-body);
     }
 
     .svg-box {
-      background: #0f172a; /* Keep diagrams in dark contrast for legibility */
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
+      background: #07131e;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
       overflow: hidden;
-      margin: 0.6rem 0;
+      margin: 0.65rem 0;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
     }
 
     .svg-box svg {
@@ -573,72 +602,83 @@
     }
 
     .sim-control-row {
-      background: rgba(241, 245, 249, 0.7);
+      background: rgba(255, 255, 255, 0.58);
       padding: 0.65rem 0.85rem;
-      border-radius: 8px;
-      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
       margin-bottom: 0.6rem;
     }
 
     .sim-output-pill {
-      background: rgba(5, 150, 105, 0.08);
-      border-left: 3px solid var(--accent-emerald);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-left: 4px solid var(--accent-emerald);
       padding: 0.65rem 0.85rem;
-      border-radius: 6px;
+      border-radius: 8px;
       margin-top: 0.5rem;
     }
 
     .math-display {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.75);
       padding: 0.85rem;
-      border-radius: 8px;
-      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
       overflow-x: auto;
       text-align: center;
       margin: 0.55rem 0;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+      box-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.04);
     }
 
     .quiz-btn {
       display: block;
       width: 100%;
       text-align: left;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.68);
       color: var(--text-main);
-      border: 1px solid var(--border-subtle);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
       padding: 0.65rem 0.85rem;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-bottom: 0.45rem;
       font-size: 0.85rem;
+      font-weight: 500;
       cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
       transition: all 0.15s;
     }
+
     .quiz-btn:hover {
+      background: rgba(255, 255, 255, 0.92);
       border-color: var(--accent-teal);
-      background: #f8fafc;
     }
 
     .quiz-btn.correct {
-      background: rgba(5, 150, 105, 0.12);
+      background: rgba(16, 185, 129, 0.2);
       border-color: var(--accent-emerald);
-      color: #047857;
+      color: #065f46;
       font-weight: 700;
     }
 
     .quiz-btn.wrong {
-      background: rgba(239, 68, 68, 0.1);
+      background: rgba(239, 68, 68, 0.18);
       border-color: #ef4444;
-      color: #b91c1c;
+      color: #991b1b;
     }
   </style>
 </head>
 <body>
 
-  <!-- Upgraded Frosted Glass Cellulum Header -->
+  <!-- Fixed Ambient Color Orbs Behind the Frosted Glass -->
+  <div class="aero-bg-canvas">
+    <div class="aero-orb aero-orb-1"></div>
+    <div class="aero-orb aero-orb-2"></div>
+    <div class="aero-orb aero-orb-3"></div>
+    <div class="aero-orb aero-orb-4"></div>
+  </div>
+
+  <!-- Windows Aero Frosted Glass Header -->
   <header class="cellulum-header">
     
-    <!-- Row 1: Left-Aligned Cellular 'C' Logo + Search + Buy Me a Coffee + Main Page -->
+    <!-- Row 1: Fixed Cellular 'C' Gradient Logo + Search + Buy Me a Coffee + Main Page -->
     <div class="header-brand-row">
       <a href="../index.html" class="brand-lockup" aria-label="Cellulum Home">
         <svg class="brand-logo-svg" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -653,10 +693,11 @@
               <stop offset="100%" stop-color="#0284c7" />
             </linearGradient>
           </defs>
-          <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(%23g)" stroke-width="13.5" stroke-linecap="round" />
-          <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#0f172a" stroke-width="3.0" stroke-linecap="round" fill="none" />
-          <circle cx="44" cy="43" r="11.5" fill="url(%23nucleusGrad)" />
-          <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
+          <!-- Fixed #cellCGrad and #nucleusGrad IDs so the full cellular C renders vividly! -->
+          <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
+          <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" fill="none" />
+          <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
+          <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#14b8a6" stroke-width="4.5" stroke-linecap="round" />
           <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
           <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
           <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
@@ -667,7 +708,6 @@
 
       <!-- Right Action Controls -->
       <div class="header-actions">
-        <!-- Desktop Search Pill -->
         <div class="desktop-search-wrap">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input
@@ -679,18 +719,15 @@
           />
         </div>
 
-        <!-- Mobile Search Toggle Button -->
         <button class="btn-search-mobile" onclick="toggleMobileSearch()" title="Search in this chapter" aria-label="Search">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
 
-        <!-- Buy Me a Coffee Button (Update href with your link!) -->
         <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener noreferrer" id="bmcHeaderBtn" class="btn-coffee" title="Buy Me a Coffee">
           <i class="fa-solid fa-mug-hot"></i>
           <span class="coffee-text">Buy Me a Coffee</span>
         </a>
 
-        <!-- Back to Main Observatory Page -->
         <a href="../index.html" class="btn-main-page" title="Return to Main Observatory">
           <span>✕ Main Page</span>
         </a>
@@ -782,6 +819,21 @@
     const moduleCache = {};
     let activeModId = "TextBook1";
 
+    // Beautifies plain-text scientific notation (e.g. "Delta G", "->", ">=") inside paragraphs
+    function formatSciText(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/\bDelta G\b/g, "ΔG")
+        .replace(/\bDelta H\b/g, "ΔH")
+        .replace(/\bDelta S\b/g, "ΔS")
+        .replace(/\bDelta p\b/g, "Δp")
+        .replace(/\bPsi_w\b/g, "Ψw")
+        .replace(/\bPsi_s\b/g, "Ψs")
+        .replace(/\bPsi_p\b/g, "Ψp")
+        .replace(/<->/g, "⇄")
+        .replace(/->/g, "→");
+    }
+
     function toggleMobileSearch() {
       const row = document.getElementById("mobileSearchRow");
       row.classList.toggle("open");
@@ -838,9 +890,9 @@
       }
 
       document.getElementById("chapterContentRoot").innerHTML = `
-        <div class="chapter-hero-card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.05);">
-          <h2 class="text-base font-bold text-rose-600 mb-2">Module File Not Found</h2>
-          <p class="text-xs text-slate-600">Could not fetch <code>${modId}.json</code> from the <code>textbook/</code> folder. Please ensure all 15 JSON files are uploaded to your GitHub repository.</p>
+        <div class="chapter-hero-card" style="border-color: rgba(239, 68, 68, 0.5);">
+          <h2 style="color:#b91c1c;font-size:1.05rem;margin-bottom:0.35rem;">Module File Not Found</h2>
+          <p style="font-size:0.85rem;color:#334155;">Could not fetch <code>${modId}.json</code> from the <code>textbook/</code> folder. Please ensure all 15 JSON files are uploaded to your GitHub repository.</p>
         </div>
       `;
     }
@@ -853,8 +905,8 @@
       let bodyHtml = `
         <div class="chapter-hero-card searchable-block">
           <span class="chapter-badge">${data.textbook_id} • BRANCH ${String(data.branch_number).padStart(2, '0')}</span>
-          <h1 class="chapter-h1">${data.branch_title}</h1>
-          <p class="chapter-sub">${data.subtitle || ""}</p>
+          <h1 class="chapter-h1">${formatSciText(data.branch_title)}</h1>
+          <p class="chapter-sub">${formatSciText(data.subtitle || "")}</p>
         </div>
       `;
 
@@ -869,7 +921,7 @@
 
         bodyHtml += `
           <div id="${subAnchor}" class="topic-section-title searchable-block">
-            ${sub.id} — ${sub.title}
+            ${sub.id} — ${formatSciText(sub.title)}
           </div>
         `;
 
@@ -884,10 +936,10 @@
           bodyHtml += `
             <article class="concept-card searchable-block" id="${cAnchor}">
               <span class="concept-meta-tag">SECTION ${c.concept_id}</span>
-              <h3>${c.heading}</h3>
-              <p>${c.theory}</p>
+              <h3>${formatSciText(c.heading)}</h3>
+              <p>${formatSciText(c.theory)}</p>
               <ul class="bullet-list">
-                ${(c.key_principles || []).map(kp => `<li>${kp}</li>`).join("")}
+                ${(c.key_principles || []).map(kp => `<li>${formatSciText(kp)}</li>`).join("")}
               </ul>
             </article>
           `;
@@ -897,14 +949,14 @@
           const tb = sub.comparison_table;
           bodyHtml += `
             <div class="concept-card searchable-block">
-              <h3>📊 ${tb.title}</h3>
+              <h3>📊 ${formatSciText(tb.title)}</h3>
               <div class="table-scroll">
                 <table class="cellulum-table">
                   <thead>
-                    <tr>${tb.headers.map(h => `<th>${h}</th>`).join("")}</tr>
+                    <tr>${tb.headers.map(h => `<th>${formatSciText(h)}</th>`).join("")}</tr>
                   </thead>
                   <tbody>
-                    ${tb.rows.map(r => `<tr>${r.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}
+                    ${tb.rows.map(r => `<tr>${r.map(cell => `<td>${formatSciText(cell)}</td>`).join("")}</tr>`).join("")}
                   </tbody>
                 </table>
               </div>
@@ -915,27 +967,27 @@
 
       if (data.expandable_figures && data.expandable_figures.length) {
         outlineHtml += `<li class="outline-group-spacer"></li>`;
-        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-figures')" style="color:var(--accent-cyan);">🖼️ Vector Figures (${data.expandable_figures.length})</li>`;
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-figures')" style="color:var(--accent-cyan);font-weight:600;">🖼️ Vector Figures (${data.expandable_figures.length})</li>`;
         bodyHtml += `<div id="sec-figures" class="topic-section-title">🖼️ Ultrastructure &amp; Pathway Diagrams</div>`;
         data.expandable_figures.forEach(fig => {
           bodyHtml += `
             <div class="concept-card searchable-block">
               <h3>${fig.title}</h3>
               <div class="svg-box">${fig.svg_markup}</div>
-              <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.4rem;">${fig.thumbnail_caption}</p>
+              <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.2rem;">${fig.thumbnail_caption}</p>
             </div>
           `;
         });
       }
 
       if (data.interactive_simulators && data.interactive_simulators.length) {
-        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-sims')" style="color:var(--accent-emerald);">🎛️ Interactive Simulators (${data.interactive_simulators.length})</li>`;
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-sims')" style="color:var(--accent-emerald);font-weight:600;">🎛️ Interactive Simulators (${data.interactive_simulators.length})</li>`;
         bodyHtml += `<div id="sec-sims" class="topic-section-title">🎛️ Interactive Quantitative Simulators</div>`;
         data.interactive_simulators.forEach((sim, sIdx) => {
           bodyHtml += `
             <div class="concept-card searchable-block">
               <h3>⚡ ${sim.title}</h3>
-              <p>${sim.description}</p>
+              <p>${formatSciText(sim.description)}</p>
               ${sim.controls.map(ctrl => `
                 <div class="sim-control-row">
                   <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:0.3rem;">
@@ -960,7 +1012,7 @@
       }
 
       if (data.schaums_math_box && data.schaums_math_box.length) {
-        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-math')" style="color:var(--accent-amber);">📐 Schaum's Math Box (${data.schaums_math_box.length})</li>`;
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-math')" style="color:var(--accent-amber);font-weight:600;">📐 Schaum's Math Box (${data.schaums_math_box.length})</li>`;
         bodyHtml += `<div id="sec-math" class="topic-section-title">📐 Schaum's Formula &amp; Equation Box</div>`;
         data.schaums_math_box.forEach(eq => {
           bodyHtml += `
@@ -968,29 +1020,29 @@
               <span class="concept-meta-tag">${eq.formula_id}</span>
               <h3>${eq.title}</h3>
               <div class="math-display" data-latex="${encodeURIComponent(eq.latex)}">${eq.latex}</div>
-              <p>${eq.description}</p>
+              <p>${formatSciText(eq.description)}</p>
             </div>
           `;
         });
       }
 
       if (data.schaums_problem_solving) {
-        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-probs')" style="color:var(--accent-amber);">✏️ Worked &amp; Practice Problems</li>`;
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-probs')" style="color:var(--accent-amber);font-weight:600;">✏️ Worked &amp; Practice Problems</li>`;
         bodyHtml += `<div id="sec-probs" class="topic-section-title">✏️ Schaum's Solved &amp; Practice Problems</div>`;
         (data.schaums_problem_solving.solved_problems || []).forEach(sp => {
           bodyHtml += `
             <div class="concept-card searchable-block">
               <span class="concept-meta-tag">${sp.problem_id} • ${sp.difficulty || 'Worked Derivation'}</span>
               <h3>${sp.title}</h3>
-              <p style="white-space:pre-line;">${sp.statement}</p>
+              <p style="white-space:pre-line;">${formatSciText(sp.statement)}</p>
               ${(sp.derivation_steps || []).map(st => `
-                <div style="background:rgba(241, 245, 249, 0.8);padding:0.65rem;border-radius:8px;margin-bottom:0.5rem;border:1px solid rgba(203, 213, 225, 0.5);">
-                  <div style="font-size:0.82rem;color:var(--text-muted);"><strong>Step ${st.step}:</strong> ${st.explanation}</div>
+                <div style="background:rgba(255, 255, 255, 0.55);padding:0.65rem;border-radius:10px;margin-bottom:0.5rem;border:1px solid rgba(255, 255, 255, 0.85);">
+                  <div style="font-size:0.82rem;color:var(--text-body);"><strong>Step ${st.step}:</strong> ${formatSciText(st.explanation)}</div>
                   <div class="math-display" data-latex="${encodeURIComponent(st.equation_latex)}">${st.equation_latex}</div>
                 </div>
               `).join("")}
               <div style="color:var(--accent-emerald);font-weight:700;font-size:0.88rem;margin-top:0.5rem;">
-                ✔ ${sp.final_answer}
+                ✔ ${formatSciText(sp.final_answer)}
               </div>
             </div>
           `;
@@ -998,19 +1050,19 @@
       }
 
       if (data.quiz && data.quiz.length) {
-        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-quiz')">❓ Mastery Quiz</li>`;
+        outlineHtml += `<li class="outline-item" onclick="scrollToAnchor('sec-quiz')" style="font-weight:600;">❓ Mastery Quiz</li>`;
         bodyHtml += `<div id="sec-quiz" class="topic-section-title">❓ Chapter Mastery Quiz</div>`;
         data.quiz.forEach((q, qIdx) => {
           bodyHtml += `
             <div class="concept-card searchable-block" id="qcard-${qIdx}">
-              <h3>${q.question_id}: ${q.question}</h3>
+              <h3>${q.question_id}: ${formatSciText(q.question)}</h3>
               ${q.options.map((opt, oIdx) => `
                 <button class="quiz-btn" onclick="gradeQuiz(${qIdx}, ${oIdx}, ${q.correct_index})">
-                  ${String.fromCharCode(65 + oIdx)}. ${opt}
+                  ${String.fromCharCode(65 + oIdx)}. ${formatSciText(opt)}
                 </button>
               `).join("")}
               <div id="qexp-${qIdx}" style="display:none;margin-top:0.5rem;font-size:0.84rem;color:var(--accent-teal);">
-                <strong>Explanation:</strong> ${q.explanation}
+                <strong>Explanation:</strong> ${formatSciText(q.explanation)}
               </div>
             </div>
           `;
