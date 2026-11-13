@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cellulum — Interactive Multi-Scale Life Sciences Observatory</title>
+  <title>Cellulum — CSIR NET Life Sciences Observatory & Interactive Simulator</title>
+  <meta name="description" content="Interactive multi-scale life sciences observatory and Schaum's-style quantitative textbook covering cellular ultrastructure, bioenergetics, molecular biology, and CSIR NET analytical problem solving.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
@@ -11,33 +12,32 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='50%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 76 25 A 37 37 0 1 0 76 75' fill='none' stroke='url(%23g)' stroke-width='15' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='13' fill='url(%23g)'/%3E%3Cpath d='M 29 42 A 22 22 0 0 1 39 29' fill='none' stroke='%2314b8a6' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 55 28 A 22 22 0 0 1 64 33' fill='none' stroke='%2306b6d4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 29 58 A 22 22 0 0 0 37 69' fill='none' stroke='%230284c7' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 54 72 A 22 22 0 0 0 64 67' fill='none' stroke='%231d4ed8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 
   <style>
-    /* Clean Top Header Layout (Prevents Subtitle & Button Overlap on Mobile) */
+    /* 1. Clean Top Header Layout */
     header.argon-header {
-      padding-left: 0.65rem !important;
-      padding-right: 0.65rem !important;
-      gap: 0.35rem;
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
     }
 
     @media (max-width: 640px) {
       .cellulum-logo-svg {
-        height: 26px !important;
+        height: 27px !important;
       }
       .brand-subtitle {
-        font-size: 8px !important;
-        letter-spacing: 0.03em !important;
-        line-height: 1.1 !important;
+        font-size: 8.5px !important;
+        letter-spacing: 0.04em !important;
+        line-height: 1.15 !important;
         white-space: nowrap !important;
       }
     }
 
-    /* Floating Slide-Out Curriculum Drawer on Mobile (Single Seamless Rounded Glass Card) */
+    /* 2. Floating Slide-Out Curriculum Drawer on Mobile/Tablet */
     @media (max-width: 1023px) {
       #curriculumFloatingDrawer {
         position: fixed;
         top: 72px;
         left: 10px;
         bottom: 14px;
-        width: min(82vw, 335px);
+        width: min(86vw, 350px);
         z-index: 140;
         padding: 0 !important;
         transform: translateX(calc(-100% - 24px));
@@ -48,47 +48,92 @@
       }
       #curriculumFloatingDrawer > .argon-panel {
         height: 100%;
+        display: flex;
+        flex-direction: column;
         border-radius: 24px !important;
-        background: linear-gradient(160deg, rgba(15, 25, 42, 0.94) 0%, rgba(9, 15, 26, 0.88) 100%) !important;
+        background: linear-gradient(160deg, rgba(15, 25, 42, 0.95) 0%, rgba(9, 15, 26, 0.90) 100%) !important;
         backdrop-filter: blur(26px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
         border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
         box-shadow: 12px 12px 38px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
       }
+
+      /* CRITICAL FIX: Prevent app.js mobile swipe card from stretching to the bottom of the drawer */
+      #moduleNavContainer {
+        flex: 0 0 auto !important;
+        height: auto !important;
+        max-height: 165px !important;
+        overflow-y: visible !important;
+      }
+      #moduleNavContainer * {
+        min-height: 0 !important;
+      }
     }
 
-    /* Floating Right Mid-Bottom Button (Matches Textbook Section Position Exactly) */
-    button.floating-curriculum-fab {
+    /* 3. Stacked Right Mid-Bottom Floating Action Buttons */
+    .floating-fab-stack {
       position: fixed;
       right: 1.1rem;
       bottom: 5.5rem;
       z-index: 125;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1.5px solid rgba(45, 212, 191, 0.45);
-      color: #2dd4bf;
-      font-size: 1.15rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-      transition: transform 0.15s ease;
+      gap: 0.75rem;
     }
-    button.floating-curriculum-fab:active {
-      transform: scale(0.94);
-    }
+
     @media (min-width: 1024px) {
-      button.floating-curriculum-fab {
+      .floating-fab-stack {
         display: none;
       }
     }
 
-    /* Right-Side Part-C Study Drawer — Floating Rounded Glass Card */
+    .floating-circle-fab {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(45, 212, 191, 0.45);
+      color: #2dd4bf;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+      transition: transform 0.15s ease;
+    }
+
+    .floating-circle-fab:active {
+      transform: scale(0.93);
+    }
+
+    /* 4. Floating Mobile/Tablet Search Pill Popover */
+    #mobileFloatingSearchBar {
+      position: fixed;
+      top: 72px;
+      left: 12px;
+      right: 12px;
+      z-index: 145;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1.5px solid rgba(45, 212, 191, 0.5);
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    #mobileFloatingSearchBar.open {
+      display: flex;
+    }
+
+    /* 5. Right-Side Part-C Study Drawer — Floating Rounded Glass Card */
     #studyDrawer {
       top: 72px !important;
       right: 10px !important;
@@ -105,14 +150,45 @@
     #studyDrawer.translate-x-full {
       transform: translateX(calc(100% + 24px)) !important;
     }
+
+    /* 6. Option A: Subtopic Stream Styling inside Mobile Drawer */
+    .drawer-subtopic-stream {
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 0;
+    }
+    .drawer-subtopic-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.55rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      color: #e2e8f0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: all 0.15s ease;
+    }
+    .drawer-subtopic-item:hover,
+    .drawer-subtopic-item:active {
+      background: rgba(45, 212, 191, 0.14);
+      border-color: rgba(45, 212, 191, 0.4);
+      color: #2dd4bf;
+    }
   </style>
 </head>
 <body class="argon-theme bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
-  <!-- Top Observatory Header (Flush Left Logo, No Left Hamburger Button Crowding) -->
+  <!-- Top Observatory Header -->
   <header class="argon-header sticky top-0 z-[150] bg-slate-900/85 backdrop-blur-xl border-b border-slate-800 h-16 flex items-center justify-between">
     <div class="flex items-center shrink-0">
-      <!-- Custom Cellulum SVG Brand Lockup + Single-Line Subtitle -->
       <div class="flex flex-col justify-center shrink-0">
         <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
           <svg class="cellulum-logo-svg h-7 sm:h-9 w-auto overflow-visible" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,19 +213,26 @@
             <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
           </svg>
         </a>
-        <p class="brand-subtitle text-[8px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
+        <p class="brand-subtitle text-[8.5px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
           Multi-Scale Life Sciences Observatory 
         </p>
       </div>
     </div>
 
-    <!-- Right Header Controls: Compact & Non-Overlapping -->
-    <div class="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
+    <!-- Right Header Controls -->
+    <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
       <div class="relative hidden lg:block">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
         <input type="text" id="globalModuleSearch" placeholder="Search pathways, enzymes, units..." 
                class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-56 transition">
       </div>
+
+      <!-- Standalone Textbook Button -->
+      <a href="textbook/textbook.html" class="px-3 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow shrink-0">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Textbook</span>
+      </a>
+
       <!-- Buy Me a Coffee Icon Button -->
       <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener noreferrer" id="bmcMainHeaderBtn"
          class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition shadow shrink-0"
@@ -158,23 +241,35 @@
         <span class="hidden md:inline">Buy Me a Coffee</span>
       </a>
 
-      <button id="openBundleModalBtn" class="argon-btn-primary px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold flex items-center space-x-1 bg-emerald-600 hover:bg-emerald-500 text-white shadow shrink-0">
+      <!-- Study Bundle Button (Compact Circle on Mobile, Pill on Desktop) -->
+      <button id="openBundleModalBtn" class="argon-btn-primary w-8 h-8 sm:w-auto sm:h-auto sm:px-3.5 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow shrink-0" title="High-Yield Study Bundle">
         <i class="fa-solid fa-layer-group"></i>
         <span class="hidden sm:inline">High-Yield Study Bundle</span>
       </button>
     </div>
   </header>
 
-  <!-- Mobile Backdrop for Floating Slide-Out Curriculum Card -->
+  <!-- Floating Mobile/Tablet Search Bar -->
+  <div id="mobileFloatingSearchBar">
+    <i class="fa-solid fa-magnifying-glass text-teal-400 text-xs"></i>
+    <input type="text" id="mobileSearchProxyInput" placeholder="Search pathways, enzymes, CSIR units..."
+           oninput="syncMobileSearch(this.value)"
+           class="flex-1 bg-transparent text-xs text-slate-100 focus:outline-none" />
+    <button onclick="toggleMobileFloatingSearch()" class="text-slate-400 hover:text-white px-1.5">
+      <i class="fa-solid fa-xmark text-sm"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Backdrop -->
   <div id="curriculumDrawerBackdrop" onclick="closeMobileCurriculumDrawer()" class="fixed inset-0 bg-black/55 backdrop-blur-xs z-[130] hidden lg:hidden"></div>
 
   <!-- Main Argon Workspace Grid -->
   <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 max-w-[1600px] w-full mx-auto p-4 sm:p-6 gap-6 relative">
 
-    <!-- Left Column: CSIR NET Module Navigator (Single Seamless Rounded Glass Card on Mobile) -->
+    <!-- Left Column: CSIR NET Module Navigator -->
     <aside id="curriculumFloatingDrawer" class="lg:col-span-3 flex flex-col">
       <div class="argon-panel p-4 rounded-2xl flex-1 flex flex-col bg-slate-900/60 border border-slate-800">
-        <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-800/80">
+        <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-800/80 shrink-0">
           <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-400 lg:text-slate-400">CSIR NET Curriculum</h2>
           <div class="flex items-center space-x-2">
             <span id="loadedModulesBadge" class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/40">15 JSON Units</span>
@@ -183,8 +278,21 @@
             </button>
           </div>
         </div>
-        <div id="moduleNavContainer" onclick="closeMobileCurriculumDrawer()" class="space-y-1.5 overflow-y-auto flex-1 pr-1">
+
+        <!-- Top Module Navigator Container (Compact on Mobile, Full List on Desktop) -->
+        <div id="moduleNavContainer" class="space-y-1.5 lg:overflow-y-auto lg:max-h-[calc(100vh-220px)] pr-1">
           <!-- Populated dynamically via app.js -->
+        </div>
+
+        <!-- Bottom Subtopic Stream (Option A: Visible on Mobile/Tablet Drawer Only) -->
+        <div class="drawer-subtopic-stream lg:hidden" id="drawerSubtopicStream">
+          <div class="text-[10px] font-mono uppercase text-teal-400 tracking-wider mb-1 font-bold flex items-center justify-between">
+            <span>Active Module Subtopics &amp; Scales</span>
+            <span id="drawerActiveModTag" class="text-emerald-400">MOD 01</span>
+          </div>
+          <div id="drawerSubtopicList" class="space-y-1.5 overflow-y-auto pr-1">
+            <!-- Dynamically synced from active module scales & hotspots -->
+          </div>
         </div>
       </div>
     </aside>
@@ -192,7 +300,7 @@
     <!-- Center Column: Multi-Scale Interactive Viewport & Simulator -->
     <main class="lg:col-span-6 flex flex-col space-y-5">
       
-      <!-- Scale Transition Bar (L1 to L4) -->
+      <!-- Scale Transition Bar (Clean Descriptive Labels: Macro, Tissue, Cellular, Molecular) -->
       <div class="argon-panel p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4 bg-slate-900/60 border border-slate-800">
         <div>
           <span id="activeUnitTag" class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">MOD 01</span>
@@ -200,10 +308,10 @@
         </div>
 
         <div class="scale-switcher flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800" role="group">
-          <button data-scale="L1" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">L1 · Macro</button>
-          <button data-scale="L2" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">L2 · Tissue</button>
-          <button data-scale="L3" class="scale-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow transition">L3 · Cellular</button>
-          <button data-scale="L4" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">L4 · Molecular</button>
+          <button data-scale="L1" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Macro</button>
+          <button data-scale="L2" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Tissue</button>
+          <button data-scale="L3" class="scale-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow transition">Cellular</button>
+          <button data-scale="L4" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Molecular</button>
         </div>
       </div>
 
@@ -213,7 +321,7 @@
         <div class="flex items-center justify-between z-40 pointer-events-none">
           <div class="bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-800/80 text-xs flex items-center space-x-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span id="hudScaleLabel" class="font-mono text-slate-300">L3: Cellular Ultrastructure</span>
+            <span id="hudScaleLabel" class="font-mono text-slate-300">Cellular Ultrastructure</span>
           </div>
           <button id="openDrawerBtn" class="pointer-events-auto bg-slate-900/90 hover:bg-emerald-950/90 text-emerald-400 border border-emerald-700/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-lg">
             <i class="fa-solid fa-sliders"></i>
@@ -274,12 +382,17 @@
 
   </div>
 
-  <!-- Floating Right Mid-Bottom Curriculum Drawer Button (Matches Textbook Section Position) -->
-  <button class="floating-curriculum-fab" onclick="toggleMobileCurriculumDrawer()" title="Open CSIR NET Curriculum">
-    ⊸
-  </button>
+  <!-- Stacked Right Mid-Bottom Floating Action Buttons -->
+  <div class="floating-fab-stack">
+    <button class="floating-circle-fab" onclick="toggleMobileFloatingSearch()" title="Search Pathways & Units" aria-label="Search">
+      <i class="fa-solid fa-magnifying-glass text-sm"></i>
+    </button>
+    <button class="floating-circle-fab" onclick="toggleMobileCurriculumDrawer()" title="Open CSIR NET Curriculum" aria-label="Curriculum Drawer">
+      ⊸
+    </button>
+  </div>
 
-  <!-- Slide-Out Deep Study Drawer (Floating Rounded Glass Card) -->
+  <!-- Slide-Out Deep Study Drawer -->
   <div id="studyDrawerBackdrop" class="fixed inset-0 bg-black/55 backdrop-blur-xs z-[130] hidden opacity-0 transition-opacity"></div>
   <aside id="studyDrawer" class="fixed z-[140] transform translate-x-full transition-transform duration-300 flex flex-col overflow-hidden">
     <div class="p-5 border-b border-white/10 flex items-center justify-between">
@@ -323,12 +436,15 @@
 
   <script src="app.js"></script>
   <script>
-    // Toggle Floating CSIR NET Curriculum Drawer from Right Mid-Bottom Button
+    // Toggle Floating CSIR NET Curriculum Drawer
     function toggleMobileCurriculumDrawer() {
       const drawer = document.getElementById("curriculumFloatingDrawer");
       const backdrop = document.getElementById("curriculumDrawerBackdrop");
       drawer.classList.toggle("drawer-open");
       backdrop.classList.toggle("hidden");
+      if (drawer.classList.contains("drawer-open")) {
+        syncDrawerSubtopics();
+      }
     }
 
     function closeMobileCurriculumDrawer() {
@@ -338,14 +454,116 @@
       }
     }
 
-    // Ensure any Textbook button injected dynamically by app.js also points cleanly to textbook/textbook.html
+    // Toggle Floating Search Bar
+    function toggleMobileFloatingSearch() {
+      const nativeSearchBtn = Array.from(document.querySelectorAll("header.argon-header button")).find(
+        b => b.id !== "openBundleModalBtn" && b.textContent && b.textContent.toLowerCase().includes("search")
+      );
+      if (nativeSearchBtn) {
+        nativeSearchBtn.click();
+        return;
+      }
+      const bar = document.getElementById("mobileFloatingSearchBar");
+      bar.classList.toggle("open");
+      if (bar.classList.contains("open")) {
+        document.getElementById("mobileSearchProxyInput").focus();
+      }
+    }
+
+    function syncMobileSearch(val) {
+      const desktopInput = document.getElementById("globalModuleSearch");
+      if (desktopInput) {
+        desktopInput.value = val;
+        desktopInput.dispatchEvent(new Event("input", { bubbles: true }));
+        desktopInput.dispatchEvent(new Event("keyup", { bubbles: true }));
+      }
+    }
+
+    // Dynamically reads the real active hotspots & scales rendered by app.js on the page
+    function syncDrawerSubtopics() {
+      const streamList = document.getElementById("drawerSubtopicList");
+      const modTagEl = document.getElementById("drawerActiveModTag");
+      const unitTag = document.getElementById("activeUnitTag");
+      if (!streamList) return;
+
+      if (unitTag && modTagEl) {
+        modTagEl.textContent = unitTag.textContent.split("•")[0].trim();
+      }
+
+      // Collect any hotspot pins or topic cards currently rendered in main stage by app.js
+      const stageButtons = Array.from(
+        document.querySelectorAll("#hotspotCanvas button, main [data-hotspot], main .hotspot-pin, main h4, main .topic-card")
+      );
+
+      let html = "";
+      const seen = new Set();
+
+      stageButtons.forEach((el, idx) => {
+        const label = (el.textContent || "").trim().replace(/\s+/g, " ");
+        if (label && label.length > 3 && label.length < 95 && !seen.has(label)) {
+          seen.add(label);
+          html += `
+            <div class="drawer-subtopic-item" onclick="triggerStageElement(${idx})">
+              <i class="fa-solid fa-circle-nodes text-teal-400 text-xs shrink-0"></i>
+              <span class="truncate">${label}</span>
+            </div>
+          `;
+        }
+      });
+
+      // Fallback to scale switcher buttons if no hotspot pins were detected
+      if (!html) {
+        document.querySelectorAll(".scale-btn").forEach((btn, idx) => {
+          const label = btn.textContent.trim();
+          html += `
+            <div class="drawer-subtopic-item" onclick="triggerScaleBtn(${idx})">
+              <i class="fa-solid fa-layer-group text-emerald-400 text-xs shrink-0"></i>
+              <span>Inspect ${label} Scale</span>
+            </div>
+          `;
+        });
+      }
+
+      streamList.innerHTML = html;
+    }
+
+    function triggerStageElement(idx) {
+      const stageButtons = Array.from(
+        document.querySelectorAll("#hotspotCanvas button, main [data-hotspot], main .hotspot-pin, main h4, main .topic-card")
+      );
+      if (stageButtons[idx]) stageButtons[idx].click();
+      closeMobileCurriculumDrawer();
+    }
+
+    function triggerScaleBtn(idx) {
+      const btns = document.querySelectorAll(".scale-btn");
+      if (btns[idx]) btns[idx].click();
+      closeMobileCurriculumDrawer();
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
-        document.querySelectorAll("a, button").forEach(el => {
-          if (el.textContent && el.textContent.trim().includes("Textbook") && el.tagName === "BUTTON") {
-            el.onclick = () => { window.location.href = "textbook/textbook.html"; };
+        // Hide only duplicate Textbook or Search buttons injected into header by app.js
+        document.querySelectorAll("header.argon-header button").forEach(btn => {
+          if (btn.id === "openBundleModalBtn") return;
+          const txt = (btn.textContent || "").trim().toLowerCase();
+          if (txt.includes("textbook") || txt.includes("search")) {
+            btn.style.display = "none";
           }
         });
+
+        // Strip "L1 · " prefixes if app.js re-renders scale buttons dynamically
+        document.querySelectorAll(".scale-btn").forEach(btn => {
+          btn.textContent = btn.textContent.replace(/^L[1-4]\s*[·•-]\s*/i, "");
+        });
+
+        syncDrawerSubtopics();
+
+        const mainEl = document.querySelector("main");
+        if (mainEl) {
+          const observer = new MutationObserver(() => syncDrawerSubtopics());
+          observer.observe(mainEl, { childList: true, subtree: true });
+        }
       }, 400);
     });
   </script>
