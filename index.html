@@ -7,85 +7,143 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
-<!-- Custom Cellulum Cellular 'C' Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='50%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 76 25 A 37 37 0 1 0 76 75' fill='none' stroke='url(%23g)' stroke-width='15' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='13' fill='url(%23g)'/%3E%3Cpath d='M 29 42 A 22 22 0 0 1 39 29' fill='none' stroke='%2314b8a6' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 55 28 A 22 22 0 0 1 64 33' fill='none' stroke='%2306b6d4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 29 58 A 22 22 0 0 0 37 69' fill='none' stroke='%230284c7' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 54 72 A 22 22 0 0 0 64 67' fill='none' stroke='%231d4ed8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <!-- Custom Cellulum Cellular 'C' Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='50%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 76 25 A 37 37 0 1 0 76 75' fill='none' stroke='url(%23g)' stroke-width='15' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='13' fill='url(%23g)'/%3E%3Cpath d='M 29 42 A 22 22 0 0 1 39 29' fill='none' stroke='%2314b8a6' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 55 28 A 22 22 0 0 1 64 33' fill='none' stroke='%2306b6d4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 29 58 A 22 22 0 0 0 37 69' fill='none' stroke='%230284c7' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 54 72 A 22 22 0 0 0 64 67' fill='none' stroke='%231d4ed8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <style>
+    /* Floating Rounded Aero Glass Drawer Transitions for Main Landing Page */
+    @media (max-width: 1023px) {
+      #curriculumFloatingDrawer {
+        position: fixed;
+        top: 74px;
+        left: 10px;
+        bottom: 14px;
+        width: min(82vw, 330px);
+        z-index: 60;
+        background: linear-gradient(160deg, rgba(15, 23, 42, 0.92) 0%, rgba(9, 16, 29, 0.84) 100%);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1.5px solid rgba(255, 255, 255, 0.16);
+        border-radius: 24px;
+        box-shadow: 12px 12px 36px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        transform: translateX(calc(-100% - 24px));
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #curriculumFloatingDrawer.drawer-open {
+        transform: translateX(0);
+      }
+    }
+
+    /* Right-Side Part-C Study Drawer — Floating Rounded Glass Card */
+    #studyDrawer {
+      top: 74px !important;
+      right: 10px !important;
+      bottom: 14px !important;
+      height: auto !important;
+      width: min(90vw, 460px) !important;
+      border-radius: 24px !important;
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.92) 0%, rgba(9, 16, 29, 0.85) 100%) !important;
+      backdrop-filter: blur(26px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+      box-shadow: -12px 12px 40px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+    }
+    #studyDrawer.translate-x-full {
+      transform: translateX(calc(100% + 24px)) !important;
+    }
+  </style>
 </head>
 <body class="argon-theme bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
-  <!-- Top Observatory Header -->
-  <header class="argon-header sticky top-0 z-40 bg-slate-900/85 backdrop-blur-md border-b border-slate-800 px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center space-x-3">
+  <!-- Top Observatory Header (z-50 so floating drawers slide underneath it cleanly) -->
+  <header class="argon-header sticky top-0 z-50 bg-slate-900/85 backdrop-blur-xl border-b border-slate-800 px-3 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center space-x-2.5">
+      <!-- Mobile Floating Curriculum Drawer Button -->
+      <button onclick="toggleMobileCurriculumDrawer()" class="lg:hidden p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-emerald-400 border border-slate-700/80 transition" title="Open CSIR NET Curriculum">
+        <i class="fa-solid fa-bars-staggered text-sm"></i>
+      </button>
+
       <!-- Custom Cellulum SVG Brand Lockup + Single-Line Subtitle -->
-<div class="flex flex-col justify-center shrink-0">
-  <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
-    <svg class="cellulum-logo-svg h-7 sm:h-9 w-auto overflow-visible" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!-- Bioluminescent Emerald-Teal to Deep Azure Gradient -->
-        <linearGradient id="cellCGrad" x1="12" y1="8" x2="72" y2="80" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#10b981" />
-          <stop offset="48%" stop-color="#06b6d4" />
-          <stop offset="100%" stop-color="#1d4ed8" />
-        </linearGradient>
-        <linearGradient id="nucleusGrad" x1="30" y1="30" x2="58" y2="58" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#2dd4bf" />
-          <stop offset="100%" stop-color="#0284c7" />
-        </linearGradient>
-      </defs>
+      <div class="flex flex-col justify-center shrink-0">
+        <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
+          <svg class="cellulum-logo-svg h-7 sm:h-9 w-auto overflow-visible" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cellCGrad" x1="12" y1="8" x2="72" y2="80" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="48%" stop-color="#06b6d4" />
+                <stop offset="100%" stop-color="#1d4ed8" />
+              </linearGradient>
+              <linearGradient id="nucleusGrad" x1="30" y1="30" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2dd4bf" />
+                <stop offset="100%" stop-color="#0284c7" />
+              </linearGradient>
+            </defs>
+            <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
+            <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#ffffff" stroke-width="3.0" stroke-linecap="round" fill="none" />
+            <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
+            <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
+            <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
+            <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
+            <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
+            <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
+          </svg>
+        </a>
+        <p class="brand-subtitle text-[8.5px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
+          Multi-Scale Life Sciences Observatory 
+        </p>
+      </div>
+    </div>
 
-      <!-- Stylized Cellular 'C' Outer Membrane Arc -->
-      <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
-<!-- Flush White Border Along the Outer Edge of 'C' -->
-<path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#ffffff" stroke-width="3.0" stroke-linecap="round" fill="none" />
-
-      <!-- Central Glowing Nucleus -->
-      <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
-
-      <!-- 4 Curved Organelle Capsules Inside Cytoplasm -->
-      <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
-      <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
-      <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
-      <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
-
-      <!-- Rounded Geometric 'ellulum' Typography (Crisp White for Dark Aero Glass) -->
-      <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
-    </svg>
-  </a>
-  <p class="brand-subtitle text-[9px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 sm:whitespace-nowrap">
-   Multi-Scale Life Sciences Observatory 
-</p>
-</div>
-    <!-- Global Search & Bundle Triggers -->
-    <div class="flex items-center space-x-3">
-      <div class="relative hidden md:block">
+    <!-- Global Search, Textbook, Buy Me a Coffee & Bundle Triggers -->
+    <div class="flex items-center space-x-2 sm:space-x-2.5">
+      <div class="relative hidden xl:block">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
         <input type="text" id="globalModuleSearch" placeholder="Search pathways, enzymes, units..." 
-               class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-64 transition">
+               class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-56 transition">
       </div>
-<!-- Opens textbook/textbook.html inside the textbook/ subfolder -->
-<a href="textbook/textbook.html" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow">
-  <i class="fa-solid fa-book-open"></i>
-  <span>Textbook</span>
-</a>
 
-      <button id="openBundleModalBtn" class="argon-btn-primary px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white">
+      <!-- Standalone Textbook Section Button (Points to textbook/textbook.html) -->
+      <a href="textbook/textbook.html" class="px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Textbook</span>
+      </a>
+
+      <!-- NEW: Buy Me a Coffee Button (Update href with your link!) -->
+      <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener noreferrer" id="bmcMainHeaderBtn"
+         class="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition shadow"
+         title="Buy Me a Coffee">
+        <i class="fa-solid fa-mug-hot"></i>
+        <span class="hidden md:inline">Buy Me a Coffee</span>
+      </a>
+
+      <button id="openBundleModalBtn" class="argon-btn-primary px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow">
         <i class="fa-solid fa-layer-group"></i>
-        <span>High-Yield Study Bundle</span>
+        <span class="hidden sm:inline">High-Yield Study Bundle</span>
+        <span class="sm:hidden">Bundle</span>
       </button>
     </div>
   </header>
 
+  <!-- Mobile Backdrop for Floating Left Curriculum Drawer -->
+  <div id="curriculumDrawerBackdrop" onclick="closeMobileCurriculumDrawer()" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
   <!-- Main Argon Workspace Grid -->
   <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 max-w-[1600px] w-full mx-auto p-4 sm:p-6 gap-6 relative">
 
-    <!-- Left Column: CSIR NET Module Navigator -->
-    <aside class="lg:col-span-3 flex flex-col space-y-4">
-      <div class="argon-panel p-4 rounded-2xl flex-1 flex flex-col bg-slate-900/60 border border-slate-800">
+    <!-- Left Column: CSIR NET Module Navigator (Desktop Sidebar + Mobile Floating Rounded Glass Drawer) -->
+    <aside id="curriculumFloatingDrawer" class="lg:col-span-3 flex flex-col p-4 lg:p-0">
+      <div class="argon-panel p-4 rounded-2xl flex-1 flex flex-col bg-slate-900/60 border border-slate-800 h-full">
         <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800/80">
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">CSIR NET Curriculum</h2>
-          <span id="loadedModulesBadge" class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/40">15 JSON Units</span>
+          <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-400 lg:text-slate-400">CSIR NET Curriculum</h2>
+          <div class="flex items-center space-x-2">
+            <span id="loadedModulesBadge" class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/40">15 JSON Units</span>
+            <button onclick="closeMobileCurriculumDrawer()" class="lg:hidden p-1 text-slate-400 hover:text-white">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
         </div>
-        <div id="moduleNavContainer" class="space-y-1.5 overflow-y-auto max-h-[calc(100vh-220px)] pr-1">
-          <!-- Populated dynamically -->
+        <div id="moduleNavContainer" onclick="closeMobileCurriculumDrawer()" class="space-y-1.5 overflow-y-auto max-h-[calc(100vh-190px)] lg:max-h-[calc(100vh-220px)] pr-1">
+          <!-- Populated dynamically via app.js -->
         </div>
       </div>
     </aside>
@@ -175,26 +233,32 @@
 
   </div>
 
-  <!-- Slide-Out Deep Study Drawer -->
-  <div id="studyDrawerBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity"></div>
-  <aside id="studyDrawer" class="fixed top-0 right-0 h-full w-full max-w-lg bg-slate-900 border-l border-slate-800 z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-    <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+  <!-- Floating Mobile Bottom-Left Quick Curriculum Trigger Button -->
+  <button onclick="toggleMobileCurriculumDrawer()" title="Toggle CSIR NET Curriculum"
+          class="lg:hidden fixed left-4 bottom-20 z-40 w-12 h-12 rounded-full bg-slate-900/90 backdrop-blur-md border border-white/20 text-emerald-400 flex items-center justify-center shadow-2xl">
+    <i class="fa-solid fa-list-ul"></i>
+  </button>
+
+  <!-- Slide-Out Deep Study Drawer (Upgraded to Floating Rounded Aero Glass Card) -->
+  <div id="studyDrawerBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity"></div>
+  <aside id="studyDrawer" class="fixed z-40 transform translate-x-full transition-transform duration-300 flex flex-col overflow-hidden">
+    <div class="p-5 border-b border-white/10 flex items-center justify-between">
       <div>
         <span class="text-[10px] font-mono uppercase text-emerald-400">Deep-Dive Reference Drawer</span>
         <h3 id="drawerTitle" class="text-base font-bold text-white">Analytical Notes & Experimental Assays</h3>
       </div>
-      <button id="closeDrawerBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white">
+      <button id="closeDrawerBtn" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-white/10">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
-    <div id="drawerBody" class="p-6 overflow-y-auto flex-1 space-y-4 text-xs text-slate-300 leading-relaxed">
+    <div id="drawerBody" class="p-6 overflow-y-auto flex-1 space-y-4 text-xs text-slate-200 leading-relaxed">
       <!-- Dynamic Content -->
     </div>
   </aside>
 
   <!-- Study Bundle Modal -->
   <div id="bundleModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-    <div class="argon-panel max-w-md w-full rounded-2xl p-6 bg-slate-900 border border-emerald-500/40 relative shadow-2xl">
+    <div class="argon-panel max-w-md w-full rounded-3xl p-6 bg-slate-900/90 backdrop-blur-2xl border border-emerald-500/40 relative shadow-2xl">
       <button id="closeBundleModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
@@ -206,14 +270,33 @@
       <p class="text-xs text-slate-300 leading-relaxed mb-4">
         Get the complete offline companion: Rapid-Revision Cheat Sheets, Part-C Experimental Trap Flowcharts, and Anki Decks.
       </p>
-      <div class="flex items-center space-x-3">
-        <a id="bundlePurchaseLink" href="#" target="_blank" class="argon-btn-primary flex-1 py-2.5 rounded-xl text-xs font-bold text-center bg-emerald-600 hover:bg-emerald-500 text-white">
+      <div class="flex flex-col sm:flex-row items-center gap-2.5">
+        <a id="bundlePurchaseLink" href="#" target="_blank" class="argon-btn-primary w-full sm:flex-1 py-2.5 rounded-xl text-xs font-bold text-center bg-emerald-600 hover:bg-emerald-500 text-white">
           Download Master Bundle
+        </a>
+        <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold text-center bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40">
+          <i class="fa-solid fa-mug-hot mr-1"></i> Support Cellulum
         </a>
       </div>
     </div>
   </div>
 
   <script src="app.js"></script>
+  <script>
+    // Mobile Floating Rounded Curriculum Drawer Controller
+    function toggleMobileCurriculumDrawer() {
+      const drawer = document.getElementById("curriculumFloatingDrawer");
+      const backdrop = document.getElementById("curriculumDrawerBackdrop");
+      drawer.classList.toggle("drawer-open");
+      backdrop.classList.toggle("hidden");
+    }
+
+    function closeMobileCurriculumDrawer() {
+      if (window.innerWidth < 1024) {
+        document.getElementById("curriculumFloatingDrawer").classList.remove("drawer-open");
+        document.getElementById("curriculumDrawerBackdrop").classList.add("hidden");
+      }
+    }
+  </script>
 </body>
 </html>
