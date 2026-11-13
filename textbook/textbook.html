@@ -43,7 +43,7 @@
       position: relative;
     }
 
-    /* Ambient Aero Background Color Orbs (So Frosted Glass Cards Visibly Blur What's Behind Them!) */
+    /* Ambient Aero Background Color Orbs */
     .aero-bg-canvas {
       position: fixed;
       inset: 0;
@@ -91,15 +91,15 @@
       right: 10%;
     }
 
-    /* True Windows Aero Frosted Glass Header */
+    /* True Windows Aero Frosted Glass Header (z-index 150 so drawer never blurs it) */
     header.cellulum-header {
       position: sticky;
       top: 0;
-      z-index: 120;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.48) 100%);
+      z-index: 150;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.56) 100%);
       backdrop-filter: blur(22px) saturate(180%);
       -webkit-backdrop-filter: blur(22px) saturate(180%);
-      border-bottom: 1.5px solid rgba(255, 255, 255, 0.88);
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.9);
       box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.95);
       padding: 0.5rem 0.55rem 0.55rem 0.55rem;
       display: flex;
@@ -336,12 +336,12 @@
       flex: 1;
     }
 
-    /* Slide-Out Aero Frosted Glass Drawer */
+    /* Slide-Out Rounded-Edge Aero Frosted Glass Drawer */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
       z-index: 130;
-      background: rgba(15, 23, 42, 0.25);
+      background: rgba(15, 23, 42, 0.22);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       display: none;
@@ -353,20 +353,23 @@
 
     aside.topic-drawer {
       position: fixed;
-      top: 96px;
-      left: 0;
-      bottom: 0;
-      width: min(80vw, 330px);
+      top: 102px;
+      left: 8px;
+      bottom: 12px;
+      width: min(82vw, 335px);
       z-index: 140;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.78) 0%, rgba(240, 249, 255, 0.62) 100%);
-      backdrop-filter: blur(25px) saturate(190%);
-      -webkit-backdrop-filter: blur(25px) saturate(190%);
-      border-right: 1.5px solid rgba(255, 255, 255, 0.92);
-      box-shadow: 12px 0 36px rgba(15, 23, 42, 0.12);
-      padding: 1.1rem 1rem 2rem;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.84) 0%, rgba(240, 249, 255, 0.68) 100%);
+      backdrop-filter: blur(26px) saturate(190%);
+      -webkit-backdrop-filter: blur(26px) saturate(190%);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      box-shadow:
+        12px 12px 36px rgba(15, 23, 42, 0.14),
+        inset 0 1px 2px rgba(255, 255, 255, 1);
+      padding: 1.15rem 1rem 1.75rem;
       overflow-y: auto;
-      transform: translateX(-102%);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(calc(-100% - 20px));
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     aside.topic-drawer.open {
@@ -384,12 +387,12 @@
 
     select.drawer-module-select {
       width: 100%;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       color: var(--text-main);
       border: 1.5px solid rgba(255, 255, 255, 0.95);
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
       padding: 0.65rem 0.85rem;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 0.85rem;
       font-weight: 600;
       margin-bottom: 1.35rem;
@@ -405,11 +408,11 @@
     }
 
     .outline-item {
-      padding: 0.55rem 0.5rem;
+      padding: 0.55rem 0.6rem;
       font-size: 0.87rem;
       color: var(--text-body);
       cursor: pointer;
-      border-radius: 8px;
+      border-radius: 10px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -418,10 +421,10 @@
 
     .outline-item:hover,
     .outline-item.active {
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.82);
       color: var(--accent-teal);
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
     }
 
     .outline-group-spacer {
@@ -693,7 +696,6 @@
               <stop offset="100%" stop-color="#0284c7" />
             </linearGradient>
           </defs>
-          <!-- Fixed #cellCGrad and #nucleusGrad IDs so the full cellular C renders vividly! -->
           <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
           <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" fill="none" />
           <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
@@ -761,7 +763,7 @@
 
   </header>
 
-  <!-- Slide-Out Left Drawer -->
+  <!-- Slide-Out Left Drawer (Rounded 24px Aero Floating Card) -->
   <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
   <aside class="topic-drawer" id="topicDrawer">
     <div class="drawer-label">SWITCH MODULE CHAPTER</div>
@@ -819,7 +821,6 @@
     const moduleCache = {};
     let activeModId = "TextBook1";
 
-    // Beautifies plain-text scientific notation (e.g. "Delta G", "->", ">=") inside paragraphs
     function formatSciText(str) {
       if (!str) return "";
       return String(str)
