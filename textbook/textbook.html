@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Cellulum — Interactive Textbook & Schaum's Outlines</title>
+  <title>Cellulum — Interactive Textbook & Schaum's Outlines</title>
+  <meta name="description" content="Interactive life sciences textbook and Schaum's-style quantitative outlines covering 15 modules: thermodynamics, cell biology, genetics, PCR, CRISPR, enzyme kinetics, bioinformatics, and worked derivations." />
+  <meta name="keywords" content="Cellulum, life sciences textbook, biochemistry calculators, Schaum's outlines biology, CSIR NET Life Sciences notes, Michaelis-Menten simulator, PCR mastermix, bioinformatics, molecular biology derivations" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cellulum.in/textbook/textbook.html" />
+
+  <!-- Open Graph / Social Sharing Preview (WhatsApp, LinkedIn, X) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Cellulum — Interactive Life Sciences Textbook & Quantitative Outlines" />
+  <meta property="og:description" content="15 interactive biology & biochemistry chapters with live quantitative simulators, KaTeX derivations, and mastery quizzes." />
+  <meta property="og:url" content="https://cellulum.in/textbook/textbook.html" />
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- KaTeX for Schaum's Math Boxes & Worked Derivations -->
@@ -871,7 +882,18 @@
         renderModuleAndOutline(moduleCache[modId]);
         return;
       }
+    function renderModuleAndOutline(data) {
+      // Dynamic SEO Title & Meta Description per Chapter
+      if (data && data.branch_title) {
+        document.title = `${data.branch_title} — Cellulum Interactive Textbook`;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && data.subtitle) {
+          metaDesc.setAttribute("content", `${data.branch_title}: ${data.subtitle}. Interactive simulators, Schaum's math derivations, and mastery quiz.`);
+        }
+      }
 
+      const outlineList = document.getElementById("drawerOutlineList");
+      const contentRoot = document.getElementById("chapterContentRoot");
       const candidatePaths = [
         `./${modId}.json`,
         `${modId}.json`,
