@@ -228,14 +228,15 @@
                class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-56 transition">
       </div>
 
-      <!-- Single Textbook Button (Circular Icon on Mobile, Pill on Desktop) -->
+      
+      <!-- Standalone Textbook Button (Strictly Forces Navigation to textbook.html) -->
       <a href="textbook/textbook.html" id="customTextbookLink"
+         onclick="window.location.href='textbook/textbook.html'; event.stopImmediatePropagation(); return false;"
          class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow shrink-0"
          title="Interactive Textbook">
         <i class="fa-solid fa-book-open"></i>
         <span class="hidden sm:inline">Textbook</span>
       </a>
-
       <!-- Buy Me a Coffee Icon Button -->
       <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener noreferrer" id="bmcMainHeaderBtn"
          class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition shadow shrink-0"
