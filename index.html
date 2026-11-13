@@ -11,42 +11,96 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='50%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%231d4ed8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 76 25 A 37 37 0 1 0 76 75' fill='none' stroke='url(%23g)' stroke-width='15' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='50' r='13' fill='url(%23g)'/%3E%3Cpath d='M 29 42 A 22 22 0 0 1 39 29' fill='none' stroke='%2314b8a6' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 55 28 A 22 22 0 0 1 64 33' fill='none' stroke='%2306b6d4' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 29 58 A 22 22 0 0 0 37 69' fill='none' stroke='%230284c7' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M 54 72 A 22 22 0 0 0 64 67' fill='none' stroke='%231d4ed8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 
   <style>
-    /* Floating Rounded Aero Glass Drawer Transitions for Main Landing Page */
+    /* Clean Top Header Layout (Prevents Subtitle & Button Overlap on Mobile) */
+    header.argon-header {
+      padding-left: 0.65rem !important;
+      padding-right: 0.65rem !important;
+      gap: 0.35rem;
+    }
+
+    @media (max-width: 640px) {
+      .cellulum-logo-svg {
+        height: 26px !important;
+      }
+      .brand-subtitle {
+        font-size: 8px !important;
+        letter-spacing: 0.03em !important;
+        line-height: 1.1 !important;
+        white-space: nowrap !important;
+      }
+    }
+
+    /* Floating Slide-Out Curriculum Drawer on Mobile (Single Seamless Rounded Glass Card) */
     @media (max-width: 1023px) {
       #curriculumFloatingDrawer {
         position: fixed;
-        top: 74px;
+        top: 72px;
         left: 10px;
         bottom: 14px;
-        width: min(82vw, 330px);
-        z-index: 60;
-        background: linear-gradient(160deg, rgba(15, 23, 42, 0.92) 0%, rgba(9, 16, 29, 0.84) 100%);
-        backdrop-filter: blur(24px) saturate(180%);
-        -webkit-backdrop-filter: blur(24px) saturate(180%);
-        border: 1.5px solid rgba(255, 255, 255, 0.16);
-        border-radius: 24px;
-        box-shadow: 12px 12px 36px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        width: min(82vw, 335px);
+        z-index: 140;
+        padding: 0 !important;
         transform: translateX(calc(-100% - 24px));
         transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       }
       #curriculumFloatingDrawer.drawer-open {
         transform: translateX(0);
       }
+      #curriculumFloatingDrawer > .argon-panel {
+        height: 100%;
+        border-radius: 24px !important;
+        background: linear-gradient(160deg, rgba(15, 25, 42, 0.94) 0%, rgba(9, 15, 26, 0.88) 100%) !important;
+        backdrop-filter: blur(26px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+        box-shadow: 12px 12px 38px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
+      }
+    }
+
+    /* Floating Right Mid-Bottom Button (Matches Textbook Section Position Exactly) */
+    button.floating-curriculum-fab {
+      position: fixed;
+      right: 1.1rem;
+      bottom: 5.5rem;
+      z-index: 125;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(45, 212, 191, 0.45);
+      color: #2dd4bf;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      transition: transform 0.15s ease;
+    }
+    button.floating-curriculum-fab:active {
+      transform: scale(0.94);
+    }
+    @media (min-width: 1024px) {
+      button.floating-curriculum-fab {
+        display: none;
+      }
     }
 
     /* Right-Side Part-C Study Drawer — Floating Rounded Glass Card */
     #studyDrawer {
-      top: 74px !important;
+      top: 72px !important;
       right: 10px !important;
       bottom: 14px !important;
       height: auto !important;
-      width: min(90vw, 460px) !important;
+      width: min(90vw, 450px) !important;
       border-radius: 24px !important;
-      background: linear-gradient(160deg, rgba(15, 23, 42, 0.92) 0%, rgba(9, 16, 29, 0.85) 100%) !important;
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.94) 0%, rgba(9, 16, 29, 0.88) 100%) !important;
       backdrop-filter: blur(26px) saturate(180%) !important;
       -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
-      border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
-      box-shadow: -12px 12px 40px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+      box-shadow: -12px 12px 40px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
     }
     #studyDrawer.translate-x-full {
       transform: translateX(calc(100% + 24px)) !important;
@@ -55,14 +109,9 @@
 </head>
 <body class="argon-theme bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
-  <!-- Top Observatory Header (z-50 so floating drawers slide underneath it cleanly) -->
-  <header class="argon-header sticky top-0 z-50 bg-slate-900/85 backdrop-blur-xl border-b border-slate-800 px-3 sm:px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center space-x-2.5">
-      <!-- Mobile Floating Curriculum Drawer Button -->
-      <button onclick="toggleMobileCurriculumDrawer()" class="lg:hidden p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-emerald-400 border border-slate-700/80 transition" title="Open CSIR NET Curriculum">
-        <i class="fa-solid fa-bars-staggered text-sm"></i>
-      </button>
-
+  <!-- Top Observatory Header (Flush Left Logo, No Left Hamburger Button Crowding) -->
+  <header class="argon-header sticky top-0 z-[150] bg-slate-900/85 backdrop-blur-xl border-b border-slate-800 h-16 flex items-center justify-between">
+    <div class="flex items-center shrink-0">
       <!-- Custom Cellulum SVG Brand Lockup + Single-Line Subtitle -->
       <div class="flex flex-col justify-center shrink-0">
         <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
@@ -88,61 +137,60 @@
             <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
           </svg>
         </a>
-        <p class="brand-subtitle text-[8.5px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
+        <p class="brand-subtitle text-[8px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
           Multi-Scale Life Sciences Observatory 
         </p>
       </div>
     </div>
 
-    <!-- Global Search, Textbook, Buy Me a Coffee & Bundle Triggers -->
-    <div class="flex items-center space-x-2 sm:space-x-2.5">
-      <div class="relative hidden xl:block">
+    <!-- Right Header Controls: Compact & Non-Overlapping -->
+    <div class="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
+      <div class="relative hidden lg:block">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
         <input type="text" id="globalModuleSearch" placeholder="Search pathways, enzymes, units..." 
                class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-56 transition">
       </div>
 
-      <!-- Standalone Textbook Section Button (Points to textbook/textbook.html) -->
-      <a href="textbook/textbook.html" class="px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow">
+      <!-- Standalone Textbook Link (Points to textbook/textbook.html) -->
+      <a href="textbook/textbook.html" class="px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold flex items-center space-x-1 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow shrink-0">
         <i class="fa-solid fa-book-open"></i>
         <span>Textbook</span>
       </a>
 
-      <!-- NEW: Buy Me a Coffee Button (Update href with your link!) -->
+      <!-- Buy Me a Coffee Icon Button -->
       <a href="https://www.buymeacoffee.com/" target="_blank" rel="noopener noreferrer" id="bmcMainHeaderBtn"
-         class="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition shadow"
+         class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition shadow shrink-0"
          title="Buy Me a Coffee">
         <i class="fa-solid fa-mug-hot"></i>
         <span class="hidden md:inline">Buy Me a Coffee</span>
       </a>
 
-      <button id="openBundleModalBtn" class="argon-btn-primary px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow">
+      <button id="openBundleModalBtn" class="argon-btn-primary px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold flex items-center space-x-1 bg-emerald-600 hover:bg-emerald-500 text-white shadow shrink-0">
         <i class="fa-solid fa-layer-group"></i>
         <span class="hidden sm:inline">High-Yield Study Bundle</span>
-        <span class="sm:hidden">Bundle</span>
       </button>
     </div>
   </header>
 
-  <!-- Mobile Backdrop for Floating Left Curriculum Drawer -->
-  <div id="curriculumDrawerBackdrop" onclick="closeMobileCurriculumDrawer()" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+  <!-- Mobile Backdrop for Floating Slide-Out Curriculum Card -->
+  <div id="curriculumDrawerBackdrop" onclick="closeMobileCurriculumDrawer()" class="fixed inset-0 bg-black/55 backdrop-blur-xs z-[130] hidden lg:hidden"></div>
 
   <!-- Main Argon Workspace Grid -->
   <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 max-w-[1600px] w-full mx-auto p-4 sm:p-6 gap-6 relative">
 
-    <!-- Left Column: CSIR NET Module Navigator (Desktop Sidebar + Mobile Floating Rounded Glass Drawer) -->
-    <aside id="curriculumFloatingDrawer" class="lg:col-span-3 flex flex-col p-4 lg:p-0">
-      <div class="argon-panel p-4 rounded-2xl flex-1 flex flex-col bg-slate-900/60 border border-slate-800 h-full">
-        <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800/80">
+    <!-- Left Column: CSIR NET Module Navigator (Single Seamless Rounded Glass Card on Mobile) -->
+    <aside id="curriculumFloatingDrawer" class="lg:col-span-3 flex flex-col">
+      <div class="argon-panel p-4 rounded-2xl flex-1 flex flex-col bg-slate-900/60 border border-slate-800">
+        <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-800/80">
           <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-400 lg:text-slate-400">CSIR NET Curriculum</h2>
           <div class="flex items-center space-x-2">
             <span id="loadedModulesBadge" class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/40">15 JSON Units</span>
-            <button onclick="closeMobileCurriculumDrawer()" class="lg:hidden p-1 text-slate-400 hover:text-white">
-              <i class="fa-solid fa-xmark"></i>
+            <button onclick="closeMobileCurriculumDrawer()" class="lg:hidden w-7 h-7 rounded-full bg-slate-800/80 text-slate-300 hover:text-white flex items-center justify-center">
+              <i class="fa-solid fa-xmark text-xs"></i>
             </button>
           </div>
         </div>
-        <div id="moduleNavContainer" onclick="closeMobileCurriculumDrawer()" class="space-y-1.5 overflow-y-auto max-h-[calc(100vh-190px)] lg:max-h-[calc(100vh-220px)] pr-1">
+        <div id="moduleNavContainer" onclick="closeMobileCurriculumDrawer()" class="space-y-1.5 overflow-y-auto flex-1 pr-1">
           <!-- Populated dynamically via app.js -->
         </div>
       </div>
@@ -233,15 +281,14 @@
 
   </div>
 
-  <!-- Floating Mobile Bottom-Left Quick Curriculum Trigger Button -->
-  <button onclick="toggleMobileCurriculumDrawer()" title="Toggle CSIR NET Curriculum"
-          class="lg:hidden fixed left-4 bottom-20 z-40 w-12 h-12 rounded-full bg-slate-900/90 backdrop-blur-md border border-white/20 text-emerald-400 flex items-center justify-center shadow-2xl">
-    <i class="fa-solid fa-list-ul"></i>
+  <!-- Floating Right Mid-Bottom Curriculum Drawer Button (Matches Textbook Section Position) -->
+  <button class="floating-curriculum-fab" onclick="toggleMobileCurriculumDrawer()" title="Open CSIR NET Curriculum">
+    ⊸
   </button>
 
-  <!-- Slide-Out Deep Study Drawer (Upgraded to Floating Rounded Aero Glass Card) -->
-  <div id="studyDrawerBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity"></div>
-  <aside id="studyDrawer" class="fixed z-40 transform translate-x-full transition-transform duration-300 flex flex-col overflow-hidden">
+  <!-- Slide-Out Deep Study Drawer (Floating Rounded Glass Card) -->
+  <div id="studyDrawerBackdrop" class="fixed inset-0 bg-black/55 backdrop-blur-xs z-[130] hidden opacity-0 transition-opacity"></div>
+  <aside id="studyDrawer" class="fixed z-[140] transform translate-x-full transition-transform duration-300 flex flex-col overflow-hidden">
     <div class="p-5 border-b border-white/10 flex items-center justify-between">
       <div>
         <span class="text-[10px] font-mono uppercase text-emerald-400">Deep-Dive Reference Drawer</span>
@@ -257,7 +304,7 @@
   </aside>
 
   <!-- Study Bundle Modal -->
-  <div id="bundleModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+  <div id="bundleModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-[160] hidden items-center justify-center p-4">
     <div class="argon-panel max-w-md w-full rounded-3xl p-6 bg-slate-900/90 backdrop-blur-2xl border border-emerald-500/40 relative shadow-2xl">
       <button id="closeBundleModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i class="fa-solid fa-xmark text-lg"></i>
@@ -283,7 +330,7 @@
 
   <script src="app.js"></script>
   <script>
-    // Mobile Floating Rounded Curriculum Drawer Controller
+    // Toggle Floating CSIR NET Curriculum Drawer from Right Mid-Bottom Button
     function toggleMobileCurriculumDrawer() {
       const drawer = document.getElementById("curriculumFloatingDrawer");
       const backdrop = document.getElementById("curriculumDrawerBackdrop");
@@ -297,6 +344,17 @@
         document.getElementById("curriculumDrawerBackdrop").classList.add("hidden");
       }
     }
+
+    // Ensure any Textbook button injected dynamically by app.js also points cleanly to textbook/textbook.html
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        document.querySelectorAll("a, button").forEach(el => {
+          if (el.textContent && el.textContent.trim().includes("Textbook") && el.tagName === "BUTTON") {
+            el.onclick = () => { window.location.href = "textbook/textbook.html"; };
+          }
+        });
+      }, 400);
+    });
   </script>
 </body>
 </html>
