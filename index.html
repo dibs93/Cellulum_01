@@ -4,7 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cellulum — CSIR NET Life Sciences Observatory & Interactive Simulator</title>
-  <meta name="description" content="Interactive multi-scale life sciences observatory and Schaum's-style quantitative textbook covering cellular ultrastructure, bioenergetics, molecular biology, and CSIR NET analytical problem solving.">
+  <meta name="description" content="Interactive multi-scale life sciences observatory and Schaum's-style quantitative textbook covering cellular ultrastructure, bioenergetics, molecular biology, enzyme kinetics, and CSIR NET analytical problem solving.">
+  <meta name="keywords" content="Cellulum, CSIR NET Life Sciences, biochemistry simulator, cellular ultrastructure, molecular biology, bioenergetics, oxidative phosphorylation, enzyme kinetics, interactive biology">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://cellulum.in/">
+
+  <!-- Open Graph / Social Sharing Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cellulum — Multi-Scale Life Sciences Observatory & Textbook">
+  <meta property="og:description" content="Explore biological structures from tissue to atomic scales (10 cm to 1 Å) with interactive pathway simulators and Schaum's-style quantitative outlines.">
+  <meta property="og:url" content="https://cellulum.in/">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
@@ -19,7 +29,6 @@
       z-index: 90 !important;
     }
 
-    /* Strictly hide ANY extra button or link that app.js injects into the header */
     header.argon-header > :not(#headerLeftBrand):not(#headerRightActions),
     #headerRightActions > :not(#desktopSearchBox):not(#customTextbookLink):not(#bmcMainHeaderBtn):not(#openBundleModalBtn) {
       display: none !important;
@@ -44,7 +53,7 @@
         top: 72px;
         left: 10px;
         bottom: 14px;
-        width: min(86vw, 350px);
+        width: min(88vw, 355px);
         z-index: 140;
         padding: 0 !important;
         transform: translateX(calc(-100% - 24px));
@@ -69,7 +78,7 @@
       #moduleNavContainer {
         flex: 0 0 auto !important;
         height: auto !important;
-        max-height: 160px !important;
+        max-height: 155px !important;
         overflow-y: visible !important;
       }
       #moduleNavContainer * {
@@ -158,10 +167,10 @@
       transform: translateX(calc(100% + 24px)) !important;
     }
 
-    /* 6. Option A: Subtopic Stream Styling inside Mobile Drawer */
+    /* 6. Option A: Persistent Scale Pills + Subtopic Stream inside Mobile Drawer */
     .drawer-subtopic-stream {
-      margin-top: 0.85rem;
-      padding-top: 0.85rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
       border-top: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       flex-direction: column;
@@ -170,10 +179,67 @@
       flex: 1;
       min-height: 0;
     }
+
+    .drawer-scale-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .drawer-scale-pill {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(45, 212, 191, 0.28);
+      border-radius: 10px;
+      padding: 0.42rem 0.55rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-scale-pill.active,
+    .drawer-scale-pill:active {
+      background: rgba(16, 185, 129, 0.22);
+      border-color: #10b981;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .drawer-scale-tier {
+      font-size: 0.67rem;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .drawer-scale-nm {
+      font-size: 0.72rem;
+      font-family: monospace;
+      color: #cbd5e1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .drawer-scale-examples {
+      font-size: 0.62rem;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+
     .drawer-subtopic-item {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0.6rem 0.75rem;
+      padding: 0.58rem 0.75rem;
       border-radius: 12px;
       font-size: 0.78rem;
       color: #e2e8f0;
@@ -189,9 +255,58 @@
       border-color: rgba(45, 212, 191, 0.4);
       color: #2dd4bf;
     }
+
+    /* 7. Main Stage Descriptive Scale Bar (Tissue / Cellular / Organelle / Molecular) */
+    .stage-bio-scale-bar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      padding-top: 0.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    @media (min-width: 640px) {
+      .stage-bio-scale-bar {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .stage-bio-pill {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 0.38rem 0.4rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .stage-bio-pill.active {
+      background: rgba(16, 185, 129, 0.22);
+      border-color: #10b981;
+      color: #34d399;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+    .stage-bio-pill-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: block;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .stage-bio-pill.active .stage-bio-pill-title {
+      color: #34d399;
+    }
+    .stage-bio-pill-sub {
+      font-size: 0.64rem;
+      font-family: monospace;
+      color: #94a3b8;
+      display: block;
+    }
   </style>
 
-  <!-- EARLIEST POSSIBLE CAPTURE LISTENER: Runs BEFORE app.js loads so app.js can NEVER hijack Textbook clicks! -->
+  <!-- EARLIEST POSSIBLE CAPTURE LISTENER: Forces Textbook button to open /textbook/textbook.html -->
   <script>
     window.addEventListener("click", function(e) {
       const target = e.target.closest("#customTextbookLink, [data-go-textbook]");
@@ -202,7 +317,6 @@
         window.location.assign("/textbook/textbook.html");
         return false;
       }
-      // Also catch if the user clicks any button generated by app.js that has a book icon or "Textbook"
       const btn = e.target.closest("header button, header a");
       if (btn && btn.id !== "appBrandTitle" && btn.id !== "bmcMainHeaderBtn" && btn.id !== "openBundleModalBtn") {
         const html = (btn.innerHTML || "").toLowerCase();
@@ -214,7 +328,7 @@
           return false;
         }
       }
-    }, true); // <--- 'true' = Capture Phase (fires at the very top of window before app.js!)
+    }, true);
   </script>
 </head>
 <body class="argon-theme bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
@@ -252,7 +366,7 @@
       </div>
     </div>
 
-    <!-- Right Header Controls: Strictly Whitelisted to 3 Buttons on Mobile -->
+    <!-- Right Header Controls -->
     <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0" id="headerRightActions">
       <div class="relative hidden lg:block" id="desktopSearchBox">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
@@ -260,7 +374,7 @@
                class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-56 transition">
       </div>
 
-      <!-- Single Textbook Button (Navigates Strictly to /textbook/textbook.html) -->
+      <!-- Single Textbook Button -->
       <a href="/textbook/textbook.html" id="customTextbookLink" data-go-textbook="true"
          class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow shrink-0"
          title="Interactive Textbook">
@@ -319,11 +433,20 @@
           <!-- Populated dynamically via app.js -->
         </div>
 
-        <!-- Bottom Subtopic Stream (Option A: Clean Biological Subtopics & Scales Only) -->
+        <!-- Bottom Subtopic Stream (Option A: Persistent Biological Scale Switcher + Subtopic List) -->
         <div class="drawer-subtopic-stream lg:hidden" id="drawerSubtopicStream">
           <div class="text-[10px] font-mono uppercase text-teal-400 tracking-wider mb-1 font-bold flex items-center justify-between shrink-0">
-            <span>Active Module Subtopics &amp; Scales</span>
+            <span>1. Select Biological Scale</span>
             <span id="drawerActiveModTag" class="text-emerald-400">MOD 01</span>
+          </div>
+
+          <!-- Persistent 4-Tier Biological Scale Switcher inside Drawer -->
+          <div id="drawerScaleGrid" class="drawer-scale-grid">
+            <!-- Populated dynamically via BIOLOGICAL_SCALES -->
+          </div>
+
+          <div class="text-[10px] font-mono uppercase text-teal-400 tracking-wider mb-1 font-bold shrink-0">
+            2. Scale Hotspot Subtopics
           </div>
           <div id="drawerSubtopicList" class="space-y-1.5 overflow-y-auto pr-1 flex-1">
             <!-- Dynamically synced from active module hotspots -->
@@ -343,10 +466,10 @@
         </div>
 
         <div class="scale-switcher flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800" role="group">
-          <button data-scale="L1" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Macro</button>
-          <button data-scale="L2" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Tissue</button>
-          <button data-scale="L3" class="scale-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow transition">Cellular</button>
-          <button data-scale="L4" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Molecular</button>
+          <button data-scale="L1" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-leaf mr-1"></i>Tissue &amp; Organ</button>
+          <button data-scale="L2" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-circle-dot mr-1"></i>Cellular</button>
+          <button data-scale="L3" class="scale-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow transition"><i class="fa-solid fa-microscope mr-1"></i>Organelle</button>
+          <button data-scale="L4" class="scale-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition"><i class="fa-solid fa-atom mr-1"></i>Molecular</button>
         </div>
       </div>
 
@@ -392,7 +515,7 @@
       <div class="argon-panel p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
         <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2 flex items-center space-x-2">
           <i class="fa-solid fa-crosshairs"></i>
-          <span>Mechanism & Part-C Focus</span>
+          <span>Mechanism &amp; Part-C Focus</span>
         </h3>
         <div id="nodeInspectorContent" class="text-xs text-slate-300 space-y-2 leading-relaxed">
           <!-- Populated on Pin Click -->
@@ -433,7 +556,7 @@
     <div class="p-5 border-b border-white/10 flex items-center justify-between">
       <div>
         <span class="text-[10px] font-mono uppercase text-emerald-400">Deep-Dive Reference Drawer</span>
-        <h3 id="drawerTitle" class="text-base font-bold text-white">Analytical Notes & Experimental Assays</h3>
+        <h3 id="drawerTitle" class="text-base font-bold text-white">Analytical Notes &amp; Experimental Assays</h3>
       </div>
       <button id="closeDrawerBtn" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-white/10">
         <i class="fa-solid fa-xmark"></i>
@@ -471,13 +594,89 @@
 
   <script src="app.js"></script>
   <script>
-    // Physically remove any extra buttons app.js tries to append inside header or #headerRightActions
+    // Master Biological Scale Definitions (Converted from biological-scales.ts for Browser Execution)
+    const BIOLOGICAL_SCALES = [
+      {
+        id: "tissue",
+        name: "Tissue & Organ",
+        range: "100 µm – 10 cm",
+        icon: "fa-leaf",
+        examples: ["Leaf", "Root", "Liver Lobule"]
+      },
+      {
+        id: "cellular",
+        name: "Cellular",
+        range: "1 µm – 100 µm",
+        icon: "fa-circle-dot",
+        examples: ["Plant Cell", "Neuron", "Yeast Cell"]
+      },
+      {
+        id: "organelle",
+        name: "Organelle & Complex",
+        range: "10 nm – 5 µm",
+        icon: "fa-microscope",
+        examples: ["Mitochondrion", "Golgi", "Ribosome"]
+      },
+      {
+        id: "molecular",
+        name: "Molecular",
+        range: "1 Å – 10 nm",
+        icon: "fa-atom",
+        examples: ["DNA", "ATP", "Protein"]
+      }
+    ];
+
+    // Pairs each of the 4 zoom buttons with BIOLOGICAL_SCALES metadata + live scientific unit conversion
+    function classifyBiologicalScale(rawText, indexFallback) {
+      const scaleDef = BIOLOGICAL_SCALES[indexFallback % BIOLOGICAL_SCALES.length];
+      const clean = (rawText || "").trim();
+      const match = clean.match(/^(\d+(?:\.\d+)?)\s*(nm|µm|um|mm|cm|Å|A)$/i);
+
+      if (!match) {
+        return {
+          tier: scaleDef.name,
+          unit: scaleDef.range,
+          shortUnit: scaleDef.range,
+          icon: scaleDef.icon,
+          examples: scaleDef.examples.join(" · ")
+        };
+      }
+
+      const val = parseFloat(match[1]);
+      const unit = match[2].toLowerCase();
+
+      // Convert raw nm values into proper scientific units (µm / nm / Å)
+      let formattedLiveUnit = clean;
+      let nm = val;
+      if (unit === "µm" || unit === "um") nm = val * 1000;
+      else if (unit === "mm") nm = val * 1e6;
+      else if (unit === "cm") nm = val * 1e7;
+      else if (unit === "å" || unit === "a") nm = val * 0.1;
+
+      if (nm >= 1000) {
+        formattedLiveUnit = `${+(nm / 1000).toFixed(2)} µm`;
+      } else if (nm >= 100) {
+        formattedLiveUnit = `${+(nm / 1000).toFixed(2)} µm (${nm} nm)`;
+      } else if (nm < 10) {
+        formattedLiveUnit = `${Math.round(nm * 10)} Å (${nm} nm)`;
+      }
+
+      return {
+        tier: scaleDef.name,
+        unit: `${formattedLiveUnit} • ${scaleDef.range}`,
+        shortUnit: formattedLiveUnit,
+        icon: scaleDef.icon,
+        examples: scaleDef.examples.join(" · ")
+      };
+    }
+
     function removeDuplicateHeaderButtons() {
-      const keepIds = new Set(["headerLeftBrand", "headerRightActions", "appBrandTitle", "desktopSearchBox", "customTextbookLink", "bmcMainHeaderBtn", "openBundleModalBtn"]);
+      const keepIds = new Set([
+        "headerLeftBrand", "headerRightActions", "appBrandTitle",
+        "desktopSearchBox", "customTextbookLink", "bmcMainHeaderBtn", "openBundleModalBtn"
+      ]);
       document.querySelectorAll("header.argon-header > *, #headerRightActions > *").forEach(el => {
-        if (!keepIds.has(el.id)) {
-          el.remove();
-        }
+        if (!keepIds.has(el.id)) el.remove();
       });
     }
 
@@ -487,7 +686,7 @@
       drawer.classList.toggle("drawer-open");
       backdrop.classList.toggle("hidden");
       if (drawer.classList.contains("drawer-open")) {
-        syncDrawerSubtopics();
+        syncDrawerAndStageScales();
       }
     }
 
@@ -515,56 +714,195 @@
       }
     }
 
-    let validSubtopicElements = [];
-
-    function syncDrawerSubtopics() {
-      const streamList = document.getElementById("drawerSubtopicList");
-      const modTagEl = document.getElementById("drawerActiveModTag");
-      const unitTag = document.getElementById("activeUnitTag");
-      if (!streamList) return;
-
-      if (unitTag && modTagEl) {
-        modTagEl.textContent = unitTag.textContent.split("•")[0].trim();
-      }
-
-      const candidates = Array.from(
-        document.querySelectorAll("#hotspotCanvas button, main [data-hotspot], main .hotspot-pin, main h4, main .topic-card")
-      );
-
-      validSubtopicElements = [];
-      let html = "";
-      const seen = new Set();
-
-      const ignorePattern = /^(zoom\s*(in|out)|l[1-4]\s*#?\d*|open\s*part-c|pathway\s*simulator|\d+\s*(nm|µm|um|mm|m)|\+|-)$/i;
-
-      candidates.forEach(el => {
-        let raw = (el.textContent || "").trim().replace(/\s+/g, " ");
-        if (!raw || raw.length < 8 || raw.length > 95) return;
-        if (ignorePattern.test(raw)) return;
-
-        let cleanLabel = raw.replace(/^#(\d+)\s*/, "#$1 · ");
-        const coreKey = cleanLabel.replace(/^#\d+\s*·\s*/, "").toLowerCase().slice(0, 22);
-        if (seen.has(coreKey)) return;
-        seen.add(coreKey);
-
-        const idx = validSubtopicElements.length;
-        validSubtopicElements.push(el);
-
-        html += `
-          <div class="drawer-subtopic-item" onclick="triggerValidSubtopic(${idx})">
-            <i class="fa-solid fa-circle-nodes text-teal-400 text-xs shrink-0"></i>
-            <span class="truncate">${cleanLabel}</span>
-          </div>
-        `;
+    // Reliably finds the 4 scale tick elements rendered below the Optical Scale slider
+    function getLiveScaleElements() {
+      const nmPattern = /^\d+(\.\d+)?\s*(nm|µm|um|mm|cm|Å|A)$/i;
+      const allMatches = Array.from(document.querySelectorAll("main button, main span, main div")).filter(el => {
+        if (el.closest("#stageBioScaleBar") || el.closest("#drawerScaleGrid")) return false;
+        if (el.children.length > 0) return false;
+        const txt = (el.getAttribute("data-raw-scale") || el.textContent || "").trim();
+        return nmPattern.test(txt);
       });
 
-      streamList.innerHTML = html || `<div class="text-xs text-slate-400 px-2 py-2">Tap any optical scale on the stage to view subtopics.</div>`;
+      for (const el of allMatches) {
+        const parent = el.parentElement;
+        if (parent && parent.children.length >= 3 && parent.children.length <= 6) {
+          const siblings = Array.from(parent.children).filter(c => {
+            const t = (c.getAttribute("data-raw-scale") || c.textContent || "").trim();
+            return nmPattern.test(t);
+          });
+          if (siblings.length >= 3) {
+            siblings.forEach(s => {
+              if (!s.getAttribute("data-raw-scale")) {
+                s.setAttribute("data-raw-scale", s.textContent.trim());
+              }
+            });
+            return siblings;
+          }
+        }
+      }
+
+      return allMatches.slice(-4);
     }
 
-    function triggerValidSubtopic(idx) {
-      if (validSubtopicElements[idx]) {
-        validSubtopicElements[idx].click();
-        validSubtopicElements[idx].scrollIntoView({ behavior: "smooth", block: "center" });
+    // Detects which scale index (0 to 3) is currently active on the stage
+    function getActiveScaleIndex(liveTicks) {
+      for (let i = 0; i < liveTicks.length; i++) {
+        const cls = (liveTicks[i].className || "") + " " + (liveTicks[i].getAttribute("style") || "");
+        if (cls.includes("underline") || cls.includes("emerald") || cls.includes("teal") || cls.includes("font-bold")) {
+          return i;
+        }
+      }
+      const rangeInput = document.querySelector("main input[type='range']");
+      if (rangeInput) {
+        const val = parseInt(rangeInput.value, 10);
+        if (!isNaN(val) && val >= 0 && val < 4) return val;
+      }
+      return 0;
+    }
+
+    // Triggers scale switching reliably as many times as clicked
+    function selectBiologicalScale(scaleIdx, closeDrawerAfter) {
+      const liveTicks = getLiveScaleElements();
+      if (liveTicks[scaleIdx]) {
+        liveTicks[scaleIdx].click();
+      }
+
+      const rangeInput = document.querySelector("main input[type='range']");
+      if (rangeInput && rangeInput.max <= 4) {
+        rangeInput.value = scaleIdx;
+        rangeInput.dispatchEvent(new Event("input", { bubbles: true }));
+        rangeInput.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+
+      setTimeout(() => {
+        syncDrawerAndStageScales();
+      }, 90);
+
+      if (closeDrawerAfter) {
+        closeMobileCurriculumDrawer();
+      }
+    }
+
+    let isSyncingDOM = false;
+
+    function syncDrawerAndStageScales() {
+      if (isSyncingDOM) return;
+      isSyncingDOM = true;
+
+      try {
+        const streamList = document.getElementById("drawerSubtopicList");
+        const scaleGrid = document.getElementById("drawerScaleGrid");
+        const modTagEl = document.getElementById("drawerActiveModTag");
+        const unitTag = document.getElementById("activeUnitTag");
+
+        if (unitTag && modTagEl) {
+          modTagEl.textContent = unitTag.textContent.split("•")[0].trim();
+        }
+
+        const liveTicks = getLiveScaleElements();
+        const activeIdx = getActiveScaleIndex(liveTicks);
+        const count = Math.max(liveTicks.length, 4);
+
+        // 1. Render Persistent 4-Tier Scale Switcher inside Slide-Out Drawer
+        if (scaleGrid) {
+          let scaleHtml = "";
+          for (let i = 0; i < count; i++) {
+            const rawTick = liveTicks[i] ? (liveTicks[i].getAttribute("data-raw-scale") || liveTicks[i].textContent) : "";
+            const info = classifyBiologicalScale(rawTick, i);
+            const isActive = i === activeIdx ? "active" : "";
+            scaleHtml += `
+              <button type="button" class="drawer-scale-pill ${isActive}" onclick="selectBiologicalScale(${i}, false)" title="Range: ${info.unit} | Examples: ${info.examples}">
+                <span class="drawer-scale-tier"><i class="fa-solid ${info.icon} mr-1"></i>${info.tier}</span>
+                <span class="drawer-scale-nm">${info.shortUnit}</span>
+                <span class="drawer-scale-examples">${info.examples}</span>
+              </button>
+            `;
+          }
+          scaleGrid.innerHTML = scaleHtml;
+        }
+
+        // 2. Inject Descriptive Biological Scale Bar onto Main Stage right under the Optical Scale box
+        if (liveTicks.length > 0) {
+          const tickRow = liveTicks[0].parentElement;
+          const sliderBox = tickRow?.parentElement || tickRow;
+          if (sliderBox) {
+            let stageBar = document.getElementById("stageBioScaleBar");
+            if (!stageBar) {
+              stageBar = document.createElement("div");
+              stageBar.id = "stageBioScaleBar";
+              stageBar.className = "stage-bio-scale-bar";
+              sliderBox.appendChild(stageBar);
+            }
+            let stageBarHtml = "";
+            for (let i = 0; i < liveTicks.length; i++) {
+              const rawTick = liveTicks[i].getAttribute("data-raw-scale") || liveTicks[i].textContent;
+              const info = classifyBiologicalScale(rawTick, i);
+              const isActive = i === activeIdx ? "active" : "";
+              stageBarHtml += `
+                <button type="button" class="stage-bio-pill ${isActive}" onclick="selectBiologicalScale(${i}, false)" title="Range: ${info.unit} (${info.examples})">
+                  <span class="stage-bio-pill-title"><i class="fa-solid ${info.icon} mr-1"></i>${info.tier}</span>
+                  <span class="stage-bio-pill-sub">${info.shortUnit}</span>
+                </button>
+              `;
+            }
+            stageBar.innerHTML = stageBarHtml;
+          }
+        }
+
+        // 3. Populate Hotspot Subtopics for Current Scale
+        if (streamList) {
+          const candidates = Array.from(
+            document.querySelectorAll("#hotspotCanvas button, main [data-hotspot], main .hotspot-pin, main h4, main .topic-card, main button")
+          );
+
+          let subHtml = "";
+          const seen = new Set();
+          const ignorePattern = /^(zoom\s*(in|out)|l[1-4]\s*#?\d*|open\s*part-c|pathway\s*simulator|\d+(\.\d+)?\s*(nm|µm|um|mm|cm|Å|A)|\+|-)$/i;
+
+          candidates.forEach(el => {
+            if (el.closest("#stageBioScaleBar") || el.closest("#drawerScaleGrid")) return;
+            if (liveTicks.includes(el)) return;
+
+            let raw = (el.textContent || "").trim().replace(/\s+/g, " ");
+            if (!raw || raw.length < 6 || raw.length > 95) return;
+            if (ignorePattern.test(raw)) return;
+
+            let cleanLabel = raw.replace(/^#(\d+)\s*/, "#$1 · ");
+            const coreKey = cleanLabel.replace(/^#\d+\s*·\s*/, "").toLowerCase().slice(0, 20);
+            if (seen.has(coreKey)) return;
+            seen.add(coreKey);
+
+            const safeSearchKey = encodeURIComponent(raw.slice(0, 25));
+
+            subHtml += `
+              <div class="drawer-subtopic-item" onclick="triggerLiveSubtopic('${safeSearchKey}')">
+                <i class="fa-solid fa-circle-nodes text-teal-400 text-xs shrink-0"></i>
+                <span class="truncate">${cleanLabel}</span>
+              </div>
+            `;
+          });
+
+          streamList.innerHTML = subHtml || `<div class="text-xs text-slate-400 px-2 py-2">Select a scale above to inspect its subtopics.</div>`;
+        }
+      } finally {
+        setTimeout(() => { isSyncingDOM = false; }, 60);
+      }
+    }
+
+    function triggerLiveSubtopic(encodedKey) {
+      const searchKey = decodeURIComponent(encodedKey).toLowerCase();
+      const candidates = Array.from(
+        document.querySelectorAll("#hotspotCanvas button, main [data-hotspot], main .hotspot-pin, main h4, main .topic-card, main button")
+      );
+      const match = candidates.find(el => {
+        if (el.closest("#stageBioScaleBar") || el.closest("#drawerScaleGrid")) return false;
+        const txt = (el.textContent || "").trim().replace(/\s+/g, " ").toLowerCase();
+        return txt.includes(searchKey);
+      });
+      if (match) {
+        match.click();
+        match.scrollIntoView({ behavior: "smooth", block: "center" });
       }
       closeMobileCurriculumDrawer();
     }
@@ -573,7 +911,7 @@
       removeDuplicateHeaderButtons();
       setTimeout(() => {
         removeDuplicateHeaderButtons();
-        syncDrawerSubtopics();
+        syncDrawerAndStageScales();
 
         const headerEl = document.querySelector("header.argon-header");
         if (headerEl) {
@@ -582,7 +920,9 @@
 
         const mainEl = document.querySelector("main");
         if (mainEl) {
-          new MutationObserver(() => syncDrawerSubtopics()).observe(mainEl, { childList: true, subtree: true });
+          new MutationObserver(() => {
+            if (!isSyncingDOM) syncDrawerAndStageScales();
+          }).observe(mainEl, { childList: true, subtree: true });
         }
       }, 350);
     });
