@@ -255,15 +255,17 @@
       border-color: rgba(45, 212, 191, 0.4);
       color: #2dd4bf;
     }
-
-    /* 7. Main Stage Descriptive Scale Bar (Tissue / Cellular / Organelle / Molecular) */
+    /* 7.Main Stage Descriptive Scale Bar (Independent Card below Optical Scale) */
     .stage-bio-scale-bar {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 0.4rem;
-      margin-top: 0.6rem;
-      padding-top: 0.6rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding: 0.5rem;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
     }
     @media (min-width: 640px) {
       .stage-bio-scale-bar {
@@ -271,10 +273,10 @@
       }
     }
     .stage-bio-pill {
-      background: rgba(15, 23, 42, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(45, 212, 191, 0.25);
       border-radius: 10px;
-      padding: 0.38rem 0.4rem;
+      padding: 0.45rem 0.4rem;
       text-align: center;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -283,7 +285,7 @@
       background: rgba(16, 185, 129, 0.22);
       border-color: #10b981;
       color: #34d399;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
     }
     .stage-bio-pill-title {
       font-size: 0.68rem;
