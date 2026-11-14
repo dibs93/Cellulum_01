@@ -824,25 +824,32 @@
           scaleGrid.innerHTML = scaleHtml;
         }
 
-        // 2. Inject Descriptive Biological Scale Bar onto Main Stage right under the Optical Scale box
+       // 2. Place Descriptive Biological Scale Bar OUTSIDE the Optical Scale slider box as its own card!
         if (liveTicks.length > 0) {
           const tickRow = liveTicks[0].parentElement;
           const sliderBox = tickRow?.parentElement || tickRow;
-          if (sliderBox) {
+          // Find the outer panel container that wraps both the title and the slider box
+          const outerPanel = sliderBox?.closest(".argon-panel") || sliderBox?.parentElement;
+
+          if (outerPanel) {
             let stageBar = document.getElementById("stageBioScaleBar");
             if (!stageBar) {
               stageBar = document.createElement("div");
               stageBar.id = "stageBioScaleBar";
               stageBar.className = "stage-bio-scale-bar";
-              sliderBox.appendChild(stageBar);
             }
+            // Append stageBar directly to the outer panel card, right after the slider box!
+            if (stageBar.parentElement !== outerPanel) {
+              sliderBox.insertAdjacentElement("afterend", stageBar);
+            }
+
             let stageBarHtml = "";
             for (let i = 0; i < liveTicks.length; i++) {
               const rawTick = liveTicks[i].getAttribute("data-raw-scale") || liveTicks[i].textContent;
               const info = classifyBiologicalScale(rawTick, i);
               const isActive = i === activeIdx ? "active" : "";
               stageBarHtml += `
-                <button type="button" class="stage-bio-pill ${isActive}" onclick="selectBiologicalScale(${i}, false)" title="Range: ${info.unit} (${info.examples})">
+                <button type="button" class="stage-bio-pill ${isActive}" onclick="selectBiologicalScale(${i}, false)">
                   <span class="stage-bio-pill-title"><i class="fa-solid ${info.icon} mr-1"></i>${info.tier}</span>
                   <span class="stage-bio-pill-sub">${info.shortUnit}</span>
                 </button>
