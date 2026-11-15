@@ -272,23 +272,39 @@
       }
     }
 
-    /* Main Page Return Button */
+        /* Main Page Return Button (Compact 2-Line Capsule) */
     .btn-main-page {
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
+      justify-content: center;
+      gap: 0.25rem;
       background: linear-gradient(135deg, rgba(254, 226, 226, 0.88), rgba(254, 202, 202, 0.72));
       border: 1.5px solid rgba(239, 68, 68, 0.45);
       color: #9f1239;
-      padding: 0.38rem 0.75rem;
+      height: 33px;
+      padding: 0 0.55rem;
       border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
       text-decoration: none;
       cursor: pointer;
-      white-space: nowrap;
       flex-shrink: 0;
       box-shadow: 0 2px 8px rgba(239, 68, 68, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-main-page .close-icon {
+      font-size: 0.75rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .btn-main-page .main-page-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      font-size: 0.58rem;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
     }
 
     /* Collapsible Mobile Search Row */
