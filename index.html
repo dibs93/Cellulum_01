@@ -15,8 +15,8 @@
   <meta property="og:description" content="Explore biological structures from tissue to atomic scales (10 cm to 1 Å) with interactive pathway simulators and Schaum's-style quantitative outlines.">
   <meta property="og:url" content="https://cellulum.in/">
 
-  <!-- GOOGLE ADSENSE CODE-->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4994243447898228" crossorigin="anonymous"></script>
+  <!-- GOOGLE ADSENSE CODE -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4994243447898228" crossorigin="anonymous"></script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -362,58 +362,68 @@
 <body class="argon-theme bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
   <!-- Top Observatory Header -->
-  <header class="argon-header sticky top-0 bg-slate-900/90 backdrop-blur-xl border-b border-slate-800 h-16 px-3 sm:px-6 flex items-center justify-between z-50">
-    <!-- Left Brand -->
-    <div class="flex items-center space-x-3 shrink-0" id="headerLeftBrand">
-      <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
-        <svg class="cellulum-logo-svg h-7 sm:h-9 w-auto overflow-visible" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="cellCGrad" x1="12" y1="8" x2="72" y2="80" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#10b981" />
-              <stop offset="48%" stop-color="#06b6d4" />
-              <stop offset="100%" stop-color="#1d4ed8" />
-            </linearGradient>
-            <linearGradient id="nucleusGrad" x1="30" y1="30" x2="58" y2="58" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#2dd4bf" />
-              <stop offset="100%" stop-color="#0284c7" />
-            </linearGradient>
-          </defs>
-          <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
-          <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#ffffff" stroke-width="3.0" stroke-linecap="round" fill="none" />
-          <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
-          <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
-          <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
-          <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
-          <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
-          <text x="77" y="62" fill="#ffffff" font-family="'Inter', system-ui, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
-        </svg>
-      </a>
+  <header class="argon-header sticky top-0 bg-slate-900/85 backdrop-blur-xl border-b border-slate-800 h-16 flex items-center justify-between">
+    <div class="flex items-center shrink-0" id="headerLeftBrand">
+      <div class="flex flex-col justify-center shrink-0">
+        <a href="#" id="appBrandTitle" class="inline-flex items-center group focus:outline-none" aria-label="Cellulum Home">
+          <svg class="cellulum-logo-svg h-7 sm:h-9 w-auto overflow-visible" viewBox="0 0 335 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cellCGrad" x1="12" y1="8" x2="72" y2="80" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="48%" stop-color="#06b6d4" />
+                <stop offset="100%" stop-color="#1d4ed8" />
+              </linearGradient>
+              <linearGradient id="nucleusGrad" x1="30" y1="30" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2dd4bf" />
+                <stop offset="100%" stop-color="#0284c7" />
+              </linearGradient>
+            </defs>
+            <path d="M 70 22 A 33 33 0 1 0 70 64" stroke="url(#cellCGrad)" stroke-width="13.5" stroke-linecap="round" />
+            <path d="M 72.2 19.4 A 36.8 36.8 0 1 0 72.2 66.6" stroke="#ffffff" stroke-width="3.0" stroke-linecap="round" fill="none" />
+            <circle cx="44" cy="43" r="11.5" fill="url(#nucleusGrad)" />
+            <path d="M 25 36 A 19 19 0 0 1 35 24" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round" />
+            <path d="M 49 24 A 19 19 0 0 1 58 28" stroke="#06b6d4" stroke-width="4.5" stroke-linecap="round" />
+            <path d="M 26 51 A 19 19 0 0 0 34 60" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round" />
+            <path d="M 49 62 A 19 19 0 0 0 58 58" stroke="#1d4ed8" stroke-width="4.5" stroke-linecap="round" />
+            <text x="77" y="62" fill="#ffffff" font-family="'Plus Jakarta Sans', 'Nunito', 'Inter', system-ui, -apple-system, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.5">ellulum</text>
+          </svg>
+        </a>
+        <p class="brand-subtitle text-[8px] sm:text-[10px] font-mono tracking-wider text-emerald-300/90 pl-1 -mt-0.5 whitespace-nowrap">
+          Multi-Scale Life Sciences Observatory 
+        </p>
+      </div>
     </div>
 
-    <!-- Right Header Actions (Forced Flex Row) -->
-    <div class="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0" id="headerRightActions" style="display: flex !important; flex-direction: row !important; align-items: center !important;">
-      <!-- Textbook Button -->
+    <!-- Right Header Controls -->
+    <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0" id="headerRightActions">
+      <div class="relative hidden lg:block" id="desktopSearchBox">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-500"></i>
+        <input type="text" id="globalModuleSearch" placeholder="Search pathways, enzymes, units..." 
+               class="bg-slate-950/90 border border-slate-800 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 w-56 transition">
+      </div>
+
+      <!-- Single Textbook Button -->
       <a href="/textbook/textbook.html" id="customTextbookLink" data-go-textbook="true"
-         class="px-2.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold flex items-center space-x-1 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shrink-0"
+         class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/40 transition shadow shrink-0"
          title="Interactive Textbook">
         <i class="fa-solid fa-book-open"></i>
         <span class="hidden sm:inline">Textbook</span>
       </a>
 
-      <!-- Buy Me a Chai Button -->
+      <!-- Buy Me a Chai Icon Button (Direct to Topmate) -->
       <a href="https://topmate.io/cellulum/2410801" target="_blank" rel="noopener noreferrer" id="bmcMainHeaderBtn"
-         class="px-2.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold flex items-center space-x-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition shrink-0"
-         title="Buy Us a Chai">
+         class="w-8 h-8 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition shadow shrink-0"
+         title="Support Cellulum — Buy Us a Chai (+ Bonus Formula Sheet)">
         <i class="fa-solid fa-mug-hot"></i>
-        <span class="hidden md:inline">Chai</span>
+        <span class="hidden md:inline">Buy Me a Chai</span>
       </a>
 
       <!-- Study Bundle Button -->
       <button type="button" id="openBundleModalBtn" onclick="openCelModal('celBundlesModal')"
-              class="px-2.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold flex items-center space-x-1 bg-emerald-600 hover:bg-emerald-500 text-white shadow transition shrink-0"
-              title="Study Bundles">
+              class="argon-btn-primary w-8 h-8 sm:w-auto sm:h-auto sm:px-3.5 sm:py-1.5 rounded-full text-xs font-semibold flex items-center justify-center sm:space-x-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow shrink-0"
+              title="High-Yield Study Bundle">
         <i class="fa-solid fa-layer-group"></i>
-        <span class="hidden sm:inline">Bundles</span>
+        <span class="hidden sm:inline">High-Yield Study Bundle</span>
       </button>
     </div>
   </header>
