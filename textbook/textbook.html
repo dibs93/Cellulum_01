@@ -972,12 +972,16 @@
     }
 
     function renderModuleAndOutline(data) {
-      // Dynamic SEO Title & Meta Description per Chapter
+            // Dynamic SEO Title, Meta Description & Canonical URL per Chapter
       if (data && data.branch_title) {
         document.title = `${data.branch_title} — Cellulum Interactive Textbook`;
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc && data.subtitle) {
           metaDesc.setAttribute("content", `${data.branch_title}: ${data.subtitle}. Interactive simulators, Schaum's math derivations, and mastery quiz.`);
+        }
+        const canonicalLink = document.querySelector('link[rel="canonical"]');
+        if (canonicalLink && activeModId) {
+          canonicalLink.setAttribute("href", `https://cellulum.in/textbook/textbook.html?module=${encodeURIComponent(activeModId)}`);
         }
       }
 
